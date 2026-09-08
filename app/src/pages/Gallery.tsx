@@ -17,6 +17,77 @@ type StoredRefresh = {
   scenes: StacScene[];
 };
 
+
+type FarmMeta = {
+  source?: string;
+  last_updated?: string;
+  generated_on?: string;
+  dates?: Array<{ date?: string; product_id?: string; tile?: string; cloud_cover?: number }>;
+};
+
+function FarmArtifactsMeta({
+  locale,
+  missingLabel,
+  lastUpdatedLabel,
+}: {
+  locale: string;
+  missingLabel: string;
+  lastUpdatedLabel: string;
+}) {
+  const [meta, setMeta] = useState<FarmMeta | null>(null);
+  const [failed, setFailed] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch(publicUrl("data/timeseries.json"))
+      .then((r) => {
+        if (!r.ok) throw new Error("missing");
+        return r.json();
+      })
+      .then((j: FarmMeta) => {
+        if (!cancelled) setMeta(j);
+      })
+      .catch(() => {
+        if (!cancelled) setFailed(true);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  if (failed) return <p className="text-xs text-sand-800/70">{missingLabel}</p>;
+  if (!meta) return <p className="text-xs text-sand-800/50">…</p>;
+
+  const latest = [...(meta.dates ?? [])].sort((a, b) => (a.date ?? "").localeCompare(b.date ?? "")).at(-1);
+  const stamp = meta.last_updated || meta.generated_on || null;
+  let stampLabel = "—";
+  if (stamp) {
+    try {
+      stampLabel = new Intl.DateTimeFormat(locale === "ar" ? "ar-OM" : "en-GB", {
+        dateStyle: "medium",
+        timeStyle: "short",
+      }).format(new Date(stamp));
+    } catch {
+      stampLabel = stamp;
+    }
+  }
+
+  return (
+    <div className="space-y-1 text-xs text-sand-800/80">
+      <div>
+        <span className="font-semibold">{lastUpdatedLabel}: </span>
+        {stampLabel}
+      </div>
+      {meta.source && <div>{meta.source}</div>}
+      {latest && (
+        <div className="font-mono break-all">
+          {latest.date} · {latest.tile} · cloud {latest.cloud_cover ?? "—"}% · {latest.product_id}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function Gallery() {
   const { t, i18n } = useTranslation();
   const [tile, setTile] = useState("all");
@@ -111,6 +182,19 @@ export default function Gallery() {
           </span>
         </div>
 
+        <aside className="rounded-xl border border-amber-200 bg-amber-50/80 p-3 text-xs text-sand-900/90 space-y-1">
+          <div className="font-semibold text-earth-600">{t("honesty.title")}</div>
+          <ul className="list-disc space-y-1 ps-4">
+            <li>{t("honesty.cloud")}</li>
+            <li>{t("honesty.proxy")}</li>
+            <li>{t("honesty.pest")}</li>
+            <li>{t("honesty.aou")}</li>
+            <li>{t("honesty.stale")}</li>
+            <li>{t("honesty.mountain")}</li>
+          </ul>
+        </aside>
+
+
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="text-sm text-sand-800/80">
             <div>
@@ -173,6 +257,13 @@ export default function Gallery() {
         )}
 
         <p className="text-xs text-sand-800/60">{t("gallery.howRefresh")}</p>
+      </section>
+
+      
+      <section className="space-y-2 rounded-2xl border border-sand-200 bg-sand-50 p-4 text-sm">
+        <h2 className="text-lg font-semibold text-crop-700">{t("gallery.farmDataTitle")}</h2>
+        <p className="text-sand-800/80">{t("gallery.farmDataBlurb")}</p>
+        <FarmArtifactsMeta locale={i18n.language} missingLabel={t("gallery.farmDataMissing")} lastUpdatedLabel={t("gallery.lastUpdated")} />
       </section>
 
       <section className="space-y-3">
