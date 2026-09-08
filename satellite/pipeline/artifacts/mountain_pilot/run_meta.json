@@ -1,0 +1,54 @@
+{
+  "generated_at": "2026-09-08T14:57:28.176102+00:00",
+  "status": "pilot_unverified",
+  "layer": "mountain_pilot",
+  "pilot_bbox": [
+    54.05,
+    17.08,
+    54.22,
+    17.22
+  ],
+  "bbox_note": "Locked start bbox [54.05, 17.08, 54.22, 17.22] (Jabal Qara fog-escarpment). No change before first run; post-DEM nudge ≤0.05°; max span ≤~0.2°/side.",
+  "dem_source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer",
+  "slope_p90_deg": 26.941082000732422,
+  "n_features": 4851,
+  "ndmi_pre": {
+    "date_range": "2026-05-01/2026-05-31",
+    "n_candidates": 14,
+    "status": "ok",
+    "product_id": "S2B_MSIL2A_20260502T064619_R020_T40QBE_20260502T104108",
+    "date": "2026-05-02",
+    "cloud_cover": 0.012356,
+    "tile": "40QBE",
+    "clear_frac": 0.2369
+  },
+  "ndmi_post": {
+    "date_range": "2026-09-01/2026-09-08",
+    "n_candidates": 2,
+    "status": "insufficient_clear_data",
+    "product_id": "S2C_MSIL2A_20260904T064621_R020_T40QBE_20260904T115810",
+    "date": "2026-09-04",
+    "cloud_cover": 17.01638,
+    "tile": "40QBE",
+    "clear_frac": 0.0,
+    "reason": "SCL clear fraction 0.000 < minimum 0.15 (fail-honest; no fabricated NDMI)"
+  },
+  "artifacts": {
+    "geojson": "satellite/pipeline/artifacts/mountain_pilot/pilot_terrain.geojson",
+    "sample": "satellite/pipeline/artifacts/mountain_pilot/pilot_terrain.sample.geojson",
+    "schema": "satellite/pipeline/artifacts/mountain_pilot/pilot_terrain.schema.json"
+  },
+  "ui_wire": false,
+  "forbidden_fields_enforced": [
+    "action",
+    "action_ladder",
+    "confidence",
+    "ecological_confidence",
+    "live_mpi",
+    "mpi",
+    "mpi_class",
+    "species",
+    "species_note",
+    "suitability"
+  ]
+}

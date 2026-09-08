@@ -10,3 +10,7 @@ __pycache__/
 satellite/pipeline/cache/
 *.tif
 *.tiff
+
+# Mountain pilot full grids are large; keep sample+schema+meta
+satellite/pipeline/artifacts/mountain_pilot/pilot_terrain.geojson
+satellite/pipeline/artifacts/mountain_pilot/e2e_run.log
