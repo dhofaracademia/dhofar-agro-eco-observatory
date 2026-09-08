@@ -90,7 +90,8 @@
       "avoid": "Avoid / Defer"
     },
     "speciesHelperDhofarica": "Fog-escarpment native",
-    "provisionalMpi": "Provisional class — not live MPI"
+    "provisionalMpi": "Provisional class — not live MPI",
+    "notByFarmStac": "not refreshed by farm STAC"
   },
   "home": {
     "badge": "Dhofar · Oman · Open Data First",
@@ -120,7 +121,9 @@
     "legendBare": "Bare / unplanted",
     "legendHealthy": "Stable vigor",
     "legendWater": "Needs water check",
-    "legendVigor": "Low vigor — check nutrition/management"
+    "legendVigor": "Low vigor — check nutrition/management",
+    "aouOfflineBadge": "AOU layer: last offline run {{date}}",
+    "aouNotByStac": "Gallery STAC refresh does not update the AOU alert layer."
   },
   "gallery": {
     "title": "Imagery",
@@ -155,7 +158,13 @@
     "farmDataTitle": "Farm monitor artifacts",
     "farmDataBlurb": "latest_alerts.geojson + timeseries.json are produced by satellite/pipeline/run_monitor.py (PC STAC + rasterio) into app/public/data/. Client Refresh browses latest STAC scenes; full raster recompute is via the pipeline / GitHub Action.",
     "farmDataMissing": "Farm GeoJSON not loaded — run the monitor pipeline or wait for the Action.",
-    "refreshHelper": "Updates the STAC scene list only — does not update AOU alerts or MPI."
+    "refreshHelper": "Updates the STAC scene list only — does not update AOU alerts or MPI.",
+    "previewFail": "Preview unavailable",
+    "tabLive": "Live STAC",
+    "tabArchive": "Archive",
+    "datetime": "Datetime",
+    "stacListUpdated": "Imagery STAC list updated",
+    "aouOfflineRun": "AOU layer offline run"
   },
   "analysis": {
     "title": "Planting-status analysis",

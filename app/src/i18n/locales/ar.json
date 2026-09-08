@@ -90,7 +90,8 @@
       "avoid": "تجنّب / تأجيل"
     },
     "speciesHelperDhofarica": "نوع مستوطن لمنحدر الضباب",
-    "provisionalMpi": "فئة مؤقتة — ليس MPI حياً"
+    "provisionalMpi": "فئة مؤقتة — ليس MPI حياً",
+    "notByFarmStac": "غير محدَّث عبر STAC المزارع"
   },
   "home": {
     "badge": "ظفار · عُمان · بيانات مفتوحة أولاً",
@@ -120,7 +121,9 @@
     "legendBare": "جرداء / غير مزروعة",
     "legendHealthy": "نمو مستقر",
     "legendWater": "يحتاج تفقد الري",
-    "legendVigor": "ضعف نمو — تفقد التغذية/الإدارة"
+    "legendVigor": "ضعف نمو — تفقد التغذية/الإدارة",
+    "aouOfflineBadge": "طبقة AOU: آخر تشغيل غير متصل {{date}}",
+    "aouNotByStac": "تحديث STAC في المعرض لا يحدّث طبقة تنبيهات AOU."
   },
   "gallery": {
     "title": "الصور",
@@ -155,7 +158,13 @@
     "farmDataTitle": "مخرجات رصد المزارع",
     "farmDataBlurb": "latest_alerts.geojson و timeseries.json يُنتجهما satellite/pipeline/run_monitor.py (PC STAC + rasterio) إلى app/public/data/. زر التحديث في الواجهة يستعرض مشاهد STAC؛ إعادة الحساب الكامل عبر خط الأنابيب / GitHub Action.",
     "farmDataMissing": "لم تُحمَّل بيانات المزارع — شغّل خط الرصد أو انتظر الـ Action.",
-    "refreshHelper": "يحدّث قائمة مشاهد STAC فقط — ولا يحدّث تنبيهات AOU أو MPI."
+    "refreshHelper": "يحدّث قائمة مشاهد STAC فقط — ولا يحدّث تنبيهات AOU أو MPI.",
+    "previewFail": "المعاينة غير متاحة",
+    "tabLive": "STAC مباشر",
+    "tabArchive": "الأرشيف",
+    "datetime": "التاريخ والوقت",
+    "stacListUpdated": "تحديث قائمة مشاهد STAC للصور",
+    "aouOfflineRun": "تشغيل طبقة AOU غير المتصل"
   },
   "analysis": {
     "title": "تحليل حالة الزراعة",

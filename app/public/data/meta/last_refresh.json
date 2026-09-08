@@ -1,0 +1,9 @@
+{
+  "last_updated": "2026-09-08T12:00:00+00:00",
+  "source": "run_monitor",
+  "artifacts": [
+    "latest_alerts.geojson",
+    "timeseries.json"
+  ],
+  "generated_on": "2026-09-08"
+}
