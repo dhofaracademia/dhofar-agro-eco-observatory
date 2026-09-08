@@ -110,12 +110,23 @@ export default function RestorationMap({ heightClass = "h-[28rem]" }: { heightCl
                   }}
                 >
                   <Popup>
-                    <strong>{p.id}</strong>
-                    {name ? <div>{name}</div> : null}
-                    <div>
-                      {t("restoration.suitability")}: {p.suitability} · {t("restoration.confidence")}: {p.confidence}
+                    <div style={{ maxWidth: 220 }}>
+                      <strong>{p.id}</strong>
+                      {name ? <div>{name}</div> : null}
+                      <div>
+                        {t("restoration.suitability")}: {p.suitability}
+                      </div>
+                      <div>
+                        {t("restoration.confidence")}: {p.confidence}
+                      </div>
+                      <div style={{ fontSize: 11, marginTop: 4 }}>{t("restoration.suitabilityNeqConfidence")}</div>
+                      <div style={{ marginTop: 4 }}>
+                        <em>{p.species}</em>
+                        {p.species.includes("Terminalia dhofarica") ? (
+                          <div style={{ fontSize: 11 }}>{t("restoration.speciesHelperDhofarica")}</div>
+                        ) : null}
+                      </div>
                     </div>
-                    <em>{p.species}</em>
                   </Popup>
                 </CircleMarker>
               );

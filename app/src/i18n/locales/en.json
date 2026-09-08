@@ -67,7 +67,7 @@
   },
   "restoration": {
     "title": "Recommended restoration sites",
-    "blurb": "Sample sites over Qara, Samhan, Qamar, Mirbat and Mughsayl. Suitability and confidence are separate expert-rule stubs for MVP — not field-validated scores.",
+    "blurb": "Sample sites over Qara, Samhan, Qamar, Mirbat and Mughsayl. Suitability and confidence are separate illustrative expert-rule stubs — not field-validated scores. Environment Authority review is required before any restoration campaign.",
     "selectHint": "Click a recommended site on the map to open «Why This Site?»",
     "whyTitle": "Why This Site?",
     "suitability": "Ecological suitability",
@@ -88,7 +88,8 @@
       "enrichment": "Enrichment Seeding",
       "active": "Active Planting",
       "avoid": "Avoid / Defer"
-    }
+    },
+    "speciesHelperDhofarica": "Fog-escarpment native"
   },
   "home": {
     "badge": "Dhofar · Oman · Open Data First",
@@ -210,7 +211,7 @@
       "NDMI / MPI are proxies — not plot-level soil moisture meters.",
       "SMAP / CCI / ERA5 / CHIRPS are regional context only.",
       "Suitability Score and Confidence Score stay separate.",
-      "Fog-escarpment species (e.g. Terminalia dhofarica) are not mixed with arid Najd species (sidr, samr, ghaf) by default.",
+      "Fog-escarpment species (e.g. Terminalia dhofarica) are not mixed with arid Najd species by default: samr (Vachellia tortilis, syn. Acacia tortilis), sidr (Ziziphus spina-christi), ghaf (Prosopis cineraria).",
       "AOU ≠ Official Farm until authorized government data is linked."
     ],
     "limitTitle": "MVP limits",

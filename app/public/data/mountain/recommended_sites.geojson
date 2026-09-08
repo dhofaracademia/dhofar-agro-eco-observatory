@@ -8,7 +8,13 @@
   "features": [
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [54.12, 17.18] },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          54.12,
+          17.18
+        ]
+      },
       "properties": {
         "id": "JR-00871",
         "name_en": "Jabal Qara — fog escarpment niche",
@@ -31,7 +37,13 @@
     },
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [54.05, 17.25] },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          54.05,
+          17.25
+        ]
+      },
       "properties": {
         "id": "JR-00842",
         "name_en": "Jabal Qara — north ridge regeneration",
@@ -42,7 +54,7 @@
         "mpi_class": "Medium-High",
         "action": "Assisted Natural Regeneration",
         "species": "Terminalia dhofarica",
-        "species_note": "Support existing recruits; avoid arid-plain species (sidr / samr / ghaf).",
+        "species_note": "Support existing recruits; avoid arid-plain species (sidr (Ziziphus spina-christi) / samr (Vachellia tortilis) / ghaf (Prosopis cineraria)).",
         "window": "Post-Khareef",
         "why": [
           "Natural regeneration indicators already present",
@@ -54,7 +66,13 @@
     },
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [54.78, 17.12] },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          54.78,
+          17.12
+        ]
+      },
       "properties": {
         "id": "JR-00915",
         "name_en": "Jabal Samhan — monsoon escarpment",
@@ -77,30 +95,41 @@
     },
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [54.85, 17.08] },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          54.85,
+          17.08
+        ]
+      },
       "properties": {
         "id": "JR-00928",
-        "name_en": "Jabal Samhan — eastern spur gap",
-        "name_ar": "جبل سمحان — فجوة على النتوء الشرقي",
+        "name_en": "Jabal Samhan — eastern spur (enrichment sample)",
+        "name_ar": "جبل سمحان — نتوء شرقي (عيّنة إثراء)",
         "region": "Samhan",
         "suitability": 76,
         "confidence": 66,
         "mpi_class": "Medium",
-        "action": "Active Planting",
+        "action": "Enrichment Seeding",
         "species": "Terminalia dhofarica",
-        "species_note": "Active planting after site check; fog-belt native only.",
+        "species_note": "Enrichment preferred for partner MVP until field validation; fog-belt native Terminalia dhofarica only.",
         "window": "Early Post-Khareef",
         "why": [
-          "Sparse regeneration and canopy gaps warrant active intervention",
-          "Hydrology screen passed coarse DEM / wetness proxy filters",
-          "Confidence lower due to single-season stub imagery",
-          "Species limited to fog-escarpment list pending Authority review"
+          "Canopy gaps suit enrichment rather than full active planting until field validation",
+          "Hydrology screen passed for this spur niche",
+          "Fog-escarpment native only — no arid Najd species mix"
         ]
       }
     },
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [53.62, 16.92] },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          53.62,
+          16.92
+        ]
+      },
       "properties": {
         "id": "JR-00755",
         "name_en": "Jabal Qamar — western fog pocket",
@@ -123,7 +152,13 @@
     },
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [53.72, 16.98] },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          53.72,
+          16.98
+        ]
+      },
       "properties": {
         "id": "JR-00768",
         "name_en": "Jabal Qamar — steep runoff corridor",
@@ -146,7 +181,13 @@
     },
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [54.69, 17.02] },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          54.69,
+          17.02
+        ]
+      },
       "properties": {
         "id": "JR-01002",
         "name_en": "Mirbat foothills — coastal moisture fringe",
@@ -169,7 +210,13 @@
     },
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [53.77, 16.88] },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          53.77,
+          16.88
+        ]
+      },
       "properties": {
         "id": "JR-01041",
         "name_en": "Mughsayl — western coastal foothill",
