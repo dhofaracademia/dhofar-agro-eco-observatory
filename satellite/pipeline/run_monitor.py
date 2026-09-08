@@ -40,7 +40,16 @@ TIMESERIES_PATH = OUT_DATA / "timeseries.json"
 
 AOI_BBOX = [53.4, 17.5, 54.3, 18.5]  # full AOI (w,s,e,n)
 # Manageable farm-corridor window centered near 18.0N 53.8E
-WINDOW_BBOX = [53.70, 17.90, 53.95, 18.15]  # ~0.25° x 0.25°
+WINDOW_BBOX = [53.70, 17.90, 53.98, 18.15]  # ~0.28° x 0.25°
+# NOTE (fixed): east edge widened from 53.95 -> 53.98 so the Hanfit hub
+# (lon 53.9667, see app/src/data/hubs.json) actually falls inside the
+# monitored window instead of sitting ~0.017deg outside it. Thumrait,
+# Ash Shisr, Saih Al-Khairat, and Al-Mazyunah are still NOT covered by this
+# single window -- see hubs.json's covered_by_current_window flag. Extending
+# coverage to those requires either enlarging WINDOW_BBOX (more compute/cost)
+# or running the pipeline per-hub with a small window around each hub
+# individually; the latter is the recommended next step, not a blanket
+# expansion.
 PRIORITY_TILES = {"39QZV", "39QYA", "39QZA", "39QYV"}
 CLOUD_LT = 10.0
 BARE_NDVI = 0.18

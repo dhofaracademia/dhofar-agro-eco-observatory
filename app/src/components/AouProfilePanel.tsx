@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import {
   aouIdFromFeature,
-  confidenceStub,
+  dataQualityConfidence,
   estimatedAreaHa,
   featureCentroid,
   mapAlertLabels,
@@ -28,7 +28,7 @@ export default function AouProfilePanel({
   const id = aouIdFromFeature(feature);
   const { lon, lat } = featureCentroid(feature);
   const area = estimatedAreaHa(p);
-  const conf = confidenceStub(p);
+  const conf = dataQualityConfidence(p);
   const labels = mapAlertLabels(p.alert);
 
   return (
@@ -80,7 +80,7 @@ export default function AouProfilePanel({
         <div>
           <dt className="text-xs font-semibold uppercase tracking-wide text-sand-800/50">{t("aou.confidence")}</dt>
           <dd>
-            {conf}% <span className="text-xs text-sand-800/50">({t("aou.confidenceStub")})</span>
+            {conf}% <span className="text-xs text-sand-800/50">({t("aou.confidenceDataQuality")})</span>
           </dd>
         </div>
         <div>

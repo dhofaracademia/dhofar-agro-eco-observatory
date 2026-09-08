@@ -415,6 +415,8 @@ Recommendation → Action → Field Result → Validation → Model Update
 
 Restoration Observatory → Jabal Qara → Post-Khareef Analysis → طبقات MPI / Vegetation Recovery / Degradation / Natural Regeneration / Slope / Hydrology → Recommended Sites → `JR-00871`: Suitability 89% · Confidence 78% · Regeneration Low · MPI High · Enrichment Seeding · *Terminalia dhofarica* · Late Khareef / Early Post-Khareef.
 
+**⚠ هذا السيناريو مستهدَف (target UX)، وليس وصفاً لما يعمل اليوم.** `JR-00871` والأرقام المرفقة أمثلة توضيحية من `recommended_sites.geojson` الثابت — لا تُعرض كمخرجات نظام محسوبة فعلياً حتى ينتقل `run_mountain_pilot.py` (أو خلفه) من تجربة تجريبية غير مُختبرة إلى خط أنابيب فعلي مُتحقَّق.
+
 ### 22.3 بعد التنفيذ
 
 تسجيل البذر → Germination 30d · Survival 90d · Survival 365d → ربط النتائج بخصائص الموقع → اكتشاف عبر المواسم: أفضل المواقع/الأنواع/الظروف/أوقات البذر/طرق التنفيذ → تحسين مستمر للمحرك.
@@ -425,7 +427,7 @@ Restoration Observatory → Jabal Qara → Post-Khareef Analysis → طبقات 
 
 | المرحلة | النطاق |
 |---------|--------|
-| **MVP** | امتداد `najd-planting-monitor`؛ AOU/خلايا شبكية + اكتشاف احتمالية زراعية أولي؛ مسار جبال (مركّبات خريف، MPI أولي، DEM+TWI أساسي، مسودة Site×Species بقواعد خبير)؛ مبدّل أوضاع؛ تقويم خريف ديناميكي مبسّط؛ تغذية راجعة ملفات؛ لماذا هذا الموقع؟ |
+| **MVP — الوضع الفعلي (تدقيق 2026-09-08)** | جانب نجد: **حقيقي ويعمل** — امتداد `najd-planting-monitor`، AOU/خلايا شبكية (500م)، خط أنابيب `run_monitor.py` يجلب Sentinel-2 L2A فعلياً ويحسب NDVI/NDMI/تصنيف تنبيه، مع قناع سحابي حقيقي (SCL). جانب الجبال: **توضيحي/ثابت فعلياً، وليس MPI/DEM/TWI حقيقياً بعد** — `mountain/recommended_sites.geojson` ثمانية مواقع مكتوبة يدوياً بأرقام suitability/confidence استرشادية لتوضيح شكل UX المستهدف، وليست ناتج معالجة صور. أول محاولة حقيقية لحساب DEM/slope/TWI/NDMI فعلي لمنطقة تجريبية واحدة موجودة في `satellite/pipeline/run_mountain_pilot.py` لكنها **لم تُختبر بعد** (تحتاج بيئة بشبكة تصل Planetary Computer) ولا تُنتج بعد أي توصية بذر — فقط قياسات تضاريس/رطوبة خام. لا يُقدَّم مسار الجبال لأي جهة رسمية كنظام قرار قبل أن ينتقل هذا الملف الثابت إلى ناتج حقيقي مُتحقَّق ميدانياً. |
 | **v2** | PostGIS · FastAPI · SMS/Push · حسابات بلدية · تطبيق متطوعين · سجل بذر كامل وجداول بقاء · تشغيل مفعَّل بنوافذ الخريف · TiTiler اختياري · ربط Official Farm عند التوفر |
 | **v3** | تجزئة AOI · عمّال سحابة · معايرة ML بعد كفاية Ground Truth · تغطية كتل جبلية أوسع · تقارير مؤسسية · أتمتة أسبوعية شبه كاملة |
 
@@ -467,3 +469,11 @@ Restoration Observatory → Jabal Qara → Post-Khareef Analysis → طبقات 
 ---
 
 *نهاية مواصفات المنتج 1.0.1 — ظفار رصد | Dhofar Agro & Eco Observatory. موافقة علمية Agroforestry على 1.0 مع ملاحظات خفيفة مُدمجة (قائمة ضباب قصيرة، تسمية *V. tortilis*، تثقيل MPI لـ onset/post-khareef، NDRE اختياري في مسار المزارع). المعمارية امتداد معتمد لمكدس najd-planting-monitor.*
+
+### Round-4 hygiene note — analysis WINDOW vs hub list (2026-09)
+
+- AOU alerts are computed only inside `satellite/pipeline/run_monitor.py` `WINDOW_BBOX` (documented also as `analysis_window` in `app/src/data/hubs.json`).
+- Round-4 widened the east edge **53.95 → 53.98** so the Hanfit hub center falls inside the window. **Alert classification thresholds (NDVI/NDMI/SCL rules) were not changed** — only geographic coverage of the processed window.
+- Hubs with `covered_by_current_window: false` are dimmed/badged in the UI. Al-Mazyunah (`within_satellite_aoi: false`) is shown with an explicit limited-coverage honesty note.
+- AOU **data-quality confidence** (`dataQualityConfidence`) is derived from cloud cover and valid pixels only — never merged with restoration Suitability/Confidence.
+
