@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.venv/
+mapvenv/
+__pycache__/
+*.pyc
+.DS_Store
+.env
+.env.*
+satellite/pipeline/cache/
+*.tif
+*.tiff

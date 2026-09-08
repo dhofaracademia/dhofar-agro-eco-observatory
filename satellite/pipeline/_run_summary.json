@@ -1,0 +1,189 @@
+{
+  "latest_date": "2026-09-06",
+  "alert_counts": {
+    "bare": 1770,
+    "healthy": 65,
+    "water_attention": 26,
+    "vigor_attention": 11
+  },
+  "timeseries_dates": [
+    "2026-08-17",
+    "2026-08-25",
+    "2026-08-30",
+    "2026-09-06"
+  ],
+  "sample_stats": [
+    {
+      "date": "2026-08-17",
+      "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+      "product_id": "S2A_MSIL2A_20260817T070431_R020_T39QYA_20260817T093558",
+      "tile": "39QYA",
+      "cloud_cover": 9.681165,
+      "window_bbox": [
+        53.7,
+        17.9,
+        53.95,
+        18.15
+      ],
+      "aoi_bbox": [
+        53.4,
+        17.5,
+        54.3,
+        18.5
+      ],
+      "pixels_valid": 4522421,
+      "ndvi": {
+        "mean": 0.0687510296702385,
+        "p10": 0.042073678225278854,
+        "p50": 0.054591719061136246,
+        "p90": 0.06600292772054672
+      },
+      "ndmi": {
+        "mean": -0.10449161380529404,
+        "p10": -0.12604287266731262,
+        "p50": -0.11257496476173401,
+        "p90": -0.09106643497943878
+      },
+      "grid_cell_count_raw": 1872,
+      "citation": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer; product S2A_MSIL2A_20260817T070431_R020_T39QYA_20260817T093558; acquisition 2026-08-17; MGRS tile 39QYA.",
+      "alert_counts": {
+        "bare": 1796,
+        "water_attention": 19,
+        "healthy": 53,
+        "vigor_attention": 4
+      },
+      "grid_cell_count": 1872
+    },
+    {
+      "date": "2026-08-25",
+      "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+      "product_id": "S2C_MSIL2A_20260825T064621_R020_T39QYA_20260825T115811",
+      "tile": "39QYA",
+      "cloud_cover": 0.0,
+      "window_bbox": [
+        53.7,
+        17.9,
+        53.95,
+        18.15
+      ],
+      "aoi_bbox": [
+        53.4,
+        17.5,
+        54.3,
+        18.5
+      ],
+      "pixels_valid": 4522421,
+      "ndvi": {
+        "mean": 0.07278931885957718,
+        "p10": 0.044226471334695816,
+        "p50": 0.05773195996880531,
+        "p90": 0.06917077302932739
+      },
+      "ndmi": {
+        "mean": -0.09613349288702011,
+        "p10": -0.11725877970457077,
+        "p50": -0.10420916974544525,
+        "p90": -0.08283717930316925
+      },
+      "grid_cell_count_raw": 1872,
+      "citation": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer; product S2C_MSIL2A_20260825T064621_R020_T39QYA_20260825T115811; acquisition 2026-08-25; MGRS tile 39QYA.",
+      "alert_counts": {
+        "bare": 1787,
+        "healthy": 57,
+        "vigor_attention": 7,
+        "water_attention": 21
+      },
+      "grid_cell_count": 1872
+    },
+    {
+      "date": "2026-08-30",
+      "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+      "product_id": "S2B_MSIL2A_20260830T064619_R020_T39QZA_20260830T103855",
+      "tile": "39QZA",
+      "cloud_cover": 0.000398,
+      "window_bbox": [
+        53.7,
+        17.9,
+        53.95,
+        18.15
+      ],
+      "aoi_bbox": [
+        53.4,
+        17.5,
+        54.3,
+        18.5
+      ],
+      "pixels_valid": 2323253,
+      "ndvi": {
+        "mean": 0.07351431995630264,
+        "p10": 0.05388174578547478,
+        "p50": 0.062196750193834305,
+        "p90": 0.0743599385023117
+      },
+      "ndmi": {
+        "mean": -0.09678220003843307,
+        "p10": -0.12336891144514084,
+        "p50": -0.10104580968618393,
+        "p90": -0.08263983577489853
+      },
+      "grid_cell_count_raw": 1014,
+      "citation": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer; product S2B_MSIL2A_20260830T064619_R020_T39QZA_20260830T103855; acquisition 2026-08-30; MGRS tile 39QZA.",
+      "alert_counts": {
+        "bare": 985,
+        "healthy": 19,
+        "water_attention": 7,
+        "vigor_attention": 3
+      },
+      "grid_cell_count": 1014
+    },
+    {
+      "date": "2026-09-06",
+      "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+      "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
+      "tile": "39QYA",
+      "cloud_cover": 0.867071,
+      "window_bbox": [
+        53.7,
+        17.9,
+        53.95,
+        18.15
+      ],
+      "aoi_bbox": [
+        53.4,
+        17.5,
+        54.3,
+        18.5
+      ],
+      "pixels_valid": 4522421,
+      "ndvi": {
+        "mean": 0.07121829688549042,
+        "p10": 0.03876883164048195,
+        "p50": 0.05322378873825073,
+        "p90": 0.06569479405879974
+      },
+      "ndmi": {
+        "mean": -0.10114920884370804,
+        "p10": -0.12476266920566559,
+        "p50": -0.11042165756225586,
+        "p90": -0.08661308139562607
+      },
+      "grid_cell_count_raw": 1872,
+      "citation": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer; product S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909; acquisition 2026-09-06; MGRS tile 39QYA.",
+      "alert_counts": {
+        "bare": 1770,
+        "healthy": 65,
+        "water_attention": 26,
+        "vigor_attention": 11
+      },
+      "grid_cell_count": 1872
+    }
+  ],
+  "errors": [],
+  "window_bbox": [
+    53.7,
+    17.9,
+    53.95,
+    18.15
+  ],
+  "n_latest_features": 1872
+}

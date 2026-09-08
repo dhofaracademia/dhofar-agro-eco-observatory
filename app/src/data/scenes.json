@@ -1,0 +1,172 @@
+[
+  {
+    "id": "39QZV-20260313-tc",
+    "file": "39QZV_20260313_truecolor_wheatseason_Thumrait.png",
+    "tile": "39QZV",
+    "date": "2026-03-13",
+    "type": "truecolor",
+    "season": "wheat",
+    "label_en": "Thumrait true-color (peak wheat)",
+    "label_ar": "ثمريت — ألوان حقيقية (ذروة القمح)"
+  },
+  {
+    "id": "39QZV-20260313-ndvi",
+    "file": "39QZV_20260313_NDVI_Thumrait.png",
+    "tile": "39QZV",
+    "date": "2026-03-13",
+    "type": "ndvi",
+    "season": "wheat",
+    "label_en": "Thumrait NDVI (peak wheat)",
+    "label_ar": "ثمريت — NDVI (ذروة القمح)"
+  },
+  {
+    "id": "39QZV-20260904-tc",
+    "file": "39QZV_20260904_truecolor_Thumrait.png",
+    "tile": "39QZV",
+    "date": "2026-09-04",
+    "type": "truecolor",
+    "season": "offseason",
+    "label_en": "Thumrait true-color (late summer)",
+    "label_ar": "ثمريت — ألوان حقيقية (أواخر الصيف)"
+  },
+  {
+    "id": "39QYA-20260313-tc",
+    "file": "39QYA_20260313_truecolor_wheatseason.png",
+    "tile": "39QYA",
+    "date": "2026-03-13",
+    "type": "truecolor",
+    "season": "wheat",
+    "label_en": "Shisr corridor true-color",
+    "label_ar": "ممر شصر — ألوان حقيقية"
+  },
+  {
+    "id": "39QYA-20260313-ndvi",
+    "file": "39QYA_20260313_NDVI.png",
+    "tile": "39QYA",
+    "date": "2026-03-13",
+    "type": "ndvi",
+    "season": "wheat",
+    "label_en": "Shisr corridor NDVI",
+    "label_ar": "ممر شصر — NDVI"
+  },
+  {
+    "id": "39QYA-20260904-tc",
+    "file": "39QYA_20260904_truecolor.png",
+    "tile": "39QYA",
+    "date": "2026-09-04",
+    "type": "truecolor",
+    "season": "offseason",
+    "label_en": "Shisr corridor late summer",
+    "label_ar": "ممر شصر — أواخر الصيف"
+  },
+  {
+    "id": "39QZA-20260313-tc",
+    "file": "39QZA_20260313_truecolor_wheatseason.png",
+    "tile": "39QZA",
+    "date": "2026-03-13",
+    "type": "truecolor",
+    "season": "wheat",
+    "label_en": "Saih Al-Khairat / E corridor",
+    "label_ar": "سيح الخيرات / الممر الشرقي"
+  },
+  {
+    "id": "39QZA-20260313-ndvi",
+    "file": "39QZA_20260313_NDVI.png",
+    "tile": "39QZA",
+    "date": "2026-03-13",
+    "type": "ndvi",
+    "season": "wheat",
+    "label_en": "Saih Al-Khairat NDVI",
+    "label_ar": "سيح الخيرات — NDVI"
+  },
+  {
+    "id": "39QZA-20260904-tc",
+    "file": "39QZA_20260904_truecolor.png",
+    "tile": "39QZA",
+    "date": "2026-09-04",
+    "type": "truecolor",
+    "season": "offseason",
+    "label_en": "E corridor late summer",
+    "label_ar": "الممر الشرقي — أواخر الصيف"
+  },
+  {
+    "id": "39QZA-20260904-ndvi",
+    "file": "39QZA_20260904_NDVI.png",
+    "tile": "39QZA",
+    "date": "2026-09-04",
+    "type": "ndvi",
+    "season": "offseason",
+    "label_en": "E corridor NDVI late summer",
+    "label_ar": "الممر الشرقي — NDVI أواخر الصيف"
+  },
+  {
+    "id": "39QYV-20260313-tc",
+    "file": "39QYV_20260313_truecolor_wheatseason.png",
+    "tile": "39QYV",
+    "date": "2026-03-13",
+    "type": "truecolor",
+    "season": "wheat",
+    "label_en": "Farm-cluster center true-color",
+    "label_ar": "مركز تجمع المزارع — ألوان حقيقية"
+  },
+  {
+    "id": "39QYV-20260827-tc",
+    "file": "39QYV_20260827_truecolor.png",
+    "tile": "39QYV",
+    "date": "2026-08-27",
+    "type": "truecolor",
+    "season": "offseason",
+    "label_en": "Farm-cluster late summer",
+    "label_ar": "تجمع المزارع — أواخر الصيف"
+  },
+  {
+    "id": "40QBE-20260313-tc",
+    "file": "40QBE_20260313_truecolor_wheatseason.png",
+    "tile": "40QBE",
+    "date": "2026-03-13",
+    "type": "truecolor",
+    "season": "wheat",
+    "label_en": "East of Thumrait wheat season",
+    "label_ar": "شرق ثمريت — موسم القمح"
+  },
+  {
+    "id": "40QBE-20260827-tc",
+    "file": "40QBE_20260827_truecolor.png",
+    "tile": "40QBE",
+    "date": "2026-08-27",
+    "type": "truecolor",
+    "season": "offseason",
+    "label_en": "East of Thumrait late summer",
+    "label_ar": "شرق ثمريت — أواخر الصيف"
+  },
+  {
+    "id": "40QBF-20260904-tc",
+    "file": "40QBF_20260904_truecolor.png",
+    "tile": "40QBF",
+    "date": "2026-09-04",
+    "type": "truecolor",
+    "season": "offseason",
+    "label_en": "NE corridor",
+    "label_ar": "الممر الشمالي الشرقي"
+  },
+  {
+    "id": "39QXV-20260823-tc",
+    "file": "39QXV_20260823_truecolor_AlMazyouna.png",
+    "tile": "39QXV",
+    "date": "2026-08-23",
+    "type": "truecolor",
+    "season": "offseason",
+    "label_en": "Al-Mazyunah",
+    "label_ar": "المزيونة"
+  },
+  {
+    "id": "L8-160047-20260316-tc",
+    "file": "Landsat8_P160R047_20260316_truecolor.png",
+    "tile": "L8-160/047",
+    "date": "2026-03-16",
+    "type": "truecolor",
+    "season": "wheat",
+    "label_en": "Landsat-8 true-color",
+    "label_ar": "Landsat-8 — ألوان حقيقية"
+  }
+]

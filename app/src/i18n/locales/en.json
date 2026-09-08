@@ -1,0 +1,154 @@
+{
+  "appName": "Najd Planting Monitor",
+  "subtitle": "Bilingual satellite views and planting-status analysis for Najd farms in Dhofar",
+  "nav": {
+    "home": "Home",
+    "map": "Map",
+    "gallery": "Scenes",
+    "analysis": "Analysis",
+    "about": "Method"
+  },
+  "home": {
+    "badge": "Najd · Dhofar · Oman",
+    "title": "See desert farms from space",
+    "intro": "This platform shows satellite images of Najd farms in Dhofar and helps track planting status after sowing. Vegetation and moisture indices highlight fields that established well versus sparse, irrigation-stressed, or salinity-suspect ones. The aim is clear seasonal monitoring for farmers and researchers in Arabic and English.",
+    "whyTitle": "Why Sentinel-2?",
+    "whyBody": "Irrigated pivots and blocks in Najd are large enough for 10 m pixels. Optical VNIR + SWIR supports vegetation, moisture, and salinity-proxy indices. Inland Najd is hyper-arid, so clear scenes are common most months.",
+    "seasonTitle": "Wheat season",
+    "seasonBody": "Typical sowing is early–mid November; harvest starts in early April. Check establishment Dec–Jan, peak vigor Feb–Mar, post-harvest Apr–May, and off-season stress Jun–Oct.",
+    "ctaGallery": "Browse scenes",
+    "ctaAnalysis": "View analysis",
+    "previewNote": "Live Sentinel-2 NDVI/NDMI monitoring is on the Analysis and Map pages. Gallery still shows browse previews."
+  },
+  "map": {
+    "title": "Farm corridor map",
+    "blurb": "Working AOI for active farms (Thumrait–Shisr–Hanfit–Saih Al-Khairat). Al-Mazyunah lies west of the core corridor.",
+    "bbox": "Farm corridor bbox",
+    "hubs": "Agricultural hubs",
+    "liveTitle": "Early-intervention zones",
+    "liveBlurb": "500 m cells from the latest clear Sentinel-2 scene. Water and vigor flags are relative to vegetated peers — not lab diagnoses.",
+    "hideBare": "Hide bare desert cells",
+    "legendBare": "Bare / unplanted",
+    "legendHealthy": "Stable vigor",
+    "legendWater": "Needs water check",
+    "legendVigor": "Low vigor — check nutrition/management"
+  },
+  "gallery": {
+    "title": "Satellite scenes",
+    "blurb": "Browse true-color and NDVI previews from Sentinel-2 (and one Landsat-8 scene). Filter by tile, season, and product type.",
+    "allTiles": "All tiles",
+    "allSeasons": "All seasons",
+    "allTypes": "All types",
+    "wheat": "Wheat season",
+    "offseason": "Late summer / off-season",
+    "truecolor": "True-color",
+    "ndvi": "NDVI",
+    "empty": "No scenes match these filters.",
+    "close": "Close",
+    "sensor": "Sensor / tile",
+    "date": "Date"
+  },
+  "analysis": {
+    "title": "Planting-status analysis",
+    "blurb": "Indices and field classes for arid irrigated wheat. Thresholds should be calibrated with local field data.",
+    "indicesTitle": "Key indices",
+    "ndviName": "NDVI — vegetation index",
+    "ndviFormula": "(B08 − B04) / (B08 + B04)",
+    "ndviDesc": "Green biomass, phenology, crop vs bare, failed plantings (flat/low curve).",
+    "saviName": "SAVI — soil-adjusted vegetation index",
+    "saviFormula": "Soil-adjusted variants (SAVI / OSAVI)",
+    "saviDesc": "Sparse canopy over bright desert soil; reduces soil noise versus NDVI.",
+    "ndmiName": "NDMI — canopy moisture index",
+    "ndmiFormula": "(B08 − B11) / (B08 + B11)",
+    "ndmiDesc": "Canopy water / irrigation stress through the season.",
+    "statusTitle": "Field status classes",
+    "established": "Established",
+    "establishedDesc": "NDVI rises by Dec–Jan and peaks Feb–Mar above bare/neighbor thresholds.",
+    "sparse": "Sparse / failed",
+    "sparseDesc": "Weak or delayed green-up; high within-field NDVI variance.",
+    "irrigation": "Irrigation stress",
+    "irrigationDesc": "NDVI OK early, NDMI drops mid-season; often warmer than peers.",
+    "salinity": "Salinity-suspect",
+    "salinityDesc": "Chronically low peak NDVI; high salinity proxies on fallow scenes — needs field EC.",
+    "abandoned": "Abandoned / unplanted",
+    "abandonedDesc": "Persistent bare signature across winter while neighbors green.",
+    "compareTitle": "Seasonal compare",
+    "compareBody": "March peak-wheat scenes show bright NDVI on active pivots. Late-summer scenes return to bare desert reflectance — useful for abandoned vs cropped contrast.",
+    "issuesTitle": "Planting issues detectable from space",
+    "issues": [
+      {
+        "t": "Failed or sparse establishment",
+        "d": "Late sowing after early Nov cuts yield; low/late Dec–Jan NDVI rise."
+      },
+      {
+        "t": "Irrigation water stress",
+        "d": "Mid-season NDMI drop; early senescence; warmer Landsat LST vs neighbors."
+      },
+      {
+        "t": "Salinity stress",
+        "d": "Reduced peak NDVI and bare-soil salinity indices — calibrate with EC samples."
+      },
+      {
+        "t": "Abandoned pivots",
+        "d": "Bare all winter while adjacent fields green."
+      },
+      {
+        "t": "Uneven pivot irrigation",
+        "d": "Circular NDVI rings or pie wedges of low vigor."
+      },
+      {
+        "t": "Heat-driven early senescence",
+        "d": "Compressed NDVI season; premature drop Mar–Apr."
+      }
+    ]
+  },
+  "about": {
+    "title": "Method & data",
+    "blurb": "Groundwork from the Najd satellite investigation support report.",
+    "aoiTitle": "Area of interest",
+    "aoiBody": "Practical farm-corridor bbox ≈ [53.4, 17.5, 54.3, 18.5], center ~18.0°N, 53.8°E. Broader Najd literature bbox is larger (hydro-geographic).",
+    "sensorsTitle": "Sensors",
+    "sensorsBody": "Primary: Sentinel-2 L2A tiles 39QZV, 39QYA, 39QZA, 39QYV, 39QXV (+ adjacent). Backup: Landsat 8/9 path 160 rows 047–048.",
+    "workflowTitle": "Field workflow (summary)",
+    "workflow": [
+      "Digitize pivot/block boundaries on true-color or basemap.",
+      "Mask clouds/shadows (SCL); optional bright-soil mask.",
+      "Extract per-field NDVI / SAVI / NDMI time series.",
+      "Classify establishment, stress, salinity-suspect, abandoned.",
+      "Validate with ground photos, farmer reports, and EC samples."
+    ],
+    "limitTitle": "MVP limits",
+    "limitBody": "This demo shows browse preview PNGs and educational analysis views. It does not stream live COGs or compute indices on the fly yet."
+  },
+  "footer": "Najd Planting Monitor · browse imagery MVP · not a substitute for field survey",
+  "live": {
+    "source": "Source",
+    "date": "Acquisition date",
+    "productId": "Product ID",
+    "tile": "MGRS tile",
+    "cloud": "Cloud cover",
+    "citation": "Citation",
+    "liveTitle": "Live monitor",
+    "liveBlurb": "Computed NDVI and NDMI from Sentinel-2 L2A COG bands over the farm window. Weekly re-run ready.",
+    "alertCounts": "Zone counts (latest)",
+    "timeseries": "Week-to-week change",
+    "timeseriesBlurb": "Mean NDVI / NDMI and attention counts for clear scenes in the monitor window.",
+    "attentionMap": "Attention map",
+    "ndviMean": "NDVI mean",
+    "ndmiMean": "NDMI mean",
+    "loading": "Loading live data…",
+    "error": "Could not load live monitor data.",
+    "note": "Alerts are relative early-intervention flags among vegetated cells, not definitive diagnoses.",
+    "bare": "Bare / unplanted",
+    "healthy": "Stable vigor",
+    "water_attention": "Needs water check",
+    "vigor_attention": "Low vigor — check nutrition/management",
+    "cells": "cells",
+    "unclear": "Unclear — needs review",
+    "tip_bare": "Little or no green canopy in this cell for the acquisition date.",
+    "tip_healthy": "Vegetation indices look stable versus nearby vegetated cells.",
+    "tip_water_attention": "Canopy moisture (NDMI) is low versus nearby vegetated areas — verify irrigation soon.",
+    "tip_vigor_attention": "Greening (NDVI) is weak versus peers. May need fertilizer or other management — confirm in the field (satellite cannot diagnose fertilizer alone).",
+    "tip_unclear": "Signal is ambiguous for this cell — review imagery and field conditions."
+  }
+}
