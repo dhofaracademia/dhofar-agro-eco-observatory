@@ -1,29 +1,5 @@
-# Najd Planting Monitor / رصد زراعة نجد
+# Dhofar Agro & Eco Observatory (app)
 
-Bilingual (Arabic + English) MVP for public satellite browse imagery of irrigated desert farms in Najd, Dhofar, Oman.
+Frontend for مرصد ظفار الزراعي البيئي / Dhofar Agro & Eco Observatory.
 
-## Run
-
-```bash
-# install deps, then:
-#   package-manager install
-#   package-manager run dev
-```
-
-Usually serves at http://localhost:5173. Language switch: **EN | ع**.
-
-## Build
-
-```bash
-# package-manager run build
-# package-manager run preview
-```
-
-## Stack
-
-Vite · React · TypeScript · Tailwind · react-i18next · React Router · Leaflet
-
-## Notes
-
-- Images in `public/previews/` are browse previews, not full radiometric COGs.
-- Full Sentinel-2 COG analysis comes later.
+Install deps then run the Vite dev script. Optional: VITE_STAC_SEARCH_URL for STAC endpoint override.

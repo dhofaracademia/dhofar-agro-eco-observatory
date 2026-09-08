@@ -37,6 +37,12 @@ export default function About() {
         </ul>
       </section>
 
+      <section className="rounded-2xl border border-sand-200 bg-white p-5 shadow-sm">
+        <h2 className="mb-2 font-semibold text-crop-700">{t("about.dataSourcesTitle")}</h2>
+        <p className="text-sm leading-relaxed text-sand-800/90">{t("about.dataSourcesBody")}</p>
+        <p className="mt-2 text-xs text-sand-800/60">{t("gallery.howRefresh")}</p>
+      </section>
+
       <section className="rounded-2xl border border-amber-200 bg-amber-50 p-5">
         <h2 className="mb-2 font-semibold text-earth-600">{t("about.limitTitle")}</h2>
         <p className="text-sm leading-relaxed text-sand-800/90">{t("about.limitBody")}</p>
