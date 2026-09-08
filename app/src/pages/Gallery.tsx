@@ -7,7 +7,7 @@ import {
   type RefreshStatus,
   type StacScene,
 } from "../lib/stacRefresh";
-import { fetchAouOfflineStamp, formatStamp } from "../lib/dataStamp";
+import { fetchAouOfflineStamp, formatStamp, formatStampLabel } from "../lib/dataStamp";
 
 type Scene = (typeof scenes)[number];
 type GalleryTab = "live" | "archive";
@@ -38,15 +38,32 @@ function PreviewFail({ label }: { label: string }) {
   );
 }
 
-function LivePreview({ url, id, failLabel }: { url: string | null; id: string; failLabel: string }) {
+function LivePreview({
+  url,
+  id,
+  failLabel,
+  unsignedHint,
+}: {
+  url: string | null;
+  id: string;
+  failLabel: string;
+  unsignedHint: string;
+}) {
   const [failed, setFailed] = useState(false);
-  if (!url || failed) return <PreviewFail label={failLabel} />;
+  const unsigned =
+    !!url &&
+    (url.includes("planetarycomputer.microsoft.com/api/data") ||
+      url.includes("blob.core.windows.net"));
+  if (!url || failed) {
+    return <PreviewFail label={unsigned ? `${failLabel} — ${unsignedHint}` : failLabel} />;
+  }
   return (
     <img
       src={url}
       alt={id}
       className="h-36 w-full object-cover bg-sand-200"
       loading="lazy"
+      referrerPolicy="no-referrer"
       onError={() => setFailed(true)}
     />
   );
@@ -98,7 +115,8 @@ function FarmArtifactsMeta({
     };
   }, []);
 
-  const stamp = formatStamp(aouIso ?? meta?.last_updated ?? meta?.generated_on ?? null, locale);
+  const stampIso = aouIso ?? meta?.last_updated ?? meta?.generated_on ?? null;
+  const stamp = formatStamp(stampIso, locale);
 
   if (failed && !aouIso) return <p className="text-xs text-sand-800/70">{missingLabel}</p>;
   if (!meta && !aouIso) return <p className="text-xs text-sand-800/50">…</p>;
@@ -111,7 +129,7 @@ function FarmArtifactsMeta({
     <div className="space-y-1 text-xs text-sand-800/80">
       <div>
         <span className="font-semibold">{lastUpdatedLabel}: </span>
-        {stamp.absolute} ({stamp.relative})
+        {stampIso ? `${stamp.absolute} ${stamp.zoneLabel} (${stamp.relative})` : "—"}
       </div>
       {meta?.source && <div>{meta.source}</div>}
       {latest && (
@@ -180,13 +198,9 @@ export default function Gallery() {
 
   const label = (s: Scene) => (i18n.language === "ar" ? s.label_ar : s.label_en);
 
-  const formatClientStamp = (iso: string | null) => {
-    const s = formatStamp(iso, i18n.language);
-    return iso ? `${s.absolute} (${s.relative})` : "—";
-  };
+  const formatClientStamp = (iso: string | null) => formatStampLabel(iso, i18n.language);
 
-  const aouStamp = formatStamp(aouIso, i18n.language);
-  const aouStampText = aouIso ? `${aouStamp.absolute} (${aouStamp.relative})` : "—";
+  const aouStampText = formatStampLabel(aouIso, i18n.language);
 
   const statusLabel =
     status === "refreshing"
@@ -215,6 +229,7 @@ export default function Gallery() {
   }, []);
 
   const failLabel = t("gallery.previewFail");
+  const unsignedHint = t("gallery.previewUnsignedHint");
 
   return (
     <div className="space-y-8">
@@ -245,6 +260,7 @@ export default function Gallery() {
             <li>{t("honesty.aou")}</li>
             <li>{t("honesty.stale")}</li>
             <li>{t("honesty.mountain")}</li>
+            <li>{t("honesty.stac")}</li>
           </ul>
         </aside>
 
@@ -329,7 +345,7 @@ export default function Gallery() {
                     key={s.id}
                     className="overflow-hidden rounded-2xl border border-sand-200 bg-sand-50 text-start shadow-sm"
                   >
-                    <LivePreview url={s.previewUrl} id={s.id} failLabel={failLabel} />
+                    <LivePreview url={s.previewUrl} id={s.id} failLabel={failLabel} unsignedHint={unsignedHint} />
                     <div className="space-y-1 p-3 text-xs">
                       <div className="font-semibold text-sand-900">
                         {t("gallery.datetime")}: {s.datetime ?? s.date ?? "—"}

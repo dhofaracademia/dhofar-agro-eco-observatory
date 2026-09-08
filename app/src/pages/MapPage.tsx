@@ -1,32 +1,18 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import AlertMap from "../components/AlertMap";
 import RestorationMap from "../components/RestorationMap";
 import ObservatoryModeToggle from "../components/ObservatoryModeToggle";
 import KhareefCalendar from "../components/KhareefCalendar";
+import AouOfflineBadge from "../components/AouOfflineBadge";
+import NajdSeasonalChip from "../components/NajdSeasonalChip";
 import hubsData from "../data/hubs.json";
 import type { ObservatoryMode } from "../lib/mode";
-import { fetchAouOfflineStamp, formatStamp } from "../lib/dataStamp";
 
 export default function MapPage() {
   const { t, i18n } = useTranslation();
   const { hubs, bbox } = hubsData;
   const [mode, setMode] = useState<ObservatoryMode>("agricultural");
-  const [aouIso, setAouIso] = useState<string | null>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-    fetchAouOfflineStamp().then((iso) => {
-      if (!cancelled) setAouIso(iso);
-    });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  const stamp = formatStamp(aouIso, i18n.language);
-  const stampText =
-    aouIso != null ? `${stamp.absolute} (${stamp.relative})` : "—";
 
   return (
     <div className="space-y-6">
@@ -42,31 +28,31 @@ export default function MapPage() {
         <section className="space-y-2">
           <div className="flex flex-wrap items-center gap-2">
             <h2 className="text-lg font-semibold text-crop-700">{t("map.liveTitle")}</h2>
-            <span className="rounded-full bg-amber-50 px-2 py-0.5 text-xs font-medium text-earth-600">
+            <span className="rounded-full border border-amber-300 bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-950">
               {t("provisional.badge")}
             </span>
-            <span className="rounded-full bg-sand-100 px-2.5 py-0.5 text-xs font-medium text-sand-800">
-              {t("map.aouOfflineBadge", { date: stampText })}
-            </span>
+            <AouOfflineBadge showHelper={false} />
+            <NajdSeasonalChip compact />
           </div>
           <p className="text-sm text-sand-800/90">{t("map.liveBlurb")}</p>
           <p className="text-xs text-sand-800/60">{t("provisional.aou")}</p>
-          <p className="text-xs text-amber-900/80">{t("map.aouNotByStac")}</p>
+          <p className="text-xs text-amber-950/90">{t("map.aouNotByStac")}</p>
+          <NajdSeasonalChip />
           <AlertMap />
         </section>
       ) : (
         <section className="space-y-2">
           <div className="flex flex-wrap items-center gap-2">
             <h2 className="text-lg font-semibold text-crop-700">{t("restoration.title")}</h2>
-            <span className="rounded-full bg-amber-50 px-2 py-0.5 text-xs font-medium text-earth-600">
+            <span className="rounded-full border border-amber-300 bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-950">
               {t("provisional.badge")}
             </span>
-            <span className="rounded-full bg-sand-100 px-2.5 py-0.5 text-xs font-medium text-sand-800">
+            <span className="rounded-full border border-sand-300 bg-sand-100 px-2.5 py-0.5 text-xs font-medium text-sand-900">
               {t("restoration.notByFarmStac")}
             </span>
           </div>
           <p className="text-sm text-sand-800/90">{t("restoration.blurb")}</p>
-          <p className="text-xs text-amber-900/80">{t("provisional.sites")}</p>
+          <p className="text-xs text-amber-950/90">{t("provisional.sites")}</p>
           <p className="text-xs text-sand-800/60">{t("provisional.mpi")}</p>
           <RestorationMap />
         </section>

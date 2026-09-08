@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import AlertMap from "../components/AlertMap";
+import AouOfflineBadge from "../components/AouOfflineBadge";
+import NajdSeasonalChip from "../components/NajdSeasonalChip";
 import { publicUrl } from "../lib/publicUrl";
 import SourceCitation from "../components/SourceCitation";
 
@@ -128,8 +130,18 @@ export default function Analysis() {
       </div>
 
       <section className="space-y-3">
-        <h2 className="text-lg font-semibold text-crop-700">{t("live.liveTitle")}</h2>
+        <div className="flex flex-wrap items-center gap-2">
+          <h2 className="text-lg font-semibold text-crop-700">{t("live.liveTitle")}</h2>
+          <span className="rounded-full border border-amber-300 bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-950">
+            {t("provisional.badge")}
+          </span>
+          <AouOfflineBadge showHelper={false} />
+          <NajdSeasonalChip compact />
+        </div>
         <p className="text-sm text-sand-800/90">{t("live.liveBlurb")}</p>
+        <p className="text-xs text-amber-950/90">{t("map.aouNotByStac")}</p>
+        <p className="text-xs text-sand-800/60">{t("provisional.aou")}</p>
+        <NajdSeasonalChip />
         {error && <p className="text-sm text-red-700">{t("live.error")}</p>}
         {!ts && !error && <p className="text-sm text-sand-800/70">{t("live.loading")}</p>}
         <SourceCitation info={primarySource} />
