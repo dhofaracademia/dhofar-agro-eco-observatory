@@ -65,6 +65,10 @@ export default function WhyThisSiteCard({
         )}
       </div>
 
+      <p className="mb-3 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs font-semibold text-earth-600">
+        {t("restoration.provisionalMpi")}
+      </p>
+
       <div className="mb-4 grid gap-3 sm:grid-cols-2">
         <div className="rounded-xl border border-crop-600/30 bg-crop-600/5 p-3">
           <div className="text-xs font-semibold uppercase tracking-wide text-sand-800/50">
@@ -89,7 +93,10 @@ export default function WhyThisSiteCard({
       <dl className="grid gap-3 text-sm sm:grid-cols-2">
         <div>
           <dt className="text-xs font-semibold uppercase tracking-wide text-sand-800/50">{t("restoration.mpi")}</dt>
-          <dd>{site.mpi_class}</dd>
+          <dd>
+            {site.mpi_class}
+            <span className="mt-1 block text-[11px] font-medium text-earth-600">{t("restoration.provisionalMpi")}</span>
+          </dd>
         </div>
         <div>
           <dt className="text-xs font-semibold uppercase tracking-wide text-sand-800/50">{t("restoration.action")}</dt>
