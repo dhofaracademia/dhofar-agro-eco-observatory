@@ -66,9 +66,11 @@ export async function fetchLatestSentinel2Scenes(limit = 6): Promise<StacScene[]
       typeof props["eo:cloud_cover"] === "number" ? (props["eo:cloud_cover"] as number) : null;
     const tile =
       typeof props["s2:mgrs_tile"] === "string" ? (props["s2:mgrs_tile"] as string) : null;
-    const self =
-      f.links?.find((l) => l.rel === "self")?.href ??
+    const self = f.links?.find((l) => l.rel === "self")?.href ?? null;
+    // Prefer STAC rendered_preview when present; unsigned PC data API URLs often 403 in-browser.
+    const assetPreview =
       f.assets?.rendered_preview?.href ??
+      f.assets?.preview?.href ??
       null;
     return {
       id: f.id,
@@ -77,7 +79,7 @@ export async function fetchLatestSentinel2Scenes(limit = 6): Promise<StacScene[]
       cloudCover: cloud,
       tile,
       collection: f.collection ?? "sentinel-2-l2a",
-      previewUrl: previewForItem(f.id),
+      previewUrl: assetPreview || previewForItem(f.id),
       selfHref: self,
     };
   });

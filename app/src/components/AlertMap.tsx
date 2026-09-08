@@ -8,6 +8,7 @@ import type { SourceInfo } from "./SourceCitation";
 import AouProfilePanel from "./AouProfilePanel";
 import { aouIdFromFeature, type AouFeature, type AlertKind } from "../lib/aou";
 import { publicUrl } from "../lib/publicUrl";
+import NajdSeasonalChip from "./NajdSeasonalChip";
 
 type AlertProps = {
   alert: AlertKind;
@@ -183,6 +184,8 @@ export default function AlertMap({
           ))}
         </div>
       </div>
+      {/* Persistent seasonal context under bare legend; chip also gates on Sep–Oct Muscat */}
+      <NajdSeasonalChip always />
 
       {error && <p className="text-sm text-red-700">{t("live.error")}</p>}
       {!data && !error && <p className="text-sm text-sand-800/70">{t("live.loading")}</p>}

@@ -4,6 +4,7 @@ export default function About() {
   const { t } = useTranslation();
   const steps = t("about.workflow", { returnObjects: true }) as string[];
   const honesty = t("about.honesty", { returnObjects: true }) as string[];
+  const howToRead = t("about.howToRead", { returnObjects: true }) as string[];
 
   return (
     <div className="space-y-8">
@@ -28,6 +29,14 @@ export default function About() {
         <ol className="list-decimal space-y-2 ps-5 text-sm text-sand-800/90">
           {Array.isArray(steps) && steps.map((s) => <li key={s}>{s}</li>)}
         </ol>
+      </section>
+
+
+      <section className="rounded-2xl border border-sand-200 bg-white p-5 shadow-sm">
+        <h2 className="mb-3 font-semibold text-crop-700">{t("about.howToReadTitle")}</h2>
+        <ul className="list-disc space-y-2 ps-5 text-sm text-sand-800/90">
+          {Array.isArray(howToRead) && howToRead.map((s) => <li key={s}>{s}</li>)}
+        </ul>
       </section>
 
       <section className="rounded-2xl border border-sand-200 bg-white p-5 shadow-sm">

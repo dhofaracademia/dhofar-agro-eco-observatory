@@ -123,7 +123,9 @@
     "legendWater": "Needs water check",
     "legendVigor": "Low vigor — check nutrition/management",
     "aouOfflineBadge": "AOU layer: last offline run {{date}}",
-    "aouNotByStac": "Gallery STAC refresh does not update the AOU alert layer."
+    "aouNotByStac": "Gallery STAC refresh does not update the AOU alert layer.",
+    "najdOffSeasonChip": "Sep–Oct: bare often = off-season (expected)",
+    "najdOffSeasonHelper": "In Asia/Muscat September–October, Najd wheat is typically off-season. Many bare AOU cells reflect expected fallow / unplanted ground — not necessarily a monitor failure."
   },
   "gallery": {
     "title": "Imagery",
@@ -164,7 +166,8 @@
     "tabArchive": "Archive",
     "datetime": "Datetime",
     "stacListUpdated": "Imagery STAC list updated",
-    "aouOfflineRun": "AOU layer offline run"
+    "aouOfflineRun": "AOU layer offline run",
+    "previewUnsignedHint": "unsigned Planetary Computer preview URLs often fail in-browser without a SAS token"
   },
   "analysis": {
     "title": "Planting-status analysis",
@@ -247,7 +250,15 @@
     "limitTitle": "MVP limits",
     "limitBody": "This MVP can refresh the Imagery STAC scene list from Planetary Computer. AOU alert GeoJSON, mountain MPI / suitability / confidence, and restoration site scores remain offline or illustrative stubs. It does not recompute live MPI composites or replace Environment Authority / field decisions.",
     "dataSourcesTitle": "Data sources",
-    "dataSourcesBody": "Sentinel-2 L2A via Microsoft Planetary Computer STAC; static browse previews; sample mountain GeoJSON. Contains modified Copernicus Sentinel data (ESA)."
+    "dataSourcesBody": "Sentinel-2 L2A via Microsoft Planetary Computer STAC; static browse previews; sample mountain GeoJSON. Contains modified Copernicus Sentinel data (ESA).",
+    "howToReadTitle": "How to read this demo",
+    "howToRead": [
+      "AOU ≠ farm — Agricultural Observation Units are satellite cells, not official farm names or cadastral boundaries.",
+      "STAC ≠ monitoring — Gallery «Refresh scene list from STAC» updates imagery listings only; it does not recompute AOU alerts or farm monitor layers.",
+      "MPI stub — Mountain Moisture Persistence (MPI) classes on sample sites are provisional stubs; this MVP does not compute live MPI.",
+      "Suitability ≠ Confidence — restoration suitability and confidence stay separate scores and are never merged into one number.",
+      "Authority before campaigns — Environment Authority review (and field checks) are required before any restoration campaign; this demo is not an official planting plan."
+    ]
   },
   "footer": "Dhofar Agro & Eco Observatory · open-data observatory MVP · not a substitute for field survey",
   "live": {
@@ -257,8 +268,8 @@
     "tile": "MGRS tile",
     "cloud": "Cloud cover",
     "citation": "Citation",
-    "liveTitle": "Live monitor",
-    "liveBlurb": "Computed NDVI and NDMI from Sentinel-2 L2A COG bands over the farm window. Weekly re-run ready.",
+    "liveTitle": "Farm monitor (offline artifacts)",
+    "liveBlurb": "NDVI and NDMI summaries from the latest offline farm-monitor run (Sentinel-2 L2A). Not recomputed by Gallery STAC refresh — re-run satellite/pipeline/run_monitor.py or the scheduled Action when enabled.",
     "alertCounts": "Zone counts (latest)",
     "timeseries": "Week-to-week change",
     "timeseriesBlurb": "Mean NDVI / NDMI and attention counts for clear scenes in the monitor window.",
@@ -292,10 +303,11 @@
   "honesty": {
     "title": "Data honesty",
     "cloud": "Cloud cover is reported per scene; peak-Khareef mountain scenes may be cloudy — SCL masking applies where computed.",
-    "proxy": "NDVI/NDMI (and mountain MPI) are satellite proxies — not plot-level soil moisture meters.",
+    "proxy": "NDVI/NDMI (and mountain MPI) are satellite proxies — not plot-level soil moisture meters. NDMI ≠ field soil moisture.",
     "pest": "No confirmed pest/disease diagnosis from space — use “Possible Biotic Stress” + field check only.",
     "aou": "AOU ≠ official farm boundary until authorized cadastral link.",
     "stale": "Scenes always show last-updated. Empty STAC results fail visibly — never silent reuse of stale imagery without a stamp.",
-    "mountain": "Mountain suitability / confidence / MPI on sample sites are illustrative stubs — farm STAC refresh does not compute live mountain MPI."
+    "mountain": "Mountain suitability / confidence / MPI on sample sites are illustrative stubs — farm STAC refresh does not compute live mountain MPI.",
+    "stac": "Gallery STAC refresh ≠ AOU/MPI recompute — scene list only."
   }
 }
