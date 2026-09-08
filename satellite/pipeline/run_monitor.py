@@ -15,7 +15,7 @@ import json
 import math
 import sys
 from collections import defaultdict
-from datetime import date
+from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -33,7 +33,8 @@ from shapely.geometry import box, mapping
 # ---------------------------------------------------------------------------
 PIPELINE_DIR = Path(__file__).resolve().parent
 CACHE_DIR = PIPELINE_DIR / "cache"
-OUT_DATA = Path("/workspace/najd-planting-monitor/public/data")
+REPO_ROOT = PIPELINE_DIR.parents[1]  # .../satellite/pipeline -> repo root
+OUT_DATA = Path(__import__("os").environ.get("MONITOR_OUT_DATA", str(REPO_ROOT / "app" / "public" / "data")))
 GEOJSON_PATH = OUT_DATA / "latest_alerts.geojson"
 TIMESERIES_PATH = OUT_DATA / "timeseries.json"
 
@@ -479,6 +480,7 @@ def main() -> int:
         "properties": {
             "source": SOURCE_STR,
             "date": latest_date,
+            "last_updated": datetime.now(timezone.utc).isoformat(),
             "window_bbox": WINDOW_BBOX,
             "aoi_bbox": AOI_BBOX,
             "bare_ndvi_threshold": BARE_NDVI,
@@ -508,7 +510,8 @@ def main() -> int:
 
     ts_doc = {
         "source": SOURCE_STR,
-        "generated_on": "2026-09-08",
+        "generated_on": datetime.now(timezone.utc).date().isoformat(),
+        "last_updated": datetime.now(timezone.utc).isoformat(),
         "aoi_bbox": AOI_BBOX,
         "window_bbox": WINDOW_BBOX,
         "priority_tiles": sorted(PRIORITY_TILES),

@@ -17,7 +17,7 @@ export default function KhareefCalendar({ active = "peak" }: { active?: (typeof 
     <section className="rounded-2xl border border-sand-200 bg-white p-4 shadow-sm">
       <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
         <h2 className="text-sm font-semibold text-crop-700">{t("khareef.title")}</h2>
-        <p className="text-xs text-sand-800/60">{t("khareef.note")}</p>
+        <p className="max-w-xl text-xs text-sand-800/60">{t("khareef.note")}</p>
       </div>
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
         {STAGES.map((s) => {
