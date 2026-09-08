@@ -24,14 +24,27 @@ export default function MapPage() {
 
       {mode === "agricultural" ? (
         <section className="space-y-2">
-          <h2 className="text-lg font-semibold text-crop-700">{t("map.liveTitle")}</h2>
+          <div className="flex flex-wrap items-center gap-2">
+            <h2 className="text-lg font-semibold text-crop-700">{t("map.liveTitle")}</h2>
+            <span className="rounded-full bg-amber-50 px-2 py-0.5 text-xs font-medium text-earth-600">
+              {t("provisional.badge")}
+            </span>
+          </div>
           <p className="text-sm text-sand-800/90">{t("map.liveBlurb")}</p>
+          <p className="text-xs text-sand-800/60">{t("provisional.aou")}</p>
           <AlertMap />
         </section>
       ) : (
         <section className="space-y-2">
-          <h2 className="text-lg font-semibold text-crop-700">{t("restoration.title")}</h2>
+          <div className="flex flex-wrap items-center gap-2">
+            <h2 className="text-lg font-semibold text-crop-700">{t("restoration.title")}</h2>
+            <span className="rounded-full bg-amber-50 px-2 py-0.5 text-xs font-medium text-earth-600">
+              {t("provisional.badge")}
+            </span>
+          </div>
           <p className="text-sm text-sand-800/90">{t("restoration.blurb")}</p>
+          <p className="text-xs text-amber-900/80">{t("provisional.sites")}</p>
+          <p className="text-xs text-sand-800/60">{t("provisional.mpi")}</p>
           <RestorationMap />
         </section>
       )}

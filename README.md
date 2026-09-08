@@ -1,22 +1,10 @@
-# ظفار رصد | Dhofar Agro & Eco Observatory
+# مرصد ظفار الزراعي البيئي | Dhofar Agro & Eco Observatory
 
-Bilingual decision-support platform for Dhofar, Oman:
+Bilingual decision-support observatory for Dhofar, Oman.
 
-- **Agricultural Observatory** — AOU monitoring (Najd irrigated farms)
-- **Restoration & Reforestation Observatory** — Khareef / mountain reseeding intelligence
+- Agricultural Observatory — AOU monitoring
+- Restoration Observatory — Khareef / mountain intelligence
 
-Extends the Najd Planting Monitor stack (Vite + React + Leaflet + Planetary Computer STAC).
+Imagery Refresh uses Microsoft Planetary Computer STAC (Sentinel-2 L2A). Contains modified Copernicus Sentinel data (ESA). Optional env: VITE_STAC_SEARCH_URL (no secrets in repo).
 
-## Layout
-
-- `app/` — web frontend (Vite React TypeScript)
-- `satellite/` — processing pipeline (Python / PC STAC / rasterio)
-- `docs/` — product specifications
-
-## Spec
-
-See `docs/PRODUCT_SPEC_dhofar_agro_eco_observatory.md` (v1.0.1).
-
-## Status
-
-MVP in progress — dual Farm / Mountain modes, AOU framing, Restoration site cards.
+App lives in `app/`.

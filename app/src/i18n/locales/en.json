@@ -1,12 +1,13 @@
 {
-  "appName": "ظفار رصد | Dhofar Agro & Eco Observatory",
-  "subtitle": "Agricultural Observation Units and Restoration Intelligence for Dhofar, Oman",
+  "appName": "Dhofar Agro & Eco Observatory",
+  "appAlias": "Dhofar Monitor",
+  "subtitle": "Agricultural observation units and restoration intelligence for Dhofar, Oman",
   "nav": {
-    "home": "Home",
-    "map": "Map",
-    "gallery": "Scenes",
-    "analysis": "Analysis",
-    "about": "Method"
+    "home": "Overview",
+    "map": "Sites",
+    "gallery": "Imagery",
+    "analysis": "Monitoring",
+    "about": "About"
   },
   "mode": {
     "label": "Observatory mode",
@@ -94,7 +95,7 @@
   "home": {
     "badge": "Dhofar · Oman · Open Data First",
     "title": "One map. Two observatories.",
-    "intro": "ظفار رصد | Dhofar Agro & Eco Observatory turns open Earth-observation into interpretable indicators for Dhofar: Agricultural Observation Units (AOUs) across the Najd irrigated plain, and Restoration Intelligence for Qara, Samhan, Qamar and coastal foothills. It is decision support — not a satellite slideshow and not a substitute for field survey.",
+    "intro": "Dhofar Agro & Eco Observatory turns open Earth-observation into interpretable indicators for Dhofar: Agricultural Observation Units (AOUs) across the Najd irrigated plain, and Restoration Intelligence for Qara, Samhan, Qamar and coastal foothills. It is decision support — not a satellite slideshow and not a substitute for field survey.",
     "whyTitle": "Why Sentinel-2?",
     "whyBody": "Irrigated blocks in Najd are large enough for 10 m pixels. Optical VNIR + SWIR supports vegetation and canopy-moisture indices. Inland Najd is hyper-arid, so clear scenes are common most months. Mountain Khareef seasons need cloud-aware composites and moisture persistence — not a single post-rain image.",
     "seasonTitle": "Wheat & Khareef seasons",
@@ -122,8 +123,8 @@
     "legendVigor": "Low vigor — check nutrition/management"
   },
   "gallery": {
-    "title": "Satellite scenes",
-    "blurb": "Browse true-color and NDVI previews from Sentinel-2 (and one Landsat-8 scene). Filter by tile, season, and product type.",
+    "title": "Imagery",
+    "blurb": "Browse archived true-color and NDVI previews, or refresh current Sentinel-2 scenes from Microsoft Planetary Computer STAC.",
     "allTiles": "All tiles",
     "allSeasons": "All seasons",
     "allTypes": "All types",
@@ -134,7 +135,23 @@
     "empty": "No scenes match these filters.",
     "close": "Close",
     "sensor": "Sensor / tile",
-    "date": "Date"
+    "date": "Date",
+    "staticNote": "Archived browse previews (offline gallery assets).",
+    "refresh": "Refresh from STAC",
+    "refreshing": "Refreshing…",
+    "refreshIdle": "Idle",
+    "refreshOk": "Updated",
+    "refreshFail": "Refresh failed",
+    "lastUpdated": "Last updated",
+    "liveTitle": "Current STAC scenes",
+    "liveBlurb": "Latest clear Sentinel-2 L2A items for the farm corridor via Planetary Computer.",
+    "noLive": "No live scenes yet — click Refresh.",
+    "cloud": "Cloud",
+    "productId": "Product ID",
+    "sourceBadgePc": "Planetary Computer",
+    "sourceBadgeS2": "Sentinel-2 L2A",
+    "sourceBadgeStac": "STAC",
+    "howRefresh": "Refresh queries the Microsoft Planetary Computer STAC API (sentinel-2-l2a) over the observatory AOI. Contains modified Copernicus Sentinel data. No API token required for STAC search; optional VITE_PC_SAS_TOKEN may be set later for signed assets."
   },
   "analysis": {
     "title": "Planting-status analysis",
@@ -192,7 +209,7 @@
   },
   "about": {
     "title": "Method & scientific honesty",
-    "blurb": "ظفار رصد | Dhofar Agro & Eco Observatory extends the Najd planting monitor into a dual Agricultural / Restoration platform (product spec v1.0.1).",
+    "blurb": "Dhofar Agro & Eco Observatory (مرصد ظفار الزراعي البيئي) is a bilingual agricultural and restoration observatory for Dhofar, Oman (product spec v1.0.1).",
     "aoiTitle": "Areas of interest",
     "aoiBody": "Agricultural: Najd farm corridor ≈ [53.4, 17.5, 54.3, 18.5] (Thumrait, Shisr, Hanfit, Saih Al-Khairat; Al-Mazyunah west). Restoration: Jabal Qara, Samhan, Qamar; Mirbat and Mughsayl foothills.",
     "sensorsTitle": "Sensors",
@@ -215,9 +232,11 @@
       "AOU ≠ Official Farm until authorized government data is linked."
     ],
     "limitTitle": "MVP limits",
-    "limitBody": "This MVP serves static GeoJSON, browse PNGs, dual-mode UI, Khareef strip, AOU profiles, and sample restoration sites. It does not stream live COGs, run MPI from full composites, or replace agroforestry / Environment Authority decisions."
+    "limitBody": "This MVP serves static GeoJSON, browse PNGs, dual-mode UI, Khareef strip, AOU profiles, and sample restoration sites. It does not stream live COGs, run MPI from full composites, or replace agroforestry / Environment Authority decisions.",
+    "dataSourcesTitle": "Data sources",
+    "dataSourcesBody": "Sentinel-2 L2A via Microsoft Planetary Computer STAC; static browse previews; sample mountain GeoJSON. Contains modified Copernicus Sentinel data (ESA)."
   },
-  "footer": "ظفار رصد | Dhofar Agro & Eco Observatory · open-data MVP · not a substitute for field survey",
+  "footer": "Dhofar Agro & Eco Observatory · alias: ظفار رصد · open-data observatory MVP · not a substitute for field survey",
   "live": {
     "source": "Source",
     "date": "Acquisition date",
@@ -247,5 +266,12 @@
     "tip_water_attention": "Canopy moisture (NDMI) is low versus nearby vegetated areas — verify irrigation soon.",
     "tip_vigor_attention": "Greening (NDVI) is weak versus peers. Possible biotic or management stress — confirm in the field (satellite cannot diagnose fertilizer or pests alone).",
     "tip_unclear": "Signal is ambiguous for this cell — review imagery and field conditions."
+  },
+  "appNameAr": "مرصد ظفار الزراعي البيئي",
+  "provisional": {
+    "badge": "Provisional / sample",
+    "sites": "Sample restoration sites are illustrative expert-rule stubs — not field-validated; Environment Authority review required before campaigns.",
+    "aou": "AOU cells shown here are from offline / one-shot discovery — not yet on a scheduled open-data pull.",
+    "mpi": "MPI class is provisional; live MPI is not computed in this MVP."
   }
 }
