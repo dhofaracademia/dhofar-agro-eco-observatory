@@ -12,23 +12,25 @@ export default function Layout({ children }: { children: ReactNode }) {
   const { locale = "en" } = useParams();
   const other = locale === "ar" ? "en" : "ar";
   const base = `/${locale}`;
-  const title =
-    i18n.language === "ar"
-      ? t("appName")
-      : t("appName");
-  const subtitleSecondary =
-    i18n.language === "ar" ? "Dhofar Agro & Eco Observatory" : "مرصد ظفار الزراعي البيئي";
+  const isAr = i18n.language === "ar";
 
   return (
     <div className="min-h-screen flex flex-col">
       <header className="sticky top-0 z-20 border-b border-sand-200/80 bg-sand-50/90 backdrop-blur">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3">
           <Link to={base} className="min-w-0">
-            <div className="text-lg font-bold text-crop-700">{title}</div>
-            <div className="text-xs font-medium text-crop-700/80">{t("appAlias")}</div>
+            <div className="flex flex-wrap items-baseline gap-2">
+              <span className="text-lg font-bold text-crop-700">{t("appName")}</span>
+              <span className="rounded-full border border-sand-300 px-2 py-0.5 text-[10px] font-semibold text-sand-800/70">
+                {t("navAlias")}
+              </span>
+            </div>
             <div className="truncate text-xs text-sand-800/70">
               {t("subtitle")}
-              <span className="text-sand-800/40"> · {subtitleSecondary}</span>
+              <span className="text-sand-800/40">
+                {" "}
+                · {isAr ? "Dhofar Agro & Eco Observatory" : "مرصد ظفار الزراعي البيئي"}
+              </span>
             </div>
           </Link>
           <nav className="flex flex-wrap items-center gap-1">
@@ -58,7 +60,11 @@ export default function Layout({ children }: { children: ReactNode }) {
       </header>
       <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8">{children}</main>
       <footer className="border-t border-sand-200 py-5 text-center text-xs text-sand-800/60">
-        <div>{t("footer")}</div>
+        <div>
+          {t("appName")}
+          <span className="text-sand-800/40"> · {t("navAlias")}</span>
+        </div>
+        <div className="mt-1">{t("footer")}</div>
         <div className="mx-auto mt-2 max-w-3xl px-4">{t("gallery.howRefresh")}</div>
         <div className="mt-2 font-medium text-sand-800/70">{t("about.dataSourcesTitle")}</div>
       </footer>
