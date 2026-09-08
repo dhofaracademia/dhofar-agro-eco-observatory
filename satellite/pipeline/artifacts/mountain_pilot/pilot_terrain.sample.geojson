@@ -1,0 +1,2090 @@
+{
+  "type": "FeatureCollection",
+  "generated_at": "2026-09-08T14:57:28.098184+00:00",
+  "pilot_bbox": [
+    54.05,
+    17.08,
+    54.22,
+    17.22
+  ],
+  "status": "pilot_unverified",
+  "layer": "mountain_pilot",
+  "dem_source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer",
+  "bbox_note": "Locked start bbox [54.05, 17.08, 54.22, 17.22] (Jabal Qara fog-escarpment). No change before first run; post-DEM nudge ≤0.05°; max span ≤~0.2°/side.",
+  "ndmi_pre": {
+    "date_range": "2026-05-01/2026-05-31",
+    "n_candidates": 14,
+    "status": "ok",
+    "product_id": "S2B_MSIL2A_20260502T064619_R020_T40QBE_20260502T104108",
+    "date": "2026-05-02",
+    "cloud_cover": 0.012356,
+    "tile": "40QBE",
+    "clear_frac": 0.2369
+  },
+  "ndmi_post": {
+    "date_range": "2026-09-01/2026-09-08",
+    "n_candidates": 2,
+    "status": "insufficient_clear_data",
+    "product_id": "S2C_MSIL2A_20260904T064621_R020_T40QBE_20260904T115810",
+    "date": "2026-09-04",
+    "cloud_cover": 17.01638,
+    "tile": "40QBE",
+    "clear_frac": 0.0,
+    "reason": "SCL clear fraction 0.000 < minimum 0.15 (fail-honest; no fabricated NDMI)"
+  },
+  "grid_cell_m": 250.0,
+  "n_features": 4851,
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.05242557649603,
+              17.217627111031263
+            ],
+            [
+              54.05242557649603,
+              17.219872888968737
+            ],
+            [
+              54.050074423503965,
+              17.219872888968737
+            ],
+            [
+              54.050074423503965,
+              17.217627111031263
+            ],
+            [
+              54.05242557649603,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 816.1,
+        "slope_deg": 9.87,
+        "aspect_deg": 74.6,
+        "twi": 3.393,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.05464779871825,
+              17.217627111031263
+            ],
+            [
+              54.05464779871825,
+              17.219872888968737
+            ],
+            [
+              54.05229664572619,
+              17.219872888968737
+            ],
+            [
+              54.05229664572619,
+              17.217627111031263
+            ],
+            [
+              54.05464779871825,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 793.9,
+        "slope_deg": 11.19,
+        "aspect_deg": 50.5,
+        "twi": 3.291,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.05687002094047,
+              17.217627111031263
+            ],
+            [
+              54.05687002094047,
+              17.219872888968737
+            ],
+            [
+              54.05451886794841,
+              17.219872888968737
+            ],
+            [
+              54.05451886794841,
+              17.217627111031263
+            ],
+            [
+              54.05687002094047,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 768.3,
+        "slope_deg": 14.38,
+        "aspect_deg": 95.8,
+        "twi": 3.022,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.059092243162695,
+              17.217627111031263
+            ],
+            [
+              54.059092243162695,
+              17.219872888968737
+            ],
+            [
+              54.05674109017063,
+              17.219872888968737
+            ],
+            [
+              54.05674109017063,
+              17.217627111031263
+            ],
+            [
+              54.059092243162695,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 739.0,
+        "slope_deg": 19.33,
+        "aspect_deg": 140.9,
+        "twi": 2.658,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.06131446538492,
+              17.217627111031263
+            ],
+            [
+              54.06131446538492,
+              17.219872888968737
+            ],
+            [
+              54.058963312392855,
+              17.219872888968737
+            ],
+            [
+              54.058963312392855,
+              17.217627111031263
+            ],
+            [
+              54.06131446538492,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 733.1,
+        "slope_deg": 18.37,
+        "aspect_deg": 162.3,
+        "twi": 2.656,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.06353668760714,
+              17.217627111031263
+            ],
+            [
+              54.06353668760714,
+              17.219872888968737
+            ],
+            [
+              54.06118553461508,
+              17.219872888968737
+            ],
+            [
+              54.06118553461508,
+              17.217627111031263
+            ],
+            [
+              54.06353668760714,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 641.5,
+        "slope_deg": 32.18,
+        "aspect_deg": 99.9,
+        "twi": 2.113,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.06575890982936,
+              17.217627111031263
+            ],
+            [
+              54.06575890982936,
+              17.219872888968737
+            ],
+            [
+              54.0634077568373,
+              17.219872888968737
+            ],
+            [
+              54.0634077568373,
+              17.217627111031263
+            ],
+            [
+              54.06575890982936,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 606.0,
+        "slope_deg": 35.64,
+        "aspect_deg": 191.3,
+        "twi": 1.92,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.067981132051585,
+              17.217627111031263
+            ],
+            [
+              54.067981132051585,
+              17.219872888968737
+            ],
+            [
+              54.06562997905952,
+              17.219872888968737
+            ],
+            [
+              54.06562997905952,
+              17.217627111031263
+            ],
+            [
+              54.067981132051585,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 652.2,
+        "slope_deg": 30.88,
+        "aspect_deg": 191.5,
+        "twi": 2.128,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.07020335427381,
+              17.217627111031263
+            ],
+            [
+              54.07020335427381,
+              17.219872888968737
+            ],
+            [
+              54.067852201281745,
+              17.219872888968737
+            ],
+            [
+              54.067852201281745,
+              17.217627111031263
+            ],
+            [
+              54.07020335427381,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 666.5,
+        "slope_deg": 16.43,
+        "aspect_deg": 142.4,
+        "twi": 2.829,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.07242557649603,
+              17.217627111031263
+            ],
+            [
+              54.07242557649603,
+              17.219872888968737
+            ],
+            [
+              54.07007442350397,
+              17.219872888968737
+            ],
+            [
+              54.07007442350397,
+              17.217627111031263
+            ],
+            [
+              54.07242557649603,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 586.2,
+        "slope_deg": 22.29,
+        "aspect_deg": 93.4,
+        "twi": 2.559,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.07464779871825,
+              17.217627111031263
+            ],
+            [
+              54.07464779871825,
+              17.219872888968737
+            ],
+            [
+              54.07229664572619,
+              17.219872888968737
+            ],
+            [
+              54.07229664572619,
+              17.217627111031263
+            ],
+            [
+              54.07464779871825,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 542.5,
+        "slope_deg": 11.57,
+        "aspect_deg": 116.4,
+        "twi": 3.329,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.076870020940476,
+              17.217627111031263
+            ],
+            [
+              54.076870020940476,
+              17.219872888968737
+            ],
+            [
+              54.07451886794841,
+              17.219872888968737
+            ],
+            [
+              54.07451886794841,
+              17.217627111031263
+            ],
+            [
+              54.076870020940476,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 527.4,
+        "slope_deg": 14.47,
+        "aspect_deg": 153.6,
+        "twi": 3.078,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.0790922431627,
+              17.217627111031263
+            ],
+            [
+              54.0790922431627,
+              17.219872888968737
+            ],
+            [
+              54.076741090170636,
+              17.219872888968737
+            ],
+            [
+              54.076741090170636,
+              17.217627111031263
+            ],
+            [
+              54.0790922431627,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 548.2,
+        "slope_deg": 18.78,
+        "aspect_deg": 218.1,
+        "twi": 2.615,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.08131446538492,
+              17.217627111031263
+            ],
+            [
+              54.08131446538492,
+              17.219872888968737
+            ],
+            [
+              54.07896331239286,
+              17.219872888968737
+            ],
+            [
+              54.07896331239286,
+              17.217627111031263
+            ],
+            [
+              54.08131446538492,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 586.9,
+        "slope_deg": 16.79,
+        "aspect_deg": 202.7,
+        "twi": 2.87,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.083536687607136,
+              17.217627111031263
+            ],
+            [
+              54.083536687607136,
+              17.219872888968737
+            ],
+            [
+              54.081185534615074,
+              17.219872888968737
+            ],
+            [
+              54.081185534615074,
+              17.217627111031263
+            ],
+            [
+              54.083536687607136,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 593.8,
+        "slope_deg": 26.5,
+        "aspect_deg": 169.2,
+        "twi": 2.281,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.08575890982936,
+              17.217627111031263
+            ],
+            [
+              54.08575890982936,
+              17.219872888968737
+            ],
+            [
+              54.083407756837296,
+              17.219872888968737
+            ],
+            [
+              54.083407756837296,
+              17.217627111031263
+            ],
+            [
+              54.08575890982936,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 622.2,
+        "slope_deg": 30.44,
+        "aspect_deg": 222.5,
+        "twi": 2.158,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.08798113205158,
+              17.217627111031263
+            ],
+            [
+              54.08798113205158,
+              17.219872888968737
+            ],
+            [
+              54.08562997905952,
+              17.219872888968737
+            ],
+            [
+              54.08562997905952,
+              17.217627111031263
+            ],
+            [
+              54.08798113205158,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 693.1,
+        "slope_deg": 10.05,
+        "aspect_deg": 239.3,
+        "twi": 3.355,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.090203354273804,
+              17.217627111031263
+            ],
+            [
+              54.090203354273804,
+              17.219872888968737
+            ],
+            [
+              54.08785220128174,
+              17.219872888968737
+            ],
+            [
+              54.08785220128174,
+              17.217627111031263
+            ],
+            [
+              54.090203354273804,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 711.3,
+        "slope_deg": 4.27,
+        "aspect_deg": 181.6,
+        "twi": 4.167,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.09242557649603,
+              17.217627111031263
+            ],
+            [
+              54.09242557649603,
+              17.219872888968737
+            ],
+            [
+              54.090074423503964,
+              17.219872888968737
+            ],
+            [
+              54.090074423503964,
+              17.217627111031263
+            ],
+            [
+              54.09242557649603,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 706.0,
+        "slope_deg": 4.74,
+        "aspect_deg": 149.7,
+        "twi": 4.283,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.09464779871825,
+              17.217627111031263
+            ],
+            [
+              54.09464779871825,
+              17.219872888968737
+            ],
+            [
+              54.09229664572619,
+              17.219872888968737
+            ],
+            [
+              54.09229664572619,
+              17.217627111031263
+            ],
+            [
+              54.09464779871825,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 708.2,
+        "slope_deg": 4.89,
+        "aspect_deg": 164.1,
+        "twi": 4.028,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.09687002094047,
+              17.217627111031263
+            ],
+            [
+              54.09687002094047,
+              17.219872888968737
+            ],
+            [
+              54.09451886794841,
+              17.219872888968737
+            ],
+            [
+              54.09451886794841,
+              17.217627111031263
+            ],
+            [
+              54.09687002094047,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 691.6,
+        "slope_deg": 6.24,
+        "aspect_deg": 103.9,
+        "twi": 3.806,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.099092243162694,
+              17.217627111031263
+            ],
+            [
+              54.099092243162694,
+              17.219872888968737
+            ],
+            [
+              54.09674109017063,
+              17.219872888968737
+            ],
+            [
+              54.09674109017063,
+              17.217627111031263
+            ],
+            [
+              54.099092243162694,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 667.9,
+        "slope_deg": 6.89,
+        "aspect_deg": 131.8,
+        "twi": 3.722,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.10131446538492,
+              17.217627111031263
+            ],
+            [
+              54.10131446538492,
+              17.219872888968737
+            ],
+            [
+              54.098963312392854,
+              17.219872888968737
+            ],
+            [
+              54.098963312392854,
+              17.217627111031263
+            ],
+            [
+              54.10131446538492,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 654.0,
+        "slope_deg": 7.47,
+        "aspect_deg": 151.8,
+        "twi": 3.653,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.10353668760714,
+              17.217627111031263
+            ],
+            [
+              54.10353668760714,
+              17.219872888968737
+            ],
+            [
+              54.10118553461508,
+              17.219872888968737
+            ],
+            [
+              54.10118553461508,
+              17.217627111031263
+            ],
+            [
+              54.10353668760714,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 653.6,
+        "slope_deg": 8.12,
+        "aspect_deg": 188.4,
+        "twi": 3.494,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.10575890982936,
+              17.217627111031263
+            ],
+            [
+              54.10575890982936,
+              17.219872888968737
+            ],
+            [
+              54.1034077568373,
+              17.219872888968737
+            ],
+            [
+              54.1034077568373,
+              17.217627111031263
+            ],
+            [
+              54.10575890982936,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 634.5,
+        "slope_deg": 15.31,
+        "aspect_deg": 127.1,
+        "twi": 2.991,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.107981132051584,
+              17.217627111031263
+            ],
+            [
+              54.107981132051584,
+              17.219872888968737
+            ],
+            [
+              54.10562997905952,
+              17.219872888968737
+            ],
+            [
+              54.10562997905952,
+              17.217627111031263
+            ],
+            [
+              54.107981132051584,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 607.4,
+        "slope_deg": 25.52,
+        "aspect_deg": 157.7,
+        "twi": 2.278,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.11020335427381,
+              17.217627111031263
+            ],
+            [
+              54.11020335427381,
+              17.219872888968737
+            ],
+            [
+              54.107852201281744,
+              17.219872888968737
+            ],
+            [
+              54.107852201281744,
+              17.217627111031263
+            ],
+            [
+              54.11020335427381,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 543.8,
+        "slope_deg": 26.46,
+        "aspect_deg": 116.2,
+        "twi": 2.387,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.11242557649603,
+              17.217627111031263
+            ],
+            [
+              54.11242557649603,
+              17.219872888968737
+            ],
+            [
+              54.11007442350397,
+              17.219872888968737
+            ],
+            [
+              54.11007442350397,
+              17.217627111031263
+            ],
+            [
+              54.11242557649603,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 514.6,
+        "slope_deg": 13.89,
+        "aspect_deg": 150.6,
+        "twi": 3.296,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.11464779871825,
+              17.217627111031263
+            ],
+            [
+              54.11464779871825,
+              17.219872888968737
+            ],
+            [
+              54.11229664572619,
+              17.219872888968737
+            ],
+            [
+              54.11229664572619,
+              17.217627111031263
+            ],
+            [
+              54.11464779871825,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 518.0,
+        "slope_deg": 14.54,
+        "aspect_deg": 223.5,
+        "twi": 3.105,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.116870020940475,
+              17.217627111031263
+            ],
+            [
+              54.116870020940475,
+              17.219872888968737
+            ],
+            [
+              54.11451886794841,
+              17.219872888968737
+            ],
+            [
+              54.11451886794841,
+              17.217627111031263
+            ],
+            [
+              54.116870020940475,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 594.2,
+        "slope_deg": 22.9,
+        "aspect_deg": 250.1,
+        "twi": 2.521,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.1190922431627,
+              17.217627111031263
+            ],
+            [
+              54.1190922431627,
+              17.219872888968737
+            ],
+            [
+              54.116741090170635,
+              17.219872888968737
+            ],
+            [
+              54.116741090170635,
+              17.217627111031263
+            ],
+            [
+              54.1190922431627,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 632.9,
+        "slope_deg": 6.17,
+        "aspect_deg": 107.6,
+        "twi": 3.769,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.12131446538492,
+              17.217627111031263
+            ],
+            [
+              54.12131446538492,
+              17.219872888968737
+            ],
+            [
+              54.11896331239286,
+              17.219872888968737
+            ],
+            [
+              54.11896331239286,
+              17.217627111031263
+            ],
+            [
+              54.12131446538492,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 607.1,
+        "slope_deg": 10.83,
+        "aspect_deg": 108.7,
+        "twi": 3.313,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.12353668760714,
+              17.217627111031263
+            ],
+            [
+              54.12353668760714,
+              17.219872888968737
+            ],
+            [
+              54.12118553461508,
+              17.219872888968737
+            ],
+            [
+              54.12118553461508,
+              17.217627111031263
+            ],
+            [
+              54.12353668760714,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 574.9,
+        "slope_deg": 13.28,
+        "aspect_deg": 162.9,
+        "twi": 3.3,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.125758909829365,
+              17.217627111031263
+            ],
+            [
+              54.125758909829365,
+              17.219872888968737
+            ],
+            [
+              54.1234077568373,
+              17.219872888968737
+            ],
+            [
+              54.1234077568373,
+              17.217627111031263
+            ],
+            [
+              54.125758909829365,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 599.0,
+        "slope_deg": 9.19,
+        "aspect_deg": 203.5,
+        "twi": 3.532,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.12798113205158,
+              17.217627111031263
+            ],
+            [
+              54.12798113205158,
+              17.219872888968737
+            ],
+            [
+              54.12562997905952,
+              17.219872888968737
+            ],
+            [
+              54.12562997905952,
+              17.217627111031263
+            ],
+            [
+              54.12798113205158,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 588.4,
+        "slope_deg": 10.38,
+        "aspect_deg": 91.4,
+        "twi": 3.339,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.1302033542738,
+              17.217627111031263
+            ],
+            [
+              54.1302033542738,
+              17.219872888968737
+            ],
+            [
+              54.12785220128174,
+              17.219872888968737
+            ],
+            [
+              54.12785220128174,
+              17.217627111031263
+            ],
+            [
+              54.1302033542738,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 554.8,
+        "slope_deg": 9.94,
+        "aspect_deg": 155.4,
+        "twi": 3.588,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.132425576496026,
+              17.217627111031263
+            ],
+            [
+              54.132425576496026,
+              17.219872888968737
+            ],
+            [
+              54.13007442350396,
+              17.219872888968737
+            ],
+            [
+              54.13007442350396,
+              17.217627111031263
+            ],
+            [
+              54.132425576496026,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 555.4,
+        "slope_deg": 9.62,
+        "aspect_deg": 125.2,
+        "twi": 3.373,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.13464779871825,
+              17.217627111031263
+            ],
+            [
+              54.13464779871825,
+              17.219872888968737
+            ],
+            [
+              54.132296645726186,
+              17.219872888968737
+            ],
+            [
+              54.132296645726186,
+              17.217627111031263
+            ],
+            [
+              54.13464779871825,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 531.9,
+        "slope_deg": 12.0,
+        "aspect_deg": 153.6,
+        "twi": 3.237,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.13687002094047,
+              17.217627111031263
+            ],
+            [
+              54.13687002094047,
+              17.219872888968737
+            ],
+            [
+              54.13451886794841,
+              17.219872888968737
+            ],
+            [
+              54.13451886794841,
+              17.217627111031263
+            ],
+            [
+              54.13687002094047,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 524.9,
+        "slope_deg": 12.18,
+        "aspect_deg": 164.3,
+        "twi": 3.076,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.13909224316269,
+              17.217627111031263
+            ],
+            [
+              54.13909224316269,
+              17.219872888968737
+            ],
+            [
+              54.13674109017063,
+              17.219872888968737
+            ],
+            [
+              54.13674109017063,
+              17.217627111031263
+            ],
+            [
+              54.13909224316269,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 523.6,
+        "slope_deg": 11.94,
+        "aspect_deg": 211.8,
+        "twi": 3.191,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.141314465384916,
+              17.217627111031263
+            ],
+            [
+              54.141314465384916,
+              17.219872888968737
+            ],
+            [
+              54.13896331239285,
+              17.219872888968737
+            ],
+            [
+              54.13896331239285,
+              17.217627111031263
+            ],
+            [
+              54.141314465384916,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 553.9,
+        "slope_deg": 10.63,
+        "aspect_deg": 232.0,
+        "twi": 3.26,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.14353668760714,
+              17.217627111031263
+            ],
+            [
+              54.14353668760714,
+              17.219872888968737
+            ],
+            [
+              54.141185534615076,
+              17.219872888968737
+            ],
+            [
+              54.141185534615076,
+              17.217627111031263
+            ],
+            [
+              54.14353668760714,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 566.9,
+        "slope_deg": 8.47,
+        "aspect_deg": 179.5,
+        "twi": 3.434,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.14575890982936,
+              17.217627111031263
+            ],
+            [
+              54.14575890982936,
+              17.219872888968737
+            ],
+            [
+              54.1434077568373,
+              17.219872888968737
+            ],
+            [
+              54.1434077568373,
+              17.217627111031263
+            ],
+            [
+              54.14575890982936,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 568.0,
+        "slope_deg": 9.8,
+        "aspect_deg": 187.4,
+        "twi": 3.312,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.147981132051584,
+              17.217627111031263
+            ],
+            [
+              54.147981132051584,
+              17.219872888968737
+            ],
+            [
+              54.14562997905952,
+              17.219872888968737
+            ],
+            [
+              54.14562997905952,
+              17.217627111031263
+            ],
+            [
+              54.147981132051584,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 535.8,
+        "slope_deg": 18.91,
+        "aspect_deg": 113.2,
+        "twi": 2.672,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.150203354273806,
+              17.217627111031263
+            ],
+            [
+              54.150203354273806,
+              17.219872888968737
+            ],
+            [
+              54.147852201281744,
+              17.219872888968737
+            ],
+            [
+              54.147852201281744,
+              17.217627111031263
+            ],
+            [
+              54.150203354273806,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 494.7,
+        "slope_deg": 9.42,
+        "aspect_deg": 186.5,
+        "twi": 3.678,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.15242557649603,
+              17.217627111031263
+            ],
+            [
+              54.15242557649603,
+              17.219872888968737
+            ],
+            [
+              54.150074423503966,
+              17.219872888968737
+            ],
+            [
+              54.150074423503966,
+              17.217627111031263
+            ],
+            [
+              54.15242557649603,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 493.2,
+        "slope_deg": 9.88,
+        "aspect_deg": 185.6,
+        "twi": 3.535,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.15464779871825,
+              17.217627111031263
+            ],
+            [
+              54.15464779871825,
+              17.219872888968737
+            ],
+            [
+              54.15229664572619,
+              17.219872888968737
+            ],
+            [
+              54.15229664572619,
+              17.217627111031263
+            ],
+            [
+              54.15464779871825,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 532.7,
+        "slope_deg": 17.42,
+        "aspect_deg": 263.3,
+        "twi": 2.716,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.156870020940474,
+              17.217627111031263
+            ],
+            [
+              54.156870020940474,
+              17.219872888968737
+            ],
+            [
+              54.15451886794841,
+              17.219872888968737
+            ],
+            [
+              54.15451886794841,
+              17.217627111031263
+            ],
+            [
+              54.156870020940474,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 552.9,
+        "slope_deg": 14.04,
+        "aspect_deg": 227.7,
+        "twi": 3.079,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.159092243162696,
+              17.217627111031263
+            ],
+            [
+              54.159092243162696,
+              17.219872888968737
+            ],
+            [
+              54.156741090170634,
+              17.219872888968737
+            ],
+            [
+              54.156741090170634,
+              17.217627111031263
+            ],
+            [
+              54.159092243162696,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 578.6,
+        "slope_deg": 5.26,
+        "aspect_deg": 261.5,
+        "twi": 4.026,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.16131446538492,
+              17.217627111031263
+            ],
+            [
+              54.16131446538492,
+              17.219872888968737
+            ],
+            [
+              54.158963312392856,
+              17.219872888968737
+            ],
+            [
+              54.158963312392856,
+              17.217627111031263
+            ],
+            [
+              54.16131446538492,
+              17.217627111031263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "elevation_m": 571.9,
+        "slope_deg": 8.67,
+        "aspect_deg": 102.6,
+        "twi": 3.557,
+        "status": "pilot_unverified",
+        "layer": "mountain_pilot",
+        "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+        "note": "Raw terrain/moisture measurements only. No suitability, action ladder, species, or live MPI class — science lock until spot-check.",
+        "clear_frac": 0.2369
+      }
+    }
+  ],
+  "note_sample": "First 50 cells only — full grid is pilot_terrain.geojson (often gitignored)."
+}

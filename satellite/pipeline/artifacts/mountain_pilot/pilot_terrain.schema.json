@@ -1,0 +1,96 @@
+{
+  "type": "FeatureCollection",
+  "required_collection_fields": [
+    "type",
+    "generated_at",
+    "pilot_bbox",
+    "status",
+    "layer",
+    "dem_source",
+    "features"
+  ],
+  "status_enum": [
+    "pilot_unverified",
+    "insufficient_clear_data",
+    "flat_or_arid_stop",
+    "dry_run"
+  ],
+  "layer": "mountain_pilot",
+  "feature_properties_allowed": [
+    "elevation_m",
+    "slope_deg",
+    "aspect_deg",
+    "twi",
+    "ndmi_pre_khareef",
+    "ndmi_post_khareef",
+    "ndmi_delta",
+    "clear_frac",
+    "source",
+    "note",
+    "status",
+    "layer"
+  ],
+  "feature_properties_forbidden": [
+    "action",
+    "action_ladder",
+    "confidence",
+    "ecological_confidence",
+    "live_mpi",
+    "mpi",
+    "mpi_class",
+    "species",
+    "species_note",
+    "suitability"
+  ],
+  "pilot_bbox_locked": [
+    54.05,
+    17.08,
+    54.22,
+    17.22
+  ],
+  "bbox_note": "Locked start bbox [54.05, 17.08, 54.22, 17.22] (Jabal Qara fog-escarpment). No change before first run; post-DEM nudge ≤0.05°; max span ≤~0.2°/side.",
+  "example_feature": {
+    "type": "Feature",
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            54.1,
+            17.12
+          ],
+          [
+            54.101,
+            17.12
+          ],
+          [
+            54.101,
+            17.121
+          ],
+          [
+            54.1,
+            17.121
+          ],
+          [
+            54.1,
+            17.12
+          ]
+        ]
+      ]
+    },
+    "properties": {
+      "elevation_m": 650.0,
+      "slope_deg": 12.3,
+      "aspect_deg": 210.0,
+      "twi": 4.2,
+      "ndmi_pre_khareef": -0.05,
+      "ndmi_post_khareef": 0.12,
+      "ndmi_delta": 0.17,
+      "clear_frac": 0.62,
+      "status": "pilot_unverified",
+      "layer": "mountain_pilot",
+      "source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer; Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+      "note": "Raw terrain/moisture only — no suitability / action / species."
+    }
+  }
+}
