@@ -206,14 +206,17 @@ export default function Gallery() {
               {error ? <span className="text-red-700"> — {error}</span> : null}
             </div>
           </div>
-          <button
-            type="button"
-            onClick={() => void onRefresh()}
-            disabled={status === "refreshing"}
-            className="rounded-full bg-crop-600 px-5 py-2 text-sm font-semibold text-white hover:bg-crop-700 disabled:opacity-60"
-          >
-            {status === "refreshing" ? t("gallery.refreshing") : t("gallery.refresh")}
-          </button>
+          <div className="flex max-w-sm flex-col items-stretch gap-1 sm:items-end">
+            <button
+              type="button"
+              onClick={() => void onRefresh()}
+              disabled={status === "refreshing"}
+              className="rounded-full bg-crop-600 px-5 py-2 text-sm font-semibold text-white hover:bg-crop-700 disabled:opacity-60"
+            >
+              {status === "refreshing" ? t("gallery.refreshing") : t("gallery.refresh")}
+            </button>
+            <p className="text-[11px] leading-snug text-sand-800/70">{t("gallery.refreshHelper")}</p>
+          </div>
         </div>
 
         <div>
