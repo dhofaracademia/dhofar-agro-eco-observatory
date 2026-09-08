@@ -1,5 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { publicUrl } from "../lib/publicUrl";
+import KhareefCalendar from "../components/KhareefCalendar";
 
 export default function Home() {
   const { t } = useTranslation();
@@ -19,10 +21,22 @@ export default function Home() {
           <p className="text-base leading-relaxed text-sand-800/90">{t("home.intro")}</p>
           <p className="text-sm text-sand-800/60">{t("home.previewNote")}</p>
           <div className="flex flex-wrap gap-3 pt-2">
-            <Link to={`${base}/gallery`} className="rounded-full bg-crop-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-crop-700">
+            <Link
+              to={`${base}/map`}
+              className="rounded-full bg-crop-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-crop-700"
+            >
+              {t("home.ctaMap")}
+            </Link>
+            <Link
+              to={`${base}/gallery`}
+              className="rounded-full border border-sand-300 bg-white px-5 py-2.5 text-sm font-semibold text-sand-800 hover:bg-sand-100"
+            >
               {t("home.ctaGallery")}
             </Link>
-            <Link to={`${base}/analysis`} className="rounded-full border border-sand-300 bg-white px-5 py-2.5 text-sm font-semibold text-sand-800 hover:bg-sand-100">
+            <Link
+              to={`${base}/analysis`}
+              className="rounded-full border border-sand-300 bg-white px-5 py-2.5 text-sm font-semibold text-sand-800 hover:bg-sand-100"
+            >
               {t("home.ctaAnalysis")}
             </Link>
           </div>
@@ -30,15 +44,17 @@ export default function Home() {
         <div className="grid gap-3 sm:grid-cols-2">
           <figure className="overflow-hidden rounded-2xl border border-sand-200 bg-white shadow-sm sm:col-span-2">
             <img
-              src="/previews/39QZV_20260313_truecolor_wheatseason_Thumrait.png"
+              src={publicUrl("previews/39QZV_20260313_truecolor_wheatseason_Thumrait.png")}
               alt="Thumrait true-color"
               className="h-48 w-full object-cover sm:h-56"
             />
-            <figcaption className="px-3 py-2 text-xs text-sand-800/70">Thumrait · true-color · 2026-03-13</figcaption>
+            <figcaption className="px-3 py-2 text-xs text-sand-800/70">
+              Thumrait · true-color · 2026-03-13
+            </figcaption>
           </figure>
           <figure className="overflow-hidden rounded-2xl border border-sand-200 bg-white shadow-sm">
             <img
-              src="/previews/39QZV_20260313_NDVI_Thumrait.png"
+              src={publicUrl("previews/39QZV_20260313_NDVI_Thumrait.png")}
               alt="Thumrait NDVI"
               className="h-36 w-full object-cover"
             />
@@ -46,7 +62,7 @@ export default function Home() {
           </figure>
           <figure className="overflow-hidden rounded-2xl border border-sand-200 bg-white shadow-sm">
             <img
-              src="/previews/39QZV_20260904_truecolor_Thumrait.png"
+              src={publicUrl("previews/39QZV_20260904_truecolor_Thumrait.png")}
               alt="Thumrait late summer"
               className="h-36 w-full object-cover"
             />
@@ -55,7 +71,17 @@ export default function Home() {
         </div>
       </section>
 
+      <KhareefCalendar active="peak" />
+
       <section className="grid gap-4 md:grid-cols-2">
+        <div className="rounded-2xl border border-sand-200 bg-white p-5 shadow-sm">
+          <h2 className="mb-2 text-lg font-semibold text-crop-700">{t("home.agroTitle")}</h2>
+          <p className="text-sm leading-relaxed text-sand-800/90">{t("home.agroBody")}</p>
+        </div>
+        <div className="rounded-2xl border border-sand-200 bg-white p-5 shadow-sm">
+          <h2 className="mb-2 text-lg font-semibold text-crop-700">{t("home.restoTitle")}</h2>
+          <p className="text-sm leading-relaxed text-sand-800/90">{t("home.restoBody")}</p>
+        </div>
         <div className="rounded-2xl border border-sand-200 bg-white p-5 shadow-sm">
           <h2 className="mb-2 text-lg font-semibold text-crop-700">{t("home.whyTitle")}</h2>
           <p className="text-sm leading-relaxed text-sand-800/90">{t("home.whyBody")}</p>

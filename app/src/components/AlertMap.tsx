@@ -5,8 +5,9 @@ import { useTranslation } from "react-i18next";
 import hubsData from "../data/hubs.json";
 import SourceCitation from "./SourceCitation";
 import type { SourceInfo } from "./SourceCitation";
-
-type AlertKind = "bare" | "healthy" | "water_attention" | "vigor_attention" | "unclear";
+import AouProfilePanel from "./AouProfilePanel";
+import { aouIdFromFeature, type AouFeature, type AlertKind } from "../lib/aou";
+import { publicUrl } from "../lib/publicUrl";
 
 type AlertProps = {
   alert: AlertKind;
@@ -17,11 +18,10 @@ type AlertProps = {
   product_id: string;
   tile: string;
   cloud_cover?: number;
+  pixel_count?: number;
 };
 
-type AlertFeature = {
-  type: "Feature";
-  geometry: { type: string; coordinates: number[][][] };
+type AlertFeature = AouFeature & {
   properties: AlertProps;
 };
 
@@ -55,16 +55,23 @@ const icon = L.icon({
   shadowSize: [41, 41],
 });
 
-export default function AlertMap({ heightClass = "h-[28rem]" }: { heightClass?: string }) {
+export default function AlertMap({
+  heightClass = "h-[28rem]",
+  showProfile = true,
+}: {
+  heightClass?: string;
+  showProfile?: boolean;
+}) {
   const { t, i18n } = useTranslation();
   const [data, setData] = useState<AlertFC | null>(null);
   const [error, setError] = useState(false);
   const [hideBare, setHideBare] = useState(true);
+  const [selected, setSelected] = useState<AlertFeature | null>(null);
   const { hubs, bbox } = hubsData;
 
   useEffect(() => {
     let cancelled = false;
-    fetch("/data/latest_alerts.geojson")
+    fetch(publicUrl("data/latest_alerts.geojson"))
       .then((r) => {
         if (!r.ok) throw new Error("fetch failed");
         return r.json();
@@ -109,11 +116,13 @@ export default function AlertMap({ heightClass = "h-[28rem]" }: { heightClass?: 
   const style = (feature?: AlertFeature) => {
     const alert = feature?.properties?.alert ?? "bare";
     const isBare = alert === "bare";
+    const id = feature ? aouIdFromFeature(feature) : "";
+    const isSelected = selected && feature && aouIdFromFeature(selected) === id;
     return {
-      color: COLORS[alert] ?? "#999",
-      weight: isBare ? 0 : 0.5,
+      color: isSelected ? "#111827" : (COLORS[alert] ?? "#999"),
+      weight: isSelected ? 2 : isBare ? 0 : 0.5,
       fillColor: COLORS[alert] ?? "#999",
-      fillOpacity: isBare ? 0.15 : 0.55,
+      fillOpacity: isBare ? 0.15 : isSelected ? 0.75 : 0.55,
     };
   };
 
@@ -123,13 +132,40 @@ export default function AlertMap({ heightClass = "h-[28rem]" }: { heightClass?: 
     const label = t(`live.${kind}`, { defaultValue: kind });
     const tip = t(`live.tip_${kind}`, { defaultValue: "" });
     const tipHtml = tip ? `<div style="margin-top:6px;max-width:240px">${tip}</div>` : "";
+    const aouId = aouIdFromFeature(feature);
     layer.bindPopup(
-      `<strong>${label}</strong>${tipHtml}<br/>NDVI ${p.ndvi} · NDMI ${p.ndmi}` +
+      `<strong>${aouId}</strong><br/><strong>${label}</strong>${tipHtml}<br/>NDVI ${p.ndvi} · NDMI ${p.ndmi}` +
         `<br/>${p.date} · ${p.tile}` +
+        `<br/><small>${t("aou.notOfficialFarm")}</small>` +
         `<br/><small>Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer</small>` +
         `<br/><small>${p.product_id}</small>`,
     );
+    layer.on({
+      click: () => setSelected(feature),
+    });
   };
+
+  const mapBlock = (
+    <div className={`${heightClass} w-full overflow-hidden rounded-2xl border border-sand-200 shadow-sm`}>
+      <MapContainer center={bbox.center as [number, number]} zoom={9} scrollWheelZoom={false}>
+        <TileLayer attribution="&copy; OpenStreetMap" url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        <Rectangle bounds={bounds} pathOptions={{ color: "#2f6b3a", weight: 2, fillOpacity: 0.04 }} />
+        {filtered && (
+          <GeoJSON
+            key={`${hideBare}-${filtered.features.length}-${i18n.language}-${selected ? aouIdFromFeature(selected) : "none"}`}
+            data={filtered as never}
+            style={style as never}
+            onEachFeature={onEach as never}
+          />
+        )}
+        {hubs.map((h) => (
+          <Marker key={h.id} position={[h.lat, h.lon]} icon={icon}>
+            <Popup>{i18n.language === "ar" ? h.name_ar : h.name_en}</Popup>
+          </Marker>
+        ))}
+      </MapContainer>
+    </div>
+  );
 
   return (
     <div className="space-y-3">
@@ -151,28 +187,20 @@ export default function AlertMap({ heightClass = "h-[28rem]" }: { heightClass?: 
       {error && <p className="text-sm text-red-700">{t("live.error")}</p>}
       {!data && !error && <p className="text-sm text-sand-800/70">{t("live.loading")}</p>}
 
-      <div className={`${heightClass} w-full overflow-hidden rounded-2xl border border-sand-200 shadow-sm`}>
-        <MapContainer center={bbox.center as [number, number]} zoom={9} scrollWheelZoom={false}>
-          <TileLayer attribution="&copy; OpenStreetMap" url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-          <Rectangle bounds={bounds} pathOptions={{ color: "#2f6b3a", weight: 2, fillOpacity: 0.04 }} />
-          {filtered && (
-            <GeoJSON
-              key={`${hideBare}-${filtered.features.length}-${i18n.language}`}
-              data={filtered as never}
-              style={style as never}
-              onEachFeature={onEach as never}
-            />
-          )}
-          {hubs.map((h) => (
-            <Marker key={h.id} position={[h.lat, h.lon]} icon={icon}>
-              <Popup>{i18n.language === "ar" ? h.name_ar : h.name_en}</Popup>
-            </Marker>
-          ))}
-        </MapContainer>
-      </div>
+      {showProfile ? (
+        <div className="grid gap-4 lg:grid-cols-5">
+          <div className="lg:col-span-3">{mapBlock}</div>
+          <div className="lg:col-span-2">
+            <AouProfilePanel feature={selected} onClose={() => setSelected(null)} />
+          </div>
+        </div>
+      ) : (
+        mapBlock
+      )}
 
       <SourceCitation info={sourceInfo} />
       {data?.properties?.note && <p className="text-xs text-sand-800/60">{data.properties.note}</p>}
+      <p className="text-xs text-sand-800/60">{t("aou.disclaimer")}</p>
     </div>
   );
 }

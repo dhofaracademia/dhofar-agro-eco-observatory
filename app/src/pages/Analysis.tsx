@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import AlertMap from "../components/AlertMap";
+import { publicUrl } from "../lib/publicUrl";
 import SourceCitation from "../components/SourceCitation";
 
 type DatePoint = {
@@ -51,11 +52,11 @@ export default function Analysis() {
   useEffect(() => {
     let cancelled = false;
     Promise.all([
-      fetch("/data/timeseries.json").then((r) => {
+      fetch(publicUrl("data/timeseries.json")).then((r) => {
         if (!r.ok) throw new Error("ts");
         return r.json();
       }),
-      fetch("/data/latest_alerts.geojson").then((r) => {
+      fetch(publicUrl("data/latest_alerts.geojson")).then((r) => {
         if (!r.ok) throw new Error("alerts");
         return r.json();
       }),

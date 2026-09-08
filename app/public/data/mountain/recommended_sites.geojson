@@ -1,0 +1,194 @@
+{
+  "type": "FeatureCollection",
+  "name": "dhofar_restoration_recommended_sites_mvp",
+  "properties": {
+    "note": "MVP sample sites for Restoration Observatory. Suitability and confidence are illustrative expert-rule stubs — not field-validated scores. Species suggestions require Environment Authority / agroforestry review.",
+    "version": "mvp-1"
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [54.12, 17.18] },
+      "properties": {
+        "id": "JR-00871",
+        "name_en": "Jabal Qara — fog escarpment niche",
+        "name_ar": "جبل القرا — موطئ ضباب على المنحدر",
+        "region": "Qara",
+        "suitability": 89,
+        "confidence": 74,
+        "mpi_class": "High",
+        "action": "Enrichment Seeding",
+        "species": "Terminalia dhofarica",
+        "species_note": "Accepted name; syn. Anogeissus dhofarica. Fog-escarpment native — not arid-Najd species.",
+        "window": "Late Khareef / Early Post-Khareef",
+        "why": [
+          "Post-Khareef moisture persistence (MPI) elevated vs nearby dry ridges",
+          "Partial canopy gaps suggest enrichment rather than blank planting",
+          "Moderate slope with acceptable wetness proxy — not a runoff trap",
+          "Historical fog-belt context favors Terminalia dhofarica"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [54.05, 17.25] },
+      "properties": {
+        "id": "JR-00842",
+        "name_en": "Jabal Qara — north ridge regeneration",
+        "name_ar": "جبل القرا — تجدد على الحافة الشمالية",
+        "region": "Qara",
+        "suitability": 82,
+        "confidence": 71,
+        "mpi_class": "Medium-High",
+        "action": "Assisted Natural Regeneration",
+        "species": "Terminalia dhofarica",
+        "species_note": "Support existing recruits; avoid arid-plain species (sidr / samr / ghaf).",
+        "window": "Post-Khareef",
+        "why": [
+          "Natural regeneration indicators already present",
+          "Light assist (protection, micro-site prep) preferred over active planting",
+          "MPI holds through +2 to +4 week post-onset windows",
+          "Lower operational risk than blank planting on exposed crest"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [54.78, 17.12] },
+      "properties": {
+        "id": "JR-00915",
+        "name_en": "Jabal Samhan — monsoon escarpment",
+        "name_ar": "جبل سمحان — منحدر الخريف",
+        "region": "Samhan",
+        "suitability": 91,
+        "confidence": 69,
+        "mpi_class": "High",
+        "action": "Protect Natural Regeneration",
+        "species": "Terminalia dhofarica",
+        "species_note": "Protect first; seeding only if gaps persist after monitoring.",
+        "window": "Peak Khareef → Post-Khareef monitoring",
+        "why": [
+          "Strong natural regeneration signal — protect before planting",
+          "High MPI class but confidence tempered by Khareef cloud gaps",
+          "Escarpment fog corridor historically supports cloud-forest associates",
+          "Avoid / defer intensive disturbance during peak moisture"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [54.85, 17.08] },
+      "properties": {
+        "id": "JR-00928",
+        "name_en": "Jabal Samhan — eastern spur gap",
+        "name_ar": "جبل سمحان — فجوة على النتوء الشرقي",
+        "region": "Samhan",
+        "suitability": 76,
+        "confidence": 66,
+        "mpi_class": "Medium",
+        "action": "Active Planting",
+        "species": "Terminalia dhofarica",
+        "species_note": "Active planting after site check; fog-belt native only.",
+        "window": "Early Post-Khareef",
+        "why": [
+          "Sparse regeneration and canopy gaps warrant active intervention",
+          "Hydrology screen passed coarse DEM / wetness proxy filters",
+          "Confidence lower due to single-season stub imagery",
+          "Species limited to fog-escarpment list pending Authority review"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [53.62, 16.92] },
+      "properties": {
+        "id": "JR-00755",
+        "name_en": "Jabal Qamar — western fog pocket",
+        "name_ar": "جبل القمر — جيب ضباب غربي",
+        "region": "Qamar",
+        "suitability": 84,
+        "confidence": 70,
+        "mpi_class": "High",
+        "action": "Enrichment Seeding",
+        "species": "Terminalia dhofarica",
+        "species_note": "Do not mix arid Najd species into fog pockets.",
+        "window": "Late Khareef / Early Post-Khareef",
+        "why": [
+          "Western Qamar fog pocket retains moisture after onset",
+          "Existing sparse cover suitable for enrichment seeding",
+          "Aspect and relative position favor moisture retention niches",
+          "Suitability ≠ confidence: scores kept separate by design"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [53.72, 16.98] },
+      "properties": {
+        "id": "JR-00768",
+        "name_en": "Jabal Qamar — steep runoff corridor",
+        "name_ar": "جبل القمر — ممر جريان شديد",
+        "region": "Qamar",
+        "suitability": 38,
+        "confidence": 72,
+        "mpi_class": "Low",
+        "action": "Avoid",
+        "species": "—",
+        "species_note": "Hydrological risk — not a seeding candidate in MVP rules.",
+        "window": "Defer",
+        "why": [
+          "High flow-accumulation / erosion risk on steep corridor",
+          "Low site ≠ plant more — Avoid / Defer is the correct action",
+          "Confidence relatively high that the site is unsuitable",
+          "Low-lying runoff zones are not automatically good seeding sites"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [54.69, 17.02] },
+      "properties": {
+        "id": "JR-01002",
+        "name_en": "Mirbat foothills — coastal moisture fringe",
+        "name_ar": "سفوح مرباط — هامش رطوبة ساحلي",
+        "region": "Mirbat",
+        "suitability": 73,
+        "confidence": 64,
+        "mpi_class": "Medium",
+        "action": "Assisted Natural Regeneration",
+        "species": "Terminalia dhofarica",
+        "species_note": "Coastal foothill context; local calibration required.",
+        "window": "Post-Khareef",
+        "why": [
+          "Coastal foothill moisture fringe with partial recruits",
+          "ANR preferred where grazing pressure can be reduced",
+          "Confidence limited by coarse open-data DEM and cloud cover",
+          "Species suggestion is advisory — Authority review required"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [53.77, 16.88] },
+      "properties": {
+        "id": "JR-01041",
+        "name_en": "Mughsayl — western coastal foothill",
+        "name_ar": "المغسيل — سفح ساحلي غربي",
+        "region": "Mughsayl",
+        "suitability": 71,
+        "confidence": 61,
+        "mpi_class": "Medium",
+        "action": "Enrichment Seeding",
+        "species": "Terminalia dhofarica",
+        "species_note": "Fog-influenced coastal foothill; not arid-plain species mix.",
+        "window": "Early Post-Khareef",
+        "why": [
+          "Western coastal foothill retains seasonal moisture pockets",
+          "Gaps in cover suited to enrichment rather than protect-only",
+          "MPI operational weight on onset + post-khareef (peak often cloudy)",
+          "Illustrative MVP site — validate before any campaign"
+        ]
+      }
+    }
+  ]
+}

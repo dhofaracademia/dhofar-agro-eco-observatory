@@ -1,6 +1,6 @@
 {
-  "appName": "Najd Planting Monitor",
-  "subtitle": "Bilingual satellite views and planting-status analysis for Najd farms in Dhofar",
+  "appName": "ظفار رصد | Dhofar Agro & Eco Observatory",
+  "subtitle": "Agricultural Observation Units and Restoration Intelligence for Dhofar, Oman",
   "nav": {
     "home": "Home",
     "map": "Map",
@@ -8,25 +8,112 @@
     "analysis": "Analysis",
     "about": "Method"
   },
+  "mode": {
+    "label": "Observatory mode",
+    "agricultural": "Agricultural Observatory",
+    "restoration": "Restoration Observatory"
+  },
+  "khareef": {
+    "title": "Khareef seasonal calendar",
+    "note": "Visual MVP strip — stages are illustrative, not live climate detection.",
+    "stages": {
+      "pre": "Pre-Khareef",
+      "onset": "Onset",
+      "peak": "Peak",
+      "weakening": "Weakening",
+      "end": "End",
+      "post": "Post-Khareef"
+    },
+    "hints": {
+      "pre": "Dry baseline",
+      "onset": "Moisture build-up",
+      "peak": "Peak moisture",
+      "weakening": "Decline begins",
+      "end": "Wet season ends",
+      "post": "Seeding window"
+    }
+  },
+  "aou": {
+    "profileTitle": "Dynamic Profile",
+    "selectHint": "Click an Agricultural Observation Unit (AOU) cell on the map to open its dynamic profile.",
+    "notOfficialFarm": "Not an official farm name or cadastral boundary.",
+    "disclaimer": "Polygons are Agricultural Observation Units (AOUs) derived from satellite cells — not official farms. Future link: AOU → Official Farm → Official Parcel.",
+    "close": "Close",
+    "area": "Estimated agricultural area",
+    "estimated": "estimated",
+    "coords": "Centroid",
+    "vegetationHealth": "Vegetation health",
+    "waterStress": "Water stress",
+    "confidence": "Confidence",
+    "confidenceStub": "stub score — not validated accuracy",
+    "date": "Acquisition date",
+    "health": {
+      "stable": "Stable vigor",
+      "watch": "Watch — vegetation change",
+      "possibleBiotic": "Possible biotic stress",
+      "bare": "Bare / little canopy",
+      "unclear": "Unclear — needs review"
+    },
+    "water": {
+      "low": "Low attention",
+      "attention": "Needs water check",
+      "moderate": "Moderate / mixed",
+      "na": "N/A (little canopy)",
+      "unclear": "Unclear"
+    },
+    "note": {
+      "possibleBiotic": "Possible biotic stress suspected from spectral/temporal pattern. Satellite cannot confirm a pest or disease — field verification is recommended."
+    }
+  },
+  "restoration": {
+    "title": "Recommended restoration sites",
+    "blurb": "Sample sites over Qara, Samhan, Qamar, Mirbat and Mughsayl. Suitability and confidence are separate expert-rule stubs for MVP — not field-validated scores.",
+    "selectHint": "Click a recommended site on the map to open «Why This Site?»",
+    "whyTitle": "Why This Site?",
+    "suitability": "Ecological suitability",
+    "confidence": "Confidence",
+    "suitabilityHint": "How suitable the site looks under expert rules",
+    "confidenceHint": "How sure we are given data gaps (clouds, DEM, stubs)",
+    "suitabilityNeqConfidence": "Suitability ≠ Confidence — these scores are never merged into one misleading number.",
+    "mpi": "Moisture Persistence (MPI class)",
+    "action": "Recommended action",
+    "species": "Species suggestion",
+    "window": "Recommended window",
+    "reasons": "Reasons",
+    "loading": "Loading recommended sites…",
+    "error": "Could not load restoration sites.",
+    "actions": {
+      "protect": "Protect Natural Regeneration",
+      "anr": "Assisted Natural Regeneration",
+      "enrichment": "Enrichment Seeding",
+      "active": "Active Planting",
+      "avoid": "Avoid / Defer"
+    }
+  },
   "home": {
-    "badge": "Najd · Dhofar · Oman",
-    "title": "See desert farms from space",
-    "intro": "This platform shows satellite images of Najd farms in Dhofar and helps track planting status after sowing. Vegetation and moisture indices highlight fields that established well versus sparse, irrigation-stressed, or salinity-suspect ones. The aim is clear seasonal monitoring for farmers and researchers in Arabic and English.",
+    "badge": "Dhofar · Oman · Open Data First",
+    "title": "One map. Two observatories.",
+    "intro": "ظفار رصد | Dhofar Agro & Eco Observatory turns open Earth-observation into interpretable indicators for Dhofar: Agricultural Observation Units (AOUs) across the Najd irrigated plain, and Restoration Intelligence for Qara, Samhan, Qamar and coastal foothills. It is decision support — not a satellite slideshow and not a substitute for field survey.",
     "whyTitle": "Why Sentinel-2?",
-    "whyBody": "Irrigated pivots and blocks in Najd are large enough for 10 m pixels. Optical VNIR + SWIR supports vegetation, moisture, and salinity-proxy indices. Inland Najd is hyper-arid, so clear scenes are common most months.",
-    "seasonTitle": "Wheat season",
-    "seasonBody": "Typical sowing is early–mid November; harvest starts in early April. Check establishment Dec–Jan, peak vigor Feb–Mar, post-harvest Apr–May, and off-season stress Jun–Oct.",
+    "whyBody": "Irrigated blocks in Najd are large enough for 10 m pixels. Optical VNIR + SWIR supports vegetation and canopy-moisture indices. Inland Najd is hyper-arid, so clear scenes are common most months. Mountain Khareef seasons need cloud-aware composites and moisture persistence — not a single post-rain image.",
+    "seasonTitle": "Wheat & Khareef seasons",
+    "seasonBody": "Najd wheat: typical sowing early–mid November; harvest from early April. Mountain restoration follows a dynamic Khareef calendar (Pre → Onset → Peak → Weakening → End → Post) — seeding windows are site- and moisture-dependent, not a fixed date.",
+    "agroTitle": "Agricultural Observatory",
+    "agroBody": "Detect and monitor cultivated activity as AOUs (e.g. AOU-NJ-000184). Day-one operation does not require official farm names. Alerts map bare · healthy · water_attention · vigor_attention into health and water labels — with Possible Biotic Stress wording, never pest certainty.",
+    "restoTitle": "Restoration Observatory",
+    "restoBody": "Site suitability with a separate confidence score, Moisture Persistence Index class, regeneration ladder (Protect → ANR → Enrichment → Active Planting → Avoid), and fog-escarpment species such as Terminalia dhofarica. Arid Najd species are not auto-mixed onto fog slopes.",
+    "ctaMap": "Open observatory map",
     "ctaGallery": "Browse scenes",
     "ctaAnalysis": "View analysis",
-    "previewNote": "Live Sentinel-2 NDVI/NDMI monitoring is on the Analysis and Map pages. Gallery still shows browse previews."
+    "previewNote": "MVP uses static GeoJSON and browse previews. Live COG streaming and government cadastral layers come later."
   },
   "map": {
-    "title": "Farm corridor map",
-    "blurb": "Working AOI for active farms (Thumrait–Shisr–Hanfit–Saih Al-Khairat). Al-Mazyunah lies west of the core corridor.",
-    "bbox": "Farm corridor bbox",
+    "title": "Dhofar observatory map",
+    "blurb": "Switch between Agricultural Observatory (Najd AOUs) and Restoration Observatory (mountain & foothill sites). Shared basemap; separated scientific rules.",
+    "bbox": "Najd farm-corridor bbox",
     "hubs": "Agricultural hubs",
-    "liveTitle": "Early-intervention zones",
-    "liveBlurb": "500 m cells from the latest clear Sentinel-2 scene. Water and vigor flags are relative to vegetated peers — not lab diagnoses.",
+    "liveTitle": "Agricultural Observation Units",
+    "liveBlurb": "500 m cells from the latest clear Sentinel-2 scene, labelled as AOUs. Water and vigor flags are relative to vegetated peers — not lab diagnoses or official farms.",
     "hideBare": "Hide bare desert cells",
     "legendBare": "Bare / unplanted",
     "legendHealthy": "Stable vigor",
@@ -60,7 +147,7 @@
     "saviDesc": "Sparse canopy over bright desert soil; reduces soil noise versus NDVI.",
     "ndmiName": "NDMI — canopy moisture index",
     "ndmiFormula": "(B08 − B11) / (B08 + B11)",
-    "ndmiDesc": "Canopy water / irrigation stress through the season.",
+    "ndmiDesc": "Canopy water / irrigation stress through the season. Spectral moisture proxy ≠ field soil moisture.",
     "statusTitle": "Field status classes",
     "established": "Established",
     "establishedDesc": "NDVI rises by Dec–Jan and peaks Feb–Mar above bare/neighbor thresholds.",
@@ -97,30 +184,39 @@
         "d": "Circular NDVI rings or pie wedges of low vigor."
       },
       {
-        "t": "Heat-driven early senescence",
-        "d": "Compressed NDVI season; premature drop Mar–Apr."
+        "t": "Possible biotic stress (not pest certainty)",
+        "d": "Unusual spatial/temporal spectral anomaly vs peers — recommend field check; never confirm pest/disease from space alone."
       }
     ]
   },
   "about": {
-    "title": "Method & data",
-    "blurb": "Groundwork from the Najd satellite investigation support report.",
-    "aoiTitle": "Area of interest",
-    "aoiBody": "Practical farm-corridor bbox ≈ [53.4, 17.5, 54.3, 18.5], center ~18.0°N, 53.8°E. Broader Najd literature bbox is larger (hydro-geographic).",
+    "title": "Method & scientific honesty",
+    "blurb": "ظفار رصد | Dhofar Agro & Eco Observatory extends the Najd planting monitor into a dual Agricultural / Restoration platform (product spec v1.0.1).",
+    "aoiTitle": "Areas of interest",
+    "aoiBody": "Agricultural: Najd farm corridor ≈ [53.4, 17.5, 54.3, 18.5] (Thumrait, Shisr, Hanfit, Saih Al-Khairat; Al-Mazyunah west). Restoration: Jabal Qara, Samhan, Qamar; Mirbat and Mughsayl foothills.",
     "sensorsTitle": "Sensors",
-    "sensorsBody": "Primary: Sentinel-2 L2A tiles 39QZV, 39QYA, 39QZA, 39QYV, 39QXV (+ adjacent). Backup: Landsat 8/9 path 160 rows 047–048.",
+    "sensorsBody": "Primary: Sentinel-2 L2A. Backup: Landsat 8/9. Context only (not field-scale soil moisture): SMAP / ESA CCI, CHIRPS, ERA5. Mountain MVP adds DEM wetness proxies and expert Site×Species rules.",
     "workflowTitle": "Field workflow (summary)",
     "workflow": [
-      "Digitize pivot/block boundaries on true-color or basemap.",
-      "Mask clouds/shadows (SCL); optional bright-soil mask.",
-      "Extract per-field NDVI / SAVI / NDMI time series.",
-      "Classify establishment, stress, salinity-suspect, abandoned.",
-      "Validate with ground photos, farmer reports, and EC samples."
+      "Detect agricultural footprint → segment AOUs (not official farms until cadastral link).",
+      "Mask clouds/shadows (SCL); extract NDVI / NDMI (+ optional NDRE) time series.",
+      "Map bare / healthy / water_attention / vigor_attention to interpretive health & water labels.",
+      "For mountains: Khareef staging, MPI, hydrology screen, suitability vs confidence, action ladder.",
+      "Validate with ground photos, farmer/ranger reports, and Environment Authority review for species."
+    ],
+    "honestyTitle": "Non-negotiable honesty",
+    "honesty": [
+      "No confirmed pest/disease diagnosis from space — use Possible Biotic Stress + field check.",
+      "NDMI / MPI are proxies — not plot-level soil moisture meters.",
+      "SMAP / CCI / ERA5 / CHIRPS are regional context only.",
+      "Suitability Score and Confidence Score stay separate.",
+      "Fog-escarpment species (e.g. Terminalia dhofarica) are not mixed with arid Najd species (sidr, samr, ghaf) by default.",
+      "AOU ≠ Official Farm until authorized government data is linked."
     ],
     "limitTitle": "MVP limits",
-    "limitBody": "This demo shows browse preview PNGs and educational analysis views. It does not stream live COGs or compute indices on the fly yet."
+    "limitBody": "This MVP serves static GeoJSON, browse PNGs, dual-mode UI, Khareef strip, AOU profiles, and sample restoration sites. It does not stream live COGs, run MPI from full composites, or replace agroforestry / Environment Authority decisions."
   },
-  "footer": "Najd Planting Monitor · browse imagery MVP · not a substitute for field survey",
+  "footer": "ظفار رصد | Dhofar Agro & Eco Observatory · open-data MVP · not a substitute for field survey",
   "live": {
     "source": "Source",
     "date": "Acquisition date",
@@ -142,13 +238,13 @@
     "bare": "Bare / unplanted",
     "healthy": "Stable vigor",
     "water_attention": "Needs water check",
-    "vigor_attention": "Low vigor — check nutrition/management",
+    "vigor_attention": "Low vigor — possible biotic / management stress",
     "cells": "cells",
     "unclear": "Unclear — needs review",
     "tip_bare": "Little or no green canopy in this cell for the acquisition date.",
     "tip_healthy": "Vegetation indices look stable versus nearby vegetated cells.",
     "tip_water_attention": "Canopy moisture (NDMI) is low versus nearby vegetated areas — verify irrigation soon.",
-    "tip_vigor_attention": "Greening (NDVI) is weak versus peers. May need fertilizer or other management — confirm in the field (satellite cannot diagnose fertilizer alone).",
+    "tip_vigor_attention": "Greening (NDVI) is weak versus peers. Possible biotic or management stress — confirm in the field (satellite cannot diagnose fertilizer or pests alone).",
     "tip_unclear": "Signal is ambiguous for this cell — review imagery and field conditions."
   }
 }

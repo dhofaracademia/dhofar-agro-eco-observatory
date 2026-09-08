@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import scenes from "../data/scenes.json";
+import { publicUrl } from "../lib/publicUrl";
 
 type Scene = (typeof scenes)[number];
 
@@ -60,7 +61,7 @@ export default function Gallery() {
               onClick={() => setActive(s)}
               className="overflow-hidden rounded-2xl border border-sand-200 bg-white text-start shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
             >
-              <img src={`/previews/${s.file}`} alt={label(s)} className="h-40 w-full object-cover" />
+              <img src={publicUrl(`previews/${s.file}`)} alt={label(s)} className="h-40 w-full object-cover" />
               <div className="space-y-1 p-3">
                 <div className="text-sm font-semibold text-sand-900">{label(s)}</div>
                 <div className="text-xs text-sand-800/60">{s.tile} · {s.date} · {s.type}</div>
@@ -73,7 +74,7 @@ export default function Gallery() {
       {active && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-sand-900/70 p-4" onClick={() => setActive(null)}>
           <div className="max-h-[90vh] w-full max-w-4xl overflow-auto rounded-2xl bg-white shadow-xl" onClick={(e) => e.stopPropagation()}>
-            <img src={`/previews/${active.file}`} alt={label(active)} className="w-full object-contain" />
+            <img src={publicUrl(`previews/${active.file}`)} alt={label(active)} className="w-full object-contain" />
             <div className="flex flex-wrap items-center justify-between gap-3 p-4">
               <div>
                 <div className="font-semibold">{label(active)}</div>
