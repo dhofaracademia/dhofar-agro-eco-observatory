@@ -65,20 +65,39 @@ export function estimatedAreaHa(props: AouAlertProps): number {
   return 25;
 }
 
-/** Stub confidence 0–100 — not a validated accuracy claim. */
-export function confidenceStub(props: AouAlertProps): number {
-  const base =
-    props.alert === "healthy"
-      ? 78
-      : props.alert === "water_attention"
-        ? 68
-        : props.alert === "vigor_attention"
-          ? 62
-          : props.alert === "unclear"
-            ? 45
-            : 55;
-  const nudge = Math.round((props.ndvi ?? 0) * 20);
-  return Math.max(30, Math.min(92, base + nudge));
+/** Expected valid-pixel count for a full 500m x 500m cell at 10m resolution. */
+const EXPECTED_PIXEL_COUNT = 2500;
+
+/**
+ * Data-quality confidence 0-100, derived only from observable image-quality
+ * inputs already produced by run_monitor.py: scene cloud_cover and the
+ * fraction of valid (non-cloud/non-nodata) pixels actually present in this
+ * cell. This is NOT an accuracy claim about the alert label itself (that
+ * would require field validation, per RUN_NOTES.md) -- it only answers
+ * "how much did we actually get to see this week", which is the honest
+ * thing satellite optical data can tell us on its own.
+ *
+ * Replaces the previous confidenceStub(), which returned a number based
+ * only on the alert label and NDVI and was explicitly documented as
+ * "not a validated accuracy claim" -- i.e. it did not use cloud_cover or
+ * pixel_count at all, even though both are already present in the schema.
+ */
+export function dataQualityConfidence(props: AouAlertProps): number {
+  const cloud = typeof props.cloud_cover === "number" ? props.cloud_cover : 0;
+  // cloud_cover in the pipeline output is a scene-level percentage (e.g. 0.87 = 0.87%).
+  const cloudScore = Math.max(0, 100 - cloud * 4); // 10% scene cloud -> -40 pts
+
+  const validFraction =
+    typeof props.pixel_count === "number"
+      ? Math.min(1, props.pixel_count / EXPECTED_PIXEL_COUNT)
+      : 0.5; // unknown pixel_count: treat as a real gap, not a free pass
+  const pixelScore = validFraction * 100;
+
+  // Weight pixel completeness slightly higher: a clear scene that still
+  // only partially covers the cell (edge of tile, nodata strip) matters
+  // more for a single-cell reading than overall scene cloud percentage.
+  const score = 0.4 * cloudScore + 0.6 * pixelScore;
+  return Math.round(Math.max(5, Math.min(97, score)));
 }
 
 export type HealthWaterLabels = {

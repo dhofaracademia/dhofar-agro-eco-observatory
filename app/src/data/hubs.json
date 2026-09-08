@@ -15,35 +15,55 @@
       "name_en": "Thumrait",
       "name_ar": "ثمريت",
       "lat": 17.66694,
-      "lon": 54.03278
+      "lon": 54.03278,
+      "covered_by_current_window": false,
+      "within_satellite_aoi": true
     },
     {
       "id": "shisr",
       "name_en": "Ash Shisr",
       "name_ar": "شصر",
       "lat": 18.255,
-      "lon": 53.64889
+      "lon": 53.64889,
+      "covered_by_current_window": false,
+      "within_satellite_aoi": true
     },
     {
       "id": "saih",
       "name_en": "Saih Al-Khairat",
       "name_ar": "سيح الخيرات",
       "lat": 18.28483,
-      "lon": 53.95498
+      "lon": 53.95498,
+      "covered_by_current_window": false,
+      "within_satellite_aoi": true
     },
     {
       "id": "hanfit",
       "name_en": "Hanfit",
       "name_ar": "حنفيت",
       "lat": 18.0,
-      "lon": 53.9667
+      "lon": 53.9667,
+      "covered_by_current_window": true,
+      "within_satellite_aoi": true
     },
     {
       "id": "mazyunah",
       "name_en": "Al-Mazyunah",
       "name_ar": "المزيونة",
       "lat": 17.84861,
-      "lon": 52.62
+      "lon": 52.62,
+      "covered_by_current_window": false,
+      "within_satellite_aoi": false
     }
-  ]
+  ],
+  "_coverage_note_en": "covered_by_current_window: true only if the hub center falls inside the ~0.25deg WINDOW_BBOX actually processed by run_monitor.py. within_satellite_aoi: true if inside the wider AOI_BBOX at all (some hubs, e.g. Al-Mazyunah, sit outside the AOI entirely and are not monitored by this pipeline in its current form).",
+  "_coverage_note_ar": "covered_by_current_window: صحيح فقط إذا وقع مركز المحور داخل نطاق الرصد الفعلي (~0.25 درجة) الذي يعالجه run_monitor.py فعلياً. within_satellite_aoi: صحيح إذا وقع داخل منطقة الاهتمام الأوسع أصلاً (بعض المحاور، مثل المزيونة، تقع خارج منطقة الاهتمام كلياً ولا تُرصد إطلاقاً بالشكل الحالي للخط).",
+  "analysis_window": {
+    "west": 53.7,
+    "south": 17.9,
+    "east": 53.98,
+    "north": 18.15,
+    "note_en": "Matches satellite/pipeline/run_monitor.py WINDOW_BBOX (east widened 53.95→53.98 so Hanfit hub center is inside). Alert thresholds unchanged; only geographic coverage of the monitor window.",
+    "note_ar": "يطابق WINDOW_BBOX في run_monitor.py (الحافة الشرقية وُسّعت 53.95→53.98 ليشمل مركز محمور حنفيت). عتبات التنبيه لم تتغير؛ التغيير جغرافي فقط لنطاق الرصد."
+  }
 }

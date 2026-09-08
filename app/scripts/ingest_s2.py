@@ -1,4 +1,19 @@
 #!/usr/bin/env python3
+"""
+DEPRECATED / UNUSED — kept for reference only.
+
+Verified 2026-09: no file this script writes (scenes_live.json,
+alerts_latest.geojson, primary_scene.json) is read by the frontend.
+The live pipeline is satellite/pipeline/run_monitor.py, which writes
+app/public/data/latest_alerts.geojson (consumed by AlertMap.tsx and
+Analysis.tsx) and app/public/data/timeseries.json.
+
+Do not run this script as part of the production data refresh -- it will
+silently produce files nothing displays, and its Sentinel-2 query logic has
+diverged from run_monitor.py (different cloud-mask handling, no SCL check).
+Either delete this file or port any logic still wanted into run_monitor.py,
+then remove this notice.
+"""
 from __future__ import annotations
 import json, math
 from datetime import datetime, timezone

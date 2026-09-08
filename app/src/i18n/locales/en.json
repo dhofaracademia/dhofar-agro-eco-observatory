@@ -44,8 +44,8 @@
     "coords": "Centroid",
     "vegetationHealth": "Vegetation health",
     "waterStress": "Water stress",
-    "confidence": "Confidence",
-    "confidenceStub": "stub score — not validated accuracy",
+    "confidence": "Data-quality confidence",
+    "confidenceDataQuality": "data-quality from cloud cover & valid pixels — not ecological or restoration confidence",
     "date": "Acquisition date",
     "health": {
       "stable": "Stable vigor",
@@ -125,7 +125,13 @@
     "aouOfflineBadge": "AOU layer: last offline run {{date}}",
     "aouNotByStac": "Gallery STAC refresh does not update the AOU alert layer.",
     "najdOffSeasonChip": "Sep–Oct: bare often = off-season (expected)",
-    "najdOffSeasonHelper": "In Asia/Muscat September–October, Najd wheat is typically off-season. Many bare AOU cells reflect expected fallow / unplanted ground — not necessarily a monitor failure."
+    "najdOffSeasonHelper": "In Asia/Muscat September–October, Najd wheat is typically off-season. Many bare AOU cells reflect expected fallow / unplanted ground — not necessarily a monitor failure.",
+    "hubOutsideWindow": "Outside analysis window",
+    "hubOutsideAoi": "Outside satellite AOI — limited / no coverage",
+    "hubMazyunahNote": "Al-Mazyunah sits west of the current monitor AOI (lon ≈ 52.62°). Hub is shown for orientation; it is not covered by the farm-corridor WINDOW processed by run_monitor.py.",
+    "hubCoverageLegend": "Dimmed hubs lie outside the current analysis WINDOW (or AOI). Badges are honesty markers — not alerts.",
+    "analysisWindow": "Current analysis WINDOW",
+    "aouBboxVsWindow": "Wide AOI bbox vs processed WINDOW — only the WINDOW drives AOU alerts."
   },
   "gallery": {
     "title": "Imagery",

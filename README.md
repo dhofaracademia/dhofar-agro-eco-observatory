@@ -21,6 +21,18 @@ It does **not**:
 - refresh timeseries.json or mountain MPI / suitability stubs
 - invent live Khareef onset or official farm boundaries
 
+### Deprecated: `app/scripts/ingest_s2.py`
+
+**Do not run** `app/scripts/ingest_s2.py` for production refresh. It is deprecated / unused reference code; its outputs are not read by the live UI.
+
+Use the offline AOU pipeline instead:
+
+    cd satellite/pipeline
+    pip install -r requirements.txt
+    MONITOR_OUT_DATA=../../app/public/data python run_monitor.py
+
+Gallery STAC refresh (`stacRefresh.ts` browser path) is unchanged and independent of both scripts.
+
 ### How do I refresh the AOU / farm-monitor layer?
 
 Run the offline pipeline (same outputs the UI reads from app/public/data/):

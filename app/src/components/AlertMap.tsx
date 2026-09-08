@@ -69,6 +69,12 @@ export default function AlertMap({
   const [hideBare, setHideBare] = useState(true);
   const [selected, setSelected] = useState<AlertFeature | null>(null);
   const { hubs, bbox } = hubsData;
+  const analysisWindow =
+    "analysis_window" in hubsData
+      ? (hubsData as typeof hubsData & {
+          analysis_window: { west: number; south: number; east: number; north: number };
+        }).analysis_window
+      : null;
 
   useEffect(() => {
     let cancelled = false;
@@ -113,6 +119,12 @@ export default function AlertMap({
     [bbox.south, bbox.west],
     [bbox.north, bbox.east],
   ];
+  const windowBounds: [[number, number], [number, number]] | null = analysisWindow
+    ? [
+        [analysisWindow.south, analysisWindow.west],
+        [analysisWindow.north, analysisWindow.east],
+      ]
+    : null;
 
   const style = (feature?: AlertFeature) => {
     const alert = feature?.properties?.alert ?? "bare";
@@ -151,6 +163,12 @@ export default function AlertMap({
       <MapContainer center={bbox.center as [number, number]} zoom={9} scrollWheelZoom={false}>
         <TileLayer attribution="&copy; OpenStreetMap" url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <Rectangle bounds={bounds} pathOptions={{ color: "#2f6b3a", weight: 2, fillOpacity: 0.04 }} />
+        {windowBounds && (
+          <Rectangle
+            bounds={windowBounds}
+            pathOptions={{ color: "#b45309", weight: 2, dashArray: "6 4", fillOpacity: 0.06 }}
+          />
+        )}
         {filtered && (
           <GeoJSON
             key={`${hideBare}-${filtered.features.length}-${i18n.language}-${selected ? aouIdFromFeature(selected) : "none"}`}
@@ -159,11 +177,33 @@ export default function AlertMap({
             onEachFeature={onEach as never}
           />
         )}
-        {hubs.map((h) => (
-          <Marker key={h.id} position={[h.lat, h.lon]} icon={icon}>
-            <Popup>{i18n.language === "ar" ? h.name_ar : h.name_en}</Popup>
-          </Marker>
-        ))}
+        {hubs.map((h) => {
+          const inWindow = Boolean(h.covered_by_current_window);
+          const inAoi = Boolean(h.within_satellite_aoi);
+          const name = i18n.language === "ar" ? h.name_ar : h.name_en;
+          const badge = !inAoi
+            ? t("map.hubOutsideAoi")
+            : !inWindow
+              ? t("map.hubOutsideWindow")
+              : null;
+          return (
+            <Marker key={h.id} position={[h.lat, h.lon]} icon={icon} opacity={inWindow ? 1 : 0.4}>
+              <Popup>
+                <div>
+                  <strong>{name}</strong>
+                  {badge && (
+                    <div style={{ marginTop: 6, fontSize: 12, opacity: 0.9 }}>{badge}</div>
+                  )}
+                  {h.id === "mazyunah" && (
+                    <div style={{ marginTop: 6, fontSize: 12, maxWidth: 240 }}>
+                      {t("map.hubMazyunahNote")}
+                    </div>
+                  )}
+                </div>
+              </Popup>
+            </Marker>
+          );
+        })}
       </MapContainer>
     </div>
   );
@@ -201,6 +241,7 @@ export default function AlertMap({
         mapBlock
       )}
 
+      <p className="text-xs text-sand-800/70">{t("map.hubCoverageLegend")}</p>
       <SourceCitation info={sourceInfo} />
       {data?.properties?.note && <p className="text-xs text-sand-800/60">{data.properties.note}</p>}
       <p className="text-xs text-sand-800/60">{t("aou.disclaimer")}</p>
