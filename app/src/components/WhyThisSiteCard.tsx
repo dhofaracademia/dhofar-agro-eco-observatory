@@ -99,6 +99,9 @@ export default function WhyThisSiteCard({
           <dt className="text-xs font-semibold uppercase tracking-wide text-sand-800/50">{t("restoration.species")}</dt>
           <dd>
             <em>{site.species}</em>
+            {site.species.includes("Terminalia dhofarica") && (
+              <span className="mt-1 block text-xs text-sand-800/70">{t("restoration.speciesHelperDhofarica")}</span>
+            )}
             {site.species_note && (
               <span className="mt-1 block text-xs text-sand-800/60">{site.species_note}</span>
             )}
