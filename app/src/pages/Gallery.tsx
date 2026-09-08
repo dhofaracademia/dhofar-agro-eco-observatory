@@ -7,8 +7,10 @@ import {
   type RefreshStatus,
   type StacScene,
 } from "../lib/stacRefresh";
+import { fetchAouOfflineStamp, formatStamp } from "../lib/dataStamp";
 
 type Scene = (typeof scenes)[number];
+type GalleryTab = "live" | "archive";
 
 const LS_KEY = "observatory.stac.lastRefresh";
 
@@ -17,7 +19,6 @@ type StoredRefresh = {
   scenes: StacScene[];
 };
 
-
 type FarmMeta = {
   source?: string;
   last_updated?: string;
@@ -25,14 +26,56 @@ type FarmMeta = {
   dates?: Array<{ date?: string; product_id?: string; tile?: string; cloud_cover?: number }>;
 };
 
+function PreviewFail({ label }: { label: string }) {
+  return (
+    <div
+      className="flex h-36 w-full items-center justify-center bg-sand-200 px-3 text-center text-xs font-medium text-sand-800/80"
+      role="img"
+      aria-label={label}
+    >
+      {label}
+    </div>
+  );
+}
+
+function LivePreview({ url, id, failLabel }: { url: string | null; id: string; failLabel: string }) {
+  const [failed, setFailed] = useState(false);
+  if (!url || failed) return <PreviewFail label={failLabel} />;
+  return (
+    <img
+      src={url}
+      alt={id}
+      className="h-36 w-full object-cover bg-sand-200"
+      loading="lazy"
+      onError={() => setFailed(true)}
+    />
+  );
+}
+
+function ArchivePreview({ file, alt, failLabel }: { file: string; alt: string; failLabel: string }) {
+  const [failed, setFailed] = useState(false);
+  if (failed) return <PreviewFail label={failLabel} />;
+  return (
+    <img
+      src={publicUrl(`previews/${file}`)}
+      alt={alt}
+      className="h-40 w-full object-cover"
+      loading="lazy"
+      onError={() => setFailed(true)}
+    />
+  );
+}
+
 function FarmArtifactsMeta({
   locale,
   missingLabel,
   lastUpdatedLabel,
+  aouIso,
 }: {
   locale: string;
   missingLabel: string;
   lastUpdatedLabel: string;
+  aouIso: string | null;
 }) {
   const [meta, setMeta] = useState<FarmMeta | null>(null);
   const [failed, setFailed] = useState(false);
@@ -55,30 +98,22 @@ function FarmArtifactsMeta({
     };
   }, []);
 
-  if (failed) return <p className="text-xs text-sand-800/70">{missingLabel}</p>;
-  if (!meta) return <p className="text-xs text-sand-800/50">…</p>;
+  const stamp = formatStamp(aouIso ?? meta?.last_updated ?? meta?.generated_on ?? null, locale);
 
-  const latest = [...(meta.dates ?? [])].sort((a, b) => (a.date ?? "").localeCompare(b.date ?? "")).at(-1);
-  const stamp = meta.last_updated || meta.generated_on || null;
-  let stampLabel = "—";
-  if (stamp) {
-    try {
-      stampLabel = new Intl.DateTimeFormat(locale === "ar" ? "ar-OM" : "en-GB", {
-        dateStyle: "medium",
-        timeStyle: "short",
-      }).format(new Date(stamp));
-    } catch {
-      stampLabel = stamp;
-    }
-  }
+  if (failed && !aouIso) return <p className="text-xs text-sand-800/70">{missingLabel}</p>;
+  if (!meta && !aouIso) return <p className="text-xs text-sand-800/50">…</p>;
+
+  const latest = [...(meta?.dates ?? [])]
+    .sort((a, b) => (a.date ?? "").localeCompare(b.date ?? ""))
+    .at(-1);
 
   return (
     <div className="space-y-1 text-xs text-sand-800/80">
       <div>
         <span className="font-semibold">{lastUpdatedLabel}: </span>
-        {stampLabel}
+        {stamp.absolute} ({stamp.relative})
       </div>
-      {meta.source && <div>{meta.source}</div>}
+      {meta?.source && <div>{meta.source}</div>}
       {latest && (
         <div className="font-mono break-all">
           {latest.date} · {latest.tile} · cloud {latest.cloud_cover ?? "—"}% · {latest.product_id}
@@ -98,6 +133,9 @@ export default function Gallery() {
   const [error, setError] = useState<string | null>(null);
   const [live, setLive] = useState<StacScene[]>([]);
   const [updatedAt, setUpdatedAt] = useState<string | null>(null);
+  const [aouIso, setAouIso] = useState<string | null>(null);
+  const [tab, setTab] = useState<GalleryTab>("live");
+  const [tabReady, setTabReady] = useState(false);
 
   useEffect(() => {
     try {
@@ -111,7 +149,24 @@ export default function Gallery() {
       }
     } catch {
       /* ignore */
+    } finally {
+      setTabReady(true);
     }
+  }, []);
+
+  useEffect(() => {
+    if (!tabReady) return;
+    setTab(live.length > 0 ? "live" : "archive");
+  }, [tabReady, live.length]);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetchAouOfflineStamp().then((iso) => {
+      if (!cancelled) setAouIso(iso);
+    });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const tiles = useMemo(() => Array.from(new Set(scenes.map((s) => s.tile))).sort(), []);
@@ -125,17 +180,13 @@ export default function Gallery() {
 
   const label = (s: Scene) => (i18n.language === "ar" ? s.label_ar : s.label_en);
 
-  const formatUpdated = (iso: string | null) => {
-    if (!iso) return "—";
-    try {
-      return new Intl.DateTimeFormat(i18n.language === "ar" ? "ar-OM" : "en-GB", {
-        dateStyle: "medium",
-        timeStyle: "short",
-      }).format(new Date(iso));
-    } catch {
-      return iso;
-    }
+  const formatClientStamp = (iso: string | null) => {
+    const s = formatStamp(iso, i18n.language);
+    return iso ? `${s.absolute} (${s.relative})` : "—";
   };
+
+  const aouStamp = formatStamp(aouIso, i18n.language);
+  const aouStampText = aouIso ? `${aouStamp.absolute} (${aouStamp.relative})` : "—";
 
   const statusLabel =
     status === "refreshing"
@@ -155,12 +206,15 @@ export default function Gallery() {
       setLive(items);
       setUpdatedAt(now);
       setStatus("updated");
+      setTab("live");
       localStorage.setItem(LS_KEY, JSON.stringify({ updatedAt: now, scenes: items }));
     } catch (e) {
       setStatus("failed");
       setError(e instanceof Error ? e.message : String(e));
     }
   }, []);
+
+  const failLabel = t("gallery.previewFail");
 
   return (
     <div className="space-y-8">
@@ -194,145 +248,190 @@ export default function Gallery() {
           </ul>
         </aside>
 
+        <div className="rounded-xl border border-sand-200 bg-sand-50/80 p-3 text-xs text-sand-900/90 space-y-1">
+          <div>
+            <span className="font-semibold">{t("gallery.stacListUpdated")}: </span>
+            {formatClientStamp(updatedAt)}
+          </div>
+          <div>
+            <span className="font-semibold">{t("gallery.aouOfflineRun")}: </span>
+            {aouStampText}
+          </div>
+          <p className="text-[11px] text-sand-800/70">{t("map.aouNotByStac")}</p>
+        </div>
 
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="text-sm text-sand-800/80">
             <div>
               <span className="font-semibold">{t("gallery.lastUpdated")}: </span>
-              {formatUpdated(updatedAt)}
+              {formatClientStamp(updatedAt)}
             </div>
             <div className="text-xs">
               Status: <span className="font-medium">{statusLabel}</span>
               {error ? <span className="text-red-700"> — {error}</span> : null}
             </div>
           </div>
+          <div className="flex max-w-sm flex-col items-stretch gap-1 sm:items-end">
+            <button
+              type="button"
+              onClick={() => void onRefresh()}
+              disabled={status === "refreshing"}
+              className="rounded-full bg-crop-600 px-5 py-2 text-sm font-semibold text-white hover:bg-crop-700 disabled:opacity-60"
+            >
+              {status === "refreshing" ? t("gallery.refreshing") : t("gallery.refresh")}
+            </button>
+            <p className="text-[11px] leading-snug text-sand-800/70">{t("gallery.refreshHelper")}</p>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap gap-2" role="tablist" aria-label="Gallery tabs">
           <button
             type="button"
-            onClick={() => void onRefresh()}
-            disabled={status === "refreshing"}
-            className="rounded-full bg-crop-600 px-5 py-2 text-sm font-semibold text-white hover:bg-crop-700 disabled:opacity-60"
+            role="tab"
+            aria-selected={tab === "live"}
+            onClick={() => setTab("live")}
+            className={`rounded-full px-4 py-1.5 text-sm font-semibold ${
+              tab === "live"
+                ? "bg-crop-600 text-white"
+                : "border border-sand-300 bg-white text-sand-800"
+            }`}
           >
-            {status === "refreshing" ? t("gallery.refreshing") : t("gallery.refresh")}
+            {t("gallery.tabLive")}
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={tab === "archive"}
+            onClick={() => setTab("archive")}
+            className={`rounded-full px-4 py-1.5 text-sm font-semibold ${
+              tab === "archive"
+                ? "bg-crop-600 text-white"
+                : "border border-sand-300 bg-white text-sand-800"
+            }`}
+          >
+            {t("gallery.tabArchive")}
           </button>
         </div>
 
-        <div>
-          <h2 className="text-lg font-semibold text-crop-700">{t("gallery.liveTitle")}</h2>
-          <p className="text-sm text-sand-800/80">{t("gallery.liveBlurb")}</p>
-        </div>
+        {tab === "live" && (
+          <div className="space-y-3">
+            <div>
+              <h2 className="text-lg font-semibold text-crop-700">{t("gallery.liveTitle")}</h2>
+              <p className="text-sm text-sand-800/80">{t("gallery.liveBlurb")}</p>
+            </div>
 
-        {live.length === 0 ? (
-          <p className="text-sm text-sand-800/70">{t("gallery.noLive")}</p>
-        ) : (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {live.map((s) => (
-              <article
-                key={s.id}
-                className="overflow-hidden rounded-2xl border border-sand-200 bg-sand-50 text-start shadow-sm"
-              >
-                {s.previewUrl ? (
-                  <img
-                    src={s.previewUrl}
-                    alt={s.id}
-                    className="h-36 w-full object-cover bg-sand-200"
-                    loading="lazy"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).style.display = "none";
-                    }}
-                  />
-                ) : null}
-                <div className="space-y-1 p-3 text-xs">
-                  <div className="font-semibold text-sand-900">{s.date ?? "—"}</div>
-                  <div>
-                    {t("gallery.sensor")}: {s.tile ?? "—"} · {t("gallery.cloud")}:{" "}
-                    {s.cloudCover != null ? `${s.cloudCover.toFixed(1)}%` : "—"}
-                  </div>
-                  <div className="break-all font-mono text-[10px] text-sand-800/70">
-                    {t("gallery.productId")}: {s.id}
-                  </div>
-                </div>
-              </article>
-            ))}
+            {live.length === 0 ? (
+              <p className="text-sm text-sand-800/70">{t("gallery.noLive")}</p>
+            ) : (
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {live.map((s) => (
+                  <article
+                    key={s.id}
+                    className="overflow-hidden rounded-2xl border border-sand-200 bg-sand-50 text-start shadow-sm"
+                  >
+                    <LivePreview url={s.previewUrl} id={s.id} failLabel={failLabel} />
+                    <div className="space-y-1 p-3 text-xs">
+                      <div className="font-semibold text-sand-900">
+                        {t("gallery.datetime")}: {s.datetime ?? s.date ?? "—"}
+                      </div>
+                      <div>
+                        {t("gallery.sensor")}: {s.tile ?? "—"} · {t("gallery.cloud")}:{" "}
+                        {s.cloudCover != null ? `${s.cloudCover.toFixed(1)}%` : "—"}
+                      </div>
+                      <div className="break-all font-mono text-[10px] text-sand-800/70">
+                        {t("gallery.productId")}: {s.id}
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            )}
+
+            <p className="text-xs text-sand-800/60">{t("gallery.howRefresh")}</p>
           </div>
         )}
 
-        <p className="text-xs text-sand-800/60">{t("gallery.howRefresh")}</p>
+        {tab === "archive" && (
+          <div className="space-y-3">
+            <div className="flex flex-wrap items-center gap-2">
+              <h2 className="text-lg font-semibold text-crop-700">{t("gallery.staticNote")}</h2>
+              <span className="rounded-full bg-amber-50 px-2 py-0.5 text-xs font-medium text-earth-600">
+                {t("provisional.badge")}
+              </span>
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              <select
+                className="rounded-full border border-sand-300 bg-white px-3 py-1.5 text-sm"
+                value={tile}
+                onChange={(e) => setTile(e.target.value)}
+              >
+                <option value="all">{t("gallery.allTiles")}</option>
+                {tiles.map((x) => (
+                  <option key={x} value={x}>
+                    {x}
+                  </option>
+                ))}
+              </select>
+              <select
+                className="rounded-full border border-sand-300 bg-white px-3 py-1.5 text-sm"
+                value={season}
+                onChange={(e) => setSeason(e.target.value)}
+              >
+                <option value="all">{t("gallery.allSeasons")}</option>
+                <option value="wheat">{t("gallery.wheat")}</option>
+                <option value="offseason">{t("gallery.offseason")}</option>
+              </select>
+              <select
+                className="rounded-full border border-sand-300 bg-white px-3 py-1.5 text-sm"
+                value={type}
+                onChange={(e) => setType(e.target.value)}
+              >
+                <option value="all">{t("gallery.allTypes")}</option>
+                <option value="truecolor">{t("gallery.truecolor")}</option>
+                <option value="ndvi">{t("gallery.ndvi")}</option>
+              </select>
+            </div>
+
+            {filtered.length === 0 ? (
+              <p className="text-sm text-sand-800/70">{t("gallery.empty")}</p>
+            ) : (
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {filtered.map((s) => (
+                  <button
+                    key={s.id}
+                    type="button"
+                    onClick={() => setActive(s)}
+                    className="overflow-hidden rounded-2xl border border-sand-200 bg-white text-start shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                  >
+                    <ArchivePreview file={s.file} alt={label(s)} failLabel={failLabel} />
+                    <div className="space-y-1 p-3">
+                      <div className="text-sm font-semibold text-sand-900">{label(s)}</div>
+                      <div className="text-xs text-sand-800/60">
+                        {s.tile} · {s.date} · {s.type}
+                      </div>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
       </section>
 
-      
       <section className="space-y-2 rounded-2xl border border-sand-200 bg-sand-50 p-4 text-sm">
         <h2 className="text-lg font-semibold text-crop-700">{t("gallery.farmDataTitle")}</h2>
         <p className="text-sand-800/80">{t("gallery.farmDataBlurb")}</p>
-        <FarmArtifactsMeta locale={i18n.language} missingLabel={t("gallery.farmDataMissing")} lastUpdatedLabel={t("gallery.lastUpdated")} />
-      </section>
-
-      <section className="space-y-3">
-        <div className="flex flex-wrap items-center gap-2">
-          <h2 className="text-lg font-semibold text-crop-700">{t("gallery.staticNote")}</h2>
-          <span className="rounded-full bg-amber-50 px-2 py-0.5 text-xs font-medium text-earth-600">
-            {t("provisional.badge")}
-          </span>
+        <div className="text-xs text-sand-800/80">
+          <span className="font-semibold">{t("gallery.aouOfflineRun")}: </span>
+          {aouStampText}
         </div>
-
-        <div className="flex flex-wrap gap-2">
-          <select
-            className="rounded-full border border-sand-300 bg-white px-3 py-1.5 text-sm"
-            value={tile}
-            onChange={(e) => setTile(e.target.value)}
-          >
-            <option value="all">{t("gallery.allTiles")}</option>
-            {tiles.map((x) => (
-              <option key={x} value={x}>
-                {x}
-              </option>
-            ))}
-          </select>
-          <select
-            className="rounded-full border border-sand-300 bg-white px-3 py-1.5 text-sm"
-            value={season}
-            onChange={(e) => setSeason(e.target.value)}
-          >
-            <option value="all">{t("gallery.allSeasons")}</option>
-            <option value="wheat">{t("gallery.wheat")}</option>
-            <option value="offseason">{t("gallery.offseason")}</option>
-          </select>
-          <select
-            className="rounded-full border border-sand-300 bg-white px-3 py-1.5 text-sm"
-            value={type}
-            onChange={(e) => setType(e.target.value)}
-          >
-            <option value="all">{t("gallery.allTypes")}</option>
-            <option value="truecolor">{t("gallery.truecolor")}</option>
-            <option value="ndvi">{t("gallery.ndvi")}</option>
-          </select>
-        </div>
-
-        {filtered.length === 0 ? (
-          <p className="text-sm text-sand-800/70">{t("gallery.empty")}</p>
-        ) : (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {filtered.map((s) => (
-              <button
-                key={s.id}
-                type="button"
-                onClick={() => setActive(s)}
-                className="overflow-hidden rounded-2xl border border-sand-200 bg-white text-start shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
-              >
-                <img
-                  src={publicUrl(`previews/${s.file}`)}
-                  alt={label(s)}
-                  className="h-40 w-full object-cover"
-                />
-                <div className="space-y-1 p-3">
-                  <div className="text-sm font-semibold text-sand-900">{label(s)}</div>
-                  <div className="text-xs text-sand-800/60">
-                    {s.tile} · {s.date} · {s.type}
-                  </div>
-                </div>
-              </button>
-            ))}
-          </div>
-        )}
+        <FarmArtifactsMeta
+          locale={i18n.language}
+          missingLabel={t("gallery.farmDataMissing")}
+          lastUpdatedLabel={t("gallery.lastUpdated")}
+          aouIso={aouIso}
+        />
       </section>
 
       {active && (
@@ -348,6 +447,16 @@ export default function Gallery() {
               src={publicUrl(`previews/${active.file}`)}
               alt={label(active)}
               className="w-full object-contain"
+              onError={(e) => {
+                const el = e.target as HTMLImageElement;
+                el.replaceWith(
+                  Object.assign(document.createElement("div"), {
+                    className:
+                      "flex h-48 w-full items-center justify-center bg-sand-200 text-sm text-sand-800/80",
+                    textContent: failLabel,
+                  }),
+                );
+              }}
             />
             <div className="flex flex-wrap items-center justify-between gap-3 p-4">
               <div>

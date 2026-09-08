@@ -534,6 +534,18 @@ def main() -> int:
     TIMESERIES_PATH.write_text(json.dumps(ts_doc, indent=2))
     print(f"Wrote {TIMESERIES_PATH} ({len(timeseries)} dates)")
 
+    meta_dir = OUT_DATA / "meta"
+    meta_dir.mkdir(parents=True, exist_ok=True)
+    refresh_doc = {
+        "last_updated": ts_doc["last_updated"],
+        "source": "run_monitor",
+        "artifacts": ["latest_alerts.geojson", "timeseries.json"],
+        "generated_on": ts_doc.get("generated_on"),
+    }
+    refresh_path = meta_dir / "last_refresh.json"
+    refresh_path.write_text(json.dumps(refresh_doc, indent=2))
+    print(f"Wrote {refresh_path}")
+
     # Summary print
     print("\n=== ALERT COUNTS (latest date {}) ===".format(latest_date))
     for k in sorted(alert_counts.keys()):
