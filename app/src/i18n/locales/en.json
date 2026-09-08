@@ -1,5 +1,6 @@
 {
   "appName": "Dhofar Agro & Eco Observatory",
+  "appAlias": "Dhofar Monitor",
   "subtitle": "Agricultural observation units and restoration intelligence for Dhofar, Oman",
   "nav": {
     "home": "Overview",
@@ -235,7 +236,7 @@
     "dataSourcesTitle": "Data sources",
     "dataSourcesBody": "Sentinel-2 L2A via Microsoft Planetary Computer STAC; static browse previews; sample mountain GeoJSON. Contains modified Copernicus Sentinel data (ESA)."
   },
-  "footer": "Dhofar Agro & Eco Observatory · open-data observatory MVP · not a substitute for field survey",
+  "footer": "Dhofar Agro & Eco Observatory · alias: ظفار رصد · open-data observatory MVP · not a substitute for field survey",
   "live": {
     "source": "Source",
     "date": "Acquisition date",

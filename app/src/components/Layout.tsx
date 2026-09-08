@@ -25,6 +25,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3">
           <Link to={base} className="min-w-0">
             <div className="text-lg font-bold text-crop-700">{title}</div>
+            <div className="text-xs font-medium text-crop-700/80">{t("appAlias")}</div>
             <div className="truncate text-xs text-sand-800/70">
               {t("subtitle")}
               <span className="text-sand-800/40"> · {subtitleSecondary}</span>
