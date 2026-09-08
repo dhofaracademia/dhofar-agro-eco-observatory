@@ -1,6 +1,5 @@
 {
   "appName": "Dhofar Agro & Eco Observatory",
-  "appAlias": "Dhofar Monitor",
   "subtitle": "Agricultural observation units and restoration intelligence for Dhofar, Oman",
   "nav": {
     "home": "Overview",
@@ -16,7 +15,7 @@
   },
   "khareef": {
     "title": "Khareef seasonal calendar",
-    "note": "Visual MVP strip — stages are illustrative, not live climate detection.",
+    "note": "Illustrative calendar strip only — stages are not live climate detection and do not claim detected Khareef onset.",
     "stages": {
       "pre": "Pre-Khareef",
       "onset": "Onset",
@@ -151,7 +150,10 @@
     "sourceBadgePc": "Planetary Computer",
     "sourceBadgeS2": "Sentinel-2 L2A",
     "sourceBadgeStac": "STAC",
-    "howRefresh": "Refresh queries the Microsoft Planetary Computer STAC API (sentinel-2-l2a) over the observatory AOI. Contains modified Copernicus Sentinel data. No API token required for STAC search; optional VITE_PC_SAS_TOKEN may be set later for signed assets."
+    "howRefresh": "Refresh queries the Microsoft Planetary Computer STAC API (sentinel-2-l2a) over the observatory AOI. Contains modified Copernicus Sentinel data. No API token required for STAC search; optional VITE_PC_SAS_TOKEN may be set later for signed assets.",
+    "farmDataTitle": "Farm monitor artifacts",
+    "farmDataBlurb": "latest_alerts.geojson + timeseries.json are produced by satellite/pipeline/run_monitor.py (PC STAC + rasterio) into app/public/data/. Client Refresh browses latest STAC scenes; full raster recompute is via the pipeline / GitHub Action.",
+    "farmDataMissing": "Farm GeoJSON not loaded — run the monitor pipeline or wait for the Action."
   },
   "analysis": {
     "title": "Planting-status analysis",
@@ -236,7 +238,7 @@
     "dataSourcesTitle": "Data sources",
     "dataSourcesBody": "Sentinel-2 L2A via Microsoft Planetary Computer STAC; static browse previews; sample mountain GeoJSON. Contains modified Copernicus Sentinel data (ESA)."
   },
-  "footer": "Dhofar Agro & Eco Observatory · alias: ظفار رصد · open-data observatory MVP · not a substitute for field survey",
+  "footer": "Dhofar Agro & Eco Observatory · open-data observatory MVP · not a substitute for field survey",
   "live": {
     "source": "Source",
     "date": "Acquisition date",
@@ -273,5 +275,16 @@
     "sites": "Sample restoration sites are illustrative expert-rule stubs — not field-validated; Environment Authority review required before campaigns.",
     "aou": "AOU cells shown here are from offline / one-shot discovery — not yet on a scheduled open-data pull.",
     "mpi": "MPI class is provisional; live MPI is not computed in this MVP."
+  },
+  "appNameShort": "Dhofar Observatory",
+  "navAlias": "Dhofar Observatory",
+  "honesty": {
+    "title": "Data honesty",
+    "cloud": "Cloud cover is reported per scene; peak-Khareef mountain scenes may be cloudy — SCL masking applies where computed.",
+    "proxy": "NDVI/NDMI (and mountain MPI) are satellite proxies — not plot-level soil moisture meters.",
+    "pest": "No confirmed pest/disease diagnosis from space — use “Possible Biotic Stress” + field check only.",
+    "aou": "AOU ≠ official farm boundary until authorized cadastral link.",
+    "stale": "Scenes always show last-updated. Empty STAC results fail visibly — never silent reuse of stale imagery without a stamp.",
+    "mountain": "Mountain suitability / confidence / MPI on sample sites are illustrative stubs — farm STAC refresh does not compute live mountain MPI."
   }
 }
