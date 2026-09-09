@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dhofaracademia.example/spec_0.4/confidence.schema.json",
+  "title": "Confidence",
+  "description": "Phase-3 Decision Engine — data_evidence confidence. Separate from Suitability Score and from raw data_quality_confidence alone. Not ecological certainty. Never merge with Suitability.",
+  "type": "object",
+  "required": [
+    "aou_id",
+    "confidence_domain",
+    "status",
+    "data_quality_confidence",
+    "temporal_coverage_confidence",
+    "spatial_clarity_confidence",
+    "overall_confidence",
+    "never_merge_with_suitability",
+    "not_ecological_certainty"
+  ],
+  "properties": {
+    "aou_id": {
+      "type": "string",
+      "pattern": "^AOU-NJ-[0-9]{6}$"
+    },
+    "confidence_domain": {
+      "type": "string",
+      "const": "data_evidence"
+    },
+    "status": {
+      "type": "string",
+      "const": "expert_v1_provisional"
+    },
+    "data_quality_confidence": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "maximum": 100,
+      "description": "From clear pixels / cloud / coverage — one input to overall, not the whole story"
+    },
+    "temporal_coverage_confidence": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "maximum": 100,
+      "description": "From n_clear_dates / 8 (capped at 1.0 → 100)"
+    },
+    "spatial_clarity_confidence": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "maximum": 100,
+      "description": "From prior IoU / geometry match clarity (0 if new ID)"
+    },
+    "overall_confidence": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Weighted data_evidence score — NOT suitability, NOT ecological certainty"
+    },
+    "components": {
+      "type": "object",
+      "properties": {
+        "data_quality_norm": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+        "n_clear_dates_norm": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+        "historical_depth": {
+          "type": ["number", "null"],
+          "enum": [0, 0.5, 1, null],
+          "description": "0 / 0.5 / 1 for 0 / 1 / 2+ prior seasons"
+        },
+        "prior_iou": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "maximum": 1,
+          "description": "0 if new ID"
+        }
+      }
+    },
+    "weights_used": {
+      "type": "object",
+      "additionalProperties": { "type": "number" }
+    },
+    "weights_nominal": {
+      "type": "object",
+      "properties": {
+        "data_quality": { "type": "number", "const": 0.40 },
+        "n_clear_dates": { "type": "number", "const": 0.25 },
+        "historical_depth": { "type": "number", "const": 0.20 },
+        "prior_iou": { "type": "number", "const": 0.15 }
+      }
+    },
+    "n_clear_dates": { "type": ["integer", "null"], "minimum": 0 },
+    "prior_seasons_count": { "type": ["integer", "null"], "minimum": 0 },
+    "is_new_id": { "type": "boolean" },
+    "cite_slots": {
+      "type": "object",
+      "properties": {
+        "formula_ref": { "type": "string" },
+        "observation_date": { "type": ["string", "null"] },
+        "product_id": { "type": ["string", "null"] }
+      }
+    },
+    "honesty_note_en": {
+      "type": "string",
+      "description": "Must state: not ecological certainty; Suitability ≠ Confidence ≠ data_quality alone"
+    },
+    "honesty_note_ar": { "type": "string" },
+    "never_merge_with_suitability": { "type": "boolean", "const": true },
+    "not_ecological_certainty": { "type": "boolean", "const": true },
+    "mountain_apply": { "type": "boolean", "const": false }
+  }
+}

@@ -231,3 +231,67 @@ Agricultural Probability v1, AOU IDs, Water/Vigor scores mapped to existing aler
 Phase 1 gates above are **binding** for Programmer start.  
 Phase 2 definitions binding for structure; numeric thresholds marked “calibrate with field data.”  
 Questions → Agrofostery Scientist before relaxing Forbidden list.
+
+---
+
+## Phase 3 addendum — Agriculture AOU Suitability / Confidence (2026-09-09)
+
+**Status:** Binding weight locks — `expert_v1_provisional` (NOT `spec_pending`).  
+**Owner:** Agrofostery Scientist (weights) + AgriTech (JSON field shapes) + CoS (artifacts-first delivery).  
+**Domains must not be mixed with mountain reseeding scores.** `mountain_apply = false`.
+
+### Suitability (`agriculture_aou`) — weights → 0–100
+
+| Term | Weight | Notes |
+|------|--------|-------|
+| `agricultural_probability / 100` | 0.35 | Phase-1 AgProb |
+| NDVI persistence feature | 0.20 | Thin history → weak provisional proxy |
+| `(100 − vigor_stress) / 100` | 0.20 | NDVI-based vigor proxy — NOT fertilizer diagnosis |
+| `(100 − water_stress) / 100` | 0.15 | NDMI-based moisture proxy — NOT soil moisture % |
+| Geometry stability | 0.10 | IoU ≥ 0.3 **or** area ≥ 2 ha → 1.0; else scaled |
+
+Renorm if missing. Stamp `status: expert_v1_provisional`, `suitability_domain: agriculture_aou`, `suitability_summary_label: components_only`.
+
+**AgriTech component shape (required):** `moisture_proxy`, `vigor_proxy`, `phenology_fit`, `terrain_constraint` (+ optional `agricultural_probability_norm`).
+
+### Confidence (`data_evidence`) — weights → 0–100
+
+| Term | Weight | Notes |
+|------|--------|-------|
+| `data_quality_confidence / 100` | 0.40 | DQ alone ≠ overall confidence |
+| `n_clear_dates / 8` (cap 1) | 0.25 | Temporal coverage |
+| Historical depth | 0.20 | 0 / 0.5 / 1 for 0 / 1 / 2+ prior seasons |
+| Prior IoU | 0.15 | 0 if new ID |
+
+Stamp `confidence_domain: data_evidence`. **Not ecological certainty.**
+
+**AgriTech fields (required):** `data_quality_confidence`, `temporal_coverage_confidence`, `spatial_clarity_confidence`, `overall_confidence`.
+
+### Evidence Gap + Why-this-site + Action ladder
+
+- `evidence_gaps[]` lists missing inputs honestly (no NDRE, no field visit, thin history, no post-khareef clear, no MPI on agriculture AOU, etc.).
+- `why_this_site`: `headline`, `drivers`, `cautions`, `recommended_next_step`; **`action_ladder_suggestion` MUST stay `null`** (manual enum only).
+- Action ladder = display enum / manual recommended next step only — **no** suitability→action auto-assign.
+
+### Hard gates (Phase 3)
+
+1. **Never merge** Suitability Score + Confidence Score + `data_quality_confidence`.
+2. **Do not** apply `agriculture_aou` weights to mountain cells (`mountain_apply=false`).
+3. **Do not** write decision artifacts into `app/public/` until science re-sign-off (path: `satellite/pipeline/artifacts/decision/`).
+4. **Do not** label MPI as post-khareef when evidence window is onset-T0 only.
+5. No campaign numbers, pest names, soil moisture %, live Khareef onset detection.
+6. Keep Phase-1 agriculture honesty chrome (AOU ≠ official farm; biotic = risk only).
+
+### Artifacts
+
+```
+satellite/pipeline/artifacts/decision/
+  aou_suitability_components.json
+  aou_confidence.json
+  aou_evidence_gaps.json
+  action_ladder.stubs.json
+  run_meta.json
+```
+
+Schemas: `docs/spec_0.4/{suitability_components,confidence,evidence_gap,action_ladder}.schema.json`.
+

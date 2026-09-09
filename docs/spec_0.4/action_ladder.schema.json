@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dhofaracademia.example/spec_0.4/action_ladder.schema.json",
+  "title": "ActionLadder",
+  "description": "Phase-3 Decision Engine — display enum / recommended next step MANUAL ONLY. No suitability→action auto-assign. Distinct from mountain natural_regeneration_ladder but same honesty gate.",
+  "type": "object",
+  "required": [
+    "ladder_enum",
+    "auto_assign_from_suitability",
+    "status",
+    "manual_only"
+  ],
+  "properties": {
+    "status": {
+      "type": "string",
+      "const": "enum_and_manual_only"
+    },
+    "provisional": { "type": "boolean", "const": true },
+    "manual_only": { "type": "boolean", "const": true },
+    "auto_assign_from_suitability": {
+      "type": "boolean",
+      "const": false
+    },
+    "action_ladder_suggestion": {
+      "type": "null",
+      "description": "Pipeline artifacts MUST leave this null — experts choose manually"
+    },
+    "ladder_enum": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {
+        "type": "string",
+        "enum": [
+          "field_irrigation_inspection",
+          "field_vigor_inspection",
+          "biotic_field_verification",
+          "continue_monitoring",
+          "defer_insufficient_evidence"
+        ]
+      }
+    },
+    "labels": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "en": { "type": "string" },
+          "ar": { "type": "string" },
+          "order": { "type": "integer" }
+        }
+      }
+    },
+    "rule_stubs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "ladder",
+          "requires_field_validation",
+          "auto_assign_from_suitability"
+        ],
+        "properties": {
+          "id": { "type": "string" },
+          "ladder": { "type": "string" },
+          "rule_stub_en": { "type": "string" },
+          "rule_stub_ar": { "type": "string" },
+          "requires_field_validation": { "type": "boolean", "const": true },
+          "auto_assign_from_suitability": { "type": "boolean", "const": false }
+        }
+      }
+    },
+    "forbidden": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "domain": {
+      "type": "string",
+      "const": "agriculture_aou_decision"
+    },
+    "mountain_apply": { "type": "boolean", "const": false },
+    "science_lock": {
+      "type": "string",
+      "const": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3"
+    }
+  }
+}

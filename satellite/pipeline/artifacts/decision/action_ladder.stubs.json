@@ -1,0 +1,96 @@
+{
+  "schema_ref": "docs/spec_0.4/action_ladder.schema.json",
+  "science_lock": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3",
+  "status": "enum_and_manual_only",
+  "provisional": true,
+  "manual_only": true,
+  "auto_assign_from_suitability": false,
+  "action_ladder_suggestion": null,
+  "domain": "agriculture_aou_decision",
+  "mountain_apply": false,
+  "forbidden": [
+    "numeric_suitability_to_action_auto_assignment",
+    "campaign_hectares_as_official",
+    "pest_certainty",
+    "soil_moisture_percent",
+    "merge_suitability_and_confidence",
+    "apply_agriculture_aou_weights_to_mountain"
+  ],
+  "ladder_enum": [
+    "field_irrigation_inspection",
+    "field_vigor_inspection",
+    "biotic_field_verification",
+    "continue_monitoring",
+    "defer_insufficient_evidence"
+  ],
+  "labels": {
+    "field_irrigation_inspection": {
+      "en": "Field irrigation inspection",
+      "ar": "معاينة ري ميدانية",
+      "order": 1
+    },
+    "field_vigor_inspection": {
+      "en": "Field vigor inspection",
+      "ar": "معاينة حيوية ميدانية",
+      "order": 2
+    },
+    "biotic_field_verification": {
+      "en": "Biotic field verification",
+      "ar": "تحقق ميداني لإجهاد حيوي محتمل",
+      "order": 3
+    },
+    "continue_monitoring": {
+      "en": "Continue monitoring",
+      "ar": "متابعة الرصد",
+      "order": 4
+    },
+    "defer_insufficient_evidence": {
+      "en": "Defer — insufficient evidence",
+      "ar": "تأجيل — أدلة غير كافية",
+      "order": 5
+    }
+  },
+  "rule_stubs": [
+    {
+      "id": "stub_irrigation",
+      "ladder": "field_irrigation_inspection",
+      "rule_stub_en": "When moisture_proxy is low (high water_stress), experts may manually choose irrigation inspection. Auto-assign FORBIDDEN.",
+      "rule_stub_ar": "عند انخفاض moisture_proxy يمكن للخبير اختيار معاينة الري يدوياً. التعيين التلقائي ممنوع.",
+      "requires_field_validation": true,
+      "auto_assign_from_suitability": false
+    },
+    {
+      "id": "stub_vigor",
+      "ladder": "field_vigor_inspection",
+      "rule_stub_en": "When vigor_proxy is low, manual vigor inspection — not fertilizer diagnosis.",
+      "rule_stub_ar": "عند انخفاض vigor_proxy معاينة حيوية يدوية — وليست تشخيص سماد.",
+      "requires_field_validation": true,
+      "auto_assign_from_suitability": false
+    },
+    {
+      "id": "stub_biotic",
+      "ladder": "biotic_field_verification",
+      "rule_stub_en": "possible_biotic_stress flag only — never pest name; field verification recommended.",
+      "rule_stub_ar": "علم possible_biotic_stress فقط — بلا اسم آفة؛ يُوصى بالتحقق الميداني.",
+      "requires_field_validation": true,
+      "auto_assign_from_suitability": false
+    },
+    {
+      "id": "stub_monitor",
+      "ladder": "continue_monitoring",
+      "rule_stub_en": "Default when scores are mid-range or history is thin — continue Phase-1 monitor.",
+      "rule_stub_ar": "الافتراضي عند درجات متوسطة أو تاريخ ضعيف — متابعة رصد المرحلة 1.",
+      "requires_field_validation": true,
+      "auto_assign_from_suitability": false
+    },
+    {
+      "id": "stub_defer",
+      "ladder": "defer_insufficient_evidence",
+      "rule_stub_en": "When Evidence Gap is large (no field visit, thin history, missing scores) — defer.",
+      "rule_stub_ar": "عند فجوة أدلة كبيرة — تأجيل.",
+      "requires_field_validation": true,
+      "auto_assign_from_suitability": false
+    }
+  ],
+  "note_en": "Display enum / manual recommended next step only. Pipeline leaves action_ladder_suggestion null."
+}

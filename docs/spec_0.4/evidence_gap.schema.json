@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dhofaracademia.example/spec_0.4/evidence_gap.schema.json",
+  "title": "EvidenceGap",
+  "description": "Phase-3 Decision Engine — honest list of missing inputs. Fail-honest: list gaps; do not invent campaign numbers, pest certainty, soil moisture %, or live Khareef.",
+  "type": "object",
+  "required": [
+    "aou_id",
+    "evidence_gaps",
+    "status"
+  ],
+  "properties": {
+    "aou_id": {
+      "type": "string",
+      "pattern": "^AOU-NJ-[0-9]{6}$"
+    },
+    "status": {
+      "type": "string",
+      "const": "expert_v1_provisional"
+    },
+    "evidence_gaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "code", "present", "severity_en", "severity_ar"],
+        "properties": {
+          "id": { "type": "string" },
+          "code": {
+            "type": "string",
+            "enum": [
+              "no_ndre",
+              "no_field_visit",
+              "thin_aou_history",
+              "no_historical_seasons",
+              "no_prior_iou",
+              "no_post_khareef_clear",
+              "no_mpi_curve",
+              "window_series_stub_only",
+              "no_swir_feature",
+              "low_data_quality",
+              "missing_ag_probability",
+              "missing_stress_scores",
+              "other"
+            ]
+          },
+          "present": {
+            "type": "boolean",
+            "description": "true = input is available; false = gap (missing)"
+          },
+          "severity_en": { "type": "string" },
+          "severity_ar": { "type": "string" },
+          "severity": {
+            "type": "string",
+            "description": "optional severity hint: info|caution|blocking — not a certainty claim"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "missing_input_codes": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Convenience list of codes where present=false"
+    },
+    "gap_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "honesty_note_en": { "type": "string" },
+    "honesty_note_ar": { "type": "string" },
+    "forbidden_claims": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Claims this object must never imply"
+    },
+    "cite_slots": {
+      "type": "object",
+      "properties": {
+        "formula_ref": { "type": "string" },
+        "observation_date": { "type": ["string", "null"] }
+      }
+    }
+  }
+}
