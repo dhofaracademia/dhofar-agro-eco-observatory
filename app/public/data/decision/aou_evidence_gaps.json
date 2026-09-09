@@ -1,0 +1,1100 @@
+{
+  "version": "0.4.3-phase3-scaffolds",
+  "generated_at": "2026-09-09T05:08:20.973595+00:00",
+  "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3",
+  "status": "expert_v1_provisional",
+  "never_merge": true,
+  "mountain_apply": false,
+  "action_auto_assign": false,
+  "writes_to_app_public": true,
+  "input_refs": {
+    "aou_registry": "app/public/data/aou/aou_registry.json",
+    "aou_observations": "app/public/data/aou/aou_observations.json"
+  },
+  "honesty_en": "Offline decision scaffolds for Najd agriculture AOUs only. Suitability ≠ Confidence ≠ data_quality_confidence. Not ecological certainty. No mountain UI. Action ladder manual only. Public copy is a deliberate offline snapshot for Vite fetch — expert_v1_provisional, not operational truth; refresh via scaffolds re-run + re-copy.",
+  "schema_ref": "docs/spec_0.4/evidence_gap.schema.json",
+  "units": [
+    {
+      "aou_id": "AOU-NJ-000001",
+      "status": "expert_v1_provisional",
+      "evidence_gaps": [
+        {
+          "id": "gap_ndre",
+          "code": "no_ndre",
+          "present": false,
+          "severity_en": "No NDRE (red-edge) on this observation — AgProb may have renormed.",
+          "severity_ar": "لا يوجد NDRE (الحافة الحمراء) في هذه الملاحظة — قد يُعاد توزيع وزن الاحتمال الزراعي.",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_field",
+          "code": "no_field_visit",
+          "present": false,
+          "severity_en": "No field visit / ground verification linked to this AOU.",
+          "severity_ar": "لا زيارة ميدانية / تحقق أرضي مرتبط بهذه الوحدة.",
+          "severity": "blocking"
+        },
+        {
+          "id": "gap_history",
+          "code": "thin_aou_history",
+          "present": false,
+          "severity_en": "AOU multi-date history is thin (≤1 clear AOU observation).",
+          "severity_ar": "تاريخ الوحدة متعدد التواريخ ضعيف (≤1 ملاحظة صافية).",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_seasons",
+          "code": "no_historical_seasons",
+          "present": false,
+          "severity_en": "No prior-season historical anomaly depth for this AOU.",
+          "severity_ar": "لا عمق مواسم سابقة لشذوذ تاريخي لهذه الوحدة.",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_iou",
+          "code": "no_prior_iou",
+          "present": false,
+          "severity_en": "No prior IoU match (new or unmatched ID).",
+          "severity_ar": "لا تطابق IoU سابق (معرّف جديد أو غير مطابق).",
+          "severity": "info"
+        },
+        {
+          "id": "gap_post_khareef",
+          "code": "no_post_khareef_clear",
+          "present": false,
+          "severity_en": "No post-khareef clear composite attached (agriculture AOU path — not mountain MPI).",
+          "severity_ar": "لا مركّب صافٍ بعد الخريف مرتبط (مسار وحدات الزراعة — وليس MPI الجبلي).",
+          "severity": "info"
+        },
+        {
+          "id": "gap_mpi",
+          "code": "no_mpi_curve",
+          "present": false,
+          "severity_en": "No MPI curve on this agriculture AOU (MPI is mountain offline evidence; onset-T0 provisional only).",
+          "severity_ar": "لا منحنى MPI على وحدة الزراعة هذه (MPI أدلة جبلية دون اتصال؛ بداية T0 مؤقتة فقط).",
+          "severity": "info"
+        },
+        {
+          "id": "gap_window_stub",
+          "code": "window_series_stub_only",
+          "present": false,
+          "severity_en": "Temporal context still includes window-level stub series (not AOU-specific multi-date).",
+          "severity_ar": "السياق الزمني ما زال يتضمن سلسلة نافذة تقريبية (وليست متعددة التواريخ للوحدة).",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_dq",
+          "code": "low_data_quality",
+          "present": true,
+          "severity_en": "OK — low_data_quality input available.",
+          "severity_ar": "حسناً — المدخل low_data_quality متوفر.",
+          "severity": "info"
+        },
+        {
+          "id": "gap_agprob",
+          "code": "missing_ag_probability",
+          "present": true,
+          "severity_en": "OK — missing_ag_probability input available.",
+          "severity_ar": "حسناً — المدخل missing_ag_probability متوفر.",
+          "severity": "info"
+        },
+        {
+          "id": "gap_stress",
+          "code": "missing_stress_scores",
+          "present": true,
+          "severity_en": "OK — missing_stress_scores input available.",
+          "severity_ar": "حسناً — المدخل missing_stress_scores متوفر.",
+          "severity": "info"
+        }
+      ],
+      "missing_input_codes": [
+        "no_ndre",
+        "no_field_visit",
+        "thin_aou_history",
+        "no_historical_seasons",
+        "no_prior_iou",
+        "no_post_khareef_clear",
+        "no_mpi_curve",
+        "window_series_stub_only"
+      ],
+      "gap_count": 8,
+      "honesty_note_en": "Evidence Gap lists missing inputs honestly. Does not invent campaign numbers, pest certainty, soil moisture %, or live Khareef. MPI onset narrative (if any) is onset-T0 provisional only — not post-khareef labeling for AOUs.",
+      "honesty_note_ar": "فجوة الأدلة تسرد المدخلات الناقصة بصدق. لا تختلق أرقام حملات أو يقين آفات أو رطوبة تربة % أو خريفاً حياً. سرد بداية MPI (إن وُجد) مؤقت عند T0 فقط — وليس وسم ما بعد الخريف لوحدات الزراعة.",
+      "forbidden_claims": [
+        "campaign_hectares_as_official",
+        "pest_name_or_certainty",
+        "soil_moisture_percent",
+        "live_khareef_onset",
+        "suitability_merged_with_confidence",
+        "action_auto_assigned_from_suitability",
+        "mpi_as_post_khareef_for_agriculture_aou"
+      ],
+      "cite_slots": {
+        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3",
+        "observation_date": "2026-09-06"
+      }
+    },
+    {
+      "aou_id": "AOU-NJ-000002",
+      "status": "expert_v1_provisional",
+      "evidence_gaps": [
+        {
+          "id": "gap_ndre",
+          "code": "no_ndre",
+          "present": false,
+          "severity_en": "No NDRE (red-edge) on this observation — AgProb may have renormed.",
+          "severity_ar": "لا يوجد NDRE (الحافة الحمراء) في هذه الملاحظة — قد يُعاد توزيع وزن الاحتمال الزراعي.",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_field",
+          "code": "no_field_visit",
+          "present": false,
+          "severity_en": "No field visit / ground verification linked to this AOU.",
+          "severity_ar": "لا زيارة ميدانية / تحقق أرضي مرتبط بهذه الوحدة.",
+          "severity": "blocking"
+        },
+        {
+          "id": "gap_history",
+          "code": "thin_aou_history",
+          "present": false,
+          "severity_en": "AOU multi-date history is thin (≤1 clear AOU observation).",
+          "severity_ar": "تاريخ الوحدة متعدد التواريخ ضعيف (≤1 ملاحظة صافية).",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_seasons",
+          "code": "no_historical_seasons",
+          "present": false,
+          "severity_en": "No prior-season historical anomaly depth for this AOU.",
+          "severity_ar": "لا عمق مواسم سابقة لشذوذ تاريخي لهذه الوحدة.",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_iou",
+          "code": "no_prior_iou",
+          "present": false,
+          "severity_en": "No prior IoU match (new or unmatched ID).",
+          "severity_ar": "لا تطابق IoU سابق (معرّف جديد أو غير مطابق).",
+          "severity": "info"
+        },
+        {
+          "id": "gap_post_khareef",
+          "code": "no_post_khareef_clear",
+          "present": false,
+          "severity_en": "No post-khareef clear composite attached (agriculture AOU path — not mountain MPI).",
+          "severity_ar": "لا مركّب صافٍ بعد الخريف مرتبط (مسار وحدات الزراعة — وليس MPI الجبلي).",
+          "severity": "info"
+        },
+        {
+          "id": "gap_mpi",
+          "code": "no_mpi_curve",
+          "present": false,
+          "severity_en": "No MPI curve on this agriculture AOU (MPI is mountain offline evidence; onset-T0 provisional only).",
+          "severity_ar": "لا منحنى MPI على وحدة الزراعة هذه (MPI أدلة جبلية دون اتصال؛ بداية T0 مؤقتة فقط).",
+          "severity": "info"
+        },
+        {
+          "id": "gap_window_stub",
+          "code": "window_series_stub_only",
+          "present": false,
+          "severity_en": "Temporal context still includes window-level stub series (not AOU-specific multi-date).",
+          "severity_ar": "السياق الزمني ما زال يتضمن سلسلة نافذة تقريبية (وليست متعددة التواريخ للوحدة).",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_dq",
+          "code": "low_data_quality",
+          "present": true,
+          "severity_en": "OK — low_data_quality input available.",
+          "severity_ar": "حسناً — المدخل low_data_quality متوفر.",
+          "severity": "info"
+        },
+        {
+          "id": "gap_agprob",
+          "code": "missing_ag_probability",
+          "present": true,
+          "severity_en": "OK — missing_ag_probability input available.",
+          "severity_ar": "حسناً — المدخل missing_ag_probability متوفر.",
+          "severity": "info"
+        },
+        {
+          "id": "gap_stress",
+          "code": "missing_stress_scores",
+          "present": true,
+          "severity_en": "OK — missing_stress_scores input available.",
+          "severity_ar": "حسناً — المدخل missing_stress_scores متوفر.",
+          "severity": "info"
+        }
+      ],
+      "missing_input_codes": [
+        "no_ndre",
+        "no_field_visit",
+        "thin_aou_history",
+        "no_historical_seasons",
+        "no_prior_iou",
+        "no_post_khareef_clear",
+        "no_mpi_curve",
+        "window_series_stub_only"
+      ],
+      "gap_count": 8,
+      "honesty_note_en": "Evidence Gap lists missing inputs honestly. Does not invent campaign numbers, pest certainty, soil moisture %, or live Khareef. MPI onset narrative (if any) is onset-T0 provisional only — not post-khareef labeling for AOUs.",
+      "honesty_note_ar": "فجوة الأدلة تسرد المدخلات الناقصة بصدق. لا تختلق أرقام حملات أو يقين آفات أو رطوبة تربة % أو خريفاً حياً. سرد بداية MPI (إن وُجد) مؤقت عند T0 فقط — وليس وسم ما بعد الخريف لوحدات الزراعة.",
+      "forbidden_claims": [
+        "campaign_hectares_as_official",
+        "pest_name_or_certainty",
+        "soil_moisture_percent",
+        "live_khareef_onset",
+        "suitability_merged_with_confidence",
+        "action_auto_assigned_from_suitability",
+        "mpi_as_post_khareef_for_agriculture_aou"
+      ],
+      "cite_slots": {
+        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3",
+        "observation_date": "2026-09-06"
+      }
+    },
+    {
+      "aou_id": "AOU-NJ-000003",
+      "status": "expert_v1_provisional",
+      "evidence_gaps": [
+        {
+          "id": "gap_ndre",
+          "code": "no_ndre",
+          "present": false,
+          "severity_en": "No NDRE (red-edge) on this observation — AgProb may have renormed.",
+          "severity_ar": "لا يوجد NDRE (الحافة الحمراء) في هذه الملاحظة — قد يُعاد توزيع وزن الاحتمال الزراعي.",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_field",
+          "code": "no_field_visit",
+          "present": false,
+          "severity_en": "No field visit / ground verification linked to this AOU.",
+          "severity_ar": "لا زيارة ميدانية / تحقق أرضي مرتبط بهذه الوحدة.",
+          "severity": "blocking"
+        },
+        {
+          "id": "gap_history",
+          "code": "thin_aou_history",
+          "present": false,
+          "severity_en": "AOU multi-date history is thin (≤1 clear AOU observation).",
+          "severity_ar": "تاريخ الوحدة متعدد التواريخ ضعيف (≤1 ملاحظة صافية).",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_seasons",
+          "code": "no_historical_seasons",
+          "present": false,
+          "severity_en": "No prior-season historical anomaly depth for this AOU.",
+          "severity_ar": "لا عمق مواسم سابقة لشذوذ تاريخي لهذه الوحدة.",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_iou",
+          "code": "no_prior_iou",
+          "present": false,
+          "severity_en": "No prior IoU match (new or unmatched ID).",
+          "severity_ar": "لا تطابق IoU سابق (معرّف جديد أو غير مطابق).",
+          "severity": "info"
+        },
+        {
+          "id": "gap_post_khareef",
+          "code": "no_post_khareef_clear",
+          "present": false,
+          "severity_en": "No post-khareef clear composite attached (agriculture AOU path — not mountain MPI).",
+          "severity_ar": "لا مركّب صافٍ بعد الخريف مرتبط (مسار وحدات الزراعة — وليس MPI الجبلي).",
+          "severity": "info"
+        },
+        {
+          "id": "gap_mpi",
+          "code": "no_mpi_curve",
+          "present": false,
+          "severity_en": "No MPI curve on this agriculture AOU (MPI is mountain offline evidence; onset-T0 provisional only).",
+          "severity_ar": "لا منحنى MPI على وحدة الزراعة هذه (MPI أدلة جبلية دون اتصال؛ بداية T0 مؤقتة فقط).",
+          "severity": "info"
+        },
+        {
+          "id": "gap_window_stub",
+          "code": "window_series_stub_only",
+          "present": false,
+          "severity_en": "Temporal context still includes window-level stub series (not AOU-specific multi-date).",
+          "severity_ar": "السياق الزمني ما زال يتضمن سلسلة نافذة تقريبية (وليست متعددة التواريخ للوحدة).",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_dq",
+          "code": "low_data_quality",
+          "present": true,
+          "severity_en": "OK — low_data_quality input available.",
+          "severity_ar": "حسناً — المدخل low_data_quality متوفر.",
+          "severity": "info"
+        },
+        {
+          "id": "gap_agprob",
+          "code": "missing_ag_probability",
+          "present": true,
+          "severity_en": "OK — missing_ag_probability input available.",
+          "severity_ar": "حسناً — المدخل missing_ag_probability متوفر.",
+          "severity": "info"
+        },
+        {
+          "id": "gap_stress",
+          "code": "missing_stress_scores",
+          "present": true,
+          "severity_en": "OK — missing_stress_scores input available.",
+          "severity_ar": "حسناً — المدخل missing_stress_scores متوفر.",
+          "severity": "info"
+        }
+      ],
+      "missing_input_codes": [
+        "no_ndre",
+        "no_field_visit",
+        "thin_aou_history",
+        "no_historical_seasons",
+        "no_prior_iou",
+        "no_post_khareef_clear",
+        "no_mpi_curve",
+        "window_series_stub_only"
+      ],
+      "gap_count": 8,
+      "honesty_note_en": "Evidence Gap lists missing inputs honestly. Does not invent campaign numbers, pest certainty, soil moisture %, or live Khareef. MPI onset narrative (if any) is onset-T0 provisional only — not post-khareef labeling for AOUs.",
+      "honesty_note_ar": "فجوة الأدلة تسرد المدخلات الناقصة بصدق. لا تختلق أرقام حملات أو يقين آفات أو رطوبة تربة % أو خريفاً حياً. سرد بداية MPI (إن وُجد) مؤقت عند T0 فقط — وليس وسم ما بعد الخريف لوحدات الزراعة.",
+      "forbidden_claims": [
+        "campaign_hectares_as_official",
+        "pest_name_or_certainty",
+        "soil_moisture_percent",
+        "live_khareef_onset",
+        "suitability_merged_with_confidence",
+        "action_auto_assigned_from_suitability",
+        "mpi_as_post_khareef_for_agriculture_aou"
+      ],
+      "cite_slots": {
+        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3",
+        "observation_date": "2026-09-06"
+      }
+    },
+    {
+      "aou_id": "AOU-NJ-000004",
+      "status": "expert_v1_provisional",
+      "evidence_gaps": [
+        {
+          "id": "gap_ndre",
+          "code": "no_ndre",
+          "present": false,
+          "severity_en": "No NDRE (red-edge) on this observation — AgProb may have renormed.",
+          "severity_ar": "لا يوجد NDRE (الحافة الحمراء) في هذه الملاحظة — قد يُعاد توزيع وزن الاحتمال الزراعي.",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_field",
+          "code": "no_field_visit",
+          "present": false,
+          "severity_en": "No field visit / ground verification linked to this AOU.",
+          "severity_ar": "لا زيارة ميدانية / تحقق أرضي مرتبط بهذه الوحدة.",
+          "severity": "blocking"
+        },
+        {
+          "id": "gap_history",
+          "code": "thin_aou_history",
+          "present": false,
+          "severity_en": "AOU multi-date history is thin (≤1 clear AOU observation).",
+          "severity_ar": "تاريخ الوحدة متعدد التواريخ ضعيف (≤1 ملاحظة صافية).",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_seasons",
+          "code": "no_historical_seasons",
+          "present": false,
+          "severity_en": "No prior-season historical anomaly depth for this AOU.",
+          "severity_ar": "لا عمق مواسم سابقة لشذوذ تاريخي لهذه الوحدة.",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_iou",
+          "code": "no_prior_iou",
+          "present": false,
+          "severity_en": "No prior IoU match (new or unmatched ID).",
+          "severity_ar": "لا تطابق IoU سابق (معرّف جديد أو غير مطابق).",
+          "severity": "info"
+        },
+        {
+          "id": "gap_post_khareef",
+          "code": "no_post_khareef_clear",
+          "present": false,
+          "severity_en": "No post-khareef clear composite attached (agriculture AOU path — not mountain MPI).",
+          "severity_ar": "لا مركّب صافٍ بعد الخريف مرتبط (مسار وحدات الزراعة — وليس MPI الجبلي).",
+          "severity": "info"
+        },
+        {
+          "id": "gap_mpi",
+          "code": "no_mpi_curve",
+          "present": false,
+          "severity_en": "No MPI curve on this agriculture AOU (MPI is mountain offline evidence; onset-T0 provisional only).",
+          "severity_ar": "لا منحنى MPI على وحدة الزراعة هذه (MPI أدلة جبلية دون اتصال؛ بداية T0 مؤقتة فقط).",
+          "severity": "info"
+        },
+        {
+          "id": "gap_window_stub",
+          "code": "window_series_stub_only",
+          "present": false,
+          "severity_en": "Temporal context still includes window-level stub series (not AOU-specific multi-date).",
+          "severity_ar": "السياق الزمني ما زال يتضمن سلسلة نافذة تقريبية (وليست متعددة التواريخ للوحدة).",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_dq",
+          "code": "low_data_quality",
+          "present": true,
+          "severity_en": "OK — low_data_quality input available.",
+          "severity_ar": "حسناً — المدخل low_data_quality متوفر.",
+          "severity": "info"
+        },
+        {
+          "id": "gap_agprob",
+          "code": "missing_ag_probability",
+          "present": true,
+          "severity_en": "OK — missing_ag_probability input available.",
+          "severity_ar": "حسناً — المدخل missing_ag_probability متوفر.",
+          "severity": "info"
+        },
+        {
+          "id": "gap_stress",
+          "code": "missing_stress_scores",
+          "present": true,
+          "severity_en": "OK — missing_stress_scores input available.",
+          "severity_ar": "حسناً — المدخل missing_stress_scores متوفر.",
+          "severity": "info"
+        }
+      ],
+      "missing_input_codes": [
+        "no_ndre",
+        "no_field_visit",
+        "thin_aou_history",
+        "no_historical_seasons",
+        "no_prior_iou",
+        "no_post_khareef_clear",
+        "no_mpi_curve",
+        "window_series_stub_only"
+      ],
+      "gap_count": 8,
+      "honesty_note_en": "Evidence Gap lists missing inputs honestly. Does not invent campaign numbers, pest certainty, soil moisture %, or live Khareef. MPI onset narrative (if any) is onset-T0 provisional only — not post-khareef labeling for AOUs.",
+      "honesty_note_ar": "فجوة الأدلة تسرد المدخلات الناقصة بصدق. لا تختلق أرقام حملات أو يقين آفات أو رطوبة تربة % أو خريفاً حياً. سرد بداية MPI (إن وُجد) مؤقت عند T0 فقط — وليس وسم ما بعد الخريف لوحدات الزراعة.",
+      "forbidden_claims": [
+        "campaign_hectares_as_official",
+        "pest_name_or_certainty",
+        "soil_moisture_percent",
+        "live_khareef_onset",
+        "suitability_merged_with_confidence",
+        "action_auto_assigned_from_suitability",
+        "mpi_as_post_khareef_for_agriculture_aou"
+      ],
+      "cite_slots": {
+        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3",
+        "observation_date": "2026-09-06"
+      }
+    },
+    {
+      "aou_id": "AOU-NJ-000005",
+      "status": "expert_v1_provisional",
+      "evidence_gaps": [
+        {
+          "id": "gap_ndre",
+          "code": "no_ndre",
+          "present": false,
+          "severity_en": "No NDRE (red-edge) on this observation — AgProb may have renormed.",
+          "severity_ar": "لا يوجد NDRE (الحافة الحمراء) في هذه الملاحظة — قد يُعاد توزيع وزن الاحتمال الزراعي.",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_field",
+          "code": "no_field_visit",
+          "present": false,
+          "severity_en": "No field visit / ground verification linked to this AOU.",
+          "severity_ar": "لا زيارة ميدانية / تحقق أرضي مرتبط بهذه الوحدة.",
+          "severity": "blocking"
+        },
+        {
+          "id": "gap_history",
+          "code": "thin_aou_history",
+          "present": false,
+          "severity_en": "AOU multi-date history is thin (≤1 clear AOU observation).",
+          "severity_ar": "تاريخ الوحدة متعدد التواريخ ضعيف (≤1 ملاحظة صافية).",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_seasons",
+          "code": "no_historical_seasons",
+          "present": false,
+          "severity_en": "No prior-season historical anomaly depth for this AOU.",
+          "severity_ar": "لا عمق مواسم سابقة لشذوذ تاريخي لهذه الوحدة.",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_iou",
+          "code": "no_prior_iou",
+          "present": false,
+          "severity_en": "No prior IoU match (new or unmatched ID).",
+          "severity_ar": "لا تطابق IoU سابق (معرّف جديد أو غير مطابق).",
+          "severity": "info"
+        },
+        {
+          "id": "gap_post_khareef",
+          "code": "no_post_khareef_clear",
+          "present": false,
+          "severity_en": "No post-khareef clear composite attached (agriculture AOU path — not mountain MPI).",
+          "severity_ar": "لا مركّب صافٍ بعد الخريف مرتبط (مسار وحدات الزراعة — وليس MPI الجبلي).",
+          "severity": "info"
+        },
+        {
+          "id": "gap_mpi",
+          "code": "no_mpi_curve",
+          "present": false,
+          "severity_en": "No MPI curve on this agriculture AOU (MPI is mountain offline evidence; onset-T0 provisional only).",
+          "severity_ar": "لا منحنى MPI على وحدة الزراعة هذه (MPI أدلة جبلية دون اتصال؛ بداية T0 مؤقتة فقط).",
+          "severity": "info"
+        },
+        {
+          "id": "gap_window_stub",
+          "code": "window_series_stub_only",
+          "present": false,
+          "severity_en": "Temporal context still includes window-level stub series (not AOU-specific multi-date).",
+          "severity_ar": "السياق الزمني ما زال يتضمن سلسلة نافذة تقريبية (وليست متعددة التواريخ للوحدة).",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_dq",
+          "code": "low_data_quality",
+          "present": true,
+          "severity_en": "OK — low_data_quality input available.",
+          "severity_ar": "حسناً — المدخل low_data_quality متوفر.",
+          "severity": "info"
+        },
+        {
+          "id": "gap_agprob",
+          "code": "missing_ag_probability",
+          "present": true,
+          "severity_en": "OK — missing_ag_probability input available.",
+          "severity_ar": "حسناً — المدخل missing_ag_probability متوفر.",
+          "severity": "info"
+        },
+        {
+          "id": "gap_stress",
+          "code": "missing_stress_scores",
+          "present": true,
+          "severity_en": "OK — missing_stress_scores input available.",
+          "severity_ar": "حسناً — المدخل missing_stress_scores متوفر.",
+          "severity": "info"
+        }
+      ],
+      "missing_input_codes": [
+        "no_ndre",
+        "no_field_visit",
+        "thin_aou_history",
+        "no_historical_seasons",
+        "no_prior_iou",
+        "no_post_khareef_clear",
+        "no_mpi_curve",
+        "window_series_stub_only"
+      ],
+      "gap_count": 8,
+      "honesty_note_en": "Evidence Gap lists missing inputs honestly. Does not invent campaign numbers, pest certainty, soil moisture %, or live Khareef. MPI onset narrative (if any) is onset-T0 provisional only — not post-khareef labeling for AOUs.",
+      "honesty_note_ar": "فجوة الأدلة تسرد المدخلات الناقصة بصدق. لا تختلق أرقام حملات أو يقين آفات أو رطوبة تربة % أو خريفاً حياً. سرد بداية MPI (إن وُجد) مؤقت عند T0 فقط — وليس وسم ما بعد الخريف لوحدات الزراعة.",
+      "forbidden_claims": [
+        "campaign_hectares_as_official",
+        "pest_name_or_certainty",
+        "soil_moisture_percent",
+        "live_khareef_onset",
+        "suitability_merged_with_confidence",
+        "action_auto_assigned_from_suitability",
+        "mpi_as_post_khareef_for_agriculture_aou"
+      ],
+      "cite_slots": {
+        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3",
+        "observation_date": "2026-09-06"
+      }
+    },
+    {
+      "aou_id": "AOU-NJ-000006",
+      "status": "expert_v1_provisional",
+      "evidence_gaps": [
+        {
+          "id": "gap_ndre",
+          "code": "no_ndre",
+          "present": false,
+          "severity_en": "No NDRE (red-edge) on this observation — AgProb may have renormed.",
+          "severity_ar": "لا يوجد NDRE (الحافة الحمراء) في هذه الملاحظة — قد يُعاد توزيع وزن الاحتمال الزراعي.",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_field",
+          "code": "no_field_visit",
+          "present": false,
+          "severity_en": "No field visit / ground verification linked to this AOU.",
+          "severity_ar": "لا زيارة ميدانية / تحقق أرضي مرتبط بهذه الوحدة.",
+          "severity": "blocking"
+        },
+        {
+          "id": "gap_history",
+          "code": "thin_aou_history",
+          "present": false,
+          "severity_en": "AOU multi-date history is thin (≤1 clear AOU observation).",
+          "severity_ar": "تاريخ الوحدة متعدد التواريخ ضعيف (≤1 ملاحظة صافية).",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_seasons",
+          "code": "no_historical_seasons",
+          "present": false,
+          "severity_en": "No prior-season historical anomaly depth for this AOU.",
+          "severity_ar": "لا عمق مواسم سابقة لشذوذ تاريخي لهذه الوحدة.",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_iou",
+          "code": "no_prior_iou",
+          "present": false,
+          "severity_en": "No prior IoU match (new or unmatched ID).",
+          "severity_ar": "لا تطابق IoU سابق (معرّف جديد أو غير مطابق).",
+          "severity": "info"
+        },
+        {
+          "id": "gap_post_khareef",
+          "code": "no_post_khareef_clear",
+          "present": false,
+          "severity_en": "No post-khareef clear composite attached (agriculture AOU path — not mountain MPI).",
+          "severity_ar": "لا مركّب صافٍ بعد الخريف مرتبط (مسار وحدات الزراعة — وليس MPI الجبلي).",
+          "severity": "info"
+        },
+        {
+          "id": "gap_mpi",
+          "code": "no_mpi_curve",
+          "present": false,
+          "severity_en": "No MPI curve on this agriculture AOU (MPI is mountain offline evidence; onset-T0 provisional only).",
+          "severity_ar": "لا منحنى MPI على وحدة الزراعة هذه (MPI أدلة جبلية دون اتصال؛ بداية T0 مؤقتة فقط).",
+          "severity": "info"
+        },
+        {
+          "id": "gap_window_stub",
+          "code": "window_series_stub_only",
+          "present": false,
+          "severity_en": "Temporal context still includes window-level stub series (not AOU-specific multi-date).",
+          "severity_ar": "السياق الزمني ما زال يتضمن سلسلة نافذة تقريبية (وليست متعددة التواريخ للوحدة).",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_dq",
+          "code": "low_data_quality",
+          "present": true,
+          "severity_en": "OK — low_data_quality input available.",
+          "severity_ar": "حسناً — المدخل low_data_quality متوفر.",
+          "severity": "info"
+        },
+        {
+          "id": "gap_agprob",
+          "code": "missing_ag_probability",
+          "present": true,
+          "severity_en": "OK — missing_ag_probability input available.",
+          "severity_ar": "حسناً — المدخل missing_ag_probability متوفر.",
+          "severity": "info"
+        },
+        {
+          "id": "gap_stress",
+          "code": "missing_stress_scores",
+          "present": true,
+          "severity_en": "OK — missing_stress_scores input available.",
+          "severity_ar": "حسناً — المدخل missing_stress_scores متوفر.",
+          "severity": "info"
+        }
+      ],
+      "missing_input_codes": [
+        "no_ndre",
+        "no_field_visit",
+        "thin_aou_history",
+        "no_historical_seasons",
+        "no_prior_iou",
+        "no_post_khareef_clear",
+        "no_mpi_curve",
+        "window_series_stub_only"
+      ],
+      "gap_count": 8,
+      "honesty_note_en": "Evidence Gap lists missing inputs honestly. Does not invent campaign numbers, pest certainty, soil moisture %, or live Khareef. MPI onset narrative (if any) is onset-T0 provisional only — not post-khareef labeling for AOUs.",
+      "honesty_note_ar": "فجوة الأدلة تسرد المدخلات الناقصة بصدق. لا تختلق أرقام حملات أو يقين آفات أو رطوبة تربة % أو خريفاً حياً. سرد بداية MPI (إن وُجد) مؤقت عند T0 فقط — وليس وسم ما بعد الخريف لوحدات الزراعة.",
+      "forbidden_claims": [
+        "campaign_hectares_as_official",
+        "pest_name_or_certainty",
+        "soil_moisture_percent",
+        "live_khareef_onset",
+        "suitability_merged_with_confidence",
+        "action_auto_assigned_from_suitability",
+        "mpi_as_post_khareef_for_agriculture_aou"
+      ],
+      "cite_slots": {
+        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3",
+        "observation_date": "2026-09-06"
+      }
+    },
+    {
+      "aou_id": "AOU-NJ-000007",
+      "status": "expert_v1_provisional",
+      "evidence_gaps": [
+        {
+          "id": "gap_ndre",
+          "code": "no_ndre",
+          "present": false,
+          "severity_en": "No NDRE (red-edge) on this observation — AgProb may have renormed.",
+          "severity_ar": "لا يوجد NDRE (الحافة الحمراء) في هذه الملاحظة — قد يُعاد توزيع وزن الاحتمال الزراعي.",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_field",
+          "code": "no_field_visit",
+          "present": false,
+          "severity_en": "No field visit / ground verification linked to this AOU.",
+          "severity_ar": "لا زيارة ميدانية / تحقق أرضي مرتبط بهذه الوحدة.",
+          "severity": "blocking"
+        },
+        {
+          "id": "gap_history",
+          "code": "thin_aou_history",
+          "present": false,
+          "severity_en": "AOU multi-date history is thin (≤1 clear AOU observation).",
+          "severity_ar": "تاريخ الوحدة متعدد التواريخ ضعيف (≤1 ملاحظة صافية).",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_seasons",
+          "code": "no_historical_seasons",
+          "present": false,
+          "severity_en": "No prior-season historical anomaly depth for this AOU.",
+          "severity_ar": "لا عمق مواسم سابقة لشذوذ تاريخي لهذه الوحدة.",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_iou",
+          "code": "no_prior_iou",
+          "present": false,
+          "severity_en": "No prior IoU match (new or unmatched ID).",
+          "severity_ar": "لا تطابق IoU سابق (معرّف جديد أو غير مطابق).",
+          "severity": "info"
+        },
+        {
+          "id": "gap_post_khareef",
+          "code": "no_post_khareef_clear",
+          "present": false,
+          "severity_en": "No post-khareef clear composite attached (agriculture AOU path — not mountain MPI).",
+          "severity_ar": "لا مركّب صافٍ بعد الخريف مرتبط (مسار وحدات الزراعة — وليس MPI الجبلي).",
+          "severity": "info"
+        },
+        {
+          "id": "gap_mpi",
+          "code": "no_mpi_curve",
+          "present": false,
+          "severity_en": "No MPI curve on this agriculture AOU (MPI is mountain offline evidence; onset-T0 provisional only).",
+          "severity_ar": "لا منحنى MPI على وحدة الزراعة هذه (MPI أدلة جبلية دون اتصال؛ بداية T0 مؤقتة فقط).",
+          "severity": "info"
+        },
+        {
+          "id": "gap_window_stub",
+          "code": "window_series_stub_only",
+          "present": false,
+          "severity_en": "Temporal context still includes window-level stub series (not AOU-specific multi-date).",
+          "severity_ar": "السياق الزمني ما زال يتضمن سلسلة نافذة تقريبية (وليست متعددة التواريخ للوحدة).",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_dq",
+          "code": "low_data_quality",
+          "present": true,
+          "severity_en": "OK — low_data_quality input available.",
+          "severity_ar": "حسناً — المدخل low_data_quality متوفر.",
+          "severity": "info"
+        },
+        {
+          "id": "gap_agprob",
+          "code": "missing_ag_probability",
+          "present": true,
+          "severity_en": "OK — missing_ag_probability input available.",
+          "severity_ar": "حسناً — المدخل missing_ag_probability متوفر.",
+          "severity": "info"
+        },
+        {
+          "id": "gap_stress",
+          "code": "missing_stress_scores",
+          "present": true,
+          "severity_en": "OK — missing_stress_scores input available.",
+          "severity_ar": "حسناً — المدخل missing_stress_scores متوفر.",
+          "severity": "info"
+        }
+      ],
+      "missing_input_codes": [
+        "no_ndre",
+        "no_field_visit",
+        "thin_aou_history",
+        "no_historical_seasons",
+        "no_prior_iou",
+        "no_post_khareef_clear",
+        "no_mpi_curve",
+        "window_series_stub_only"
+      ],
+      "gap_count": 8,
+      "honesty_note_en": "Evidence Gap lists missing inputs honestly. Does not invent campaign numbers, pest certainty, soil moisture %, or live Khareef. MPI onset narrative (if any) is onset-T0 provisional only — not post-khareef labeling for AOUs.",
+      "honesty_note_ar": "فجوة الأدلة تسرد المدخلات الناقصة بصدق. لا تختلق أرقام حملات أو يقين آفات أو رطوبة تربة % أو خريفاً حياً. سرد بداية MPI (إن وُجد) مؤقت عند T0 فقط — وليس وسم ما بعد الخريف لوحدات الزراعة.",
+      "forbidden_claims": [
+        "campaign_hectares_as_official",
+        "pest_name_or_certainty",
+        "soil_moisture_percent",
+        "live_khareef_onset",
+        "suitability_merged_with_confidence",
+        "action_auto_assigned_from_suitability",
+        "mpi_as_post_khareef_for_agriculture_aou"
+      ],
+      "cite_slots": {
+        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3",
+        "observation_date": "2026-09-06"
+      }
+    },
+    {
+      "aou_id": "AOU-NJ-000008",
+      "status": "expert_v1_provisional",
+      "evidence_gaps": [
+        {
+          "id": "gap_ndre",
+          "code": "no_ndre",
+          "present": false,
+          "severity_en": "No NDRE (red-edge) on this observation — AgProb may have renormed.",
+          "severity_ar": "لا يوجد NDRE (الحافة الحمراء) في هذه الملاحظة — قد يُعاد توزيع وزن الاحتمال الزراعي.",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_field",
+          "code": "no_field_visit",
+          "present": false,
+          "severity_en": "No field visit / ground verification linked to this AOU.",
+          "severity_ar": "لا زيارة ميدانية / تحقق أرضي مرتبط بهذه الوحدة.",
+          "severity": "blocking"
+        },
+        {
+          "id": "gap_history",
+          "code": "thin_aou_history",
+          "present": false,
+          "severity_en": "AOU multi-date history is thin (≤1 clear AOU observation).",
+          "severity_ar": "تاريخ الوحدة متعدد التواريخ ضعيف (≤1 ملاحظة صافية).",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_seasons",
+          "code": "no_historical_seasons",
+          "present": false,
+          "severity_en": "No prior-season historical anomaly depth for this AOU.",
+          "severity_ar": "لا عمق مواسم سابقة لشذوذ تاريخي لهذه الوحدة.",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_iou",
+          "code": "no_prior_iou",
+          "present": false,
+          "severity_en": "No prior IoU match (new or unmatched ID).",
+          "severity_ar": "لا تطابق IoU سابق (معرّف جديد أو غير مطابق).",
+          "severity": "info"
+        },
+        {
+          "id": "gap_post_khareef",
+          "code": "no_post_khareef_clear",
+          "present": false,
+          "severity_en": "No post-khareef clear composite attached (agriculture AOU path — not mountain MPI).",
+          "severity_ar": "لا مركّب صافٍ بعد الخريف مرتبط (مسار وحدات الزراعة — وليس MPI الجبلي).",
+          "severity": "info"
+        },
+        {
+          "id": "gap_mpi",
+          "code": "no_mpi_curve",
+          "present": false,
+          "severity_en": "No MPI curve on this agriculture AOU (MPI is mountain offline evidence; onset-T0 provisional only).",
+          "severity_ar": "لا منحنى MPI على وحدة الزراعة هذه (MPI أدلة جبلية دون اتصال؛ بداية T0 مؤقتة فقط).",
+          "severity": "info"
+        },
+        {
+          "id": "gap_window_stub",
+          "code": "window_series_stub_only",
+          "present": false,
+          "severity_en": "Temporal context still includes window-level stub series (not AOU-specific multi-date).",
+          "severity_ar": "السياق الزمني ما زال يتضمن سلسلة نافذة تقريبية (وليست متعددة التواريخ للوحدة).",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_dq",
+          "code": "low_data_quality",
+          "present": true,
+          "severity_en": "OK — low_data_quality input available.",
+          "severity_ar": "حسناً — المدخل low_data_quality متوفر.",
+          "severity": "info"
+        },
+        {
+          "id": "gap_agprob",
+          "code": "missing_ag_probability",
+          "present": true,
+          "severity_en": "OK — missing_ag_probability input available.",
+          "severity_ar": "حسناً — المدخل missing_ag_probability متوفر.",
+          "severity": "info"
+        },
+        {
+          "id": "gap_stress",
+          "code": "missing_stress_scores",
+          "present": true,
+          "severity_en": "OK — missing_stress_scores input available.",
+          "severity_ar": "حسناً — المدخل missing_stress_scores متوفر.",
+          "severity": "info"
+        }
+      ],
+      "missing_input_codes": [
+        "no_ndre",
+        "no_field_visit",
+        "thin_aou_history",
+        "no_historical_seasons",
+        "no_prior_iou",
+        "no_post_khareef_clear",
+        "no_mpi_curve",
+        "window_series_stub_only"
+      ],
+      "gap_count": 8,
+      "honesty_note_en": "Evidence Gap lists missing inputs honestly. Does not invent campaign numbers, pest certainty, soil moisture %, or live Khareef. MPI onset narrative (if any) is onset-T0 provisional only — not post-khareef labeling for AOUs.",
+      "honesty_note_ar": "فجوة الأدلة تسرد المدخلات الناقصة بصدق. لا تختلق أرقام حملات أو يقين آفات أو رطوبة تربة % أو خريفاً حياً. سرد بداية MPI (إن وُجد) مؤقت عند T0 فقط — وليس وسم ما بعد الخريف لوحدات الزراعة.",
+      "forbidden_claims": [
+        "campaign_hectares_as_official",
+        "pest_name_or_certainty",
+        "soil_moisture_percent",
+        "live_khareef_onset",
+        "suitability_merged_with_confidence",
+        "action_auto_assigned_from_suitability",
+        "mpi_as_post_khareef_for_agriculture_aou"
+      ],
+      "cite_slots": {
+        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3",
+        "observation_date": "2026-09-06"
+      }
+    },
+    {
+      "aou_id": "AOU-NJ-000009",
+      "status": "expert_v1_provisional",
+      "evidence_gaps": [
+        {
+          "id": "gap_ndre",
+          "code": "no_ndre",
+          "present": false,
+          "severity_en": "No NDRE (red-edge) on this observation — AgProb may have renormed.",
+          "severity_ar": "لا يوجد NDRE (الحافة الحمراء) في هذه الملاحظة — قد يُعاد توزيع وزن الاحتمال الزراعي.",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_field",
+          "code": "no_field_visit",
+          "present": false,
+          "severity_en": "No field visit / ground verification linked to this AOU.",
+          "severity_ar": "لا زيارة ميدانية / تحقق أرضي مرتبط بهذه الوحدة.",
+          "severity": "blocking"
+        },
+        {
+          "id": "gap_history",
+          "code": "thin_aou_history",
+          "present": false,
+          "severity_en": "AOU multi-date history is thin (≤1 clear AOU observation).",
+          "severity_ar": "تاريخ الوحدة متعدد التواريخ ضعيف (≤1 ملاحظة صافية).",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_seasons",
+          "code": "no_historical_seasons",
+          "present": false,
+          "severity_en": "No prior-season historical anomaly depth for this AOU.",
+          "severity_ar": "لا عمق مواسم سابقة لشذوذ تاريخي لهذه الوحدة.",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_iou",
+          "code": "no_prior_iou",
+          "present": false,
+          "severity_en": "No prior IoU match (new or unmatched ID).",
+          "severity_ar": "لا تطابق IoU سابق (معرّف جديد أو غير مطابق).",
+          "severity": "info"
+        },
+        {
+          "id": "gap_post_khareef",
+          "code": "no_post_khareef_clear",
+          "present": false,
+          "severity_en": "No post-khareef clear composite attached (agriculture AOU path — not mountain MPI).",
+          "severity_ar": "لا مركّب صافٍ بعد الخريف مرتبط (مسار وحدات الزراعة — وليس MPI الجبلي).",
+          "severity": "info"
+        },
+        {
+          "id": "gap_mpi",
+          "code": "no_mpi_curve",
+          "present": false,
+          "severity_en": "No MPI curve on this agriculture AOU (MPI is mountain offline evidence; onset-T0 provisional only).",
+          "severity_ar": "لا منحنى MPI على وحدة الزراعة هذه (MPI أدلة جبلية دون اتصال؛ بداية T0 مؤقتة فقط).",
+          "severity": "info"
+        },
+        {
+          "id": "gap_window_stub",
+          "code": "window_series_stub_only",
+          "present": false,
+          "severity_en": "Temporal context still includes window-level stub series (not AOU-specific multi-date).",
+          "severity_ar": "السياق الزمني ما زال يتضمن سلسلة نافذة تقريبية (وليست متعددة التواريخ للوحدة).",
+          "severity": "caution"
+        },
+        {
+          "id": "gap_dq",
+          "code": "low_data_quality",
+          "present": true,
+          "severity_en": "OK — low_data_quality input available.",
+          "severity_ar": "حسناً — المدخل low_data_quality متوفر.",
+          "severity": "info"
+        },
+        {
+          "id": "gap_agprob",
+          "code": "missing_ag_probability",
+          "present": true,
+          "severity_en": "OK — missing_ag_probability input available.",
+          "severity_ar": "حسناً — المدخل missing_ag_probability متوفر.",
+          "severity": "info"
+        },
+        {
+          "id": "gap_stress",
+          "code": "missing_stress_scores",
+          "present": true,
+          "severity_en": "OK — missing_stress_scores input available.",
+          "severity_ar": "حسناً — المدخل missing_stress_scores متوفر.",
+          "severity": "info"
+        }
+      ],
+      "missing_input_codes": [
+        "no_ndre",
+        "no_field_visit",
+        "thin_aou_history",
+        "no_historical_seasons",
+        "no_prior_iou",
+        "no_post_khareef_clear",
+        "no_mpi_curve",
+        "window_series_stub_only"
+      ],
+      "gap_count": 8,
+      "honesty_note_en": "Evidence Gap lists missing inputs honestly. Does not invent campaign numbers, pest certainty, soil moisture %, or live Khareef. MPI onset narrative (if any) is onset-T0 provisional only — not post-khareef labeling for AOUs.",
+      "honesty_note_ar": "فجوة الأدلة تسرد المدخلات الناقصة بصدق. لا تختلق أرقام حملات أو يقين آفات أو رطوبة تربة % أو خريفاً حياً. سرد بداية MPI (إن وُجد) مؤقت عند T0 فقط — وليس وسم ما بعد الخريف لوحدات الزراعة.",
+      "forbidden_claims": [
+        "campaign_hectares_as_official",
+        "pest_name_or_certainty",
+        "soil_moisture_percent",
+        "live_khareef_onset",
+        "suitability_merged_with_confidence",
+        "action_auto_assigned_from_suitability",
+        "mpi_as_post_khareef_for_agriculture_aou"
+      ],
+      "cite_slots": {
+        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3",
+        "observation_date": "2026-09-06"
+      }
+    }
+  ],
+  "snapshot_kind": "offline_provisional_copy",
+  "public_path": "app/public/data/decision/aou_evidence_gaps.json"
+}

@@ -66,3 +66,17 @@ python3 run_decision_scaffolds.py
 5. Evidence gaps list missing inputs honestly (NDRE, field visit, thin history, no post-khareef clear, no MPI on AOU, etc.).
 6. No Analysis Decision UI chrome in this PR; no mountain UI; no writes to `app/public/` decision paths.
 7. Rebased on main after Phase-2 onset-window labeling (#13).
+
+
+## Phase-3.1 — Analysis Decision chrome (UI)
+
+Deliberate **offline provisional copy** into `app/public/data/decision/` for Vite runtime fetch:
+
+- `aou_suitability_components.json`
+- `aou_confidence.json`
+- `aou_evidence_gaps.json`
+- `run_meta.json` (snapshot honesty + refresh note)
+
+**Do not** fetch `satellite/pipeline/artifacts/` from the browser.  
+**Refresh** = re-run `run_decision_scaffolds.py` then re-copy. No live recompute.  
+**UI:** Analysis → Decision tab — Suitability ≠ Confidence; DQ tertiary chip; why-this-site; evidence gaps; manual action enum only (`action_ladder_suggestion` null). Najd AOUs only; **no mountain**.

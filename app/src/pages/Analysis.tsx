@@ -5,6 +5,11 @@ import AouOfflineBadge from "../components/AouOfflineBadge";
 import NajdSeasonalChip from "../components/NajdSeasonalChip";
 import { publicUrl } from "../lib/publicUrl";
 import SourceCitation from "../components/SourceCitation";
+import DecisionChrome, {
+  type ConfidenceUnit,
+  type EvidenceGapUnit,
+  type SuitabilityUnit,
+} from "../components/DecisionChrome";
 
 type DatePoint = {
   date: string;
@@ -156,8 +161,7 @@ function SeriesChart({
 }
 
 export default function Analysis() {
-  const { t, i18n } = useTranslation();
-  const issues = t("analysis.issues", { returnObjects: true }) as { t: string; d: string }[];
+  const { t } = useTranslation();
   const [level, setLevel] = useState<(typeof LEVELS)[number]>("overview");
   const [ts, setTs] = useState<Timeseries | null>(null);
   const [alerts, setAlerts] = useState<AlertsMeta | null>(null);
@@ -165,6 +169,11 @@ export default function Analysis() {
   const [aouObs, setAouObs] = useState<AouObsUnit[]>([]);
   const [selectedAou, setSelectedAou] = useState<string>("");
   const [error, setError] = useState(false);
+  const [suitabilityUnits, setSuitabilityUnits] = useState<SuitabilityUnit[]>([]);
+  const [confidenceUnits, setConfidenceUnits] = useState<ConfidenceUnit[]>([]);
+  const [evidenceUnits, setEvidenceUnits] = useState<EvidenceGapUnit[]>([]);
+  const [decisionLoading, setDecisionLoading] = useState(true);
+  const [decisionError, setDecisionError] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -202,6 +211,41 @@ export default function Analysis() {
       cancelled = true;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    setDecisionLoading(true);
+    Promise.all([
+      fetch(publicUrl("data/decision/aou_suitability_components.json")).then((r) => {
+        if (!r.ok) throw new Error("suitability");
+        return r.json();
+      }),
+      fetch(publicUrl("data/decision/aou_confidence.json")).then((r) => {
+        if (!r.ok) throw new Error("confidence");
+        return r.json();
+      }),
+      fetch(publicUrl("data/decision/aou_evidence_gaps.json")).then((r) => {
+        if (!r.ok) throw new Error("gaps");
+        return r.json();
+      }),
+    ])
+      .then(([suitability, confidence, gaps]) => {
+        if (cancelled) return;
+        setSuitabilityUnits((suitability?.units || []) as SuitabilityUnit[]);
+        setConfidenceUnits((confidence?.units || []) as ConfidenceUnit[]);
+        setEvidenceUnits((gaps?.units || []) as EvidenceGapUnit[]);
+        setDecisionError(false);
+      })
+      .catch(() => {
+        if (!cancelled) setDecisionError(true);
+      })
+      .finally(() => {
+        if (!cancelled) setDecisionLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const latest = useMemo(() => {
@@ -246,6 +290,31 @@ export default function Analysis() {
     [aouRegistry, selectedAou],
   );
 
+  const selectedSuitability = useMemo(
+    () => suitabilityUnits.find((u) => u.aou_id === selectedAou) || null,
+    [suitabilityUnits, selectedAou],
+  );
+  const selectedConfidence = useMemo(
+    () => confidenceUnits.find((u) => u.aou_id === selectedAou) || null,
+    [confidenceUnits, selectedAou],
+  );
+  const selectedEvidence = useMemo(
+    () => evidenceUnits.find((u) => u.aou_id === selectedAou) || null,
+    [evidenceUnits, selectedAou],
+  );
+
+  const decisionAouIds = useMemo(() => {
+    const ids = new Set<string>();
+    suitabilityUnits.forEach((u) => ids.add(u.aou_id));
+    confidenceUnits.forEach((u) => ids.add(u.aou_id));
+    // Prefer registry order for Najd AOUs when available
+    const fromRegistry = aouRegistry
+      .map((f) => f.properties.aou_id)
+      .filter((id) => ids.has(id));
+    if (fromRegistry.length) return fromRegistry;
+    return [...ids].sort();
+  }, [suitabilityUnits, confidenceUnits, aouRegistry]);
+
   const aouNdviSeries = useMemo(() => {
     if (!selectedUnit) return [];
     const obs = selectedUnit.observations
@@ -271,25 +340,6 @@ export default function Analysis() {
 
   const aouSeriesIsWindowStub =
     !!selectedUnit && selectedUnit.observations.length <= 1 && aouNdviSeries.length > 0;
-
-  const decisionSample = useMemo(() => {
-    if (selectedUnit?.observations?.[0]) return selectedUnit.observations[0];
-    const cell = alerts?.features?.find((f) => f.properties?.aou_id === selectedAou)?.properties;
-    return cell || null;
-  }, [selectedUnit, alerts, selectedAou]);
-
-  const statuses = [
-    { key: "established", color: "bg-crop-600" },
-    { key: "sparse", color: "bg-amber-500" },
-    { key: "irrigation", color: "bg-sky-600" },
-    { key: "salinity", color: "bg-violet-600" },
-    { key: "abandoned", color: "bg-stone-500" },
-  ] as const;
-
-  const bioticDisclaimer =
-    i18n.language?.startsWith("ar") && decisionSample && "biotic_disclaimer_ar" in (decisionSample as object)
-      ? (decisionSample as AlertProps).biotic_disclaimer_ar
-      : (decisionSample as AlertProps | null)?.biotic_disclaimer_en || t("analysis.bioticDisclaimer");
 
   return (
     <div className="space-y-8">
@@ -540,14 +590,10 @@ export default function Analysis() {
       {level === "decision" && (
         <>
           <section className="space-y-3">
-            <h2 className="text-lg font-semibold text-crop-700">{t("analysis.decisionTitle")}</h2>
-            <div className="rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-950">
-              <p className="font-semibold">{t("analysis.decisionHonestyTitle")}</p>
-              <p className="mt-1">{t("analysis.decisionHonestyBody")}</p>
-            </div>
+            <h2 className="text-lg font-semibold text-crop-700">{t("analysis.decision.title")}</h2>
             <div className="flex flex-wrap items-center gap-2">
               <label className="text-sm font-semibold" htmlFor="aou-select-decision">
-                {t("analysis.selectAou")}
+                {t("analysis.decision.selectAou")}
               </label>
               <select
                 id="aou-select-decision"
@@ -555,76 +601,28 @@ export default function Analysis() {
                 value={selectedAou}
                 onChange={(e) => setSelectedAou(e.target.value)}
               >
-                {aouRegistry.map((f) => (
-                  <option key={f.properties.aou_id} value={f.properties.aou_id}>
-                    {f.properties.aou_id}
-                  </option>
-                ))}
+                {(decisionAouIds.length ? decisionAouIds : aouRegistry.map((f) => f.properties.aou_id)).map(
+                  (id) => (
+                    <option key={id} value={id}>
+                      {id}
+                    </option>
+                  ),
+                )}
               </select>
+              <span className="rounded-full border border-amber-300 bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-950">
+                {t("analysis.decision.provisionalStamp")}
+              </span>
             </div>
-            <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
-              <div className="rounded-2xl border border-sand-200 bg-white p-4 shadow-sm">
-                <div className="text-xs font-semibold uppercase text-sand-800/50">{t("analysis.colAgProb")}</div>
-                <div className="text-2xl font-bold">
-                  {selectedFeat?.properties.agricultural_probability ?? decisionSample?.agricultural_probability ?? "—"}
-                </div>
-                <div className="text-xs text-sand-800/60">{selectedFeat?.properties.ag_class || decisionSample?.ag_class}</div>
-                <div className="mt-1 text-xs text-sand-800/50">{t("analysis.expertV1")}</div>
-              </div>
-              <div className="rounded-2xl border border-sand-200 bg-white p-4 shadow-sm">
-                <div className="text-xs font-semibold uppercase text-sand-800/50">{t("analysis.waterStress")}</div>
-                <div className="text-2xl font-bold">{decisionSample?.water_stress_score ?? "—"}</div>
-                <div className="text-xs text-sand-800/50">{t("analysis.notSoilMoisture")}</div>
-              </div>
-              <div className="rounded-2xl border border-sand-200 bg-white p-4 shadow-sm">
-                <div className="text-xs font-semibold uppercase text-sand-800/50">{t("analysis.vigorStress")}</div>
-                <div className="text-2xl font-bold">{decisionSample?.vigor_stress_score ?? "—"}</div>
-                <div className="text-xs text-sand-800/50">{t("analysis.notFertilizer")}</div>
-              </div>
-              <div className="rounded-2xl border border-sand-200 bg-white p-4 shadow-sm">
-                <div className="text-xs font-semibold uppercase text-sand-800/50">{t("aou.confidence")}</div>
-                <div className="text-2xl font-bold">{decisionSample?.data_quality_confidence ?? "—"}%</div>
-                <div className="text-xs text-sand-800/50">{t("aou.confidenceDataQuality")}</div>
-                <div className="mt-1 text-xs text-amber-900">{t("analysis.dqNotEco")}</div>
-              </div>
-              <div className="rounded-2xl border border-sand-200 bg-white p-4 shadow-sm md:col-span-2">
-                <div className="text-xs font-semibold uppercase text-sand-800/50">{t("analysis.bioticTitle")}</div>
-                <div className="text-lg font-bold">
-                  {decisionSample?.possible_biotic_stress ? t("analysis.bioticPossible") : t("analysis.bioticNone")}
-                </div>
-                <p className="mt-2 text-xs leading-relaxed text-sand-800/80">{bioticDisclaimer}</p>
-              </div>
-            </div>
-            <p className="text-xs text-sand-800/60">{t("analysis.stressThrNote")}</p>
-            <p className="text-xs text-sand-800/60">{t("analysis.noActionLadder")}</p>
-          </section>
-
-          <section className="space-y-3">
-            <h2 className="text-lg font-semibold text-crop-700">{t("analysis.statusTitle")}</h2>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {statuses.map(({ key, color }) => (
-                <div key={key} className="rounded-2xl border border-sand-200 bg-white p-4 shadow-sm">
-                  <div className="mb-2 flex items-center gap-2">
-                    <span className={`h-3 w-3 rounded-full ${color}`} />
-                    <h3 className="font-semibold">{t(`analysis.${key}`)}</h3>
-                  </div>
-                  <p className="text-sm text-sand-800/90">{t(`analysis.${key}Desc`)}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <section className="rounded-2xl border border-sand-200 bg-white p-4 shadow-sm">
-            <h2 className="mb-3 text-lg font-semibold text-crop-700">{t("analysis.issuesTitle")}</h2>
-            <ul className="space-y-3">
-              {Array.isArray(issues) &&
-                issues.map((item) => (
-                  <li key={item.t} className="border-s-4 border-crop-600 ps-3">
-                    <div className="text-sm font-semibold">{item.t}</div>
-                    <div className="text-xs text-sand-800/80">{item.d}</div>
-                  </li>
-                ))}
-            </ul>
+            {decisionError && (
+              <p className="text-sm text-red-700">{t("live.error")}</p>
+            )}
+            <DecisionChrome
+              aouId={selectedAou}
+              suitability={selectedSuitability}
+              confidence={selectedConfidence}
+              evidence={selectedEvidence}
+              loading={decisionLoading}
+            />
           </section>
         </>
       )}
