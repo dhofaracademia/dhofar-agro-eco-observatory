@@ -26,3 +26,16 @@ See `GITHUB_ACTION_TEMPLATE.md` (copy later to `.github/workflows/monitor.yml`; 
 
 Imagery page: client STAC **تحديث الصور** for latest clear scenes + honesty strip.
 Full NDVI/NDMI GeoJSON refresh is this pipeline / Action — not implied by mountain MPI.
+
+
+## v0.4 Phase-1 engines
+
+After `run_monitor.py` (or standalone):
+
+```bash
+MONITOR_OUT_DATA=../../app/public/data python run_ag_probability.py
+```
+
+Formulas locked by `docs/SCIENCE_LOCKS_v0.4_phase1_2.md` (not `spec_pending`).
+NDRE: `(B08-B05)/(B08+B05)`; B06/B07 documented fallback only; else renorm AgProb.
+AOU identity: `AOU-NJ-######`, centroid + IoU≥0.3, min ~2 ha.

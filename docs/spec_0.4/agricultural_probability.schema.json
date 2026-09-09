@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dhofaracademia.example/spec_0.4/agricultural_probability.schema.json",
+  "title": "AgriculturalProbability",
+  "description": "SCIENCE_LOCKS_v0.4_phase1_2.md \u00a71 \u2014 expert v1 weights. NDRE optional with renorm.",
+  "type": "object",
+  "required": [
+    "agricultural_probability",
+    "ag_class",
+    "ndre_available",
+    "formula_ref"
+  ],
+  "properties": {
+    "agricultural_probability": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "ag_class": {
+      "type": "string",
+      "enum": [
+        "unlikely",
+        "possible",
+        "likely",
+        "very_likely"
+      ]
+    },
+    "data_quality_confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Clear pixels / cloud / coverage only \u2014 NOT ecological confidence"
+    },
+    "ndre": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "ndre_available": {
+      "type": "boolean"
+    },
+    "ndre_band": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "B05",
+        "B06",
+        "B07",
+        null
+      ]
+    },
+    "ndre_status": {
+      "type": "string",
+      "enum": [
+        "ok",
+        "fallback_B06",
+        "fallback_B07",
+        "unavailable"
+      ]
+    },
+    "weights": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number"
+      }
+    },
+    "features": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number"
+      }
+    },
+    "formula_ref": {
+      "type": "string",
+      "const": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a71"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "expert_v1",
+        "provisional_label_ok"
+      ],
+      "description": "expert_v1 = locked formulas in use (not spec_pending)"
+    }
+  }
+}

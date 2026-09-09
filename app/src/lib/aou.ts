@@ -12,6 +12,18 @@ export type AouAlertProps = {
   pixel_count?: number;
   ndvi_p25_veg?: number;
   ndmi_p25_veg?: number;
+  /** Persistent AOU id when cell overlaps a segmented unit — never a farm name. */
+  aou_id?: string | null;
+  ndre?: number | null;
+  ndre_available?: boolean;
+  ndre_status?: string;
+  agricultural_probability?: number;
+  ag_class?: string;
+  water_stress_score?: number;
+  vigor_stress_score?: number;
+  possible_biotic_stress?: boolean;
+  data_quality_confidence?: number;
+  geometry_kind?: string;
 };
 
 export type AouFeature = {
@@ -51,8 +63,16 @@ function hashToSixDigits(lon: number, lat: number): string {
   return String(n).padStart(6, "0");
 }
 
-/** Stable Agricultural Observation Unit id — never an official farm name. */
+/**
+ * Prefer persistent registry `aou_id` on properties when present.
+ * Fallback hash is display-only for grid cells without a segmented AOU —
+ * not a substitute for aou_registry matching (SCIENCE_LOCKS §2).
+ */
 export function aouIdFromFeature(feature: AouFeature): string {
+  const fromProps = feature.properties?.aou_id;
+  if (typeof fromProps === "string" && /^AOU-NJ-\d{6}$/.test(fromProps)) {
+    return fromProps;
+  }
   const { lon, lat } = featureCentroid(feature);
   return `AOU-NJ-${hashToSixDigits(lon, lat)}`;
 }

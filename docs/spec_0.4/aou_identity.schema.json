@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dhofaracademia.example/spec_0.4/aou_identity.schema.json",
+  "title": "AOUIdentity",
+  "description": "SCIENCE_LOCKS \u00a72 \u2014 persistent identity separate from geometry@T.",
+  "type": "object",
+  "required": [
+    "aou_id",
+    "first_seen_date",
+    "last_seen_date",
+    "active"
+  ],
+  "properties": {
+    "aou_id": {
+      "type": "string",
+      "pattern": "^AOU-NJ-[0-9]{6}$"
+    },
+    "previous_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "first_seen_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "last_seen_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "centroid_lon": {
+      "type": "number"
+    },
+    "centroid_lat": {
+      "type": "number"
+    },
+    "region": {
+      "type": "string",
+      "const": "NJ"
+    },
+    "formula_ref": {
+      "type": "string"
+    }
+  }
+}

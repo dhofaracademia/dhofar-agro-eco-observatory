@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dhofaracademia.example/spec_0.4/biotic_risk.schema.json",
+  "title": "BioticStressRisk",
+  "description": "SCIENCE_LOCKS \u00a74 \u2014 risk flag only; never pest certainty.",
+  "type": "object",
+  "required": [
+    "possible_biotic_stress",
+    "disclaimer_en"
+  ],
+  "properties": {
+    "possible_biotic_stress": {
+      "type": "boolean"
+    },
+    "biotic_risk_label": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "possible_biotic_stress",
+        null
+      ]
+    },
+    "rules": {
+      "type": "object"
+    },
+    "disclaimer_en": {
+      "type": "string"
+    },
+    "disclaimer_ar": {
+      "type": "string"
+    },
+    "formula_ref": {
+      "type": "string",
+      "const": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a74"
+    },
+    "forbidden": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

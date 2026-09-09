@@ -1,0 +1,520 @@
+{
+  "version": "0.4.1",
+  "generated_at": "2026-09-09T04:46:34.832505+00:00",
+  "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md",
+  "units": [
+    {
+      "aou_id": "AOU-NJ-000001",
+      "observations": [
+        {
+          "aou_id": "AOU-NJ-000001",
+          "date": "2026-09-06",
+          "ndvi": 0.1724,
+          "ndmi": -0.0474,
+          "ndre": null,
+          "ndre_available": false,
+          "agricultural_probability": 61.73,
+          "ag_class": "likely",
+          "area_ha_est": 25.106,
+          "water_stress_score": 61.66,
+          "vigor_stress_score": 61.25,
+          "alert": "bare",
+          "possible_biotic_stress": false,
+          "data_quality_confidence": 97.0,
+          "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+          "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
+          "tile": "39QYA",
+          "cloud_cover": 0.867071,
+          "series_scope": "aou_members_aggregate"
+        }
+      ],
+      "window_context_series": [
+        {
+          "date": "2026-08-17",
+          "ndvi": 0.0687510296702385,
+          "ndmi": -0.10449161380529404,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        },
+        {
+          "date": "2026-08-25",
+          "ndvi": 0.07278931885957718,
+          "ndmi": -0.09613349288702011,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        },
+        {
+          "date": "2026-08-30",
+          "ndvi": 0.07351431995630264,
+          "ndmi": -0.09678220003843307,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        },
+        {
+          "date": "2026-09-06",
+          "ndvi": 0.07121829688549042,
+          "ndmi": -0.10114920884370804,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        }
+      ],
+      "honesty": "AOU multi-date history grows as monitor re-runs with registry matching"
+    },
+    {
+      "aou_id": "AOU-NJ-000002",
+      "observations": [
+        {
+          "aou_id": "AOU-NJ-000002",
+          "date": "2026-09-06",
+          "ndvi": 0.2566,
+          "ndmi": 0.0059,
+          "ndre": null,
+          "ndre_available": false,
+          "agricultural_probability": 58.21,
+          "ag_class": "possible",
+          "area_ha_est": 100.416,
+          "water_stress_score": 48.02,
+          "vigor_stress_score": 49.05,
+          "alert": "healthy",
+          "possible_biotic_stress": false,
+          "data_quality_confidence": 97.0,
+          "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+          "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
+          "tile": "39QYA",
+          "cloud_cover": 0.867071,
+          "series_scope": "aou_members_aggregate"
+        }
+      ],
+      "window_context_series": [
+        {
+          "date": "2026-08-17",
+          "ndvi": 0.0687510296702385,
+          "ndmi": -0.10449161380529404,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        },
+        {
+          "date": "2026-08-25",
+          "ndvi": 0.07278931885957718,
+          "ndmi": -0.09613349288702011,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        },
+        {
+          "date": "2026-08-30",
+          "ndvi": 0.07351431995630264,
+          "ndmi": -0.09678220003843307,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        },
+        {
+          "date": "2026-09-06",
+          "ndvi": 0.07121829688549042,
+          "ndmi": -0.10114920884370804,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        }
+      ],
+      "honesty": "AOU multi-date history grows as monitor re-runs with registry matching"
+    },
+    {
+      "aou_id": "AOU-NJ-000003",
+      "observations": [
+        {
+          "aou_id": "AOU-NJ-000003",
+          "date": "2026-09-06",
+          "ndvi": 0.2566,
+          "ndmi": 0.0054,
+          "ndre": null,
+          "ndre_available": false,
+          "agricultural_probability": 64.58,
+          "ag_class": "likely",
+          "area_ha_est": 50.208,
+          "water_stress_score": 47.47,
+          "vigor_stress_score": 47.02,
+          "alert": "bare",
+          "possible_biotic_stress": false,
+          "data_quality_confidence": 97.0,
+          "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+          "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
+          "tile": "39QYA",
+          "cloud_cover": 0.867071,
+          "series_scope": "aou_members_aggregate"
+        }
+      ],
+      "window_context_series": [
+        {
+          "date": "2026-08-17",
+          "ndvi": 0.0687510296702385,
+          "ndmi": -0.10449161380529404,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        },
+        {
+          "date": "2026-08-25",
+          "ndvi": 0.07278931885957718,
+          "ndmi": -0.09613349288702011,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        },
+        {
+          "date": "2026-08-30",
+          "ndvi": 0.07351431995630264,
+          "ndmi": -0.09678220003843307,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        },
+        {
+          "date": "2026-09-06",
+          "ndvi": 0.07121829688549042,
+          "ndmi": -0.10114920884370804,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        }
+      ],
+      "honesty": "AOU multi-date history grows as monitor re-runs with registry matching"
+    },
+    {
+      "aou_id": "AOU-NJ-000004",
+      "observations": [
+        {
+          "aou_id": "AOU-NJ-000004",
+          "date": "2026-09-06",
+          "ndvi": 0.1452,
+          "ndmi": -0.0615,
+          "ndre": null,
+          "ndre_available": false,
+          "agricultural_probability": 52.65,
+          "ag_class": "possible",
+          "area_ha_est": 25.098,
+          "water_stress_score": 62.66,
+          "vigor_stress_score": 62.6,
+          "alert": "bare",
+          "possible_biotic_stress": false,
+          "data_quality_confidence": 97.0,
+          "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+          "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
+          "tile": "39QYA",
+          "cloud_cover": 0.867071,
+          "series_scope": "aou_members_aggregate"
+        }
+      ],
+      "window_context_series": [
+        {
+          "date": "2026-08-17",
+          "ndvi": 0.0687510296702385,
+          "ndmi": -0.10449161380529404,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        },
+        {
+          "date": "2026-08-25",
+          "ndvi": 0.07278931885957718,
+          "ndmi": -0.09613349288702011,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        },
+        {
+          "date": "2026-08-30",
+          "ndvi": 0.07351431995630264,
+          "ndmi": -0.09678220003843307,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        },
+        {
+          "date": "2026-09-06",
+          "ndvi": 0.07121829688549042,
+          "ndmi": -0.10114920884370804,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        }
+      ],
+      "honesty": "AOU multi-date history grows as monitor re-runs with registry matching"
+    },
+    {
+      "aou_id": "AOU-NJ-000005",
+      "observations": [
+        {
+          "aou_id": "AOU-NJ-000005",
+          "date": "2026-09-06",
+          "ndvi": 0.1544,
+          "ndmi": -0.0738,
+          "ndre": null,
+          "ndre_available": false,
+          "agricultural_probability": 46.22,
+          "ag_class": "possible",
+          "area_ha_est": 25.1,
+          "water_stress_score": 60.75,
+          "vigor_stress_score": 58.98,
+          "alert": "bare",
+          "possible_biotic_stress": false,
+          "data_quality_confidence": 97.0,
+          "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+          "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
+          "tile": "39QYA",
+          "cloud_cover": 0.867071,
+          "series_scope": "aou_members_aggregate"
+        }
+      ],
+      "window_context_series": [
+        {
+          "date": "2026-08-17",
+          "ndvi": 0.0687510296702385,
+          "ndmi": -0.10449161380529404,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        },
+        {
+          "date": "2026-08-25",
+          "ndvi": 0.07278931885957718,
+          "ndmi": -0.09613349288702011,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        },
+        {
+          "date": "2026-08-30",
+          "ndvi": 0.07351431995630264,
+          "ndmi": -0.09678220003843307,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        },
+        {
+          "date": "2026-09-06",
+          "ndvi": 0.07121829688549042,
+          "ndmi": -0.10114920884370804,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        }
+      ],
+      "honesty": "AOU multi-date history grows as monitor re-runs with registry matching"
+    },
+    {
+      "aou_id": "AOU-NJ-000006",
+      "observations": [
+        {
+          "aou_id": "AOU-NJ-000006",
+          "date": "2026-09-06",
+          "ndvi": 0.1778,
+          "ndmi": -0.0473,
+          "ndre": null,
+          "ndre_available": false,
+          "agricultural_probability": 48.56,
+          "ag_class": "possible",
+          "area_ha_est": 50.201,
+          "water_stress_score": 56.56,
+          "vigor_stress_score": 56.57,
+          "alert": "bare",
+          "possible_biotic_stress": false,
+          "data_quality_confidence": 97.0,
+          "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+          "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
+          "tile": "39QYA",
+          "cloud_cover": 0.867071,
+          "series_scope": "aou_members_aggregate"
+        }
+      ],
+      "window_context_series": [
+        {
+          "date": "2026-08-17",
+          "ndvi": 0.0687510296702385,
+          "ndmi": -0.10449161380529404,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        },
+        {
+          "date": "2026-08-25",
+          "ndvi": 0.07278931885957718,
+          "ndmi": -0.09613349288702011,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        },
+        {
+          "date": "2026-08-30",
+          "ndvi": 0.07351431995630264,
+          "ndmi": -0.09678220003843307,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        },
+        {
+          "date": "2026-09-06",
+          "ndvi": 0.07121829688549042,
+          "ndmi": -0.10114920884370804,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        }
+      ],
+      "honesty": "AOU multi-date history grows as monitor re-runs with registry matching"
+    },
+    {
+      "aou_id": "AOU-NJ-000007",
+      "observations": [
+        {
+          "aou_id": "AOU-NJ-000007",
+          "date": "2026-09-06",
+          "ndvi": 0.153,
+          "ndmi": -0.0637,
+          "ndre": null,
+          "ndre_available": false,
+          "agricultural_probability": 64.8,
+          "ag_class": "likely",
+          "area_ha_est": 25.099,
+          "water_stress_score": 62.67,
+          "vigor_stress_score": 61.14,
+          "alert": "bare",
+          "possible_biotic_stress": false,
+          "data_quality_confidence": 97.0,
+          "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+          "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
+          "tile": "39QYA",
+          "cloud_cover": 0.867071,
+          "series_scope": "aou_members_aggregate"
+        }
+      ],
+      "window_context_series": [
+        {
+          "date": "2026-08-17",
+          "ndvi": 0.0687510296702385,
+          "ndmi": -0.10449161380529404,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        },
+        {
+          "date": "2026-08-25",
+          "ndvi": 0.07278931885957718,
+          "ndmi": -0.09613349288702011,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        },
+        {
+          "date": "2026-08-30",
+          "ndvi": 0.07351431995630264,
+          "ndmi": -0.09678220003843307,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        },
+        {
+          "date": "2026-09-06",
+          "ndvi": 0.07121829688549042,
+          "ndmi": -0.10114920884370804,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        }
+      ],
+      "honesty": "AOU multi-date history grows as monitor re-runs with registry matching"
+    },
+    {
+      "aou_id": "AOU-NJ-000008",
+      "observations": [
+        {
+          "aou_id": "AOU-NJ-000008",
+          "date": "2026-09-06",
+          "ndvi": 0.2026,
+          "ndmi": -0.0337,
+          "ndre": null,
+          "ndre_available": false,
+          "agricultural_probability": 65.47,
+          "ag_class": "likely",
+          "area_ha_est": 25.104,
+          "water_stress_score": 52.63,
+          "vigor_stress_score": 54.98,
+          "alert": "bare",
+          "possible_biotic_stress": false,
+          "data_quality_confidence": 97.0,
+          "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+          "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
+          "tile": "39QYA",
+          "cloud_cover": 0.867071,
+          "series_scope": "aou_members_aggregate"
+        }
+      ],
+      "window_context_series": [
+        {
+          "date": "2026-08-17",
+          "ndvi": 0.0687510296702385,
+          "ndmi": -0.10449161380529404,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        },
+        {
+          "date": "2026-08-25",
+          "ndvi": 0.07278931885957718,
+          "ndmi": -0.09613349288702011,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        },
+        {
+          "date": "2026-08-30",
+          "ndvi": 0.07351431995630264,
+          "ndmi": -0.09678220003843307,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        },
+        {
+          "date": "2026-09-06",
+          "ndvi": 0.07121829688549042,
+          "ndmi": -0.10114920884370804,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        }
+      ],
+      "honesty": "AOU multi-date history grows as monitor re-runs with registry matching"
+    },
+    {
+      "aou_id": "AOU-NJ-000009",
+      "observations": [
+        {
+          "aou_id": "AOU-NJ-000009",
+          "date": "2026-09-06",
+          "ndvi": 0.1708,
+          "ndmi": -0.059,
+          "ndre": null,
+          "ndre_available": false,
+          "agricultural_probability": 49.46,
+          "ag_class": "possible",
+          "area_ha_est": 25.102,
+          "water_stress_score": 59.19,
+          "vigor_stress_score": 55.67,
+          "alert": "bare",
+          "possible_biotic_stress": false,
+          "data_quality_confidence": 97.0,
+          "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+          "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
+          "tile": "39QYA",
+          "cloud_cover": 0.867071,
+          "series_scope": "aou_members_aggregate"
+        }
+      ],
+      "window_context_series": [
+        {
+          "date": "2026-08-17",
+          "ndvi": 0.0687510296702385,
+          "ndmi": -0.10449161380529404,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        },
+        {
+          "date": "2026-08-25",
+          "ndvi": 0.07278931885957718,
+          "ndmi": -0.09613349288702011,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        },
+        {
+          "date": "2026-08-30",
+          "ndvi": 0.07351431995630264,
+          "ndmi": -0.09678220003843307,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        },
+        {
+          "date": "2026-09-06",
+          "ndvi": 0.07121829688549042,
+          "ndmi": -0.10114920884370804,
+          "series_scope": "window_not_aou",
+          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+        }
+      ],
+      "honesty": "AOU multi-date history grows as monitor re-runs with registry matching"
+    }
+  ]
+}

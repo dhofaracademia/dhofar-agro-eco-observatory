@@ -1,9 +1,13 @@
 {
-  "last_updated": "2026-09-08T12:00:00+00:00",
-  "source": "run_monitor",
+  "last_updated": "2026-09-09T04:46:34.832920+00:00",
+  "source": "run_ag_probability",
   "artifacts": [
     "latest_alerts.geojson",
-    "timeseries.json"
+    "timeseries.json",
+    "aou/aou_registry.geojson",
+    "aou/aou_registry.json",
+    "aou/aou_observations.json"
   ],
-  "generated_on": "2026-09-08"
+  "phase": "0.4.1-agriculture",
+  "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md"
 }

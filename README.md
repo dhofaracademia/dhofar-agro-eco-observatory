@@ -66,3 +66,48 @@ Until enabled on main, do **not** assume the scheduled monitor is live — use r
 ### Honesty locks (unchanged)
 
 - Fog-only T. dhofarica; Suitability != Confidence; no hydrology claims; four farm codes; no fake live MPI/Khareef; AOU != official farm; STAC refresh != AOU recompute.
+
+## v0.4 Phase-1 — Agricultural engines (this branch)
+
+Binding science: `docs/SCIENCE_LOCKS_v0.4_phase1_2.md`  
+Schemas: `docs/spec_0.4/`  
+Roadmap (Phases 2–6 listed, not built): `docs/ROADMAP_v0.4_decision_engines.md`
+
+### What Phase 1 ships
+
+- Agricultural Probability Engine (expert v1 weights; NDRE renorm when unavailable)
+- Persistent AOU IDs (`AOU-NJ-######`) via centroid + IoU ≥ 0.3 — never cell index
+- Water / Vigor stress scores → existing alert codes
+- Biotic risk flag `possible_biotic_stress` only (field verification; never pest certainty)
+- NDRE when B05 (or documented B06/B07 fallback) present; else `ndre: null` + `ndre_available: false`
+- Analysis UX: Overview / Spatial / Temporal / Decision (EN+AR)
+
+### Out of scope here
+
+Mountain decision UI; Suitability/Action ladder; Seed Intelligence; Field/Learning; fake live MPI/Khareef.
+
+### Run
+
+Full STAC monitor (writes alerts + calls AgProb engines):
+
+```bash
+cd satellite/pipeline
+pip install -r requirements.txt
+MONITOR_OUT_DATA=../../app/public/data python run_monitor.py
+```
+
+Offline enrich from existing `latest_alerts.geojson` (no PC raster re-read):
+
+```bash
+cd satellite/pipeline
+MONITOR_OUT_DATA=../../app/public/data python run_ag_probability.py
+```
+
+Additional artifacts:
+
+- `app/public/data/aou/aou_registry.geojson`
+- `app/public/data/aou/aou_registry.json`
+- `app/public/data/aou/aou_observations.json`
+
+500 m grid remains fallback/debug (`geometry_kind=monitoring_grid_500m`); segmented AOUs are the product path.
+

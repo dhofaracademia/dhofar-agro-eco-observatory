@@ -70,6 +70,31 @@ export default function AouProfilePanel({
           <dd>{p.ndmi ?? "—"}</dd>
         </div>
         <div>
+          <dt className="text-xs font-semibold uppercase tracking-wide text-sand-800/50">NDRE</dt>
+          <dd>{p.ndre_available ? (p.ndre ?? "—") : "—"}</dd>
+        </div>
+        {typeof p.agricultural_probability === "number" && (
+          <div>
+            <dt className="text-xs font-semibold uppercase tracking-wide text-sand-800/50">{t("analysis.colAgProb")}</dt>
+            <dd>
+              {p.agricultural_probability}{" "}
+              <span className="text-xs text-sand-800/50">({p.ag_class ?? "—"})</span>
+            </dd>
+          </div>
+        )}
+        {typeof p.water_stress_score === "number" && (
+          <div>
+            <dt className="text-xs font-semibold uppercase tracking-wide text-sand-800/50">{t("analysis.waterStress")}</dt>
+            <dd>{p.water_stress_score}</dd>
+          </div>
+        )}
+        {typeof p.vigor_stress_score === "number" && (
+          <div>
+            <dt className="text-xs font-semibold uppercase tracking-wide text-sand-800/50">{t("analysis.vigorStress")}</dt>
+            <dd>{p.vigor_stress_score}</dd>
+          </div>
+        )}
+        <div>
           <dt className="text-xs font-semibold uppercase tracking-wide text-sand-800/50">{t("aou.vegetationHealth")}</dt>
           <dd>{t(labels.healthKey)}</dd>
         </div>
@@ -92,6 +117,11 @@ export default function AouProfilePanel({
       {labels.noteKey && (
         <p className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-3 text-xs leading-relaxed text-sand-800/90">
           {t(labels.noteKey)}
+        </p>
+      )}
+      {p.possible_biotic_stress && (
+        <p className="mt-3 rounded-xl border border-amber-200 bg-amber-50 p-3 text-xs leading-relaxed text-sand-800/90">
+          {t("analysis.bioticPossible")}: {t("analysis.bioticDisclaimer")}
         </p>
       )}
     </aside>

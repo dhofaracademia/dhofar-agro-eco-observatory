@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dhofaracademia.example/spec_0.4/stress_scores.schema.json",
+  "title": "StressScores",
+  "description": "SCIENCE_LOCKS \u00a73 \u2014 W/V = 0.40 relative + 0.25 historical + 0.25 persistence + 0.10 phenology; renorm if no history.",
+  "type": "object",
+  "properties": {
+    "water_stress_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "vigor_stress_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "components": {
+      "type": "object",
+      "properties": {
+        "relative": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "historical": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "persistence": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "phenology": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      }
+    },
+    "weights_used": {
+      "type": "object"
+    },
+    "formula_ref": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "const": "expert_v1"
+    }
+  }
+}
