@@ -175,8 +175,9 @@ def scl_valid_mask(b04, b08, b11, scl=None):
     """SCL gates BEFORE indices (SCIENCE_LOCKS / AgriTech)."""
     valid = (b04 > 0) & (b08 > 0) & (b11 > 0) & (b04 < 10000) & (b08 < 10000) & (b11 < 10000)
     if scl is not None:
-        # Exclude 0 nodata, 1 saturated, 8 cloud med, 9 cloud high, 10 thin cirrus
-        cloudlike = np.isin(scl, [0, 1, 8, 9, 10])
+        # Exclude 0 nodata, 1 saturated, 3 cloud shadow, 8/9 cloud, 10 thin cirrus
+        # SCIENCE_LOCKS §1.3: SCL cloud/shadow/cirrus → nodata (no probability)
+        cloudlike = np.isin(scl, [0, 1, 3, 8, 9, 10])
         valid = valid & (~cloudlike)
     return valid
 
@@ -205,7 +206,7 @@ def pixel_to_lonlat(transform, crs, row, col):
     return lon, lat
 
 
-def build_grid_cells(ndvi, ndmi, valid, transform, crs, meta: dict, ndre=None, ndre_meta=None) -> list[dict]:
+def build_grid_cells(ndvi, ndmi, valid, transform, crs, meta: dict, ndre=None, ndre_meta=None, b11=None, b12=None) -> list[dict]:
     """Aggregate to ~GRID_M cells in projected CRS meters.
 
     geometry_kind=monitoring_grid_500m is the fallback/debug layer; AOU
@@ -252,6 +253,29 @@ def build_grid_cells(ndvi, ndmi, valid, transform, crs, meta: dict, ndre=None, n
                     ndre_status = (ndre_meta or {}).get("ndre_status", "ok")
                     ndre_band = (ndre_meta or {}).get("ndre_band")
 
+            # Prefer explicit B11/B12 SWIR brightness for AgProb (fallback = NDVI+NDMI proxy)
+            swir_feature = None
+            swir_source = "proxy_ndvi_ndmi"
+            mean_b11 = mean_b12 = None
+            if b11 is not None:
+                s11 = b11[r0:r1, c0:c1]
+                sm = mask & np.isfinite(s11) & (s11 > 0)
+                if int(np.sum(sm)) >= 5:
+                    mean_b11 = float(np.mean(s11[sm]))
+            if b12 is not None:
+                s12 = b12[r0:r1, c0:c1]
+                sm = mask & np.isfinite(s12) & (s12 > 0)
+                if int(np.sum(sm)) >= 5:
+                    mean_b12 = float(np.mean(s12[sm]))
+            if mean_b11 is not None or mean_b12 is not None:
+                try:
+                    from engines.ag_probability import feature_swir_from_bands
+                    swir_feature = feature_swir_from_bands(mean_b11, mean_b12)
+                    if swir_feature is not None:
+                        swir_source = "b11_b12" if mean_b12 is not None else "b11"
+                except Exception:
+                    swir_feature = None
+
             # cell corners in pixel space -> lon/lat polygon
             xs = [c0, c1, c1, c0, c0]
             ys = [r0, r0, r1, r1, r0]
@@ -272,6 +296,8 @@ def build_grid_cells(ndvi, ndmi, valid, transform, crs, meta: dict, ndre=None, n
                         "ndre_available": ndre_available,
                         "ndre_status": ndre_status,
                         "ndre_band": ndre_band,
+                        "swir_feature": None if swir_feature is None else round(float(swir_feature), 4),
+                        "swir_source": swir_source,
                         "pixel_count": count,
                         "alert": "pending",
                         "date": meta["date"],
@@ -353,11 +379,13 @@ def process_item(item) -> tuple[list[dict], dict]:
     out_shape = b08.shape
     b04, _, _ = read_window_band(href_b04, WINDOW_BBOX, out_shape=out_shape)
     b11, _, _ = read_window_band(href_b11, WINDOW_BBOX, out_shape=out_shape)
+    b12 = None
     if href_b12:
         try:
-            read_window_band(href_b12, WINDOW_BBOX, out_shape=out_shape)  # available for SWIR assist
+            b12, _, _ = read_window_band(href_b12, WINDOW_BBOX, out_shape=out_shape)
         except Exception as e:
             print(f"    B12 read failed (non-fatal): {e}")
+            b12 = None
     scl = None
     if href_scl:
         try:
@@ -441,7 +469,7 @@ def process_item(item) -> tuple[list[dict], dict]:
         "cloud_cover": cloud,
     }
     features = build_grid_cells(
-        ndvi, ndmi, valid, transform, crs, meta, ndre=ndre, ndre_meta=ndre_meta
+        ndvi, ndmi, valid, transform, crs, meta, ndre=ndre, ndre_meta=ndre_meta, b11=b11, b12=b12
     )
     return features, stats
 

@@ -39,3 +39,7 @@ MONITOR_OUT_DATA=../../app/public/data python run_ag_probability.py
 Formulas locked by `docs/SCIENCE_LOCKS_v0.4_phase1_2.md` (not `spec_pending`).
 NDRE: `(B08-B05)/(B08+B05)`; B06/B07 documented fallback only; else renorm AgProb.
 AOU identity: `AOU-NJ-######`, centroid + IoU≥0.3, min ~2 ha.
+
+## SWIR feature (AgProb)
+
+Offline enrichment may use `feature_swir_response` (NDVI+NDMI proxy) — that is OK when B11/B12 are unavailable. When the STAC path has B11/B12, prefer passing `swir_feature` derived from SWIR brightness into `agricultural_probability` (hook already exists on the engine); keep the NDVI+NDMI proxy only as fallback.

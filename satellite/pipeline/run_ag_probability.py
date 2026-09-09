@@ -107,6 +107,7 @@ def enrich_features(features: list[dict], *, n_clear_dates: int, month: int | No
             persistence_estimated = False
         persistence_gate = n_clear_dates >= 2 and ndvi >= BARE_NDVI
 
+        swir_feature = p.get("swir_feature")
         ag = agricultural_probability(
             ndvi=ndvi,
             ndmi=ndmi,
@@ -116,7 +117,12 @@ def enrich_features(features: list[dict], *, n_clear_dates: int, month: int | No
             n_dates_above_bare=n_above,
             month=month,
             local_variance=None,
+            swir_feature=swir_feature if swir_feature is not None else None,
         )
+        if swir_feature is not None:
+            p["swir_source"] = p.get("swir_source", "b11_b12")
+        elif "swir_source" not in p:
+            p["swir_source"] = "proxy_ndvi_ndmi"
         p["agricultural_probability"] = ag["agricultural_probability"]
         p["ag_class"] = ag["ag_class"]
         p["ag_probability_status"] = "expert_v1"

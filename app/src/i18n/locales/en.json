@@ -52,7 +52,8 @@
       "watch": "Watch — vegetation change",
       "possibleBiotic": "Possible biotic stress",
       "bare": "Bare / little canopy",
-      "unclear": "Unclear — needs review"
+      "unclear": "Unclear — needs review",
+      "lowVigor": "Low vigor — management check"
     },
     "water": {
       "low": "Low attention",
@@ -62,7 +63,8 @@
       "unclear": "Unclear"
     },
     "note": {
-      "possibleBiotic": "Possible biotic stress suspected from spectral/temporal pattern. Satellite cannot confirm a pest or disease — field verification is recommended."
+      "possibleBiotic": "Possible biotic stress suspected from spectral/temporal pattern. Satellite cannot confirm a pest or disease — field verification is recommended.",
+      "vigorAttention": "Greening (NDVI/NDRE) is weak versus peers. Management / possible nutrient attention — not a fertilizer diagnosis and not a biotic/pest label. Field check recommended."
     }
   },
   "restoration": {
@@ -102,7 +104,7 @@
     "seasonTitle": "Wheat & Khareef seasons",
     "seasonBody": "Najd wheat: typical sowing early–mid November; harvest from early April. Mountain restoration follows a dynamic Khareef calendar (Pre → Onset → Peak → Weakening → End → Post) — seeding windows are site- and moisture-dependent, not a fixed date.",
     "agroTitle": "Agricultural Observatory",
-    "agroBody": "Detect and monitor cultivated activity as AOUs (e.g. AOU-NJ-000184). Day-one operation does not require official farm names. Alerts map bare · healthy · water_attention · vigor_attention into health and water labels — with Possible Biotic Stress wording, never pest certainty.",
+    "agroBody": "Detect and monitor cultivated activity as AOUs (e.g. AOU-NJ-000184). Day-one operation does not require official farm names. Alerts map bare · healthy · water_attention · vigor_attention into health and water labels. Biotic risk uses possible_biotic_stress only — never pest certainty.",
     "restoTitle": "Restoration Observatory",
     "restoBody": "Site suitability with a separate confidence score, Moisture Persistence Index class, regeneration ladder (Protect → ANR → Enrichment → Active Planting → Avoid), and fog-escarpment species such as Terminalia dhofarica. Arid Najd species are not auto-mixed onto fog slopes.",
     "ctaMap": "Open observatory map",
@@ -275,7 +277,8 @@
     "formulaRef": "Formulas: docs/SCIENCE_LOCKS_v0.4_phase1_2.md (Phase 1 agriculture).",
     "ndreName": "NDRE — red-edge vegetation",
     "ndreFormula": "(B08 − B05) / (B08 + B05)",
-    "ndreDesc": "Early canopy condition; B06/B07 documented fallback only. If missing → ndre null and AgProb renorm."
+    "ndreDesc": "Early canopy condition; B06/B07 documented fallback only. If missing → ndre null and AgProb renorm.",
+    "stressThrNote": "Attention threshold = 55 (WATER_ATTENTION_THR / VIGOR_ATTENTION_THR) — expert default pending field calibration."
   },
   "about": {
     "title": "Method & scientific honesty",
@@ -336,13 +339,13 @@
     "bare": "Bare / unplanted",
     "healthy": "Stable vigor",
     "water_attention": "Needs water check",
-    "vigor_attention": "Low vigor — possible biotic / management stress",
+    "vigor_attention": "Low vigor — management check",
     "cells": "cells",
     "unclear": "Unclear — needs review",
     "tip_bare": "Little or no green canopy in this cell for the acquisition date.",
     "tip_healthy": "Vegetation indices look stable versus nearby vegetated cells.",
     "tip_water_attention": "Canopy moisture (NDMI) is low versus nearby vegetated areas — verify irrigation soon.",
-    "tip_vigor_attention": "Greening (NDVI) is weak versus peers. Possible biotic or management stress — confirm in the field (satellite cannot diagnose fertilizer or pests alone).",
+    "tip_vigor_attention": "Greening (NDVI) is weak versus peers. Management / possible nutrient attention — confirm in the field (not fertilizer diagnosis; biotic risk is a separate flag).",
     "tip_unclear": "Signal is ambiguous for this cell — review imagery and field conditions."
   },
   "appNameAr": "مرصد ظفار الزراعي البيئي",

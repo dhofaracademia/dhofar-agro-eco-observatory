@@ -11,7 +11,9 @@ from __future__ import annotations
 from typing import Any
 
 W_REL, W_HIST, W_PERS, W_PHEN = 0.40, 0.25, 0.25, 0.10
-# Attention thresholds (0–100 score); expert defaults pending field calibration
+# WATER_ATTENTION_THR / VIGOR_ATTENTION_THR = 55 — expert defaults pending
+# field calibration (SCIENCE_LOCKS Phase-1). Do not treat as measured soil
+# moisture or fertilizer diagnosis thresholds.
 WATER_ATTENTION_THR = 55.0
 VIGOR_ATTENTION_THR = 55.0
 
