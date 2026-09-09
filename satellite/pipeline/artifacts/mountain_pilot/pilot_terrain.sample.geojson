@@ -1,6 +1,6 @@
 {
   "type": "FeatureCollection",
-  "generated_at": "2026-09-09T05:01:58.713072+00:00",
+  "generated_at": "2026-09-09T05:01:58.624713+00:00",
   "pilot_bbox": [
     54.05,
     17.08,
@@ -11,7 +11,7 @@
   "layer": "mountain_pilot",
   "dem_source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer",
   "bbox_note": "Locked start bbox [54.05, 17.08, 54.22, 17.22] (Jabal Qara fog-escarpment). No change before first run; post-DEM nudge ≤0.05°; max span ≤~0.2°/side.",
-  "sample_method": "stratified_elev_tertile_x_slope_median",
+  "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600",
   "n_sample": 48,
   "n_universe": 4851,
   "elev_tertile_edges_m": [
@@ -21,6 +21,12 @@
     816.1
   ],
   "slope_median_deg": 11.69,
+  "elev_min_m": 27.4,
+  "elev_max_m": 816.1,
+  "fog_belt_elev_gt_m": 600.0,
+  "fog_belt_universe_n": 143,
+  "fog_belt_in_sample_n": 4,
+  "fog_belt_note": "Ensured ≥4 cells with elev>600.0 m (universe n=143; DEM fog-belt coverage in bbox).",
   "features": [
     {
       "type": "Feature",
@@ -29,33 +35,33 @@
         "coordinates": [
           [
             [
-              54.150202790746434,
-              17.128738222142374
+              54.09686999268406,
+              17.213182666586818
             ],
             [
-              54.150202790746434,
-              17.13098400007985
+              54.09686999268406,
+              17.215428444524292
             ],
             [
-              54.147852764809116,
-              17.13098400007985
+              54.09451889620482,
+              17.215428444524292
             ],
             [
-              54.147852764809116,
-              17.128738222142374
+              54.09451889620482,
+              17.213182666586818
             ],
             [
-              54.150202790746434,
-              17.128738222142374
+              54.09686999268406,
+              17.213182666586818
             ]
           ]
         ]
       },
       "properties": {
-        "elevation_m": 107.1,
-        "slope_deg": 9.34,
-        "aspect_deg": 144.0,
-        "twi": 3.45,
+        "elevation_m": 684.1,
+        "slope_deg": 5.95,
+        "aspect_deg": 135.0,
+        "twi": 3.927,
         "twi_note": "Topographic Wetness Proxy (coarse) — not full hydrology",
         "status": "pilot_unverified",
         "layer": "mountain_pilot",
@@ -63,8 +69,9 @@
         "note": "Raw terrain / moisture proxy only. No suitability, action ladder, or species. NDMI ≠ soil moisture %.",
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
-        "sample_stratum": "low_elev_gentle",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_stratum": "high_elev_gentle",
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600",
+        "fog_belt_elev_gt_600": true
       }
     },
     {
@@ -74,33 +81,33 @@
         "coordinates": [
           [
             [
-              54.0679803300446,
-              17.090960444364594
+              54.06131432418716,
+              17.19540488880904
             ],
             [
-              54.0679803300446,
-              17.09320622230207
+              54.06131432418716,
+              17.197650666746515
             ],
             [
-              54.06563078106651,
-              17.09320622230207
+              54.058963453590614,
+              17.197650666746515
             ],
             [
-              54.06563078106651,
-              17.090960444364594
+              54.058963453590614,
+              17.19540488880904
             ],
             [
-              54.0679803300446,
-              17.090960444364594
+              54.06131432418716,
+              17.19540488880904
             ]
           ]
         ]
       },
       "properties": {
-        "elevation_m": 102.0,
-        "slope_deg": 6.14,
-        "aspect_deg": 192.4,
-        "twi": 3.994,
+        "elevation_m": 635.5,
+        "slope_deg": 18.79,
+        "aspect_deg": 213.8,
+        "twi": 2.717,
         "twi_note": "Topographic Wetness Proxy (coarse) — not full hydrology",
         "status": "pilot_unverified",
         "layer": "mountain_pilot",
@@ -108,8 +115,9 @@
         "note": "Raw terrain / moisture proxy only. No suitability, action ladder, or species. NDMI ≠ soil moisture %.",
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
-        "sample_stratum": "low_elev_gentle",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_stratum": "high_elev_steep",
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600",
+        "fog_belt_elev_gt_600": true
       }
     },
     {
@@ -119,33 +127,33 @@
         "coordinates": [
           [
             [
-              54.090202510245234,
-              17.08429377769793
+              54.10353656051967,
+              17.197627111031263
             ],
             [
-              54.090202510245234,
-              17.086539555635404
+              54.10353656051967,
+              17.199872888968738
             ],
             [
-              54.08785304531031,
-              17.086539555635404
+              54.101185661702544,
+              17.199872888968738
             ],
             [
-              54.08785304531031,
-              17.08429377769793
+              54.101185661702544,
+              17.197627111031263
             ],
             [
-              54.090202510245234,
-              17.08429377769793
+              54.10353656051967,
+              17.197627111031263
             ]
           ]
         ]
       },
       "properties": {
-        "elevation_m": 66.6,
-        "slope_deg": 1.65,
-        "aspect_deg": 89.7,
-        "twi": 5.241,
+        "elevation_m": 602.9,
+        "slope_deg": 9.92,
+        "aspect_deg": 169.6,
+        "twi": 3.313,
         "twi_note": "Topographic Wetness Proxy (coarse) — not full hydrology",
         "status": "pilot_unverified",
         "layer": "mountain_pilot",
@@ -153,8 +161,9 @@
         "note": "Raw terrain / moisture proxy only. No suitability, action ladder, or species. NDMI ≠ soil moisture %.",
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
-        "sample_stratum": "low_elev_gentle",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_stratum": "high_elev_gentle",
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600",
+        "fog_belt_elev_gt_600": true
       }
     },
     {
@@ -199,7 +208,7 @@
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
         "sample_stratum": "low_elev_gentle",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -244,7 +253,7 @@
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
         "sample_stratum": "low_elev_gentle",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -289,7 +298,7 @@
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
         "sample_stratum": "low_elev_gentle",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -334,7 +343,7 @@
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
         "sample_stratum": "low_elev_gentle",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -379,7 +388,7 @@
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
         "sample_stratum": "low_elev_gentle",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -424,7 +433,7 @@
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
         "sample_stratum": "low_elev_steep",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -469,7 +478,7 @@
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
         "sample_stratum": "low_elev_steep",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -515,7 +524,7 @@
         "hydrology_evidence_provisional": true,
         "ndmi_pre_khareef": -0.1108,
         "sample_stratum": "low_elev_steep",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -560,7 +569,7 @@
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
         "sample_stratum": "low_elev_steep",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -605,7 +614,7 @@
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
         "sample_stratum": "low_elev_steep",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -650,7 +659,7 @@
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
         "sample_stratum": "low_elev_steep",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -696,7 +705,7 @@
         "hydrology_evidence_provisional": true,
         "ndmi_pre_khareef": -0.1221,
         "sample_stratum": "low_elev_steep",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -741,7 +750,7 @@
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
         "sample_stratum": "low_elev_steep",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -786,7 +795,7 @@
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
         "sample_stratum": "mid_elev_gentle",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -832,7 +841,7 @@
         "hydrology_evidence_provisional": true,
         "ndmi_pre_khareef": -0.1388,
         "sample_stratum": "mid_elev_gentle",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -877,7 +886,7 @@
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
         "sample_stratum": "mid_elev_gentle",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -923,7 +932,7 @@
         "hydrology_evidence_provisional": true,
         "ndmi_pre_khareef": -0.1052,
         "sample_stratum": "mid_elev_gentle",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -968,7 +977,7 @@
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
         "sample_stratum": "mid_elev_gentle",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -1013,7 +1022,7 @@
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
         "sample_stratum": "mid_elev_gentle",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -1058,7 +1067,7 @@
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
         "sample_stratum": "mid_elev_gentle",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -1103,7 +1112,7 @@
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
         "sample_stratum": "mid_elev_gentle",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -1148,7 +1157,7 @@
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
         "sample_stratum": "mid_elev_steep",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -1193,7 +1202,7 @@
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
         "sample_stratum": "mid_elev_steep",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -1238,7 +1247,7 @@
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
         "sample_stratum": "mid_elev_steep",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -1283,7 +1292,7 @@
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
         "sample_stratum": "mid_elev_steep",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -1328,7 +1337,7 @@
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
         "sample_stratum": "mid_elev_steep",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -1373,7 +1382,7 @@
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
         "sample_stratum": "mid_elev_steep",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -1418,7 +1427,7 @@
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
         "sample_stratum": "mid_elev_steep",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -1464,7 +1473,7 @@
         "hydrology_evidence_provisional": true,
         "ndmi_pre_khareef": -0.0891,
         "sample_stratum": "mid_elev_steep",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -1510,7 +1519,7 @@
         "hydrology_evidence_provisional": true,
         "ndmi_pre_khareef": -0.1909,
         "sample_stratum": "high_elev_gentle",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -1555,7 +1564,7 @@
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
         "sample_stratum": "high_elev_gentle",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -1601,7 +1610,7 @@
         "hydrology_evidence_provisional": true,
         "ndmi_pre_khareef": -0.1508,
         "sample_stratum": "high_elev_gentle",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -1646,7 +1655,7 @@
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
         "sample_stratum": "high_elev_gentle",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -1691,7 +1700,8 @@
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
         "sample_stratum": "high_elev_gentle",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600",
+        "fog_belt_elev_gt_600": true
       }
     },
     {
@@ -1737,7 +1747,7 @@
         "hydrology_evidence_provisional": true,
         "ndmi_pre_khareef": -0.1803,
         "sample_stratum": "high_elev_gentle",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -1782,7 +1792,7 @@
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
         "sample_stratum": "high_elev_gentle",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -1827,7 +1837,7 @@
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
         "sample_stratum": "high_elev_gentle",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -1872,7 +1882,7 @@
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
         "sample_stratum": "high_elev_steep",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -1918,7 +1928,7 @@
         "hydrology_evidence_provisional": true,
         "ndmi_pre_khareef": -0.1384,
         "sample_stratum": "high_elev_steep",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -1963,7 +1973,7 @@
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
         "sample_stratum": "high_elev_steep",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -2008,7 +2018,7 @@
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
         "sample_stratum": "high_elev_steep",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -2054,7 +2064,7 @@
         "hydrology_evidence_provisional": true,
         "ndmi_pre_khareef": -0.1877,
         "sample_stratum": "high_elev_steep",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -2099,7 +2109,7 @@
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
         "sample_stratum": "high_elev_steep",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -2144,7 +2154,7 @@
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
         "sample_stratum": "high_elev_steep",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     },
     {
@@ -2189,11 +2199,11 @@
         "terrain_evidence_provisional": true,
         "hydrology_evidence_provisional": true,
         "sample_stratum": "high_elev_steep",
-        "sample_method": "stratified_elev_tertile_x_slope_median"
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
       }
     }
   ],
-  "note_sample": "Stratified sample (low/mid/high elev × gentle/steep) — not first-N high-elev. Full grid: pilot_terrain.geojson (gitignored).",
+  "note_sample": "Stratified sample (low/mid/high elev × gentle/steep) plus forced fog-belt elev>600 m when present in DEM universe — not first-N high-elev. Full grid: pilot_terrain.geojson (gitignored).",
   "ndmi_pre": {
     "date_range": "2026-05-01/2026-05-31",
     "n_candidates": 14,

@@ -197,10 +197,17 @@ def stratified_sample_indices(
     elev_bins: int = 3,
     slope_bins: int = 2,
     rng_seed: int = 42,
+    ensure_elev_gt: float | None = 600.0,
+    ensure_min: int = 4,
 ) -> list[int]:
     """
     Stratified sample across elevation tertiles × slope (gentle/steep).
     Not first-N high-elev only.
+
+    When ensure_elev_gt is set (default 600 m fog-belt), force-include up to
+    ensure_min cells above that absolute elevation if the universe has them.
+    If none exist in-bbox, quantile strata alone are returned (caller should
+    note fog_belt_universe_n=0 in meta).
     """
     n = len(elevations)
     if n == 0:
@@ -241,6 +248,25 @@ def stratified_sample_indices(
         take = min(per, len(pool))
         pick = rng.choice(pool, size=take, replace=False).tolist()
         chosen.extend(int(x) for x in pick)
+
+    # Absolute fog-belt band (elev > ensure_elev_gt) when DEM has them
+    if ensure_elev_gt is not None:
+        fog = [int(i) for i in idx_all if finite[i] and elev[i] > float(ensure_elev_gt)]
+        if fog:
+            already = sum(1 for i in chosen if elev[i] > float(ensure_elev_gt))
+            need = max(0, min(int(ensure_min), len(fog)) - already)
+            pool = [i for i in fog if i not in set(chosen)]
+            if need and pool:
+                extra = rng.choice(pool, size=min(need, len(pool)), replace=False).tolist()
+                for x in extra:
+                    if len(chosen) < n_total:
+                        chosen.append(int(x))
+                    else:
+                        replaceable = [
+                            j for j, ci in enumerate(chosen) if elev[ci] <= float(ensure_elev_gt)
+                        ]
+                        if replaceable:
+                            chosen[replaceable[0]] = int(x)
 
     # Fill up if short
     if len(chosen) < n_total:

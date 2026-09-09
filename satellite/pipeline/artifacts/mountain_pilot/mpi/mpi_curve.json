@@ -3,6 +3,13 @@
   "status": "pilot_unverified",
   "layer": "mountain_mpi_phase2",
   "provisional": true,
+  "evidence_window": "onset",
+  "product_kind": "onset_window_dry_mpi_provisional",
+  "t0_source_window": "onset",
+  "interpretation": "provisional_dry_onset_evidence",
+  "not_post_khareef_persistence": true,
+  "mpi_class_disclaimer_en": "Low here means NDMI stayed at/below dry baseline under an **onset** T0 — not a failed post-khareef persistence assessment.",
+  "mpi_class_disclaimer_ar": "تصنيف Low هنا يعني أن NDMI بقي عند أو دون خط الأساس الجاف تحت نافذة بداية الموسم (onset) لـ T0 — وليس تقييم فشل استمرارية الرطوبة بعد موسم الخريف.",
   "pilot_bbox": [
     54.05,
     17.08,

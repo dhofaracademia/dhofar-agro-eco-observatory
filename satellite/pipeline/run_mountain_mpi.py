@@ -333,7 +333,7 @@ def refresh_stratified_terrain_sample(
             eband = "high_elev"
         sband = "gentle" if s < slope_med else "steep"
         f["properties"]["sample_stratum"] = f"{eband}_{sband}"
-        f["properties"]["sample_method"] = "stratified_elev_tertile_x_slope_median"
+        f["properties"]["sample_method"] = "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600"
         assert_no_forbidden_partner_keys(f["properties"])
 
     sample_path = OUT_DIR / "pilot_terrain.sample.geojson"
@@ -345,15 +345,20 @@ def refresh_stratified_terrain_sample(
         "layer": "mountain_pilot",
         "dem_source": dem_source,
         "bbox_note": BBOX_LOCK_NOTE,
-        "sample_method": "stratified_elev_tertile_x_slope_median",
+        "sample_method": "stratified_elev_tertile_x_slope_median_plus_fog_belt_gt600",
         "n_sample": len(sample_feats),
         "n_universe": len(features),
         "elev_tertile_edges_m": [round(float(x), 1) for x in elev_edges],
         "slope_median_deg": round(slope_med, 2),
+        "fog_belt_elev_gt_m": 600.0,
+        "fog_belt_universe_n": int(sum(1 for e in elevs if e > 600)),
+        "fog_belt_in_sample_n": int(
+            sum(1 for f in sample_feats if (f["properties"].get("elevation_m") or 0) > 600)
+        ),
         "features": sample_feats,
         "note_sample": (
-            "Stratified sample (low/mid/high elev × gentle/steep) — not first-N high-elev. "
-            "Full grid: pilot_terrain.geojson (gitignored)."
+            "Stratified sample (low/mid/high elev × gentle/steep) plus forced fog-belt elev>600 m "
+            "when present — not first-N high-elev. Full grid: pilot_terrain.geojson (gitignored)."
         ),
         **{k: v for k, v in extra_meta.items() if k in ("ndmi_pre", "ndmi_post", "grid_cell_m")},
     }
@@ -549,11 +554,42 @@ def main(argv: list[str] | None = None) -> int:
     )
     curve_status = STATUS_PILOT if aoi_n_valid >= 2 else STATUS_INSUFFICIENT
 
+    t0_source_window = (t0_diag or {}).get("t0_source_window") or "unknown"
+    is_onset = t0_source_window == "onset"
+    onset_label_fields = {
+        "evidence_window": "onset" if is_onset else t0_source_window,
+        "product_kind": (
+            "onset_window_dry_mpi_provisional"
+            if is_onset
+            else "post_khareef_mpi_provisional"
+        ),
+        "t0_source_window": t0_source_window,
+        "interpretation": (
+            "provisional_dry_onset_evidence"
+            if is_onset
+            else "provisional_post_khareef_mpi_evidence"
+        ),
+        "not_post_khareef_persistence": bool(is_onset),
+        "mpi_class_disclaimer_en": (
+            "Low here means NDMI stayed at/below dry baseline under an **onset** T0 — "
+            "not a failed post-khareef persistence assessment."
+            if is_onset
+            else "mpi_class is provisional post-khareef MPI evidence; validate before partner use."
+        ),
+        "mpi_class_disclaimer_ar": (
+            "تصنيف Low هنا يعني أن NDMI بقي عند أو دون خط الأساس الجاف تحت نافذة بداية الموسم "
+            "(onset) لـ T0 — وليس تقييم فشل استمرارية الرطوبة بعد موسم الخريف."
+            if is_onset
+            else "تصنيف mpi_class مؤقت لأدلة ما بعد الخريف؛ يلزم التحقق قبل الاستخدام التشغيلي."
+        ),
+    }
+
     curve = {
         "generated_at": utc_now_iso(),
         "status": curve_status,
         "layer": LAYER_MPI,
         "provisional": True,
+        **onset_label_fields,
         "pilot_bbox": PILOT_BBOX,
         "bbox_note": BBOX_LOCK_NOTE,
         "t0_date": t0.isoformat(),
@@ -787,10 +823,32 @@ def main(argv: list[str] | None = None) -> int:
     }
     write_json(MPI_DIR / "mpi_cells.geojson", mpi_fc)
 
-    # Compact sample of mpi cells for git if large
+    # Compact stratified sample of mpi cells for git (incl. fog-belt elev>600 when present)
     mpi_sample = {k: v for k, v in mpi_fc.items() if k != "features"}
-    mpi_sample["features"] = mpi_features[:48]
-    mpi_sample["note_sample"] = "Up to 48 stratified MPI cells for review."
+    mpi_sample.update(onset_label_fields)
+    if mpi_features:
+        _me = np.array([f["properties"]["elevation_m"] for f in mpi_features], dtype="float64")
+        _ms = np.array([f["properties"]["slope_deg"] for f in mpi_features], dtype="float64")
+        _sidx = stratified_sample_indices(_me, _ms, n_total=min(48, len(mpi_features)))
+        mpi_sample["features"] = [mpi_features[i] for i in _sidx]
+        _fog_n = int(np.sum(_me > 600.0))
+        _fog_in = sum(
+            1 for f in mpi_sample["features"] if f["properties"].get("elevation_m", 0) > 600
+        )
+        mpi_sample["fog_belt_elev_gt_m"] = 600.0
+        mpi_sample["fog_belt_universe_n"] = _fog_n
+        mpi_sample["fog_belt_in_sample_n"] = _fog_in
+        mpi_sample["fog_belt_note"] = (
+            f"Ensured fog-belt elev>600 m in sample when present (universe n={_fog_n})."
+            if _fog_n
+            else "No MPI-universe cells with elev>600 m in this run."
+        )
+    else:
+        mpi_sample["features"] = []
+    mpi_sample["note_sample"] = (
+        "Up to 48 stratified MPI cells for review; fog-belt elev>600 m forced when present. "
+        "Onset-window dry MPI evidence when t0_source_window=onset — not post-khareef persistence."
+    )
     write_json(MPI_DIR / "mpi_cells.sample.geojson", mpi_sample)
 
     run_meta = {
@@ -798,6 +856,7 @@ def main(argv: list[str] | None = None) -> int:
         "status": curve_status,
         "layer": LAYER_MPI,
         "provisional": True,
+        **onset_label_fields,
         "pilot_bbox": PILOT_BBOX,
         "bbox_note": BBOX_LOCK_NOTE,
         "dem_source": dem_source,
@@ -836,6 +895,23 @@ def main(argv: list[str] | None = None) -> int:
         "forbidden_partner_keys": sorted(FORBIDDEN_PARTNER_KEYS),
         "science_lock": "SCIENCE_LOCKS_v0.4_phase1_2.md §5 + §6",
         "disclaimer_en": curve["disclaimer_en"],
+    }
+        # Fog-belt sample coverage note (absolute elev>600 m)
+    _terr_elevs = np.array(
+        [f["properties"].get("elevation_m", float("nan")) for f in terrain_fc_features],
+        dtype="float64",
+    )
+    run_meta["fog_belt_sample"] = {
+        "fog_belt_elev_gt_m": 600.0,
+        "terrain_universe_n_gt_600": int(np.sum(_terr_elevs > 600.0)),
+        "terrain_elev_max_m": (
+            None if not np.isfinite(_terr_elevs).any() else round(float(np.nanmax(_terr_elevs)), 1)
+        ),
+        "mpi_sample_n_gt_600": mpi_sample.get("fog_belt_in_sample_n"),
+        "note": (
+            "Stratified sample ensures elev>600 m fog-belt cells when DEM has them in bbox; "
+            "see engines/mpi.py stratified_sample_indices(ensure_elev_gt=600)."
+        ),
     }
     write_json(MPI_DIR / "mpi_run_meta.json", run_meta)
 
