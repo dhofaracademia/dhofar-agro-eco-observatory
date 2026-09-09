@@ -3,8 +3,9 @@
 Najd (Dhofar, Oman) desert-farm satellite monitoring — first slice.
 
 Queries Microsoft Planetary Computer STAC for Sentinel-2 L2A,
-windowed-reads B04/B08/B11/(SCL) COGs, computes NDVI/NDMI on a coarse
-grid, classifies early-intervention alerts, and writes app data files.
+windowed-reads B04/B08/B11/B12/(B05|B06|B07)/SCL COGs, computes NDVI/NDMI/NDRE
+on a coarse grid, classifies alerts, then optionally runs Phase-1 AgProb/AOU
+engines (see run_ag_probability.py; SCIENCE_LOCKS_v0.4_phase1_2.md).
 
 Source: Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer.
 """
@@ -170,19 +171,21 @@ def read_window_band(href: str, bbox_wgs84: list[float], out_shape=None, dst_crs
             return data, transform, crs
 
 
+def scl_valid_mask(b04, b08, b11, scl=None):
+    """SCL gates BEFORE indices (SCIENCE_LOCKS / AgriTech)."""
+    valid = (b04 > 0) & (b08 > 0) & (b11 > 0) & (b04 < 10000) & (b08 < 10000) & (b11 < 10000)
+    if scl is not None:
+        # Exclude 0 nodata, 1 saturated, 8 cloud med, 9 cloud high, 10 thin cirrus
+        cloudlike = np.isin(scl, [0, 1, 8, 9, 10])
+        valid = valid & (~cloudlike)
+    return valid
+
+
 def compute_indices(b04, b08, b11, scl=None):
     b04f = b04.astype(np.float32) / SCALE
     b08f = b08.astype(np.float32) / SCALE
     b11f = b11.astype(np.float32) / SCALE
-    # valid reflectance pixels (non-zero / reasonable)
-    valid = (b04 > 0) & (b08 > 0) & (b11 > 0) & (b04 < 10000) & (b08 < 10000) & (b11 < 10000)
-    if scl is not None:
-        # SCL: 4=vegetation, 5=not_vegetated, 6=water, 7=unclassified,
-        # 2=dark, 3=cloud_shadow; exclude clouds/cirrus/snow/nodata
-        # Keep: 4,5,6,7,2,3,11? — exclude 0 nodata, 1 saturated, 8 cloud med,
-        # 9 cloud high, 10 thin cirrus
-        cloudlike = np.isin(scl, [0, 1, 8, 9, 10])
-        valid = valid & (~cloudlike)
+    valid = scl_valid_mask(b04, b08, b11, scl)
 
     ndvi = np.full(b04.shape, np.nan, dtype=np.float32)
     ndmi = np.full(b04.shape, np.nan, dtype=np.float32)
@@ -202,8 +205,12 @@ def pixel_to_lonlat(transform, crs, row, col):
     return lon, lat
 
 
-def build_grid_cells(ndvi, ndmi, valid, transform, crs, meta: dict) -> list[dict]:
-    """Aggregate to ~GRID_M cells in projected CRS meters."""
+def build_grid_cells(ndvi, ndmi, valid, transform, crs, meta: dict, ndre=None, ndre_meta=None) -> list[dict]:
+    """Aggregate to ~GRID_M cells in projected CRS meters.
+
+    geometry_kind=monitoring_grid_500m is the fallback/debug layer; AOU
+    segments come from run_ag_probability.py (SCIENCE_LOCKS §1.4).
+    """
     # estimate pixel size in meters
     px_m = abs(transform.a)
     # if CRS is UTM, a is meters; if geographic, convert roughly
@@ -232,6 +239,18 @@ def build_grid_cells(ndvi, ndmi, valid, transform, crs, meta: dict) -> list[dict
             mask = v_slice & np.isfinite(n_slice) & np.isfinite(m_slice)
             mean_ndvi = float(np.mean(n_slice[mask]))
             mean_ndmi = float(np.mean(m_slice[mask]))
+            mean_ndre = None
+            ndre_available = False
+            ndre_status = "unavailable"
+            ndre_band = None
+            if ndre is not None:
+                e_slice = ndre[r0:r1, c0:c1]
+                emask = mask & np.isfinite(e_slice)
+                if int(np.sum(emask)) >= 5:
+                    mean_ndre = float(np.mean(e_slice[emask]))
+                    ndre_available = True
+                    ndre_status = (ndre_meta or {}).get("ndre_status", "ok")
+                    ndre_band = (ndre_meta or {}).get("ndre_band")
 
             # cell corners in pixel space -> lon/lat polygon
             xs = [c0, c1, c1, c0, c0]
@@ -249,6 +268,10 @@ def build_grid_cells(ndvi, ndmi, valid, transform, crs, meta: dict) -> list[dict
                     "properties": {
                         "ndvi": round(mean_ndvi, 4),
                         "ndmi": round(mean_ndmi, 4),
+                        "ndre": None if mean_ndre is None else round(mean_ndre, 4),
+                        "ndre_available": ndre_available,
+                        "ndre_status": ndre_status,
+                        "ndre_band": ndre_band,
                         "pixel_count": count,
                         "alert": "pending",
                         "date": meta["date"],
@@ -256,6 +279,7 @@ def build_grid_cells(ndvi, ndmi, valid, transform, crs, meta: dict) -> list[dict
                         "product_id": meta["product_id"],
                         "tile": meta["tile"],
                         "cloud_cover": meta.get("cloud_cover"),
+                        "geometry_kind": "monitoring_grid_500m",
                     },
                 }
             )
@@ -313,13 +337,27 @@ def process_item(item) -> tuple[list[dict], dict]:
     href_b04 = signed_href(item, "B04")
     href_b08 = signed_href(item, "B08")
     href_b11 = signed_href(item, "B11")
+    href_b12 = signed_href(item, "B12") if "B12" in item.assets else None
     href_scl = signed_href(item, "SCL") if "SCL" in item.assets else None
+    # Red-edge preference B05 → B06 → B07 (documented fallback only)
+    href_re = None
+    re_key = None
+    for key in ("B05", "B06", "B07"):
+        if key in item.assets:
+            href_re = signed_href(item, key)
+            re_key = key
+            break
 
     # Read B08 at native 10m for reference shape; B11 is 20m — resample to B08
     b08, transform, crs = read_window_band(href_b08, WINDOW_BBOX)
     out_shape = b08.shape
     b04, _, _ = read_window_band(href_b04, WINDOW_BBOX, out_shape=out_shape)
     b11, _, _ = read_window_band(href_b11, WINDOW_BBOX, out_shape=out_shape)
+    if href_b12:
+        try:
+            read_window_band(href_b12, WINDOW_BBOX, out_shape=out_shape)  # available for SWIR assist
+        except Exception as e:
+            print(f"    B12 read failed (non-fatal): {e}")
     scl = None
     if href_scl:
         try:
@@ -349,6 +387,28 @@ def process_item(item) -> tuple[list[dict], dict]:
             scl = None
 
     ndvi, ndmi, valid = compute_indices(b04, b08, b11, scl)
+
+    # NDRE after SCL gate — SCIENCE_LOCKS / AgriTech prefs
+    ndre = None
+    ndre_meta = {"ndre_available": False, "ndre_band": None, "ndre_status": "unavailable"}
+    try:
+        from engines.ndre import compute_ndre
+
+        b05 = b06 = b07 = None
+        if href_re and re_key:
+            re_band, _, _ = read_window_band(href_re, WINDOW_BBOX, out_shape=out_shape)
+            if re_key == "B05":
+                b05 = re_band
+            elif re_key == "B06":
+                b06 = re_band
+            else:
+                b07 = re_band
+        ndre, band_used, ndre_meta = compute_ndre(
+            b08, b05=b05, b06=b06, b07=b07, valid=valid
+        )
+        print(f"    NDRE status={ndre_meta.get('ndre_status')} band={band_used}")
+    except Exception as e:
+        print(f"    NDRE skipped: {e}")
 
     finite = np.isfinite(ndvi) & valid
     stats = {
@@ -380,7 +440,9 @@ def process_item(item) -> tuple[list[dict], dict]:
         "tile": tile,
         "cloud_cover": cloud,
     }
-    features = build_grid_cells(ndvi, ndmi, valid, transform, crs, meta)
+    features = build_grid_cells(
+        ndvi, ndmi, valid, transform, crs, meta, ndre=ndre, ndre_meta=ndre_meta
+    )
     return features, stats
 
 
@@ -525,7 +587,12 @@ def main() -> int:
         "window_bbox": WINDOW_BBOX,
         "priority_tiles": sorted(PRIORITY_TILES),
         "method": {
-            "indices": ["NDVI=(B08-B04)/(B08+B04)", "NDMI=(B08-B11)/(B08+B11)"],
+            "indices": [
+                "NDVI=(B08-B04)/(B08+B04)",
+                "NDMI=(B08-B11)/(B08+B11)",
+                "NDRE=(B08-B05)/(B08+B05) [B06/B07 documented fallback only]",
+            ],
+            "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md",
             "reflectance_scale": SCALE,
             "grid_m": GRID_M,
             "bare_ndvi_threshold": BARE_NDVI,
@@ -572,6 +639,18 @@ def main() -> int:
         "n_latest_features": len(latest_feats),
     }
     (PIPELINE_DIR / "_run_summary.json").write_text(json.dumps(summary, indent=2))
+
+    # Phase-1 engines: AgProb / AOU identity / stress / biotic (SCIENCE_LOCKS)
+    try:
+        from run_ag_probability import main as ag_main
+
+        print("\nRunning Phase-1 Agricultural Probability / AOU engines…")
+        rc = ag_main()
+        if rc != 0:
+            print(f"WARNING: run_ag_probability exited {rc}")
+    except Exception as e:
+        print(f"WARNING: AgProb engines not run: {e}")
+
     return 0
 
 

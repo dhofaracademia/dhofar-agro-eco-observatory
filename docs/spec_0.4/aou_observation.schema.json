@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dhofaracademia.example/spec_0.4/aou_observation.schema.json",
+  "title": "AOUObservationAtT",
+  "description": "Observation / probability / area / stress at time T for a stable aou_id.",
+  "type": "object",
+  "required": [
+    "aou_id",
+    "date"
+  ],
+  "properties": {
+    "aou_id": {
+      "type": "string",
+      "pattern": "^AOU-NJ-[0-9]{6}$"
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "ndvi": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "ndmi": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "ndre": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "ndre_available": {
+      "type": "boolean"
+    },
+    "agricultural_probability": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "ag_class": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "area_ha_est": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "water_stress_score": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "vigor_stress_score": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "alert": {
+      "type": "string",
+      "enum": [
+        "bare",
+        "healthy",
+        "water_attention",
+        "vigor_attention",
+        "unclear"
+      ]
+    },
+    "possible_biotic_stress": {
+      "type": "boolean"
+    },
+    "data_quality_confidence": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "product_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "tile": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "cloud_cover": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "source": {
+      "type": "string"
+    }
+  }
+}

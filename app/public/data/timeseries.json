@@ -22,14 +22,18 @@
   "method": {
     "indices": [
       "NDVI=(B08-B04)/(B08+B04)",
-      "NDMI=(B08-B11)/(B08+B11)"
+      "NDMI=(B08-B11)/(B08+B11)",
+      "NDRE=(B08-B05)/(B08+B05) [B06/B07 documented fallback only]",
+      "AgProb=SCIENCE_LOCKS\u00a71 expert_v1",
+      "Stress=SCIENCE_LOCKS\u00a73 expert_v1"
     ],
     "reflectance_scale": 10000.0,
     "grid_m": 500.0,
     "bare_ndvi_threshold": 0.18,
     "cloud_filter": "eo:cloud_cover < 10.0",
     "stac": "https://planetarycomputer.microsoft.com/api/stac/v1",
-    "collection": "sentinel-2-l2a"
+    "collection": "sentinel-2-l2a",
+    "aou_identity": "AOU-NJ-###### centroid+IoU>=0.3"
   },
   "citation": "Copernicus Sentinel-2 L2A (ESA) accessed via Microsoft Planetary Computer STAC API and signed COG assets.",
   "errors": [],
@@ -198,5 +202,8 @@
       },
       "grid_cell_count": 1872
     }
-  ]
+  ],
+  "phase": "0.4.1-agriculture",
+  "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md",
+  "last_updated": "2026-09-09T04:46:34.832744+00:00"
 }
