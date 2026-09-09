@@ -1,0 +1,670 @@
+{
+  "version": "0.4.3-phase3-scaffolds",
+  "generated_at": "2026-09-09T05:08:20.973595+00:00",
+  "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3",
+  "status": "expert_v1_provisional",
+  "never_merge": true,
+  "mountain_apply": false,
+  "action_auto_assign": false,
+  "writes_to_app_public": true,
+  "input_refs": {
+    "aou_registry": "app/public/data/aou/aou_registry.json",
+    "aou_observations": "app/public/data/aou/aou_observations.json"
+  },
+  "honesty_en": "Offline decision scaffolds for Najd agriculture AOUs only. Suitability ≠ Confidence ≠ data_quality_confidence. Not ecological certainty. No mountain UI. Action ladder manual only. Public copy is a deliberate offline snapshot for Vite fetch — expert_v1_provisional, not operational truth; refresh via scaffolds re-run + re-copy.",
+  "schema_ref": "docs/spec_0.4/suitability_components.schema.json",
+  "suitability_domain": "agriculture_aou",
+  "suitability_summary_label": "components_only",
+  "units": [
+    {
+      "aou_id": "AOU-NJ-000001",
+      "suitability_domain": "agriculture_aou",
+      "status": "expert_v1_provisional",
+      "suitability_score": 50.11,
+      "suitability_summary_label": "components_only",
+      "suitability_components": {
+        "moisture_proxy": 0.3834,
+        "vigor_proxy": 0.3875,
+        "phenology_fit": 0.25,
+        "terrain_constraint": 1.0,
+        "agricultural_probability_norm": 0.6173
+      },
+      "weights_used": {
+        "agricultural_probability": 0.35,
+        "ndvi_persistence": 0.2,
+        "inverse_vigor_stress": 0.2,
+        "inverse_water_stress": 0.15,
+        "geometry_stability": 0.1
+      },
+      "weights_nominal": {
+        "agricultural_probability": 0.35,
+        "ndvi_persistence": 0.2,
+        "inverse_vigor_stress": 0.2,
+        "inverse_water_stress": 0.15,
+        "geometry_stability": 0.1
+      },
+      "cite_slots": {
+        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3",
+        "observation_date": "2026-09-06",
+        "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
+        "tile": "39QYA",
+        "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer"
+      },
+      "honesty_note_en": "Provisional agriculture_aou suitability (expert_v1). Suitability ≠ Confidence ≠ data_quality_confidence — never merge. Moisture/vigor terms are NDMI/NDVI stress proxies, not plot soil moisture %. Not applied to mountain cells. No action auto-assign.",
+      "honesty_note_ar": "ملاءمة زراعية مؤقتة لوحدات الرصد (خبير v1). الملاءمة ≠ الثقة ≠ ثقة جودة البيانات — لا تُدمَج. Proxies الرطوبة/الحيوية من NDMI/NDVI وليست رطوبة تربة %. لا تُطبَّق على خلايا الجبال. لا تعيين إجراء تلقائي.",
+      "suitability_neq_confidence_note_en": "Suitability ≠ Confidence — these scores are never merged into one misleading number.",
+      "suitability_neq_confidence_note_ar": "الملاءمة ≠ الثقة — لا تُدمَج الدرجتان في رقم واحد مضلّل.",
+      "never_merge_with_confidence": true,
+      "mountain_apply": false,
+      "action_auto_assign": false,
+      "why_this_site": {
+        "headline": "AOU-NJ-000001: provisional agriculture_aou suitability 50.1/100 (moderate relative among components; ag_probability_norm=0.62) — expert_v1_provisional, not operational truth",
+        "drivers": [
+          "Agricultural probability (norm) available: 0.62 (weight 0.35).",
+          "Moisture proxy from inverse water_stress (NDMI-based): 0.38 — not soil moisture %.",
+          "Vigor proxy from inverse vigor_stress (NDVI-based): 0.39 — not fertilizer diagnosis.",
+          "Phenology / NDVI persistence fit: 0.25.",
+          "Geometry stability (AOU IoU/area gate): 1.00.",
+          "Weighted suitability_score=50.1 shown as components_only (Suitability ≠ Confidence)."
+        ],
+        "cautions": [
+          "expert_v1_provisional — Agrofostery weight locks; not field-validated operational truth.",
+          "Do not merge with Confidence or data_quality_confidence.",
+          "Mountain cells: mountain_apply=false — these weights must not be used.",
+          "action_ladder_suggestion remains null (manual enum only).",
+          "NDRE unavailable on this AOU observation.",
+          "Thin AOU clear-date history — persistence is a weak provisional proxy.",
+          "No prior IoU (new or unmatched ID) — geometry stability uses area gate only.",
+          "Evidence gap: no_ndre",
+          "Evidence gap: no_field_visit",
+          "Evidence gap: thin_aou_history",
+          "Evidence gap: no_historical_seasons",
+          "Evidence gap: no_prior_iou",
+          "Evidence gap: no_post_khareef_clear",
+          "Evidence gap: no_mpi_curve",
+          "Evidence gap: window_series_stub_only"
+        ],
+        "recommended_next_step": "Manual next step: field irrigation inspection recommended (provisional — not auto-assigned from suitability).",
+        "action_ladder_suggestion": null
+      }
+    },
+    {
+      "aou_id": "AOU-NJ-000002",
+      "suitability_domain": "agriculture_aou",
+      "status": "expert_v1_provisional",
+      "suitability_score": 53.36,
+      "suitability_summary_label": "components_only",
+      "suitability_components": {
+        "moisture_proxy": 0.5198,
+        "vigor_proxy": 0.5095,
+        "phenology_fit": 0.25,
+        "terrain_constraint": 1.0,
+        "agricultural_probability_norm": 0.5821
+      },
+      "weights_used": {
+        "agricultural_probability": 0.35,
+        "ndvi_persistence": 0.2,
+        "inverse_vigor_stress": 0.2,
+        "inverse_water_stress": 0.15,
+        "geometry_stability": 0.1
+      },
+      "weights_nominal": {
+        "agricultural_probability": 0.35,
+        "ndvi_persistence": 0.2,
+        "inverse_vigor_stress": 0.2,
+        "inverse_water_stress": 0.15,
+        "geometry_stability": 0.1
+      },
+      "cite_slots": {
+        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3",
+        "observation_date": "2026-09-06",
+        "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
+        "tile": "39QYA",
+        "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer"
+      },
+      "honesty_note_en": "Provisional agriculture_aou suitability (expert_v1). Suitability ≠ Confidence ≠ data_quality_confidence — never merge. Moisture/vigor terms are NDMI/NDVI stress proxies, not plot soil moisture %. Not applied to mountain cells. No action auto-assign.",
+      "honesty_note_ar": "ملاءمة زراعية مؤقتة لوحدات الرصد (خبير v1). الملاءمة ≠ الثقة ≠ ثقة جودة البيانات — لا تُدمَج. Proxies الرطوبة/الحيوية من NDMI/NDVI وليست رطوبة تربة %. لا تُطبَّق على خلايا الجبال. لا تعيين إجراء تلقائي.",
+      "suitability_neq_confidence_note_en": "Suitability ≠ Confidence — these scores are never merged into one misleading number.",
+      "suitability_neq_confidence_note_ar": "الملاءمة ≠ الثقة — لا تُدمَج الدرجتان في رقم واحد مضلّل.",
+      "never_merge_with_confidence": true,
+      "mountain_apply": false,
+      "action_auto_assign": false,
+      "why_this_site": {
+        "headline": "AOU-NJ-000002: provisional agriculture_aou suitability 53.4/100 (moderate relative among components; ag_probability_norm=0.58) — expert_v1_provisional, not operational truth",
+        "drivers": [
+          "Agricultural probability (norm) available: 0.58 (weight 0.35).",
+          "Moisture proxy from inverse water_stress (NDMI-based): 0.52 — not soil moisture %.",
+          "Vigor proxy from inverse vigor_stress (NDVI-based): 0.51 — not fertilizer diagnosis.",
+          "Phenology / NDVI persistence fit: 0.25.",
+          "Geometry stability (AOU IoU/area gate): 1.00.",
+          "Weighted suitability_score=53.4 shown as components_only (Suitability ≠ Confidence)."
+        ],
+        "cautions": [
+          "expert_v1_provisional — Agrofostery weight locks; not field-validated operational truth.",
+          "Do not merge with Confidence or data_quality_confidence.",
+          "Mountain cells: mountain_apply=false — these weights must not be used.",
+          "action_ladder_suggestion remains null (manual enum only).",
+          "NDRE unavailable on this AOU observation.",
+          "Thin AOU clear-date history — persistence is a weak provisional proxy.",
+          "No prior IoU (new or unmatched ID) — geometry stability uses area gate only.",
+          "Evidence gap: no_ndre",
+          "Evidence gap: no_field_visit",
+          "Evidence gap: thin_aou_history",
+          "Evidence gap: no_historical_seasons",
+          "Evidence gap: no_prior_iou",
+          "Evidence gap: no_post_khareef_clear",
+          "Evidence gap: no_mpi_curve",
+          "Evidence gap: window_series_stub_only"
+        ],
+        "recommended_next_step": "Manual next step: continue monitoring and schedule field verification when evidence gaps shrink — action ladder remains manual.",
+        "action_ladder_suggestion": null
+      }
+    },
+    {
+      "aou_id": "AOU-NJ-000003",
+      "suitability_domain": "agriculture_aou",
+      "status": "expert_v1_provisional",
+      "suitability_score": 56.08,
+      "suitability_summary_label": "components_only",
+      "suitability_components": {
+        "moisture_proxy": 0.5253,
+        "vigor_proxy": 0.5298,
+        "phenology_fit": 0.25,
+        "terrain_constraint": 1.0,
+        "agricultural_probability_norm": 0.6458
+      },
+      "weights_used": {
+        "agricultural_probability": 0.35,
+        "ndvi_persistence": 0.2,
+        "inverse_vigor_stress": 0.2,
+        "inverse_water_stress": 0.15,
+        "geometry_stability": 0.1
+      },
+      "weights_nominal": {
+        "agricultural_probability": 0.35,
+        "ndvi_persistence": 0.2,
+        "inverse_vigor_stress": 0.2,
+        "inverse_water_stress": 0.15,
+        "geometry_stability": 0.1
+      },
+      "cite_slots": {
+        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3",
+        "observation_date": "2026-09-06",
+        "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
+        "tile": "39QYA",
+        "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer"
+      },
+      "honesty_note_en": "Provisional agriculture_aou suitability (expert_v1). Suitability ≠ Confidence ≠ data_quality_confidence — never merge. Moisture/vigor terms are NDMI/NDVI stress proxies, not plot soil moisture %. Not applied to mountain cells. No action auto-assign.",
+      "honesty_note_ar": "ملاءمة زراعية مؤقتة لوحدات الرصد (خبير v1). الملاءمة ≠ الثقة ≠ ثقة جودة البيانات — لا تُدمَج. Proxies الرطوبة/الحيوية من NDMI/NDVI وليست رطوبة تربة %. لا تُطبَّق على خلايا الجبال. لا تعيين إجراء تلقائي.",
+      "suitability_neq_confidence_note_en": "Suitability ≠ Confidence — these scores are never merged into one misleading number.",
+      "suitability_neq_confidence_note_ar": "الملاءمة ≠ الثقة — لا تُدمَج الدرجتان في رقم واحد مضلّل.",
+      "never_merge_with_confidence": true,
+      "mountain_apply": false,
+      "action_auto_assign": false,
+      "why_this_site": {
+        "headline": "AOU-NJ-000003: provisional agriculture_aou suitability 56.1/100 (moderate relative among components; ag_probability_norm=0.65) — expert_v1_provisional, not operational truth",
+        "drivers": [
+          "Agricultural probability (norm) available: 0.65 (weight 0.35).",
+          "Moisture proxy from inverse water_stress (NDMI-based): 0.53 — not soil moisture %.",
+          "Vigor proxy from inverse vigor_stress (NDVI-based): 0.53 — not fertilizer diagnosis.",
+          "Phenology / NDVI persistence fit: 0.25.",
+          "Geometry stability (AOU IoU/area gate): 1.00.",
+          "Weighted suitability_score=56.1 shown as components_only (Suitability ≠ Confidence)."
+        ],
+        "cautions": [
+          "expert_v1_provisional — Agrofostery weight locks; not field-validated operational truth.",
+          "Do not merge with Confidence or data_quality_confidence.",
+          "Mountain cells: mountain_apply=false — these weights must not be used.",
+          "action_ladder_suggestion remains null (manual enum only).",
+          "NDRE unavailable on this AOU observation.",
+          "Thin AOU clear-date history — persistence is a weak provisional proxy.",
+          "No prior IoU (new or unmatched ID) — geometry stability uses area gate only.",
+          "Evidence gap: no_ndre",
+          "Evidence gap: no_field_visit",
+          "Evidence gap: thin_aou_history",
+          "Evidence gap: no_historical_seasons",
+          "Evidence gap: no_prior_iou",
+          "Evidence gap: no_post_khareef_clear",
+          "Evidence gap: no_mpi_curve",
+          "Evidence gap: window_series_stub_only"
+        ],
+        "recommended_next_step": "Manual next step: continue monitoring and schedule field verification when evidence gaps shrink — action ladder remains manual.",
+        "action_ladder_suggestion": null
+      }
+    },
+    {
+      "aou_id": "AOU-NJ-000004",
+      "suitability_domain": "agriculture_aou",
+      "status": "expert_v1_provisional",
+      "suitability_score": 46.51,
+      "suitability_summary_label": "components_only",
+      "suitability_components": {
+        "moisture_proxy": 0.3734,
+        "vigor_proxy": 0.374,
+        "phenology_fit": 0.25,
+        "terrain_constraint": 1.0,
+        "agricultural_probability_norm": 0.5265
+      },
+      "weights_used": {
+        "agricultural_probability": 0.35,
+        "ndvi_persistence": 0.2,
+        "inverse_vigor_stress": 0.2,
+        "inverse_water_stress": 0.15,
+        "geometry_stability": 0.1
+      },
+      "weights_nominal": {
+        "agricultural_probability": 0.35,
+        "ndvi_persistence": 0.2,
+        "inverse_vigor_stress": 0.2,
+        "inverse_water_stress": 0.15,
+        "geometry_stability": 0.1
+      },
+      "cite_slots": {
+        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3",
+        "observation_date": "2026-09-06",
+        "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
+        "tile": "39QYA",
+        "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer"
+      },
+      "honesty_note_en": "Provisional agriculture_aou suitability (expert_v1). Suitability ≠ Confidence ≠ data_quality_confidence — never merge. Moisture/vigor terms are NDMI/NDVI stress proxies, not plot soil moisture %. Not applied to mountain cells. No action auto-assign.",
+      "honesty_note_ar": "ملاءمة زراعية مؤقتة لوحدات الرصد (خبير v1). الملاءمة ≠ الثقة ≠ ثقة جودة البيانات — لا تُدمَج. Proxies الرطوبة/الحيوية من NDMI/NDVI وليست رطوبة تربة %. لا تُطبَّق على خلايا الجبال. لا تعيين إجراء تلقائي.",
+      "suitability_neq_confidence_note_en": "Suitability ≠ Confidence — these scores are never merged into one misleading number.",
+      "suitability_neq_confidence_note_ar": "الملاءمة ≠ الثقة — لا تُدمَج الدرجتان في رقم واحد مضلّل.",
+      "never_merge_with_confidence": true,
+      "mountain_apply": false,
+      "action_auto_assign": false,
+      "why_this_site": {
+        "headline": "AOU-NJ-000004: provisional agriculture_aou suitability 46.5/100 (moderate relative among components; ag_probability_norm=0.53) — expert_v1_provisional, not operational truth",
+        "drivers": [
+          "Agricultural probability (norm) available: 0.53 (weight 0.35).",
+          "Moisture proxy from inverse water_stress (NDMI-based): 0.37 — not soil moisture %.",
+          "Vigor proxy from inverse vigor_stress (NDVI-based): 0.37 — not fertilizer diagnosis.",
+          "Phenology / NDVI persistence fit: 0.25.",
+          "Geometry stability (AOU IoU/area gate): 1.00.",
+          "Weighted suitability_score=46.5 shown as components_only (Suitability ≠ Confidence)."
+        ],
+        "cautions": [
+          "expert_v1_provisional — Agrofostery weight locks; not field-validated operational truth.",
+          "Do not merge with Confidence or data_quality_confidence.",
+          "Mountain cells: mountain_apply=false — these weights must not be used.",
+          "action_ladder_suggestion remains null (manual enum only).",
+          "NDRE unavailable on this AOU observation.",
+          "Thin AOU clear-date history — persistence is a weak provisional proxy.",
+          "No prior IoU (new or unmatched ID) — geometry stability uses area gate only.",
+          "Evidence gap: no_ndre",
+          "Evidence gap: no_field_visit",
+          "Evidence gap: thin_aou_history",
+          "Evidence gap: no_historical_seasons",
+          "Evidence gap: no_prior_iou",
+          "Evidence gap: no_post_khareef_clear",
+          "Evidence gap: no_mpi_curve",
+          "Evidence gap: window_series_stub_only"
+        ],
+        "recommended_next_step": "Manual next step: field irrigation inspection recommended (provisional — not auto-assigned from suitability).",
+        "action_ladder_suggestion": null
+      }
+    },
+    {
+      "aou_id": "AOU-NJ-000005",
+      "suitability_domain": "agriculture_aou",
+      "status": "expert_v1_provisional",
+      "suitability_score": 45.27,
+      "suitability_summary_label": "components_only",
+      "suitability_components": {
+        "moisture_proxy": 0.3925,
+        "vigor_proxy": 0.4102,
+        "phenology_fit": 0.25,
+        "terrain_constraint": 1.0,
+        "agricultural_probability_norm": 0.4622
+      },
+      "weights_used": {
+        "agricultural_probability": 0.35,
+        "ndvi_persistence": 0.2,
+        "inverse_vigor_stress": 0.2,
+        "inverse_water_stress": 0.15,
+        "geometry_stability": 0.1
+      },
+      "weights_nominal": {
+        "agricultural_probability": 0.35,
+        "ndvi_persistence": 0.2,
+        "inverse_vigor_stress": 0.2,
+        "inverse_water_stress": 0.15,
+        "geometry_stability": 0.1
+      },
+      "cite_slots": {
+        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3",
+        "observation_date": "2026-09-06",
+        "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
+        "tile": "39QYA",
+        "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer"
+      },
+      "honesty_note_en": "Provisional agriculture_aou suitability (expert_v1). Suitability ≠ Confidence ≠ data_quality_confidence — never merge. Moisture/vigor terms are NDMI/NDVI stress proxies, not plot soil moisture %. Not applied to mountain cells. No action auto-assign.",
+      "honesty_note_ar": "ملاءمة زراعية مؤقتة لوحدات الرصد (خبير v1). الملاءمة ≠ الثقة ≠ ثقة جودة البيانات — لا تُدمَج. Proxies الرطوبة/الحيوية من NDMI/NDVI وليست رطوبة تربة %. لا تُطبَّق على خلايا الجبال. لا تعيين إجراء تلقائي.",
+      "suitability_neq_confidence_note_en": "Suitability ≠ Confidence — these scores are never merged into one misleading number.",
+      "suitability_neq_confidence_note_ar": "الملاءمة ≠ الثقة — لا تُدمَج الدرجتان في رقم واحد مضلّل.",
+      "never_merge_with_confidence": true,
+      "mountain_apply": false,
+      "action_auto_assign": false,
+      "why_this_site": {
+        "headline": "AOU-NJ-000005: provisional agriculture_aou suitability 45.3/100 (moderate relative among components; ag_probability_norm=0.46) — expert_v1_provisional, not operational truth",
+        "drivers": [
+          "Agricultural probability (norm) available: 0.46 (weight 0.35).",
+          "Moisture proxy from inverse water_stress (NDMI-based): 0.39 — not soil moisture %.",
+          "Vigor proxy from inverse vigor_stress (NDVI-based): 0.41 — not fertilizer diagnosis.",
+          "Phenology / NDVI persistence fit: 0.25.",
+          "Geometry stability (AOU IoU/area gate): 1.00.",
+          "Weighted suitability_score=45.3 shown as components_only (Suitability ≠ Confidence)."
+        ],
+        "cautions": [
+          "expert_v1_provisional — Agrofostery weight locks; not field-validated operational truth.",
+          "Do not merge with Confidence or data_quality_confidence.",
+          "Mountain cells: mountain_apply=false — these weights must not be used.",
+          "action_ladder_suggestion remains null (manual enum only).",
+          "NDRE unavailable on this AOU observation.",
+          "Thin AOU clear-date history — persistence is a weak provisional proxy.",
+          "No prior IoU (new or unmatched ID) — geometry stability uses area gate only.",
+          "Evidence gap: no_ndre",
+          "Evidence gap: no_field_visit",
+          "Evidence gap: thin_aou_history",
+          "Evidence gap: no_historical_seasons",
+          "Evidence gap: no_prior_iou",
+          "Evidence gap: no_post_khareef_clear",
+          "Evidence gap: no_mpi_curve",
+          "Evidence gap: window_series_stub_only"
+        ],
+        "recommended_next_step": "Manual next step: field irrigation inspection recommended (provisional — not auto-assigned from suitability).",
+        "action_ladder_suggestion": null
+      }
+    },
+    {
+      "aou_id": "AOU-NJ-000006",
+      "suitability_domain": "agriculture_aou",
+      "status": "expert_v1_provisional",
+      "suitability_score": 47.2,
+      "suitability_summary_label": "components_only",
+      "suitability_components": {
+        "moisture_proxy": 0.4344,
+        "vigor_proxy": 0.4343,
+        "phenology_fit": 0.25,
+        "terrain_constraint": 1.0,
+        "agricultural_probability_norm": 0.4856
+      },
+      "weights_used": {
+        "agricultural_probability": 0.35,
+        "ndvi_persistence": 0.2,
+        "inverse_vigor_stress": 0.2,
+        "inverse_water_stress": 0.15,
+        "geometry_stability": 0.1
+      },
+      "weights_nominal": {
+        "agricultural_probability": 0.35,
+        "ndvi_persistence": 0.2,
+        "inverse_vigor_stress": 0.2,
+        "inverse_water_stress": 0.15,
+        "geometry_stability": 0.1
+      },
+      "cite_slots": {
+        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3",
+        "observation_date": "2026-09-06",
+        "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
+        "tile": "39QYA",
+        "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer"
+      },
+      "honesty_note_en": "Provisional agriculture_aou suitability (expert_v1). Suitability ≠ Confidence ≠ data_quality_confidence — never merge. Moisture/vigor terms are NDMI/NDVI stress proxies, not plot soil moisture %. Not applied to mountain cells. No action auto-assign.",
+      "honesty_note_ar": "ملاءمة زراعية مؤقتة لوحدات الرصد (خبير v1). الملاءمة ≠ الثقة ≠ ثقة جودة البيانات — لا تُدمَج. Proxies الرطوبة/الحيوية من NDMI/NDVI وليست رطوبة تربة %. لا تُطبَّق على خلايا الجبال. لا تعيين إجراء تلقائي.",
+      "suitability_neq_confidence_note_en": "Suitability ≠ Confidence — these scores are never merged into one misleading number.",
+      "suitability_neq_confidence_note_ar": "الملاءمة ≠ الثقة — لا تُدمَج الدرجتان في رقم واحد مضلّل.",
+      "never_merge_with_confidence": true,
+      "mountain_apply": false,
+      "action_auto_assign": false,
+      "why_this_site": {
+        "headline": "AOU-NJ-000006: provisional agriculture_aou suitability 47.2/100 (moderate relative among components; ag_probability_norm=0.49) — expert_v1_provisional, not operational truth",
+        "drivers": [
+          "Agricultural probability (norm) available: 0.49 (weight 0.35).",
+          "Moisture proxy from inverse water_stress (NDMI-based): 0.43 — not soil moisture %.",
+          "Vigor proxy from inverse vigor_stress (NDVI-based): 0.43 — not fertilizer diagnosis.",
+          "Phenology / NDVI persistence fit: 0.25.",
+          "Geometry stability (AOU IoU/area gate): 1.00.",
+          "Weighted suitability_score=47.2 shown as components_only (Suitability ≠ Confidence)."
+        ],
+        "cautions": [
+          "expert_v1_provisional — Agrofostery weight locks; not field-validated operational truth.",
+          "Do not merge with Confidence or data_quality_confidence.",
+          "Mountain cells: mountain_apply=false — these weights must not be used.",
+          "action_ladder_suggestion remains null (manual enum only).",
+          "NDRE unavailable on this AOU observation.",
+          "Thin AOU clear-date history — persistence is a weak provisional proxy.",
+          "No prior IoU (new or unmatched ID) — geometry stability uses area gate only.",
+          "Evidence gap: no_ndre",
+          "Evidence gap: no_field_visit",
+          "Evidence gap: thin_aou_history",
+          "Evidence gap: no_historical_seasons",
+          "Evidence gap: no_prior_iou",
+          "Evidence gap: no_post_khareef_clear",
+          "Evidence gap: no_mpi_curve",
+          "Evidence gap: window_series_stub_only"
+        ],
+        "recommended_next_step": "Manual next step: field irrigation inspection recommended (provisional — not auto-assigned from suitability).",
+        "action_ladder_suggestion": null
+      }
+    },
+    {
+      "aou_id": "AOU-NJ-000007",
+      "suitability_domain": "agriculture_aou",
+      "status": "expert_v1_provisional",
+      "suitability_score": 51.05,
+      "suitability_summary_label": "components_only",
+      "suitability_components": {
+        "moisture_proxy": 0.3733,
+        "vigor_proxy": 0.3886,
+        "phenology_fit": 0.25,
+        "terrain_constraint": 1.0,
+        "agricultural_probability_norm": 0.648
+      },
+      "weights_used": {
+        "agricultural_probability": 0.35,
+        "ndvi_persistence": 0.2,
+        "inverse_vigor_stress": 0.2,
+        "inverse_water_stress": 0.15,
+        "geometry_stability": 0.1
+      },
+      "weights_nominal": {
+        "agricultural_probability": 0.35,
+        "ndvi_persistence": 0.2,
+        "inverse_vigor_stress": 0.2,
+        "inverse_water_stress": 0.15,
+        "geometry_stability": 0.1
+      },
+      "cite_slots": {
+        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3",
+        "observation_date": "2026-09-06",
+        "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
+        "tile": "39QYA",
+        "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer"
+      },
+      "honesty_note_en": "Provisional agriculture_aou suitability (expert_v1). Suitability ≠ Confidence ≠ data_quality_confidence — never merge. Moisture/vigor terms are NDMI/NDVI stress proxies, not plot soil moisture %. Not applied to mountain cells. No action auto-assign.",
+      "honesty_note_ar": "ملاءمة زراعية مؤقتة لوحدات الرصد (خبير v1). الملاءمة ≠ الثقة ≠ ثقة جودة البيانات — لا تُدمَج. Proxies الرطوبة/الحيوية من NDMI/NDVI وليست رطوبة تربة %. لا تُطبَّق على خلايا الجبال. لا تعيين إجراء تلقائي.",
+      "suitability_neq_confidence_note_en": "Suitability ≠ Confidence — these scores are never merged into one misleading number.",
+      "suitability_neq_confidence_note_ar": "الملاءمة ≠ الثقة — لا تُدمَج الدرجتان في رقم واحد مضلّل.",
+      "never_merge_with_confidence": true,
+      "mountain_apply": false,
+      "action_auto_assign": false,
+      "why_this_site": {
+        "headline": "AOU-NJ-000007: provisional agriculture_aou suitability 51.0/100 (moderate relative among components; ag_probability_norm=0.65) — expert_v1_provisional, not operational truth",
+        "drivers": [
+          "Agricultural probability (norm) available: 0.65 (weight 0.35).",
+          "Moisture proxy from inverse water_stress (NDMI-based): 0.37 — not soil moisture %.",
+          "Vigor proxy from inverse vigor_stress (NDVI-based): 0.39 — not fertilizer diagnosis.",
+          "Phenology / NDVI persistence fit: 0.25.",
+          "Geometry stability (AOU IoU/area gate): 1.00.",
+          "Weighted suitability_score=51.0 shown as components_only (Suitability ≠ Confidence)."
+        ],
+        "cautions": [
+          "expert_v1_provisional — Agrofostery weight locks; not field-validated operational truth.",
+          "Do not merge with Confidence or data_quality_confidence.",
+          "Mountain cells: mountain_apply=false — these weights must not be used.",
+          "action_ladder_suggestion remains null (manual enum only).",
+          "NDRE unavailable on this AOU observation.",
+          "Thin AOU clear-date history — persistence is a weak provisional proxy.",
+          "No prior IoU (new or unmatched ID) — geometry stability uses area gate only.",
+          "Evidence gap: no_ndre",
+          "Evidence gap: no_field_visit",
+          "Evidence gap: thin_aou_history",
+          "Evidence gap: no_historical_seasons",
+          "Evidence gap: no_prior_iou",
+          "Evidence gap: no_post_khareef_clear",
+          "Evidence gap: no_mpi_curve",
+          "Evidence gap: window_series_stub_only"
+        ],
+        "recommended_next_step": "Manual next step: field irrigation inspection recommended (provisional — not auto-assigned from suitability).",
+        "action_ladder_suggestion": null
+      }
+    },
+    {
+      "aou_id": "AOU-NJ-000008",
+      "suitability_domain": "agriculture_aou",
+      "status": "expert_v1_provisional",
+      "suitability_score": 54.02,
+      "suitability_summary_label": "components_only",
+      "suitability_components": {
+        "moisture_proxy": 0.4737,
+        "vigor_proxy": 0.4502,
+        "phenology_fit": 0.25,
+        "terrain_constraint": 1.0,
+        "agricultural_probability_norm": 0.6547
+      },
+      "weights_used": {
+        "agricultural_probability": 0.35,
+        "ndvi_persistence": 0.2,
+        "inverse_vigor_stress": 0.2,
+        "inverse_water_stress": 0.15,
+        "geometry_stability": 0.1
+      },
+      "weights_nominal": {
+        "agricultural_probability": 0.35,
+        "ndvi_persistence": 0.2,
+        "inverse_vigor_stress": 0.2,
+        "inverse_water_stress": 0.15,
+        "geometry_stability": 0.1
+      },
+      "cite_slots": {
+        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3",
+        "observation_date": "2026-09-06",
+        "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
+        "tile": "39QYA",
+        "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer"
+      },
+      "honesty_note_en": "Provisional agriculture_aou suitability (expert_v1). Suitability ≠ Confidence ≠ data_quality_confidence — never merge. Moisture/vigor terms are NDMI/NDVI stress proxies, not plot soil moisture %. Not applied to mountain cells. No action auto-assign.",
+      "honesty_note_ar": "ملاءمة زراعية مؤقتة لوحدات الرصد (خبير v1). الملاءمة ≠ الثقة ≠ ثقة جودة البيانات — لا تُدمَج. Proxies الرطوبة/الحيوية من NDMI/NDVI وليست رطوبة تربة %. لا تُطبَّق على خلايا الجبال. لا تعيين إجراء تلقائي.",
+      "suitability_neq_confidence_note_en": "Suitability ≠ Confidence — these scores are never merged into one misleading number.",
+      "suitability_neq_confidence_note_ar": "الملاءمة ≠ الثقة — لا تُدمَج الدرجتان في رقم واحد مضلّل.",
+      "never_merge_with_confidence": true,
+      "mountain_apply": false,
+      "action_auto_assign": false,
+      "why_this_site": {
+        "headline": "AOU-NJ-000008: provisional agriculture_aou suitability 54.0/100 (moderate relative among components; ag_probability_norm=0.65) — expert_v1_provisional, not operational truth",
+        "drivers": [
+          "Agricultural probability (norm) available: 0.65 (weight 0.35).",
+          "Moisture proxy from inverse water_stress (NDMI-based): 0.47 — not soil moisture %.",
+          "Vigor proxy from inverse vigor_stress (NDVI-based): 0.45 — not fertilizer diagnosis.",
+          "Phenology / NDVI persistence fit: 0.25.",
+          "Geometry stability (AOU IoU/area gate): 1.00.",
+          "Weighted suitability_score=54.0 shown as components_only (Suitability ≠ Confidence)."
+        ],
+        "cautions": [
+          "expert_v1_provisional — Agrofostery weight locks; not field-validated operational truth.",
+          "Do not merge with Confidence or data_quality_confidence.",
+          "Mountain cells: mountain_apply=false — these weights must not be used.",
+          "action_ladder_suggestion remains null (manual enum only).",
+          "NDRE unavailable on this AOU observation.",
+          "Thin AOU clear-date history — persistence is a weak provisional proxy.",
+          "No prior IoU (new or unmatched ID) — geometry stability uses area gate only.",
+          "Evidence gap: no_ndre",
+          "Evidence gap: no_field_visit",
+          "Evidence gap: thin_aou_history",
+          "Evidence gap: no_historical_seasons",
+          "Evidence gap: no_prior_iou",
+          "Evidence gap: no_post_khareef_clear",
+          "Evidence gap: no_mpi_curve",
+          "Evidence gap: window_series_stub_only"
+        ],
+        "recommended_next_step": "Manual next step: continue monitoring and schedule field verification when evidence gaps shrink — action ladder remains manual.",
+        "action_ladder_suggestion": null
+      }
+    },
+    {
+      "aou_id": "AOU-NJ-000009",
+      "suitability_domain": "agriculture_aou",
+      "status": "expert_v1_provisional",
+      "suitability_score": 47.3,
+      "suitability_summary_label": "components_only",
+      "suitability_components": {
+        "moisture_proxy": 0.4081,
+        "vigor_proxy": 0.4433,
+        "phenology_fit": 0.25,
+        "terrain_constraint": 1.0,
+        "agricultural_probability_norm": 0.4946
+      },
+      "weights_used": {
+        "agricultural_probability": 0.35,
+        "ndvi_persistence": 0.2,
+        "inverse_vigor_stress": 0.2,
+        "inverse_water_stress": 0.15,
+        "geometry_stability": 0.1
+      },
+      "weights_nominal": {
+        "agricultural_probability": 0.35,
+        "ndvi_persistence": 0.2,
+        "inverse_vigor_stress": 0.2,
+        "inverse_water_stress": 0.15,
+        "geometry_stability": 0.1
+      },
+      "cite_slots": {
+        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3",
+        "observation_date": "2026-09-06",
+        "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
+        "tile": "39QYA",
+        "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer"
+      },
+      "honesty_note_en": "Provisional agriculture_aou suitability (expert_v1). Suitability ≠ Confidence ≠ data_quality_confidence — never merge. Moisture/vigor terms are NDMI/NDVI stress proxies, not plot soil moisture %. Not applied to mountain cells. No action auto-assign.",
+      "honesty_note_ar": "ملاءمة زراعية مؤقتة لوحدات الرصد (خبير v1). الملاءمة ≠ الثقة ≠ ثقة جودة البيانات — لا تُدمَج. Proxies الرطوبة/الحيوية من NDMI/NDVI وليست رطوبة تربة %. لا تُطبَّق على خلايا الجبال. لا تعيين إجراء تلقائي.",
+      "suitability_neq_confidence_note_en": "Suitability ≠ Confidence — these scores are never merged into one misleading number.",
+      "suitability_neq_confidence_note_ar": "الملاءمة ≠ الثقة — لا تُدمَج الدرجتان في رقم واحد مضلّل.",
+      "never_merge_with_confidence": true,
+      "mountain_apply": false,
+      "action_auto_assign": false,
+      "why_this_site": {
+        "headline": "AOU-NJ-000009: provisional agriculture_aou suitability 47.3/100 (moderate relative among components; ag_probability_norm=0.49) — expert_v1_provisional, not operational truth",
+        "drivers": [
+          "Agricultural probability (norm) available: 0.49 (weight 0.35).",
+          "Moisture proxy from inverse water_stress (NDMI-based): 0.41 — not soil moisture %.",
+          "Vigor proxy from inverse vigor_stress (NDVI-based): 0.44 — not fertilizer diagnosis.",
+          "Phenology / NDVI persistence fit: 0.25.",
+          "Geometry stability (AOU IoU/area gate): 1.00.",
+          "Weighted suitability_score=47.3 shown as components_only (Suitability ≠ Confidence)."
+        ],
+        "cautions": [
+          "expert_v1_provisional — Agrofostery weight locks; not field-validated operational truth.",
+          "Do not merge with Confidence or data_quality_confidence.",
+          "Mountain cells: mountain_apply=false — these weights must not be used.",
+          "action_ladder_suggestion remains null (manual enum only).",
+          "NDRE unavailable on this AOU observation.",
+          "Thin AOU clear-date history — persistence is a weak provisional proxy.",
+          "No prior IoU (new or unmatched ID) — geometry stability uses area gate only.",
+          "Evidence gap: no_ndre",
+          "Evidence gap: no_field_visit",
+          "Evidence gap: thin_aou_history",
+          "Evidence gap: no_historical_seasons",
+          "Evidence gap: no_prior_iou",
+          "Evidence gap: no_post_khareef_clear",
+          "Evidence gap: no_mpi_curve",
+          "Evidence gap: window_series_stub_only"
+        ],
+        "recommended_next_step": "Manual next step: field irrigation inspection recommended (provisional — not auto-assigned from suitability).",
+        "action_ladder_suggestion": null
+      }
+    }
+  ],
+  "snapshot_kind": "offline_provisional_copy",
+  "public_path": "app/public/data/decision/aou_suitability_components.json"
+}
