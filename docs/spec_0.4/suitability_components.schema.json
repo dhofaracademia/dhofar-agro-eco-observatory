@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dhofaracademia.example/spec_0.4/suitability_components.schema.json",
+  "title": "SuitabilityComponents",
+  "description": "Phase-3 Decision Engine — agriculture_aou suitability components. Suitability ≠ Confidence ≠ data_quality_confidence. Mountain cells must not use these weights (mountain_apply=false). Moisture/vigor are NDMI/NDVI stress proxies — never soil moisture %.",
+  "type": "object",
+  "required": [
+    "aou_id",
+    "suitability_domain",
+    "status",
+    "suitability_summary_label",
+    "suitability_components",
+    "never_merge_with_confidence",
+    "mountain_apply",
+    "action_auto_assign"
+  ],
+  "properties": {
+    "aou_id": {
+      "type": "string",
+      "pattern": "^AOU-NJ-[0-9]{6}$"
+    },
+    "suitability_domain": {
+      "type": "string",
+      "const": "agriculture_aou"
+    },
+    "status": {
+      "type": "string",
+      "const": "expert_v1_provisional"
+    },
+    "suitability_score": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Weighted 0–100 from locked agriculture_aou components; null if insufficient inputs"
+    },
+    "suitability_summary_label": {
+      "type": "string",
+      "const": "components_only",
+      "description": "UI must present component breakdown; do not overclaim a single opaque verdict"
+    },
+    "suitability_components": {
+      "type": "object",
+      "required": [
+        "moisture_proxy",
+        "vigor_proxy",
+        "phenology_fit",
+        "terrain_constraint"
+      ],
+      "properties": {
+        "moisture_proxy": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "maximum": 1,
+          "description": "From inverse water_stress / NDMI proxy — NOT soil moisture %"
+        },
+        "vigor_proxy": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "maximum": 1,
+          "description": "From inverse vigor_stress / NDVI proxy — NOT fertilizer diagnosis"
+        },
+        "phenology_fit": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "maximum": 1,
+          "description": "NDVI persistence / phenology fit feature (0–1)"
+        },
+        "terrain_constraint": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "maximum": 1,
+          "description": "AOU geometry stability (IoU≥0.3 or area≥2ha) — NOT mountain DEM/TWI suitability"
+        },
+        "agricultural_probability_norm": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "maximum": 1,
+          "description": "ag_probability/100 — core agriculture_aou weight term"
+        }
+      },
+      "additionalProperties": false
+    },
+    "weights_used": {
+      "type": "object",
+      "description": "Locked Agrofostery weights after renorm for missing terms",
+      "additionalProperties": { "type": "number" }
+    },
+    "weights_nominal": {
+      "type": "object",
+      "description": "Nominal locked weights before renorm",
+      "properties": {
+        "agricultural_probability": { "type": "number", "const": 0.35 },
+        "ndvi_persistence": { "type": "number", "const": 0.20 },
+        "inverse_vigor_stress": { "type": "number", "const": 0.20 },
+        "inverse_water_stress": { "type": "number", "const": 0.15 },
+        "geometry_stability": { "type": "number", "const": 0.10 }
+      }
+    },
+    "cite_slots": {
+      "type": "object",
+      "properties": {
+        "formula_ref": { "type": "string" },
+        "observation_date": { "type": ["string", "null"] },
+        "product_id": { "type": ["string", "null"] },
+        "tile": { "type": ["string", "null"] },
+        "source": { "type": ["string", "null"] }
+      }
+    },
+    "honesty_note_en": { "type": "string" },
+    "honesty_note_ar": { "type": "string" },
+    "suitability_neq_confidence_note_en": {
+      "type": "string",
+      "description": "Suitability ≠ Confidence — never merge"
+    },
+    "suitability_neq_confidence_note_ar": { "type": "string" },
+    "never_merge_with_confidence": { "type": "boolean", "const": true },
+    "mountain_apply": {
+      "type": "boolean",
+      "const": false,
+      "description": "Do NOT apply agriculture_aou weights to mountain cells"
+    },
+    "action_auto_assign": {
+      "type": "boolean",
+      "const": false,
+      "description": "No suitability→action auto-assign"
+    },
+    "why_this_site": {
+      "$ref": "#/$defs/why_this_site"
+    }
+  },
+  "$defs": {
+    "why_this_site": {
+      "type": "object",
+      "required": [
+        "headline",
+        "drivers",
+        "cautions",
+        "recommended_next_step",
+        "action_ladder_suggestion"
+      ],
+      "properties": {
+        "headline": { "type": "string" },
+        "drivers": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Evidence bullets from available scores only — no overclaim"
+        },
+        "cautions": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "recommended_next_step": {
+          "type": "string",
+          "description": "Manual recommended next step text — not an auto action enum"
+        },
+        "action_ladder_suggestion": {
+          "type": "null",
+          "description": "MUST stay null — action ladder is manual/enum display only"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

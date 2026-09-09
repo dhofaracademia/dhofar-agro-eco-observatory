@@ -1,0 +1,380 @@
+{
+  "version": "0.4.3-phase3-scaffolds",
+  "generated_at": "2026-09-09T05:08:20.973595+00:00",
+  "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3",
+  "status": "expert_v1_provisional",
+  "never_merge": true,
+  "mountain_apply": false,
+  "action_auto_assign": false,
+  "writes_to_app_public": false,
+  "input_refs": {
+    "aou_registry": "app/public/data/aou/aou_registry.json",
+    "aou_observations": "app/public/data/aou/aou_observations.json"
+  },
+  "honesty_en": "Offline decision scaffolds for Najd agriculture AOUs only. Suitability ≠ Confidence ≠ data_quality_confidence. Not ecological certainty. No mountain UI. Action ladder manual only.",
+  "schema_ref": "docs/spec_0.4/confidence.schema.json",
+  "confidence_domain": "data_evidence",
+  "not_ecological_certainty": true,
+  "units": [
+    {
+      "aou_id": "AOU-NJ-000001",
+      "confidence_domain": "data_evidence",
+      "status": "expert_v1_provisional",
+      "data_quality_confidence": 97.0,
+      "temporal_coverage_confidence": 12.5,
+      "spatial_clarity_confidence": 0.0,
+      "overall_confidence": 41.93,
+      "components": {
+        "data_quality_norm": 0.97,
+        "n_clear_dates_norm": 0.125,
+        "historical_depth": 0.0,
+        "prior_iou": 0.0
+      },
+      "weights_used": {
+        "data_quality": 0.4,
+        "n_clear_dates": 0.25,
+        "historical_depth": 0.2,
+        "prior_iou": 0.15
+      },
+      "weights_nominal": {
+        "data_quality": 0.4,
+        "n_clear_dates": 0.25,
+        "historical_depth": 0.2,
+        "prior_iou": 0.15
+      },
+      "n_clear_dates": 1,
+      "prior_seasons_count": 0,
+      "is_new_id": true,
+      "cite_slots": {
+        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3",
+        "observation_date": "2026-09-06",
+        "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909"
+      },
+      "honesty_note_en": "Provisional data_evidence confidence (expert_v1). Not ecological certainty. Suitability ≠ Confidence ≠ data_quality_confidence alone — never merge. Not applied to mountain cells.",
+      "honesty_note_ar": "ثقة أدلة البيانات مؤقتة (خبير v1). ليست يقيناً بيئياً. الملاءمة ≠ الثقة ≠ ثقة جودة البيانات وحدها — لا تُدمَج. لا تُطبَّق على خلايا الجبال.",
+      "never_merge_with_suitability": true,
+      "not_ecological_certainty": true,
+      "mountain_apply": false
+    },
+    {
+      "aou_id": "AOU-NJ-000002",
+      "confidence_domain": "data_evidence",
+      "status": "expert_v1_provisional",
+      "data_quality_confidence": 97.0,
+      "temporal_coverage_confidence": 12.5,
+      "spatial_clarity_confidence": 0.0,
+      "overall_confidence": 41.93,
+      "components": {
+        "data_quality_norm": 0.97,
+        "n_clear_dates_norm": 0.125,
+        "historical_depth": 0.0,
+        "prior_iou": 0.0
+      },
+      "weights_used": {
+        "data_quality": 0.4,
+        "n_clear_dates": 0.25,
+        "historical_depth": 0.2,
+        "prior_iou": 0.15
+      },
+      "weights_nominal": {
+        "data_quality": 0.4,
+        "n_clear_dates": 0.25,
+        "historical_depth": 0.2,
+        "prior_iou": 0.15
+      },
+      "n_clear_dates": 1,
+      "prior_seasons_count": 0,
+      "is_new_id": true,
+      "cite_slots": {
+        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3",
+        "observation_date": "2026-09-06",
+        "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909"
+      },
+      "honesty_note_en": "Provisional data_evidence confidence (expert_v1). Not ecological certainty. Suitability ≠ Confidence ≠ data_quality_confidence alone — never merge. Not applied to mountain cells.",
+      "honesty_note_ar": "ثقة أدلة البيانات مؤقتة (خبير v1). ليست يقيناً بيئياً. الملاءمة ≠ الثقة ≠ ثقة جودة البيانات وحدها — لا تُدمَج. لا تُطبَّق على خلايا الجبال.",
+      "never_merge_with_suitability": true,
+      "not_ecological_certainty": true,
+      "mountain_apply": false
+    },
+    {
+      "aou_id": "AOU-NJ-000003",
+      "confidence_domain": "data_evidence",
+      "status": "expert_v1_provisional",
+      "data_quality_confidence": 97.0,
+      "temporal_coverage_confidence": 12.5,
+      "spatial_clarity_confidence": 0.0,
+      "overall_confidence": 41.93,
+      "components": {
+        "data_quality_norm": 0.97,
+        "n_clear_dates_norm": 0.125,
+        "historical_depth": 0.0,
+        "prior_iou": 0.0
+      },
+      "weights_used": {
+        "data_quality": 0.4,
+        "n_clear_dates": 0.25,
+        "historical_depth": 0.2,
+        "prior_iou": 0.15
+      },
+      "weights_nominal": {
+        "data_quality": 0.4,
+        "n_clear_dates": 0.25,
+        "historical_depth": 0.2,
+        "prior_iou": 0.15
+      },
+      "n_clear_dates": 1,
+      "prior_seasons_count": 0,
+      "is_new_id": true,
+      "cite_slots": {
+        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3",
+        "observation_date": "2026-09-06",
+        "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909"
+      },
+      "honesty_note_en": "Provisional data_evidence confidence (expert_v1). Not ecological certainty. Suitability ≠ Confidence ≠ data_quality_confidence alone — never merge. Not applied to mountain cells.",
+      "honesty_note_ar": "ثقة أدلة البيانات مؤقتة (خبير v1). ليست يقيناً بيئياً. الملاءمة ≠ الثقة ≠ ثقة جودة البيانات وحدها — لا تُدمَج. لا تُطبَّق على خلايا الجبال.",
+      "never_merge_with_suitability": true,
+      "not_ecological_certainty": true,
+      "mountain_apply": false
+    },
+    {
+      "aou_id": "AOU-NJ-000004",
+      "confidence_domain": "data_evidence",
+      "status": "expert_v1_provisional",
+      "data_quality_confidence": 97.0,
+      "temporal_coverage_confidence": 12.5,
+      "spatial_clarity_confidence": 0.0,
+      "overall_confidence": 41.93,
+      "components": {
+        "data_quality_norm": 0.97,
+        "n_clear_dates_norm": 0.125,
+        "historical_depth": 0.0,
+        "prior_iou": 0.0
+      },
+      "weights_used": {
+        "data_quality": 0.4,
+        "n_clear_dates": 0.25,
+        "historical_depth": 0.2,
+        "prior_iou": 0.15
+      },
+      "weights_nominal": {
+        "data_quality": 0.4,
+        "n_clear_dates": 0.25,
+        "historical_depth": 0.2,
+        "prior_iou": 0.15
+      },
+      "n_clear_dates": 1,
+      "prior_seasons_count": 0,
+      "is_new_id": true,
+      "cite_slots": {
+        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3",
+        "observation_date": "2026-09-06",
+        "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909"
+      },
+      "honesty_note_en": "Provisional data_evidence confidence (expert_v1). Not ecological certainty. Suitability ≠ Confidence ≠ data_quality_confidence alone — never merge. Not applied to mountain cells.",
+      "honesty_note_ar": "ثقة أدلة البيانات مؤقتة (خبير v1). ليست يقيناً بيئياً. الملاءمة ≠ الثقة ≠ ثقة جودة البيانات وحدها — لا تُدمَج. لا تُطبَّق على خلايا الجبال.",
+      "never_merge_with_suitability": true,
+      "not_ecological_certainty": true,
+      "mountain_apply": false
+    },
+    {
+      "aou_id": "AOU-NJ-000005",
+      "confidence_domain": "data_evidence",
+      "status": "expert_v1_provisional",
+      "data_quality_confidence": 97.0,
+      "temporal_coverage_confidence": 12.5,
+      "spatial_clarity_confidence": 0.0,
+      "overall_confidence": 41.93,
+      "components": {
+        "data_quality_norm": 0.97,
+        "n_clear_dates_norm": 0.125,
+        "historical_depth": 0.0,
+        "prior_iou": 0.0
+      },
+      "weights_used": {
+        "data_quality": 0.4,
+        "n_clear_dates": 0.25,
+        "historical_depth": 0.2,
+        "prior_iou": 0.15
+      },
+      "weights_nominal": {
+        "data_quality": 0.4,
+        "n_clear_dates": 0.25,
+        "historical_depth": 0.2,
+        "prior_iou": 0.15
+      },
+      "n_clear_dates": 1,
+      "prior_seasons_count": 0,
+      "is_new_id": true,
+      "cite_slots": {
+        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3",
+        "observation_date": "2026-09-06",
+        "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909"
+      },
+      "honesty_note_en": "Provisional data_evidence confidence (expert_v1). Not ecological certainty. Suitability ≠ Confidence ≠ data_quality_confidence alone — never merge. Not applied to mountain cells.",
+      "honesty_note_ar": "ثقة أدلة البيانات مؤقتة (خبير v1). ليست يقيناً بيئياً. الملاءمة ≠ الثقة ≠ ثقة جودة البيانات وحدها — لا تُدمَج. لا تُطبَّق على خلايا الجبال.",
+      "never_merge_with_suitability": true,
+      "not_ecological_certainty": true,
+      "mountain_apply": false
+    },
+    {
+      "aou_id": "AOU-NJ-000006",
+      "confidence_domain": "data_evidence",
+      "status": "expert_v1_provisional",
+      "data_quality_confidence": 97.0,
+      "temporal_coverage_confidence": 12.5,
+      "spatial_clarity_confidence": 0.0,
+      "overall_confidence": 41.93,
+      "components": {
+        "data_quality_norm": 0.97,
+        "n_clear_dates_norm": 0.125,
+        "historical_depth": 0.0,
+        "prior_iou": 0.0
+      },
+      "weights_used": {
+        "data_quality": 0.4,
+        "n_clear_dates": 0.25,
+        "historical_depth": 0.2,
+        "prior_iou": 0.15
+      },
+      "weights_nominal": {
+        "data_quality": 0.4,
+        "n_clear_dates": 0.25,
+        "historical_depth": 0.2,
+        "prior_iou": 0.15
+      },
+      "n_clear_dates": 1,
+      "prior_seasons_count": 0,
+      "is_new_id": true,
+      "cite_slots": {
+        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3",
+        "observation_date": "2026-09-06",
+        "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909"
+      },
+      "honesty_note_en": "Provisional data_evidence confidence (expert_v1). Not ecological certainty. Suitability ≠ Confidence ≠ data_quality_confidence alone — never merge. Not applied to mountain cells.",
+      "honesty_note_ar": "ثقة أدلة البيانات مؤقتة (خبير v1). ليست يقيناً بيئياً. الملاءمة ≠ الثقة ≠ ثقة جودة البيانات وحدها — لا تُدمَج. لا تُطبَّق على خلايا الجبال.",
+      "never_merge_with_suitability": true,
+      "not_ecological_certainty": true,
+      "mountain_apply": false
+    },
+    {
+      "aou_id": "AOU-NJ-000007",
+      "confidence_domain": "data_evidence",
+      "status": "expert_v1_provisional",
+      "data_quality_confidence": 97.0,
+      "temporal_coverage_confidence": 12.5,
+      "spatial_clarity_confidence": 0.0,
+      "overall_confidence": 41.93,
+      "components": {
+        "data_quality_norm": 0.97,
+        "n_clear_dates_norm": 0.125,
+        "historical_depth": 0.0,
+        "prior_iou": 0.0
+      },
+      "weights_used": {
+        "data_quality": 0.4,
+        "n_clear_dates": 0.25,
+        "historical_depth": 0.2,
+        "prior_iou": 0.15
+      },
+      "weights_nominal": {
+        "data_quality": 0.4,
+        "n_clear_dates": 0.25,
+        "historical_depth": 0.2,
+        "prior_iou": 0.15
+      },
+      "n_clear_dates": 1,
+      "prior_seasons_count": 0,
+      "is_new_id": true,
+      "cite_slots": {
+        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3",
+        "observation_date": "2026-09-06",
+        "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909"
+      },
+      "honesty_note_en": "Provisional data_evidence confidence (expert_v1). Not ecological certainty. Suitability ≠ Confidence ≠ data_quality_confidence alone — never merge. Not applied to mountain cells.",
+      "honesty_note_ar": "ثقة أدلة البيانات مؤقتة (خبير v1). ليست يقيناً بيئياً. الملاءمة ≠ الثقة ≠ ثقة جودة البيانات وحدها — لا تُدمَج. لا تُطبَّق على خلايا الجبال.",
+      "never_merge_with_suitability": true,
+      "not_ecological_certainty": true,
+      "mountain_apply": false
+    },
+    {
+      "aou_id": "AOU-NJ-000008",
+      "confidence_domain": "data_evidence",
+      "status": "expert_v1_provisional",
+      "data_quality_confidence": 97.0,
+      "temporal_coverage_confidence": 12.5,
+      "spatial_clarity_confidence": 0.0,
+      "overall_confidence": 41.93,
+      "components": {
+        "data_quality_norm": 0.97,
+        "n_clear_dates_norm": 0.125,
+        "historical_depth": 0.0,
+        "prior_iou": 0.0
+      },
+      "weights_used": {
+        "data_quality": 0.4,
+        "n_clear_dates": 0.25,
+        "historical_depth": 0.2,
+        "prior_iou": 0.15
+      },
+      "weights_nominal": {
+        "data_quality": 0.4,
+        "n_clear_dates": 0.25,
+        "historical_depth": 0.2,
+        "prior_iou": 0.15
+      },
+      "n_clear_dates": 1,
+      "prior_seasons_count": 0,
+      "is_new_id": true,
+      "cite_slots": {
+        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3",
+        "observation_date": "2026-09-06",
+        "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909"
+      },
+      "honesty_note_en": "Provisional data_evidence confidence (expert_v1). Not ecological certainty. Suitability ≠ Confidence ≠ data_quality_confidence alone — never merge. Not applied to mountain cells.",
+      "honesty_note_ar": "ثقة أدلة البيانات مؤقتة (خبير v1). ليست يقيناً بيئياً. الملاءمة ≠ الثقة ≠ ثقة جودة البيانات وحدها — لا تُدمَج. لا تُطبَّق على خلايا الجبال.",
+      "never_merge_with_suitability": true,
+      "not_ecological_certainty": true,
+      "mountain_apply": false
+    },
+    {
+      "aou_id": "AOU-NJ-000009",
+      "confidence_domain": "data_evidence",
+      "status": "expert_v1_provisional",
+      "data_quality_confidence": 97.0,
+      "temporal_coverage_confidence": 12.5,
+      "spatial_clarity_confidence": 0.0,
+      "overall_confidence": 41.93,
+      "components": {
+        "data_quality_norm": 0.97,
+        "n_clear_dates_norm": 0.125,
+        "historical_depth": 0.0,
+        "prior_iou": 0.0
+      },
+      "weights_used": {
+        "data_quality": 0.4,
+        "n_clear_dates": 0.25,
+        "historical_depth": 0.2,
+        "prior_iou": 0.15
+      },
+      "weights_nominal": {
+        "data_quality": 0.4,
+        "n_clear_dates": 0.25,
+        "historical_depth": 0.2,
+        "prior_iou": 0.15
+      },
+      "n_clear_dates": 1,
+      "prior_seasons_count": 0,
+      "is_new_id": true,
+      "cite_slots": {
+        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3",
+        "observation_date": "2026-09-06",
+        "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909"
+      },
+      "honesty_note_en": "Provisional data_evidence confidence (expert_v1). Not ecological certainty. Suitability ≠ Confidence ≠ data_quality_confidence alone — never merge. Not applied to mountain cells.",
+      "honesty_note_ar": "ثقة أدلة البيانات مؤقتة (خبير v1). ليست يقيناً بيئياً. الملاءمة ≠ الثقة ≠ ثقة جودة البيانات وحدها — لا تُدمَج. لا تُطبَّق على خلايا الجبال.",
+      "never_merge_with_suitability": true,
+      "not_ecological_certainty": true,
+      "mountain_apply": false
+    }
+  ]
+}

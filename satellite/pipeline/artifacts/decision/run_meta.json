@@ -1,0 +1,29 @@
+{
+  "version": "0.4.3-phase3-scaffolds",
+  "generated_at": "2026-09-09T05:08:20.973595+00:00",
+  "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3",
+  "status": "expert_v1_provisional",
+  "never_merge": true,
+  "mountain_apply": false,
+  "action_auto_assign": false,
+  "writes_to_app_public": false,
+  "input_refs": {
+    "aou_registry": "app/public/data/aou/aou_registry.json",
+    "aou_observations": "app/public/data/aou/aou_observations.json"
+  },
+  "honesty_en": "Offline decision scaffolds for Najd agriculture AOUs only. Suitability ≠ Confidence ≠ data_quality_confidence. Not ecological certainty. No mountain UI. Action ladder manual only.",
+  "artifact_files": [
+    "aou_suitability_components.json",
+    "aou_confidence.json",
+    "aou_evidence_gaps.json",
+    "action_ladder.stubs.json"
+  ],
+  "aou_count": 9,
+  "engines": [
+    "engines/suitability.py",
+    "engines/confidence.py",
+    "engines/evidence_gap.py"
+  ],
+  "ui_gate": "Analysis Decision UI chrome deferred — artifacts-first PR",
+  "mpi_note_en": "If MPI is referenced: onset-T0 provisional only — do not label as post-khareef for agriculture AOUs."
+}
