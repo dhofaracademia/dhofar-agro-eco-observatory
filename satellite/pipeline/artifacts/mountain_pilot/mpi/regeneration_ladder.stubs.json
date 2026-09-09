@@ -1,0 +1,86 @@
+{
+  "schema_ref": "docs/spec_0.4/natural_regeneration_ladder.schema.json",
+  "science_lock": "SCIENCE_LOCKS_v0.4_phase1_2.md §6",
+  "status": "enum_and_rule_stubs_only",
+  "provisional": true,
+  "auto_assign_from_suitability": false,
+  "forbidden": [
+    "numeric_suitability_to_action_auto_assignment",
+    "campaign_hectares_as_official",
+    "seed_kg_as_official",
+    "crew_days_as_official",
+    "species_suitability_scores_as_operational_truth"
+  ],
+  "ladder_enum": [
+    "protect_natural_regeneration",
+    "assisted_natural_regeneration",
+    "enrichment_seeding",
+    "active_planting",
+    "avoid_defer"
+  ],
+  "labels": {
+    "protect_natural_regeneration": {
+      "en": "Protect Natural Regeneration",
+      "ar": "حماية التجدد الطبيعي",
+      "order": 1
+    },
+    "assisted_natural_regeneration": {
+      "en": "Assisted Natural Regeneration",
+      "ar": "تجدد طبيعي مُساعَد",
+      "order": 2
+    },
+    "enrichment_seeding": {
+      "en": "Enrichment Seeding",
+      "ar": "بذر إثرائي",
+      "order": 3
+    },
+    "active_planting": {
+      "en": "Active Planting",
+      "ar": "زراعة نشطة",
+      "order": 4
+    },
+    "avoid_defer": {
+      "en": "Avoid / Defer",
+      "ar": "تجنب / تأجيل",
+      "order": 5
+    }
+  },
+  "rule_stubs": [
+    {
+      "id": "stub_protect",
+      "ladder": "protect_natural_regeneration",
+      "rule_stub_en": "When field evidence shows intact natural recruits and low disturbance pressure, prefer protection over planting. Auto-assign from satellite suitability is FORBIDDEN.",
+      "requires_field_validation": true,
+      "auto_assign_from_suitability": false
+    },
+    {
+      "id": "stub_assisted",
+      "ladder": "assisted_natural_regeneration",
+      "rule_stub_en": "When recruits exist but face barriers (grazing, compaction), assist regeneration. Manual expert choice only in Phase 2 — no numeric score→action wiring.",
+      "requires_field_validation": true,
+      "auto_assign_from_suitability": false
+    },
+    {
+      "id": "stub_enrichment",
+      "ladder": "enrichment_seeding",
+      "rule_stub_en": "Enrichment seeding stub — Authority-vetted fog-escarpment list only; never mix Najd arid species onto escarpment recommendations.",
+      "requires_field_validation": true,
+      "auto_assign_from_suitability": false
+    },
+    {
+      "id": "stub_active",
+      "ladder": "active_planting",
+      "rule_stub_en": "Active planting stub — campaign hectares / seed kg / crew days FORBIDDEN as official numbers until field validation.",
+      "requires_field_validation": true,
+      "auto_assign_from_suitability": false
+    },
+    {
+      "id": "stub_avoid",
+      "ladder": "avoid_defer",
+      "rule_stub_en": "Avoid / defer when evidence is insufficient, slope/hazard unsafe, or science lock applies.",
+      "requires_field_validation": true,
+      "auto_assign_from_suitability": false
+    }
+  ],
+  "note_en": "Phase-2 coding: enum + rule stubs OK. Numeric suitability→action auto-assignment to partners requires field validation (Forbidden table)."
+}

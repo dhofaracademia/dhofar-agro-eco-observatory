@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dhofaracademia.example/spec_0.4/natural_regeneration_ladder.schema.json",
+  "title": "NaturalRegenerationLadder",
+  "description": "SCIENCE_LOCKS §6 — enum + rule stubs ONLY. Numeric suitability→action auto-assignment FORBIDDEN until field validation.",
+  "type": "object",
+  "required": [
+    "ladder_enum",
+    "auto_assign_from_suitability",
+    "status"
+  ],
+  "properties": {
+    "status": {
+      "type": "string",
+      "const": "enum_and_rule_stubs_only"
+    },
+    "provisional": { "type": "boolean", "const": true },
+    "auto_assign_from_suitability": {
+      "type": "boolean",
+      "const": false
+    },
+    "ladder_enum": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {
+        "type": "string",
+        "enum": [
+          "protect_natural_regeneration",
+          "assisted_natural_regeneration",
+          "enrichment_seeding",
+          "active_planting",
+          "avoid_defer"
+        ]
+      }
+    },
+    "labels": { "type": "object" },
+    "rule_stubs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "ladder",
+          "requires_field_validation",
+          "auto_assign_from_suitability"
+        ],
+        "properties": {
+          "id": { "type": "string" },
+          "ladder": { "type": "string" },
+          "rule_stub_en": { "type": "string" },
+          "requires_field_validation": { "type": "boolean", "const": true },
+          "auto_assign_from_suitability": { "type": "boolean", "const": false }
+        }
+      }
+    },
+    "forbidden": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "science_lock": {
+      "type": "string",
+      "const": "SCIENCE_LOCKS_v0.4_phase1_2.md§6"
+    }
+  }
+}

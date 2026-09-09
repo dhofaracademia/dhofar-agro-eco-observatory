@@ -3,6 +3,7 @@
 **Status:** `pilot_unverified` — raw DEM+TWI+NDMI grid only. **Not** wired into Map / Gallery / Restoration UI.
 
 **Script:** `satellite/pipeline/run_mountain_pilot.py`  
+**Phase-2 MPI:** `run_mountain_mpi.py` → see `MOUNTAIN_PHASE2_NOTES.md`  
 **Artifacts (UI-safe):** `satellite/pipeline/artifacts/mountain_pilot/`  
 Full `pilot_terrain.geojson` is gitignored (can be large). Commit keeps `pilot_terrain.sample.geojson`, `pilot_terrain.schema.json`, `run_meta.json`.
 
@@ -31,7 +32,7 @@ Full `pilot_terrain.geojson` is gitignored (can be large). Commit keeps `pilot_t
 | Pre-khareef | 2026-05-01/2026-05-31 | OK — tile `40QBE`, cloud≈0.01%, SCL clear_frac≈0.24 |
 | Post-khareef | 2026-09-01/2026-09-08 | **insufficient_clear_data** — SCL clear_frac=0.0 (no fabricated NDMI) |
 
-Post-khareef gap is expected near end of Khareef cloud; widen date window or wait for clearer scenes on re-run — do **not** invent values.
+Post-khareef gap is expected near end of Khareef cloud. **Phase-2 default post window widened to late Sep–Oct (`2026-09-15/2026-10-31`)** via `run_mountain_mpi.py` / updated `--post-range` default — fail-honest if still cloudy / not yet ingested; do **not** invent values. Sample GeoJSON is now **stratified** (elev tertile × slope), not first-50.
 
 ## Forbidden in GeoJSON properties
 
@@ -72,3 +73,5 @@ Override output dir: `MOUNTAIN_PILOT_OUT=/path python run_mountain_pilot.py`
 - [x] Artifacts under `satellite/pipeline/artifacts/` (not imported by UI routes)
 - [ ] Science spot-check of sample cells vs field / fog-belt knowledge
 - [ ] Still no live MPI / suitability in partner UI (lock held)
+- [x] Stratified sample (low/mid/high elev × gentle/steep) — Phase-2
+- [x] Phase-2 MPI offline under `artifacts/mountain_pilot/mpi/` (no app/public)
