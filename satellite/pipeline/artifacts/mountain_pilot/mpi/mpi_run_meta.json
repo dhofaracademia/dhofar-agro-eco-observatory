@@ -3,6 +3,13 @@
   "status": "pilot_unverified",
   "layer": "mountain_mpi_phase2",
   "provisional": true,
+  "evidence_window": "onset",
+  "product_kind": "onset_window_dry_mpi_provisional",
+  "t0_source_window": "onset",
+  "interpretation": "provisional_dry_onset_evidence",
+  "not_post_khareef_persistence": true,
+  "mpi_class_disclaimer_en": "Low here means NDMI stayed at/below dry baseline under an **onset** T0 — not a failed post-khareef persistence assessment.",
+  "mpi_class_disclaimer_ar": "تصنيف Low هنا يعني أن NDMI بقي عند أو دون خط الأساس الجاف تحت نافذة بداية الموسم (onset) لـ T0 — وليس تقييم فشل استمرارية الرطوبة بعد موسم الخريف.",
   "pilot_bbox": [
     54.05,
     17.08,
@@ -269,5 +276,23 @@
     "suitability_score"
   ],
   "science_lock": "SCIENCE_LOCKS_v0.4_phase1_2.md §5 + §6",
-  "disclaimer_en": "NDMI and MPI are satellite moisture proxies, not soil moisture %. Classes provisional / pilot_unverified until field validation. Gaps are null — never interpolated."
+  "disclaimer_en": "NDMI and MPI are satellite moisture proxies, not soil moisture %. Classes provisional / pilot_unverified until field validation. Gaps are null — never interpolated.",
+  "fog_belt_sample": {
+    "terrain_sample": {
+      "fog_belt_elev_gt_m": 600.0,
+      "fog_belt_universe_n": 143,
+      "fog_belt_in_sample_n": 4,
+      "fog_belt_note": "Ensured ≥4 cells with elev>600.0 m (universe n=143; DEM fog-belt coverage in bbox).",
+      "elev_min_m": 27.4,
+      "elev_max_m": 816.1
+    },
+    "mpi_cells_sample": {
+      "fog_belt_elev_gt_m": 600.0,
+      "fog_belt_universe_n": 4,
+      "fog_belt_in_sample_n": 4,
+      "fog_belt_note": "Ensured ≥4 cells with elev>600.0 m (universe n=4; DEM fog-belt coverage in bbox).",
+      "elev_min_m": 28.5,
+      "elev_max_m": 691.0
+    }
+  }
 }
