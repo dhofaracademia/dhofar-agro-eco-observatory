@@ -14,3 +14,7 @@ satellite/pipeline/cache/
 # Mountain pilot full grids are large; keep sample+schema+meta
 satellite/pipeline/artifacts/mountain_pilot/pilot_terrain.geojson
 satellite/pipeline/artifacts/mountain_pilot/e2e_run.log
+
+# Phase-2 MPI full cell grids (keep sample + curve + meta)
+satellite/pipeline/artifacts/mountain_pilot/mpi/mpi_cells.geojson
+satellite/pipeline/artifacts/mountain_pilot/mpi/e2e_run.log

@@ -1,0 +1,273 @@
+{
+  "generated_at": "2026-09-09T05:01:58.756494+00:00",
+  "status": "pilot_unverified",
+  "layer": "mountain_mpi_phase2",
+  "provisional": true,
+  "pilot_bbox": [
+    54.05,
+    17.08,
+    54.22,
+    17.22
+  ],
+  "bbox_note": "Locked start bbox [54.05, 17.08, 54.22, 17.22] (Jabal Qara fog-escarpment). No change before first run; post-DEM nudge ≤0.05°; max span ≤~0.2°/side.",
+  "dem_source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer",
+  "dem_note": "Copernicus DEM GLO-30 via PC (NASADEM fallback in shared helper)",
+  "twi_note": "Topographic Wetness Proxy only — not depression-filled D8 hydrology",
+  "slope_p90_deg": 26.941082000732422,
+  "t0_date": "2026-06-01",
+  "t0_method": "fallback_first_clear_onset in 2026-06-01/2026-06-21 (post-khareef window 2026-09-15/2026-10-31 had 0 STAC candidates or none usable); product=S2B_MSIL2A_20260601T064619_R020_T39QZV_20260601T103750; cloud=0.000415; tile=39QZV (dynamic T0 — documented search, not live Khareef onset detector)",
+  "t0_diagnostics": {
+    "post_range_searched": "2026-09-15/2026-10-31",
+    "onset_range_searched": "2026-06-01/2026-06-21",
+    "cloud_lt": 40.0,
+    "post_n_candidates": 0,
+    "post_candidate_dates": [],
+    "onset_n_candidates": 27,
+    "onset_candidate_dates": [
+      "2026-06-16",
+      "2026-06-01",
+      "2026-06-06",
+      "2026-06-01",
+      "2026-06-16",
+      "2026-06-06",
+      "2026-06-21",
+      "2026-06-21",
+      "2026-06-18",
+      "2026-06-18",
+      "2026-06-11",
+      "2026-06-01"
+    ],
+    "t0_source_window": "onset",
+    "t0_product_id": "S2B_MSIL2A_20260601T064619_R020_T39QZV_20260601T103750"
+  },
+  "post_range": "2026-09-15/2026-10-31",
+  "onset_range": "2026-06-01/2026-06-21",
+  "pre_range": "2026-05-01/2026-05-31",
+  "search_half_window_days": 3,
+  "lags_weeks": [
+    0,
+    1,
+    2,
+    4,
+    6
+  ],
+  "lag_scene_info": {
+    "0": {
+      "lag_target": "2026-06-01",
+      "search_range": "2026-05-29/2026-06-04",
+      "n_candidates": 4,
+      "status": "ok",
+      "date_range": "2026-06-01/2026-06-01",
+      "product_id": "S2B_MSIL2A_20260601T064619_R020_T39QZV_20260601T103750",
+      "date": "2026-06-01",
+      "cloud_cover": 0.000415,
+      "tile": "39QZV",
+      "clear_frac": 0.9998,
+      "tried": [
+        {
+          "wanted": "S2B_MSIL2A_20260601T064619_R020_T39QZV_20260601T103750",
+          "got": "S2B_MSIL2A_20260601T064619_R020_T39QZV_20260601T103750",
+          "status": "ok",
+          "clear_frac": 0.9998,
+          "cloud_cover": 0.000415
+        }
+      ]
+    },
+    "1": {
+      "lag_target": "2026-06-08",
+      "search_range": "2026-06-05/2026-06-11",
+      "n_candidates": 4,
+      "status": "ok",
+      "date_range": "2026-06-06/2026-06-06",
+      "product_id": "S2C_MSIL2A_20260606T064621_R020_T39QZV_20260606T115910",
+      "date": "2026-06-06",
+      "cloud_cover": 0.00216,
+      "tile": "39QZV",
+      "clear_frac": 1.0,
+      "tried": [
+        {
+          "wanted": "S2C_MSIL2A_20260606T064621_R020_T39QZV_20260606T115910",
+          "got": "S2C_MSIL2A_20260606T064621_R020_T39QZV_20260606T115910",
+          "status": "ok",
+          "clear_frac": 1.0,
+          "cloud_cover": 0.00216
+        }
+      ]
+    },
+    "2": {
+      "lag_target": "2026-06-15",
+      "search_range": "2026-06-12/2026-06-18",
+      "n_candidates": 4,
+      "status": "ok",
+      "date_range": "2026-06-16/2026-06-16",
+      "product_id": "S2C_MSIL2A_20260616T064621_R020_T39QZV_20260616T114357",
+      "date": "2026-06-16",
+      "cloud_cover": 0.000385,
+      "tile": "39QZV",
+      "clear_frac": 1.0,
+      "tried": [
+        {
+          "wanted": "S2C_MSIL2A_20260616T064621_R020_T39QZV_20260616T114357",
+          "got": "S2C_MSIL2A_20260616T064621_R020_T39QZV_20260616T114357",
+          "status": "ok",
+          "clear_frac": 1.0,
+          "cloud_cover": 0.000385
+        }
+      ]
+    },
+    "4": {
+      "lag_target": "2026-06-29",
+      "search_range": "2026-06-26/2026-07-02",
+      "n_candidates": 7,
+      "status": "gap",
+      "reason": "All 7 candidate(s) in 2026-06-26/2026-07-02 failed SCL clear gate (min clear_frac=0.15); no fabricated NDMI",
+      "tried": [
+        {
+          "wanted": "S2A_MSIL2A_20260628T070431_R020_T40QBE_20260628T093707",
+          "got": "S2A_MSIL2A_20260628T070431_R020_T40QBE_20260628T093707",
+          "status": "insufficient_clear_data",
+          "clear_frac": 0.0,
+          "cloud_cover": 6.974386
+        },
+        {
+          "wanted": "S2A_MSIL2A_20260628T070431_R020_T39QZV_20260628T093707",
+          "got": "S2A_MSIL2A_20260628T070431_R020_T40QBE_20260628T093707",
+          "status": "insufficient_clear_data",
+          "clear_frac": 0.0,
+          "cloud_cover": 6.974386
+        },
+        {
+          "wanted": "S2C_MSIL2A_20260626T064621_R020_T39QZV_20260626T113915",
+          "got": "S2C_MSIL2A_20260626T064621_R020_T39QZV_20260626T113915",
+          "status": "insufficient_clear_data",
+          "clear_frac": 0.0043,
+          "cloud_cover": 10.27129
+        },
+        {
+          "wanted": "S2C_MSIL2A_20260626T064621_R020_T40QBE_20260626T113915",
+          "got": "S2C_MSIL2A_20260626T064621_R020_T39QZV_20260626T113915",
+          "status": "insufficient_clear_data",
+          "clear_frac": 0.0043,
+          "cloud_cover": 10.27129
+        },
+        {
+          "wanted": "S2B_MSIL2A_20260701T064619_R020_T40QBE_20260701T104133",
+          "got": "S2B_MSIL2A_20260701T064619_R020_T40QBE_20260701T104133",
+          "status": "insufficient_clear_data",
+          "clear_frac": 0.0,
+          "cloud_cover": 15.921333
+        },
+        {
+          "wanted": "S2B_MSIL2A_20260701T064619_R020_T39QZV_20260701T104133",
+          "got": "S2B_MSIL2A_20260701T064619_R020_T40QBE_20260701T104133",
+          "status": "insufficient_clear_data",
+          "clear_frac": 0.0,
+          "cloud_cover": 15.921333
+        },
+        {
+          "wanted": "S2C_MSIL2A_20260626T064621_R020_T40QBD_20260626T113915",
+          "got": "S2C_MSIL2A_20260626T064621_R020_T39QZV_20260626T113915",
+          "status": "insufficient_clear_data",
+          "clear_frac": 0.0043,
+          "cloud_cover": 10.27129
+        }
+      ]
+    },
+    "6": {
+      "lag_target": "2026-07-13",
+      "search_range": "2026-07-10/2026-07-16",
+      "n_candidates": 4,
+      "status": "gap",
+      "reason": "All 4 candidate(s) in 2026-07-10/2026-07-16 failed SCL clear gate (min clear_frac=0.15); no fabricated NDMI",
+      "tried": [
+        {
+          "wanted": "S2B_MSIL2A_20260711T064619_R020_T40QBE_20260711T104126",
+          "got": "S2B_MSIL2A_20260711T064619_R020_T40QBE_20260711T104126",
+          "status": "insufficient_clear_data",
+          "clear_frac": 0.0386,
+          "cloud_cover": 1.73867
+        },
+        {
+          "wanted": "S2B_MSIL2A_20260711T064619_R020_T39QZV_20260711T104126",
+          "got": "S2B_MSIL2A_20260711T064619_R020_T40QBE_20260711T104126",
+          "status": "insufficient_clear_data",
+          "clear_frac": 0.0386,
+          "cloud_cover": 1.73867
+        },
+        {
+          "wanted": "S2C_MSIL2A_20260716T064621_R020_T40QBE_20260716T115112",
+          "got": null,
+          "status": "insufficient_clear_data",
+          "clear_frac": null,
+          "cloud_cover": null
+        },
+        {
+          "wanted": "S2C_MSIL2A_20260716T064621_R020_T39QZV_20260716T115112",
+          "got": null,
+          "status": "insufficient_clear_data",
+          "clear_frac": null,
+          "cloud_cover": null
+        }
+      ]
+    }
+  },
+  "aoi_mpi_class": "Low",
+  "aoi_mpi_class_reason": "All valid NDMI ≤ dry baseline (no persistence signal; provisional)",
+  "aoi_n_valid": 3,
+  "class_counts": {
+    "High": 1,
+    "Medium": 0,
+    "Low": 119,
+    "Insufficient": 0
+  },
+  "n_terrain_features": 4851,
+  "n_mpi_features": 120,
+  "ndmi_pre": {
+    "date_range": "2026-05-01/2026-05-31",
+    "n_candidates": 14,
+    "status": "ok",
+    "product_id": "S2B_MSIL2A_20260502T064619_R020_T40QBE_20260502T104108",
+    "date": "2026-05-02",
+    "cloud_cover": 0.012356,
+    "tile": "40QBE",
+    "clear_frac": 0.2369
+  },
+  "ndmi_post": {
+    "date_range": "2026-09-15/2026-10-31",
+    "n_candidates": 0,
+    "status": "insufficient_clear_data",
+    "reason": "No S2 L2A scenes with eo:cloud_cover < 20.0 in 2026-09-15/2026-10-31"
+  },
+  "artifacts": {
+    "mpi_curve": "satellite/pipeline/artifacts/mountain_pilot/mpi/mpi_curve.json",
+    "mpi_cells": "satellite/pipeline/artifacts/mountain_pilot/mpi/mpi_cells.geojson",
+    "mpi_cells_sample": "satellite/pipeline/artifacts/mountain_pilot/mpi/mpi_cells.sample.geojson",
+    "mpi_run_meta": "satellite/pipeline/artifacts/mountain_pilot/mpi/mpi_run_meta.json",
+    "regen_stubs": "satellite/pipeline/artifacts/mountain_pilot/mpi/regeneration_ladder.stubs.json",
+    "terrain_sample": "satellite/pipeline/artifacts/mountain_pilot/pilot_terrain.sample.geojson",
+    "terrain_full": "satellite/pipeline/artifacts/mountain_pilot/pilot_terrain.geojson",
+    "run_meta_terrain": "satellite/pipeline/artifacts/mountain_pilot/run_meta.json"
+  },
+  "ui_wire": false,
+  "app_public_write": false,
+  "forbidden_partner_keys": [
+    "action",
+    "action_ladder",
+    "campaign_ha",
+    "confidence",
+    "crew_days",
+    "ecological_confidence",
+    "regeneration_action",
+    "seed_kg",
+    "soil_moisture",
+    "soil_moisture_pct",
+    "soil_moisture_percent",
+    "species",
+    "species_note",
+    "species_suitability",
+    "suitability",
+    "suitability_score"
+  ],
+  "science_lock": "SCIENCE_LOCKS_v0.4_phase1_2.md §5 + §6",
+  "disclaimer_en": "NDMI and MPI are satellite moisture proxies, not soil moisture %. Classes provisional / pilot_unverified until field validation. Gaps are null — never interpolated."
+}

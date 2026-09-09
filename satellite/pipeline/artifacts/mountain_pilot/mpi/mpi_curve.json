@@ -1,0 +1,121 @@
+{
+  "generated_at": "2026-09-09T05:01:53.302036+00:00",
+  "status": "pilot_unverified",
+  "layer": "mountain_mpi_phase2",
+  "provisional": true,
+  "pilot_bbox": [
+    54.05,
+    17.08,
+    54.22,
+    17.22
+  ],
+  "bbox_note": "Locked start bbox [54.05, 17.08, 54.22, 17.22] (Jabal Qara fog-escarpment). No change before first run; post-DEM nudge ≤0.05°; max span ≤~0.2°/side.",
+  "t0_date": "2026-06-01",
+  "t0_method": "fallback_first_clear_onset in 2026-06-01/2026-06-21 (post-khareef window 2026-09-15/2026-10-31 had 0 STAC candidates or none usable); product=S2B_MSIL2A_20260601T064619_R020_T39QZV_20260601T103750; cloud=0.000415; tile=39QZV (dynamic T0 — documented search, not live Khareef onset detector)",
+  "t0_diagnostics": {
+    "post_range_searched": "2026-09-15/2026-10-31",
+    "onset_range_searched": "2026-06-01/2026-06-21",
+    "cloud_lt": 40.0,
+    "post_n_candidates": 0,
+    "post_candidate_dates": [],
+    "onset_n_candidates": 27,
+    "onset_candidate_dates": [
+      "2026-06-16",
+      "2026-06-01",
+      "2026-06-06",
+      "2026-06-01",
+      "2026-06-16",
+      "2026-06-06",
+      "2026-06-21",
+      "2026-06-21",
+      "2026-06-18",
+      "2026-06-18",
+      "2026-06-11",
+      "2026-06-01"
+    ],
+    "t0_source_window": "onset",
+    "t0_product_id": "S2B_MSIL2A_20260601T064619_R020_T39QZV_20260601T103750"
+  },
+  "dry_baseline_ndmi": -0.05,
+  "lags_weeks": [
+    0,
+    1,
+    2,
+    4,
+    6
+  ],
+  "search_half_window_days": 3,
+  "points": [
+    {
+      "lag_weeks": 0,
+      "target_date": "2026-06-01",
+      "search_range": "2026-05-29/2026-06-04",
+      "ndmi_mean": -0.127,
+      "status": "ok",
+      "product_id": "S2B_MSIL2A_20260601T064619_R020_T39QZV_20260601T103750",
+      "scene_date": "2026-06-01",
+      "tile": "39QZV",
+      "cloud_cover": 0.000415,
+      "clear_frac": 0.9998,
+      "reason": null
+    },
+    {
+      "lag_weeks": 1,
+      "target_date": "2026-06-08",
+      "search_range": "2026-06-05/2026-06-11",
+      "ndmi_mean": -0.1272,
+      "status": "ok",
+      "product_id": "S2C_MSIL2A_20260606T064621_R020_T39QZV_20260606T115910",
+      "scene_date": "2026-06-06",
+      "tile": "39QZV",
+      "cloud_cover": 0.00216,
+      "clear_frac": 1.0,
+      "reason": null
+    },
+    {
+      "lag_weeks": 2,
+      "target_date": "2026-06-15",
+      "search_range": "2026-06-12/2026-06-18",
+      "ndmi_mean": -0.1377,
+      "status": "ok",
+      "product_id": "S2C_MSIL2A_20260616T064621_R020_T39QZV_20260616T114357",
+      "scene_date": "2026-06-16",
+      "tile": "39QZV",
+      "cloud_cover": 0.000385,
+      "clear_frac": 1.0,
+      "reason": null
+    },
+    {
+      "lag_weeks": 4,
+      "target_date": "2026-06-29",
+      "search_range": "2026-06-26/2026-07-02",
+      "ndmi_mean": null,
+      "status": "gap",
+      "product_id": null,
+      "scene_date": null,
+      "tile": null,
+      "cloud_cover": null,
+      "clear_frac": null,
+      "reason": "All 7 candidate(s) in 2026-06-26/2026-07-02 failed SCL clear gate (min clear_frac=0.15); no fabricated NDMI"
+    },
+    {
+      "lag_weeks": 6,
+      "target_date": "2026-07-13",
+      "search_range": "2026-07-10/2026-07-16",
+      "ndmi_mean": null,
+      "status": "gap",
+      "product_id": null,
+      "scene_date": null,
+      "tile": null,
+      "cloud_cover": null,
+      "clear_frac": null,
+      "reason": "All 4 candidate(s) in 2026-07-10/2026-07-16 failed SCL clear gate (min clear_frac=0.15); no fabricated NDMI"
+    }
+  ],
+  "mpi_class": "Low",
+  "mpi_class_reason": "All valid NDMI ≤ dry baseline (no persistence signal; provisional)",
+  "n_valid": 3,
+  "dem_source": "Copernicus DEM GLO-30 via Microsoft Planetary Computer",
+  "disclaimer_en": "NDMI and MPI are satellite moisture proxies, not soil moisture %. Classes provisional / pilot_unverified until field validation. Gaps are null — never interpolated.",
+  "science_lock": "SCIENCE_LOCKS_v0.4_phase1_2.md §5"
+}

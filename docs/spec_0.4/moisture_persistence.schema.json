@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dhofaracademia.example/spec_0.4/moisture_persistence.schema.json",
+  "title": "MoisturePersistenceIndex",
+  "description": "SCIENCE_LOCKS §5 — MPI curve + classes. Offline mountain evidence only. NDMI/MPI are proxies, NOT soil moisture %.",
+  "type": "object",
+  "required": [
+    "t0_date",
+    "t0_method",
+    "points",
+    "status",
+    "provisional",
+    "disclaimer_en"
+  ],
+  "properties": {
+    "t0_date": {
+      "type": ["string", "null"],
+      "description": "First clear post-onset or post-khareef reference date (dynamic; documented per season)."
+    },
+    "t0_method": {
+      "type": "string",
+      "description": "Documented selection method. Must NOT claim live Khareef onset detection without EO/climate QA."
+    },
+    "lags_weeks": {
+      "type": "array",
+      "items": { "type": "integer" },
+      "description": "Sample lags: T0, T+1w, T+2w, T+4w, T+6w"
+    },
+    "points": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["lag_weeks", "status"],
+        "properties": {
+          "lag_weeks": { "type": "integer" },
+          "target_date": { "type": "string" },
+          "search_range": { "type": "string" },
+          "ndmi_mean": {
+            "type": ["number", "null"],
+            "description": "Clear-pixel NDMI mean; null on gap — never interpolated/fabricated"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["ok", "gap", "insufficient_clear_data"]
+          },
+          "product_id": { "type": ["string", "null"] },
+          "scene_date": { "type": ["string", "null"] },
+          "tile": { "type": ["string", "null"] },
+          "cloud_cover": { "type": ["number", "null"] },
+          "clear_frac": { "type": ["number", "null"] },
+          "reason": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "mpi_class": {
+      "type": ["string", "null"],
+      "enum": ["High", "Medium", "Low", null],
+      "description": "Null when Insufficient (<2 valid clear points). Provisional until field validation."
+    },
+    "mpi_class_reason": { "type": "string" },
+    "n_valid": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Count of non-null NDMI sample points. <2 → Insufficient / no class."
+    },
+    "dry_baseline_ndmi": {
+      "type": "number",
+      "description": "AOI dry baseline NDMI proxy (not soil moisture %)"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["pilot_unverified", "insufficient_clear_data", "dry_run", "provisional"]
+    },
+    "layer": {
+      "type": "string",
+      "const": "mountain_mpi_phase2"
+    },
+    "provisional": { "type": "boolean", "const": true },
+    "disclaimer_en": { "type": "string" },
+    "science_lock": {
+      "type": "string",
+      "const": "SCIENCE_LOCKS_v0.4_phase1_2.md§5"
+    },
+    "forbidden_interpretations": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Must not call MPI/NDMI soil moisture %"
+    }
+  }
+}

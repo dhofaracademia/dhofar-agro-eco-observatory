@@ -29,6 +29,8 @@ USAGE:
   python satellite/pipeline/run_mountain_pilot.py
   python satellite/pipeline/run_mountain_pilot.py --dry-run   # schema + stub only
   MOUNTAIN_PILOT_OUT=... python ...   # override artifact dir
+
+Phase-2 MPI curve (offline): see run_mountain_mpi.py → artifacts/mountain_pilot/mpi/
 """
 from __future__ import annotations
 
@@ -476,8 +478,8 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument(
         "--post-range",
-        default="2026-09-01/2026-09-08",
-        help="Post-khareef NDMI datetime range",
+        default="2026-09-15/2026-10-31",
+        help="Post-khareef NDMI datetime range (late Sep–Oct; prior Sep 1–8 failed SCL clear)",
     )
     parser.add_argument(
         "--grid-m",
@@ -658,11 +660,48 @@ def main(argv: list[str] | None = None) -> int:
     }
     write_json(GEOJSON_PATH, fc)
 
-    # Compact sample for git / science skim (full grid may be large)
+    # Compact stratified sample for git / science skim (not first-N high-elev)
     sample_path = OUT_DIR / "pilot_terrain.sample.geojson"
-    sample = {k: v for k, v in fc.items() if k != "features"}
-    sample["features"] = fc["features"][:50]
-    sample["note_sample"] = "First 50 cells only — full grid is pilot_terrain.geojson (often gitignored)."
+    try:
+        from engines.mpi import stratified_sample_indices, assert_no_forbidden_partner_keys
+        elevs = np.array([f["properties"].get("elevation_m", np.nan) for f in features], dtype="float64")
+        slopes = np.array([f["properties"].get("slope_deg", np.nan) for f in features], dtype="float64")
+        idxs = stratified_sample_indices(elevs, slopes, n_total=48)
+        sample_feats = []
+        fe = elevs[np.isfinite(elevs)]
+        fs = slopes[np.isfinite(slopes)]
+        elev_edges = np.quantile(fe, [0, 1 / 3, 2 / 3, 1]) if fe.size else [0, 0, 0, 0]
+        slope_med = float(np.median(fs)) if fs.size else 0.0
+        for i in idxs:
+            feat = json.loads(json.dumps(features[i]))  # deep copy
+            e = feat["properties"].get("elevation_m")
+            s = feat["properties"].get("slope_deg")
+            if e is not None and s is not None:
+                if e <= elev_edges[1]:
+                    eband = "low_elev"
+                elif e <= elev_edges[2]:
+                    eband = "mid_elev"
+                else:
+                    eband = "high_elev"
+                feat["properties"]["sample_stratum"] = f"{eband}_{'gentle' if s < slope_med else 'steep'}"
+                feat["properties"]["sample_method"] = "stratified_elev_tertile_x_slope_median"
+            assert_no_forbidden_partner_keys(feat["properties"])
+            sample_feats.append(feat)
+        sample = {k: v for k, v in fc.items() if k != "features"}
+        sample["features"] = sample_feats
+        sample["sample_method"] = "stratified_elev_tertile_x_slope_median"
+        sample["n_sample"] = len(sample_feats)
+        sample["elev_tertile_edges_m"] = [round(float(x), 1) for x in elev_edges]
+        sample["slope_median_deg"] = round(slope_med, 2)
+        sample["note_sample"] = (
+            "Stratified sample (low/mid/high elev × gentle/steep) — not first-N. "
+            "Full grid: pilot_terrain.geojson (often gitignored)."
+        )
+    except Exception as exc:
+        print(f"[warn] stratified sample fallback to first-48: {exc}")
+        sample = {k: v for k, v in fc.items() if k != "features"}
+        sample["features"] = fc["features"][:48]
+        sample["note_sample"] = "Fallback first-48 — stratified helper unavailable."
     write_json(sample_path, sample)
 
     meta = {

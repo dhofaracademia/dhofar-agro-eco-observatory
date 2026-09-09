@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-08T14:57:28.176102+00:00",
+  "generated_at": "2026-09-09T05:01:58.757073+00:00",
   "status": "pilot_unverified",
   "layer": "mountain_pilot",
   "pilot_bbox": [
@@ -23,20 +23,24 @@
     "clear_frac": 0.2369
   },
   "ndmi_post": {
-    "date_range": "2026-09-01/2026-09-08",
-    "n_candidates": 2,
+    "date_range": "2026-09-15/2026-10-31",
+    "n_candidates": 0,
     "status": "insufficient_clear_data",
-    "product_id": "S2C_MSIL2A_20260904T064621_R020_T40QBE_20260904T115810",
-    "date": "2026-09-04",
-    "cloud_cover": 17.01638,
-    "tile": "40QBE",
-    "clear_frac": 0.0,
-    "reason": "SCL clear fraction 0.000 < minimum 0.15 (fail-honest; no fabricated NDMI)"
+    "reason": "No S2 L2A scenes with eo:cloud_cover < 20.0 in 2026-09-15/2026-10-31"
+  },
+  "sample_method": "stratified_elev_tertile_x_slope_median",
+  "phase2_mpi": {
+    "layer": "mountain_mpi_phase2",
+    "t0_date": "2026-06-01",
+    "aoi_mpi_class": "Low",
+    "status": "pilot_unverified",
+    "artifacts_dir": "satellite/pipeline/artifacts/mountain_pilot/mpi/"
   },
   "artifacts": {
     "geojson": "satellite/pipeline/artifacts/mountain_pilot/pilot_terrain.geojson",
     "sample": "satellite/pipeline/artifacts/mountain_pilot/pilot_terrain.sample.geojson",
-    "schema": "satellite/pipeline/artifacts/mountain_pilot/pilot_terrain.schema.json"
+    "schema": "satellite/pipeline/artifacts/mountain_pilot/pilot_terrain.schema.json",
+    "mpi_run_meta": "satellite/pipeline/artifacts/mountain_pilot/mpi/mpi_run_meta.json"
   },
   "ui_wire": false,
   "forbidden_fields_enforced": [
