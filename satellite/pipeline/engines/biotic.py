@@ -62,19 +62,19 @@ def infer_biotic_from_cell(
 
     Spatial: NDVI distinctly below immediate peers / neighbor median (patch-like).
     Temporal: vigor high while water not dominant (NDMI OK-ish).
-    Persistence: ≥2 prior vigor flags when history exists; else require strong
-    single-date spatial+temporal and leave persistence False (no flag).
+    Persistence (SCIENCE_LOCKS §4): ≥2 clear dates only — pass prior vigor
+    flags and/or flags_last_n including current; persistence_ok when ≥2 True
+    entries. Single-date (and the former soft path of 1 prior + strong current)
+    cannot clear persistence alone.
     """
     neighbor = neighbor_ndvi_median if neighbor_ndvi_median is not None else ndvi_p25
     spatial = ndvi < (neighbor - 0.05) and ndvi < ndvi_p25
     water_ok = ndmi >= ndmi_p25 or water_stress < 50
     temporal = vigor_stress >= 60 and water_ok
     not_water = water_stress < vigor_stress and water_ok
+    # flags_last_n may include current; require ≥2 True dates (no soft path)
     flags = prior_vigor_flags or []
-    persistence = sum(1 for f in flags if f) >= 2 or (
-        # allow persistence True when we already have ≥1 prior + strong current
-        sum(1 for f in flags if f) >= 1 and spatial and temporal
-    )
+    persistence = sum(1 for f in flags if f) >= 2
     dq = data_quality_confidence >= 40
     return biotic_stress_risk(
         spatial_anomaly=spatial,

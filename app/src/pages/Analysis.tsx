@@ -595,6 +595,7 @@ export default function Analysis() {
                 <p className="mt-2 text-xs leading-relaxed text-sand-800/80">{bioticDisclaimer}</p>
               </div>
             </div>
+            <p className="text-xs text-sand-800/60">{t("analysis.stressThrNote")}</p>
             <p className="text-xs text-sand-800/60">{t("analysis.noActionLadder")}</p>
           </section>
 

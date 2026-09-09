@@ -21,6 +21,7 @@ These JSON Schemas describe **Phase-1 Agriculture** contracts only. Mountain sui
 - **Documented fallback only:** if B05 missing, try B06 then B07 (record `ndre_band`).
 - **No silent third formula.** If no red-edge band → omit NDRE (`ndre: null`, `ndre_available: false`) and redistribute AgProb weight 0.10 → NDVI peak + NDMI.
 - SCL cloud/shadow/cirrus gates apply **before** indices.
+- **SWIR:** prefer `swir_feature` from B11/B12 brightness on the STAC path; NDVI+NDMI proxy only when SWIR bands unavailable.
 
 ## Runtime artifacts (`app/public/data/`)
 

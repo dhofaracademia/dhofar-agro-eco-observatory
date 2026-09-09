@@ -65,8 +65,9 @@ function hashToSixDigits(lon: number, lat: number): string {
 
 /**
  * Prefer persistent registry `aou_id` on properties when present.
- * Fallback hash is display-only for grid cells without a segmented AOU —
- * not a substitute for aou_registry matching (SCIENCE_LOCKS §2).
+ * Fallback is a clearly non-registry display key for monitoring-grid cells
+ * without a segmented AOU — never mint AOU-NJ-* from a 500 m cell
+ * (SCIENCE_LOCKS §2.2: do not bind identity to cell index).
  */
 export function aouIdFromFeature(feature: AouFeature): string {
   const fromProps = feature.properties?.aou_id;
@@ -74,7 +75,7 @@ export function aouIdFromFeature(feature: AouFeature): string {
     return fromProps;
   }
   const { lon, lat } = featureCentroid(feature);
-  return `AOU-NJ-${hashToSixDigits(lon, lat)}`;
+  return `GRID-DISP-${hashToSixDigits(lon, lat)}`;
 }
 
 /** Estimated area in hectares from 10 m Sentinel-2 pixels (fallback 25 ha for 500 m cell). */
@@ -134,10 +135,12 @@ export function mapAlertLabels(alert: AlertKind): HealthWaterLabels {
     case "water_attention":
       return { healthKey: "aou.health.watch", waterKey: "aou.water.attention" };
     case "vigor_attention":
+      // SCIENCE_LOCKS §3.2: vigor_attention = management / possible nutrient — NOT biotic.
+      // Biotic is only possible_biotic_stress (§4), shown separately in AouProfilePanel.
       return {
-        healthKey: "aou.health.possibleBiotic",
+        healthKey: "aou.health.lowVigor",
         waterKey: "aou.water.moderate",
-        noteKey: "aou.note.possibleBiotic",
+        noteKey: "aou.note.vigorAttention",
       };
     case "bare":
       return { healthKey: "aou.health.bare", waterKey: "aou.water.na" };

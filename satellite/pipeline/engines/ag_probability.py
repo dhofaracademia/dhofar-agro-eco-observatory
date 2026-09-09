@@ -96,6 +96,34 @@ def feature_swir_response(ndvi: float, ndmi: float) -> float:
     return _clip01(0.5 * feature_ndvi_peak(ndvi) + 0.5 * feature_ndmi(ndmi))
 
 
+def feature_swir_from_bands(
+    b11_mean: float | None,
+    b12_mean: float | None = None,
+    *,
+    scale: float = 10000.0,
+) -> float | None:
+    """Prefer explicit B11/B12 reflectance brightness → 0–1 AgProb swir feature.
+
+    Lower mid-IR brightness with valid reflectance → higher crop/soil contrast score.
+    Returns None if no SWIR band means (caller falls back to NDVI+NDMI proxy).
+    """
+    vals = []
+    for v in (b11_mean, b12_mean):
+        if v is None:
+            continue
+        # accept either DN (0–10000) or already-scaled reflectance
+        rf = float(v) / scale if float(v) > 1.5 else float(v)
+        if rf <= 0:
+            continue
+        vals.append(rf)
+    if not vals:
+        return None
+    # Typical dry soil SWIR ~0.25–0.45; vegetated/moist lower ~0.08–0.22
+    bright = sum(vals) / len(vals)
+    # Invert brightness into crop-like score
+    return max(0.0, min(1.0, (0.40 - bright) / 0.32))
+
+
 def feature_ndre(ndre: float | None) -> float:
     if ndre is None:
         return 0.0

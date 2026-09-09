@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://dhofaracademia.example/spec_0.4/stress_scores.schema.json",
   "title": "StressScores",
-  "description": "SCIENCE_LOCKS \u00a73 \u2014 W/V = 0.40 relative + 0.25 historical + 0.25 persistence + 0.10 phenology; renorm if no history.",
+  "description": "SCIENCE_LOCKS \u00a73 \u2014 W/V = 0.40 relative + 0.25 historical + 0.25 persistence + 0.10 phenology; renorm if no history. WATER_ATTENTION_THR / VIGOR_ATTENTION_THR = 55 are expert defaults pending field calibration (map high W \u2192 water_attention; high V \u2192 vigor_attention).",
   "type": "object",
   "properties": {
     "water_stress_score": {
@@ -54,5 +54,6 @@
       "type": "string",
       "const": "expert_v1"
     }
-  }
+  },
+  "$comment": "Attention thresholds WATER_ATTENTION_THR=VIGOR_ATTENTION_THR=55 are expert defaults pending field calibration \u2014 see satellite/pipeline/engines/stress.py."
 }
