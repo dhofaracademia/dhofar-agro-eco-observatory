@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dhofaracademia.example/spec_0.4/seed_intelligence.schema.json",
+  "title": "SeedIntelligence",
+  "description": "Phase-4 Seed Intelligence optional wrapper — catalog + matrix + protocol stubs + run honesty. Artifacts-first; no Map/Restoration/Analysis Seed UI in first scaffold PR. Domains never mixed.",
+  "type": "object",
+  "required": [
+    "version",
+    "status",
+    "science_lock",
+    "domains",
+    "never_mix_domains",
+    "species_catalog_ref",
+    "site_species_matrix_ref",
+    "seeding_protocol_stubs",
+    "forbidden",
+    "ui_gates"
+  ],
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "const": "unvalidated_expert_stub"
+    },
+    "science_lock": {
+      "type": "string",
+      "const": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase4"
+    },
+    "domains": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "agriculture_aou",
+          "restoration_mountain"
+        ]
+      }
+    },
+    "never_mix_domains": {
+      "type": "boolean",
+      "const": true
+    },
+    "suitability_neq_confidence": {
+      "type": "boolean",
+      "const": true
+    },
+    "species_catalog_ref": {
+      "type": "string"
+    },
+    "site_species_matrix_ref": {
+      "type": "string"
+    },
+    "seeding_protocol_stubs": {
+      "type": "object",
+      "required": [
+        "mode",
+        "steps_enum",
+        "auto_assign"
+      ],
+      "properties": {
+        "mode": {
+          "type": "string",
+          "const": "manual_operator_confirmed"
+        },
+        "auto_assign": {
+          "type": "boolean",
+          "const": false
+        },
+        "steps_enum": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "authority_contact",
+              "site_field_check",
+              "species_confirm",
+              "provenance_confirm",
+              "timing_confirm",
+              "protocol_confirm",
+              "operator_signoff",
+              "defer_insufficient_evidence"
+            ]
+          }
+        },
+        "labels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "en": {
+                "type": "string"
+              },
+              "ar": {
+                "type": "string"
+              },
+              "order": {
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "note_en": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "forbidden": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "ui_gates": {
+      "type": "object",
+      "required": [
+        "analysis_seed_panel",
+        "restoration_seed_panel",
+        "mountain_partner_ui",
+        "writes_to_app_public"
+      ],
+      "properties": {
+        "analysis_seed_panel": {
+          "type": "boolean",
+          "const": false
+        },
+        "restoration_seed_panel": {
+          "type": "boolean",
+          "const": false
+        },
+        "mountain_partner_ui": {
+          "type": "boolean",
+          "const": false
+        },
+        "writes_to_app_public": {
+          "type": "boolean",
+          "const": false
+        },
+        "link_mountain_decision_to_species_candidates": {
+          "type": "boolean",
+          "const": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "authority_source": {
+      "type": "string",
+      "const": "pending_agrofostery"
+    },
+    "honesty_note_en": {
+      "type": "string"
+    },
+    "honesty_note_ar": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

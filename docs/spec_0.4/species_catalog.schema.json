@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dhofaracademia.example/spec_0.4/species_catalog.schema.json",
+  "title": "SpeciesCatalog",
+  "description": "Phase-4 Seed Intelligence — Authority-vetted / placeholder species short lists by domain. Domains NEVER mixed: agriculture_aou (Najd) vs restoration_mountain (fog-escarpment). Scores are NOT operational truth. authority_source pending_agrofostery until science expands.",
+  "type": "object",
+  "required": [
+    "version",
+    "status",
+    "authority_source",
+    "science_lock",
+    "domains",
+    "species"
+  ],
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "const": "unvalidated_expert_stub"
+    },
+    "authority_source": {
+      "type": "string",
+      "const": "pending_agrofostery",
+      "description": "Placeholder until Agrofostery Authority short list lands"
+    },
+    "authority_contact_note_en": {
+      "type": "string"
+    },
+    "authority_contact_note_ar": {
+      "type": "string"
+    },
+    "science_lock": {
+      "type": "string",
+      "const": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase4"
+    },
+    "domains": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "agriculture_aou",
+          "restoration_mountain"
+        ]
+      },
+      "uniqueItems": true,
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "never_mix_domains": {
+      "type": "boolean",
+      "const": true
+    },
+    "forbidden": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Must include campaign/operational truth bans"
+    },
+    "species": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "species_id",
+          "species_name_sci",
+          "domain",
+          "status",
+          "local_preferred"
+        ],
+        "properties": {
+          "species_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "species_name_sci": {
+            "type": "string"
+          },
+          "species_name_syn": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "species_name_ar": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "species_name_en": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "domain": {
+            "type": "string",
+            "enum": [
+              "agriculture_aou",
+              "restoration_mountain"
+            ]
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "najd_native_tree",
+              "irrigated_fodder_placeholder",
+              "fog_escarpment_restoration",
+              "authority_pending"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "unvalidated_expert_stub",
+              "expert_v1_provisional"
+            ]
+          },
+          "local_preferred": {
+            "type": "boolean"
+          },
+          "seed_provenance_note_en": {
+            "type": "string"
+          },
+          "seed_provenance_note_ar": {
+            "type": "string"
+          },
+          "habitat_notes_en": {
+            "type": "string"
+          },
+          "habitat_notes_ar": {
+            "type": "string"
+          },
+          "authority_source": {
+            "type": "string"
+          },
+          "cross_domain_recommend": {
+            "type": "boolean",
+            "const": false,
+            "description": "Hard lock — never recommend across domains"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "honesty_note_en": {
+      "type": "string"
+    },
+    "honesty_note_ar": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

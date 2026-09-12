@@ -1,0 +1,4908 @@
+{
+  "version": "0.4.4-phase4-seed-scaffold",
+  "status": "unvalidated_expert_stub",
+  "science_lock": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase4",
+  "never_mix_domains": true,
+  "suitability_neq_confidence": true,
+  "writes_to_app_public": false,
+  "mountain_partner_ui": false,
+  "forbidden": [
+    "campaign_ha",
+    "seed_kg",
+    "crew_days",
+    "operational_truth",
+    "pest_certainty",
+    "soil_moisture_percent",
+    "live_khareef_onset",
+    "cross_domain_recommend",
+    "auto_campaign_planner"
+  ],
+  "rows": [
+    {
+      "site_ref": "AOU-NJ-000001",
+      "domain": "agriculture_aou",
+      "species_id": "ziziphus_spina_christi",
+      "species_name_sci": "Ziziphus spina-christi",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000001"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "AOU-NJ-000001",
+      "domain": "agriculture_aou",
+      "species_id": "vachellia_tortilis",
+      "species_name_sci": "Vachellia tortilis",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000001"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "AOU-NJ-000001",
+      "domain": "agriculture_aou",
+      "species_id": "prosopis_cineraria",
+      "species_name_sci": "Prosopis cineraria",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000001"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "AOU-NJ-000001",
+      "domain": "agriculture_aou",
+      "species_id": "irrigated_fodder_placeholder",
+      "species_name_sci": "irrigated_fodder_placeholder",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000001"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": false,
+        "provenance_status": "authority_pending",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "AOU-NJ-000002",
+      "domain": "agriculture_aou",
+      "species_id": "ziziphus_spina_christi",
+      "species_name_sci": "Ziziphus spina-christi",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000002"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "AOU-NJ-000002",
+      "domain": "agriculture_aou",
+      "species_id": "vachellia_tortilis",
+      "species_name_sci": "Vachellia tortilis",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000002"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "AOU-NJ-000002",
+      "domain": "agriculture_aou",
+      "species_id": "prosopis_cineraria",
+      "species_name_sci": "Prosopis cineraria",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000002"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "AOU-NJ-000002",
+      "domain": "agriculture_aou",
+      "species_id": "irrigated_fodder_placeholder",
+      "species_name_sci": "irrigated_fodder_placeholder",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000002"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": false,
+        "provenance_status": "authority_pending",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "AOU-NJ-000003",
+      "domain": "agriculture_aou",
+      "species_id": "ziziphus_spina_christi",
+      "species_name_sci": "Ziziphus spina-christi",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000003"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "AOU-NJ-000003",
+      "domain": "agriculture_aou",
+      "species_id": "vachellia_tortilis",
+      "species_name_sci": "Vachellia tortilis",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000003"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "AOU-NJ-000003",
+      "domain": "agriculture_aou",
+      "species_id": "prosopis_cineraria",
+      "species_name_sci": "Prosopis cineraria",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000003"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "AOU-NJ-000003",
+      "domain": "agriculture_aou",
+      "species_id": "irrigated_fodder_placeholder",
+      "species_name_sci": "irrigated_fodder_placeholder",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000003"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": false,
+        "provenance_status": "authority_pending",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "AOU-NJ-000004",
+      "domain": "agriculture_aou",
+      "species_id": "ziziphus_spina_christi",
+      "species_name_sci": "Ziziphus spina-christi",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000004"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "AOU-NJ-000004",
+      "domain": "agriculture_aou",
+      "species_id": "vachellia_tortilis",
+      "species_name_sci": "Vachellia tortilis",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000004"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "AOU-NJ-000004",
+      "domain": "agriculture_aou",
+      "species_id": "prosopis_cineraria",
+      "species_name_sci": "Prosopis cineraria",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000004"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "AOU-NJ-000004",
+      "domain": "agriculture_aou",
+      "species_id": "irrigated_fodder_placeholder",
+      "species_name_sci": "irrigated_fodder_placeholder",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000004"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": false,
+        "provenance_status": "authority_pending",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "AOU-NJ-000005",
+      "domain": "agriculture_aou",
+      "species_id": "ziziphus_spina_christi",
+      "species_name_sci": "Ziziphus spina-christi",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000005"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "AOU-NJ-000005",
+      "domain": "agriculture_aou",
+      "species_id": "vachellia_tortilis",
+      "species_name_sci": "Vachellia tortilis",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000005"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "AOU-NJ-000005",
+      "domain": "agriculture_aou",
+      "species_id": "prosopis_cineraria",
+      "species_name_sci": "Prosopis cineraria",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000005"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "AOU-NJ-000005",
+      "domain": "agriculture_aou",
+      "species_id": "irrigated_fodder_placeholder",
+      "species_name_sci": "irrigated_fodder_placeholder",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000005"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": false,
+        "provenance_status": "authority_pending",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "AOU-NJ-000006",
+      "domain": "agriculture_aou",
+      "species_id": "ziziphus_spina_christi",
+      "species_name_sci": "Ziziphus spina-christi",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000006"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "AOU-NJ-000006",
+      "domain": "agriculture_aou",
+      "species_id": "vachellia_tortilis",
+      "species_name_sci": "Vachellia tortilis",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000006"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "AOU-NJ-000006",
+      "domain": "agriculture_aou",
+      "species_id": "prosopis_cineraria",
+      "species_name_sci": "Prosopis cineraria",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000006"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "AOU-NJ-000006",
+      "domain": "agriculture_aou",
+      "species_id": "irrigated_fodder_placeholder",
+      "species_name_sci": "irrigated_fodder_placeholder",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000006"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": false,
+        "provenance_status": "authority_pending",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "AOU-NJ-000007",
+      "domain": "agriculture_aou",
+      "species_id": "ziziphus_spina_christi",
+      "species_name_sci": "Ziziphus spina-christi",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000007"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "AOU-NJ-000007",
+      "domain": "agriculture_aou",
+      "species_id": "vachellia_tortilis",
+      "species_name_sci": "Vachellia tortilis",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000007"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "AOU-NJ-000007",
+      "domain": "agriculture_aou",
+      "species_id": "prosopis_cineraria",
+      "species_name_sci": "Prosopis cineraria",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000007"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "AOU-NJ-000007",
+      "domain": "agriculture_aou",
+      "species_id": "irrigated_fodder_placeholder",
+      "species_name_sci": "irrigated_fodder_placeholder",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000007"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": false,
+        "provenance_status": "authority_pending",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "AOU-NJ-000008",
+      "domain": "agriculture_aou",
+      "species_id": "ziziphus_spina_christi",
+      "species_name_sci": "Ziziphus spina-christi",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000008"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "AOU-NJ-000008",
+      "domain": "agriculture_aou",
+      "species_id": "vachellia_tortilis",
+      "species_name_sci": "Vachellia tortilis",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000008"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "AOU-NJ-000008",
+      "domain": "agriculture_aou",
+      "species_id": "prosopis_cineraria",
+      "species_name_sci": "Prosopis cineraria",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000008"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "AOU-NJ-000008",
+      "domain": "agriculture_aou",
+      "species_id": "irrigated_fodder_placeholder",
+      "species_name_sci": "irrigated_fodder_placeholder",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000008"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": false,
+        "provenance_status": "authority_pending",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "AOU-NJ-000009",
+      "domain": "agriculture_aou",
+      "species_id": "ziziphus_spina_christi",
+      "species_name_sci": "Ziziphus spina-christi",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000009"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "AOU-NJ-000009",
+      "domain": "agriculture_aou",
+      "species_id": "vachellia_tortilis",
+      "species_name_sci": "Vachellia tortilis",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000009"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "AOU-NJ-000009",
+      "domain": "agriculture_aou",
+      "species_id": "prosopis_cineraria",
+      "species_name_sci": "Prosopis cineraria",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000009"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "AOU-NJ-000009",
+      "domain": "agriculture_aou",
+      "species_id": "irrigated_fodder_placeholder",
+      "species_name_sci": "irrigated_fodder_placeholder",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "no_aou_ground_truth_species",
+        "site_ref=AOU-NJ-000009"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Najd cool-season heuristic (approx Nov–Mar) — provisional calendar only",
+        "window_label_ar": "إرشاد موسم نجد البارد (تقريباً نوفمبر–مارس) — تقويم مؤقت فقط",
+        "note_en": "Calendar heuristic provisional — not phenology engine output; not live onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": false,
+        "provenance_status": "authority_pending",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-000-high_elev_steep-691m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-000-high_elev_steep-691m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-001-high_elev_gentle-612m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-001-high_elev_gentle-612m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-002-high_elev_steep-651m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-002-high_elev_steep-651m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-003-low_elev_gentle-65m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-003-low_elev_gentle-65m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-004-low_elev_gentle-47m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-004-low_elev_gentle-47m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-005-low_elev_gentle-86m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-005-low_elev_gentle-86m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-006-low_elev_gentle-41m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-006-low_elev_gentle-41m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-007-low_elev_gentle-63m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-007-low_elev_gentle-63m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-008-low_elev_steep-116m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-008-low_elev_steep-116m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-009-low_elev_steep-120m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-009-low_elev_steep-120m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-010-low_elev_steep-129m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-010-low_elev_steep-129m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-011-low_elev_steep-113m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-011-low_elev_steep-113m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-012-low_elev_steep-142m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-012-low_elev_steep-142m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-013-low_elev_steep-137m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-013-low_elev_steep-137m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-014-low_elev_steep-138m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-014-low_elev_steep-138m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-015-low_elev_steep-145m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-015-low_elev_steep-145m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-016-mid_elev_gentle-313m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-016-mid_elev_gentle-313m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-017-mid_elev_gentle-243m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-017-mid_elev_gentle-243m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-018-mid_elev_gentle-431m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-018-mid_elev_gentle-431m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-019-mid_elev_gentle-311m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-019-mid_elev_gentle-311m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-020-mid_elev_gentle-317m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-020-mid_elev_gentle-317m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-021-mid_elev_gentle-165m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-021-mid_elev_gentle-165m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-022-mid_elev_gentle-296m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-022-mid_elev_gentle-296m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-023-mid_elev_gentle-323m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-023-mid_elev_gentle-323m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-024-mid_elev_steep-428m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-024-mid_elev_steep-428m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-025-mid_elev_steep-175m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-025-mid_elev_steep-175m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-026-mid_elev_steep-186m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-026-mid_elev_steep-186m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-027-mid_elev_steep-412m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-027-mid_elev_steep-412m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-028-mid_elev_steep-307m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-028-mid_elev_steep-307m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-029-mid_elev_steep-211m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-029-mid_elev_steep-211m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-030-mid_elev_steep-424m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-030-mid_elev_steep-424m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-031-mid_elev_steep-324m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-031-mid_elev_steep-324m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-032-high_elev_gentle-519m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-032-high_elev_gentle-519m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-033-high_elev_gentle-454m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-033-high_elev_gentle-454m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-034-high_elev_gentle-526m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-034-high_elev_gentle-526m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-035-high_elev_gentle-523m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-035-high_elev_gentle-523m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-036-high_elev_gentle-511m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-036-high_elev_gentle-511m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-037-high_elev_gentle-476m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-037-high_elev_gentle-476m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-038-high_elev_gentle-503m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-038-high_elev_gentle-503m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-039-high_elev_gentle-465m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-039-high_elev_gentle-465m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-040-high_elev_steep-468m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-040-high_elev_steep-468m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-041-high_elev_steep-443m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-041-high_elev_steep-443m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-042-high_elev_steep-583m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-042-high_elev_steep-583m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-043-high_elev_steep-569m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-043-high_elev_steep-569m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-044-high_elev_steep-441m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-044-high_elev_steep-441m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-045-high_elev_steep-553m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-045-high_elev_steep-553m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-046-high_elev_steep-613m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-046-high_elev_steep-613m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    },
+    {
+      "site_ref": "MPI-SAMPLE-047-high_elev_steep-518m",
+      "domain": "restoration_mountain",
+      "species_id": "terminalia_dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "suitability_provisional_0_100": null,
+      "status": "unvalidated_expert_stub",
+      "evidence_gaps": [
+        "authority_short_list_pending",
+        "no_field_validation",
+        "species_suitability_unvalidated",
+        "no_campaign_quantities_by_design",
+        "mountain_partner_ui_forbidden_until_resignoff",
+        "post_khareef_re_signoff_pending",
+        "mpi_sample_cell_not_validated_planting_site",
+        "site_ref=MPI-SAMPLE-047-high_elev_steep-518m"
+      ],
+      "species_suitability": {
+        "status": "unvalidated",
+        "score_0_100": null,
+        "note_en": "Matrix scaffold only — unvalidated; not operational truth.",
+        "note_ar": "هيكل مصفوفة فقط — غير مُتحقَّق؛ ليست حقيقة تشغيلية."
+      },
+      "seed_recommendation": {
+        "mode": "manual",
+        "operator_confirmed": false,
+        "recommendation_text_en": null,
+        "recommendation_text_ar": null,
+        "note_en": "Manual / operator-confirmed only — no auto recommend."
+      },
+      "timing_window": {
+        "kind": "calendar_heuristic",
+        "status": "provisional",
+        "window_label_en": "Post-khareef heuristic (late Sep–Oct preference) — provisional; not live onset",
+        "window_label_ar": "إرشاد ما بعد الخريف (أواخر سبتمبر–أكتوبر) — مؤقت؛ ليس رصد بداية حي",
+        "note_en": "Calendar heuristic provisional — MPI/onset labeling locks still apply; no live Khareef onset.",
+        "live_khareef_onset": false
+      },
+      "seed_provenance": {
+        "local_preferred": true,
+        "provenance_status": "local_preferred_flag_only",
+        "note_en": "local_preferred flag only — not a verified lot certificate."
+      },
+      "seeding_protocol": {
+        "mode": "manual_operator_confirmed",
+        "steps": [
+          "authority_contact",
+          "site_field_check",
+          "species_confirm",
+          "provenance_confirm",
+          "timing_confirm",
+          "protocol_confirm",
+          "operator_signoff",
+          "defer_insufficient_evidence"
+        ],
+        "auto_assign": false,
+        "note_en": "Enum steps only; operator must confirm. No auto campaign planner."
+      }
+    }
+  ],
+  "honesty_note_en": "Site × Species matrix scaffold. Scores null/unvalidated. Domains agriculture_aou vs restoration_mountain never mixed. No campaign quantities. No Map/Restoration Seed UI in this artifacts PR.",
+  "honesty_note_ar": "هيكل مصفوفة موقع×نوع. الدرجات فارغة/غير مُتحقَّقة. المجالان agriculture_aou و restoration_mountain لا يُخلطان. بلا كميات حملة. بلا واجهة بذر في هذا الـPR."
+}
