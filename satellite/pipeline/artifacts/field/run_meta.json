@@ -1,0 +1,40 @@
+{
+  "generated_at": "2026-09-12T19:55:05.717999+00:00",
+  "science_lock": "SCIENCE_LOCKS_v0.4_phase5_field_loop",
+  "phase4_species_lock": "SCIENCE_LOCKS_v0.4_phase4_species",
+  "vetting_status": "scientist_locked_pending_ea",
+  "status": "field_loop_scaffold_capture",
+  "domains": [
+    "fog_escarpment",
+    "najd_arid"
+  ],
+  "never_mix_domains": true,
+  "mountain_ui": "hold",
+  "campaign_numbers": false,
+  "published_rates": false,
+  "auto_rewrite_scores": false,
+  "writes_to_app_public": false,
+  "partner_field_ui": false,
+  "n_events": 3,
+  "n_observations": 15,
+  "event_ids": [
+    "SE-2026-000001",
+    "SE-2026-000002",
+    "SE-2026-000003"
+  ],
+  "engines": [
+    "engines/field_loop.py"
+  ],
+  "runner": "run_field_loop.py",
+  "artifact_files": [
+    "seeding_events.sample.json",
+    "field_observations.sample.json",
+    "survival_observations.sample.json",
+    "field_loop.json",
+    "field_events_export.stub.csv",
+    "run_meta.json"
+  ],
+  "honesty_note_en": "Field log — germination ≠ establishment ≠ survival. Not a platform success score, not an Environment Authority approval.",
+  "honesty_note_ar": "سجل ميداني — إنبات ≠ تأسيس ≠ بقاء. ليست درجة نجاح للمنصة وليست اعتماداً من هيئة البيئة.",
+  "agrofostery_lock_tip": "Replace enums / reject rules from docs/phase5_field_loop_scaffold.json when mid-flight Agrofostery addenda land — keep validate_seeding_event and create_planned_followups as tip-update points."
+}

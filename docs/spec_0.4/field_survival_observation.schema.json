@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dhofaracademia.example/spec_0.4/field_survival_observation.schema.json",
+  "title": "FieldObservation",
+  "description": "Phase-5 FieldObservation — SCIENCE_LOCKS_v0.4_phase5_field_loop. Keep all visits; never overwrite. Missed ≠ failure; no interpolate; no fabricated germination/survival %. Germination not_applicable (not zero) for protect/vegetative/seedling/cutting/wilding/protection_only. Satellite ≠ germination meter.",
+  "type": "object",
+  "required": [
+    "observation_id",
+    "event_id",
+    "visit_type",
+    "visit_date",
+    "days_since_event",
+    "window_status",
+    "outcome_class",
+    "observer",
+    "vetting_status"
+  ],
+  "properties": {
+    "observation_id": {
+      "type": "string",
+      "pattern": "^FO-[0-9]{4}-[0-9]{6}$",
+      "description": "FO-{YYYY}-{NNNNNN}"
+    },
+    "event_id": {
+      "type": "string",
+      "pattern": "^SE-[0-9]{4}-[0-9]{6}$"
+    },
+    "visit_type": {
+      "type": "string",
+      "enum": [
+        "baseline",
+        "d30_germination",
+        "d90_survival",
+        "d180_establishment",
+        "d365_survival",
+        "ad_hoc"
+      ]
+    },
+    "visit_date": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "ISO date of visit; null only for scheduler missed rows with outcome_class=not_observed"
+    },
+    "days_since_event": {
+      "type": ["integer", "null"],
+      "description": "Computed from event_date; null if event_date unknown (ad_hoc only)"
+    },
+    "window_status": {
+      "type": "string",
+      "enum": ["on_window", "early", "late", "missed"]
+    },
+    "outcome_class": {
+      "type": "string",
+      "enum": [
+        "not_observed",
+        "not_applicable",
+        "none_detected",
+        "present_uncertain_id",
+        "present_target",
+        "present_nontarget_only",
+        "dead_or_missing",
+        "protected_only"
+      ]
+    },
+    "observer": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Team / person label — not civil ID"
+    },
+    "gps": {
+      "type": ["object", "null"],
+      "required": ["lat", "lon"],
+      "properties": {
+        "lat": { "type": "number" },
+        "lon": { "type": "number" },
+        "accuracy_m": { "type": ["number", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "target_count": { "type": ["integer", "null"], "minimum": 0 },
+    "subplot_area_m2": { "type": ["number", "null"], "exclusiveMinimum": 0 },
+    "species_id_confidence": {
+      "type": ["string", "null"],
+      "enum": ["certain", "probable", "uncertain", null]
+    },
+    "establishment_uncertain": { "type": ["boolean", "null"] },
+    "photos": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["ref", "pii_flag"],
+        "properties": {
+          "ref": { "type": "string" },
+          "taken_at": { "type": ["string", "null"] },
+          "caption": { "type": ["string", "null"] },
+          "pii_flag": {
+            "type": "string",
+            "enum": ["none", "incidental_person"]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "notes": { "type": ["string", "null"] },
+    "covariates": {
+      "type": ["object", "null"],
+      "properties": {
+        "grazing_sign": { "type": ["boolean", "null"] },
+        "browse_damage": { "type": ["boolean", "null"] },
+        "washout": { "type": ["boolean", "null"] },
+        "drought_note": { "type": ["string", "null"] },
+        "irrigation_on": { "type": ["boolean", "null"] },
+        "competition_note": { "type": ["string", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "satellite_context": {
+      "type": ["object", "null"],
+      "description": "NDVI/NDMI scene cite only — never a visit verdict / germination meter",
+      "properties": {
+        "scene_id": { "type": ["string", "null"] },
+        "ndvi": { "type": ["number", "null"] },
+        "ndmi": { "type": ["number", "null"] },
+        "note_en": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "operator_emergence_ratio_unvalidated": {
+      "type": ["number", "null"],
+      "description": "Provisional only if both target_count and quantity.amount exist — NEVER partner UI germination rate"
+    },
+    "vetting_status": {
+      "type": "string",
+      "const": "scientist_locked_pending_ea"
+    },
+    "honesty_note_en": { "type": "string" },
+    "honesty_note_ar": { "type": "string" }
+  },
+  "additionalProperties": false
+}

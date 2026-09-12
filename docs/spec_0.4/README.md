@@ -1,9 +1,9 @@
-# Spec 0.4 — Phase-1 agricultural + Phase-2 mountain evidence + Phase-3 decision + Phase-4 seed schemas
+# Spec 0.4 — Phase-1 agricultural + Phase-2 mountain evidence + Phase-3 decision + Phase-4 seed + Phase-5 field schemas
 
 Binding science: [`docs/SCIENCE_LOCKS_v0.4_phase1_2.md`](../SCIENCE_LOCKS_v0.4_phase1_2.md)  
 Roadmap: [`docs/ROADMAP_v0.4_decision_engines.md`](../ROADMAP_v0.4_decision_engines.md)
 
-These JSON Schemas describe **Phase-1 Agriculture**, **Phase-2 mountain evidence**, **Phase-3 Decision Engine**, and **Phase-4 Seed Intelligence** contracts. Species scores as operational truth, campaign numbers, live MPI/Khareef detection, pest certainty, and partner mountain decision / Seed UI remain **out of scope / forbidden**.
+These JSON Schemas describe **Phase-1 Agriculture**, **Phase-2 mountain evidence**, **Phase-3 Decision Engine**, **Phase-4 Seed Intelligence**, and **Phase-5 Field Loop** contracts. Species scores as operational truth, campaign numbers, live MPI/Khareef detection, pest certainty, and partner mountain decision / Seed UI remain **out of scope / forbidden**.
 
 ## Field → SCIENCE_LOCKS mapping
 
@@ -23,6 +23,10 @@ These JSON Schemas describe **Phase-1 Agriculture**, **Phase-2 mountain evidence
 | `species_catalog.schema.json` | §Phase4 Seed catalog | Domain-separated short lists; `authority_source: pending_agrofostery` |
 | `site_species_matrix.schema.json` | §Phase4 Site×Species | `unvalidated_expert_stub`; null scores OK; no campaign fields |
 | `seed_intelligence.schema.json` | §Phase4 Wrapper | Protocol stubs + UI gates (all false in scaffold PR) |
+
+| `field_seeding_event.schema.json` | `SCIENCE_LOCKS_v0.4_phase5_field_loop` | `SE-{YYYY}-{NNNNNN}`; operator quantity unvalidated; domains never mix |
+| `field_survival_observation.schema.json` | `SCIENCE_LOCKS_v0.4_phase5_field_loop` | `FO-{YYYY}-{NNNNNN}` FieldObservation; keep all visits; no fabricated rates |
+| `field_loop.schema.json` | `SCIENCE_LOCKS_v0.4_phase5_field_loop` | Optional wrapper + UI gates (all partner Field UI false) |
 
 ## Phase-2 mountain evidence (offline only)
 
@@ -84,9 +88,21 @@ Decision scaffolds intentionally live under `satellite/pipeline/artifacts/decisi
 - Gates: no campaign_ha/seed_kg/crew_days; manual protocol only; no Analysis/Restoration Seed UI; no mountain partner UI
 - Contact Agrofostery Authority before any campaign (`authority_source: pending_agrofostery`)
 
+## Phase-5 Field Loop (offline artifacts)
+
+- Binding: [`docs/SCIENCE_LOCKS_v0.4_phase5_field_loop.md`](../SCIENCE_LOCKS_v0.4_phase5_field_loop.md) + [`docs/phase5_field_loop_scaffold.json`](../phase5_field_loop_scaffold.json)
+- Engines: `satellite/pipeline/engines/field_loop.py`
+- Runner: `satellite/pipeline/run_field_loop.py`
+- Artifacts: `satellite/pipeline/artifacts/field/` — **NOT** `app/public/`
+- IDs: `SE-{YYYY}-{NNNNNN}` / `FO-{YYYY}-{NNNNNN}`
+- Germination ≠ establishment ≠ survival; missed ≠ failure; no interpolate; no published rates
+- Germination `not_applicable` (not zero) for protect/vegetative/seedling/cutting/wilding/protection_only
+- Photos: optional plot evidence; no children / ID docs / face recognition / partner gallery
+- Gates: no partner Field UI; mountain Hold; no auto-rewrite Suitability/Confidence/Site×Species; Phase-6 out
+
 ## Later phases
 
-Field/Learning remain ROADMAP later. Partner mountain UI + Seed UI remain Forbidden until re-sign-off.
+Learning (Phase-6) remains ROADMAP later. Partner mountain UI + Seed UI remain Forbidden until re-sign-off.
 
 ## Phase-4 species lock
 - Ecological domains: `fog_escarpment` | `najd_arid` (never mix)

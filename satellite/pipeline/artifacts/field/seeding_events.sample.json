@@ -1,0 +1,119 @@
+{
+  "version": "0.4.5-phase5-field-loop",
+  "science_lock": "SCIENCE_LOCKS_v0.4_phase5_field_loop",
+  "vetting_status": "scientist_locked_pending_ea",
+  "status": "scaffold_sample",
+  "honesty_note_en": "Field log — germination ≠ establishment ≠ survival. Not a platform success score, not an Environment Authority approval.",
+  "events": [
+    {
+      "event_id": "SE-2026-000001",
+      "site_ref": "AOU-NJ-000001",
+      "domain": "najd_arid",
+      "species_id": "sp-najd-zsc",
+      "event_date": "2026-01-15",
+      "gps": {
+        "lat": 17.12,
+        "lon": 54.05,
+        "accuracy_m": 8.0
+      },
+      "intervention_type": "seeding",
+      "establishment_mode": "seed",
+      "method": "pit",
+      "timing_window": "winter_spring_rain",
+      "provenance_class": "regional_dhofar",
+      "seed_lot_id": null,
+      "quantity": {
+        "amount": 120,
+        "unit": "seeds",
+        "source": "operator_reported_unvalidated"
+      },
+      "operator_name": "najd_field_team_a",
+      "organization": "baladiya",
+      "n_participants": 4,
+      "photos_event": [],
+      "notes": "Scaffold sample — operator-confirmed pit seeding of سدر.",
+      "override_note": null,
+      "event_status": "logged",
+      "linked_recommendation_id": null,
+      "baseline_missing": true,
+      "vetting_status": "scientist_locked_pending_ea",
+      "honesty_note_en": "Field log — germination ≠ establishment ≠ survival. Not a platform success score, not an Environment Authority approval.",
+      "honesty_note_ar": "سجل ميداني — إنبات ≠ تأسيس ≠ بقاء. ليست درجة نجاح للمنصة وليست اعتماداً من هيئة البيئة."
+    },
+    {
+      "event_id": "SE-2026-000002",
+      "site_ref": "AOU-NJ-000003",
+      "domain": "najd_arid",
+      "species_id": "sp-najd-vtor",
+      "event_date": "2026-02-01",
+      "gps": {
+        "lat": 17.18,
+        "lon": 54.11,
+        "accuracy_m": 12.0
+      },
+      "intervention_type": "planting",
+      "establishment_mode": "vegetative_preferred",
+      "method": "seedling",
+      "timing_window": "irrigated",
+      "provenance_class": "unknown",
+      "seed_lot_id": null,
+      "quantity": {
+        "amount": 25,
+        "unit": "seedlings",
+        "source": "operator_reported_unvalidated"
+      },
+      "operator_name": "najd_field_team_b",
+      "organization": "volunteers",
+      "n_participants": 6,
+      "photos_event": [
+        {
+          "ref": "stubs/photos/SE-2026-000002/plot_pre.jpg",
+          "taken_at": "2026-02-01",
+          "caption": "Plot pre-plant — soil only",
+          "pii_flag": "none"
+        }
+      ],
+      "notes": "Scaffold sample — seedling planting of سمر. d30_germination is not_applicable (already a plant).",
+      "override_note": null,
+      "event_status": "logged",
+      "linked_recommendation_id": null,
+      "baseline_missing": true,
+      "vetting_status": "scientist_locked_pending_ea",
+      "honesty_note_en": "Field log — germination ≠ establishment ≠ survival. Not a platform success score, not an Environment Authority approval.",
+      "honesty_note_ar": "سجل ميداني — إنبات ≠ تأسيس ≠ بقاء. ليست درجة نجاح للمنصة وليست اعتماداً من هيئة البيئة."
+    },
+    {
+      "event_id": "SE-2026-000003",
+      "site_ref": "MPI-SAMPLE-000",
+      "domain": "fog_escarpment",
+      "species_id": "sp-fog-tdhof",
+      "event_date": "2025-09-20",
+      "gps": {
+        "lat": 17.05,
+        "lon": 54.45,
+        "accuracy_m": 15.0
+      },
+      "intervention_type": "protect_regeneration",
+      "establishment_mode": "protect_regeneration",
+      "method": "protection_only",
+      "timing_window": "early_post_khareef",
+      "provenance_class": "local_same_jabal",
+      "seed_lot_id": null,
+      "quantity": null,
+      "operator_name": "fog_offline_hold_team",
+      "organization": "other",
+      "n_participants": 2,
+      "photos_event": [],
+      "notes": "OFFLINE mountain cell sample — Mountain partner UI Hold. Protect regeneration of ميست; germination not_applicable.",
+      "override_note": null,
+      "khareef_stage": "early_post_khareef",
+      "event_status": "logged",
+      "linked_recommendation_id": null,
+      "baseline_missing": true,
+      "mountain_ui": "hold",
+      "vetting_status": "scientist_locked_pending_ea",
+      "honesty_note_en": "Field log — germination ≠ establishment ≠ survival. Not a platform success score, not an Environment Authority approval.",
+      "honesty_note_ar": "سجل ميداني — إنبات ≠ تأسيس ≠ بقاء. ليست درجة نجاح للمنصة وليست اعتماداً من هيئة البيئة."
+    }
+  ]
+}
