@@ -98,15 +98,10 @@ export default function RestorationMap({ heightClass = "h-[28rem]" }: { heightCl
                     <div style={{ maxWidth: 220 }}>
                       <strong>{p.id}</strong>
                       {name ? <div>{name}</div> : null}
-                      <div>
-                        {t("restoration.suitability")}: {p.suitability}
-                      </div>
-                      <div>
-                        {t("restoration.confidence")}: {p.confidence}
-                      </div>
-                      <div style={{ fontSize: 11, marginTop: 4 }}>{t("restoration.suitabilityNeqConfidence")}</div>
-                      <div style={{ fontSize: 11, marginTop: 4 }}>{t("mountainStatus.timingDeferred")}</div>
+                      <div style={{ fontSize: 11, marginTop: 4 }}>{t("mountainStatus.productKind")}</div>
+                      <div style={{ fontSize: 11 }}>{t("mountainStatus.timingDeferred")}</div>
                       <div style={{ fontSize: 11 }}>{t("mountainStatus.noPlantHere")}</div>
+                      <div style={{ fontSize: 11 }}>{t("mountainStatus.seedingHold")}</div>
                     </div>
                   </Popup>
                 </CircleMarker>

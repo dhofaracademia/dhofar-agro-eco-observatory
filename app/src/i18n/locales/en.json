@@ -440,7 +440,10 @@
     "seedingHold": "Seeding-rec Hold",
     "noPlantHere": "Fog species are a catalog list only — not a plant-here recommendation.",
     "siteStatus": "Satellite status site",
-    "actionHidden": "Recommended seeding action hidden — Hold until post-khareef MPI (2026-09-15–2026-10-31) + Agrofostery SHA."
+    "actionHidden": "Recommended seeding action hidden — Hold until post-khareef MPI (2026-09-15–2026-10-31) + Agrofostery SHA.",
+    "mpiOnsetProvisional": "Onset-window dry MPI provisional / insufficient — not post-khareef persistence",
+    "fogCatalogList": "Fog catalog (list only)",
+    "statusNotes": "Status notes"
   },
   "fieldLoop": {
     "optionalTitle": "Field Loop — optional last-verify",
