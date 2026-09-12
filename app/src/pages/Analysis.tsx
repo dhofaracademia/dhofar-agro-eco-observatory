@@ -10,6 +10,7 @@ import DecisionChrome, {
   type EvidenceGapUnit,
   type SuitabilityUnit,
 } from "../components/DecisionChrome";
+import SeedCatalogPanel from "../components/SeedCatalogPanel";
 
 type DatePoint = {
   date: string;
@@ -623,6 +624,16 @@ export default function Analysis() {
               evidence={selectedEvidence}
               loading={decisionLoading}
             />
+          </section>
+          <section className="space-y-3">
+            <h2 className="text-lg font-semibold text-crop-700">{t("seed.najdTitle")}</h2>
+            <p className="text-sm text-sand-800/90">{t("seed.partnerMayAct")}</p>
+            <SeedCatalogPanel domain="najd_arid" />
+          </section>
+          <section className="rounded-2xl border border-dashed border-sand-300 bg-sand-50 p-4 text-xs text-sand-800/80">
+            <h3 className="mb-1 text-sm font-semibold text-sand-900">{t("fieldLoop.optionalTitle")}</h3>
+            <p>{t("fieldLoop.optionalBody")}</p>
+            <p className="mt-2">{t("learning.honesty")}</p>
           </section>
         </>
       )}

@@ -33,9 +33,9 @@ _GAP_CATALOG = [
     (
         "gap_field",
         "no_field_visit",
-        "blocking",
-        "No field visit / ground verification linked to this AOU.",
-        "لا زيارة ميدانية / تحقق أرضي مرتبط بهذه الوحدة.",
+        "caution",
+        "No dated field visit on file — optional additional field verification (last resort) only; not a prerequisite to act.",
+        "لا زيارة ميدانية مؤرخة — معاينة ميدانية لاحقة اختيارية للتحقق الإضافي فقط؛ ليست شرطاً للاستخدام.",
     ),
     (
         "gap_history",

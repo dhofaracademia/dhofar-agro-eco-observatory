@@ -8,6 +8,7 @@ import AouOfflineBadge from "../components/AouOfflineBadge";
 import NajdSeasonalChip from "../components/NajdSeasonalChip";
 import hubsData from "../data/hubs.json";
 import type { ObservatoryMode } from "../lib/mode";
+import MountainStatusPanel from "../components/MountainStatusPanel";
 
 type Hub = (typeof hubsData.hubs)[number];
 
@@ -76,6 +77,7 @@ export default function MapPage() {
           <p className="text-sm text-sand-800/90">{t("restoration.blurb")}</p>
           <p className="text-xs text-amber-950/90">{t("provisional.sites")}</p>
           <p className="text-xs text-sand-800/60">{t("provisional.mpi")}</p>
+          <MountainStatusPanel />
           <RestorationMap />
         </section>
       )}

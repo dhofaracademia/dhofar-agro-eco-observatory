@@ -1,0 +1,45 @@
+{
+  "lock_id": "SCIENCE_LOCKS_v0.4_satellite_first",
+  "date": "2026-09-13",
+  "timezone": "Asia/Muscat",
+  "owner": "Agrofostery Scientist",
+  "verdict": "go",
+  "field_visit_prerequisite": false,
+  "field_loop_role": "optional_last_verify",
+  "primary_product": "satellite_decision_engines",
+  "najd_partner_complete_without_fo": true,
+  "mountain_status_view": "allowed_fail_honest",
+  "mountain_seeding_hold": true,
+  "experimental_partner_seeding_toggle": false,
+  "post_khareef_window": {
+    "start": "2026-09-15",
+    "end": "2026-10-31"
+  },
+  "seeding_hold_lifts_when": [
+    "t0_source_window=post_khareef",
+    "product_kind=post_khareef_mpi_or_insufficient_fail_honest",
+    "ge1_clear_S2_L2A_SCL",
+    "no_interpolation",
+    "scientist_resignoff_on_mpi_run_meta_sha"
+  ],
+  "najd_may_ship": [
+    "s2_gallery_cited",
+    "ag_probability_aou",
+    "water_vigor_alerts",
+    "possible_biotic_stress",
+    "suitability_confidence_separate_provisional",
+    "najd_seed_catalog_unvalidated",
+    "timing_winter_spring_or_irrigated"
+  ],
+  "forbidden": [
+    "germination_survival_pct_operational",
+    "Authority-approved",
+    "معتمد من الهيئة",
+    "auto_weight_writes",
+    "mix_domains",
+    "missed_fo_as_failure",
+    "field_visit_required_for_analysis",
+    "onset_mpi_as_post_khareef",
+    "experimental_partner_seeding_map"
+  ]
+}

@@ -2,8 +2,12 @@
   "type": "FeatureCollection",
   "name": "dhofar_restoration_recommended_sites_mvp",
   "properties": {
-    "note": "MVP sample sites for Restoration Observatory. Suitability and confidence are illustrative expert-rule stubs — not field-validated scores. Species suggestions require Environment Authority / agroforestry review.",
-    "version": "mvp-1"
+    "note": "Mountain STATUS markers only. MPI product_kind is onset_window_dry_mpi_provisional or insufficient — not post-khareef persistence. Timing deferred. Not seeding recommendations. Seeding-rec Hold until post-khareef MPI 2026-09-15–2026-10-31 + Agrofostery SHA.",
+    "version": "mvp-1-status",
+    "product_kind": "onset_window_dry_mpi_provisional",
+    "timing": "deferred",
+    "seeding_recommendation": "hold",
+    "partner_surface": "status_only"
   },
   "features": [
     {
@@ -20,19 +24,22 @@
         "name_en": "Jabal Qara — fog escarpment niche",
         "name_ar": "جبل القرا — موطئ ضباب على المنحدر",
         "region": "Qara",
-        "suitability": 89,
-        "confidence": 74,
-        "mpi_class": "High",
-        "action": "Enrichment Seeding",
+        "suitability": null,
+        "confidence": null,
+        "mpi_class": "onset_provisional_or_insufficient",
+        "action": null,
         "species": "Terminalia dhofarica",
-        "species_note": "Accepted name; syn. Anogeissus dhofarica. Fog-escarpment native — not arid-Najd species.",
-        "window": "Late Khareef / Early Post-Khareef",
+        "species_note": "Fog catalog list only — not a plant-here recommendation while seeding-rec Hold.",
+        "window": null,
         "why": [
-          "Post-Khareef moisture persistence (MPI) elevated vs nearby dry ridges",
-          "Partial canopy gaps suggest enrichment rather than blank planting",
-          "Moderate slope with acceptable wetness proxy — not a runoff trap",
-          "Historical fog-belt context favors Terminalia dhofarica"
-        ]
+          "Status marker only — onset-window dry MPI provisional (not post-khareef persistence).",
+          "Seeding recommendations Hold until post-khareef MPI window + science Approve.",
+          "Fog-belt species listed elsewhere as catalog only — not a plant-here card."
+        ],
+        "illustrative_stub": false,
+        "product_kind": "onset_window_dry_mpi_provisional",
+        "timing": "deferred",
+        "seeding_recommendation": "hold"
       }
     },
     {
@@ -49,19 +56,22 @@
         "name_en": "Jabal Qara — north ridge regeneration",
         "name_ar": "جبل القرا — تجدد على الحافة الشمالية",
         "region": "Qara",
-        "suitability": 82,
-        "confidence": 71,
-        "mpi_class": "Medium-High",
-        "action": "Assisted Natural Regeneration",
+        "suitability": null,
+        "confidence": null,
+        "mpi_class": "onset_provisional_or_insufficient",
+        "action": null,
         "species": "Terminalia dhofarica",
-        "species_note": "Support existing recruits; avoid arid-plain species (sidr (Ziziphus spina-christi) / samr (Vachellia tortilis) / ghaf (Prosopis cineraria)).",
-        "window": "Post-Khareef",
+        "species_note": "Fog catalog list only — not a plant-here recommendation while seeding-rec Hold.",
+        "window": null,
         "why": [
-          "Natural regeneration indicators already present",
-          "Light assist (protection, micro-site prep) preferred over active planting",
-          "MPI holds through +2 to +4 week post-onset windows",
-          "Lower operational risk than blank planting on exposed crest"
-        ]
+          "Status marker only — onset-window dry MPI provisional (not post-khareef persistence).",
+          "Seeding recommendations Hold until post-khareef MPI window + science Approve.",
+          "Fog-belt species listed elsewhere as catalog only — not a plant-here card."
+        ],
+        "illustrative_stub": false,
+        "product_kind": "onset_window_dry_mpi_provisional",
+        "timing": "deferred",
+        "seeding_recommendation": "hold"
       }
     },
     {
@@ -78,19 +88,22 @@
         "name_en": "Jabal Samhan — monsoon escarpment",
         "name_ar": "جبل سمحان — منحدر الخريف",
         "region": "Samhan",
-        "suitability": 91,
-        "confidence": 69,
-        "mpi_class": "High",
-        "action": "Protect Natural Regeneration",
+        "suitability": null,
+        "confidence": null,
+        "mpi_class": "onset_provisional_or_insufficient",
+        "action": null,
         "species": "Terminalia dhofarica",
-        "species_note": "Protect first; seeding only if gaps persist after monitoring.",
-        "window": "Peak Khareef → Post-Khareef monitoring",
+        "species_note": "Fog catalog list only — not a plant-here recommendation while seeding-rec Hold.",
+        "window": null,
         "why": [
-          "Strong natural regeneration signal — protect before planting",
-          "High MPI class but confidence tempered by Khareef cloud gaps",
-          "Escarpment fog corridor historically supports cloud-forest associates",
-          "Avoid / defer intensive disturbance during peak moisture"
-        ]
+          "Status marker only — onset-window dry MPI provisional (not post-khareef persistence).",
+          "Seeding recommendations Hold until post-khareef MPI window + science Approve.",
+          "Fog-belt species listed elsewhere as catalog only — not a plant-here card."
+        ],
+        "illustrative_stub": false,
+        "product_kind": "onset_window_dry_mpi_provisional",
+        "timing": "deferred",
+        "seeding_recommendation": "hold"
       }
     },
     {
@@ -107,18 +120,22 @@
         "name_en": "Jabal Samhan — eastern spur (enrichment sample)",
         "name_ar": "جبل سمحان — نتوء شرقي (عيّنة إثراء)",
         "region": "Samhan",
-        "suitability": 76,
-        "confidence": 66,
-        "mpi_class": "Medium",
-        "action": "Enrichment Seeding",
+        "suitability": null,
+        "confidence": null,
+        "mpi_class": "onset_provisional_or_insufficient",
+        "action": null,
         "species": "Terminalia dhofarica",
-        "species_note": "Enrichment preferred for partner MVP until field validation; fog-belt native Terminalia dhofarica only.",
-        "window": "Early Post-Khareef",
+        "species_note": "Fog catalog list only — not a plant-here recommendation while seeding-rec Hold.",
+        "window": null,
         "why": [
-          "Canopy gaps suit enrichment rather than full active planting until field validation",
-          "Hydrology screen passed for this spur niche",
-          "Fog-escarpment native only — no arid Najd species mix"
-        ]
+          "Status marker only — onset-window dry MPI provisional (not post-khareef persistence).",
+          "Seeding recommendations Hold until post-khareef MPI window + science Approve.",
+          "Fog-belt species listed elsewhere as catalog only — not a plant-here card."
+        ],
+        "illustrative_stub": false,
+        "product_kind": "onset_window_dry_mpi_provisional",
+        "timing": "deferred",
+        "seeding_recommendation": "hold"
       }
     },
     {
@@ -135,19 +152,22 @@
         "name_en": "Jabal Qamar — western fog pocket",
         "name_ar": "جبل القمر — جيب ضباب غربي",
         "region": "Qamar",
-        "suitability": 84,
-        "confidence": 70,
-        "mpi_class": "High",
-        "action": "Enrichment Seeding",
+        "suitability": null,
+        "confidence": null,
+        "mpi_class": "onset_provisional_or_insufficient",
+        "action": null,
         "species": "Terminalia dhofarica",
-        "species_note": "Do not mix arid Najd species into fog pockets.",
-        "window": "Late Khareef / Early Post-Khareef",
+        "species_note": "Fog catalog list only — not a plant-here recommendation while seeding-rec Hold.",
+        "window": null,
         "why": [
-          "Western Qamar fog pocket retains moisture after onset",
-          "Existing sparse cover suitable for enrichment seeding",
-          "Aspect and relative position favor moisture retention niches",
-          "Suitability ≠ confidence: scores kept separate by design"
-        ]
+          "Status marker only — onset-window dry MPI provisional (not post-khareef persistence).",
+          "Seeding recommendations Hold until post-khareef MPI window + science Approve.",
+          "Fog-belt species listed elsewhere as catalog only — not a plant-here card."
+        ],
+        "illustrative_stub": false,
+        "product_kind": "onset_window_dry_mpi_provisional",
+        "timing": "deferred",
+        "seeding_recommendation": "hold"
       }
     },
     {
@@ -164,19 +184,22 @@
         "name_en": "Jabal Qamar — steep runoff corridor",
         "name_ar": "جبل القمر — ممر جريان شديد",
         "region": "Qamar",
-        "suitability": 38,
-        "confidence": 72,
-        "mpi_class": "Low",
-        "action": "Avoid",
+        "suitability": null,
+        "confidence": null,
+        "mpi_class": "onset_provisional_or_insufficient",
+        "action": null,
         "species": "—",
-        "species_note": "Hydrological risk — not a seeding candidate in MVP rules.",
-        "window": "Defer",
+        "species_note": "Fog catalog list only — not a plant-here recommendation while seeding-rec Hold.",
+        "window": null,
         "why": [
-          "High flow-accumulation / erosion risk on steep corridor",
-          "Low site ≠ plant more — Avoid / Defer is the correct action",
-          "Confidence relatively high that the site is unsuitable",
-          "Low-lying runoff zones are not automatically good seeding sites"
-        ]
+          "Status marker only — onset-window dry MPI provisional (not post-khareef persistence).",
+          "Seeding recommendations Hold until post-khareef MPI window + science Approve.",
+          "Fog-belt species listed elsewhere as catalog only — not a plant-here card."
+        ],
+        "illustrative_stub": false,
+        "product_kind": "onset_window_dry_mpi_provisional",
+        "timing": "deferred",
+        "seeding_recommendation": "hold"
       }
     },
     {
@@ -193,19 +216,22 @@
         "name_en": "Mirbat foothills — coastal moisture fringe",
         "name_ar": "سفوح مرباط — هامش رطوبة ساحلي",
         "region": "Mirbat",
-        "suitability": 73,
-        "confidence": 64,
-        "mpi_class": "Medium",
-        "action": "Assisted Natural Regeneration",
+        "suitability": null,
+        "confidence": null,
+        "mpi_class": "onset_provisional_or_insufficient",
+        "action": null,
         "species": "Terminalia dhofarica",
-        "species_note": "Coastal foothill context; local calibration required.",
-        "window": "Post-Khareef",
+        "species_note": "Fog catalog list only — not a plant-here recommendation while seeding-rec Hold.",
+        "window": null,
         "why": [
-          "Coastal foothill moisture fringe with partial recruits",
-          "ANR preferred where grazing pressure can be reduced",
-          "Confidence limited by coarse open-data DEM and cloud cover",
-          "Species suggestion is advisory — Authority review required"
-        ]
+          "Status marker only — onset-window dry MPI provisional (not post-khareef persistence).",
+          "Seeding recommendations Hold until post-khareef MPI window + science Approve.",
+          "Fog-belt species listed elsewhere as catalog only — not a plant-here card."
+        ],
+        "illustrative_stub": false,
+        "product_kind": "onset_window_dry_mpi_provisional",
+        "timing": "deferred",
+        "seeding_recommendation": "hold"
       }
     },
     {
@@ -222,19 +248,22 @@
         "name_en": "Mughsayl — western coastal foothill",
         "name_ar": "المغسيل — سفح ساحلي غربي",
         "region": "Mughsayl",
-        "suitability": 71,
-        "confidence": 61,
-        "mpi_class": "Medium",
-        "action": "Enrichment Seeding",
+        "suitability": null,
+        "confidence": null,
+        "mpi_class": "onset_provisional_or_insufficient",
+        "action": null,
         "species": "Terminalia dhofarica",
-        "species_note": "Fog-influenced coastal foothill; not arid-plain species mix.",
-        "window": "Early Post-Khareef",
+        "species_note": "Fog catalog list only — not a plant-here recommendation while seeding-rec Hold.",
+        "window": null,
         "why": [
-          "Western coastal foothill retains seasonal moisture pockets",
-          "Gaps in cover suited to enrichment rather than protect-only",
-          "MPI operational weight on onset + post-khareef (peak often cloudy)",
-          "Illustrative MVP site — validate before any campaign"
-        ]
+          "Status marker only — onset-window dry MPI provisional (not post-khareef persistence).",
+          "Seeding recommendations Hold until post-khareef MPI window + science Approve.",
+          "Fog-belt species listed elsewhere as catalog only — not a plant-here card."
+        ],
+        "illustrative_stub": false,
+        "product_kind": "onset_window_dry_mpi_provisional",
+        "timing": "deferred",
+        "seeding_recommendation": "hold"
       }
     }
   ]

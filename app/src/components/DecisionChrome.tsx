@@ -40,8 +40,10 @@ export type EvidenceGap = {
   id: string;
   code: string;
   present: boolean;
-  narrative_en: string;
-  narrative_ar: string;
+  narrative_en?: string;
+  narrative_ar?: string;
+  severity_en?: string;
+  severity_ar?: string;
   severity?: string;
 };
 
@@ -56,12 +58,14 @@ export type EvidenceGapUnit = {
 };
 
 const ACTION_ENUM = [
+  "continue_monitoring",
   "field_irrigation_inspection",
   "field_vigor_inspection",
   "biotic_field_verification",
-  "continue_monitoring",
   "defer_insufficient_evidence",
 ] as const;
+
+const FIELD_GAP_CODES = new Set(["no_field_visit"]);
 
 const SEVERITY_STYLE: Record<string, string> = {
   blocking: "border-red-300 bg-red-50 text-red-950",
@@ -72,6 +76,11 @@ const SEVERITY_STYLE: Record<string, string> = {
 function fmtScore(v: number | undefined | null, digits = 1): string {
   if (v == null || Number.isNaN(Number(v))) return "—";
   return Number(v).toFixed(digits);
+}
+
+function gapSeverity(g: EvidenceGap): string {
+  if (FIELD_GAP_CODES.has(g.code)) return "caution";
+  return g.severity || "info";
 }
 
 export default function DecisionChrome({
@@ -89,19 +98,20 @@ export default function DecisionChrome({
 }) {
   const { t, i18n } = useTranslation();
   const ar = i18n.language?.startsWith("ar");
-  // Manual enum stub only — suggestion stays null; control stays disabled
   const [manualAction] = useState<string>("");
 
   const activeGaps = useMemo(
     () => (evidence?.evidence_gaps || []).filter((g) => g.present === false),
     [evidence],
   );
+  const fieldGap = activeGaps.find((g) => FIELD_GAP_CODES.has(g.code));
+  const otherGaps = activeGaps.filter((g) => !FIELD_GAP_CODES.has(g.code));
 
   const components = suitability?.suitability_components || {};
   const why = suitability?.why_this_site;
-  // Alias: confidence_score label bound to overall_confidence
   const confidenceScore = confidence?.overall_confidence;
   const suggestion = why?.action_ladder_suggestion ?? null;
+  const satelliteStep = why?.recommended_next_step;
 
   if (loading) {
     return <p className="text-sm text-sand-800/70">{t("analysis.decision.loading")}</p>;
@@ -133,6 +143,9 @@ export default function DecisionChrome({
           <span className="rounded-full border border-amber-400 bg-white px-2 py-0.5">
             {t("analysis.decision.noMountain")}
           </span>
+          <span className="rounded-full border border-crop-600/40 bg-white px-2 py-0.5 text-crop-800">
+            {t("satelliteFirst.zeroFoChip")}
+          </span>
         </div>
       </div>
 
@@ -140,7 +153,25 @@ export default function DecisionChrome({
         {neqNote}
       </p>
 
-      {/* Two separate score cards — never a merged bar */}
+      <section className="rounded-2xl border border-crop-600/40 bg-crop-600/5 p-4 shadow-sm">
+        <div className="mb-1 text-xs font-semibold uppercase tracking-wide text-crop-800">
+          {t("satelliteFirst.primaryCta")}
+        </div>
+        <p className="text-sm font-semibold leading-relaxed text-sand-900">
+          {satelliteStep || t("satelliteFirst.defaultDecision")}
+        </p>
+        <p className="mt-2 text-xs text-sand-800/70">{t("satelliteFirst.optionalField")}</p>
+      </section>
+
+      {fieldGap && (
+        <p className="rounded-xl border border-sand-300 bg-sand-50 px-3 py-2 text-xs text-sand-900">
+          <span className="font-semibold">{t("satelliteFirst.fieldHonestyChip")}: </span>
+          {ar
+            ? fieldGap.narrative_ar || fieldGap.severity_ar || t("satelliteFirst.optionalField")
+            : fieldGap.narrative_en || fieldGap.severity_en || t("satelliteFirst.optionalField")}
+        </p>
+      )}
+
       <div className="grid gap-3 md:grid-cols-2">
         <div className="rounded-2xl border border-crop-600/30 bg-white p-4 shadow-sm">
           <div className="flex flex-wrap items-center gap-2">
@@ -181,7 +212,6 @@ export default function DecisionChrome({
             <span className="ms-1 text-sm font-semibold text-sand-800/50">/100</span>
           </div>
           <p className="mt-1 text-xs text-sand-800/60">{t("analysis.decision.confidenceSeparate")}</p>
-          {/* Tertiary input chip — ≠ overall Confidence */}
           <div className="mt-3 inline-flex flex-wrap items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-3 py-1 text-xs text-sky-950">
             <span className="font-semibold">{t("analysis.decision.dataQualityChip")}</span>
             <span className="font-mono font-bold">{fmtScore(confidence?.data_quality_confidence, 0)}%</span>
@@ -190,7 +220,6 @@ export default function DecisionChrome({
         </div>
       </div>
 
-      {/* Suitability components */}
       {Object.keys(components).length > 0 && (
         <section className="rounded-2xl border border-sand-200 bg-white p-4 shadow-sm">
           <h3 className="mb-2 text-sm font-semibold text-crop-700">
@@ -207,12 +236,9 @@ export default function DecisionChrome({
         </section>
       )}
 
-      {/* Why this site */}
       <section className="rounded-2xl border border-sand-200 bg-white p-4 shadow-sm">
         <h3 className="mb-2 text-sm font-semibold text-crop-700">{t("analysis.decision.whyThisSite")}</h3>
-        {why?.headline && (
-          <p className="mb-3 text-sm leading-relaxed text-sand-900">{why.headline}</p>
-        )}
+        {why?.headline && <p className="mb-3 text-sm leading-relaxed text-sand-900">{why.headline}</p>}
         {!!why?.drivers?.length && (
           <div className="mb-3">
             <h4 className="mb-1 text-xs font-semibold uppercase tracking-wide text-sand-800/50">
@@ -239,7 +265,6 @@ export default function DecisionChrome({
         )}
       </section>
 
-      {/* Evidence gaps — active only (present=false) */}
       <section className="rounded-2xl border border-sand-200 bg-white p-4 shadow-sm">
         <div className="mb-2 flex flex-wrap items-center gap-2">
           <h3 className="text-sm font-semibold text-crop-700">{t("analysis.decision.evidenceGaps")}</h3>
@@ -248,9 +273,11 @@ export default function DecisionChrome({
           </span>
         </div>
         <ul className="space-y-2">
-          {activeGaps.map((g) => {
-            const narrative = ar ? g.narrative_ar : g.narrative_en;
-            const sev = g.severity || "info";
+          {otherGaps.map((g) => {
+            const narrative = ar
+              ? g.narrative_ar || g.severity_ar
+              : g.narrative_en || g.severity_en;
+            const sev = gapSeverity(g);
             return (
               <li
                 key={g.id || g.code}
@@ -268,13 +295,10 @@ export default function DecisionChrome({
               </li>
             );
           })}
-          {!activeGaps.length && (
-            <li className="text-xs text-sand-800/60">—</li>
-          )}
+          {!otherGaps.length && <li className="text-xs text-sand-800/60">—</li>}
         </ul>
       </section>
 
-      {/* Manual action ladder — suggestion null; select disabled */}
       <section className="rounded-2xl border border-dashed border-sand-300 bg-sand-50 p-4">
         <h3 className="mb-1 text-sm font-semibold text-sand-900">{t("analysis.decision.actionLadder")}</h3>
         <p className="mb-2 text-xs text-sand-800/70">{t("analysis.decision.noAutoAction")}</p>

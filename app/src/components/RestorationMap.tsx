@@ -16,13 +16,7 @@ type SiteFC = {
   properties?: { note?: string };
 };
 
-const ACTION_COLOR: Record<string, string> = {
-  "Protect Natural Regeneration": "#166534",
-  "Assisted Natural Regeneration": "#2f6b3a",
-  "Enrichment Seeding": "#0284c7",
-  "Active Planting": "#d97706",
-  Avoid: "#b91c1c",
-};
+const STATUS_COLOR = "#78716c";
 
 function FitSites({ features }: { features: SiteFeature[] }) {
   const map = useMap();
@@ -62,23 +56,14 @@ export default function RestorationMap({ heightClass = "h-[28rem]" }: { heightCl
 
   return (
     <div className="space-y-4">
-      <div className="flex flex-wrap gap-3 text-xs">
-        {Object.entries(ACTION_COLOR).map(([action, color]) => (
-          <span key={action} className="inline-flex items-center gap-1.5">
-            <span className="h-3 w-3 rounded-full" style={{ background: color }} />
-            {t(
-              (
-                {
-                  "Protect Natural Regeneration": "restoration.actions.protect",
-                  "Assisted Natural Regeneration": "restoration.actions.anr",
-                  "Enrichment Seeding": "restoration.actions.enrichment",
-                  "Active Planting": "restoration.actions.active",
-                  Avoid: "restoration.actions.avoid",
-                } as Record<string, string>
-              )[action] ?? action,
-            )}
-          </span>
-        ))}
+      <div className="flex flex-wrap items-center gap-2 text-xs text-sand-800/80">
+        <span className="inline-flex items-center gap-1.5">
+          <span className="h-3 w-3 rounded-full" style={{ background: STATUS_COLOR }} />
+          {t("mountainStatus.siteStatus")}
+        </span>
+        <span className="rounded-full border border-amber-300 bg-amber-50 px-2 py-0.5 text-[10px] font-semibold text-amber-950">
+          {t("mountainStatus.seedingHold")}
+        </span>
       </div>
 
       {error && <p className="text-sm text-red-700">{t("restoration.error")}</p>}
@@ -92,7 +77,7 @@ export default function RestorationMap({ heightClass = "h-[28rem]" }: { heightCl
             {features.map((f) => {
               const [lon, lat] = f.geometry.coordinates;
               const p = f.properties;
-              const color = ACTION_COLOR[p.action] ?? "#78716c";
+              const color = STATUS_COLOR;
               const name = i18n.language === "ar" ? p.name_ar ?? p.name_en : p.name_en ?? p.name_ar;
               return (
                 <CircleMarker
@@ -113,19 +98,10 @@ export default function RestorationMap({ heightClass = "h-[28rem]" }: { heightCl
                     <div style={{ maxWidth: 220 }}>
                       <strong>{p.id}</strong>
                       {name ? <div>{name}</div> : null}
-                      <div>
-                        {t("restoration.suitability")}: {p.suitability}
-                      </div>
-                      <div>
-                        {t("restoration.confidence")}: {p.confidence}
-                      </div>
-                      <div style={{ fontSize: 11, marginTop: 4 }}>{t("restoration.suitabilityNeqConfidence")}</div>
-                      <div style={{ marginTop: 4 }}>
-                        <em>{p.species}</em>
-                        {p.species.includes("Terminalia dhofarica") ? (
-                          <div style={{ fontSize: 11 }}>{t("restoration.speciesHelperDhofarica")}</div>
-                        ) : null}
-                      </div>
+                      <div style={{ fontSize: 11, marginTop: 4 }}>{t("mountainStatus.productKind")}</div>
+                      <div style={{ fontSize: 11 }}>{t("mountainStatus.timingDeferred")}</div>
+                      <div style={{ fontSize: 11 }}>{t("mountainStatus.noPlantHere")}</div>
+                      <div style={{ fontSize: 11 }}>{t("mountainStatus.seedingHold")}</div>
                     </div>
                   </Popup>
                 </CircleMarker>

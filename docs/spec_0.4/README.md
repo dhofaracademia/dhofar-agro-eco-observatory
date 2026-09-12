@@ -126,3 +126,14 @@ Partner mountain UI + Seed UI + Learning dashboard remain Forbidden until re-sig
 - Catalog: exactly 6 rows from `docs/phase4_species_scaffold.json`
 - `vetting_status`: `scientist_locked_pending_ea` — never Authority-approved
 - See `docs/SCIENCE_LOCKS_v0.4_phase4_species.md`
+
+## Satellite-first product framing (2026-09-13)
+
+Binding: [`docs/SCIENCE_LOCKS_v0.4_satellite_first.md`](../SCIENCE_LOCKS_v0.4_satellite_first.md) + [`docs/phase_satellite_first_scaffold.json`](../phase_satellite_first_scaffold.json).
+
+- Analysis / Decision / Najd Seed are usable with **zero** FO/SE.
+- `no_field_visit` is an evidence-gap honesty flag (`caution`), never a partner gate.
+- Mountain **status** view is allowed (onset / insufficient, timing deferred). Mountain **seeding recommendations** remain Hold.
+- Field Loop / Learning empty ≠ unreadiness.
+
+See [`docs/PRODUCT_COMPLETE_satellite_first.md`](../PRODUCT_COMPLETE_satellite_first.md).

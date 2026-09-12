@@ -30,9 +30,9 @@
           "id": "gap_field",
           "code": "no_field_visit",
           "present": false,
-          "severity_en": "No field visit / ground verification linked to this AOU.",
-          "severity_ar": "لا زيارة ميدانية / تحقق أرضي مرتبط بهذه الوحدة.",
-          "severity": "blocking"
+          "severity_en": "No dated field visit on file — optional additional field verification (last resort) only; not a prerequisite to act.",
+          "severity_ar": "لا زيارة ميدانية مؤرخة — معاينة ميدانية لاحقة اختيارية للتحقق الإضافي فقط؛ ليست شرطاً للاستخدام.",
+          "severity": "caution"
         },
         {
           "id": "gap_history",
@@ -150,9 +150,9 @@
           "id": "gap_field",
           "code": "no_field_visit",
           "present": false,
-          "severity_en": "No field visit / ground verification linked to this AOU.",
-          "severity_ar": "لا زيارة ميدانية / تحقق أرضي مرتبط بهذه الوحدة.",
-          "severity": "blocking"
+          "severity_en": "No dated field visit on file — optional additional field verification (last resort) only; not a prerequisite to act.",
+          "severity_ar": "لا زيارة ميدانية مؤرخة — معاينة ميدانية لاحقة اختيارية للتحقق الإضافي فقط؛ ليست شرطاً للاستخدام.",
+          "severity": "caution"
         },
         {
           "id": "gap_history",
@@ -270,9 +270,9 @@
           "id": "gap_field",
           "code": "no_field_visit",
           "present": false,
-          "severity_en": "No field visit / ground verification linked to this AOU.",
-          "severity_ar": "لا زيارة ميدانية / تحقق أرضي مرتبط بهذه الوحدة.",
-          "severity": "blocking"
+          "severity_en": "No dated field visit on file — optional additional field verification (last resort) only; not a prerequisite to act.",
+          "severity_ar": "لا زيارة ميدانية مؤرخة — معاينة ميدانية لاحقة اختيارية للتحقق الإضافي فقط؛ ليست شرطاً للاستخدام.",
+          "severity": "caution"
         },
         {
           "id": "gap_history",
@@ -390,9 +390,9 @@
           "id": "gap_field",
           "code": "no_field_visit",
           "present": false,
-          "severity_en": "No field visit / ground verification linked to this AOU.",
-          "severity_ar": "لا زيارة ميدانية / تحقق أرضي مرتبط بهذه الوحدة.",
-          "severity": "blocking"
+          "severity_en": "No dated field visit on file — optional additional field verification (last resort) only; not a prerequisite to act.",
+          "severity_ar": "لا زيارة ميدانية مؤرخة — معاينة ميدانية لاحقة اختيارية للتحقق الإضافي فقط؛ ليست شرطاً للاستخدام.",
+          "severity": "caution"
         },
         {
           "id": "gap_history",
@@ -510,9 +510,9 @@
           "id": "gap_field",
           "code": "no_field_visit",
           "present": false,
-          "severity_en": "No field visit / ground verification linked to this AOU.",
-          "severity_ar": "لا زيارة ميدانية / تحقق أرضي مرتبط بهذه الوحدة.",
-          "severity": "blocking"
+          "severity_en": "No dated field visit on file — optional additional field verification (last resort) only; not a prerequisite to act.",
+          "severity_ar": "لا زيارة ميدانية مؤرخة — معاينة ميدانية لاحقة اختيارية للتحقق الإضافي فقط؛ ليست شرطاً للاستخدام.",
+          "severity": "caution"
         },
         {
           "id": "gap_history",
@@ -630,9 +630,9 @@
           "id": "gap_field",
           "code": "no_field_visit",
           "present": false,
-          "severity_en": "No field visit / ground verification linked to this AOU.",
-          "severity_ar": "لا زيارة ميدانية / تحقق أرضي مرتبط بهذه الوحدة.",
-          "severity": "blocking"
+          "severity_en": "No dated field visit on file — optional additional field verification (last resort) only; not a prerequisite to act.",
+          "severity_ar": "لا زيارة ميدانية مؤرخة — معاينة ميدانية لاحقة اختيارية للتحقق الإضافي فقط؛ ليست شرطاً للاستخدام.",
+          "severity": "caution"
         },
         {
           "id": "gap_history",
@@ -750,9 +750,9 @@
           "id": "gap_field",
           "code": "no_field_visit",
           "present": false,
-          "severity_en": "No field visit / ground verification linked to this AOU.",
-          "severity_ar": "لا زيارة ميدانية / تحقق أرضي مرتبط بهذه الوحدة.",
-          "severity": "blocking"
+          "severity_en": "No dated field visit on file — optional additional field verification (last resort) only; not a prerequisite to act.",
+          "severity_ar": "لا زيارة ميدانية مؤرخة — معاينة ميدانية لاحقة اختيارية للتحقق الإضافي فقط؛ ليست شرطاً للاستخدام.",
+          "severity": "caution"
         },
         {
           "id": "gap_history",
@@ -870,9 +870,9 @@
           "id": "gap_field",
           "code": "no_field_visit",
           "present": false,
-          "severity_en": "No field visit / ground verification linked to this AOU.",
-          "severity_ar": "لا زيارة ميدانية / تحقق أرضي مرتبط بهذه الوحدة.",
-          "severity": "blocking"
+          "severity_en": "No dated field visit on file — optional additional field verification (last resort) only; not a prerequisite to act.",
+          "severity_ar": "لا زيارة ميدانية مؤرخة — معاينة ميدانية لاحقة اختيارية للتحقق الإضافي فقط؛ ليست شرطاً للاستخدام.",
+          "severity": "caution"
         },
         {
           "id": "gap_history",
@@ -990,9 +990,9 @@
           "id": "gap_field",
           "code": "no_field_visit",
           "present": false,
-          "severity_en": "No field visit / ground verification linked to this AOU.",
-          "severity_ar": "لا زيارة ميدانية / تحقق أرضي مرتبط بهذه الوحدة.",
-          "severity": "blocking"
+          "severity_en": "No dated field visit on file — optional additional field verification (last resort) only; not a prerequisite to act.",
+          "severity_ar": "لا زيارة ميدانية مؤرخة — معاينة ميدانية لاحقة اختيارية للتحقق الإضافي فقط؛ ليست شرطاً للاستخدام.",
+          "severity": "caution"
         },
         {
           "id": "gap_history",
