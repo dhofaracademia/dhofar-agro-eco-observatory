@@ -143,6 +143,10 @@ Satellite NDVI at the visit is optional `context`, never the actual.
 - ML models  
 - Pooling fog + Najd to “get n up”
 
+### `calibration_pool` flag
+
+`calibration_pool=true` is **not** grouping identity alone. Identity is `species_id × domain × horizon`. Emit `calibration_pool=true` only when that identity **and** `n_eligible_pairs ≥ 20`. Thin rows keep identity in `group` with `calibration_pool=false` + note `grouping_identity_only`.
+
 ### Future unlock (not this PR — record only)
 
 A **later** science lock may allow a *draft* `proposed_delta` when **all** hold:

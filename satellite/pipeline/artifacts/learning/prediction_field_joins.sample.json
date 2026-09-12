@@ -386,7 +386,8 @@
       "n_missed_windows": 1,
       "n_not_applicable": 0,
       "thin_n": true,
-      "calibration_pool": true
+      "calibration_pool": false,
+      "note": "grouping_identity_only — unlock calibration_pool when n_eligible_pairs>=20"
     },
     {
       "group": {
@@ -420,7 +421,8 @@
       "n_missed_windows": 1,
       "n_not_applicable": 0,
       "thin_n": true,
-      "calibration_pool": true
+      "calibration_pool": false,
+      "note": "grouping_identity_only — unlock calibration_pool when n_eligible_pairs>=20"
     },
     {
       "group": {
@@ -437,7 +439,8 @@
       "n_missed_windows": 1,
       "n_not_applicable": 0,
       "thin_n": true,
-      "calibration_pool": true
+      "calibration_pool": false,
+      "note": "grouping_identity_only — unlock calibration_pool when n_eligible_pairs>=20"
     },
     {
       "group": {
@@ -489,7 +492,8 @@
       "n_missed_windows": 0,
       "n_not_applicable": 1,
       "thin_n": true,
-      "calibration_pool": true
+      "calibration_pool": false,
+      "note": "grouping_identity_only — unlock calibration_pool when n_eligible_pairs>=20"
     },
     {
       "group": {
@@ -523,7 +527,8 @@
       "n_missed_windows": 0,
       "n_not_applicable": 1,
       "thin_n": true,
-      "calibration_pool": true
+      "calibration_pool": false,
+      "note": "grouping_identity_only — unlock calibration_pool when n_eligible_pairs>=20"
     },
     {
       "group": {
@@ -540,7 +545,8 @@
       "n_missed_windows": 1,
       "n_not_applicable": 0,
       "thin_n": true,
-      "calibration_pool": true
+      "calibration_pool": false,
+      "note": "grouping_identity_only — unlock calibration_pool when n_eligible_pairs>=20"
     },
     {
       "group": {
@@ -592,7 +598,8 @@
       "n_missed_windows": 0,
       "n_not_applicable": 0,
       "thin_n": true,
-      "calibration_pool": true
+      "calibration_pool": false,
+      "note": "grouping_identity_only — unlock calibration_pool when n_eligible_pairs>=20"
     },
     {
       "group": {
@@ -626,7 +633,8 @@
       "n_missed_windows": 0,
       "n_not_applicable": 0,
       "thin_n": true,
-      "calibration_pool": true
+      "calibration_pool": false,
+      "note": "grouping_identity_only — unlock calibration_pool when n_eligible_pairs>=20"
     },
     {
       "group": {
@@ -643,7 +651,8 @@
       "n_missed_windows": 0,
       "n_not_applicable": 0,
       "thin_n": true,
-      "calibration_pool": true
+      "calibration_pool": false,
+      "note": "grouping_identity_only — unlock calibration_pool when n_eligible_pairs>=20"
     },
     {
       "group": {
@@ -695,7 +704,8 @@
       "n_missed_windows": 1,
       "n_not_applicable": 0,
       "thin_n": true,
-      "calibration_pool": true
+      "calibration_pool": false,
+      "note": "grouping_identity_only — unlock calibration_pool when n_eligible_pairs>=20"
     },
     {
       "group": {
@@ -729,7 +739,8 @@
       "n_missed_windows": 1,
       "n_not_applicable": 0,
       "thin_n": true,
-      "calibration_pool": true
+      "calibration_pool": false,
+      "note": "grouping_identity_only — unlock calibration_pool when n_eligible_pairs>=20"
     },
     {
       "group": {
@@ -746,7 +757,8 @@
       "n_missed_windows": 1,
       "n_not_applicable": 0,
       "thin_n": true,
-      "calibration_pool": true
+      "calibration_pool": false,
+      "note": "grouping_identity_only — unlock calibration_pool when n_eligible_pairs>=20"
     }
   ],
   "forbidden": [

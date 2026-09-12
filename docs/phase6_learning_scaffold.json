@@ -19,7 +19,8 @@
     "Spec 14 metrics named, empty, forbidden to fill.",
     "Domains never mix. Phase-4 six only.",
     "Unvalidated prediction stubs stay labeled unvalidated.",
-    "Annual report is narrative template only."
+    "Annual report is narrative template only.",
+    "calibration_pool=true only when species×domain×horizon AND n_eligible_pairs>=20 (grouping identity alone is not unlock)."
   ],
   "learning_pair": {
     "id_pattern": "LP-{YYYY}-{NNNNNN}",

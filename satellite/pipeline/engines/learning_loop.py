@@ -445,6 +445,13 @@ def build_counts(
     rows = list(keys.values())
     for row in rows:
         row["thin_n"] = row["n_eligible_pairs"] < N_ELIGIBLE_UNLOCK
+        # species×domain×horizon is grouping identity; calibration_pool means ready to calibrate
+        if row["calibration_pool"] and row["n_eligible_pairs"] < N_ELIGIBLE_UNLOCK:
+            row["calibration_pool"] = False
+            row["note"] = (
+                "grouping_identity_only — unlock calibration_pool when "
+                f"n_eligible_pairs>={N_ELIGIBLE_UNLOCK}"
+            )
         if row["group"]["domain"] is None:
             row["calibration_pool"] = False
             if row["group"]["horizon"] is None:
