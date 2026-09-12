@@ -1,9 +1,9 @@
-# Spec 0.4 — Phase-1 agricultural + Phase-2 mountain evidence + Phase-3 decision + Phase-4 seed + Phase-5 field schemas
+# Spec 0.4 — Phase-1 agricultural + Phase-2 mountain evidence + Phase-3 decision + Phase-4 seed + Phase-5 field + Phase-6 learning schemas
 
 Binding science: [`docs/SCIENCE_LOCKS_v0.4_phase1_2.md`](../SCIENCE_LOCKS_v0.4_phase1_2.md)  
 Roadmap: [`docs/ROADMAP_v0.4_decision_engines.md`](../ROADMAP_v0.4_decision_engines.md)
 
-These JSON Schemas describe **Phase-1 Agriculture**, **Phase-2 mountain evidence**, **Phase-3 Decision Engine**, **Phase-4 Seed Intelligence**, and **Phase-5 Field Loop** contracts. Species scores as operational truth, campaign numbers, live MPI/Khareef detection, pest certainty, and partner mountain decision / Seed UI remain **out of scope / forbidden**.
+These JSON Schemas describe **Phase-1 Agriculture**, **Phase-2 mountain evidence**, **Phase-3 Decision Engine**, **Phase-4 Seed Intelligence**, **Phase-5 Field Loop**, and **Phase-6 Learning** contracts. Species scores as operational truth, campaign numbers, live MPI/Khareef detection, pest certainty, and partner mountain decision / Seed UI remain **out of scope / forbidden**.
 
 ## Field → SCIENCE_LOCKS mapping
 
@@ -27,6 +27,9 @@ These JSON Schemas describe **Phase-1 Agriculture**, **Phase-2 mountain evidence
 | `field_seeding_event.schema.json` | `SCIENCE_LOCKS_v0.4_phase5_field_loop` | `SE-{YYYY}-{NNNNNN}`; operator quantity unvalidated; domains never mix |
 | `field_survival_observation.schema.json` | `SCIENCE_LOCKS_v0.4_phase5_field_loop` | `FO-{YYYY}-{NNNNNN}` FieldObservation; keep all visits; no fabricated rates |
 | `field_loop.schema.json` | `SCIENCE_LOCKS_v0.4_phase5_field_loop` | Optional wrapper + UI gates (all partner Field UI false) |
+| `prediction_field_join.schema.json` | `SCIENCE_LOCKS_v0.4_phase6_learning` | `LP-{YYYY}-{NNNNNN}` eligible SE×FO join; id-only coverage; counts only |
+| `calibration_ledger.schema.json` | `SCIENCE_LOCKS_v0.4_phase6_learning` | `frozen_expert_v1`; `not_authorized` + `delta: null`; `auto_apply: false` |
+| `annual_learning_report.schema.json` | `SCIENCE_LOCKS_v0.4_phase6_learning` | Narrative template + outcome_class counts; Spec §14 metrics null |
 
 ## Phase-2 mountain evidence (offline only)
 
@@ -98,11 +101,25 @@ Decision scaffolds intentionally live under `satellite/pipeline/artifacts/decisi
 - Germination ≠ establishment ≠ survival; missed ≠ failure; no interpolate; no published rates
 - Germination `not_applicable` (not zero) for protect/vegetative/seedling/cutting/wilding/protection_only
 - Photos: optional plot evidence; no children / ID docs / face recognition / partner gallery
-- Gates: no partner Field UI; mountain Hold; no auto-rewrite Suitability/Confidence/Site×Species; Phase-6 out
+- Gates: no partner Field UI; mountain Hold; no auto-rewrite Suitability/Confidence/Site×Species; Phase-6 learns in a later artifact dir
+
+## Phase-6 Learning (offline artifacts)
+
+- Binding: [`docs/SCIENCE_LOCKS_v0.4_phase6_learning.md`](../SCIENCE_LOCKS_v0.4_phase6_learning.md) + [`docs/phase6_learning_scaffold.json`](../phase6_learning_scaffold.json)
+- Engines: `satellite/pipeline/engines/learning_loop.py`
+- Runner: `satellite/pipeline/run_learning_loop.py`
+- Artifacts: `satellite/pipeline/artifacts/learning/` — **NOT** `app/public/`
+- IDs: `LP-{YYYY}-{NNNNNN}` = one SE × one **eligible** FO at one horizon
+- Eligible: dated visit + `on_window`|`late` + outcome ∈ {present_target, none_detected, dead_or_missing, present_uncertain_id}
+- Exclude missed / not_observed / early / undated stub; exclude `not_applicable` from germination pairs
+- Counts only — no `germination_pct` / `survival_pct` / `recommendation_success`
+- Ledger: `frozen_expert_v1`; proposed_change `not_authorized` + `delta: null`; `auto_apply: false`
+- Annual report: narrative template + raw counts; `sample_rows_not_a_season` when using Phase-5 samples
+- Gates: no Learning UI; mountain Hold; no live weight writes; no fog+Najd pooling
 
 ## Later phases
 
-Learning (Phase-6) remains ROADMAP later. Partner mountain UI + Seed UI remain Forbidden until re-sign-off.
+Partner mountain UI + Seed UI + Learning dashboard remain Forbidden until re-sign-off. Published rates and weight unlocks wait for a later lock + declared n.
 
 ## Phase-4 species lock
 - Ecological domains: `fog_escarpment` | `najd_arid` (never mix)

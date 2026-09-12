@@ -1,0 +1,117 @@
+{
+  "version": "0.4.6-phase6-learning",
+  "science_lock": "SCIENCE_LOCKS_v0.4_phase6_learning",
+  "vetting_status": "scientist_locked_pending_ea",
+  "calibration_status": "frozen_expert_v1",
+  "auto_apply": false,
+  "live_weight_writes": false,
+  "mix_domains_in_one_pool": false,
+  "published_rates": false,
+  "mountain_ui": "hold",
+  "frozen_engines": [
+    "ag_probability",
+    "water_vigor_stress",
+    "mpi",
+    "aou_suitability_confidence",
+    "site_x_species"
+  ],
+  "future_unlock_not_this_pr": {
+    "n_eligible_min": 20,
+    "group": "species_id x domain x horizon",
+    "first_horizon": "d365_survival",
+    "second_horizon": "d180_establishment",
+    "no_unlock_from_d30_alone": true,
+    "requires_scientist_signoff": true
+  },
+  "proposed_change": [
+    {
+      "proposal_id": "CAL-2026-000001",
+      "engine": "ag_probability",
+      "target": "ag_probability_weights",
+      "proposed_change": {},
+      "delta": null,
+      "evidence_n": 0,
+      "thin_n": true,
+      "status": "not_authorized",
+      "auto_apply": false,
+      "requires": [
+        "agrofostery_approve",
+        "cos_gate"
+      ],
+      "note_en": "Frozen expert_v1 — no live write this PR. Future unlock (not this PR): n>=20 per species x domain x horizon; d365 first."
+    },
+    {
+      "proposal_id": "CAL-2026-000002",
+      "engine": "aou_suitability_confidence",
+      "target": "suitability_weights",
+      "proposed_change": {},
+      "delta": null,
+      "evidence_n": 0,
+      "thin_n": true,
+      "status": "not_authorized",
+      "auto_apply": false,
+      "requires": [
+        "agrofostery_approve",
+        "cos_gate"
+      ],
+      "note_en": "Frozen expert_v1 — no live write this PR. Future unlock (not this PR): n>=20 per species x domain x horizon; d365 first."
+    },
+    {
+      "proposal_id": "CAL-2026-000003",
+      "engine": "aou_suitability_confidence",
+      "target": "confidence_weights",
+      "proposed_change": {},
+      "delta": null,
+      "evidence_n": 0,
+      "thin_n": true,
+      "status": "not_authorized",
+      "auto_apply": false,
+      "requires": [
+        "agrofostery_approve",
+        "cos_gate"
+      ],
+      "note_en": "Frozen expert_v1 — no live write this PR. Future unlock (not this PR): n>=20 per species x domain x horizon; d365 first."
+    },
+    {
+      "proposal_id": "CAL-2026-000004",
+      "engine": "site_x_species",
+      "target": "species_matrix_cell",
+      "proposed_change": {},
+      "delta": null,
+      "evidence_n": 0,
+      "thin_n": true,
+      "status": "not_authorized",
+      "auto_apply": false,
+      "requires": [
+        "agrofostery_approve",
+        "cos_gate"
+      ],
+      "note_en": "Frozen expert_v1 — no live write this PR. Future unlock (not this PR): n>=20 per species x domain x horizon; d365 first."
+    }
+  ],
+  "counts_ref": "prediction_field_joins.sample.json#counts",
+  "honesty_note_en": "Learning scaffold — joins and counts only. Not a published success rate, not an Environment Authority approval. Weights remain frozen expert_v1.",
+  "honesty_note_ar": "مسودة تعلّم — ربط وعدّ فقط. ليست نسبة نجاح منشورة وليست اعتماداً من هيئة البيئة. الأوزان تبقى expert_v1 مجمّدة.",
+  "forbidden": [
+    "species_failed_auto",
+    "site_failed_auto",
+    "rewrite_suitability_from_sparse_plots",
+    "mountain_partner_ui",
+    "partner_learning_dashboard",
+    "fill_spec14_metrics",
+    "germination_pct_operational",
+    "survival_pct_operational",
+    "recommendation_success",
+    "missed_as_zero",
+    "na_as_fail",
+    "mix_domains_in_one_pool",
+    "backfill_prediction",
+    "live_weight_write",
+    "auto_apply",
+    "ml",
+    "campaign_numbers",
+    "Authority-approved",
+    "معتمد من الهيئة"
+  ],
+  "agrofostery_lock_tip": "Replace proposed_change status/delta from docs/phase6_learning_scaffold.json when a later lock authorizes draft deltas — keep build_calibration_ledger as the tip-update point."
+}

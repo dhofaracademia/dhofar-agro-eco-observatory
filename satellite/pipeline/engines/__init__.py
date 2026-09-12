@@ -1,8 +1,9 @@
-"""v0.4 Phase-1 agricultural + Phase-3 decision + Phase-4 seed + Phase-5 field engines.
+"""v0.4 Phase-1 agricultural + Phase-3 decision + Phase-4 seed + Phase-5 field + Phase-6 learning engines.
 
 Formulas locked by docs/SCIENCE_LOCKS_v0.4_phase1_2.md (Agrofostery).
 Phase-4 species: docs/SCIENCE_LOCKS_v0.4_phase4_species.md
 Phase-5 field: docs/SCIENCE_LOCKS_v0.4_phase5_field_loop.md
+Phase-6 learning: docs/SCIENCE_LOCKS_v0.4_phase6_learning.md
 
 Do not invent alternate equations or auto-rewrite scores without Agrofostery sign-off.
 """
@@ -37,6 +38,14 @@ from .field_loop import (
     germination_not_applicable,
     build_field_loop_wrapper,
 )
+from .learning_loop import (
+    ineligible_reason,
+    is_eligible,
+    build_joins_document,
+    build_calibration_ledger,
+    build_annual_report,
+)
+
 
 __all__ = [
     "compute_ndre",
@@ -66,4 +75,9 @@ __all__ = [
     "validate_seeding_event",
     "germination_not_applicable",
     "build_field_loop_wrapper",
+    "ineligible_reason",
+    "is_eligible",
+    "build_joins_document",
+    "build_calibration_ledger",
+    "build_annual_report",
 ]

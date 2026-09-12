@@ -151,3 +151,15 @@ Artifacts: `species_catalog.json`, `site_species_matrix.json`, `seed_intelligenc
 Binding: `docs/SCIENCE_LOCKS_v0.4_phase5_field_loop.md`  
 Runner: `cd satellite/pipeline && python run_field_loop.py`  
 Artifacts: `satellite/pipeline/artifacts/field/` (not `app/public/`). Mountain UI Hold. No partner Field UI. No fabricated rates.
+
+
+## v0.4 Phase-6 — Learning (offline artifacts)
+
+Binding: `docs/SCIENCE_LOCKS_v0.4_phase6_learning.md`  
+Machine twin: `docs/phase6_learning_scaffold.json`  
+Notes: `satellite/pipeline/LEARNING_PHASE6_NOTES.md`  
+Runner: `cd satellite/pipeline && python run_learning_loop.py`  
+Artifacts: `satellite/pipeline/artifacts/learning/` (not `app/public/`).
+
+Joins Decision/Seed ids to Field Loop `SE-` / `FO-` samples. Eligible pairs only (`LP-`). Counts only — no published %. Ledger stays `frozen_expert_v1`. Mountain UI Hold. No Learning UI.
+

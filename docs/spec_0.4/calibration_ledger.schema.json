@@ -1,0 +1,187 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dhofaracademia.example/spec_0.4/calibration_ledger.schema.json",
+  "title": "CalibrationLedger",
+  "description": "Phase-6 calibration ledger — SCIENCE_LOCKS_v0.4_phase6_learning. calibration_status=frozen_expert_v1. proposed_change[] only not_authorized + delta null. auto_apply false. No live weight writes. No fog+Najd pooling.",
+  "type": "object",
+  "required": [
+    "version",
+    "science_lock",
+    "vetting_status",
+    "calibration_status",
+    "auto_apply",
+    "live_weight_writes",
+    "mix_domains_in_one_pool",
+    "proposed_change",
+    "frozen_engines"
+  ],
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "science_lock": {
+      "type": "string",
+      "const": "SCIENCE_LOCKS_v0.4_phase6_learning"
+    },
+    "vetting_status": {
+      "type": "string",
+      "const": "scientist_locked_pending_ea"
+    },
+    "calibration_status": {
+      "type": "string",
+      "const": "frozen_expert_v1"
+    },
+    "auto_apply": {
+      "type": "boolean",
+      "const": false
+    },
+    "live_weight_writes": {
+      "type": "boolean",
+      "const": false
+    },
+    "mix_domains_in_one_pool": {
+      "type": "boolean",
+      "const": false
+    },
+    "published_rates": {
+      "type": "boolean",
+      "const": false
+    },
+    "mountain_ui": {
+      "type": "string",
+      "const": "hold"
+    },
+    "frozen_engines": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "ag_probability",
+          "water_vigor_stress",
+          "mpi",
+          "aou_suitability_confidence",
+          "site_x_species"
+        ]
+      }
+    },
+    "future_unlock_not_this_pr": {
+      "type": "object",
+      "properties": {
+        "n_eligible_min": {
+          "type": "integer",
+          "const": 20
+        },
+        "group": {
+          "type": "string"
+        },
+        "first_horizon": {
+          "type": "string",
+          "const": "d365_survival"
+        },
+        "second_horizon": {
+          "type": "string",
+          "const": "d180_establishment"
+        },
+        "no_unlock_from_d30_alone": {
+          "type": "boolean",
+          "const": true
+        },
+        "requires_scientist_signoff": {
+          "type": "boolean",
+          "const": true
+        }
+      }
+    },
+    "proposed_change": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "proposal_id",
+          "engine",
+          "target",
+          "proposed_change",
+          "delta",
+          "evidence_n",
+          "status",
+          "auto_apply",
+          "requires"
+        ],
+        "properties": {
+          "proposal_id": {
+            "type": "string",
+            "pattern": "^CAL-[0-9]{4}-[0-9]{6}$"
+          },
+          "engine": {
+            "type": "string"
+          },
+          "target": {
+            "type": "string",
+            "enum": [
+              "suitability_weights",
+              "confidence_weights",
+              "species_matrix_cell",
+              "ag_probability_weights"
+            ]
+          },
+          "proposed_change": {
+            "type": "object",
+            "maxProperties": 0
+          },
+          "delta": {
+            "type": "null"
+          },
+          "evidence_n": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "thin_n": {
+            "type": "boolean"
+          },
+          "status": {
+            "type": "string",
+            "const": "not_authorized"
+          },
+          "auto_apply": {
+            "type": "boolean",
+            "const": false
+          },
+          "requires": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "agrofostery_approve",
+                "cos_gate"
+              ]
+            },
+            "minItems": 2
+          },
+          "note_en": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "counts_ref": {
+      "type": "string"
+    },
+    "honesty_note_en": {
+      "type": "string"
+    },
+    "honesty_note_ar": {
+      "type": "string"
+    },
+    "forbidden": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "agrofostery_lock_tip": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

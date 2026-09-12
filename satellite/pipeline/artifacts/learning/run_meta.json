@@ -1,0 +1,47 @@
+{
+  "generated_at": "2026-09-12T20:01:45.179733+00:00",
+  "science_lock": "SCIENCE_LOCKS_v0.4_phase6_learning",
+  "phase4_species_lock": "SCIENCE_LOCKS_v0.4_phase4_species",
+  "phase5_field_lock": "SCIENCE_LOCKS_v0.4_phase5_field_loop",
+  "vetting_status": "scientist_locked_pending_ea",
+  "status": "learning_scaffold_join",
+  "calibration_status": "frozen_expert_v1",
+  "version": "0.4.6-phase6-learning",
+  "domains": [
+    "fog_escarpment",
+    "najd_arid"
+  ],
+  "never_mix_domains": true,
+  "mountain_ui": "hold",
+  "campaign_numbers": false,
+  "published_rates": false,
+  "auto_rewrite_scores": false,
+  "auto_apply": false,
+  "live_weight_writes": false,
+  "writes_to_app_public": false,
+  "partner_learning_dashboard": false,
+  "n_events": 3,
+  "n_observations": 15,
+  "n_eligible_pairs": 0,
+  "event_ids": [
+    "SE-2026-000001",
+    "SE-2026-000002",
+    "SE-2026-000003"
+  ],
+  "engines": [
+    "engines/learning_loop.py"
+  ],
+  "runner": "run_learning_loop.py",
+  "artifact_files": [
+    "prediction_field_joins.sample.json",
+    "calibration_ledger.json",
+    "annual_report.template.json",
+    "annual_report.export.stub.md",
+    "annual_report.export.stub.csv",
+    "model_improvement_log.json",
+    "run_meta.json"
+  ],
+  "honesty_note_en": "Learning scaffold — joins and counts only. Not a published success rate, not an Environment Authority approval. Weights remain frozen expert_v1.",
+  "honesty_note_ar": "مسودة تعلّم — ربط وعدّ فقط. ليست نسبة نجاح منشورة وليست اعتماداً من هيئة البيئة. الأوزان تبقى expert_v1 مجمّدة.",
+  "agrofostery_lock_tip": "Replace eligibility / ledger rules from docs/phase6_learning_scaffold.json when mid-flight Agrofostery addenda land — keep ineligible_reason, build_learning_pair, build_calibration_ledger, build_annual_report as tip-update points."
+}

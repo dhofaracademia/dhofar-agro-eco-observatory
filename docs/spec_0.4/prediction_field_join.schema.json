@@ -1,0 +1,643 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dhofaracademia.example/spec_0.4/prediction_field_join.schema.json",
+  "title": "PredictionFieldJoins",
+  "description": "Phase-6 Learning join document — SCIENCE_LOCKS_v0.4_phase6_learning. One LearningPair = one SE × one eligible FO at one horizon (LP-YYYY-NNNNNN). Id-only coverage joins for ineligible FO stubs. Counts only; no percents; no prediction back-fill.",
+  "type": "object",
+  "required": [
+    "version",
+    "science_lock",
+    "vetting_status",
+    "status",
+    "stamp",
+    "sample_rows_not_a_season",
+    "domains",
+    "never_mix_domains",
+    "allowed_species_ids",
+    "horizons",
+    "pairs",
+    "id_joins",
+    "counts",
+    "forbidden",
+    "ui_gates",
+    "honesty_note_en"
+  ],
+  "$defs": {
+    "learningPair": {
+      "title": "LearningPair",
+      "type": "object",
+      "required": [
+        "pair_id",
+        "event_id",
+        "observation_id",
+        "horizon",
+        "domain",
+        "species_id",
+        "prediction",
+        "actual",
+        "eligible_for_calibration",
+        "vetting_status"
+      ],
+      "properties": {
+        "pair_id": {
+          "type": "string",
+          "pattern": "^LP-[0-9]{4}-[0-9]{6}$"
+        },
+        "event_id": {
+          "type": "string",
+          "pattern": "^SE-[0-9]{4}-[0-9]{6}$"
+        },
+        "observation_id": {
+          "type": "string",
+          "pattern": "^FO-[0-9]{4}-[0-9]{6}$"
+        },
+        "horizon": {
+          "type": "string",
+          "enum": [
+            "d30_germination",
+            "d90_survival",
+            "d180_establishment",
+            "d365_survival"
+          ]
+        },
+        "domain": {
+          "type": "string",
+          "enum": [
+            "fog_escarpment",
+            "najd_arid"
+          ]
+        },
+        "species_id": {
+          "type": "string",
+          "enum": [
+            "sp-fog-tdhof",
+            "sp-fog-oleac",
+            "sp-fog-fsyco",
+            "sp-najd-zsc",
+            "sp-najd-vtor",
+            "sp-najd-pcin"
+          ]
+        },
+        "site_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "aou_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "prediction": {
+          "type": "object",
+          "required": [
+            "linked_recommendation_id",
+            "suitability_stub",
+            "suitability_status",
+            "timing_window",
+            "intervention_type",
+            "establishment_mode",
+            "provenance_class"
+          ],
+          "properties": {
+            "linked_recommendation_id": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "suitability_stub": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "description": "Must stay null if null at event time — no back-fill"
+            },
+            "suitability_status": {
+              "type": "string",
+              "enum": [
+                "unvalidated_stub",
+                "none"
+              ]
+            },
+            "timing_window": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "intervention_type": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "establishment_mode": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "provenance_class": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "actual": {
+          "type": "object",
+          "required": [
+            "visit_type",
+            "visit_date",
+            "window_status",
+            "outcome_class"
+          ],
+          "properties": {
+            "visit_type": {
+              "type": "string",
+              "enum": [
+                "d30_germination",
+                "d90_survival",
+                "d180_establishment",
+                "d365_survival"
+              ]
+            },
+            "visit_date": {
+              "type": "string",
+              "format": "date"
+            },
+            "days_since_event": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "window_status": {
+              "type": "string",
+              "enum": [
+                "on_window",
+                "late"
+              ]
+            },
+            "outcome_class": {
+              "type": "string",
+              "enum": [
+                "present_target",
+                "none_detected",
+                "dead_or_missing",
+                "present_uncertain_id"
+              ]
+            },
+            "target_count": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "species_id_confidence": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "eligible_for_calibration": {
+          "type": "boolean",
+          "const": true
+        },
+        "vetting_status": {
+          "type": "string",
+          "const": "scientist_locked_pending_ea"
+        },
+        "stamp": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "experimental",
+              "unvalidated"
+            ]
+          }
+        },
+        "honesty_note_en": {
+          "type": "string"
+        },
+        "honesty_note_ar": {
+          "type": "string"
+        }
+      },
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "germination_pct"
+            ]
+          },
+          {
+            "required": [
+              "survival_pct"
+            ]
+          },
+          {
+            "required": [
+              "recommendation_success"
+            ]
+          },
+          {
+            "required": [
+              "species_failed"
+            ]
+          },
+          {
+            "required": [
+              "site_failed"
+            ]
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "idJoin": {
+      "title": "IdJoin",
+      "description": "Id-only SE ↔ FO ↔ site_ref ↔ recommendation link. Not a LearningPair. Ineligible rows stay here with reason.",
+      "type": "object",
+      "required": [
+        "event_id",
+        "observation_id",
+        "horizon",
+        "eligible_for_calibration",
+        "ineligible_reason"
+      ],
+      "properties": {
+        "event_id": {
+          "type": "string",
+          "pattern": "^SE-[0-9]{4}-[0-9]{6}$"
+        },
+        "observation_id": {
+          "type": "string",
+          "pattern": "^FO-[0-9]{4}-[0-9]{6}$"
+        },
+        "site_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "aou_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "linked_recommendation_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "domain": {
+          "type": "string",
+          "enum": [
+            "fog_escarpment",
+            "najd_arid"
+          ]
+        },
+        "species_id": {
+          "type": "string"
+        },
+        "horizon": {
+          "type": "string",
+          "enum": [
+            "d30_germination",
+            "d90_survival",
+            "d180_establishment",
+            "d365_survival"
+          ]
+        },
+        "window_status": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "outcome_class": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "visit_date": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "eligible_for_calibration": {
+          "type": "boolean"
+        },
+        "ineligible_reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "pair_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "learningCounts": {
+      "title": "LearningCounts",
+      "description": "Raw n only. present_uncertain_id counted in n_uncertain — never pooled into n_present_target. No percents.",
+      "type": "object",
+      "required": [
+        "group",
+        "n_events",
+        "n_eligible_pairs",
+        "n_present_target",
+        "n_none_detected",
+        "n_dead_or_missing",
+        "n_uncertain",
+        "n_missed_windows",
+        "n_not_applicable"
+      ],
+      "properties": {
+        "group": {
+          "type": "object",
+          "required": [
+            "horizon",
+            "domain",
+            "species_id"
+          ],
+          "properties": {
+            "horizon": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "domain": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "fog_escarpment",
+                "najd_arid",
+                null
+              ]
+            },
+            "species_id": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "n_events": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "n_eligible_pairs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "n_present_target": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "n_none_detected": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "n_dead_or_missing": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "n_uncertain": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "n_missed_windows": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "n_not_applicable": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "thin_n": {
+          "type": "boolean"
+        },
+        "calibration_pool": {
+          "type": "boolean"
+        },
+        "note": {
+          "type": "string"
+        }
+      },
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "germination_pct"
+            ]
+          },
+          {
+            "required": [
+              "survival_pct"
+            ]
+          },
+          {
+            "required": [
+              "count_ratio_unvalidated"
+            ]
+          }
+        ]
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "science_lock": {
+      "type": "string",
+      "const": "SCIENCE_LOCKS_v0.4_phase6_learning"
+    },
+    "vetting_status": {
+      "type": "string",
+      "const": "scientist_locked_pending_ea"
+    },
+    "status": {
+      "type": "string",
+      "const": "learning_scaffold_join"
+    },
+    "stamp": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "experimental",
+          "unvalidated",
+          "sample_rows_not_a_season"
+        ]
+      },
+      "minItems": 3
+    },
+    "sample_rows_not_a_season": {
+      "type": "boolean",
+      "const": true
+    },
+    "domains": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "fog_escarpment",
+          "najd_arid"
+        ]
+      },
+      "minItems": 2,
+      "maxItems": 2,
+      "uniqueItems": true
+    },
+    "never_mix_domains": {
+      "type": "boolean",
+      "const": true
+    },
+    "allowed_species_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 6,
+      "maxItems": 6
+    },
+    "horizons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "field_events_ref": {
+      "type": "string"
+    },
+    "field_observations_ref": {
+      "type": "string"
+    },
+    "seed_matrix_ref": {
+      "type": "string"
+    },
+    "decision_ref": {
+      "type": "string"
+    },
+    "join_rule": {
+      "type": "string"
+    },
+    "n_events": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "n_observations_scanned": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "n_id_joins": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "n_eligible_pairs": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "pairs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/learningPair"
+      }
+    },
+    "id_joins": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/idJoin"
+      }
+    },
+    "counts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/learningCounts"
+      }
+    },
+    "forbidden": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "honesty_note_en": {
+      "type": "string"
+    },
+    "honesty_note_ar": {
+      "type": "string"
+    },
+    "ui_gates": {
+      "type": "object",
+      "required": [
+        "partner_learning_dashboard",
+        "mountain_partner_ui",
+        "writes_to_app_public",
+        "auto_rewrite_scores",
+        "published_rates",
+        "auto_apply"
+      ],
+      "properties": {
+        "partner_learning_dashboard": {
+          "type": "boolean",
+          "const": false
+        },
+        "mountain_partner_ui": {
+          "type": "boolean",
+          "const": false
+        },
+        "writes_to_app_public": {
+          "type": "boolean",
+          "const": false
+        },
+        "auto_rewrite_scores": {
+          "type": "boolean",
+          "const": false
+        },
+        "published_rates": {
+          "type": "boolean",
+          "const": false
+        },
+        "auto_apply": {
+          "type": "boolean",
+          "const": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "mountain_ui": {
+      "type": "string",
+      "const": "hold"
+    }
+  },
+  "additionalProperties": false
+}

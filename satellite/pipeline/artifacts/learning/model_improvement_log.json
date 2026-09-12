@@ -1,0 +1,36 @@
+{
+  "version": "0.4.6-phase6-learning",
+  "science_lock": "SCIENCE_LOCKS_v0.4_phase6_learning",
+  "vetting_status": "scientist_locked_pending_ea",
+  "note_en": "Changelog of lock versions + dataset n. Not a promotion log — weights stay frozen_expert_v1.",
+  "entries": [
+    {
+      "lock_id": "SCIENCE_LOCKS_v0.4_phase4_species",
+      "phase": 4,
+      "dataset_n": {
+        "species": 6
+      },
+      "note": "Scientist-locked six-species catalog"
+    },
+    {
+      "lock_id": "SCIENCE_LOCKS_v0.4_phase5_field_loop",
+      "phase": 5,
+      "dataset_n": {
+        "events": 3,
+        "observations": 15
+      },
+      "note": "Field Loop scaffold samples (undated FO stubs)"
+    },
+    {
+      "lock_id": "SCIENCE_LOCKS_v0.4_phase6_learning",
+      "phase": 6,
+      "dataset_n": {
+        "events": 3,
+        "observations": 15,
+        "eligible_pairs": 0
+      },
+      "calibration_status": "frozen_expert_v1",
+      "note": "Learning scaffold — zero eligible pairs from Phase-5 stubs"
+    }
+  ]
+}
