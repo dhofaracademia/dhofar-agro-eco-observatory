@@ -305,6 +305,8 @@ def create_planned_followups(
 
         if visit_type == "d30_germination" and germ_na:
             outcome = "not_applicable"
+            # outcome_class carries science; do not brand N/A as missed
+            status = "on_window"
             notes = (
                 "Germination not_applicable (not zero) for "
                 f"establishment_mode={event.get('establishment_mode')} "
@@ -463,7 +465,7 @@ def sample_seeding_events() -> list[dict[str, Any]]:
             "event_date": "2026-02-01",
             "gps": {"lat": 17.18, "lon": 54.11, "accuracy_m": 12.0},
             "intervention_type": "planting",
-            "establishment_mode": "seedling",
+            "establishment_mode": "vegetative_preferred",
             "method": "seedling",
             "timing_window": "irrigated",
             "provenance_class": "unknown",

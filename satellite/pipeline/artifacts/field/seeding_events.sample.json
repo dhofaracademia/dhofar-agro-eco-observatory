@@ -52,7 +52,7 @@
         "accuracy_m": 12.0
       },
       "intervention_type": "planting",
-      "establishment_mode": "seedling",
+      "establishment_mode": "vegetative_preferred",
       "method": "seedling",
       "timing_window": "irrigated",
       "provenance_class": "unknown",
