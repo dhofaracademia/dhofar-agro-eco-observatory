@@ -299,6 +299,15 @@ Schemas: `docs/spec_0.4/{suitability_components,confidence,evidence_gap,action_l
 
 ## Phase 4 addendum — Seed Intelligence scaffold (2026-09-12)
 
+> **SUPERSEDED (2026-09-12):** Species catalog / domains / vetting for Phase-4 Seed Intelligence are defined only in
+> [`docs/SCIENCE_LOCKS_v0.4_phase4_species.md`](SCIENCE_LOCKS_v0.4_phase4_species.md) +
+> [`docs/phase4_species_scaffold.json`](phase4_species_scaffold.json)
+> (PR #17 remediation). Do **not** re-implement the blocked pre-lock catalog below
+> (`pending_agrofostery`, irrigated/fodder placeholder, `agriculture_aou` / `restoration_mountain` as ecological domain ids).
+> Historical text retained for audit only.
+
+
+
 **Status:** `unvalidated_expert_stub` — matrix / catalog scaffold only (**NOT** operational truth).  
 **Owner:** Agrofostery Scientist (species short lists) + AgriTech (JSON field shapes) + CoS (artifacts-first delivery).  
 **UI gate:** No Analysis / Restoration / Map Seed panel in the first Phase-4 PR. **No** mountain partner UI. **No** Decision→species candidate wire in partner UI.
