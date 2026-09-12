@@ -1,0 +1,188 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dhofaracademia.example/spec_0.4/annual_learning_report.schema.json",
+  "title": "AnnualLearningReport",
+  "description": "Phase-6 annual restoration report — SCIENCE_LOCKS_v0.4_phase6_learning. Narrative template + outcome_class counts only. Stamp unpublished_scaffold / narrative_template_only. sample_rows_not_a_season when using Phase-5 samples. Spec §14 metrics reserved null. No fabricated accuracy %.",
+  "type": "object",
+  "required": [
+    "version",
+    "science_lock",
+    "vetting_status",
+    "year",
+    "stamp",
+    "unpublished_scaffold",
+    "sample_rows_not_a_season",
+    "narrative_sections",
+    "tables",
+    "metrics_reserved"
+  ],
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "science_lock": {
+      "type": "string",
+      "const": "SCIENCE_LOCKS_v0.4_phase6_learning"
+    },
+    "vetting_status": {
+      "type": "string",
+      "const": "scientist_locked_pending_ea"
+    },
+    "year": {
+      "type": "integer"
+    },
+    "stamp": {
+      "type": "string",
+      "const": "narrative_template_only"
+    },
+    "unpublished_scaffold": {
+      "type": "boolean",
+      "const": true
+    },
+    "sample_rows_not_a_season": {
+      "type": "boolean"
+    },
+    "mountain_ui": {
+      "type": "string",
+      "const": "hold"
+    },
+    "published_rates": {
+      "type": "boolean",
+      "const": false
+    },
+    "narrative_sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "title_en",
+          "title_ar",
+          "body_en",
+          "body_ar"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title_en": {
+            "type": "string"
+          },
+          "title_ar": {
+            "type": "string"
+          },
+          "body_en": {
+            "type": "string"
+          },
+          "body_ar": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "tables": {
+      "type": "object",
+      "required": [
+        "events_logged",
+        "visit_coverage",
+        "outcome_class_counts"
+      ],
+      "properties": {
+        "events_logged": {
+          "type": "object"
+        },
+        "visit_coverage": {
+          "type": "object"
+        },
+        "outcome_class_counts": {
+          "type": "object",
+          "required": [
+            "n_present_target",
+            "n_none_detected",
+            "n_dead_or_missing",
+            "n_uncertain"
+          ],
+          "properties": {
+            "n_present_target": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "n_none_detected": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "n_dead_or_missing": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "n_uncertain": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false
+        },
+        "counts": {
+          "type": "array"
+        }
+      }
+    },
+    "metrics_reserved": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "value",
+          "reason"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "null"
+          },
+          "reason": {
+            "type": "string",
+            "const": "insufficient_n"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "honesty_note_en": {
+      "type": "string"
+    },
+    "honesty_note_ar": {
+      "type": "string"
+    },
+    "forbidden": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "not": {
+    "anyOf": [
+      {
+        "required": [
+          "germination_pct"
+        ]
+      },
+      {
+        "required": [
+          "survival_pct"
+        ]
+      },
+      {
+        "required": [
+          "accuracy_pct"
+        ]
+      }
+    ]
+  },
+  "additionalProperties": false
+}

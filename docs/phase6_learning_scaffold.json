@@ -1,0 +1,113 @@
+{
+  "lock_id": "SCIENCE_LOCKS_v0.4_phase6_learning",
+  "date": "2026-09-12",
+  "timezone": "Asia/Muscat",
+  "owner": "Agrofostery Scientist",
+  "verdict": "go",
+  "mode": "scaffold_only",
+  "mountain_ui": "hold",
+  "calibration_status": "frozen_expert_v1",
+  "published_rates": false,
+  "auto_rewrite_scores": false,
+  "annual_report": "narrative_template_only",
+  "honesty": [
+    "Join pairs; do not invent germination/survival %.",
+    "missed/not_observed = coverage gap, not zero.",
+    "not_applicable germination excluded from germination learning.",
+    "No auto species_failed/site_failed.",
+    "expert_v1 weights frozen. No live engine writes.",
+    "Spec 14 metrics named, empty, forbidden to fill.",
+    "Domains never mix. Phase-4 six only.",
+    "Unvalidated prediction stubs stay labeled unvalidated.",
+    "Annual report is narrative template only."
+  ],
+  "learning_pair": {
+    "id_pattern": "LP-{YYYY}-{NNNNNN}",
+    "join": "SeedingEvent x one eligible FieldObservation at one horizon",
+    "horizons": [
+      "d30_germination",
+      "d90_survival",
+      "d180_establishment",
+      "d365_survival"
+    ],
+    "prediction_no_backfill": true,
+    "eligible_if": {
+      "visit_date_present": true,
+      "window_status": [
+        "on_window",
+        "late"
+      ],
+      "outcome_class": [
+        "present_target",
+        "none_detected",
+        "dead_or_missing",
+        "present_uncertain_id"
+      ],
+      "exclude_not_applicable_from_germination": true
+    },
+    "never_eligible": [
+      "missed",
+      "not_observed",
+      "not_applicable",
+      "early",
+      "undated_stub"
+    ]
+  },
+  "counts_allowed": [
+    "n_events",
+    "n_eligible_pairs",
+    "n_present_target",
+    "n_none_detected",
+    "n_dead_or_missing",
+    "n_uncertain",
+    "n_missed_windows",
+    "n_not_applicable"
+  ],
+  "counts_forbidden": [
+    "germination_pct_operational",
+    "survival_pct_operational",
+    "recommendation_success",
+    "accuracy_filled",
+    "one_success_percent"
+  ],
+  "emit_count_ratio_in_scaffold": false,
+  "future_unlock_not_this_pr": {
+    "n_eligible_min": 20,
+    "group": "species_id x domain x horizon",
+    "first_horizon": "d365_survival",
+    "second_horizon": "d180_establishment",
+    "no_unlock_from_d30_alone": true,
+    "requires_scientist_signoff": true
+  },
+  "frozen_engines": [
+    "ag_probability",
+    "water_vigor_stress",
+    "mpi",
+    "aou_suitability_confidence",
+    "site_x_species"
+  ],
+  "proposed_change_status": "not_authorized",
+  "proposed_change_delta": null,
+  "annual_report_stub": {
+    "type": "narrative_template_only",
+    "metrics_reserved_value": null,
+    "stamp_sample_rows": "sample_rows_not_a_season"
+  },
+  "forbidden": [
+    "species_failed_auto",
+    "site_failed_auto",
+    "rewrite_suitability_from_sparse_plots",
+    "mountain_partner_ui",
+    "partner_learning_dashboard",
+    "fill_spec14_metrics",
+    "missed_as_zero",
+    "na_as_fail",
+    "mix_domains_in_one_pool",
+    "backfill_prediction",
+    "live_weight_write",
+    "ml",
+    "campaign_numbers",
+    "Authority-approved",
+    "معتمد من الهيئة"
+  ]
+}

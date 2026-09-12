@@ -1,0 +1,784 @@
+{
+  "version": "0.4.6-phase6-learning",
+  "science_lock": "SCIENCE_LOCKS_v0.4_phase6_learning",
+  "vetting_status": "scientist_locked_pending_ea",
+  "status": "learning_scaffold_join",
+  "stamp": [
+    "experimental",
+    "unvalidated",
+    "sample_rows_not_a_season"
+  ],
+  "sample_rows_not_a_season": true,
+  "domains": [
+    "fog_escarpment",
+    "najd_arid"
+  ],
+  "never_mix_domains": true,
+  "allowed_species_ids": [
+    "sp-fog-tdhof",
+    "sp-fog-oleac",
+    "sp-fog-fsyco",
+    "sp-najd-zsc",
+    "sp-najd-vtor",
+    "sp-najd-pcin"
+  ],
+  "horizons": [
+    "d30_germination",
+    "d90_survival",
+    "d180_establishment",
+    "d365_survival"
+  ],
+  "field_events_ref": "artifacts/field/seeding_events.sample.json",
+  "field_observations_ref": "artifacts/field/field_observations.sample.json",
+  "seed_matrix_ref": "artifacts/seed/site_species_matrix.json",
+  "decision_ref": "artifacts/decision/run_meta.json",
+  "join_rule": "one SE x one eligible FO at one horizon; ids only; no back-fill",
+  "n_events": 3,
+  "n_observations_scanned": 15,
+  "n_id_joins": 12,
+  "n_eligible_pairs": 0,
+  "pairs": [],
+  "id_joins": [
+    {
+      "event_id": "SE-2026-000001",
+      "observation_id": "FO-2026-000002",
+      "site_ref": "AOU-NJ-000001",
+      "aou_id": "AOU-NJ-000001",
+      "linked_recommendation_id": null,
+      "domain": "najd_arid",
+      "species_id": "sp-najd-zsc",
+      "horizon": "d30_germination",
+      "window_status": "missed",
+      "outcome_class": "not_observed",
+      "visit_date": null,
+      "eligible_for_calibration": false,
+      "ineligible_reason": "undated_stub",
+      "pair_id": null
+    },
+    {
+      "event_id": "SE-2026-000001",
+      "observation_id": "FO-2026-000003",
+      "site_ref": "AOU-NJ-000001",
+      "aou_id": "AOU-NJ-000001",
+      "linked_recommendation_id": null,
+      "domain": "najd_arid",
+      "species_id": "sp-najd-zsc",
+      "horizon": "d90_survival",
+      "window_status": "missed",
+      "outcome_class": "not_observed",
+      "visit_date": null,
+      "eligible_for_calibration": false,
+      "ineligible_reason": "undated_stub",
+      "pair_id": null
+    },
+    {
+      "event_id": "SE-2026-000001",
+      "observation_id": "FO-2026-000004",
+      "site_ref": "AOU-NJ-000001",
+      "aou_id": "AOU-NJ-000001",
+      "linked_recommendation_id": null,
+      "domain": "najd_arid",
+      "species_id": "sp-najd-zsc",
+      "horizon": "d180_establishment",
+      "window_status": "missed",
+      "outcome_class": "not_observed",
+      "visit_date": null,
+      "eligible_for_calibration": false,
+      "ineligible_reason": "undated_stub",
+      "pair_id": null
+    },
+    {
+      "event_id": "SE-2026-000001",
+      "observation_id": "FO-2026-000005",
+      "site_ref": "AOU-NJ-000001",
+      "aou_id": "AOU-NJ-000001",
+      "linked_recommendation_id": null,
+      "domain": "najd_arid",
+      "species_id": "sp-najd-zsc",
+      "horizon": "d365_survival",
+      "window_status": "early",
+      "outcome_class": "not_observed",
+      "visit_date": null,
+      "eligible_for_calibration": false,
+      "ineligible_reason": "undated_stub",
+      "pair_id": null
+    },
+    {
+      "event_id": "SE-2026-000002",
+      "observation_id": "FO-2026-000007",
+      "site_ref": "AOU-NJ-000003",
+      "aou_id": "AOU-NJ-000003",
+      "linked_recommendation_id": null,
+      "domain": "najd_arid",
+      "species_id": "sp-najd-vtor",
+      "horizon": "d30_germination",
+      "window_status": "on_window",
+      "outcome_class": "not_applicable",
+      "visit_date": null,
+      "eligible_for_calibration": false,
+      "ineligible_reason": "undated_stub",
+      "pair_id": null
+    },
+    {
+      "event_id": "SE-2026-000002",
+      "observation_id": "FO-2026-000008",
+      "site_ref": "AOU-NJ-000003",
+      "aou_id": "AOU-NJ-000003",
+      "linked_recommendation_id": null,
+      "domain": "najd_arid",
+      "species_id": "sp-najd-vtor",
+      "horizon": "d90_survival",
+      "window_status": "missed",
+      "outcome_class": "not_observed",
+      "visit_date": null,
+      "eligible_for_calibration": false,
+      "ineligible_reason": "undated_stub",
+      "pair_id": null
+    },
+    {
+      "event_id": "SE-2026-000002",
+      "observation_id": "FO-2026-000009",
+      "site_ref": "AOU-NJ-000003",
+      "aou_id": "AOU-NJ-000003",
+      "linked_recommendation_id": null,
+      "domain": "najd_arid",
+      "species_id": "sp-najd-vtor",
+      "horizon": "d180_establishment",
+      "window_status": "missed",
+      "outcome_class": "not_observed",
+      "visit_date": null,
+      "eligible_for_calibration": false,
+      "ineligible_reason": "undated_stub",
+      "pair_id": null
+    },
+    {
+      "event_id": "SE-2026-000002",
+      "observation_id": "FO-2026-000010",
+      "site_ref": "AOU-NJ-000003",
+      "aou_id": "AOU-NJ-000003",
+      "linked_recommendation_id": null,
+      "domain": "najd_arid",
+      "species_id": "sp-najd-vtor",
+      "horizon": "d365_survival",
+      "window_status": "early",
+      "outcome_class": "not_observed",
+      "visit_date": null,
+      "eligible_for_calibration": false,
+      "ineligible_reason": "undated_stub",
+      "pair_id": null
+    },
+    {
+      "event_id": "SE-2026-000003",
+      "observation_id": "FO-2026-000012",
+      "site_ref": "MPI-SAMPLE-000",
+      "aou_id": null,
+      "linked_recommendation_id": null,
+      "domain": "fog_escarpment",
+      "species_id": "sp-fog-tdhof",
+      "horizon": "d30_germination",
+      "window_status": "on_window",
+      "outcome_class": "not_applicable",
+      "visit_date": null,
+      "eligible_for_calibration": false,
+      "ineligible_reason": "undated_stub",
+      "pair_id": null
+    },
+    {
+      "event_id": "SE-2026-000003",
+      "observation_id": "FO-2026-000013",
+      "site_ref": "MPI-SAMPLE-000",
+      "aou_id": null,
+      "linked_recommendation_id": null,
+      "domain": "fog_escarpment",
+      "species_id": "sp-fog-tdhof",
+      "horizon": "d90_survival",
+      "window_status": "missed",
+      "outcome_class": "not_observed",
+      "visit_date": null,
+      "eligible_for_calibration": false,
+      "ineligible_reason": "undated_stub",
+      "pair_id": null
+    },
+    {
+      "event_id": "SE-2026-000003",
+      "observation_id": "FO-2026-000014",
+      "site_ref": "MPI-SAMPLE-000",
+      "aou_id": null,
+      "linked_recommendation_id": null,
+      "domain": "fog_escarpment",
+      "species_id": "sp-fog-tdhof",
+      "horizon": "d180_establishment",
+      "window_status": "missed",
+      "outcome_class": "not_observed",
+      "visit_date": null,
+      "eligible_for_calibration": false,
+      "ineligible_reason": "undated_stub",
+      "pair_id": null
+    },
+    {
+      "event_id": "SE-2026-000003",
+      "observation_id": "FO-2026-000015",
+      "site_ref": "MPI-SAMPLE-000",
+      "aou_id": null,
+      "linked_recommendation_id": null,
+      "domain": "fog_escarpment",
+      "species_id": "sp-fog-tdhof",
+      "horizon": "d365_survival",
+      "window_status": "on_window",
+      "outcome_class": "not_observed",
+      "visit_date": null,
+      "eligible_for_calibration": false,
+      "ineligible_reason": "undated_stub",
+      "pair_id": null
+    }
+  ],
+  "counts": [
+    {
+      "group": {
+        "horizon": null,
+        "domain": null,
+        "species_id": null
+      },
+      "n_events": 3,
+      "n_eligible_pairs": 0,
+      "n_present_target": 0,
+      "n_none_detected": 0,
+      "n_dead_or_missing": 0,
+      "n_uncertain": 0,
+      "n_missed_windows": 7,
+      "n_not_applicable": 2,
+      "thin_n": true,
+      "calibration_pool": false,
+      "note": "display_only_overall — not a fog+Najd calibration pool"
+    },
+    {
+      "group": {
+        "horizon": null,
+        "domain": "fog_escarpment",
+        "species_id": null
+      },
+      "n_events": 1,
+      "n_eligible_pairs": 0,
+      "n_present_target": 0,
+      "n_none_detected": 0,
+      "n_dead_or_missing": 0,
+      "n_uncertain": 0,
+      "n_missed_windows": 2,
+      "n_not_applicable": 1,
+      "thin_n": true,
+      "calibration_pool": false
+    },
+    {
+      "group": {
+        "horizon": null,
+        "domain": "fog_escarpment",
+        "species_id": "sp-fog-tdhof"
+      },
+      "n_events": 1,
+      "n_eligible_pairs": 0,
+      "n_present_target": 0,
+      "n_none_detected": 0,
+      "n_dead_or_missing": 0,
+      "n_uncertain": 0,
+      "n_missed_windows": 0,
+      "n_not_applicable": 0,
+      "thin_n": true,
+      "calibration_pool": false
+    },
+    {
+      "group": {
+        "horizon": null,
+        "domain": "najd_arid",
+        "species_id": null
+      },
+      "n_events": 2,
+      "n_eligible_pairs": 0,
+      "n_present_target": 0,
+      "n_none_detected": 0,
+      "n_dead_or_missing": 0,
+      "n_uncertain": 0,
+      "n_missed_windows": 5,
+      "n_not_applicable": 1,
+      "thin_n": true,
+      "calibration_pool": false
+    },
+    {
+      "group": {
+        "horizon": null,
+        "domain": "najd_arid",
+        "species_id": "sp-najd-vtor"
+      },
+      "n_events": 1,
+      "n_eligible_pairs": 0,
+      "n_present_target": 0,
+      "n_none_detected": 0,
+      "n_dead_or_missing": 0,
+      "n_uncertain": 0,
+      "n_missed_windows": 0,
+      "n_not_applicable": 0,
+      "thin_n": true,
+      "calibration_pool": false
+    },
+    {
+      "group": {
+        "horizon": null,
+        "domain": "najd_arid",
+        "species_id": "sp-najd-zsc"
+      },
+      "n_events": 1,
+      "n_eligible_pairs": 0,
+      "n_present_target": 0,
+      "n_none_detected": 0,
+      "n_dead_or_missing": 0,
+      "n_uncertain": 0,
+      "n_missed_windows": 0,
+      "n_not_applicable": 0,
+      "thin_n": true,
+      "calibration_pool": false
+    },
+    {
+      "group": {
+        "horizon": "d180_establishment",
+        "domain": null,
+        "species_id": null
+      },
+      "n_events": 3,
+      "n_eligible_pairs": 0,
+      "n_present_target": 0,
+      "n_none_detected": 0,
+      "n_dead_or_missing": 0,
+      "n_uncertain": 0,
+      "n_missed_windows": 3,
+      "n_not_applicable": 0,
+      "thin_n": true,
+      "calibration_pool": false,
+      "note": "display_only — domains not pooled for calibration"
+    },
+    {
+      "group": {
+        "horizon": "d180_establishment",
+        "domain": "fog_escarpment",
+        "species_id": null
+      },
+      "n_events": 1,
+      "n_eligible_pairs": 0,
+      "n_present_target": 0,
+      "n_none_detected": 0,
+      "n_dead_or_missing": 0,
+      "n_uncertain": 0,
+      "n_missed_windows": 1,
+      "n_not_applicable": 0,
+      "thin_n": true,
+      "calibration_pool": false
+    },
+    {
+      "group": {
+        "horizon": "d180_establishment",
+        "domain": "fog_escarpment",
+        "species_id": "sp-fog-tdhof"
+      },
+      "n_events": 1,
+      "n_eligible_pairs": 0,
+      "n_present_target": 0,
+      "n_none_detected": 0,
+      "n_dead_or_missing": 0,
+      "n_uncertain": 0,
+      "n_missed_windows": 1,
+      "n_not_applicable": 0,
+      "thin_n": true,
+      "calibration_pool": true
+    },
+    {
+      "group": {
+        "horizon": "d180_establishment",
+        "domain": "najd_arid",
+        "species_id": null
+      },
+      "n_events": 2,
+      "n_eligible_pairs": 0,
+      "n_present_target": 0,
+      "n_none_detected": 0,
+      "n_dead_or_missing": 0,
+      "n_uncertain": 0,
+      "n_missed_windows": 2,
+      "n_not_applicable": 0,
+      "thin_n": true,
+      "calibration_pool": false
+    },
+    {
+      "group": {
+        "horizon": "d180_establishment",
+        "domain": "najd_arid",
+        "species_id": "sp-najd-vtor"
+      },
+      "n_events": 1,
+      "n_eligible_pairs": 0,
+      "n_present_target": 0,
+      "n_none_detected": 0,
+      "n_dead_or_missing": 0,
+      "n_uncertain": 0,
+      "n_missed_windows": 1,
+      "n_not_applicable": 0,
+      "thin_n": true,
+      "calibration_pool": true
+    },
+    {
+      "group": {
+        "horizon": "d180_establishment",
+        "domain": "najd_arid",
+        "species_id": "sp-najd-zsc"
+      },
+      "n_events": 1,
+      "n_eligible_pairs": 0,
+      "n_present_target": 0,
+      "n_none_detected": 0,
+      "n_dead_or_missing": 0,
+      "n_uncertain": 0,
+      "n_missed_windows": 1,
+      "n_not_applicable": 0,
+      "thin_n": true,
+      "calibration_pool": true
+    },
+    {
+      "group": {
+        "horizon": "d30_germination",
+        "domain": null,
+        "species_id": null
+      },
+      "n_events": 3,
+      "n_eligible_pairs": 0,
+      "n_present_target": 0,
+      "n_none_detected": 0,
+      "n_dead_or_missing": 0,
+      "n_uncertain": 0,
+      "n_missed_windows": 1,
+      "n_not_applicable": 2,
+      "thin_n": true,
+      "calibration_pool": false,
+      "note": "display_only — domains not pooled for calibration"
+    },
+    {
+      "group": {
+        "horizon": "d30_germination",
+        "domain": "fog_escarpment",
+        "species_id": null
+      },
+      "n_events": 1,
+      "n_eligible_pairs": 0,
+      "n_present_target": 0,
+      "n_none_detected": 0,
+      "n_dead_or_missing": 0,
+      "n_uncertain": 0,
+      "n_missed_windows": 0,
+      "n_not_applicable": 1,
+      "thin_n": true,
+      "calibration_pool": false
+    },
+    {
+      "group": {
+        "horizon": "d30_germination",
+        "domain": "fog_escarpment",
+        "species_id": "sp-fog-tdhof"
+      },
+      "n_events": 1,
+      "n_eligible_pairs": 0,
+      "n_present_target": 0,
+      "n_none_detected": 0,
+      "n_dead_or_missing": 0,
+      "n_uncertain": 0,
+      "n_missed_windows": 0,
+      "n_not_applicable": 1,
+      "thin_n": true,
+      "calibration_pool": true
+    },
+    {
+      "group": {
+        "horizon": "d30_germination",
+        "domain": "najd_arid",
+        "species_id": null
+      },
+      "n_events": 2,
+      "n_eligible_pairs": 0,
+      "n_present_target": 0,
+      "n_none_detected": 0,
+      "n_dead_or_missing": 0,
+      "n_uncertain": 0,
+      "n_missed_windows": 1,
+      "n_not_applicable": 1,
+      "thin_n": true,
+      "calibration_pool": false
+    },
+    {
+      "group": {
+        "horizon": "d30_germination",
+        "domain": "najd_arid",
+        "species_id": "sp-najd-vtor"
+      },
+      "n_events": 1,
+      "n_eligible_pairs": 0,
+      "n_present_target": 0,
+      "n_none_detected": 0,
+      "n_dead_or_missing": 0,
+      "n_uncertain": 0,
+      "n_missed_windows": 0,
+      "n_not_applicable": 1,
+      "thin_n": true,
+      "calibration_pool": true
+    },
+    {
+      "group": {
+        "horizon": "d30_germination",
+        "domain": "najd_arid",
+        "species_id": "sp-najd-zsc"
+      },
+      "n_events": 1,
+      "n_eligible_pairs": 0,
+      "n_present_target": 0,
+      "n_none_detected": 0,
+      "n_dead_or_missing": 0,
+      "n_uncertain": 0,
+      "n_missed_windows": 1,
+      "n_not_applicable": 0,
+      "thin_n": true,
+      "calibration_pool": true
+    },
+    {
+      "group": {
+        "horizon": "d365_survival",
+        "domain": null,
+        "species_id": null
+      },
+      "n_events": 3,
+      "n_eligible_pairs": 0,
+      "n_present_target": 0,
+      "n_none_detected": 0,
+      "n_dead_or_missing": 0,
+      "n_uncertain": 0,
+      "n_missed_windows": 0,
+      "n_not_applicable": 0,
+      "thin_n": true,
+      "calibration_pool": false,
+      "note": "display_only — domains not pooled for calibration"
+    },
+    {
+      "group": {
+        "horizon": "d365_survival",
+        "domain": "fog_escarpment",
+        "species_id": null
+      },
+      "n_events": 1,
+      "n_eligible_pairs": 0,
+      "n_present_target": 0,
+      "n_none_detected": 0,
+      "n_dead_or_missing": 0,
+      "n_uncertain": 0,
+      "n_missed_windows": 0,
+      "n_not_applicable": 0,
+      "thin_n": true,
+      "calibration_pool": false
+    },
+    {
+      "group": {
+        "horizon": "d365_survival",
+        "domain": "fog_escarpment",
+        "species_id": "sp-fog-tdhof"
+      },
+      "n_events": 1,
+      "n_eligible_pairs": 0,
+      "n_present_target": 0,
+      "n_none_detected": 0,
+      "n_dead_or_missing": 0,
+      "n_uncertain": 0,
+      "n_missed_windows": 0,
+      "n_not_applicable": 0,
+      "thin_n": true,
+      "calibration_pool": true
+    },
+    {
+      "group": {
+        "horizon": "d365_survival",
+        "domain": "najd_arid",
+        "species_id": null
+      },
+      "n_events": 2,
+      "n_eligible_pairs": 0,
+      "n_present_target": 0,
+      "n_none_detected": 0,
+      "n_dead_or_missing": 0,
+      "n_uncertain": 0,
+      "n_missed_windows": 0,
+      "n_not_applicable": 0,
+      "thin_n": true,
+      "calibration_pool": false
+    },
+    {
+      "group": {
+        "horizon": "d365_survival",
+        "domain": "najd_arid",
+        "species_id": "sp-najd-vtor"
+      },
+      "n_events": 1,
+      "n_eligible_pairs": 0,
+      "n_present_target": 0,
+      "n_none_detected": 0,
+      "n_dead_or_missing": 0,
+      "n_uncertain": 0,
+      "n_missed_windows": 0,
+      "n_not_applicable": 0,
+      "thin_n": true,
+      "calibration_pool": true
+    },
+    {
+      "group": {
+        "horizon": "d365_survival",
+        "domain": "najd_arid",
+        "species_id": "sp-najd-zsc"
+      },
+      "n_events": 1,
+      "n_eligible_pairs": 0,
+      "n_present_target": 0,
+      "n_none_detected": 0,
+      "n_dead_or_missing": 0,
+      "n_uncertain": 0,
+      "n_missed_windows": 0,
+      "n_not_applicable": 0,
+      "thin_n": true,
+      "calibration_pool": true
+    },
+    {
+      "group": {
+        "horizon": "d90_survival",
+        "domain": null,
+        "species_id": null
+      },
+      "n_events": 3,
+      "n_eligible_pairs": 0,
+      "n_present_target": 0,
+      "n_none_detected": 0,
+      "n_dead_or_missing": 0,
+      "n_uncertain": 0,
+      "n_missed_windows": 3,
+      "n_not_applicable": 0,
+      "thin_n": true,
+      "calibration_pool": false,
+      "note": "display_only — domains not pooled for calibration"
+    },
+    {
+      "group": {
+        "horizon": "d90_survival",
+        "domain": "fog_escarpment",
+        "species_id": null
+      },
+      "n_events": 1,
+      "n_eligible_pairs": 0,
+      "n_present_target": 0,
+      "n_none_detected": 0,
+      "n_dead_or_missing": 0,
+      "n_uncertain": 0,
+      "n_missed_windows": 1,
+      "n_not_applicable": 0,
+      "thin_n": true,
+      "calibration_pool": false
+    },
+    {
+      "group": {
+        "horizon": "d90_survival",
+        "domain": "fog_escarpment",
+        "species_id": "sp-fog-tdhof"
+      },
+      "n_events": 1,
+      "n_eligible_pairs": 0,
+      "n_present_target": 0,
+      "n_none_detected": 0,
+      "n_dead_or_missing": 0,
+      "n_uncertain": 0,
+      "n_missed_windows": 1,
+      "n_not_applicable": 0,
+      "thin_n": true,
+      "calibration_pool": true
+    },
+    {
+      "group": {
+        "horizon": "d90_survival",
+        "domain": "najd_arid",
+        "species_id": null
+      },
+      "n_events": 2,
+      "n_eligible_pairs": 0,
+      "n_present_target": 0,
+      "n_none_detected": 0,
+      "n_dead_or_missing": 0,
+      "n_uncertain": 0,
+      "n_missed_windows": 2,
+      "n_not_applicable": 0,
+      "thin_n": true,
+      "calibration_pool": false
+    },
+    {
+      "group": {
+        "horizon": "d90_survival",
+        "domain": "najd_arid",
+        "species_id": "sp-najd-vtor"
+      },
+      "n_events": 1,
+      "n_eligible_pairs": 0,
+      "n_present_target": 0,
+      "n_none_detected": 0,
+      "n_dead_or_missing": 0,
+      "n_uncertain": 0,
+      "n_missed_windows": 1,
+      "n_not_applicable": 0,
+      "thin_n": true,
+      "calibration_pool": true
+    },
+    {
+      "group": {
+        "horizon": "d90_survival",
+        "domain": "najd_arid",
+        "species_id": "sp-najd-zsc"
+      },
+      "n_events": 1,
+      "n_eligible_pairs": 0,
+      "n_present_target": 0,
+      "n_none_detected": 0,
+      "n_dead_or_missing": 0,
+      "n_uncertain": 0,
+      "n_missed_windows": 1,
+      "n_not_applicable": 0,
+      "thin_n": true,
+      "calibration_pool": true
+    }
+  ],
+  "forbidden": [
+    "species_failed_auto",
+    "site_failed_auto",
+    "rewrite_suitability_from_sparse_plots",
+    "mountain_partner_ui",
+    "partner_learning_dashboard",
+    "fill_spec14_metrics",
+    "germination_pct_operational",
+    "survival_pct_operational",
+    "recommendation_success",
+    "missed_as_zero",
+    "na_as_fail",
+    "mix_domains_in_one_pool",
+    "backfill_prediction",
+    "live_weight_write",
+    "auto_apply",
+    "ml",
+    "campaign_numbers",
+    "Authority-approved",
+    "معتمد من الهيئة"
+  ],
+  "honesty_note_en": "Learning scaffold — joins and counts only. Not a published success rate, not an Environment Authority approval. Weights remain frozen expert_v1.",
+  "honesty_note_ar": "مسودة تعلّم — ربط وعدّ فقط. ليست نسبة نجاح منشورة وليست اعتماداً من هيئة البيئة. الأوزان تبقى expert_v1 مجمّدة.",
+  "ui_gates": {
+    "partner_learning_dashboard": false,
+    "mountain_partner_ui": false,
+    "writes_to_app_public": false,
+    "auto_rewrite_scores": false,
+    "published_rates": false,
+    "auto_apply": false
+  },
+  "mountain_ui": "hold"
+}
