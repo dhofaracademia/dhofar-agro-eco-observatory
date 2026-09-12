@@ -1,16 +1,10 @@
-"""v0.4 Phase-1 agricultural + Phase-3 decision + Phase-4 seed engines.
+"""v0.4 Phase-1 agricultural + Phase-3 decision + Phase-4 seed + Phase-5 field engines.
 
 Formulas locked by docs/SCIENCE_LOCKS_v0.4_phase1_2.md (Agrofostery).
-Do not invent alternate AgProb / Stress / Biotic / NDRE / Suitability /
-Confidence equations without Agrofostery sign-off.
+Phase-4 species: docs/SCIENCE_LOCKS_v0.4_phase4_species.md
+Phase-5 field: docs/SCIENCE_LOCKS_v0.4_phase5_field_loop.md
 
-Phase-3 agriculture_aou suitability + data_evidence confidence:
-  mountain_apply=False; never merge Suitability with Confidence;
-  action_auto_assign=False.
-
-Phase-4 Seed Intelligence (agriculture_aou vs restoration_mountain):
-  never_mix_domains; unvalidated_expert_stub; no campaign quantities;
-  no Seed UI / mountain partner UI in artifacts-first scaffold.
+Do not invent alternate equations or auto-rewrite scores without Agrofostery sign-off.
 """
 
 from .ndre import compute_ndre, ndre_status_from_band
@@ -32,10 +26,16 @@ from .suitability import compute_suitability, WEIGHTS_NOMINAL as SUITABILITY_WEI
 from .confidence import compute_confidence, WEIGHTS_NOMINAL as CONFIDENCE_WEIGHTS
 from .evidence_gap import assess_evidence_gaps
 from .seed_intelligence import (
-    build_species_catalog,
-    build_agriculture_rows,
-    build_mountain_rows,
-    build_site_species_matrix,
+    build_catalog,
+    load_scaffold_species,
+    normalize_domain,
+    timing_for_domain,
+)
+from .field_loop import (
+    create_planned_followups,
+    validate_seeding_event,
+    germination_not_applicable,
+    build_field_loop_wrapper,
 )
 
 __all__ = [
@@ -58,8 +58,12 @@ __all__ = [
     "compute_confidence",
     "CONFIDENCE_WEIGHTS",
     "assess_evidence_gaps",
-    "build_species_catalog",
-    "build_agriculture_rows",
-    "build_mountain_rows",
-    "build_site_species_matrix",
+    "build_catalog",
+    "load_scaffold_species",
+    "normalize_domain",
+    "timing_for_domain",
+    "create_planned_followups",
+    "validate_seeding_event",
+    "germination_not_applicable",
+    "build_field_loop_wrapper",
 ]

@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dhofaracademia.example/spec_0.4/field_loop.schema.json",
+  "title": "FieldLoop",
+  "description": "Phase-5 Field Loop optional wrapper — SCIENCE_LOCKS_v0.4_phase5_field_loop. Artifacts-first; no partner Field UI; mountain Hold; no fabricated rates; no auto-rewrite Suitability/Confidence/Site×Species; Phase-6 Learning out of scope.",
+  "type": "object",
+  "required": [
+    "version",
+    "status",
+    "vetting_status",
+    "science_lock",
+    "domains",
+    "never_mix_domains",
+    "allowed_species_ids",
+    "visit_types",
+    "seeding_events_ref",
+    "field_observations_ref",
+    "forbidden",
+    "ui_gates",
+    "ui_disclaimer"
+  ],
+  "properties": {
+    "version": { "type": "string" },
+    "status": { "type": "string", "const": "field_loop_scaffold_capture" },
+    "vetting_status": {
+      "type": "string",
+      "const": "scientist_locked_pending_ea"
+    },
+    "science_lock": {
+      "type": "string",
+      "const": "SCIENCE_LOCKS_v0.4_phase5_field_loop"
+    },
+    "domains": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["fog_escarpment", "najd_arid"] },
+      "minItems": 2,
+      "maxItems": 2,
+      "uniqueItems": true
+    },
+    "never_mix_domains": { "type": "boolean", "const": true },
+    "allowed_species_ids": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 6,
+      "maxItems": 6
+    },
+    "visit_types": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "baseline",
+          "d30_germination",
+          "d90_survival",
+          "d180_establishment",
+          "d365_survival",
+          "ad_hoc"
+        ]
+      }
+    },
+    "seeding_events_ref": { "type": "string" },
+    "field_observations_ref": { "type": "string" },
+    "csv_export_stub_ref": { "type": ["string", "null"] },
+    "forbidden": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "ui_gates": {
+      "type": "object",
+      "required": [
+        "partner_field_ui",
+        "mountain_partner_ui",
+        "writes_to_app_public",
+        "auto_rewrite_scores",
+        "published_rates",
+        "partner_photo_gallery"
+      ],
+      "properties": {
+        "partner_field_ui": { "type": "boolean", "const": false },
+        "mountain_partner_ui": { "type": "boolean", "const": false },
+        "writes_to_app_public": { "type": "boolean", "const": false },
+        "auto_rewrite_scores": { "type": "boolean", "const": false },
+        "published_rates": { "type": "boolean", "const": false },
+        "partner_photo_gallery": { "type": "boolean", "const": false }
+      },
+      "additionalProperties": false
+    },
+    "ui_disclaimer": {
+      "type": "object",
+      "required": ["en", "ar"],
+      "properties": {
+        "en": {
+          "type": "string",
+          "const": "Field log — germination ≠ establishment ≠ survival. Not a platform success score, not an Environment Authority approval."
+        },
+        "ar": {
+          "type": "string",
+          "const": "سجل ميداني — إنبات ≠ تأسيس ≠ بقاء. ليست درجة نجاح للمنصة وليست اعتماداً من هيئة البيئة."
+        }
+      },
+      "additionalProperties": false
+    },
+    "mountain_ui": { "type": "string", "const": "hold" },
+    "phase6_later": { "type": "boolean", "const": false }
+  },
+  "additionalProperties": false
+}

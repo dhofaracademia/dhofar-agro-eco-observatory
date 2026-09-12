@@ -1,0 +1,281 @@
+{
+  "lock_id": "SCIENCE_LOCKS_v0.4_phase5_field_loop",
+  "date": "2026-09-12",
+  "timezone": "Asia/Muscat",
+  "owner": "Agrofostery Scientist",
+  "status": "scientist_locked_pending_ea",
+  "phase": 5,
+  "mode": "scaffold_capture",
+  "mountain_ui": "hold",
+  "auto_rewrite_scores": false,
+  "published_rates": false,
+  "honesty": [
+    "Germination ≠ establishment ≠ survival. Never one success %.",
+    "Satellite is not a germination meter.",
+    "Missed visit ≠ failure. Do not interpolate.",
+    "One plot does not fail a species.",
+    "No fabricated germination/survival rates.",
+    "Operator kg/count ≠ campaign planner official numbers.",
+    "Phase 5 captures facts. Phase 6 learns.",
+    "Domains never mix. Species = Phase-4 six only.",
+    "Do not print Authority-approved / معتمد من الهيئة.",
+    "Protect/vegetative interventions: germination often not_applicable.",
+    "Photos are evidence, not automatic species ID."
+  ],
+  "allowed_species_ids": [
+    "sp-fog-tdhof",
+    "sp-fog-oleac",
+    "sp-fog-fsyco",
+    "sp-najd-zsc",
+    "sp-najd-vtor",
+    "sp-najd-pcin"
+  ],
+  "domains": [
+    "fog_escarpment",
+    "najd_arid"
+  ],
+  "seeding_event": {
+    "id_pattern": "SE-{YYYY}-{NNNNNN}",
+    "required": [
+      "event_id",
+      "site_ref",
+      "domain",
+      "species_id",
+      "event_date",
+      "gps",
+      "intervention_type",
+      "establishment_mode",
+      "method",
+      "timing_window",
+      "provenance_class",
+      "operator_name",
+      "event_status",
+      "vetting_status"
+    ],
+    "intervention_type_enum": [
+      "seeding",
+      "enrichment_seeding",
+      "planting",
+      "vegetative",
+      "protect_regeneration",
+      "assisted_natural_regeneration"
+    ],
+    "establishment_mode_enum": [
+      "seed",
+      "vegetative_preferred",
+      "protect_regeneration"
+    ],
+    "method_enum": [
+      "broadcast",
+      "pit",
+      "contour",
+      "dibble",
+      "seedling",
+      "cutting",
+      "wilding",
+      "protection_only"
+    ],
+    "timing_window_enum": {
+      "fog_escarpment": [
+        "late_khareef",
+        "early_post_khareef",
+        "deferred"
+      ],
+      "najd_arid": [
+        "winter_spring_rain",
+        "irrigated"
+      ]
+    },
+    "provenance_class_enum": [
+      "local_same_jabal",
+      "regional_dhofar",
+      "oman_other",
+      "unknown",
+      "blocked_exotic"
+    ],
+    "event_status_enum": [
+      "planned",
+      "logged",
+      "cancelled"
+    ],
+    "quantity": {
+      "required": false,
+      "source": "operator_reported_unvalidated",
+      "units": [
+        "seeds",
+        "seedlings",
+        "cuttings",
+        "grams"
+      ],
+      "forbid_official": [
+        "campaign_ha",
+        "seed_kg",
+        "crew_days",
+        "kg_per_ha"
+      ]
+    },
+    "reject_if": [
+      "domain_ne_species_domain",
+      "species_id_not_in_six",
+      "provenance_class_blocked_exotic",
+      "broadcast_on_oleac_or_fsyco_without_override_note",
+      "missing_event_date_or_gps",
+      "fog_planting_while_timing_deferred"
+    ]
+  },
+  "observation_windows": {
+    "clock": "event_date_day0",
+    "visits": [
+      {
+        "visit_type": "baseline",
+        "ar": "خط الأساس",
+        "center_day": 0,
+        "window_day_min": -7,
+        "window_day_max": 0
+      },
+      {
+        "visit_type": "d30_germination",
+        "ar": "إنبات أولي",
+        "center_day": 30,
+        "window_day_min": 21,
+        "window_day_max": 45,
+        "definition": "Emerged target-species seedling. Satellite green-up ≠ germination."
+      },
+      {
+        "visit_type": "d90_survival",
+        "ar": "بقاء قصير",
+        "center_day": 90,
+        "window_day_min": 75,
+        "window_day_max": 105,
+        "definition": "Target still alive at ~90d. Still not establishment."
+      },
+      {
+        "visit_type": "d180_establishment",
+        "ar": "تأسيس متوسط",
+        "center_day": 180,
+        "window_day_min": 160,
+        "window_day_max": 200,
+        "definition": "Alive and past first flush; first dry (fog) or first heat (Najd)."
+      },
+      {
+        "visit_type": "d365_survival",
+        "ar": "بقاء سنوي",
+        "center_day": 365,
+        "window_day_min": 335,
+        "window_day_max": 395,
+        "definition": "Alive at ~one year. First horizon that may later feed Phase-6. Not a published rate."
+      },
+      {
+        "visit_type": "ad_hoc",
+        "ar": "زيارة إضافية",
+        "center_day": null,
+        "note": "Does not close a scheduled window."
+      }
+    ],
+    "window_status_enum": [
+      "on_window",
+      "early",
+      "late",
+      "missed"
+    ],
+    "missed_rule": "Do not interpolate counts. Scheduler may list missed with outcome_class=not_observed only.",
+    "ecology_note": {
+      "fog": "180d ≈ late dry season persistence; 365d ≈ through next Khareef.",
+      "najd": "180d ≈ first summer heat; 365d ≈ full year including summer."
+    }
+  },
+  "outcome_class_enum": [
+    "not_observed",
+    "not_applicable",
+    "none_detected",
+    "present_uncertain_id",
+    "present_target",
+    "present_nontarget_only",
+    "dead_or_missing",
+    "protected_only"
+  ],
+  "germination_not_applicable_if_mode": [
+    "protect_regeneration",
+    "vegetative_preferred"
+  ],
+  "germination_not_applicable_if_method": [
+    "seedling",
+    "cutting",
+    "wilding",
+    "protection_only"
+  ],
+  "field_observation": {
+    "id_pattern": "FO-{YYYY}-{NNNNNN}",
+    "required": [
+      "observation_id",
+      "event_id",
+      "visit_type",
+      "visit_date",
+      "days_since_event",
+      "window_status",
+      "outcome_class",
+      "observer",
+      "vetting_status"
+    ],
+    "optional": [
+      "gps",
+      "target_count",
+      "subplot_area_m2",
+      "species_id_confidence",
+      "photos",
+      "notes",
+      "covariates"
+    ],
+    "species_id_confidence_enum": [
+      "certain",
+      "probable",
+      "uncertain"
+    ],
+    "keep_all_visits": true,
+    "do_not_overwrite": true
+  },
+  "forbidden_derived_fields": [
+    "germination_pct_operational",
+    "survival_pct_operational",
+    "recommendation_success",
+    "species_failed_auto",
+    "site_failed_auto"
+  ],
+  "ui_disclaimer": {
+    "en": "Field log — germination ≠ establishment ≠ survival. Not a platform success score, not an Environment Authority approval.",
+    "ar": "سجل ميداني — إنبات ≠ تأسيس ≠ بقاء. ليست درجة نجاح للمنصة وليست اعتماداً من هيئة البيئة."
+  },
+  "phase6_later": [
+    "prediction_vs_actual",
+    "calibration_sample_rules",
+    "score_update_after_n_and_protocol",
+    "published_accuracy_with_declared_n"
+  ],
+  "photos_pii": {
+    "required": false,
+    "subject": "plot_seedlings_soil_damage_fence",
+    "forbid": [
+      "posed_people",
+      "children",
+      "national_id",
+      "passport",
+      "badge_closeup",
+      "face_recognition",
+      "auto_species_id_from_photo"
+    ],
+    "observer_is": "team_or_person_label_not_civil_id",
+    "exif": "optional_datetime_and_plot_gps; strip phone-owner name",
+    "public_partner_gallery": false,
+    "item_fields": [
+      "ref",
+      "taken_at",
+      "caption",
+      "pii_flag"
+    ],
+    "pii_flag_enum": [
+      "none",
+      "incidental_person"
+    ],
+    "pii_flag_default": "none"
+  }
+}

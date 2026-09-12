@@ -1,0 +1,71 @@
+{
+  "version": "0.4.5-phase5-field-loop",
+  "status": "field_loop_scaffold_capture",
+  "vetting_status": "scientist_locked_pending_ea",
+  "science_lock": "SCIENCE_LOCKS_v0.4_phase5_field_loop",
+  "domains": [
+    "fog_escarpment",
+    "najd_arid"
+  ],
+  "never_mix_domains": true,
+  "allowed_species_ids": [
+    "sp-fog-tdhof",
+    "sp-fog-oleac",
+    "sp-fog-fsyco",
+    "sp-najd-zsc",
+    "sp-najd-vtor",
+    "sp-najd-pcin"
+  ],
+  "visit_types": [
+    "baseline",
+    "d30_germination",
+    "d90_survival",
+    "d180_establishment",
+    "d365_survival",
+    "ad_hoc"
+  ],
+  "seeding_events_ref": "seeding_events.sample.json",
+  "field_observations_ref": "field_observations.sample.json",
+  "csv_export_stub_ref": "field_events_export.stub.csv",
+  "forbidden": [
+    "domain_mix",
+    "species_outside_phase4_six",
+    "blocked_exotic",
+    "campaign_ha",
+    "seed_kg",
+    "crew_days",
+    "kg_per_ha",
+    "germination_pct_operational",
+    "survival_pct_operational",
+    "recommendation_success",
+    "species_failed_auto",
+    "site_failed_auto",
+    "interpolate_missed_counts",
+    "satellite_as_germination_meter",
+    "auto_rewrite_suitability_confidence_matrix",
+    "Authority-approved",
+    "معتمد من الهيئة",
+    "partner_field_ui",
+    "mountain_partner_ui",
+    "partner_photo_gallery",
+    "face_recognition",
+    "auto_species_id_from_photo",
+    "photos_of_children",
+    "identity_documents",
+    "phase6_learning"
+  ],
+  "ui_gates": {
+    "partner_field_ui": false,
+    "mountain_partner_ui": false,
+    "writes_to_app_public": false,
+    "auto_rewrite_scores": false,
+    "published_rates": false,
+    "partner_photo_gallery": false
+  },
+  "ui_disclaimer": {
+    "en": "Field log — germination ≠ establishment ≠ survival. Not a platform success score, not an Environment Authority approval.",
+    "ar": "سجل ميداني — إنبات ≠ تأسيس ≠ بقاء. ليست درجة نجاح للمنصة وليست اعتماداً من هيئة البيئة."
+  },
+  "mountain_ui": "hold",
+  "phase6_later": false
+}

@@ -144,3 +144,10 @@ python3 run_seed_intelligence.py
 
 Artifacts: `species_catalog.json`, `site_species_matrix.json`, `seed_intelligence.json`, `seeding_protocol.stubs.json`, `run_meta.json`.
 
+
+
+## v0.4 Phase-5 — Field Loop (offline artifacts)
+
+Binding: `docs/SCIENCE_LOCKS_v0.4_phase5_field_loop.md`  
+Runner: `cd satellite/pipeline && python run_field_loop.py`  
+Artifacts: `satellite/pipeline/artifacts/field/` (not `app/public/`). Mountain UI Hold. No partner Field UI. No fabricated rates.

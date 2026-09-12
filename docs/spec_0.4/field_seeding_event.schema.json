@@ -1,0 +1,203 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dhofaracademia.example/spec_0.4/field_seeding_event.schema.json",
+  "title": "SeedingEvent",
+  "description": "Phase-5 Field Loop SeedingEvent — SCIENCE_LOCKS_v0.4_phase5_field_loop. One event = one intervention, one site, one species. Domains never mix. Operator quantity ≠ campaign. No Authority-approved wording.",
+  "type": "object",
+  "required": [
+    "event_id",
+    "site_ref",
+    "domain",
+    "species_id",
+    "event_date",
+    "gps",
+    "intervention_type",
+    "establishment_mode",
+    "method",
+    "timing_window",
+    "provenance_class",
+    "operator_name",
+    "event_status",
+    "vetting_status"
+  ],
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "pattern": "^SE-[0-9]{4}-[0-9]{6}$",
+      "description": "SE-{YYYY}-{NNNNNN}"
+    },
+    "site_ref": {
+      "type": "string",
+      "minLength": 1,
+      "description": "AOU-NJ-… or mountain sample / restoration site id"
+    },
+    "domain": {
+      "type": "string",
+      "enum": ["fog_escarpment", "najd_arid"]
+    },
+    "species_id": {
+      "type": "string",
+      "enum": [
+        "sp-fog-tdhof",
+        "sp-fog-oleac",
+        "sp-fog-fsyco",
+        "sp-najd-zsc",
+        "sp-najd-vtor",
+        "sp-najd-pcin"
+      ]
+    },
+    "event_date": {
+      "type": "string",
+      "format": "date",
+      "description": "ISO date (Asia/Muscat calendar date); day 0 for windows"
+    },
+    "gps": {
+      "type": "object",
+      "required": ["lat", "lon"],
+      "properties": {
+        "lat": { "type": "number", "minimum": -90, "maximum": 90 },
+        "lon": { "type": "number", "minimum": -180, "maximum": 180 },
+        "accuracy_m": { "type": ["number", "null"], "minimum": 0 }
+      },
+      "additionalProperties": false
+    },
+    "intervention_type": {
+      "type": "string",
+      "enum": [
+        "seeding",
+        "enrichment_seeding",
+        "planting",
+        "vegetative",
+        "protect_regeneration",
+        "assisted_natural_regeneration"
+      ]
+    },
+    "establishment_mode": {
+      "type": "string",
+      "enum": ["seed", "vegetative_preferred", "protect_regeneration"]
+    },
+    "method": {
+      "type": "string",
+      "enum": [
+        "broadcast",
+        "pit",
+        "contour",
+        "dibble",
+        "seedling",
+        "cutting",
+        "wilding",
+        "protection_only"
+      ]
+    },
+    "timing_window": {
+      "type": "string",
+      "enum": [
+        "late_khareef",
+        "early_post_khareef",
+        "deferred",
+        "winter_spring_rain",
+        "irrigated"
+      ]
+    },
+    "provenance_class": {
+      "type": "string",
+      "enum": [
+        "local_same_jabal",
+        "regional_dhofar",
+        "oman_other",
+        "unknown",
+        "blocked_exotic"
+      ]
+    },
+    "seed_lot_id": { "type": ["string", "null"] },
+    "quantity": {
+      "type": ["object", "null"],
+      "required": ["amount", "unit", "source"],
+      "properties": {
+        "amount": { "type": "number", "exclusiveMinimum": 0 },
+        "unit": {
+          "type": "string",
+          "enum": ["seeds", "seedlings", "cuttings", "grams"]
+        },
+        "source": {
+          "type": "string",
+          "const": "operator_reported_unvalidated"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Optional; never official campaign_ha/seed_kg/crew_days/kg_per_ha"
+    },
+    "operator_name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Person or team label — not a civil ID"
+    },
+    "organization": {
+      "type": ["string", "null"],
+      "enum": [
+        "baladiya",
+        "volunteers",
+        "ministry",
+        "authority",
+        "other",
+        null
+      ]
+    },
+    "n_participants": { "type": ["integer", "null"], "minimum": 0 },
+    "photos_event": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/photo_ref" }
+    },
+    "notes": { "type": ["string", "null"] },
+    "override_note": {
+      "type": ["string", "null"],
+      "description": "Required if broadcast on Olea/Ficus despite catalog preference"
+    },
+    "khareef_stage": {
+      "type": ["string", "null"],
+      "description": "Fog only; else omit/unknown"
+    },
+    "event_status": {
+      "type": "string",
+      "enum": ["planned", "logged", "cancelled"]
+    },
+    "linked_recommendation_id": {
+      "type": ["string", "null"],
+      "description": "Optional Decision/Seed link by id only — null OK; no auto-assign"
+    },
+    "baseline_missing": { "type": "boolean" },
+    "mountain_ui": {
+      "type": "string",
+      "const": "hold",
+      "description": "Stamp for fog/mountain_cell offline samples"
+    },
+    "vetting_status": {
+      "type": "string",
+      "const": "scientist_locked_pending_ea"
+    },
+    "campaign_ha": { "type": "null" },
+    "seed_kg": { "type": "null" },
+    "crew_days": { "type": "null" },
+    "honesty_note_en": { "type": "string" },
+    "honesty_note_ar": { "type": "string" }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "photo_ref": {
+      "type": "object",
+      "required": ["ref", "pii_flag"],
+      "properties": {
+        "ref": { "type": "string" },
+        "taken_at": { "type": ["string", "null"] },
+        "caption": { "type": ["string", "null"] },
+        "pii_flag": {
+          "type": "string",
+          "enum": ["none", "incidental_person"],
+          "default": "none"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Plot evidence only — no posed people, no children, no ID docs, no face recognition, no auto species ID"
+    }
+  }
+}
