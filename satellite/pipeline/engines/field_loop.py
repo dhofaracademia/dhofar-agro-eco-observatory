@@ -232,17 +232,58 @@ def planned_date(event_date: date, center_day: int) -> date:
     return event_date + timedelta(days=center_day)
 
 
+def muscat_today() -> date:
+    """Asia/Muscat calendar day for clock-aware window_status."""
+    try:
+        from zoneinfo import ZoneInfo
+
+        return datetime.now(ZoneInfo("Asia/Muscat")).date()
+    except Exception:
+        return datetime.now(timezone.utc).date()
+
+
+def planned_window_status(
+    visit_type: str,
+    event_date: date,
+    *,
+    as_of: date | None = None,
+    has_dated_visit: bool = False,
+) -> str:
+    """Clock-aware status for planned stubs with no dated visit yet.
+
+    - Do NOT stamp missed until window_day_max has passed with no visit.
+    - Before window opens: early
+    - Inside window: on_window
+    - After window closes with no visit: missed
+    - After window with a late visit: late (caller sets has_dated_visit)
+    """
+    if visit_type == "ad_hoc":
+        return "on_window" if has_dated_visit else "missed"
+    _center, lo, hi = VISIT_WINDOWS[visit_type]
+    assert lo is not None and hi is not None
+    as_of = as_of or muscat_today()
+    days = (as_of - event_date).days
+    if has_dated_visit:
+        return window_status_for(visit_type, days, has_visit=True)
+    if days < lo:
+        return "early"
+    if lo <= days <= hi:
+        return "on_window"
+    return "missed"
+
+
 def create_planned_followups(
     event: dict[str, Any],
     *,
     obs_seq_start: int = 1,
     year: int | None = None,
+    as_of: date | None = None,
 ) -> list[dict[str, Any]]:
     """Create scheduled follow-up stubs from event_date (no fabricated outcomes).
 
     - Germination visit: outcome_class=not_applicable when protect/vegetative/etc.
-    - Other windows: outcome_class=not_observed, window_status scheduled as missed
-      until a real visit is logged (scheduler listing only — no counts).
+    - window_status is clock-aware (Asia/Muscat): early | on_window | missed
+      — never mark future/open windows as missed.
     - Never invent germination_pct / survival_pct.
     """
     rejects = validate_seeding_event(event)
@@ -251,18 +292,19 @@ def create_planned_followups(
 
     ed = parse_iso_date(event["event_date"])
     y = year or ed.year
+    as_of = as_of or muscat_today()
     germ_na = germination_not_applicable(event)
     rows: list[dict[str, Any]] = []
     seq = obs_seq_start
 
     for visit_type in SCHEDULED_VISIT_TYPES:
-        center, _lo, _hi = VISIT_WINDOWS[visit_type]
-        assert center is not None
+        center, lo, hi = VISIT_WINDOWS[visit_type]
+        assert center is not None and lo is not None and hi is not None
         planned = planned_date(ed, center)
+        status = planned_window_status(visit_type, ed, as_of=as_of, has_dated_visit=False)
 
         if visit_type == "d30_germination" and germ_na:
             outcome = "not_applicable"
-            status = "on_window"  # N/A is protocol-correct, not a miss
             notes = (
                 "Germination not_applicable (not zero) for "
                 f"establishment_mode={event.get('establishment_mode')} "
@@ -271,10 +313,11 @@ def create_planned_followups(
             )
         else:
             outcome = "not_observed"
-            status = "missed"  # scheduler stub until real visit logged
             notes = (
-                "Scheduled window stub — missed ≠ failure; "
-                "do not interpolate counts; no fabricated rates."
+                f"Scheduled window stub (as_of={as_of.isoformat()}, "
+                f"window_days={lo}..{hi}, day={(as_of - ed).days}) — "
+                f"status={status}. missed ≠ failure; do not interpolate; "
+                "no fabricated rates. Only stamp missed after window_day_max."
             )
 
         rows.append(
@@ -284,7 +327,9 @@ def create_planned_followups(
                 "visit_type": visit_type,
                 "visit_date": None,
                 "planned_at": planned.isoformat(),
-                "days_since_event": center,
+                "days_since_event": (as_of - ed).days,
+                "window_day_min": lo,
+                "window_day_max": hi,
                 "window_status": status,
                 "outcome_class": outcome,
                 "observer": "scheduler_stub",
@@ -405,11 +450,8 @@ def sample_seeding_events() -> list[dict[str, Any]]:
             "override_note": None,
             "event_status": "logged",
             "linked_recommendation_id": None,
-            "baseline_missing": False,
+            "baseline_missing": True,
             "vetting_status": VETTING,
-            "campaign_ha": None,
-            "seed_kg": None,
-            "crew_days": None,
             "honesty_note_en": DISCLAIMER_EN,
             "honesty_note_ar": DISCLAIMER_AR,
         },
@@ -421,7 +463,7 @@ def sample_seeding_events() -> list[dict[str, Any]]:
             "event_date": "2026-02-01",
             "gps": {"lat": 17.18, "lon": 54.11, "accuracy_m": 12.0},
             "intervention_type": "planting",
-            "establishment_mode": "seed",
+            "establishment_mode": "seedling",
             "method": "seedling",
             "timing_window": "irrigated",
             "provenance_class": "unknown",
@@ -451,9 +493,6 @@ def sample_seeding_events() -> list[dict[str, Any]]:
             "linked_recommendation_id": None,
             "baseline_missing": True,
             "vetting_status": VETTING,
-            "campaign_ha": None,
-            "seed_kg": None,
-            "crew_days": None,
             "honesty_note_en": DISCLAIMER_EN,
             "honesty_note_ar": DISCLAIMER_AR,
         },
@@ -483,12 +522,9 @@ def sample_seeding_events() -> list[dict[str, Any]]:
             "khareef_stage": "early_post_khareef",
             "event_status": "logged",
             "linked_recommendation_id": None,
-            "baseline_missing": False,
+            "baseline_missing": True,
             "mountain_ui": "hold",
             "vetting_status": VETTING,
-            "campaign_ha": None,
-            "seed_kg": None,
-            "crew_days": None,
             "honesty_note_en": DISCLAIMER_EN,
             "honesty_note_ar": DISCLAIMER_AR,
         },

@@ -68,3 +68,8 @@ satellite/pipeline/artifacts/field/
 ## Tip-update points (mid-flight Agrofostery locks)
 - `engines/field_loop.py` → `validate_seeding_event`, `VISIT_WINDOWS`, `create_planned_followups`
 - `docs/phase5_field_loop_scaffold.json` enums
+
+## Tip fix 2026-09-12 (Approve-with-fixes)
+- `window_status` is clock-aware (Asia/Muscat): do not stamp `missed` until `window_day_max` has passed with no visit.
+- SE-001 `baseline_missing=true` until a dated baseline visit exists.
+- SE-002 `establishment_mode=seedling` matches `method=seedling` (germination N/A).

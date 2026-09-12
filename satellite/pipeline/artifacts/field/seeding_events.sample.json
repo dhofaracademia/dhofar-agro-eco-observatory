@@ -35,11 +35,8 @@
       "override_note": null,
       "event_status": "logged",
       "linked_recommendation_id": null,
-      "baseline_missing": false,
+      "baseline_missing": true,
       "vetting_status": "scientist_locked_pending_ea",
-      "campaign_ha": null,
-      "seed_kg": null,
-      "crew_days": null,
       "honesty_note_en": "Field log — germination ≠ establishment ≠ survival. Not a platform success score, not an Environment Authority approval.",
       "honesty_note_ar": "سجل ميداني — إنبات ≠ تأسيس ≠ بقاء. ليست درجة نجاح للمنصة وليست اعتماداً من هيئة البيئة."
     },
@@ -55,7 +52,7 @@
         "accuracy_m": 12.0
       },
       "intervention_type": "planting",
-      "establishment_mode": "seed",
+      "establishment_mode": "seedling",
       "method": "seedling",
       "timing_window": "irrigated",
       "provenance_class": "unknown",
@@ -82,9 +79,6 @@
       "linked_recommendation_id": null,
       "baseline_missing": true,
       "vetting_status": "scientist_locked_pending_ea",
-      "campaign_ha": null,
-      "seed_kg": null,
-      "crew_days": null,
       "honesty_note_en": "Field log — germination ≠ establishment ≠ survival. Not a platform success score, not an Environment Authority approval.",
       "honesty_note_ar": "سجل ميداني — إنبات ≠ تأسيس ≠ بقاء. ليست درجة نجاح للمنصة وليست اعتماداً من هيئة البيئة."
     },
@@ -115,12 +109,9 @@
       "khareef_stage": "early_post_khareef",
       "event_status": "logged",
       "linked_recommendation_id": null,
-      "baseline_missing": false,
+      "baseline_missing": true,
       "mountain_ui": "hold",
       "vetting_status": "scientist_locked_pending_ea",
-      "campaign_ha": null,
-      "seed_kg": null,
-      "crew_days": null,
       "honesty_note_en": "Field log — germination ≠ establishment ≠ survival. Not a platform success score, not an Environment Authority approval.",
       "honesty_note_ar": "سجل ميداني — إنبات ≠ تأسيس ≠ بقاء. ليست درجة نجاح للمنصة وليست اعتماداً من هيئة البيئة."
     }
