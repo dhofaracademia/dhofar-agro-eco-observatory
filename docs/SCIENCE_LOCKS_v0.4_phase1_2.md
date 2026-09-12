@@ -295,3 +295,64 @@ satellite/pipeline/artifacts/decision/
 
 Schemas: `docs/spec_0.4/{suitability_components,confidence,evidence_gap,action_ladder}.schema.json`.
 
+---
+
+## Phase 4 addendum — Seed Intelligence scaffold (2026-09-12)
+
+**Status:** `unvalidated_expert_stub` — matrix / catalog scaffold only (**NOT** operational truth).  
+**Owner:** Agrofostery Scientist (species short lists) + AgriTech (JSON field shapes) + CoS (artifacts-first delivery).  
+**UI gate:** No Analysis / Restoration / Map Seed panel in the first Phase-4 PR. **No** mountain partner UI. **No** Decision→species candidate wire in partner UI.
+
+### Domains (NEVER mixed)
+
+| Domain | Geography | Starter species (Authority pending) |
+|--------|-----------|-------------------------------------|
+| `agriculture_aou` | Najd arid / farm AOUs | سدر *Ziziphus spina-christi*, سمر *Vachellia tortilis*, غاف *Prosopis cineraria* + irrigated/fodder **placeholders** labeled unvalidated |
+| `restoration_mountain` | Fog-escarpment | *Terminalia dhofarica* (syn. *Anogeissus dhofarica*) **only for now** |
+
+`cross_domain_recommend = false` hard lock. Fog species never auto-mixed onto Najd rows; Najd dry species never onto fog-escarpment rows.
+
+### Field stubs (matrix row)
+
+| Stub | Rule |
+|------|------|
+| `species_suitability` | `unvalidated` / optional later `expert_v1_provisional` — **not** operational truth |
+| `suitability_provisional_0_100` | null OK |
+| `seed_recommendation` | `mode: manual` — operator-confirmed only |
+| `timing_window` | `calendar_heuristic` + `provisional` — **no** live Khareef onset |
+| `seed_provenance` | `local_preferred` flag only |
+| `seeding_protocol` | enum steps; `manual_operator_confirmed`; `auto_assign=false` |
+
+**Suitability ≠ Confidence** (unchanged global lock).
+
+### Forbidden (Phase 4)
+
+| Item | Status |
+|------|--------|
+| Species suitability scores as **operational truth** | Forbidden |
+| Auto **campaign planner** fields as official numbers (`campaign_ha`, `seed_kg`, `crew_days`) | Forbidden |
+| Mixing `agriculture_aou` ↔ `restoration_mountain` recommend paths | Forbidden |
+| Mountain partner Seed / Decision→species UI | Forbidden until post-khareef re-sign-off |
+| Pest names / soil moisture % / live Khareef onset | Forbidden (global) |
+| Writing seed artifacts into `app/public/` before science re-sign-off | Forbidden |
+
+**Allowed as provisional / expert-stub (must be labeled):** Site×Species matrix scaffold; Authority-pending short lists (`authority_source: pending_agrofostery`); manual protocol enum; offline mountain sample-cell notes.
+
+### Artifacts
+
+```
+satellite/pipeline/artifacts/seed/
+  species_catalog.json
+  site_species_matrix.json
+  seed_intelligence.json
+  seeding_protocol.stubs.json
+  run_meta.json
+```
+
+Schemas: `docs/spec_0.4/{species_catalog,site_species_matrix,seed_intelligence}.schema.json`.  
+Engines: `engines/seed_intelligence.py` + `run_seed_intelligence.py`.
+
+### Contact before campaigns
+
+Operators **must** contact Agrofostery Authority before any seeding campaign. Placeholder rows are not a planting order.
+

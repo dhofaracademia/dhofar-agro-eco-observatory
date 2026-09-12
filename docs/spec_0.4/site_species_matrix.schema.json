@@ -1,0 +1,282 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dhofaracademia.example/spec_0.4/site_species_matrix.schema.json",
+  "title": "SiteSpeciesMatrix",
+  "description": "Phase-4 Seed Intelligence — Site × Species matrix scaffold. Domains separated (agriculture_aou | restoration_mountain). suitability_provisional_0_100 may be null; status unvalidated_expert_stub. NOT operational truth. No campaign_ha / seed_kg / crew_days as official numbers. Suitability ≠ Confidence.",
+  "type": "object",
+  "required": [
+    "version",
+    "status",
+    "science_lock",
+    "never_mix_domains",
+    "rows",
+    "forbidden"
+  ],
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "const": "unvalidated_expert_stub"
+    },
+    "science_lock": {
+      "type": "string",
+      "const": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase4"
+    },
+    "never_mix_domains": {
+      "type": "boolean",
+      "const": true
+    },
+    "suitability_neq_confidence": {
+      "type": "boolean",
+      "const": true
+    },
+    "writes_to_app_public": {
+      "type": "boolean",
+      "const": false
+    },
+    "mountain_partner_ui": {
+      "type": "boolean",
+      "const": false
+    },
+    "forbidden": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "campaign_ha",
+          "seed_kg",
+          "crew_days",
+          "operational_truth",
+          "pest_certainty",
+          "soil_moisture_percent",
+          "live_khareef_onset",
+          "cross_domain_recommend",
+          "auto_campaign_planner"
+        ]
+      },
+      "minItems": 4
+    },
+    "rows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "site_ref",
+          "domain",
+          "species_id",
+          "species_name_sci",
+          "status",
+          "evidence_gaps"
+        ],
+        "properties": {
+          "site_ref": {
+            "type": "string",
+            "description": "AOU-NJ-###### for agriculture_aou, or MPI-SAMPLE-### for restoration_mountain sample cells"
+          },
+          "domain": {
+            "type": "string",
+            "enum": [
+              "agriculture_aou",
+              "restoration_mountain"
+            ]
+          },
+          "species_id": {
+            "type": "string"
+          },
+          "species_name_sci": {
+            "type": "string"
+          },
+          "suitability_provisional_0_100": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0,
+            "maximum": 100,
+            "description": "Null OK — scaffold only; NOT operational truth"
+          },
+          "status": {
+            "type": "string",
+            "const": "unvalidated_expert_stub"
+          },
+          "evidence_gaps": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1
+          },
+          "species_suitability": {
+            "type": "object",
+            "required": [
+              "status"
+            ],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "unvalidated",
+                  "expert_v1_provisional"
+                ]
+              },
+              "score_0_100": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0,
+                "maximum": 100
+              },
+              "note_en": {
+                "type": "string"
+              },
+              "note_ar": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "seed_recommendation": {
+            "type": "object",
+            "required": [
+              "mode"
+            ],
+            "properties": {
+              "mode": {
+                "type": "string",
+                "const": "manual"
+              },
+              "operator_confirmed": {
+                "type": "boolean",
+                "const": false
+              },
+              "recommendation_text_en": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "recommendation_text_ar": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "note_en": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "timing_window": {
+            "type": "object",
+            "required": [
+              "kind",
+              "status"
+            ],
+            "properties": {
+              "kind": {
+                "type": "string",
+                "const": "calendar_heuristic"
+              },
+              "status": {
+                "type": "string",
+                "const": "provisional"
+              },
+              "window_label_en": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "window_label_ar": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "note_en": {
+                "type": "string"
+              },
+              "live_khareef_onset": {
+                "type": "boolean",
+                "const": false
+              }
+            },
+            "additionalProperties": false
+          },
+          "seed_provenance": {
+            "type": "object",
+            "required": [
+              "local_preferred"
+            ],
+            "properties": {
+              "local_preferred": {
+                "type": "boolean"
+              },
+              "provenance_status": {
+                "type": "string",
+                "enum": [
+                  "unknown",
+                  "local_preferred_flag_only",
+                  "authority_pending"
+                ]
+              },
+              "note_en": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "seeding_protocol": {
+            "type": "object",
+            "required": [
+              "mode",
+              "steps"
+            ],
+            "properties": {
+              "mode": {
+                "type": "string",
+                "const": "manual_operator_confirmed"
+              },
+              "steps": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "authority_contact",
+                    "site_field_check",
+                    "species_confirm",
+                    "provenance_confirm",
+                    "timing_confirm",
+                    "protocol_confirm",
+                    "operator_signoff",
+                    "defer_insufficient_evidence"
+                  ]
+                }
+              },
+              "auto_assign": {
+                "type": "boolean",
+                "const": false
+              },
+              "note_en": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "honesty_note_en": {
+      "type": "string"
+    },
+    "honesty_note_ar": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

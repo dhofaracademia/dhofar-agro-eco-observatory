@@ -1,0 +1,72 @@
+{
+  "schema_ref": "docs/spec_0.4/seed_intelligence.schema.json",
+  "science_lock": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase4",
+  "status": "unvalidated_expert_stub",
+  "mode": "manual_operator_confirmed",
+  "auto_assign": false,
+  "steps_enum": [
+    "authority_contact",
+    "site_field_check",
+    "species_confirm",
+    "provenance_confirm",
+    "timing_confirm",
+    "protocol_confirm",
+    "operator_signoff",
+    "defer_insufficient_evidence"
+  ],
+  "labels": {
+    "authority_contact": {
+      "en": "Contact Agrofostery Authority before any campaign",
+      "ar": "التواصل مع سلطة الحراجة الزراعية قبل أي حملة",
+      "order": 1
+    },
+    "site_field_check": {
+      "en": "Field-check the site",
+      "ar": "معاينة ميدانية للموقع",
+      "order": 2
+    },
+    "species_confirm": {
+      "en": "Confirm species within domain short list",
+      "ar": "تأكيد النوع ضمن القائمة القصيرة للمجال",
+      "order": 3
+    },
+    "provenance_confirm": {
+      "en": "Confirm local-preferred seed provenance",
+      "ar": "تأكيد مصدر البذور المفضل محلياً",
+      "order": 4
+    },
+    "timing_confirm": {
+      "en": "Confirm timing window (calendar heuristic only)",
+      "ar": "تأكيد نافذة التوقيت (تقويم إرشادي فقط)",
+      "order": 5
+    },
+    "protocol_confirm": {
+      "en": "Confirm seeding protocol steps",
+      "ar": "تأكيد خطوات بروتوكول البذر",
+      "order": 6
+    },
+    "operator_signoff": {
+      "en": "Operator sign-off (manual)",
+      "ar": "اعتماد المشغّل (يدوي)",
+      "order": 7
+    },
+    "defer_insufficient_evidence": {
+      "en": "Defer — insufficient evidence",
+      "ar": "تأجيل — أدلة غير كافية",
+      "order": 8
+    }
+  },
+  "forbidden": [
+    "campaign_ha",
+    "seed_kg",
+    "crew_days",
+    "operational_truth",
+    "pest_certainty",
+    "soil_moisture_percent",
+    "live_khareef_onset",
+    "cross_domain_recommend",
+    "auto_campaign_planner"
+  ],
+  "note_en": "Seeding protocol = manual / operator-confirmed only. No auto campaign planner.",
+  "note_ar": "بروتوكول البذر يدوي / باعتماد المشغّل فقط. بلا مخطّط حملة تلقائي."
+}

@@ -84,7 +84,7 @@ Roadmap (Phases 2–6 listed, not built): `docs/ROADMAP_v0.4_decision_engines.md
 
 ### Out of scope here
 
-Mountain decision UI; Suitability/Action ladder; Seed Intelligence; Field/Learning; fake live MPI/Khareef.
+Mountain decision UI; Seed / Restoration Seed UI; Field/Learning; fake live MPI/Khareef. (Phase-3 decision + Phase-4 seed **artifacts** ship offline — see below.)
 
 ### Run
 
@@ -110,4 +110,37 @@ Additional artifacts:
 - `app/public/data/aou/aou_observations.json`
 
 500 m grid remains fallback/debug (`geometry_kind=monitoring_grid_500m`); segmented AOUs are the product path.
+
+## v0.4 Phase-4 — Seed Intelligence (artifacts scaffold)
+
+Binding science: `docs/SCIENCE_LOCKS_v0.4_phase1_2.md` §Phase4 (Forbidden table).  
+Roadmap: `docs/ROADMAP_v0.4_decision_engines.md` §35 مرحلة 4.  
+Notes: `satellite/pipeline/SEED_PHASE4_NOTES.md`.
+
+### What Seed Intelligence does
+
+- Domain-separated Site × Species **matrix scaffold** (`agriculture_aou` vs `restoration_mountain` — never mixed)
+- Authority-pending species catalog (`authority_source: pending_agrofostery`) with starter rows: سدر *Ziziphus spina-christi*, سمر *Vachellia tortilis*, غاف *Prosopis cineraria*, irrigated/fodder placeholder; fog-escarpment *Terminalia dhofarica* (syn. *Anogeissus dhofarica*)
+- Field stubs: species_suitability (unvalidated), seed_recommendation (manual), timing_window (calendar heuristic provisional), seed_provenance (`local_preferred`), seeding_protocol (enum / operator-confirmed)
+- Offline artifacts under `satellite/pipeline/artifacts/seed/`
+
+### What it does **not**
+
+- Species suitability as **operational truth**
+- Auto campaign planner official numbers (`campaign_ha`, `seed_kg`, `crew_days`)
+- Analysis / Restoration / Map Seed UI (deferred follow-up)
+- Mountain partner UI or Decision→species candidate wiring (forbidden until post-khareef re-sign-off)
+- Pest certainty, soil moisture %, live Khareef onset
+- Cross-domain recommendations
+
+**Contact Agrofostery Authority before any seeding campaign.**
+
+### Run
+
+```bash
+cd satellite/pipeline
+python3 run_seed_intelligence.py
+```
+
+Artifacts: `species_catalog.json`, `site_species_matrix.json`, `seed_intelligence.json`, `seeding_protocol.stubs.json`, `run_meta.json`.
 

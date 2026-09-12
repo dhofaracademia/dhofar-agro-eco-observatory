@@ -1,9 +1,9 @@
-# Spec 0.4 — Phase-1 agricultural + Phase-2 mountain evidence + Phase-3 decision schemas
+# Spec 0.4 — Phase-1 agricultural + Phase-2 mountain evidence + Phase-3 decision + Phase-4 seed schemas
 
 Binding science: [`docs/SCIENCE_LOCKS_v0.4_phase1_2.md`](../SCIENCE_LOCKS_v0.4_phase1_2.md)  
 Roadmap: [`docs/ROADMAP_v0.4_decision_engines.md`](../ROADMAP_v0.4_decision_engines.md)
 
-These JSON Schemas describe **Phase-1 Agriculture**, **Phase-2 mountain evidence**, and **Phase-3 Decision Engine** contracts. Species scores as operational truth, campaign numbers, live MPI/Khareef detection, pest certainty, and partner mountain decision UI remain **out of scope / forbidden**.
+These JSON Schemas describe **Phase-1 Agriculture**, **Phase-2 mountain evidence**, **Phase-3 Decision Engine**, and **Phase-4 Seed Intelligence** contracts. Species scores as operational truth, campaign numbers, live MPI/Khareef detection, pest certainty, and partner mountain decision / Seed UI remain **out of scope / forbidden**.
 
 ## Field → SCIENCE_LOCKS mapping
 
@@ -20,6 +20,9 @@ These JSON Schemas describe **Phase-1 Agriculture**, **Phase-2 mountain evidence
 | `confidence.schema.json` | §Phase3 Confidence | `data_evidence`; ≠ Suitability ≠ DQ alone; not ecological certainty |
 | `evidence_gap.schema.json` | §Phase3 Evidence Gap | Honest missing-input list |
 | `action_ladder.schema.json` | §Phase3 Action ladder | Display enum / manual only; `action_ladder_suggestion` null |
+| `species_catalog.schema.json` | §Phase4 Seed catalog | Domain-separated short lists; `authority_source: pending_agrofostery` |
+| `site_species_matrix.schema.json` | §Phase4 Site×Species | `unvalidated_expert_stub`; null scores OK; no campaign fields |
+| `seed_intelligence.schema.json` | §Phase4 Wrapper | Protocol stubs + UI gates (all false in scaffold PR) |
 
 ## Phase-2 mountain evidence (offline only)
 
@@ -70,6 +73,17 @@ These JSON Schemas describe **Phase-1 Agriculture**, **Phase-2 mountain evidence
 
 Decision scaffolds intentionally live under `satellite/pipeline/artifacts/decision/` (not `app/public/`) until science re-sign-off.
 
+## Phase-4 Seed Intelligence (offline artifacts)
+
+- Engines: `satellite/pipeline/engines/seed_intelligence.py`
+- Runner: `satellite/pipeline/run_seed_intelligence.py`
+- Artifacts: `satellite/pipeline/artifacts/seed/` — **NOT** `app/public/` until science re-sign-off
+- Domains: `agriculture_aou` (Najd) vs `restoration_mountain` (fog-escarpment) — **never mixed**
+- Starter rows: سدر / سمر / غاف (+ irrigated-fodder placeholder) · *Terminalia dhofarica* (syn. *Anogeissus dhofarica*)
+- Status: `unvalidated_expert_stub`; `suitability_provisional_0_100` may be null
+- Gates: no campaign_ha/seed_kg/crew_days; manual protocol only; no Analysis/Restoration Seed UI; no mountain partner UI
+- Contact Agrofostery Authority before any campaign (`authority_source: pending_agrofostery`)
+
 ## Later phases
 
-Seed/Field/Learning remain ROADMAP later. Partner mountain UI remains Forbidden until re-sign-off.
+Field/Learning remain ROADMAP later. Partner mountain UI + Seed UI remain Forbidden until re-sign-off.

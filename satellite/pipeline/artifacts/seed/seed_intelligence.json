@@ -1,0 +1,91 @@
+{
+  "version": "0.4.4-phase4-seed-scaffold",
+  "status": "unvalidated_expert_stub",
+  "science_lock": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase4",
+  "domains": [
+    "agriculture_aou",
+    "restoration_mountain"
+  ],
+  "never_mix_domains": true,
+  "suitability_neq_confidence": true,
+  "species_catalog_ref": "satellite/pipeline/artifacts/seed/species_catalog.json",
+  "site_species_matrix_ref": "satellite/pipeline/artifacts/seed/site_species_matrix.json",
+  "seeding_protocol_stubs": {
+    "mode": "manual_operator_confirmed",
+    "auto_assign": false,
+    "steps_enum": [
+      "authority_contact",
+      "site_field_check",
+      "species_confirm",
+      "provenance_confirm",
+      "timing_confirm",
+      "protocol_confirm",
+      "operator_signoff",
+      "defer_insufficient_evidence"
+    ],
+    "labels": {
+      "authority_contact": {
+        "en": "Contact Agrofostery Authority before any campaign",
+        "ar": "التواصل مع سلطة الحراجة الزراعية قبل أي حملة",
+        "order": 1
+      },
+      "site_field_check": {
+        "en": "Field-check the site",
+        "ar": "معاينة ميدانية للموقع",
+        "order": 2
+      },
+      "species_confirm": {
+        "en": "Confirm species within domain short list",
+        "ar": "تأكيد النوع ضمن القائمة القصيرة للمجال",
+        "order": 3
+      },
+      "provenance_confirm": {
+        "en": "Confirm local-preferred seed provenance",
+        "ar": "تأكيد مصدر البذور المفضل محلياً",
+        "order": 4
+      },
+      "timing_confirm": {
+        "en": "Confirm timing window (calendar heuristic only)",
+        "ar": "تأكيد نافذة التوقيت (تقويم إرشادي فقط)",
+        "order": 5
+      },
+      "protocol_confirm": {
+        "en": "Confirm seeding protocol steps",
+        "ar": "تأكيد خطوات بروتوكول البذر",
+        "order": 6
+      },
+      "operator_signoff": {
+        "en": "Operator sign-off (manual)",
+        "ar": "اعتماد المشغّل (يدوي)",
+        "order": 7
+      },
+      "defer_insufficient_evidence": {
+        "en": "Defer — insufficient evidence",
+        "ar": "تأجيل — أدلة غير كافية",
+        "order": 8
+      }
+    },
+    "note_en": "Manual / operator-confirmed protocol enum only — no auto campaign planner."
+  },
+  "forbidden": [
+    "campaign_ha",
+    "seed_kg",
+    "crew_days",
+    "operational_truth",
+    "pest_certainty",
+    "soil_moisture_percent",
+    "live_khareef_onset",
+    "cross_domain_recommend",
+    "auto_campaign_planner"
+  ],
+  "ui_gates": {
+    "analysis_seed_panel": false,
+    "restoration_seed_panel": false,
+    "mountain_partner_ui": false,
+    "writes_to_app_public": false,
+    "link_mountain_decision_to_species_candidates": false
+  },
+  "authority_source": "pending_agrofostery",
+  "honesty_note_en": "Seed Intelligence does: Site×Species scaffold, domain-separated short lists, manual protocol stubs. Does NOT: operational suitability scores, campaign ha/kg/crew, mountain partner UI, pest/soil%/live Khareef, cross-domain recommend.",
+  "honesty_note_ar": "ذكاء البذور يفعل: هيكل موقع×نوع وقوائم مفصولة وبروتوكول يدوي. لا يفعل: درجات تشغيلية، كميات حملة، واجهة جبل شريكة، آفات/رطوبة تربة%/خريف حي، توصية عبر المجالات."
+}

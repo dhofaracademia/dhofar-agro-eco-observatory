@@ -1,4 +1,4 @@
-"""v0.4 Phase-1 agricultural + Phase-3 decision engines.
+"""v0.4 Phase-1 agricultural + Phase-3 decision + Phase-4 seed engines.
 
 Formulas locked by docs/SCIENCE_LOCKS_v0.4_phase1_2.md (Agrofostery).
 Do not invent alternate AgProb / Stress / Biotic / NDRE / Suitability /
@@ -7,6 +7,10 @@ Confidence equations without Agrofostery sign-off.
 Phase-3 agriculture_aou suitability + data_evidence confidence:
   mountain_apply=False; never merge Suitability with Confidence;
   action_auto_assign=False.
+
+Phase-4 Seed Intelligence (agriculture_aou vs restoration_mountain):
+  never_mix_domains; unvalidated_expert_stub; no campaign quantities;
+  no Seed UI / mountain partner UI in artifacts-first scaffold.
 """
 
 from .ndre import compute_ndre, ndre_status_from_band
@@ -27,6 +31,12 @@ from .aou_identity import (
 from .suitability import compute_suitability, WEIGHTS_NOMINAL as SUITABILITY_WEIGHTS
 from .confidence import compute_confidence, WEIGHTS_NOMINAL as CONFIDENCE_WEIGHTS
 from .evidence_gap import assess_evidence_gaps
+from .seed_intelligence import (
+    build_species_catalog,
+    build_agriculture_rows,
+    build_mountain_rows,
+    build_site_species_matrix,
+)
 
 __all__ = [
     "compute_ndre",
@@ -48,4 +58,8 @@ __all__ = [
     "compute_confidence",
     "CONFIDENCE_WEIGHTS",
     "assess_evidence_gaps",
+    "build_species_catalog",
+    "build_agriculture_rows",
+    "build_mountain_rows",
+    "build_site_species_matrix",
 ]
