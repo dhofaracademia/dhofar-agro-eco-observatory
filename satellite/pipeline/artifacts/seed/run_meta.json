@@ -1,55 +1,38 @@
 {
-  "version": "0.4.4-phase4-seed-scaffold",
-  "generated_at": "2026-09-12T19:38:00.938182+00:00",
-  "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase4",
-  "status": "unvalidated_expert_stub",
-  "authority_source": "pending_agrofostery",
+  "generated_at": "2026-09-12T19:45:20.610273+00:00",
+  "science_lock": "SCIENCE_LOCKS_v0.4_phase4_species",
+  "vetting_status": "scientist_locked_pending_ea",
+  "score_status": "unvalidated",
   "domains": [
-    "agriculture_aou",
-    "restoration_mountain"
+    "fog_escarpment",
+    "najd_arid"
   ],
-  "never_mix_domains": true,
-  "suitability_neq_confidence": true,
-  "writes_to_app_public": false,
-  "mountain_partner_ui": false,
-  "link_mountain_decision_to_species_candidates": false,
-  "analysis_seed_ui": false,
-  "restoration_seed_ui": false,
-  "campaign_quantity_fields": false,
-  "forbidden": [
-    "campaign_ha",
-    "seed_kg",
-    "crew_days",
-    "operational_truth",
-    "pest_certainty",
-    "soil_moisture_percent",
-    "live_khareef_onset",
-    "cross_domain_recommend",
-    "auto_campaign_planner"
-  ],
-  "input_refs": {
-    "aou_registry": "app/public/data/aou/aou_registry.json",
-    "mpi_cells_sample": "satellite/pipeline/artifacts/mountain_pilot/mpi/mpi_cells.sample.geojson"
+  "domain_aliases_note": {
+    "najd_arid": "former_internal_alias agriculture_aou (AOU sites only)",
+    "fog_escarpment": "former_internal_alias restoration_mountain (fog woodland only — not Boswellia / frankincense domain)"
   },
-  "counts": {
-    "aou_sites": 9,
-    "mountain_sample_sites": 48,
-    "species_catalog": 5,
-    "matrix_rows_agriculture_aou": 36,
-    "matrix_rows_restoration_mountain": 48,
-    "matrix_rows_total": 84
+  "species_count": 6,
+  "species_ids": [
+    "sp-fog-fsyco",
+    "sp-fog-oleac",
+    "sp-fog-tdhof",
+    "sp-najd-pcin",
+    "sp-najd-vtor",
+    "sp-najd-zsc"
+  ],
+  "dropped": [
+    "irrigated_fodder_placeholder"
+  ],
+  "mountain_ui": "hold",
+  "campaign_numbers": false,
+  "ui_wire": false,
+  "app_public_write": false,
+  "honesty_note_en": "Unvalidated expert stub — not an Environment Authority approval, not a field-tested score.",
+  "matrix_counts": {
+    "species": 6,
+    "najd_sites": 9,
+    "fog_sites": 48,
+    "rows": 171
   },
-  "artifact_files": [
-    "species_catalog.json",
-    "site_species_matrix.json",
-    "seed_intelligence.json",
-    "seeding_protocol.stubs.json",
-    "run_meta.json"
-  ],
-  "engines": [
-    "engines/seed_intelligence.py"
-  ],
-  "runner": "run_seed_intelligence.py",
-  "honesty_en": "Offline Seed Intelligence scaffold. Domains never mixed. Scores unvalidated / null. No campaign ha/kg/crew. No Analysis/Restoration Seed UI. No mountain partner UI. Contact Agrofostery Authority before campaigns.",
-  "ui_gate": "Seed / Restoration / mountain partner UI deferred — artifacts-first PR"
+  "follows_merge": "0cb69d0_pre_lock_remediation"
 }

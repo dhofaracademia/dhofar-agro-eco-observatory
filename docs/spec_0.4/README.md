@@ -87,3 +87,9 @@ Decision scaffolds intentionally live under `satellite/pipeline/artifacts/decisi
 ## Later phases
 
 Field/Learning remain ROADMAP later. Partner mountain UI + Seed UI remain Forbidden until re-sign-off.
+
+## Phase-4 species lock
+- Ecological domains: `fog_escarpment` | `najd_arid` (never mix)
+- Catalog: exactly 6 rows from `docs/phase4_species_scaffold.json`
+- `vetting_status`: `scientist_locked_pending_ea` — never Authority-approved
+- See `docs/SCIENCE_LOCKS_v0.4_phase4_species.md`
