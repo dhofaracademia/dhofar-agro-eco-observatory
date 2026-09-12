@@ -63,14 +63,14 @@
       "unclear": "Unclear"
     },
     "note": {
-      "possibleBiotic": "Possible biotic stress suspected from spectral/temporal pattern. Satellite cannot confirm a pest or disease — field verification is recommended.",
-      "vigorAttention": "Greening (NDVI/NDRE) is weak versus peers. Management / possible nutrient attention — not a fertilizer diagnosis and not a biotic/pest label. Field check recommended."
+      "possibleBiotic": "Possible biotic stress suspected from spectral/temporal pattern. Satellite cannot confirm a pest or disease. Partner may act on the satellite attention now. Optional additional field verification (last resort) only.",
+      "vigorAttention": "Greening (NDVI/NDRE) is weak versus peers. Management / possible nutrient attention — not a fertilizer diagnosis and not a biotic/pest label. Satellite decision stands without a field visit."
     }
   },
   "restoration": {
-    "title": "Recommended restoration sites",
-    "blurb": "Sample sites over Qara, Samhan, Qamar, Mirbat and Mughsayl. Suitability and confidence are separate illustrative expert-rule stubs — not field-validated scores. Environment Authority review is required before any restoration campaign.",
-    "selectHint": "Click a recommended site on the map to open «Why This Site?»",
+    "title": "Mountain satellite status",
+    "blurb": "Mountain satellite status for Qara, Samhan, Qamar, Mirbat and Mughsayl. MPI is onset-window dry / insufficient (fail-honest) — not a post-khareef persistence product. Seeding recommendations remain on Hold. Fog species appear as a catalog list, not plant-here cards.",
+    "selectHint": "Click a status site on the map (status only — not a seeding recommendation).",
     "whyTitle": "Why This Site?",
     "suitability": "Ecological suitability",
     "confidence": "Confidence",
@@ -98,7 +98,7 @@
   "home": {
     "badge": "Dhofar · Oman · Open Data First",
     "title": "One map. Two observatories.",
-    "intro": "Dhofar Agro & Eco Observatory turns open Earth-observation into interpretable indicators for Dhofar: Agricultural Observation Units (AOUs) across the Najd irrigated plain, and restoration intelligence for the fog mountains. Gallery STAC refresh updates scene listings only; AOU/MPI layers stay provisional until a full monitor run.",
+    "intro": "Dhofar Agro & Eco Observatory turns open Earth-observation into interpretable satellite decisions for Dhofar: Agricultural Observation Units (AOUs) across the Najd irrigated plain, and restoration status for the fog mountains. Partners may act on Analysis / Decision / Seed with zero field visits. Gallery STAC refresh updates scene listings only; AOU/MPI layers stay provisional until a full monitor run.",
     "whyTitle": "Why Sentinel-2?",
     "whyBody": "Irrigated blocks in Najd are large enough for 10 m pixels. Optical VNIR + SWIR supports vegetation and canopy-moisture indices. Inland Najd is hyper-arid, so clear scenes are common most months. Mountain Khareef seasons need cloud-aware composites and moisture persistence — not a single post-rain image.",
     "seasonTitle": "Wheat & Khareef seasons",
@@ -109,7 +109,7 @@
     "restoBody": "Site suitability with a separate confidence score, Moisture Persistence Index class, regeneration ladder (Protect → ANR → Enrichment → Active Planting → Avoid), and fog-escarpment species such as Terminalia dhofarica. Arid Najd species are not auto-mixed onto fog slopes.",
     "ctaMap": "Open observatory map",
     "ctaGallery": "Browse scenes",
-    "ctaAnalysis": "View analysis",
+    "ctaAnalysis": "Open satellite decision",
     "previewNote": "Imagery can refresh the Sentinel-2 scene list from Planetary Computer STAC. AOU alerts, mountain MPI, and restoration scores remain offline / provisional stubs — not recomputed by that button."
   },
   "map": {
@@ -179,7 +179,7 @@
   },
   "analysis": {
     "title": "Agricultural analysis",
-    "blurb": "Four-level decision support for Najd Agricultural Observation Units: overview, spatial, temporal, and provisional decision scores. Thresholds follow SCIENCE_LOCKS expert v1; field calibration still required.",
+    "blurb": "Four-level satellite decision support for Najd Agricultural Observation Units: overview, spatial, temporal, and provisional decision scores. Thresholds follow SCIENCE_LOCKS expert v1. A field visit is not required to use this page.",
     "indicesTitle": "Key indices",
     "ndviName": "NDVI — vegetation index",
     "ndviFormula": "(B08 − B04) / (B08 + B04)",
@@ -227,7 +227,7 @@
       },
       {
         "t": "Possible biotic stress (not pest certainty)",
-        "d": "Unusual spatial/temporal spectral anomaly vs peers — recommend field check; never confirm pest/disease from space alone."
+        "d": "Unusual spatial/temporal spectral anomaly vs peers — satellite attention only; never confirm pest/disease from space. Optional additional field verification (last resort) only."
       }
     ],
     "levelsLabel": "Analysis levels",
@@ -245,7 +245,7 @@
     "temporalBlurb": "Pick an AOU for NDVI/NDMI series. Split charts avoid misleading dual-axis comparisons. Window series shown honestly when AOU multi-date history is still thin.",
     "decisionTitle": "What should we attend to?",
     "decisionHonestyTitle": "Provisional decision support — expert_v1_provisional",
-    "decisionHonestyBody": "Suitability (agriculture_aou) and Confidence (data_evidence) are separate offline scores for Najd AOUs. Never merge. Data-quality confidence ≠ overall Confidence. AOU ≠ farm. No mountain/MPI Decision chrome. Action ladder is manual only.",
+    "decisionHonestyBody": "Suitability (agriculture_aou) and Confidence (data_evidence) are separate offline scores for Najd AOUs. Never merge. Partners may act with zero FO/SE. Action ladder is manual only.",
     "aouCount": "Segmented AOUs",
     "bioticCount": "Biotic risk flags",
     "bioticRiskOnly": "possible_biotic_stress only — never pest certainty",
@@ -272,17 +272,17 @@
     "bioticTitle": "Biotic stress risk",
     "bioticPossible": "possible_biotic_stress",
     "bioticNone": "No biotic risk flag",
-    "bioticDisclaimer": "Possible biotic stress — satellite cannot confirm pest or disease. Field verification recommended.",
+    "bioticDisclaimer": "Possible biotic stress — satellite cannot confirm pest or disease. Optional additional field verification (last resort) only.",
     "noActionLadder": "Action ladder suggestion stays null — operator picks manually; no auto-assign from Suitability.",
     "formulaRef": "Formulas: docs/SCIENCE_LOCKS_v0.4_phase1_2.md (Phase 1 agriculture).",
     "ndreName": "NDRE — red-edge vegetation",
     "ndreFormula": "(B08 − B05) / (B08 + B05)",
     "ndreDesc": "Early canopy condition; B06/B07 documented fallback only. If missing → ndre null and AgProb renorm.",
-    "stressThrNote": "Attention threshold = 55 (WATER_ATTENTION_THR / VIGOR_ATTENTION_THR) — expert default pending field calibration.",
+    "stressThrNote": "Attention threshold = 55 (WATER_ATTENTION_THR / VIGOR_ATTENTION_THR) — expert default; not blocked on field calibration.",
     "decision": {
       "title": "Decision support — Najd AOUs",
       "honestyTitle": "expert_v1_provisional — offline snapshot, not operational truth",
-      "honestyBody": "Suitability (agriculture_aou) and Confidence (data_evidence) are separate scores and must never be merged. Data-quality confidence is an input chip only — not overall Confidence. AOU ≠ farm. No campaign hectares, pest certainty, soil moisture %, or mountain/MPI post-khareef chrome on this tab. Snapshot refresh = re-run run_decision_scaffolds.py then re-copy into app/public/data/decision/.",
+      "honestyBody": "Suitability (agriculture_aou) and Confidence (data_evidence) are separate scores and must never be merged. Data-quality confidence is an input chip only — not overall Confidence. AOU ≠ farm. Partners may act on this satellite decision with zero FO/SE. Missing field evidence is an honesty chip only — it never blocks the page or hides recommended actions. No campaign hectares, pest certainty, soil moisture %, or mountain seeding recommendations on this tab.",
       "whyThisSite": "Why this site",
       "evidenceGaps": "Evidence gaps",
       "suitabilityComponents": "Suitability components",
@@ -304,7 +304,7 @@
       "severity": "Severity",
       "gapCount": "Active gaps",
       "actionLadder": "Action ladder (manual)",
-      "actionLadderHint": "Operator picks — suggestion stays null; control disabled until field workflow lands",
+      "actionLadderHint": "Satellite decision is primary. Field ladder options are optional last-resort verification — not a required next step. Suggestion stays null; control disabled (no auto-assign).",
       "actionNone": "— no auto suggestion —",
       "componentsOnly": "components_only summary",
       "loading": "Loading decision snapshot…",
@@ -314,9 +314,9 @@
       "offlineSnapshot": "Offline provisional JSON snapshot (Vite fetch) — not live recompute",
       "selectAou": "Select Najd AOU",
       "actionLadderOptions": {
-        "field_irrigation_inspection": "Field irrigation inspection",
-        "field_vigor_inspection": "Field vigor inspection",
-        "biotic_field_verification": "Biotic field verification",
+        "field_irrigation_inspection": "Optional additional field verification — irrigation (last resort)",
+        "field_vigor_inspection": "Optional additional field verification — vigor (last resort)",
+        "biotic_field_verification": "Optional additional field verification — possible biotic (last resort)",
         "continue_monitoring": "Continue monitoring",
         "defer_insufficient_evidence": "Defer — insufficient evidence"
       }
@@ -329,17 +329,17 @@
     "aoiBody": "Agricultural: Najd farm corridor ≈ [53.4, 17.5, 54.3, 18.5] (Thumrait, Shisr, Hanfit, Saih Al-Khairat; Al-Mazyunah west). Restoration: Jabal Qara, Samhan, Qamar; Mirbat and Mughsayl foothills.",
     "sensorsTitle": "Sensors",
     "sensorsBody": "Primary: Sentinel-2 L2A. Backup: Landsat 8/9. Context only (not field-scale soil moisture): SMAP / ESA CCI, CHIRPS, ERA5. Mountain MVP adds DEM wetness proxies and expert Site×Species rules.",
-    "workflowTitle": "Field workflow (summary)",
+    "workflowTitle": "Satellite workflow (summary)",
     "workflow": [
       "Detect agricultural footprint → segment AOUs (not official farms until cadastral link).",
       "Mask clouds/shadows (SCL); extract NDVI / NDMI (+ optional NDRE) time series.",
       "Map bare / healthy / water_attention / vigor_attention to interpretive health & water labels.",
       "For mountains: Khareef staging, MPI, hydrology screen, suitability vs confidence, action ladder.",
-      "Validate with ground photos, farmer/ranger reports, and Environment Authority review for species."
+      "Optional additional field verification (last resort) only if someone later logs a seeding event — never a prerequisite."
     ],
     "honestyTitle": "Non-negotiable honesty",
     "honesty": [
-      "No confirmed pest/disease diagnosis from space — use Possible Biotic Stress + field check.",
+      "No confirmed pest/disease diagnosis from space — use Possible Biotic Stress. Field visit is not required to act.",
       "NDMI / MPI are proxies — not plot-level soil moisture meters.",
       "SMAP / CCI / ERA5 / CHIRPS are regional context only.",
       "Suitability Score and Confidence Score stay separate.",
@@ -347,7 +347,7 @@
       "AOU ≠ Official Farm until authorized government data is linked."
     ],
     "limitTitle": "MVP limits",
-    "limitBody": "This MVP can refresh the Imagery STAC scene list from Planetary Computer. AOU alert GeoJSON, mountain MPI / suitability / confidence, and restoration site scores remain offline or illustrative stubs. It does not recompute live MPI composites or replace Environment Authority / field decisions.",
+    "limitBody": "This MVP can refresh the Imagery STAC scene list from Planetary Computer. AOU alert GeoJSON and mountain MPI remain offline or illustrative stubs. It does not recompute live post-khareef MPI or print Environment Authority approval. A field visit is not required to use Najd Analysis / Decision / Seed.",
     "dataSourcesTitle": "Data sources",
     "dataSourcesBody": "Sentinel-2 L2A via Microsoft Planetary Computer STAC; static browse previews; sample mountain GeoJSON. Contains modified Copernicus Sentinel data (ESA).",
     "howToReadTitle": "How to read this demo",
@@ -356,10 +356,10 @@
       "STAC ≠ monitoring — Gallery «Refresh scene list from STAC» updates imagery listings only; it does not recompute AOU alerts or farm monitor layers.",
       "MPI stub — Mountain Moisture Persistence (MPI) classes on sample sites are provisional stubs; this MVP does not compute live MPI.",
       "Suitability ≠ Confidence — restoration suitability and confidence stay separate scores and are never merged into one number.",
-      "Authority before campaigns — Environment Authority review (and field checks) are required before any restoration campaign; this demo is not an official planting plan."
+      "Mountain seeding Hold — post-khareef MPI (2026-09-15–2026-10-31) plus Agrofostery SHA is required before seeding recommendations. Status view is allowed now. This is not an official planting plan and not EA-approved."
     ]
   },
-  "footer": "Dhofar Agro & Eco Observatory · open-data observatory MVP · not a substitute for field survey",
+  "footer": "Dhofar Agro & Eco Observatory · open-data observatory MVP · satellite-first decisions; field visit is last-resort optional verification",
   "live": {
     "source": "Source",
     "date": "Acquisition date",
@@ -387,13 +387,13 @@
     "tip_bare": "Little or no green canopy in this cell for the acquisition date.",
     "tip_healthy": "Vegetation indices look stable versus nearby vegetated cells.",
     "tip_water_attention": "Canopy moisture (NDMI) is low versus nearby vegetated areas — verify irrigation soon.",
-    "tip_vigor_attention": "Greening (NDVI) is weak versus peers. Management / possible nutrient attention — confirm in the field (not fertilizer diagnosis; biotic risk is a separate flag).",
-    "tip_unclear": "Signal is ambiguous for this cell — review imagery and field conditions."
+    "tip_vigor_attention": "Greening (NDVI) is weak versus peers. Management / possible nutrient attention — satellite decision; not fertilizer diagnosis; biotic risk is a separate flag.",
+    "tip_unclear": "Signal is ambiguous for this cell — review satellite imagery. Field visit is not required."
   },
   "appNameAr": "مرصد ظفار الزراعي البيئي",
   "provisional": {
     "badge": "Provisional / sample",
-    "sites": "Sample restoration sites are illustrative expert-rule stubs — not field-validated; Environment Authority review required before campaigns.",
+    "sites": "Sample restoration sites are status markers (onset / insufficient MPI) — not field-validated and not seeding recommendations. Seeding-rec Hold until post-khareef MPI + scientist SHA.",
     "aou": "AOU cells shown here are from offline / one-shot discovery — not yet on a scheduled open-data pull.",
     "mpi": "MPI class is provisional; live MPI is not computed in this MVP."
   },
@@ -403,10 +403,50 @@
     "title": "Data honesty",
     "cloud": "Cloud cover is reported per scene; peak-Khareef mountain scenes may be cloudy — SCL masking applies where computed.",
     "proxy": "NDVI/NDMI (and mountain MPI) are satellite proxies — not plot-level soil moisture meters. NDMI ≠ field soil moisture.",
-    "pest": "No confirmed pest/disease diagnosis from space — use “Possible Biotic Stress” + field check only.",
+    "pest": "No confirmed pest/disease diagnosis from space — use “Possible Biotic Stress”. Optional additional field verification (last resort) only.",
     "aou": "AOU ≠ official farm boundary until authorized cadastral link.",
     "stale": "Scenes always show last-updated. Empty STAC results fail visibly — never silent reuse of stale imagery without a stamp.",
     "mountain": "Mountain suitability / confidence / MPI on sample sites are illustrative stubs — farm STAC refresh does not compute live mountain MPI.",
     "stac": "Gallery STAC refresh ≠ AOU/MPI recompute — scene list only."
+  },
+  "satelliteFirst": {
+    "primaryCta": "Satellite decision / recommended action",
+    "defaultDecision": "Satellite decision: continue monitoring this AOU. A field visit is not required to act.",
+    "optionalField": "Optional additional field verification (last resort) only — not a required next step.",
+    "zeroFoChip": "Usable with zero FO / SE",
+    "fieldHonestyChip": "Honesty — no dated FO"
+  },
+  "seed": {
+    "najdTitle": "Najd seed catalog (Site × Species)",
+    "fogTitle": "Fog-escarpment species catalog (list only)",
+    "najdBlurb": "Three arid-Najd species. Scores unvalidated. vetting_status = scientist_locked_pending_ea — never EA-approved. Timing: winter_spring_rain or irrigated. Partner may use this catalog with zero FO/SE.",
+    "fogListOnly": "Fog catalog as a list (ميست / ميتان / جميز). Not a plant-here card. Mountain seeding recommendations remain on Hold.",
+    "unvalidated": "unvalidated",
+    "colName": "Name",
+    "colSci": "Accepted name",
+    "colTiming": "Timing",
+    "colStatus": "Status",
+    "noScore": "(no published score)",
+    "empty": "Catalog not loaded.",
+    "error": "Could not load seed catalog.",
+    "partnerMayAct": "Partner may act on this satellite catalog now. site_field_check / authority_contact apply only when someone later logs a seeding event."
+  },
+  "mountainStatus": {
+    "banner": "Mountain seeding is deferred until post-khareef moisture-persistence is measured from satellite. This is not a seeding recommendation.",
+    "bannerHelp": "Status view 3.A: product_kind = onset_window_dry_mpi_provisional or insufficient. Timing = deferred. No experimental partner seeding toggle.",
+    "productKind": "onset_window_dry_mpi_provisional / insufficient",
+    "timingDeferred": "timing: deferred",
+    "timingLabel": "Timing",
+    "seedingHold": "Seeding-rec Hold",
+    "noPlantHere": "Fog species are a catalog list only — not a plant-here recommendation.",
+    "siteStatus": "Satellite status site",
+    "actionHidden": "Recommended seeding action hidden — Hold until post-khareef MPI (2026-09-15–2026-10-31) + Agrofostery SHA."
+  },
+  "fieldLoop": {
+    "optionalTitle": "Field Loop — optional last-verify",
+    "optionalBody": "SE / FO are capture scaffolds only. Empty Field Loop does not block Analysis, Decision, or Seed. Optional additional field verification (last resort) if someone later logs a planting."
+  },
+  "learning": {
+    "honesty": "Learning is experimental / counts-only. Empty Learning is not a readiness blocker. No published germination or survival %. No auto calibration."
   }
 }

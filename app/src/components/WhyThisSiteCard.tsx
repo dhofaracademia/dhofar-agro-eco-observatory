@@ -15,14 +15,6 @@ export type RestorationSiteProps = {
   why: string[];
 };
 
-const ACTION_I18N: Record<string, string> = {
-  "Protect Natural Regeneration": "restoration.actions.protect",
-  "Assisted Natural Regeneration": "restoration.actions.anr",
-  "Enrichment Seeding": "restoration.actions.enrichment",
-  "Active Planting": "restoration.actions.active",
-  Avoid: "restoration.actions.avoid",
-};
-
 export default function WhyThisSiteCard({
   site,
   onClose,
@@ -41,15 +33,13 @@ export default function WhyThisSiteCard({
   }
 
   const name = i18n.language === "ar" ? site.name_ar ?? site.name_en : site.name_en ?? site.name_ar;
-  const actionKey = ACTION_I18N[site.action];
-  const actionLabel = actionKey ? t(actionKey) : site.action;
 
   return (
     <aside className="rounded-2xl border border-sand-200 bg-white p-5 shadow-sm">
       <div className="mb-3 flex items-start justify-between gap-2">
         <div>
           <div className="text-xs font-semibold uppercase tracking-wide text-sand-800/50">
-            {t("restoration.whyTitle")}
+            {t("mountainStatus.siteStatus")}
           </div>
           <h3 className="font-mono text-lg font-bold text-crop-700">{site.id}</h3>
           {name && <p className="mt-1 text-sm text-sand-800/80">{name}</p>}
@@ -66,7 +56,10 @@ export default function WhyThisSiteCard({
       </div>
 
       <p className="mb-3 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs font-semibold text-earth-600">
-        {t("restoration.provisionalMpi")}
+        {t("mountainStatus.productKind")}
+      </p>
+      <p className="mb-3 rounded-lg border border-sand-200 bg-sand-50 px-3 py-2 text-xs text-sand-900">
+        {t("mountainStatus.noPlantHere")}
       </p>
 
       <div className="mb-4 grid gap-3 sm:grid-cols-2">
@@ -95,28 +88,22 @@ export default function WhyThisSiteCard({
           <dt className="text-xs font-semibold uppercase tracking-wide text-sand-800/50">{t("restoration.mpi")}</dt>
           <dd>
             {site.mpi_class}
-            <span className="mt-1 block text-[11px] font-medium text-earth-600">{t("restoration.provisionalMpi")}</span>
+            <span className="mt-1 block text-[11px] font-medium text-earth-600">
+              {t("mountainStatus.productKind")}
+            </span>
           </dd>
         </div>
         <div>
-          <dt className="text-xs font-semibold uppercase tracking-wide text-sand-800/50">{t("restoration.action")}</dt>
-          <dd>{actionLabel}</dd>
+          <dt className="text-xs font-semibold uppercase tracking-wide text-sand-800/50">
+            {t("mountainStatus.timingLabel")}
+          </dt>
+          <dd>{t("mountainStatus.timingDeferred")}</dd>
         </div>
         <div className="sm:col-span-2">
-          <dt className="text-xs font-semibold uppercase tracking-wide text-sand-800/50">{t("restoration.species")}</dt>
-          <dd>
-            <em>{site.species}</em>
-            {site.species.includes("Terminalia dhofarica") && (
-              <span className="mt-1 block text-xs text-sand-800/70">{t("restoration.speciesHelperDhofarica")}</span>
-            )}
-            {site.species_note && (
-              <span className="mt-1 block text-xs text-sand-800/60">{site.species_note}</span>
-            )}
-          </dd>
-        </div>
-        <div className="sm:col-span-2">
-          <dt className="text-xs font-semibold uppercase tracking-wide text-sand-800/50">{t("restoration.window")}</dt>
-          <dd>{site.window}</dd>
+          <dt className="text-xs font-semibold uppercase tracking-wide text-sand-800/50">
+            {t("mountainStatus.seedingHold")}
+          </dt>
+          <dd className="text-xs text-sand-800/80">{t("mountainStatus.actionHidden")}</dd>
         </div>
       </dl>
 

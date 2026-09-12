@@ -289,19 +289,22 @@ def _next_step(
     vigor: float | None,
     gap_codes: list[str],
 ) -> str:
-    """Manual recommended next step text only — never an action enum auto-assign."""
+    """Satellite-first next-step text — never an FO prerequisite or action auto-assign."""
     _ = gap_codes  # gaps inform cautions; ladder suggestion stays null upstream
     if moisture is not None and moisture < 0.45:
         return (
-            "Manual next step: field irrigation inspection recommended "
-            "(provisional — not auto-assigned from suitability)."
+            "Satellite attention: canopy-moisture (NDMI) proxy is low — "
+            "review irrigation from this satellite decision. "
+            "Optional additional field verification (last resort) only — not required to act."
         )
     if vigor is not None and vigor < 0.45:
         return (
-            "Manual next step: field vigor inspection recommended "
-            "(provisional — not auto-assigned from suitability)."
+            "Satellite attention: vigor (NDVI) proxy is weak — "
+            "management review from this satellite decision. "
+            "Optional additional field verification (last resort) only — not required to act."
         )
     return (
-        "Manual next step: continue monitoring and schedule field verification "
-        "when evidence gaps shrink — action ladder remains manual."
+        "Satellite decision: continue monitoring. "
+        "A field visit is not required to use this output; "
+        "optional additional field verification is last-resort only."
     )

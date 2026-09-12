@@ -84,7 +84,7 @@
           "Evidence gap: no_mpi_curve",
           "Evidence gap: window_series_stub_only"
         ],
-        "recommended_next_step": "Manual next step: field irrigation inspection recommended (provisional — not auto-assigned from suitability).",
+        "recommended_next_step": "Satellite attention: canopy-moisture (NDMI) proxy is low — review irrigation from this satellite decision. Optional additional field verification (last resort) only — not required to act.",
         "action_ladder_suggestion": null
       }
     },
@@ -156,7 +156,7 @@
           "Evidence gap: no_mpi_curve",
           "Evidence gap: window_series_stub_only"
         ],
-        "recommended_next_step": "Manual next step: continue monitoring and schedule field verification when evidence gaps shrink — action ladder remains manual.",
+        "recommended_next_step": "Satellite decision: continue monitoring. A field visit is not required to use this output; optional additional field verification is last-resort only.",
         "action_ladder_suggestion": null
       }
     },
@@ -228,7 +228,7 @@
           "Evidence gap: no_mpi_curve",
           "Evidence gap: window_series_stub_only"
         ],
-        "recommended_next_step": "Manual next step: continue monitoring and schedule field verification when evidence gaps shrink — action ladder remains manual.",
+        "recommended_next_step": "Satellite decision: continue monitoring. A field visit is not required to use this output; optional additional field verification is last-resort only.",
         "action_ladder_suggestion": null
       }
     },
@@ -300,7 +300,7 @@
           "Evidence gap: no_mpi_curve",
           "Evidence gap: window_series_stub_only"
         ],
-        "recommended_next_step": "Manual next step: field irrigation inspection recommended (provisional — not auto-assigned from suitability).",
+        "recommended_next_step": "Satellite attention: canopy-moisture (NDMI) proxy is low — review irrigation from this satellite decision. Optional additional field verification (last resort) only — not required to act.",
         "action_ladder_suggestion": null
       }
     },
@@ -372,7 +372,7 @@
           "Evidence gap: no_mpi_curve",
           "Evidence gap: window_series_stub_only"
         ],
-        "recommended_next_step": "Manual next step: field irrigation inspection recommended (provisional — not auto-assigned from suitability).",
+        "recommended_next_step": "Satellite attention: canopy-moisture (NDMI) proxy is low — review irrigation from this satellite decision. Optional additional field verification (last resort) only — not required to act.",
         "action_ladder_suggestion": null
       }
     },
@@ -444,7 +444,7 @@
           "Evidence gap: no_mpi_curve",
           "Evidence gap: window_series_stub_only"
         ],
-        "recommended_next_step": "Manual next step: field irrigation inspection recommended (provisional — not auto-assigned from suitability).",
+        "recommended_next_step": "Satellite attention: canopy-moisture (NDMI) proxy is low — review irrigation from this satellite decision. Optional additional field verification (last resort) only — not required to act.",
         "action_ladder_suggestion": null
       }
     },
@@ -516,7 +516,7 @@
           "Evidence gap: no_mpi_curve",
           "Evidence gap: window_series_stub_only"
         ],
-        "recommended_next_step": "Manual next step: field irrigation inspection recommended (provisional — not auto-assigned from suitability).",
+        "recommended_next_step": "Satellite attention: canopy-moisture (NDMI) proxy is low — review irrigation from this satellite decision. Optional additional field verification (last resort) only — not required to act.",
         "action_ladder_suggestion": null
       }
     },
@@ -588,7 +588,7 @@
           "Evidence gap: no_mpi_curve",
           "Evidence gap: window_series_stub_only"
         ],
-        "recommended_next_step": "Manual next step: continue monitoring and schedule field verification when evidence gaps shrink — action ladder remains manual.",
+        "recommended_next_step": "Satellite decision: continue monitoring. A field visit is not required to use this output; optional additional field verification is last-resort only.",
         "action_ladder_suggestion": null
       }
     },
@@ -660,7 +660,7 @@
           "Evidence gap: no_mpi_curve",
           "Evidence gap: window_series_stub_only"
         ],
-        "recommended_next_step": "Manual next step: field irrigation inspection recommended (provisional — not auto-assigned from suitability).",
+        "recommended_next_step": "Satellite attention: canopy-moisture (NDMI) proxy is low — review irrigation from this satellite decision. Optional additional field verification (last resort) only — not required to act.",
         "action_ladder_suggestion": null
       }
     }

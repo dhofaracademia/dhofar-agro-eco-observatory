@@ -1,0 +1,162 @@
+{
+  "version": "partner_catalog_satellite_first_v1",
+  "status": "unvalidated",
+  "vetting_status": "scientist_locked_pending_ea",
+  "score_status": "unvalidated",
+  "science_lock": "SCIENCE_LOCKS_v0.4_satellite_first",
+  "species_lock": "SCIENCE_LOCKS_v0.4_phase4_species",
+  "never_mix_domains": true,
+  "mountain_seeding_hold": true,
+  "campaign_numbers": false,
+  "honesty_note_en": "Unvalidated expert stub — not an Environment Authority approval, not a field-tested score. Partner may use the Najd catalog with zero FO/SE.",
+  "honesty_note_ar": "مسودة خبير غير مُتحقق منها — ليست موافقة من هيئة البيئة وليست درجة مختبرة ميدانياً. يمكن استخدام كتالوج نجد دون أي زيارة ميدانية أو حدث بذر.",
+  "domains": [
+    "fog_escarpment",
+    "najd_arid"
+  ],
+  "species": [
+    {
+      "species_id": "sp-fog-tdhof",
+      "domain": "fog_escarpment",
+      "ecological_domain": "fog_escarpment",
+      "accepted_name": "Terminalia dhofarica",
+      "species_name_sci": "Terminalia dhofarica",
+      "synonym": "Anogeissus dhofarica A.J.Scott (1979)",
+      "ar_name": "ميست",
+      "ar_name_alt": [
+        "الظفارية"
+      ],
+      "en_name": "Dhofar Terminalia",
+      "family": "Combretaceae",
+      "role": "canopy_keystone_fog_interceptor",
+      "habitat": "mid-elevation monsoon woodland, seaward escarpment",
+      "timing_window": [
+        "late_khareef",
+        "early_post_khareef"
+      ],
+      "vetting_status": "scientist_locked_pending_ea",
+      "score_status": "unvalidated",
+      "status": "unvalidated_expert_stub",
+      "suitability_provisional_0_100": null
+    },
+    {
+      "species_id": "sp-fog-oleac",
+      "domain": "fog_escarpment",
+      "ecological_domain": "fog_escarpment",
+      "accepted_name": "Olea europaea subsp. cuspidata",
+      "species_name_sci": "Olea europaea subsp. cuspidata",
+      "synonym": [
+        "Olea africana",
+        "Olea chrysophylla",
+        "Olea cuspidata"
+      ],
+      "ar_name": "ميتان",
+      "ar_name_alt": [
+        "عتم",
+        "موتين"
+      ],
+      "en_name": "Wild olive",
+      "family": "Oleaceae",
+      "role": "evergreen_upper_escarpment",
+      "habitat": "Cadia purpurea–Olea variant of Terminalia forest",
+      "timing_window": [
+        "late_khareef",
+        "early_post_khareef"
+      ],
+      "vetting_status": "scientist_locked_pending_ea",
+      "score_status": "unvalidated",
+      "status": "unvalidated_expert_stub",
+      "suitability_provisional_0_100": null
+    },
+    {
+      "species_id": "sp-fog-fsyco",
+      "domain": "fog_escarpment",
+      "ecological_domain": "fog_escarpment",
+      "accepted_name": "Ficus sycomorus",
+      "species_name_sci": "Ficus sycomorus",
+      "synonym": null,
+      "ar_name": "جميز",
+      "ar_name_alt": [
+        "تين سيكومور"
+      ],
+      "en_name": "Sycamore fig",
+      "family": "Moraceae",
+      "role": "wetter_woodland_wadi",
+      "habitat": "Gymnosporia dhofarensis–Ficus sycomorus woodland variant; wadi and lower woodland",
+      "timing_window": [
+        "late_khareef",
+        "early_post_khareef"
+      ],
+      "vetting_status": "scientist_locked_pending_ea",
+      "score_status": "unvalidated",
+      "status": "unvalidated_expert_stub",
+      "suitability_provisional_0_100": null
+    },
+    {
+      "species_id": "sp-najd-zsc",
+      "domain": "najd_arid",
+      "ecological_domain": "najd_arid",
+      "accepted_name": "Ziziphus spina-christi",
+      "species_name_sci": "Ziziphus spina-christi",
+      "synonym": null,
+      "ar_name": "سدر",
+      "ar_name_alt": [],
+      "en_name": "Christ's thorn jujube",
+      "family": "Rhamnaceae",
+      "role": "farm_adjacent_wadi_edge",
+      "habitat": "arid belt, irrigated farms, drainage lines",
+      "timing_window": [
+        "winter_spring_rain",
+        "irrigated"
+      ],
+      "vetting_status": "scientist_locked_pending_ea",
+      "score_status": "unvalidated",
+      "status": "unvalidated_expert_stub",
+      "suitability_provisional_0_100": null
+    },
+    {
+      "species_id": "sp-najd-vtor",
+      "domain": "najd_arid",
+      "ecological_domain": "najd_arid",
+      "accepted_name": "Vachellia tortilis",
+      "species_name_sci": "Vachellia tortilis",
+      "synonym": "Acacia tortilis (Forssk.) Hayne",
+      "ar_name": "سمر",
+      "ar_name_alt": [],
+      "en_name": "Umbrella thorn",
+      "family": "Fabaceae",
+      "role": "open_arid_woodland_windbreak",
+      "habitat": "Najd and arid Dhofar; never auto-assigned to fog woodland",
+      "timing_window": [
+        "winter_spring_rain",
+        "irrigated"
+      ],
+      "vetting_status": "scientist_locked_pending_ea",
+      "score_status": "unvalidated",
+      "status": "unvalidated_expert_stub",
+      "suitability_provisional_0_100": null
+    },
+    {
+      "species_id": "sp-najd-pcin",
+      "domain": "najd_arid",
+      "ecological_domain": "najd_arid",
+      "accepted_name": "Prosopis cineraria",
+      "species_name_sci": "Prosopis cineraria",
+      "synonym": null,
+      "ar_name": "غاف",
+      "ar_name_alt": [],
+      "en_name": "Ghaf",
+      "family": "Fabaceae",
+      "role": "deep_rooted_arid_native",
+      "habitat": "Najd / arid Oman",
+      "timing_window": [
+        "winter_spring_rain",
+        "irrigated"
+      ],
+      "vetting_status": "scientist_locked_pending_ea",
+      "score_status": "unvalidated",
+      "status": "unvalidated_expert_stub",
+      "suitability_provisional_0_100": null
+    }
+  ]
+}

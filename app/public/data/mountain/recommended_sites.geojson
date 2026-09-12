@@ -2,8 +2,11 @@
   "type": "FeatureCollection",
   "name": "dhofar_restoration_recommended_sites_mvp",
   "properties": {
-    "note": "MVP sample sites for Restoration Observatory. Suitability and confidence are illustrative expert-rule stubs — not field-validated scores. Species suggestions require Environment Authority / agroforestry review.",
-    "version": "mvp-1"
+    "note": "Mountain STATUS markers only. MPI product_kind is onset_window_dry_mpi_provisional or insufficient — not post-khareef persistence. Timing deferred. Not seeding recommendations. Seeding-rec Hold until post-khareef MPI 2026-09-15–2026-10-31 + Agrofostery SHA.",
+    "version": "mvp-1",
+    "product_kind": "onset_window_dry_mpi_provisional",
+    "timing": "deferred",
+    "seeding_recommendation": "hold"
   },
   "features": [
     {
