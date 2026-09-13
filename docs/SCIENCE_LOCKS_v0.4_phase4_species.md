@@ -1,6 +1,11 @@
 # Science locks — Phase 4 Site × Species scaffold
 
-**Owner:** Agrofostery Scientist  
+> **Disclosure:** “Agrofostery Scientist”, “AgriTech Developer”, “Programmer”, and “Chief of Staff” here are **role names for AI agents** in an internal multi-agent development pipeline (engineering red-team / blue-team style), **not** sign-off by an independent certified human forestry/ecology expert. **Independent human scientific review is still pending.** These locks constrain pipeline honesty; they are not external Authority or EA approval.
+>
+> **إفصاح:** «Agrofostery Scientist» و«AgriTech» و«Programmer» و«Chief of Staff» هنا **أسماء أدوار لوكلاء ذكاء اصطناعي** ضمن خط تطوير متعدد الوكلاء، **وليست** مراجعة من خبير بشري مستقل معتمد في الحراجة/البيئة. **المراجعة البشرية المستقلة لا تزال معلّقة.** هذه الأقفال تضبط صدق خط الإنتاج؛ وليست اعتماداً من الهيئة أو جهة خارجية.
+
+
+**Owner:** Pipeline role: Agrofostery Scientist (AI agent)  
 **Audience:** Programmer + AgriTech + Chief of Staff  
 **Date:** 2026-09-12 (Asia/Muscat)  
 **Status:** Binding for Phase-4 **scaffold only**  
@@ -281,8 +286,8 @@ UI copy if a cell is ever shown internally:
 
 ---
 
-## Sign-off
+## Sign-off (AI pipeline role — not human expert credential)
 
-**Agrofostery Scientist — 2026-09-12 (Asia/Muscat)**  
+**Pipeline role: Agrofostery Scientist (AI agent) — 2026-09-12 (Asia/Muscat)**  
 Phase-4 short lists + timing + provenance **locked for scaffold**.  
 EA / field expansion = new science lock, not a silent JSON edit.

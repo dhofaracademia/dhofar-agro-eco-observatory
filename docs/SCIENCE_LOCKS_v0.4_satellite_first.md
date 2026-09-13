@@ -1,12 +1,17 @@
 # Science locks — Satellite-first product (no field-visit prerequisite)
 
-**Owner:** Agrofostery Scientist  
+> **Disclosure:** “Agrofostery Scientist”, “AgriTech Developer”, “Programmer”, and “Chief of Staff” here are **role names for AI agents** in an internal multi-agent development pipeline (engineering red-team / blue-team style), **not** sign-off by an independent certified human forestry/ecology expert. **Independent human scientific review is still pending.** These locks constrain pipeline honesty; they are not external Authority or EA approval.
+>
+> **إفصاح:** «Agrofostery Scientist» و«AgriTech» و«Programmer» و«Chief of Staff» هنا **أسماء أدوار لوكلاء ذكاء اصطناعي** ضمن خط تطوير متعدد الوكلاء، **وليست** مراجعة من خبير بشري مستقل معتمد في الحراجة/البيئة. **المراجعة البشرية المستقلة لا تزال معلّقة.** هذه الأقفال تضبط صدق خط الإنتاج؛ وليست اعتماداً من الهيئة أو جهة خارجية.
+
+
+**Owner:** Pipeline role: Agrofostery Scientist (AI agent)  
 **Audience:** Programmer + AgriTech + Chief of Staff  
 **Date:** 2026-09-13 (Asia/Muscat)  
 **Status:** Binding product + honesty lock  
 **Mandate:** Observatory delivers **actionable satellite solutions**. Field visits are **last-resort optional extra verification**, never a prerequisite.  
 **Companions:** Phase 1–6 locks, Product Spec 1.0.1  
-**Verdict: Go**
+**AI pipeline Go** (not independent human expert sign-off)
 
 Machine-readable twin: `docs/phase_satellite_first_scaffold.json`
 
@@ -121,9 +126,9 @@ If post window is still empty (today is 2026-09-13; preferred window opens 15 Se
 
 ---
 
-## Sign-off
+## Sign-off (AI pipeline role — not human expert credential)
 
-**Agrofostery Scientist — 2026-09-13 (Asia/Muscat)**  
+**Pipeline role: Agrofostery Scientist (AI agent) — 2026-09-13 (Asia/Muscat)**  
 **Go** — satellite-first Najd product; field loop optional.  
 Mountain **status** view Go; mountain **seeding recs** Hold until post-khareef MPI + my SHA glance.
 

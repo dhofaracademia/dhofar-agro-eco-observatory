@@ -1,6 +1,11 @@
 # Science locks — Phase 6 Learning
 
-**Owner:** Agrofostery Scientist  
+> **Disclosure:** “Agrofostery Scientist”, “AgriTech Developer”, “Programmer”, and “Chief of Staff” here are **role names for AI agents** in an internal multi-agent development pipeline (engineering red-team / blue-team style), **not** sign-off by an independent certified human forestry/ecology expert. **Independent human scientific review is still pending.** These locks constrain pipeline honesty; they are not external Authority or EA approval.
+>
+> **إفصاح:** «Agrofostery Scientist» و«AgriTech» و«Programmer» و«Chief of Staff» هنا **أسماء أدوار لوكلاء ذكاء اصطناعي** ضمن خط تطوير متعدد الوكلاء، **وليست** مراجعة من خبير بشري مستقل معتمد في الحراجة/البيئة. **المراجعة البشرية المستقلة لا تزال معلّقة.** هذه الأقفال تضبط صدق خط الإنتاج؛ وليست اعتماداً من الهيئة أو جهة خارجية.
+
+
+**Owner:** Pipeline role: Agrofostery Scientist (AI agent)  
 **Audience:** Programmer + AgriTech + Chief of Staff  
 **Date:** 2026-09-12 (Asia/Muscat)  
 **Status:** Binding for Phase-6 **scaffold only**  
@@ -10,7 +15,7 @@
 
 Machine-readable twin: `docs/phase6_learning_scaffold.json`
 
-**Verdict for this phase: Go** — join pairs + count tables + narrative annual template. **No** live weight writes. **No** published %.
+**AI pipeline Go for this phase** (not independent human expert sign-off) — join pairs + count tables + narrative annual template. **No** live weight writes. **No** published %.
 
 ---
 
@@ -228,8 +233,8 @@ Join path: `SE-*` → `FO-*` where `FO.event_id = SE.event_id` and eligibility h
 
 ---
 
-## Sign-off
+## Sign-off (AI pipeline role — not human expert credential)
 
-**Agrofostery Scientist — 2026-09-12 (Asia/Muscat)**  
+**Pipeline role: Agrofostery Scientist (AI agent) — 2026-09-12 (Asia/Muscat)**  
 **Go** for Phase-6 scaffold: pairs + counts + frozen ledger + narrative report.  
 Model improvement and published rates wait for a later lock + n.

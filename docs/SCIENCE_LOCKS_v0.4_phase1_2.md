@@ -1,6 +1,11 @@
 # Science locks — Spec / Roadmap v0.4 Decision Engines (Phase 1 + Phase 2)
 
-**Owner:** Agrofostery Scientist (species / ecology / honesty)  
+> **Disclosure:** “Agrofostery Scientist”, “AgriTech Developer”, “Programmer”, and “Chief of Staff” here are **role names for AI agents** in an internal multi-agent development pipeline (engineering red-team / blue-team style), **not** sign-off by an independent certified human forestry/ecology expert. **Independent human scientific review is still pending.** These locks constrain pipeline honesty; they are not external Authority or EA approval.
+>
+> **إفصاح:** «Agrofostery Scientist» و«AgriTech» و«Programmer» و«Chief of Staff» هنا **أسماء أدوار لوكلاء ذكاء اصطناعي** ضمن خط تطوير متعدد الوكلاء، **وليست** مراجعة من خبير بشري مستقل معتمد في الحراجة/البيئة. **المراجعة البشرية المستقلة لا تزال معلّقة.** هذه الأقفال تضبط صدق خط الإنتاج؛ وليست اعتماداً من الهيئة أو جهة خارجية.
+
+
+**Owner:** Pipeline role: Agrofostery Scientist (AI agent) — species / ecology / honesty  
 **Audience:** Programmer + AgriTech  
 **Date:** 2026-09-09 (Asia/Muscat)  
 **Status:** Binding for Phase 1 coding gates; Phase 2 as specified below  
@@ -226,7 +231,7 @@ Agricultural Probability v1, AOU IDs, Water/Vigor scores mapped to existing aler
 
 ---
 
-## Sign-off
+## Sign-off (AI pipeline role — not human expert credential)
 
 Phase 1 gates above are **binding** for Programmer start.  
 Phase 2 definitions binding for structure; numeric thresholds marked “calibrate with field data.”  
@@ -237,7 +242,7 @@ Questions → Agrofostery Scientist before relaxing Forbidden list.
 ## Phase 3 addendum — Agriculture AOU Suitability / Confidence (2026-09-09)
 
 **Status:** Binding weight locks — `expert_v1_provisional` (NOT `spec_pending`).  
-**Owner:** Agrofostery Scientist (weights) + AgriTech (JSON field shapes) + CoS (artifacts-first delivery).  
+**Owner:** Pipeline role: Agrofostery Scientist (AI agent) (weights) + AgriTech (JSON field shapes) + CoS (artifacts-first delivery).  
 **Domains must not be mixed with mountain reseeding scores.** `mountain_apply = false`.
 
 ### Suitability (`agriculture_aou`) — weights → 0–100
@@ -309,7 +314,7 @@ Schemas: `docs/spec_0.4/{suitability_components,confidence,evidence_gap,action_l
 
 
 **Status:** `unvalidated_expert_stub` — matrix / catalog scaffold only (**NOT** operational truth).  
-**Owner:** Agrofostery Scientist (species short lists) + AgriTech (JSON field shapes) + CoS (artifacts-first delivery).  
+**Owner:** Pipeline role: Agrofostery Scientist (AI agent) (species short lists) + AgriTech (JSON field shapes) + CoS (artifacts-first delivery).  
 **UI gate:** No Analysis / Restoration / Map Seed panel in the first Phase-4 PR. **No** mountain partner UI. **No** Decision→species candidate wire in partner UI.
 
 ### Domains (NEVER mixed)

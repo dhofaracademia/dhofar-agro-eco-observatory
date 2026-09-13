@@ -1,10 +1,15 @@
 # Science locks — Evaluator endorsement + n_clear honesty (v0.4)
 
-**Owner:** Agrofostery Scientist  
+> **Disclosure:** “Agrofostery Scientist”, “AgriTech Developer”, “Programmer”, and “Chief of Staff” here are **role names for AI agents** in an internal multi-agent development pipeline (engineering red-team / blue-team style), **not** sign-off by an independent certified human forestry/ecology expert. **Independent human scientific review is still pending.** These locks constrain pipeline honesty; they are not external Authority or EA approval.
+>
+> **إفصاح:** «Agrofostery Scientist» و«AgriTech» و«Programmer» و«Chief of Staff» هنا **أسماء أدوار لوكلاء ذكاء اصطناعي** ضمن خط تطوير متعدد الوكلاء، **وليست** مراجعة من خبير بشري مستقل معتمد في الحراجة/البيئة. **المراجعة البشرية المستقلة لا تزال معلّقة.** هذه الأقفال تضبط صدق خط الإنتاج؛ وليست اعتماداً من الهيئة أو جهة خارجية.
+
+
+**Owner:** Pipeline role: Agrofostery Scientist (AI agent)  
 **Audience:** Programmer + AgriTech + Chief of Staff  
 **Date:** 2026-09-13 (Asia/Muscat)  
 **Status:** Binding honesty + classifier lock  
-**Verdict: Go-with-fixes**  
+**AI pipeline Go-with-fixes** (not independent human expert sign-off)  
 **Companions:** `SCIENCE_LOCKS_v0.4_satellite_first.md`, `SCIENCE_LOCKS_v0.4_phase1_2.md` §1.3 / Phase-3 Confidence  
 **Machine twin:** `docs/phase_evaluator_endorsement_scaffold.json`  
 **Does not lift:** mountain seeding-rec Hold (3.B). Post-khareef MPI window `2026-09-15`–`2026-10-31` + my SHA still required.
@@ -203,7 +208,7 @@ Unlock to a stronger stamp is **later**. n≥20 per species×domain×horizon rem
 
 ---
 
-## Sign-off
+## Sign-off (AI pipeline role — not human expert credential)
 
-**Agrofostery Scientist — 2026-09-13 (Asia/Muscat)**  
+**Pipeline role: Agrofostery Scientist (AI agent) — 2026-09-13 (Asia/Muscat)**  
 **Go-with-fixes.** Philosophy endorsed. n_clear / persistence honesty is a **required** fix before expansion. Mountain Hold unchanged. Najd remains a provisional satellite analytical service — not a validated crop model.

@@ -69,6 +69,8 @@ Until enabled on main, do **not** assume the scheduled monitor is live — use r
 
 ## v0.4 Phase-1 — Agricultural engines (this branch)
 
+> **Note:** `docs/SCIENCE_LOCKS_*.md` are **AI pipeline role locks** (Agrofostery Scientist / AgriTech / Programmer / Chief of Staff = agent roles). Independent human scientific review is still pending; not Authority/EA approval.
+
 Binding science: `docs/SCIENCE_LOCKS_v0.4_phase1_2.md`  
 Schemas: `docs/spec_0.4/`  
 Roadmap (Phases 2–6 listed, not built): `docs/ROADMAP_v0.4_decision_engines.md`
