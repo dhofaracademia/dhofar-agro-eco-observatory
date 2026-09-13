@@ -1,0 +1,241 @@
+{
+  "type": "FeatureCollection",
+  "name": "khareef_status_corridor_segments",
+  "generated_at": "2026-09-13T16:15:15.621135+00:00",
+  "asof_date": "2026-09-13",
+  "domain": "fog_escarpment",
+  "properties": {
+    "partner_surface": "status_only",
+    "seeding_recommendation": "hold",
+    "product_stamp": "provisional_satellite_analytical_service",
+    "note_en": "Corridor segment envelopes Samhan→Sarfait (fog_escarpment). Not seeding polygons.",
+    "note_ar": "مغلفات قطع الممر سمحان→صرفيت (منحدر الضباب). ليست مضلعات بذر."
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              53.0,
+              16.65
+            ],
+            [
+              53.3,
+              16.65
+            ],
+            [
+              53.3,
+              16.95
+            ],
+            [
+              53.0,
+              16.95
+            ],
+            [
+              53.0,
+              16.65
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "segment_id": "sarfait",
+        "name_en": "Sarfait / western Qamar fog escarpment",
+        "name_ar": "صرفيت / غرب القمر — منحدر الضباب",
+        "bbox": [
+          53.0,
+          16.65,
+          53.3,
+          16.95
+        ],
+        "domain": "fog_escarpment",
+        "optional_segment": false,
+        "partner_surface": "status_only",
+        "seeding_recommendation": "hold"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              53.25,
+              16.7
+            ],
+            [
+              53.75,
+              16.7
+            ],
+            [
+              53.75,
+              17.05
+            ],
+            [
+              53.25,
+              17.05
+            ],
+            [
+              53.25,
+              16.7
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "segment_id": "qamar",
+        "name_en": "Jabal Qamar seaward escarpment",
+        "name_ar": "جبل القمر — المنحدر البحري",
+        "bbox": [
+          53.25,
+          16.7,
+          53.75,
+          17.05
+        ],
+        "domain": "fog_escarpment",
+        "optional_segment": false,
+        "partner_surface": "status_only",
+        "seeding_recommendation": "hold"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.05,
+              17.08
+            ],
+            [
+              54.22,
+              17.08
+            ],
+            [
+              54.22,
+              17.22
+            ],
+            [
+              54.05,
+              17.22
+            ],
+            [
+              54.05,
+              17.08
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "segment_id": "qara",
+        "name_en": "Jabal Qara fog-escarpment (locked mountain pilot bbox)",
+        "name_ar": "جبل القرا — منحدر الضباب (مربع الطيار المقفول)",
+        "bbox": [
+          54.05,
+          17.08,
+          54.22,
+          17.22
+        ],
+        "domain": "fog_escarpment",
+        "optional_segment": false,
+        "partner_surface": "status_only",
+        "seeding_recommendation": "hold"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.55,
+              17.0
+            ],
+            [
+              54.95,
+              17.0
+            ],
+            [
+              54.95,
+              17.35
+            ],
+            [
+              54.55,
+              17.35
+            ],
+            [
+              54.55,
+              17.0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "segment_id": "samhan",
+        "name_en": "Jabal Samhan seaward escarpment",
+        "name_ar": "جبل سمحان — المنحدر البحري",
+        "bbox": [
+          54.55,
+          17.0,
+          54.95,
+          17.35
+        ],
+        "domain": "fog_escarpment",
+        "optional_segment": false,
+        "partner_surface": "status_only",
+        "seeding_recommendation": "hold"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              54.35,
+              16.82
+            ],
+            [
+              54.7,
+              16.82
+            ],
+            [
+              54.7,
+              17.05
+            ],
+            [
+              54.35,
+              17.05
+            ],
+            [
+              54.35,
+              16.82
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "segment_id": "mirbat_mughsayl",
+        "name_en": "Mirbat–Mughsayl coastal fog fringe (catalog segment)",
+        "name_ar": "مرباط–المغيسيل — هامش ضباب ساحلي (قطعة كتالوج)",
+        "bbox": [
+          54.35,
+          16.82,
+          54.7,
+          17.05
+        ],
+        "domain": "fog_escarpment",
+        "optional_segment": true,
+        "partner_surface": "status_only",
+        "seeding_recommendation": "hold"
+      }
+    }
+  ]
+}

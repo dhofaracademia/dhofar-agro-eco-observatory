@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dhofaracademia.example/spec_0.4/khareef_status.schema.json",
+  "title": "KhareefStatusTracker",
+  "description": "SCIENCE_LOCKS_v0.4_khareef_status_tracker — fog_escarpment corridor status (Samhan→Sarfait). Status-only; not seeding. NDVI/NDMI proxies; honest product_kind / khareef_stage.",
+  "type": "object",
+  "required": [
+    "type",
+    "name",
+    "domain",
+    "properties",
+    "features"
+  ],
+  "properties": {
+    "type": { "const": "FeatureCollection" },
+    "name": { "const": "khareef_status_cells" },
+    "domain": { "const": "fog_escarpment" },
+    "asof_date": { "type": "string", "format": "date" },
+    "generated_at": { "type": "string" },
+    "properties": {
+      "type": "object",
+      "required": [
+        "product_kind",
+        "product_stamp",
+        "khareef_stage",
+        "seeding_recommendation",
+        "partner_surface",
+        "mountain_3b_hold"
+      ],
+      "properties": {
+        "note_en": { "type": "string" },
+        "note_ar": { "type": "string" },
+        "product_kind": {
+          "type": "string",
+          "enum": [
+            "onset_window_dry_mpi_provisional",
+            "post_khareef_mpi",
+            "insufficient"
+          ]
+        },
+        "product_stamp": {
+          "const": "provisional_satellite_analytical_service"
+        },
+        "khareef_stage": {
+          "type": "string",
+          "enum": [
+            "pre_khareef",
+            "onset",
+            "peak",
+            "late_khareef",
+            "post_khareef",
+            "insufficient"
+          ]
+        },
+        "stage_method": { "type": "string" },
+        "timing": { "type": "string" },
+        "seeding_recommendation": { "const": "hold" },
+        "partner_surface": { "const": "status_only" },
+        "mountain_3b_hold": { "const": true },
+        "post_khareef_window": { "type": "object" },
+        "science_lock": { "type": "string" }
+      }
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "geometry", "properties"],
+        "properties": {
+          "type": { "const": "Feature" },
+          "geometry": {
+            "type": "object",
+            "required": ["type", "coordinates"],
+            "properties": {
+              "type": { "const": "Point" },
+              "coordinates": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 2,
+                "items": { "type": "number" }
+              }
+            }
+          },
+          "properties": {
+            "type": "object",
+            "required": [
+              "segment_id",
+              "domain",
+              "khareef_stage",
+              "product_kind",
+              "partner_surface",
+              "seeding_recommendation",
+              "bbox"
+            ],
+            "properties": {
+              "segment_id": {
+                "type": "string",
+                "enum": [
+                  "sarfait",
+                  "qamar",
+                  "qara",
+                  "samhan",
+                  "mirbat_mughsayl"
+                ]
+              },
+              "domain": { "const": "fog_escarpment" },
+              "bbox": {
+                "type": "array",
+                "minItems": 4,
+                "maxItems": 4,
+                "items": { "type": "number" },
+                "description": "WGS84 [W, S, E, N]"
+              },
+              "khareef_stage": {
+                "type": "string",
+                "enum": [
+                  "pre_khareef",
+                  "onset",
+                  "peak",
+                  "late_khareef",
+                  "post_khareef",
+                  "insufficient"
+                ]
+              },
+              "ndvi": { "type": ["number", "null"] },
+              "ndmi": { "type": ["number", "null"] },
+              "ndre": { "type": ["number", "null"] },
+              "ndre_available": { "type": "boolean" },
+              "n_clear": { "type": "integer", "minimum": 0 },
+              "data_quality": { "type": "string" },
+              "evidence_level": { "type": "string" },
+              "product_kind": {
+                "type": "string",
+                "enum": [
+                  "onset_window_dry_mpi_provisional",
+                  "post_khareef_mpi",
+                  "insufficient"
+                ]
+              },
+              "product_stamp": {
+                "const": "provisional_satellite_analytical_service"
+              },
+              "partner_surface": { "const": "status_only" },
+              "seeding_recommendation": { "const": "hold" },
+              "suitability": { "type": "null" },
+              "action": { "type": "null" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

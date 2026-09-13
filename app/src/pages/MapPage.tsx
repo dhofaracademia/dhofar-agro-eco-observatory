@@ -45,7 +45,7 @@ export default function MapPage() {
       </div>
 
       <ObservatoryModeToggle mode={mode} onChange={setMode} />
-      <KhareefCalendar active="peak" />
+      <KhareefCalendar active="weakening" />
 
       {mode === "agricultural" ? (
         <section className="space-y-2">

@@ -5,6 +5,7 @@ export type RestorationSiteProps = {
   name_en?: string;
   name_ar?: string;
   region?: string;
+  segment_id?: string;
   suitability?: number | null;
   confidence?: number | null;
   mpi_class?: string | null;
@@ -16,6 +17,13 @@ export type RestorationSiteProps = {
   product_kind?: string;
   timing?: string;
   seeding_recommendation?: string;
+  khareef_stage?: string;
+  ndvi?: number | null;
+  ndmi?: number | null;
+  n_clear?: number;
+  data_quality?: string;
+  evidence_level?: string;
+  partner_surface?: string;
 };
 
 export default function WhyThisSiteCard({

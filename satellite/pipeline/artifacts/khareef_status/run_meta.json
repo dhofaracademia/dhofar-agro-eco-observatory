@@ -1,0 +1,149 @@
+{
+  "generated_at": "2026-09-13T16:15:15.620699+00:00",
+  "asof_date": "2026-09-13",
+  "timezone_note": "asof_date is Asia/Muscat calendar date",
+  "status": "pilot_unverified",
+  "layer": "khareef_status_tracker",
+  "product": "khareef_status_tracker",
+  "domain": "fog_escarpment",
+  "provisional": true,
+  "product_stamp": "provisional_satellite_analytical_service",
+  "product_kind": "onset_window_dry_mpi_provisional",
+  "khareef_stage": "late_khareef",
+  "stage_method": "calendar_heuristic",
+  "stage_enum": [
+    "pre_khareef",
+    "onset",
+    "peak",
+    "late_khareef",
+    "post_khareef",
+    "insufficient"
+  ],
+  "not_post_khareef": true,
+  "mountain_3b_hold": true,
+  "lifts_3b": false,
+  "partner_surface": "status_only",
+  "seeding_recommendation": "hold",
+  "corridor": {
+    "name": "Samhan→Sarfait",
+    "order_east_to_west": [
+      "samhan",
+      "qara",
+      "mirbat_mughsayl",
+      "qamar",
+      "sarfait"
+    ],
+    "envelope_approx_wsen": [
+      53.0,
+      16.55,
+      55.0,
+      17.45
+    ],
+    "envelope_note": "Belt envelope only — per-segment bboxes are authoritative for PR glance"
+  },
+  "segment_bboxes": {
+    "sarfait": {
+      "bbox_wgs84_wsen": [
+        53.0,
+        16.65,
+        53.3,
+        16.95
+      ],
+      "name_en": "Sarfait / western Qamar fog escarpment",
+      "name_ar": "صرفيت / غرب القمر — منحدر الضباب",
+      "optional": false
+    },
+    "qamar": {
+      "bbox_wgs84_wsen": [
+        53.25,
+        16.7,
+        53.75,
+        17.05
+      ],
+      "name_en": "Jabal Qamar seaward escarpment",
+      "name_ar": "جبل القمر — المنحدر البحري",
+      "optional": false
+    },
+    "qara": {
+      "bbox_wgs84_wsen": [
+        54.05,
+        17.08,
+        54.22,
+        17.22
+      ],
+      "name_en": "Jabal Qara fog-escarpment (locked mountain pilot bbox)",
+      "name_ar": "جبل القرا — منحدر الضباب (مربع الطيار المقفول)",
+      "optional": false,
+      "bbox_note": "Locked start bbox from mountain pilot — unchanged."
+    },
+    "samhan": {
+      "bbox_wgs84_wsen": [
+        54.55,
+        17.0,
+        54.95,
+        17.35
+      ],
+      "name_en": "Jabal Samhan seaward escarpment",
+      "name_ar": "جبل سمحان — المنحدر البحري",
+      "optional": false
+    },
+    "mirbat_mughsayl": {
+      "bbox_wgs84_wsen": [
+        54.35,
+        16.82,
+        54.7,
+        17.05
+      ],
+      "name_en": "Mirbat–Mughsayl coastal fog fringe (catalog segment)",
+      "name_ar": "مرباط–المغيسيل — هامش ضباب ساحلي (قطعة كتالوج)",
+      "optional": true
+    }
+  },
+  "allowed_indices": [
+    "NDVI",
+    "NDMI",
+    "NDRE_optional",
+    "true_color_cite",
+    "MPI_stamped"
+  ],
+  "mpi_reuse": {
+    "qara_mpi_meta": "satellite/pipeline/artifacts/mountain_pilot/mpi/mpi_run_meta.json",
+    "qara_product_kind": "onset_window_dry_mpi_provisional",
+    "qara_t0_source_window": "onset",
+    "not_post_khareef_persistence": true
+  },
+  "post_khareef_gate": {
+    "window_start": "2026-09-15",
+    "window_end": "2026-10-31",
+    "requires": [
+      "ge1_clear_S2_L2A_SCL",
+      "product_kind_post_khareef_or_insufficient",
+      "pipeline_approve_sha"
+    ],
+    "post_stamp_allowed_today": false
+  },
+  "honesty_en": "NDVI/NDMI are satellite proxies — not biomass t/ha, not soil moisture %. Stage is a label, not a phenology model publication. Insufficient when clear scenes missing.",
+  "honesty_ar": "NDVI/NDMI مؤشرات قمرية — ليست كتلة حيوية ولا رطوبة تربة %. المرحلة تسمية وليست نموذج فينولوجيا منشور. غير كافٍ عند غياب المشاهد الصافية.",
+  "partner_copy_en": "Khareef status — vegetation and moisture indicators. Not a seeding recommendation.",
+  "partner_copy_ar": "حالة الخريف — مؤشرات غطاء ورطوبة. ليست توصية بذر.",
+  "science_lock": "SCIENCE_LOCKS_v0.4_khareef_status_tracker.md",
+  "scaffold": "docs/phase_khareef_status_tracker_scaffold.json",
+  "artifacts": {
+    "run_meta": "satellite/pipeline/artifacts/khareef_status/run_meta.json",
+    "khareef_status_cells": "satellite/pipeline/artifacts/khareef_status/khareef_status_cells.geojson",
+    "corridor_segments": "satellite/pipeline/artifacts/khareef_status/corridor_segments.geojson"
+  },
+  "ui_wire": true,
+  "app_public_mirror": "app/public/data/mountain/khareef_status_cells.geojson",
+  "forbidden_partner_keys": [
+    "campaign_ha",
+    "seed_kg",
+    "crew_days",
+    "soil_moisture_pct",
+    "germination_pct",
+    "authority_approved",
+    "experimental_seeding_toggle"
+  ],
+  "ai_pipeline_role": true,
+  "human_review": "pending"
+}
