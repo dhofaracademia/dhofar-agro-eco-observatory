@@ -1,10 +1,11 @@
 {
-  "version": "0.4.1",
-  "generated_at": "2026-09-13T10:08:25.243138+00:00",
-  "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md",
+  "version": "0.4.5-aou-temporal-ledger",
+  "generated_at": "2026-09-13T14:56:53.746541+00:00",
+  "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md",
   "units": [
     {
       "aou_id": "AOU-NJ-000001",
+      "n_clear_dates": 1,
       "observations": [
         {
           "aou_id": "AOU-NJ-000001",
@@ -26,7 +27,6 @@
           "tile": "39QYA",
           "cloud_cover": 0.867071,
           "series_scope": "aou_members_aggregate",
-          "n_clear_dates": 1,
           "persistence_status": "single_date_insufficient"
         }
       ],
@@ -36,34 +36,35 @@
           "ndvi": 0.0687510296702385,
           "ndmi": -0.10449161380529404,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
           "date": "2026-08-25",
           "ndvi": 0.07278931885957718,
           "ndmi": -0.09613349288702011,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
           "date": "2026-08-30",
           "ndvi": 0.07351431995630264,
           "ndmi": -0.09678220003843307,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
           "date": "2026-09-06",
           "ndvi": 0.07121829688549042,
           "ndmi": -0.10114920884370804,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         }
       ],
-      "honesty": "AOU multi-date history grows as monitor re-runs with registry matching"
+      "honesty": "AOU ledger append/upserts by (aou_id, date); window_context_series is context only (series_scope=window_not_aou)"
     },
     {
       "aou_id": "AOU-NJ-000002",
+      "n_clear_dates": 1,
       "observations": [
         {
           "aou_id": "AOU-NJ-000002",
@@ -85,7 +86,6 @@
           "tile": "39QYA",
           "cloud_cover": 0.867071,
           "series_scope": "aou_members_aggregate",
-          "n_clear_dates": 1,
           "persistence_status": "single_date_insufficient"
         }
       ],
@@ -95,34 +95,35 @@
           "ndvi": 0.0687510296702385,
           "ndmi": -0.10449161380529404,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
           "date": "2026-08-25",
           "ndvi": 0.07278931885957718,
           "ndmi": -0.09613349288702011,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
           "date": "2026-08-30",
           "ndvi": 0.07351431995630264,
           "ndmi": -0.09678220003843307,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
           "date": "2026-09-06",
           "ndvi": 0.07121829688549042,
           "ndmi": -0.10114920884370804,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         }
       ],
-      "honesty": "AOU multi-date history grows as monitor re-runs with registry matching"
+      "honesty": "AOU ledger append/upserts by (aou_id, date); window_context_series is context only (series_scope=window_not_aou)"
     },
     {
       "aou_id": "AOU-NJ-000003",
+      "n_clear_dates": 1,
       "observations": [
         {
           "aou_id": "AOU-NJ-000003",
@@ -144,7 +145,6 @@
           "tile": "39QYA",
           "cloud_cover": 0.867071,
           "series_scope": "aou_members_aggregate",
-          "n_clear_dates": 1,
           "persistence_status": "single_date_insufficient"
         }
       ],
@@ -154,34 +154,35 @@
           "ndvi": 0.0687510296702385,
           "ndmi": -0.10449161380529404,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
           "date": "2026-08-25",
           "ndvi": 0.07278931885957718,
           "ndmi": -0.09613349288702011,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
           "date": "2026-08-30",
           "ndvi": 0.07351431995630264,
           "ndmi": -0.09678220003843307,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
           "date": "2026-09-06",
           "ndvi": 0.07121829688549042,
           "ndmi": -0.10114920884370804,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         }
       ],
-      "honesty": "AOU multi-date history grows as monitor re-runs with registry matching"
+      "honesty": "AOU ledger append/upserts by (aou_id, date); window_context_series is context only (series_scope=window_not_aou)"
     },
     {
       "aou_id": "AOU-NJ-000004",
+      "n_clear_dates": 1,
       "observations": [
         {
           "aou_id": "AOU-NJ-000004",
@@ -203,7 +204,6 @@
           "tile": "39QYA",
           "cloud_cover": 0.867071,
           "series_scope": "aou_members_aggregate",
-          "n_clear_dates": 1,
           "persistence_status": "single_date_insufficient"
         }
       ],
@@ -213,34 +213,35 @@
           "ndvi": 0.0687510296702385,
           "ndmi": -0.10449161380529404,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
           "date": "2026-08-25",
           "ndvi": 0.07278931885957718,
           "ndmi": -0.09613349288702011,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
           "date": "2026-08-30",
           "ndvi": 0.07351431995630264,
           "ndmi": -0.09678220003843307,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
           "date": "2026-09-06",
           "ndvi": 0.07121829688549042,
           "ndmi": -0.10114920884370804,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         }
       ],
-      "honesty": "AOU multi-date history grows as monitor re-runs with registry matching"
+      "honesty": "AOU ledger append/upserts by (aou_id, date); window_context_series is context only (series_scope=window_not_aou)"
     },
     {
       "aou_id": "AOU-NJ-000005",
+      "n_clear_dates": 1,
       "observations": [
         {
           "aou_id": "AOU-NJ-000005",
@@ -262,7 +263,6 @@
           "tile": "39QYA",
           "cloud_cover": 0.867071,
           "series_scope": "aou_members_aggregate",
-          "n_clear_dates": 1,
           "persistence_status": "single_date_insufficient"
         }
       ],
@@ -272,34 +272,35 @@
           "ndvi": 0.0687510296702385,
           "ndmi": -0.10449161380529404,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
           "date": "2026-08-25",
           "ndvi": 0.07278931885957718,
           "ndmi": -0.09613349288702011,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
           "date": "2026-08-30",
           "ndvi": 0.07351431995630264,
           "ndmi": -0.09678220003843307,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
           "date": "2026-09-06",
           "ndvi": 0.07121829688549042,
           "ndmi": -0.10114920884370804,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         }
       ],
-      "honesty": "AOU multi-date history grows as monitor re-runs with registry matching"
+      "honesty": "AOU ledger append/upserts by (aou_id, date); window_context_series is context only (series_scope=window_not_aou)"
     },
     {
       "aou_id": "AOU-NJ-000006",
+      "n_clear_dates": 1,
       "observations": [
         {
           "aou_id": "AOU-NJ-000006",
@@ -321,7 +322,6 @@
           "tile": "39QYA",
           "cloud_cover": 0.867071,
           "series_scope": "aou_members_aggregate",
-          "n_clear_dates": 1,
           "persistence_status": "single_date_insufficient"
         }
       ],
@@ -331,34 +331,35 @@
           "ndvi": 0.0687510296702385,
           "ndmi": -0.10449161380529404,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
           "date": "2026-08-25",
           "ndvi": 0.07278931885957718,
           "ndmi": -0.09613349288702011,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
           "date": "2026-08-30",
           "ndvi": 0.07351431995630264,
           "ndmi": -0.09678220003843307,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
           "date": "2026-09-06",
           "ndvi": 0.07121829688549042,
           "ndmi": -0.10114920884370804,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         }
       ],
-      "honesty": "AOU multi-date history grows as monitor re-runs with registry matching"
+      "honesty": "AOU ledger append/upserts by (aou_id, date); window_context_series is context only (series_scope=window_not_aou)"
     },
     {
       "aou_id": "AOU-NJ-000007",
+      "n_clear_dates": 1,
       "observations": [
         {
           "aou_id": "AOU-NJ-000007",
@@ -380,7 +381,6 @@
           "tile": "39QYA",
           "cloud_cover": 0.867071,
           "series_scope": "aou_members_aggregate",
-          "n_clear_dates": 1,
           "persistence_status": "single_date_insufficient"
         }
       ],
@@ -390,34 +390,35 @@
           "ndvi": 0.0687510296702385,
           "ndmi": -0.10449161380529404,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
           "date": "2026-08-25",
           "ndvi": 0.07278931885957718,
           "ndmi": -0.09613349288702011,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
           "date": "2026-08-30",
           "ndvi": 0.07351431995630264,
           "ndmi": -0.09678220003843307,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
           "date": "2026-09-06",
           "ndvi": 0.07121829688549042,
           "ndmi": -0.10114920884370804,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         }
       ],
-      "honesty": "AOU multi-date history grows as monitor re-runs with registry matching"
+      "honesty": "AOU ledger append/upserts by (aou_id, date); window_context_series is context only (series_scope=window_not_aou)"
     },
     {
       "aou_id": "AOU-NJ-000008",
+      "n_clear_dates": 1,
       "observations": [
         {
           "aou_id": "AOU-NJ-000008",
@@ -439,7 +440,6 @@
           "tile": "39QYA",
           "cloud_cover": 0.867071,
           "series_scope": "aou_members_aggregate",
-          "n_clear_dates": 1,
           "persistence_status": "single_date_insufficient"
         }
       ],
@@ -449,34 +449,35 @@
           "ndvi": 0.0687510296702385,
           "ndmi": -0.10449161380529404,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
           "date": "2026-08-25",
           "ndvi": 0.07278931885957718,
           "ndmi": -0.09613349288702011,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
           "date": "2026-08-30",
           "ndvi": 0.07351431995630264,
           "ndmi": -0.09678220003843307,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
           "date": "2026-09-06",
           "ndvi": 0.07121829688549042,
           "ndmi": -0.10114920884370804,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         }
       ],
-      "honesty": "AOU multi-date history grows as monitor re-runs with registry matching"
+      "honesty": "AOU ledger append/upserts by (aou_id, date); window_context_series is context only (series_scope=window_not_aou)"
     },
     {
       "aou_id": "AOU-NJ-000009",
+      "n_clear_dates": 1,
       "observations": [
         {
           "aou_id": "AOU-NJ-000009",
@@ -498,7 +499,6 @@
           "tile": "39QYA",
           "cloud_cover": 0.867071,
           "series_scope": "aou_members_aggregate",
-          "n_clear_dates": 1,
           "persistence_status": "single_date_insufficient"
         }
       ],
@@ -508,31 +508,31 @@
           "ndvi": 0.0687510296702385,
           "ndmi": -0.10449161380529404,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
           "date": "2026-08-25",
           "ndvi": 0.07278931885957718,
           "ndmi": -0.09613349288702011,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
           "date": "2026-08-30",
           "ndvi": 0.07351431995630264,
           "ndmi": -0.09678220003843307,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
           "date": "2026-09-06",
           "ndvi": 0.07121829688549042,
           "ndmi": -0.10114920884370804,
           "series_scope": "window_not_aou",
-          "note": "Window mean \u2014 AOU-specific history not yet multi-date tracked"
+          "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         }
       ],
-      "honesty": "AOU multi-date history grows as monitor re-runs with registry matching"
+      "honesty": "AOU ledger append/upserts by (aou_id, date); window_context_series is context only (series_scope=window_not_aou)"
     }
   ]
 }

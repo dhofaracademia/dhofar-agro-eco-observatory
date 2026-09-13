@@ -3,6 +3,7 @@
 **Date:** 2026-09-13 (Asia/Muscat)  
 **Product:** مرصد ظفار الزراعي البيئي | alias ظفار رصد | Dhofar Agro & Eco Observatory  
 **Binding lock:** [`SCIENCE_LOCKS_v0.4_evaluator_endorsement.md`](SCIENCE_LOCKS_v0.4_evaluator_endorsement.md)  
+**Companion:** [`SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md`](SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md) (ledger append/upsert; `n_clear` from ledger)  
 **Machine twin:** [`phase_evaluator_endorsement_scaffold.json`](phase_evaluator_endorsement_scaffold.json)
 
 ## Stakeholder optional FO ≠ platform scientific validation
@@ -18,7 +19,8 @@
 
 ## Single clear obs ≠ multi-date persistence
 
-- `n_clear_dates` = AOU- or cell-scoped SCL-clear dates only (today **1** on all 9 Najd AOUs: `2026-09-06`).
+- `n_clear_dates` = distinct dates in the AOU observation ledger (`aou_observations.json`), never window length (today **1** on all 9 Najd AOUs: `2026-09-06`).
+- Ledger **append/upserts** by `(aou_id, date)` — does not wipe to latest-only.
 - Window / `timeseries.json` length is **context only** (`series_scope=window_not_aou`).
 - Persistence feature is **null / 0.0** when `n_clear < 2` — never 0.25 or 0.5 from one green date.
 - `ag_class` capped at `possible` when `n_clear < 2` (and `< 3`).

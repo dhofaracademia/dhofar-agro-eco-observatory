@@ -1,7 +1,7 @@
 {
-  "version": "0.4.4-evidence-level-honesty",
-  "generated_at": "2026-09-13T10:09:00.625229+00:00",
-  "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3 + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md",
+  "version": "0.4.5-aou-temporal-ledger",
+  "generated_at": "2026-09-13T14:56:53.844510+00:00",
+  "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3 + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md",
   "status": "expert_v1_provisional",
   "product_stamp": "provisional_satellite_analytical_service",
   "najd_model_validation": "not_validated",
@@ -66,7 +66,7 @@
           "Agricultural probability (norm) available: 0.62 (weight 0.35).",
           "Moisture proxy from inverse water_stress (NDMI-based): 0.28 — not soil moisture %.",
           "Vigor proxy from inverse vigor_stress (NDVI-based): 0.28 — not fertilizer diagnosis.",
-          "Geometry stability (AOU IoU/area gate): 1.00.",
+          "Geometry gate (area ≥ 2 ha): 1.00.",
           "Weighted suitability_score=51.7 shown as components_only (Suitability ≠ Confidence)."
         ],
         "cautions": [
@@ -76,7 +76,7 @@
           "action_ladder_suggestion remains null (manual enum only).",
           "NDRE unavailable on this AOU observation.",
           "1 clear date — temporal persistence not established (ndvi_persistence null / renorm).",
-          "No prior IoU (new or unmatched ID) — geometry stability uses area gate only.",
+          "No prior IoU (new or unmatched ID) — geometry gate (area ≥ 2 ha) only; not temporal stability / geometry stability.",
           "Evidence gap: no_ndre",
           "Evidence gap: no_field_visit",
           "Evidence gap: thin_aou_history",
@@ -140,7 +140,7 @@
           "Agricultural probability (norm) available: 0.58 (weight 0.35).",
           "Moisture proxy from inverse water_stress (NDMI-based): 0.48 — not soil moisture %.",
           "Vigor proxy from inverse vigor_stress (NDVI-based): 0.46 — not fertilizer diagnosis.",
-          "Geometry stability (AOU IoU/area gate): 1.00.",
+          "Geometry gate (area ≥ 2 ha): 1.00.",
           "Weighted suitability_score=58.6 shown as components_only (Suitability ≠ Confidence)."
         ],
         "cautions": [
@@ -150,7 +150,7 @@
           "action_ladder_suggestion remains null (manual enum only).",
           "NDRE unavailable on this AOU observation.",
           "1 clear date — temporal persistence not established (ndvi_persistence null / renorm).",
-          "No prior IoU (new or unmatched ID) — geometry stability uses area gate only.",
+          "No prior IoU (new or unmatched ID) — geometry gate (area ≥ 2 ha) only; not temporal stability / geometry stability.",
           "Evidence gap: no_ndre",
           "Evidence gap: no_field_visit",
           "Evidence gap: thin_aou_history",
@@ -214,7 +214,7 @@
           "Agricultural probability (norm) available: 0.65 (weight 0.35).",
           "Moisture proxy from inverse water_stress (NDMI-based): 0.49 — not soil moisture %.",
           "Vigor proxy from inverse vigor_stress (NDVI-based): 0.49 — not fertilizer diagnosis.",
-          "Geometry stability (AOU IoU/area gate): 1.00.",
+          "Geometry gate (area ≥ 2 ha): 1.00.",
           "Weighted suitability_score=62.3 shown as components_only (Suitability ≠ Confidence)."
         ],
         "cautions": [
@@ -224,7 +224,7 @@
           "action_ladder_suggestion remains null (manual enum only).",
           "NDRE unavailable on this AOU observation.",
           "1 clear date — temporal persistence not established (ndvi_persistence null / renorm).",
-          "No prior IoU (new or unmatched ID) — geometry stability uses area gate only.",
+          "No prior IoU (new or unmatched ID) — geometry gate (area ≥ 2 ha) only; not temporal stability / geometry stability.",
           "Evidence gap: no_ndre",
           "Evidence gap: no_field_visit",
           "Evidence gap: thin_aou_history",
@@ -288,7 +288,7 @@
           "Agricultural probability (norm) available: 0.53 (weight 0.35).",
           "Moisture proxy from inverse water_stress (NDMI-based): 0.26 — not soil moisture %.",
           "Vigor proxy from inverse vigor_stress (NDVI-based): 0.26 — not fertilizer diagnosis.",
-          "Geometry stability (AOU IoU/area gate): 1.00.",
+          "Geometry gate (area ≥ 2 ha): 1.00.",
           "Weighted suitability_score=46.9 shown as components_only (Suitability ≠ Confidence)."
         ],
         "cautions": [
@@ -298,7 +298,7 @@
           "action_ladder_suggestion remains null (manual enum only).",
           "NDRE unavailable on this AOU observation.",
           "1 clear date — temporal persistence not established (ndvi_persistence null / renorm).",
-          "No prior IoU (new or unmatched ID) — geometry stability uses area gate only.",
+          "No prior IoU (new or unmatched ID) — geometry gate (area ≥ 2 ha) only; not temporal stability / geometry stability.",
           "Evidence gap: no_ndre",
           "Evidence gap: no_field_visit",
           "Evidence gap: thin_aou_history",
@@ -362,7 +362,7 @@
           "Agricultural probability (norm) available: 0.46 (weight 0.35).",
           "Moisture proxy from inverse water_stress (NDMI-based): 0.29 — not soil moisture %.",
           "Vigor proxy from inverse vigor_stress (NDVI-based): 0.32 — not fertilizer diagnosis.",
-          "Geometry stability (AOU IoU/area gate): 1.00.",
+          "Geometry gate (area ≥ 2 ha): 1.00.",
           "Weighted suitability_score=46.0 shown as components_only (Suitability ≠ Confidence)."
         ],
         "cautions": [
@@ -372,7 +372,7 @@
           "action_ladder_suggestion remains null (manual enum only).",
           "NDRE unavailable on this AOU observation.",
           "1 clear date — temporal persistence not established (ndvi_persistence null / renorm).",
-          "No prior IoU (new or unmatched ID) — geometry stability uses area gate only.",
+          "No prior IoU (new or unmatched ID) — geometry gate (area ≥ 2 ha) only; not temporal stability / geometry stability.",
           "Evidence gap: no_ndre",
           "Evidence gap: no_field_visit",
           "Evidence gap: thin_aou_history",
@@ -436,7 +436,7 @@
           "Agricultural probability (norm) available: 0.49 (weight 0.35).",
           "Moisture proxy from inverse water_stress (NDMI-based): 0.35 — not soil moisture %.",
           "Vigor proxy from inverse vigor_stress (NDVI-based): 0.35 — not fertilizer diagnosis.",
-          "Geometry stability (AOU IoU/area gate): 1.00.",
+          "Geometry gate (area ≥ 2 ha): 1.00.",
           "Weighted suitability_score=49.1 shown as components_only (Suitability ≠ Confidence)."
         ],
         "cautions": [
@@ -446,7 +446,7 @@
           "action_ladder_suggestion remains null (manual enum only).",
           "NDRE unavailable on this AOU observation.",
           "1 clear date — temporal persistence not established (ndvi_persistence null / renorm).",
-          "No prior IoU (new or unmatched ID) — geometry stability uses area gate only.",
+          "No prior IoU (new or unmatched ID) — geometry gate (area ≥ 2 ha) only; not temporal stability / geometry stability.",
           "Evidence gap: no_ndre",
           "Evidence gap: no_field_visit",
           "Evidence gap: thin_aou_history",
@@ -510,7 +510,7 @@
           "Agricultural probability (norm) available: 0.65 (weight 0.35).",
           "Moisture proxy from inverse water_stress (NDMI-based): 0.26 — not soil moisture %.",
           "Vigor proxy from inverse vigor_stress (NDVI-based): 0.28 — not fertilizer diagnosis.",
-          "Geometry stability (AOU IoU/area gate): 1.00.",
+          "Geometry gate (area ≥ 2 ha): 1.00.",
           "Weighted suitability_score=52.8 shown as components_only (Suitability ≠ Confidence)."
         ],
         "cautions": [
@@ -520,7 +520,7 @@
           "action_ladder_suggestion remains null (manual enum only).",
           "NDRE unavailable on this AOU observation.",
           "1 clear date — temporal persistence not established (ndvi_persistence null / renorm).",
-          "No prior IoU (new or unmatched ID) — geometry stability uses area gate only.",
+          "No prior IoU (new or unmatched ID) — geometry gate (area ≥ 2 ha) only; not temporal stability / geometry stability.",
           "Evidence gap: no_ndre",
           "Evidence gap: no_field_visit",
           "Evidence gap: thin_aou_history",
@@ -584,7 +584,7 @@
           "Agricultural probability (norm) available: 0.65 (weight 0.35).",
           "Moisture proxy from inverse water_stress (NDMI-based): 0.41 — not soil moisture %.",
           "Vigor proxy from inverse vigor_stress (NDVI-based): 0.38 — not fertilizer diagnosis.",
-          "Geometry stability (AOU IoU/area gate): 1.00.",
+          "Geometry gate (area ≥ 2 ha): 1.00.",
           "Weighted suitability_score=58.2 shown as components_only (Suitability ≠ Confidence)."
         ],
         "cautions": [
@@ -594,7 +594,7 @@
           "action_ladder_suggestion remains null (manual enum only).",
           "NDRE unavailable on this AOU observation.",
           "1 clear date — temporal persistence not established (ndvi_persistence null / renorm).",
-          "No prior IoU (new or unmatched ID) — geometry stability uses area gate only.",
+          "No prior IoU (new or unmatched ID) — geometry gate (area ≥ 2 ha) only; not temporal stability / geometry stability.",
           "Evidence gap: no_ndre",
           "Evidence gap: no_field_visit",
           "Evidence gap: thin_aou_history",
@@ -658,7 +658,7 @@
           "Agricultural probability (norm) available: 0.49 (weight 0.35).",
           "Moisture proxy from inverse water_stress (NDMI-based): 0.31 — not soil moisture %.",
           "Vigor proxy from inverse vigor_stress (NDVI-based): 0.36 — not fertilizer diagnosis.",
-          "Geometry stability (AOU IoU/area gate): 1.00.",
+          "Geometry gate (area ≥ 2 ha): 1.00.",
           "Weighted suitability_score=49.1 shown as components_only (Suitability ≠ Confidence)."
         ],
         "cautions": [
@@ -668,7 +668,7 @@
           "action_ladder_suggestion remains null (manual enum only).",
           "NDRE unavailable on this AOU observation.",
           "1 clear date — temporal persistence not established (ndvi_persistence null / renorm).",
-          "No prior IoU (new or unmatched ID) — geometry stability uses area gate only.",
+          "No prior IoU (new or unmatched ID) — geometry gate (area ≥ 2 ha) only; not temporal stability / geometry stability.",
           "Evidence gap: no_ndre",
           "Evidence gap: no_field_visit",
           "Evidence gap: thin_aou_history",
