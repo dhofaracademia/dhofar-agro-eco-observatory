@@ -118,10 +118,12 @@ def compute_confidence(
     temporal_cov = None if n_clear_norm is None else round(n_clear_norm * 100.0, 2)
     spatial_clarity = round((iou or 0.0) * 100.0, 2)
 
+    thin_temporal = bool(n_clear is not None and n_clear < 2)
     return {
         "aou_id": aou_id,
         "confidence_domain": CONFIDENCE_DOMAIN,
         "status": STATUS,
+        "thin_temporal": thin_temporal,
         "data_quality_confidence": (
             None if data_quality_confidence is None else round(float(data_quality_confidence), 2)
         ),

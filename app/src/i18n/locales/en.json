@@ -282,7 +282,7 @@
     "decision": {
       "title": "Decision support — Najd AOUs",
       "honestyTitle": "expert_v1_provisional — offline snapshot, not operational truth",
-      "honestyBody": "Suitability (agriculture_aou) and Confidence (data_evidence) are separate scores and must never be merged. Data-quality confidence is an input chip only — not overall Confidence. AOU ≠ farm. Partners may act on this satellite decision with zero FO/SE. Missing field evidence is an honesty chip only — it never blocks the page or hides recommended actions. No campaign hectares, pest certainty, soil moisture %, or mountain seeding recommendations on this tab.",
+      "honestyBody": "Lead with evidence level + provisional stamp. Suitability ≠ Confidence. n_clear_dates is AOU-scoped (today = 1) — not the window date count. Partners may act with zero FO/SE. Missing field evidence is an honesty chip only. Mountain seeding recommendations stay on Hold.",
       "whyThisSite": "Why this site",
       "evidenceGaps": "Evidence gaps",
       "suitabilityComponents": "Suitability components",
@@ -411,8 +411,8 @@
   },
   "satelliteFirst": {
     "primaryCta": "Satellite decision / recommended action",
-    "defaultDecision": "Satellite decision: continue monitoring this AOU. A field visit is not required to act.",
-    "optionalField": "Optional additional field verification (last resort) only — not a required next step.",
+    "defaultDecision": "Satellite decision: continue monitoring this AOU.",
+    "optionalField": "A field visit is not required to use this output; optional additional field verification is last-resort only.",
     "zeroFoChip": "Usable with zero FO / SE",
     "fieldHonestyChip": "Honesty — no dated FO"
   },
@@ -451,5 +451,22 @@
   },
   "learning": {
     "honesty": "Learning is experimental / counts-only. Empty Learning is not a readiness blocker. No published germination or survival %. No auto calibration."
+  },
+  "evidenceLevel": {
+    "label": "Evidence level",
+    "satellite_only": "Satellite-only",
+    "enhanced_by_field_verification": "Enhanced by field verification",
+    "productStamp": "Provisional satellite-based analytical service",
+    "productStampShort": "provisional_satellite_analytical_service",
+    "najdNotValidated": "najd_model_validation = not_validated",
+    "honestyBody": "Suitability (agriculture_aou) and Confidence (data_evidence) stay separate. Stakeholder field verify is optional per AOU — it is not the same as platform scientific validation. Nine AOUs do not mean the Najd model is validated.",
+    "basisSatellite": "Satellite: Sentinel-2 L2A · n_clear_dates={{n}}",
+    "basisHistorical": "Historical: Not available",
+    "basisField": "Field verification: Not available",
+    "singleObsChip": "1 clear obs ≠ multi-date persistence",
+    "temporalCoverage": "Temporal coverage: {{pct}}% (n_clear_dates={{n}})",
+    "addFoCta": "Optional — Add field observation",
+    "addFoHint": "Upgrades evidence level when a dated FO exists. Never gates Analysis, Decision, or Seed.",
+    "fieldFootnote": "A field visit is not required to use this output; optional additional field verification is last-resort only."
   }
 }

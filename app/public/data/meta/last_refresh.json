@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-09T04:46:34.832920+00:00",
+  "last_updated": "2026-09-13T10:08:25.243518+00:00",
   "source": "run_ag_probability",
   "artifacts": [
     "latest_alerts.geojson",

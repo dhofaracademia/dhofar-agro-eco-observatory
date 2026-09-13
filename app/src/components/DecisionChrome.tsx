@@ -30,6 +30,8 @@ export type ConfidenceUnit = {
   overall_confidence?: number;
   temporal_coverage_confidence?: number;
   spatial_clarity_confidence?: number;
+  n_clear_dates?: number;
+  thin_temporal?: boolean;
   honesty_note_en?: string;
   honesty_note_ar?: string;
   never_merge_with_suitability?: boolean;
@@ -112,6 +114,11 @@ export default function DecisionChrome({
   const confidenceScore = confidence?.overall_confidence;
   const suggestion = why?.action_ladder_suggestion ?? null;
   const satelliteStep = why?.recommended_next_step;
+  // Current Najd AOUs: no dated FO → satellite_only (Phase-5 FO upgrades later)
+  const evidenceLevel = "satellite_only" as const;
+  const nClear = confidence?.n_clear_dates ?? 1;
+  const temporalCov = confidence?.temporal_coverage_confidence;
+  const thinTemporal = confidence?.thin_temporal ?? nClear < 2;
 
   if (loading) {
     return <p className="text-sm text-sand-800/70">{t("analysis.decision.loading")}</p>;
@@ -128,14 +135,17 @@ export default function DecisionChrome({
   return (
     <div className="space-y-4">
       <div className="rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-950">
-        <p className="font-semibold">{t("analysis.decision.honestyTitle")}</p>
-        <p className="mt-1">{t("analysis.decision.honestyBody")}</p>
+        <p className="font-semibold">{t("evidenceLevel.productStamp")}</p>
+        <p className="mt-1 text-xs">{t("evidenceLevel.honestyBody")}</p>
         <div className="mt-2 flex flex-wrap gap-2 text-xs font-semibold">
           <span className="rounded-full border border-amber-400 bg-white px-2 py-0.5">
-            {t("analysis.decision.provisionalStamp")}
+            {t("evidenceLevel.productStampShort")}
           </span>
           <span className="rounded-full border border-amber-400 bg-white px-2 py-0.5">
-            {t("analysis.decision.offlineSnapshot")}
+            {t("evidenceLevel.najdNotValidated")}
+          </span>
+          <span className="rounded-full border border-amber-400 bg-white px-2 py-0.5">
+            {t("analysis.decision.provisionalStamp")}
           </span>
           <span className="rounded-full border border-amber-400 bg-white px-2 py-0.5">
             {t("analysis.decision.aouNotFarm")}
@@ -143,11 +153,57 @@ export default function DecisionChrome({
           <span className="rounded-full border border-amber-400 bg-white px-2 py-0.5">
             {t("analysis.decision.noMountain")}
           </span>
-          <span className="rounded-full border border-crop-600/40 bg-white px-2 py-0.5 text-crop-800">
-            {t("satelliteFirst.zeroFoChip")}
-          </span>
         </div>
       </div>
+
+      <section className="rounded-2xl border border-crop-600/40 bg-white p-4 shadow-sm">
+        <div className="mb-2 flex flex-wrap items-center gap-2">
+          <div className="text-xs font-semibold uppercase tracking-wide text-crop-800">
+            {t("evidenceLevel.label")}
+          </div>
+          <span className="rounded-full border border-crop-600/40 bg-crop-600/10 px-2.5 py-0.5 text-xs font-bold text-crop-800">
+            {t(`evidenceLevel.${evidenceLevel}`)}
+          </span>
+        </div>
+        <div className="mb-3 flex flex-wrap gap-2 text-[11px] font-semibold">
+          <span className="rounded-full border border-sky-300 bg-sky-50 px-2 py-0.5 text-sky-950">
+            {t("evidenceLevel.basisSatellite", { n: nClear })}
+          </span>
+          <span className="rounded-full border border-sand-300 bg-sand-50 px-2 py-0.5 text-sand-900">
+            {t("evidenceLevel.basisHistorical")}
+          </span>
+          <span className="rounded-full border border-sand-300 bg-sand-50 px-2 py-0.5 text-sand-900">
+            {t("evidenceLevel.basisField")}
+          </span>
+          {thinTemporal && (
+            <span className="rounded-full border border-amber-400 bg-amber-50 px-2 py-0.5 text-amber-950">
+              {t("evidenceLevel.singleObsChip")}
+            </span>
+          )}
+        </div>
+        <div className="grid gap-2 sm:grid-cols-2">
+          <div className="rounded-lg border border-sand-200 bg-sand-50 px-3 py-2 text-xs">
+            <div className="font-semibold text-sand-800/60">{t("analysis.decision.confidenceScore")}</div>
+            <div className="text-lg font-bold text-sand-900">
+              {fmtScore(confidenceScore)}
+              <span className="ms-1 text-xs font-semibold text-sand-800/50">/100</span>
+            </div>
+            <div className="mt-1 text-[10px] text-sand-800/60">
+              {t("evidenceLevel.temporalCoverage", {
+                n: nClear,
+                pct: temporalCov != null ? fmtScore(temporalCov, 1) : "—",
+              })}
+            </div>
+          </div>
+          <div className="rounded-lg border border-sand-200 bg-sand-50 px-3 py-2 text-xs">
+            <div className="font-semibold text-sand-800/60">{t("evidenceLevel.addFoCta")}</div>
+            <p className="mt-1 text-[11px] leading-relaxed text-sand-800/80">
+              {t("evidenceLevel.addFoHint")}
+            </p>
+          </div>
+        </div>
+        <p className="mt-3 text-[10px] italic text-sand-800/55">{t("evidenceLevel.fieldFootnote")}</p>
+      </section>
 
       <p className="rounded-lg border border-crop-600/20 bg-crop-600/5 px-3 py-2 text-xs font-semibold text-crop-800">
         {neqNote}
@@ -160,15 +216,14 @@ export default function DecisionChrome({
         <p className="text-sm font-semibold leading-relaxed text-sand-900">
           {satelliteStep || t("satelliteFirst.defaultDecision")}
         </p>
-        <p className="mt-2 text-xs text-sand-800/70">{t("satelliteFirst.optionalField")}</p>
       </section>
 
       {fieldGap && (
         <p className="rounded-xl border border-sand-300 bg-sand-50 px-3 py-2 text-xs text-sand-900">
-          <span className="font-semibold">{t("satelliteFirst.fieldHonestyChip")}: </span>
+          <span className="font-semibold">{t("evidenceLevel.basisField")}: </span>
           {ar
-            ? fieldGap.narrative_ar || fieldGap.severity_ar || t("satelliteFirst.optionalField")
-            : fieldGap.narrative_en || fieldGap.severity_en || t("satelliteFirst.optionalField")}
+            ? fieldGap.narrative_ar || fieldGap.severity_ar || t("evidenceLevel.basisField")
+            : fieldGap.narrative_en || fieldGap.severity_en || t("evidenceLevel.basisField")}
         </p>
       )}
 
@@ -212,10 +267,18 @@ export default function DecisionChrome({
             <span className="ms-1 text-sm font-semibold text-sand-800/50">/100</span>
           </div>
           <p className="mt-1 text-xs text-sand-800/60">{t("analysis.decision.confidenceSeparate")}</p>
-          <div className="mt-3 inline-flex flex-wrap items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-3 py-1 text-xs text-sky-950">
-            <span className="font-semibold">{t("analysis.decision.dataQualityChip")}</span>
-            <span className="font-mono font-bold">{fmtScore(confidence?.data_quality_confidence, 0)}%</span>
-            <span className="text-[10px] opacity-80">{t("analysis.decision.dataQualityChipHint")}</span>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <div className="inline-flex flex-wrap items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-3 py-1 text-xs text-sky-950">
+              <span className="font-semibold">{t("analysis.decision.dataQualityChip")}</span>
+              <span className="font-mono font-bold">{fmtScore(confidence?.data_quality_confidence, 0)}%</span>
+              <span className="text-[10px] opacity-80">{t("analysis.decision.dataQualityChipHint")}</span>
+            </div>
+            <div className="inline-flex flex-wrap items-center gap-2 rounded-full border border-amber-300 bg-amber-50 px-3 py-1 text-xs text-amber-950">
+              <span className="font-semibold">n_clear_dates={nClear}</span>
+              <span className="font-mono">
+                temporal {fmtScore(temporalCov, 1)}%
+              </span>
+            </div>
           </div>
         </div>
       </div>

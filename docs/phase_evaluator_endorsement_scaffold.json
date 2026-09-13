@@ -1,0 +1,65 @@
+{
+  "lock_id": "SCIENCE_LOCKS_v0.4_evaluator_endorsement",
+  "date": "2026-09-13",
+  "timezone": "Asia/Muscat",
+  "owner": "Agrofostery Scientist",
+  "verdict": "go_with_fixes",
+  "amends": [
+    "SCIENCE_LOCKS_v0.4_satellite_first",
+    "SCIENCE_LOCKS_v0.4_phase1_2"
+  ],
+  "evaluator_philosophy": "satellite_first_evidence_aware_field_optional_validated_at_system_level",
+  "stakeholder_field_verify": "optional_not_ux_gate",
+  "platform_scientific_validation": "required_methodology_checks",
+  "najd_model_validation": "not_validated",
+  "product_stamp": "provisional_satellite_analytical_service",
+  "evidence_level_enum": ["satellite_only", "enhanced_by_field_verification"],
+  "current_aou_evidence_level": "satellite_only",
+  "current_aou_n_clear_dates": 1,
+  "n_clear_scope": "aou_or_cell_scl_clear_dates_only",
+  "forbidden_n_clear_sources": [
+    "timeseries_window_date_count",
+    "hardcoded_4",
+    "assume_green_on_all_window_dates"
+  ],
+  "persistence": {
+    "n_clear_0": "null_renorm",
+    "n_clear_1": "null_or_0_status_single_date_insufficient",
+    "n_clear_2": "weak_thin_temporal",
+    "n_clear_ge_3": "frac_n_above_over_n_clear"
+  },
+  "ag_class_caps": {
+    "n_clear_lt_3": "possible",
+    "n_clear_lt_2": "possible_not_likely_or_very_likely"
+  },
+  "confidence_weights_unchanged": {
+    "data_quality": 0.40,
+    "n_clear_dates_over_8": 0.25,
+    "historical_depth": 0.20,
+    "prior_iou": 0.15
+  },
+  "ui": {
+    "lead_with": ["evidence_level", "confidence", "evidence_basis", "product_stamp"],
+    "field_optional_is": "footnote_not_lead",
+    "add_fo_cta": "optional_upgrade_not_gate"
+  },
+  "must_fix_before_expansion": [
+    "delete_hardcoded_n_clear_4_in_assign_aou_ids",
+    "delete_len_timeseries_dates_as_n_clear",
+    "recompute_nine_aous_likely_to_possible",
+    "persistence_null_when_n_clear_lt_2",
+    "evidence_level_chips_and_product_stamp"
+  ],
+  "mountain_seeding_hold": true,
+  "post_khareef_window": {"start": "2026-09-15", "end": "2026-10-31"},
+  "forbidden": [
+    "window_count_as_aou_n_clear",
+    "hardcoded_n_clear",
+    "strong_persistence_from_one_date",
+    "nine_aous_equals_validated_najd_model",
+    "field_visit_required_for_analysis",
+    "skip_platform_validation_because_fo_optional",
+    "onset_mpi_as_post_khareef"
+  ]
+}
+

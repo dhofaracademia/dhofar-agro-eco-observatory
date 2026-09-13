@@ -229,6 +229,9 @@ def main() -> int:
             ndre_available=ndre_available,
             evidence_gap_codes=gaps.get("missing_input_codes") or [],
         )
+        suit["evidence_level"] = "satellite_only"
+        suit["product_stamp"] = "provisional_satellite_analytical_service"
+        suit["najd_model_validation"] = "not_validated"
         suitability_units.append(suit)
 
         conf = compute_confidence(
@@ -241,16 +244,22 @@ def main() -> int:
             observation_date=latest.get("date"),
             product_id=latest.get("product_id"),
         )
+        conf["evidence_level"] = "satellite_only"
+        conf["product_stamp"] = "provisional_satellite_analytical_service"
+        conf["najd_model_validation"] = "not_validated"
         confidence_units.append(conf)
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     generated_at = datetime.now(timezone.utc).isoformat()
 
     common_meta = {
-        "version": "0.4.3-phase3-scaffolds",
+        "version": "0.4.4-evidence-level-honesty",
         "generated_at": generated_at,
-        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3",
+        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3 + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md",
         "status": "expert_v1_provisional",
+        "product_stamp": "provisional_satellite_analytical_service",
+        "najd_model_validation": "not_validated",
+        "evidence_level_default": "satellite_only",
         "never_merge": True,
         "mountain_apply": False,
         "action_auto_assign": False,

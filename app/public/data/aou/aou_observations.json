@@ -1,6 +1,6 @@
 {
   "version": "0.4.1",
-  "generated_at": "2026-09-09T04:46:34.832505+00:00",
+  "generated_at": "2026-09-13T10:08:25.243138+00:00",
   "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md",
   "units": [
     {
@@ -14,10 +14,10 @@
           "ndre": null,
           "ndre_available": false,
           "agricultural_probability": 61.73,
-          "ag_class": "likely",
+          "ag_class": "possible",
           "area_ha_est": 25.106,
-          "water_stress_score": 61.66,
-          "vigor_stress_score": 61.25,
+          "water_stress_score": 72.49,
+          "vigor_stress_score": 71.88,
           "alert": "bare",
           "possible_biotic_stress": false,
           "data_quality_confidence": 97.0,
@@ -25,7 +25,9 @@
           "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
           "tile": "39QYA",
           "cloud_cover": 0.867071,
-          "series_scope": "aou_members_aggregate"
+          "series_scope": "aou_members_aggregate",
+          "n_clear_dates": 1,
+          "persistence_status": "single_date_insufficient"
         }
       ],
       "window_context_series": [
@@ -73,8 +75,8 @@
           "agricultural_probability": 58.21,
           "ag_class": "possible",
           "area_ha_est": 100.416,
-          "water_stress_score": 48.02,
-          "vigor_stress_score": 49.05,
+          "water_stress_score": 52.04,
+          "vigor_stress_score": 53.58,
           "alert": "healthy",
           "possible_biotic_stress": false,
           "data_quality_confidence": 97.0,
@@ -82,7 +84,9 @@
           "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
           "tile": "39QYA",
           "cloud_cover": 0.867071,
-          "series_scope": "aou_members_aggregate"
+          "series_scope": "aou_members_aggregate",
+          "n_clear_dates": 1,
+          "persistence_status": "single_date_insufficient"
         }
       ],
       "window_context_series": [
@@ -128,18 +132,20 @@
           "ndre": null,
           "ndre_available": false,
           "agricultural_probability": 64.58,
-          "ag_class": "likely",
+          "ag_class": "possible",
           "area_ha_est": 50.208,
-          "water_stress_score": 47.47,
-          "vigor_stress_score": 47.02,
-          "alert": "bare",
+          "water_stress_score": 51.21,
+          "vigor_stress_score": 50.53,
+          "alert": "healthy",
           "possible_biotic_stress": false,
           "data_quality_confidence": 97.0,
           "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
           "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
           "tile": "39QYA",
           "cloud_cover": 0.867071,
-          "series_scope": "aou_members_aggregate"
+          "series_scope": "aou_members_aggregate",
+          "n_clear_dates": 1,
+          "persistence_status": "single_date_insufficient"
         }
       ],
       "window_context_series": [
@@ -187,8 +193,8 @@
           "agricultural_probability": 52.65,
           "ag_class": "possible",
           "area_ha_est": 25.098,
-          "water_stress_score": 62.66,
-          "vigor_stress_score": 62.6,
+          "water_stress_score": 74.0,
+          "vigor_stress_score": 73.91,
           "alert": "bare",
           "possible_biotic_stress": false,
           "data_quality_confidence": 97.0,
@@ -196,7 +202,9 @@
           "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
           "tile": "39QYA",
           "cloud_cover": 0.867071,
-          "series_scope": "aou_members_aggregate"
+          "series_scope": "aou_members_aggregate",
+          "n_clear_dates": 1,
+          "persistence_status": "single_date_insufficient"
         }
       ],
       "window_context_series": [
@@ -244,8 +252,8 @@
           "agricultural_probability": 46.22,
           "ag_class": "possible",
           "area_ha_est": 25.1,
-          "water_stress_score": 60.75,
-          "vigor_stress_score": 58.98,
+          "water_stress_score": 71.13,
+          "vigor_stress_score": 68.47,
           "alert": "bare",
           "possible_biotic_stress": false,
           "data_quality_confidence": 97.0,
@@ -253,7 +261,9 @@
           "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
           "tile": "39QYA",
           "cloud_cover": 0.867071,
-          "series_scope": "aou_members_aggregate"
+          "series_scope": "aou_members_aggregate",
+          "n_clear_dates": 1,
+          "persistence_status": "single_date_insufficient"
         }
       ],
       "window_context_series": [
@@ -301,8 +311,8 @@
           "agricultural_probability": 48.56,
           "ag_class": "possible",
           "area_ha_est": 50.201,
-          "water_stress_score": 56.56,
-          "vigor_stress_score": 56.57,
+          "water_stress_score": 64.84,
+          "vigor_stress_score": 64.86,
           "alert": "bare",
           "possible_biotic_stress": false,
           "data_quality_confidence": 97.0,
@@ -310,7 +320,9 @@
           "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
           "tile": "39QYA",
           "cloud_cover": 0.867071,
-          "series_scope": "aou_members_aggregate"
+          "series_scope": "aou_members_aggregate",
+          "n_clear_dates": 1,
+          "persistence_status": "single_date_insufficient"
         }
       ],
       "window_context_series": [
@@ -356,10 +368,10 @@
           "ndre": null,
           "ndre_available": false,
           "agricultural_probability": 64.8,
-          "ag_class": "likely",
+          "ag_class": "possible",
           "area_ha_est": 25.099,
-          "water_stress_score": 62.67,
-          "vigor_stress_score": 61.14,
+          "water_stress_score": 74.01,
+          "vigor_stress_score": 71.71,
           "alert": "bare",
           "possible_biotic_stress": false,
           "data_quality_confidence": 97.0,
@@ -367,7 +379,9 @@
           "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
           "tile": "39QYA",
           "cloud_cover": 0.867071,
-          "series_scope": "aou_members_aggregate"
+          "series_scope": "aou_members_aggregate",
+          "n_clear_dates": 1,
+          "persistence_status": "single_date_insufficient"
         }
       ],
       "window_context_series": [
@@ -413,10 +427,10 @@
           "ndre": null,
           "ndre_available": false,
           "agricultural_probability": 65.47,
-          "ag_class": "likely",
+          "ag_class": "possible",
           "area_ha_est": 25.104,
-          "water_stress_score": 52.63,
-          "vigor_stress_score": 54.98,
+          "water_stress_score": 58.95,
+          "vigor_stress_score": 62.47,
           "alert": "bare",
           "possible_biotic_stress": false,
           "data_quality_confidence": 97.0,
@@ -424,7 +438,9 @@
           "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
           "tile": "39QYA",
           "cloud_cover": 0.867071,
-          "series_scope": "aou_members_aggregate"
+          "series_scope": "aou_members_aggregate",
+          "n_clear_dates": 1,
+          "persistence_status": "single_date_insufficient"
         }
       ],
       "window_context_series": [
@@ -472,8 +488,8 @@
           "agricultural_probability": 49.46,
           "ag_class": "possible",
           "area_ha_est": 25.102,
-          "water_stress_score": 59.19,
-          "vigor_stress_score": 55.67,
+          "water_stress_score": 68.79,
+          "vigor_stress_score": 63.51,
           "alert": "bare",
           "possible_biotic_stress": false,
           "data_quality_confidence": 97.0,
@@ -481,7 +497,9 @@
           "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
           "tile": "39QYA",
           "cloud_cover": 0.867071,
-          "series_scope": "aou_members_aggregate"
+          "series_scope": "aou_members_aggregate",
+          "n_clear_dates": 1,
+          "persistence_status": "single_date_insufficient"
         }
       ],
       "window_context_series": [

@@ -40,9 +40,11 @@
       },
       "area_ha_est": 25.106,
       "agricultural_probability": 61.73,
-      "ag_class": "likely",
+      "ag_class": "possible",
       "region": "NJ",
-      "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72"
+      "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72",
+      "n_clear_dates": 1,
+      "persistence_status": "single_date_insufficient"
     },
     {
       "aou_id": "AOU-NJ-000002",
@@ -107,7 +109,9 @@
       "agricultural_probability": 58.21,
       "ag_class": "possible",
       "region": "NJ",
-      "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72"
+      "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72",
+      "n_clear_dates": 1,
+      "persistence_status": "single_date_insufficient"
     },
     {
       "aou_id": "AOU-NJ-000003",
@@ -154,9 +158,11 @@
       },
       "area_ha_est": 50.208,
       "agricultural_probability": 64.58,
-      "ag_class": "likely",
+      "ag_class": "possible",
       "region": "NJ",
-      "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72"
+      "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72",
+      "n_clear_dates": 1,
+      "persistence_status": "single_date_insufficient"
     },
     {
       "aou_id": "AOU-NJ-000004",
@@ -197,7 +203,9 @@
       "agricultural_probability": 52.65,
       "ag_class": "possible",
       "region": "NJ",
-      "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72"
+      "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72",
+      "n_clear_dates": 1,
+      "persistence_status": "single_date_insufficient"
     },
     {
       "aou_id": "AOU-NJ-000005",
@@ -238,7 +246,9 @@
       "agricultural_probability": 46.22,
       "ag_class": "possible",
       "region": "NJ",
-      "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72"
+      "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72",
+      "n_clear_dates": 1,
+      "persistence_status": "single_date_insufficient"
     },
     {
       "aou_id": "AOU-NJ-000006",
@@ -287,7 +297,9 @@
       "agricultural_probability": 48.56,
       "ag_class": "possible",
       "region": "NJ",
-      "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72"
+      "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72",
+      "n_clear_dates": 1,
+      "persistence_status": "single_date_insufficient"
     },
     {
       "aou_id": "AOU-NJ-000007",
@@ -326,9 +338,11 @@
       },
       "area_ha_est": 25.099,
       "agricultural_probability": 64.8,
-      "ag_class": "likely",
+      "ag_class": "possible",
       "region": "NJ",
-      "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72"
+      "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72",
+      "n_clear_dates": 1,
+      "persistence_status": "single_date_insufficient"
     },
     {
       "aou_id": "AOU-NJ-000008",
@@ -367,9 +381,11 @@
       },
       "area_ha_est": 25.104,
       "agricultural_probability": 65.47,
-      "ag_class": "likely",
+      "ag_class": "possible",
       "region": "NJ",
-      "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72"
+      "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72",
+      "n_clear_dates": 1,
+      "persistence_status": "single_date_insufficient"
     },
     {
       "aou_id": "AOU-NJ-000009",
@@ -410,8 +426,10 @@
       "agricultural_probability": 49.46,
       "ag_class": "possible",
       "region": "NJ",
-      "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72"
+      "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72",
+      "n_clear_dates": 1,
+      "persistence_status": "single_date_insufficient"
     }
   ],
-  "updated_at": "2026-09-09T04:46:34.831561+00:00"
+  "updated_at": "2026-09-13T10:08:25.242207+00:00"
 }

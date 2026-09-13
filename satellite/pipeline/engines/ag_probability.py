@@ -6,7 +6,8 @@ Core weights (sum 1.0 when NDRE present):
 If NDRE unavailable → redistribute 0.10 to NDVI peak + NDMI (half each).
 S1/DW are assists only (not implemented as sole voters in Phase 1).
 Gates: SCL already applied; <3 clear → max class possible;
-single-date spike alone cannot reach very_likely.
+n_clear < 2 → max possible (never likely/very_likely);
+persistence feature 0.0 when n_clear < 2 (never 0.5 from one date).
 """
 
 from __future__ import annotations
@@ -55,12 +56,12 @@ def ag_class_from_probability(
         if p < hi:
             label = name
             break
-    # Gate: <3 clear → cap at possible
+    # Gate: <3 clear → cap at possible (SCIENCE_LOCKS §1.3)
     if n_clear_dates < 3 and label in ("likely", "very_likely"):
         label = "possible"
-    # Gate: single-date NDVI spike alone cannot reach very_likely
-    if (single_date_only or n_clear_dates < 2) and label == "very_likely":
-        label = "likely"
+    # Gate: single-date (n_clear < 2) → max possible; never likely/very_likely
+    if (single_date_only or n_clear_dates < 2) and label in ("likely", "very_likely"):
+        label = "possible"
     if persistence_feature < 0.15 and label == "very_likely":
         label = "likely"
     return label
@@ -136,12 +137,29 @@ def feature_persistence(
     *,
     min_dates: int = 2,
 ) -> float:
+    """AOU/cell-scoped persistence only.
+
+    SCIENCE_LOCKS evaluator endorsement: n_clear < 2 → 0.0
+    (never 0.5 from one green date; never window length).
+    """
     if n_clear <= 0:
+        return 0.0
+    if n_clear < 2:
         return 0.0
     frac = n_dates_above_bare / max(n_clear, 1)
     if n_dates_above_bare < min_dates:
         return _clip01(frac * 0.5)
     return _clip01(frac)
+
+
+def persistence_status(n_clear: int) -> str:
+    if n_clear <= 0:
+        return "no_clear"
+    if n_clear < 2:
+        return "single_date_insufficient"
+    if n_clear < 3:
+        return "thin_temporal"
+    return "multi_date"
 
 
 def feature_phenology_proxy(ndvi: float, month: int | None) -> float:
@@ -198,9 +216,20 @@ def agricultural_probability(
         }
 
     weights = redistribute_ndre_weight(ndre_available and ndre is not None)
+    pers_raw = feature_persistence(n_dates_above_bare, n_clear_dates)
+    # n_clear < 2: omit persistence and renorm remaining weights (skip, not 0*0.18 drag).
+    # Class gates still cap at possible; probability may stay in range.
+    if n_clear_dates < 2 and "persistence" in weights:
+        weights = {k: v for k, v in weights.items() if k != "persistence"}
+        s = sum(weights.values())
+        if s > 0:
+            weights = {k: round(v / s, 6) for k, v in weights.items()}
+        pers_feat = None
+    else:
+        pers_feat = pers_raw
     feats = {
         "ndvi_peak": feature_ndvi_peak(ndvi, bare_floor),
-        "persistence": feature_persistence(n_dates_above_bare, n_clear_dates),
+        "persistence": 0.0 if pers_feat is None else pers_feat,
         "ndmi": feature_ndmi(ndmi),
         "swir": swir_feature if swir_feature is not None else feature_swir_response(ndvi, ndmi),
         "phenology": feature_phenology_proxy(ndvi, month),
@@ -220,7 +249,7 @@ def agricultural_probability(
     ag_class = ag_class_from_probability(
         prob,
         n_clear_dates=n_clear_dates,
-        persistence_feature=feats["persistence"],
+        persistence_feature=0.0 if pers_feat is None else float(pers_feat),
         single_date_only=single_date_only,
     )
 
@@ -228,7 +257,14 @@ def agricultural_probability(
         "agricultural_probability": round(prob, 2),
         "ag_class": ag_class,
         "weights": weights,
-        "features": {k: round(v, 4) for k, v in feats.items()},
+        "features": {
+            k: (None if k == "persistence" and pers_feat is None else round(v, 4))
+            for k, v in feats.items()
+        },
+        "n_clear_dates": int(n_clear_dates),
+        "n_dates_above_bare": int(n_dates_above_bare),
+        "persistence_status": persistence_status(int(n_clear_dates)),
+        "persistence_renormed": pers_feat is None,
         "ndre_available": bool(ndre_available and ndre is not None),
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§1",
         "s1_boost_pts": boost,
