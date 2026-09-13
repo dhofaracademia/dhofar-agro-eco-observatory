@@ -1,0 +1,290 @@
+{
+  "type": "FeatureCollection",
+  "name": "khareef_status_cells",
+  "generated_at": "2026-09-13T16:15:15.620668+00:00",
+  "asof_date": "2026-09-13",
+  "domain": "fog_escarpment",
+  "properties": {
+    "note_en": "Khareef status — vegetation and moisture indicators. Not a seeding recommendation.",
+    "note_ar": "حالة الخريف — مؤشرات غطاء ورطوبة. ليست توصية بذر.",
+    "version": "0.4-status-1",
+    "product_kind": "onset_window_dry_mpi_provisional",
+    "product_stamp": "provisional_satellite_analytical_service",
+    "khareef_stage": "late_khareef",
+    "stage_method": "calendar_heuristic",
+    "timing": "deferred",
+    "seeding_recommendation": "hold",
+    "partner_surface": "status_only",
+    "mountain_3b_hold": true,
+    "post_khareef_window": {
+      "start": "2026-09-15",
+      "end": "2026-10-31",
+      "open_for_post_stamp": false,
+      "post_stamp_allowed": false,
+      "reason": "Requires ≥1 SCL-clear S2 L2A in window + product_kind post_khareef_mpi + pipeline Approve SHA"
+    },
+    "science_lock": "SCIENCE_LOCKS_v0.4_khareef_status_tracker.md",
+    "forbidden": [
+      "plant_here",
+      "enrichment_seeding_scores",
+      "onset_mpi_as_post_khareef",
+      "mix_najd_arid",
+      "experimental_seeding_toggle"
+    ]
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          53.15,
+          16.8
+        ]
+      },
+      "properties": {
+        "id": "KS-sarfait",
+        "segment_id": "sarfait",
+        "name_en": "Sarfait / western Qamar fog escarpment",
+        "name_ar": "صرفيت / غرب القمر — منحدر الضباب",
+        "domain": "fog_escarpment",
+        "bbox": [
+          53.0,
+          16.65,
+          53.3,
+          16.95
+        ],
+        "optional_segment": false,
+        "khareef_stage": "insufficient",
+        "stage_method": "insufficient_pending_clear",
+        "ndvi": null,
+        "ndmi": null,
+        "ndre": null,
+        "ndre_available": false,
+        "n_clear": 0,
+        "data_quality": "no_scl_clear_claim_pending_stac",
+        "evidence_level": "insufficient",
+        "product_kind": "insufficient",
+        "product_stamp": "provisional_satellite_analytical_service",
+        "partner_surface": "status_only",
+        "seeding_recommendation": "hold",
+        "suitability": null,
+        "confidence": null,
+        "action": null,
+        "mpi": null,
+        "scene_cite": null,
+        "asof_date": "2026-09-13",
+        "why": [
+          "Status cell only — vegetation/moisture indicators, not a plant-here site.",
+          "Seeding-rec Hold (3.B) until post-khareef MPI window + pipeline Approve.",
+          "Fog species catalog is list-only — not mixed onto this cell as a rec."
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          53.5,
+          16.88
+        ]
+      },
+      "properties": {
+        "id": "KS-qamar",
+        "segment_id": "qamar",
+        "name_en": "Jabal Qamar seaward escarpment",
+        "name_ar": "جبل القمر — المنحدر البحري",
+        "domain": "fog_escarpment",
+        "bbox": [
+          53.25,
+          16.7,
+          53.75,
+          17.05
+        ],
+        "optional_segment": false,
+        "khareef_stage": "insufficient",
+        "stage_method": "insufficient_pending_clear",
+        "ndvi": null,
+        "ndmi": null,
+        "ndre": null,
+        "ndre_available": false,
+        "n_clear": 0,
+        "data_quality": "no_scl_clear_claim_pending_stac",
+        "evidence_level": "insufficient",
+        "product_kind": "insufficient",
+        "product_stamp": "provisional_satellite_analytical_service",
+        "partner_surface": "status_only",
+        "seeding_recommendation": "hold",
+        "suitability": null,
+        "confidence": null,
+        "action": null,
+        "mpi": null,
+        "scene_cite": null,
+        "asof_date": "2026-09-13",
+        "why": [
+          "Status cell only — vegetation/moisture indicators, not a plant-here site.",
+          "Seeding-rec Hold (3.B) until post-khareef MPI window + pipeline Approve.",
+          "Fog species catalog is list-only — not mixed onto this cell as a rec."
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          54.135,
+          17.15
+        ]
+      },
+      "properties": {
+        "id": "KS-qara",
+        "segment_id": "qara",
+        "name_en": "Jabal Qara fog-escarpment (locked mountain pilot bbox)",
+        "name_ar": "جبل القرا — منحدر الضباب (مربع الطيار المقفول)",
+        "domain": "fog_escarpment",
+        "bbox": [
+          54.05,
+          17.08,
+          54.22,
+          17.22
+        ],
+        "optional_segment": false,
+        "khareef_stage": "late_khareef",
+        "stage_method": "calendar_heuristic",
+        "ndvi": null,
+        "ndmi": null,
+        "ndre": null,
+        "ndre_available": false,
+        "n_clear": 3,
+        "data_quality": "onset_window_mpi_reuse",
+        "evidence_level": "satellite_onset_provisional",
+        "product_kind": "onset_window_dry_mpi_provisional",
+        "product_stamp": "provisional_satellite_analytical_service",
+        "partner_surface": "status_only",
+        "seeding_recommendation": "hold",
+        "suitability": null,
+        "confidence": null,
+        "action": null,
+        "mpi": {
+          "product_kind": "onset_window_dry_mpi_provisional",
+          "t0_source_window": "onset",
+          "not_post_khareef_persistence": true,
+          "aoi_mpi_class": "Low",
+          "mpi_meta_path": "satellite/pipeline/artifacts/mountain_pilot/mpi/mpi_run_meta.json"
+        },
+        "scene_cite": {
+          "source": "Copernicus Sentinel-2 L2A via Microsoft Planetary Computer",
+          "product_id": "S2B_MSIL2A_20260601T064619_R020_T39QZV_20260601T103750",
+          "date": "2026-06-01",
+          "tile": null,
+          "cloud_cover": null,
+          "note": "Cited from mountain_pilot mpi_run_meta (onset T0); not a live peak/post claim."
+        },
+        "asof_date": "2026-09-13",
+        "why": [
+          "Status cell only — vegetation/moisture indicators, not a plant-here site.",
+          "Seeding-rec Hold (3.B) until post-khareef MPI window + pipeline Approve.",
+          "Fog species catalog is list-only — not mixed onto this cell as a rec."
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          54.75,
+          17.18
+        ]
+      },
+      "properties": {
+        "id": "KS-samhan",
+        "segment_id": "samhan",
+        "name_en": "Jabal Samhan seaward escarpment",
+        "name_ar": "جبل سمحان — المنحدر البحري",
+        "domain": "fog_escarpment",
+        "bbox": [
+          54.55,
+          17.0,
+          54.95,
+          17.35
+        ],
+        "optional_segment": false,
+        "khareef_stage": "insufficient",
+        "stage_method": "insufficient_pending_clear",
+        "ndvi": null,
+        "ndmi": null,
+        "ndre": null,
+        "ndre_available": false,
+        "n_clear": 0,
+        "data_quality": "no_scl_clear_claim_pending_stac",
+        "evidence_level": "insufficient",
+        "product_kind": "insufficient",
+        "product_stamp": "provisional_satellite_analytical_service",
+        "partner_surface": "status_only",
+        "seeding_recommendation": "hold",
+        "suitability": null,
+        "confidence": null,
+        "action": null,
+        "mpi": null,
+        "scene_cite": null,
+        "asof_date": "2026-09-13",
+        "why": [
+          "Status cell only — vegetation/moisture indicators, not a plant-here site.",
+          "Seeding-rec Hold (3.B) until post-khareef MPI window + pipeline Approve.",
+          "Fog species catalog is list-only — not mixed onto this cell as a rec."
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          54.52,
+          16.93
+        ]
+      },
+      "properties": {
+        "id": "KS-mirbat_mughsayl",
+        "segment_id": "mirbat_mughsayl",
+        "name_en": "Mirbat–Mughsayl coastal fog fringe (catalog segment)",
+        "name_ar": "مرباط–المغيسيل — هامش ضباب ساحلي (قطعة كتالوج)",
+        "domain": "fog_escarpment",
+        "bbox": [
+          54.35,
+          16.82,
+          54.7,
+          17.05
+        ],
+        "optional_segment": true,
+        "khareef_stage": "insufficient",
+        "stage_method": "insufficient_pending_clear",
+        "ndvi": null,
+        "ndmi": null,
+        "ndre": null,
+        "ndre_available": false,
+        "n_clear": 0,
+        "data_quality": "no_scl_clear_claim_pending_stac",
+        "evidence_level": "insufficient",
+        "product_kind": "insufficient",
+        "product_stamp": "provisional_satellite_analytical_service",
+        "partner_surface": "status_only",
+        "seeding_recommendation": "hold",
+        "suitability": null,
+        "confidence": null,
+        "action": null,
+        "mpi": null,
+        "scene_cite": null,
+        "asof_date": "2026-09-13",
+        "why": [
+          "Status cell only — vegetation/moisture indicators, not a plant-here site.",
+          "Seeding-rec Hold (3.B) until post-khareef MPI window + pipeline Approve.",
+          "Fog species catalog is list-only — not mixed onto this cell as a rec."
+        ]
+      }
+    }
+  ]
+}
