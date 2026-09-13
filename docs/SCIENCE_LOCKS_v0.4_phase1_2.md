@@ -365,3 +365,10 @@ Engines: `engines/seed_intelligence.py` + `run_seed_intelligence.py`.
 
 Operators **must** contact Agrofostery Authority before any seeding campaign. Placeholder rows are not a planting order.
 
+---
+
+## Addendum 2026-09-13 — n_clear honesty (evaluator lock)
+
+**Superseding pointer:** [`SCIENCE_LOCKS_v0.4_evaluator_endorsement.md`](SCIENCE_LOCKS_v0.4_evaluator_endorsement.md)
+
+§1.3 gates stand, but `n_clear_dates` is **AOU- or cell-scoped SCL-clear dates only**. Window / `timeseries.json` length and any hardcoded `n_clear_dates=4` are forbidden. One clear date → persistence `null`/0, max `ag_class=possible`, no “temporal persistence” copy. Mountain seeding-rec Hold unchanged.

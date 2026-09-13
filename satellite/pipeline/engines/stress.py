@@ -56,10 +56,20 @@ def historical_anomaly_score(value: float | None, hist_median: float | None) -> 
     return _clip100(50.0 + 50.0 * min(1.0, (hist_median - value) / span))
 
 
-def persistence_score(flags_last_n: list[bool]) -> float:
-    """Stress flag true on ≥2 of last 3 clear observations → high."""
+def persistence_score(
+    flags_last_n: list[bool],
+    *,
+    n_clear_dates: int | None = None,
+) -> float | None:
+    """Stress flag true on ≥2 of last 3 clear observations → high.
+
+    Empty flags or n_clear_dates < 2 → None so caller renorms.
+    Do not invent a multi-date persistence signal (was 40.0) from one date.
+    """
     if not flags_last_n:
-        return 40.0  # unknown → mild neutral
+        return None
+    if n_clear_dates is not None and n_clear_dates < 2:
+        return None
     n = len(flags_last_n)
     hits = sum(1 for f in flags_last_n if f)
     if n >= 3 and hits >= 2:
@@ -87,7 +97,7 @@ def phenology_penalty_vigor(month: int | None, ndvi: float | None) -> float:
 def _combine(
     relative: float,
     historical: float | None,
-    persistence: float,
+    persistence: float | None,
     phenology: float,
 ) -> tuple[float, dict[str, float]]:
     base = {
@@ -99,15 +109,16 @@ def _combine(
     present = {
         "relative": True,
         "historical": historical is not None,
-        "persistence": True,
+        "persistence": persistence is not None,
         "phenology": True,
     }
     w = _renorm(base, present)
     hist_v = historical if historical is not None else 0.0
+    pers_v = persistence if persistence is not None else 0.0
     score = (
         w["relative"] * relative
         + w["historical"] * hist_v
-        + w["persistence"] * persistence
+        + w["persistence"] * pers_v
         + w["phenology"] * phenology
     )
     return round(_clip100(score), 2), {k: round(v, 4) for k, v in w.items()}
@@ -122,10 +133,11 @@ def water_stress_score(
     stress_flags_recent: list[bool] | None = None,
     month: int | None = None,
     ndvi: float | None = None,
+    n_clear_dates: int | None = None,
 ) -> dict[str, Any]:
     rel = relative_anomaly_score(ndmi, ndmi_p25_veg, ndmi_p50_veg)
     hist = historical_anomaly_score(ndmi, ndmi_hist_median)
-    pers = persistence_score(stress_flags_recent or [])
+    pers = persistence_score(stress_flags_recent or [], n_clear_dates=n_clear_dates)
     phen = phenology_penalty_water(month, ndvi)
     score, weights = _combine(rel, hist, pers, phen)
     return {
@@ -133,10 +145,15 @@ def water_stress_score(
         "components": {
             "relative": round(rel, 2),
             "historical": None if hist is None else round(hist, 2),
-            "persistence": round(pers, 2),
+            "persistence": None if pers is None else round(pers, 2),
             "phenology": round(phen, 2),
         },
         "weights_used": weights,
+        "persistence_status": (
+            "single_date_unknown"
+            if pers is None
+            else "multi_date"
+        ),
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§3.1",
         "status": "expert_v1",
     }
@@ -152,6 +169,7 @@ def vigor_stress_score(
     ndre_p25: float | None = None,
     stress_flags_recent: list[bool] | None = None,
     month: int | None = None,
+    n_clear_dates: int | None = None,
 ) -> dict[str, Any]:
     # Prefer NDVI; if NDRE present, blend 70/30 into relative term
     rel_ndvi = relative_anomaly_score(ndvi, ndvi_p25_veg, ndvi_p50_veg)
@@ -161,7 +179,7 @@ def vigor_stress_score(
     else:
         rel = rel_ndvi
     hist = historical_anomaly_score(ndvi, ndvi_hist_median)
-    pers = persistence_score(stress_flags_recent or [])
+    pers = persistence_score(stress_flags_recent or [], n_clear_dates=n_clear_dates)
     phen = phenology_penalty_vigor(month, ndvi)
     score, weights = _combine(rel, hist, pers, phen)
     return {
@@ -169,10 +187,15 @@ def vigor_stress_score(
         "components": {
             "relative": round(rel, 2),
             "historical": None if hist is None else round(hist, 2),
-            "persistence": round(pers, 2),
+            "persistence": None if pers is None else round(pers, 2),
             "phenology": round(phen, 2),
         },
         "weights_used": weights,
+        "persistence_status": (
+            "single_date_unknown"
+            if pers is None
+            else "multi_date"
+        ),
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§3.2",
         "status": "expert_v1",
         "note": "High vigor stress → management / possible nutrient — NOT fertilizer diagnosis",

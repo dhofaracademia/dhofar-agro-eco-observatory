@@ -56,6 +56,17 @@ export default function SeedCatalogPanel({ domain }: { domain: "najd_arid" | "fo
 
   return (
     <section className="space-y-3">
+      <div className="flex flex-wrap gap-2 text-[10px] font-semibold">
+        <span className="rounded-full border border-amber-300 bg-amber-50 px-2 py-0.5 text-amber-950">
+          {t("evidenceLevel.productStampShort")}
+        </span>
+        <span className="rounded-full border border-amber-300 bg-amber-50 px-2 py-0.5 text-amber-950">
+          {t("evidenceLevel.najdNotValidated")}
+        </span>
+        <span className="rounded-full border border-crop-600/30 bg-crop-600/5 px-2 py-0.5 text-crop-800">
+          {t("evidenceLevel.satellite_only")}
+        </span>
+      </div>
       <div className="flex flex-wrap items-center gap-2">
         <h3 className="text-sm font-semibold text-crop-700">
           {domain === "najd_arid" ? t("seed.najdTitle") : t("seed.fogTitle")}

@@ -7,7 +7,7 @@ Modes:
      and rewrite latest_alerts with new fields (ndre null if unavailable).
   2) Called after run_monitor.py full STAC path (same writers).
 
-Cite: docs/SCIENCE_LOCKS_v0.4_phase1_2.md
+Cite: docs/SCIENCE_LOCKS_v0.4_phase1_2.md + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md
 AOU ≠ farm; DQ ≠ ecological confidence; biotic ≠ pest certainty.
 500 m grid remains fallback/debug (geometry_kind=monitoring_grid_500m).
 """
@@ -66,8 +66,13 @@ def cell_key(props: dict) -> str:
     return f"grid:{props.get('date')}:{round(props.get('ndvi', 0), 4)}:{round(props.get('ndmi', 0), 4)}:{props.get('pixel_count')}"
 
 
-def enrich_features(features: list[dict], *, n_clear_dates: int, month: int | None) -> list[dict]:
-    """Apply AgProb + stress + biotic to monitoring-grid features."""
+def enrich_features(features: list[dict], *, month: int | None) -> list[dict]:
+    """Apply AgProb + stress + biotic to monitoring-grid features.
+
+    n_clear_dates is per-cell / AOU-scoped SCL-clear count — NEVER the
+    AOI timeseries window length (SCIENCE_LOCKS evaluator endorsement).
+    Offline enrich has one observation date per cell → n_clear_dates=1.
+    """
     # Neighbor NDVI medians for biotic spatial term (simple peer p25 fallback)
     veg_ndvi = [
         f["properties"]["ndvi"]
@@ -97,15 +102,12 @@ def enrich_features(features: list[dict], *, n_clear_dates: int, month: int | No
             p["ndre_status"] = "unavailable"
             p["ndre_band"] = None
 
-        # Without per-cell multi-date history, estimate persistence from window
-        # clear-date count when the cell is currently vegetated (documented).
-        if ndvi >= BARE_NDVI and n_clear_dates >= 2:
-            n_above = min(n_clear_dates, 3)
-            persistence_estimated = True
-        else:
-            n_above = 1 if ndvi >= BARE_NDVI else 0
-            persistence_estimated = False
-        persistence_gate = n_clear_dates >= 2 and ndvi >= BARE_NDVI
+        # Cell-scoped clear dates only. No multi-date cell history offline → 1.
+        # FORBIDDEN: len(timeseries.dates) / window length as n_clear_dates.
+        n_clear_dates = 1
+        n_above = 1 if ndvi >= BARE_NDVI else 0
+        persistence_estimated = False  # window must never raise class alone
+        persistence_gate = False  # requires AOU/cell n_clear >= 2
 
         swir_feature = p.get("swir_feature")
         ag = agricultural_probability(
@@ -126,7 +128,10 @@ def enrich_features(features: list[dict], *, n_clear_dates: int, month: int | No
         p["agricultural_probability"] = ag["agricultural_probability"]
         p["ag_class"] = ag["ag_class"]
         p["ag_probability_status"] = "expert_v1"
-        p["persistence_gate"] = persistence_gate or ag["features"].get("persistence", 0) >= 0.5
+        p["n_clear_dates"] = n_clear_dates
+        p["n_dates_above_bare"] = n_above
+        p["persistence_status"] = ag.get("persistence_status", "single_date_insufficient")
+        p["persistence_gate"] = False
         p["persistence_estimated_from_window"] = persistence_estimated
         p["formula_ref_ag"] = ag["formula_ref"]
 
@@ -141,6 +146,7 @@ def enrich_features(features: list[dict], *, n_clear_dates: int, month: int | No
             stress_flags_recent=[],
             month=month,
             ndvi=ndvi,
+            n_clear_dates=n_clear_dates,
         )
         vigor = vigor_stress_score(
             ndvi=ndvi,
@@ -150,6 +156,7 @@ def enrich_features(features: list[dict], *, n_clear_dates: int, month: int | No
             ndre=ndre if ndre_available else None,
             stress_flags_recent=[],
             month=month,
+            n_clear_dates=n_clear_dates,
         )
         p["water_stress_score"] = water["water_stress_score"]
         p["vigor_stress_score"] = vigor["vigor_stress_score"]
@@ -187,74 +194,193 @@ def enrich_features(features: list[dict], *, n_clear_dates: int, month: int | No
     return out
 
 
+def _aou_scoped_clear_count(rec: dict[str, Any], observation_date: str) -> int:
+    """Distinct AOU observation dates (not window length). Offline today → 1."""
+    dates = set()
+    for key in ("first_seen_date", "last_seen_date"):
+        if rec.get(key):
+            dates.add(str(rec[key]))
+    if observation_date:
+        dates.add(str(observation_date))
+    # first_seen == last_seen == observation → one clear date
+    return max(1, len(dates)) if dates else 1
+
+
 def assign_aou_ids(
     features: list[dict],
     registry_json_path: Path,
     observation_date: str,
 ) -> tuple[list[dict], dict[str, Any], list[dict]]:
-    """Segment high-probability cells → persistent AOUs; stamp aou_id on members."""
+    """Persistent AOUs: re-score existing units honestly; segment only if registry empty.
+
+    FORBIDDEN: hardcoded n_clear_dates=4 / persistence_feature=0.5.
+    n_clear is AOU-scoped (today 1). Soft window persistence never raises class.
+    """
+    from engines.ag_probability import (
+        ag_class_from_probability,
+        agricultural_probability,
+    )
+
     registry = load_registry(registry_json_path)
-    candidates = segment_probability_mask(features)
-    aou_features = []
+    aou_features: list[dict] = []
     cell_to_aou: dict[int, str] = {}
+    active = [u for u in (registry.get("units") or []) if u.get("active", True) and u.get("geometry")]
 
-    # Map member cells by identity of properties object id — use geometry wkt-ish
-    for cand in candidates:
-        props = {
-            "agricultural_probability": cand["agricultural_probability"],
-            "ag_class": None,
-            "area_ha_est": cand["area_ha_est"],
-        }
-        # derive ag_class from mean probability
-        from engines.ag_probability import ag_class_from_probability
-
-        if cand["agricultural_probability"] is not None:
-            props["ag_class"] = ag_class_from_probability(
-                cand["agricultural_probability"],
-                n_clear_dates=4,
-                persistence_feature=0.5,
-            )
-        aou_id, rec = mint_or_match_aou(
-            cand["geometry"],
-            registry,
-            observation_date=observation_date,
-            props=props,
+    def _honest_class(prob: float | None, n_clear: int) -> str | None:
+        if prob is None:
+            return None
+        return ag_class_from_probability(
+            float(prob),
+            n_clear_dates=n_clear,
+            persistence_feature=0.0 if n_clear < 2 else 0.5,
+            single_date_only=n_clear < 2,
         )
-        # mark member cells: match by centroid proximity of cell polygons
-        for i, f in enumerate(features):
+
+    def _score_unit_from_ndvi_ndmi(ndvi, ndmi, month: int | None, n_clear: int) -> dict:
+        if ndvi is None or ndmi is None:
+            return {"agricultural_probability": None, "ag_class": None}
+        ag = agricultural_probability(
+            ndvi=float(ndvi),
+            ndmi=float(ndmi),
+            n_clear_dates=n_clear,
+            n_dates_above_bare=1 if float(ndvi) >= BARE_NDVI else 0,
+            month=month,
+        )
+        return {
+            "agricultural_probability": ag["agricultural_probability"],
+            "ag_class": ag["ag_class"],
+            "persistence_status": ag.get("persistence_status", "single_date_insufficient"),
+        }
+
+    month = None
+    if observation_date:
+        try:
+            month = int(str(observation_date).split("-")[1])
+        except Exception:
+            month = None
+
+    if active:
+        # Re-score path: keep 9 (or N) identities; do not mint from inflated window gates
+        for rec in active:
+            aou_id = rec["aou_id"]
+            n_clear = 1  # AOU-scoped; multi-date history not yet tracked per unit
+            scored = _score_unit_from_ndvi_ndmi(rec.get("ndvi"), rec.get("ndmi"), month, n_clear)
+            # Prefer recompute; fall back to class-gate on stored probability
+            mean_prob = scored["agricultural_probability"]
+            if mean_prob is None:
+                mean_prob = rec.get("agricultural_probability")
+            ag_class = scored["ag_class"] or _honest_class(mean_prob, n_clear)
+            pers_status = scored.get("persistence_status") or "single_date_insufficient"
+
             try:
-                g = shape(f["geometry"])
-                if cand["geometry"].intersects(g):
-                    cell_to_aou[i] = aou_id
+                geom = shape(rec["geometry"])
             except Exception:
                 continue
+            member_count = 0
+            for i, f in enumerate(features):
+                try:
+                    g = shape(f["geometry"])
+                    if geom.intersects(g) and (f["properties"].get("ndvi") or 0) >= BARE_NDVI:
+                        cell_to_aou[i] = aou_id
+                        member_count += 1
+                except Exception:
+                    continue
 
-        aou_features.append(
-            {
-                "type": "Feature",
-                "geometry": mapping(cand["geometry"]),
-                "properties": {
-                    "aou_id": aou_id,
-                    "previous_ids": rec.get("previous_ids", []),
-                    "first_seen_date": rec.get("first_seen_date"),
-                    "last_seen_date": rec.get("last_seen_date"),
-                    "active": True,
-                    "agricultural_probability": cand["agricultural_probability"],
-                    "ag_class": props["ag_class"],
-                    "area_ha_est": cand["area_ha_est"],
-                    "ndvi": cand.get("ndvi_mean"),
-                    "ndmi": cand.get("ndmi_mean"),
-                    "ndre": None,
-                    "ndre_available": False,
-                    "ndre_status": "unavailable",
-                    "member_count": cand["member_count"],
-                    "geometry_kind": "aou_segment",
-                    "aou_not_official_farm": True,
-                    "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§1-2",
-                    "date": observation_date,
-                },
+            rec["agricultural_probability"] = mean_prob
+            rec["ag_class"] = ag_class
+            rec["n_clear_dates"] = n_clear
+            rec["persistence_status"] = pers_status
+            rec["last_seen_date"] = observation_date
+
+            aou_features.append(
+                {
+                    "type": "Feature",
+                    "geometry": rec["geometry"],
+                    "properties": {
+                        "aou_id": aou_id,
+                        "previous_ids": rec.get("previous_ids", []),
+                        "first_seen_date": rec.get("first_seen_date"),
+                        "last_seen_date": observation_date,
+                        "active": True,
+                        "agricultural_probability": mean_prob,
+                        "ag_class": ag_class,
+                        "area_ha_est": rec.get("area_ha_est"),
+                        "ndvi": rec.get("ndvi"),
+                        "ndmi": rec.get("ndmi"),
+                        "ndre": None,
+                        "ndre_available": False,
+                        "ndre_status": "unavailable",
+                        "member_count": member_count or rec.get("member_count"),
+                        "geometry_kind": "aou_segment",
+                        "aou_not_official_farm": True,
+                        "n_clear_dates": n_clear,
+                        "persistence_status": pers_status,
+                        "persistence_estimated_from_window": False,
+                        "evidence_level": "satellite_only",
+                        "product_stamp": "provisional_satellite_analytical_service",
+                        "najd_model_validation": "not_validated",
+                        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§1-2",
+                        "date": observation_date,
+                    },
+                }
+            )
+    else:
+        # Cold start only: segment mask (honest cell scores; no window persistence gate)
+        candidates = segment_probability_mask(features)
+        for cand in candidates:
+            n_clear = 1
+            props = {
+                "agricultural_probability": cand["agricultural_probability"],
+                "ag_class": _honest_class(cand["agricultural_probability"], n_clear),
+                "area_ha_est": cand["area_ha_est"],
+                "n_clear_dates": n_clear,
+                "persistence_status": "single_date_insufficient",
             }
-        )
+            aou_id, rec = mint_or_match_aou(
+                cand["geometry"],
+                registry,
+                observation_date=observation_date,
+                props=props,
+            )
+            for i, f in enumerate(features):
+                try:
+                    g = shape(f["geometry"])
+                    if cand["geometry"].intersects(g):
+                        cell_to_aou[i] = aou_id
+                except Exception:
+                    continue
+            aou_features.append(
+                {
+                    "type": "Feature",
+                    "geometry": mapping(cand["geometry"]),
+                    "properties": {
+                        "aou_id": aou_id,
+                        "previous_ids": rec.get("previous_ids", []),
+                        "first_seen_date": rec.get("first_seen_date"),
+                        "last_seen_date": rec.get("last_seen_date"),
+                        "active": True,
+                        "agricultural_probability": cand["agricultural_probability"],
+                        "ag_class": props["ag_class"],
+                        "area_ha_est": cand["area_ha_est"],
+                        "ndvi": cand.get("ndvi_mean"),
+                        "ndmi": cand.get("ndmi_mean"),
+                        "ndre": None,
+                        "ndre_available": False,
+                        "ndre_status": "unavailable",
+                        "member_count": cand["member_count"],
+                        "geometry_kind": "aou_segment",
+                        "aou_not_official_farm": True,
+                        "n_clear_dates": n_clear,
+                        "persistence_status": "single_date_insufficient",
+                        "persistence_estimated_from_window": False,
+                        "evidence_level": "satellite_only",
+                        "product_stamp": "provisional_satellite_analytical_service",
+                        "najd_model_validation": "not_validated",
+                        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§1-2",
+                        "date": observation_date,
+                    },
+                }
+            )
 
     for i, f in enumerate(features):
         if i in cell_to_aou:
@@ -318,6 +444,8 @@ def build_observations(
                     "tile": members[0].get("tile"),
                     "cloud_cover": members[0].get("cloud_cover"),
                     "series_scope": "aou_members_aggregate",
+                    "n_clear_dates": 1,
+                    "persistence_status": "single_date_insufficient",
                 }
             )
         # Honest window-level companion points (not AOU-true history yet)
@@ -373,7 +501,8 @@ def main() -> int:
 
     geo = json.loads(alerts_path.read_text())
     ts = json.loads(ts_path.read_text()) if ts_path.exists() else {"dates": []}
-    n_clear = max(1, len(ts.get("dates") or []))
+    # Window / AOI timeseries length is CONTEXT ONLY — never AOU n_clear_dates.
+    window_date_count = len(ts.get("dates") or [])
     date = geo.get("properties", {}).get("date") or (geo["features"][0]["properties"].get("date") if geo.get("features") else None)
     month = None
     if date:
@@ -382,8 +511,12 @@ def main() -> int:
         except Exception:
             month = None
 
-    print(f"Enriching {len(geo.get('features', []))} cells; n_clear_dates={n_clear} date={date}")
-    enriched = enrich_features(geo["features"], n_clear_dates=n_clear, month=month)
+    print(
+        f"Enriching {len(geo.get('features', []))} cells; "
+        f"cell/AOU n_clear_dates=1 (scoped); "
+        f"window_dates={window_date_count} (context only); date={date}"
+    )
+    enriched = enrich_features(geo["features"], month=month)
     enriched, registry, aou_feats = assign_aou_ids(enriched, registry_json, date or "1970-01-01")
 
     alert_counts: dict[str, int] = defaultdict(int)
@@ -413,11 +546,17 @@ def main() -> int:
             "geometry_kinds": ["monitoring_grid_500m", "aou_segment"],
             "aou_count": len(aou_feats),
             "possible_biotic_stress_count": biotic_n,
+            "product_stamp": "provisional_satellite_analytical_service",
+            "najd_model_validation": "not_validated",
+            "evidence_level_default": "satellite_only",
+            "window_date_count_context_only": window_date_count,
             "note": (
                 "Alerts use Water/Vigor stress scores (expert v1) mapped to UI codes. "
                 "AOU ≠ official farm. possible_biotic_stress ≠ pest certainty. "
                 "Data-quality confidence ≠ ecological confidence. "
-                "500m grid is fallback/debug; segmented AOUs are in aou/aou_registry.geojson."
+                "n_clear_dates is AOU/cell-scoped — never timeseries window length. "
+                "500m grid is fallback/debug; segmented AOUs are in aou/aou_registry.geojson. "
+                "provisional_satellite_analytical_service; najd_model_validation=not_validated."
             ),
         }
     )
@@ -440,6 +579,8 @@ def main() -> int:
             "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§2",
             "aou_not_official_farm": True,
             "count": len(aou_feats),
+            "product_stamp": "provisional_satellite_analytical_service",
+            "najd_model_validation": "not_validated",
             "last_updated": datetime.now(timezone.utc).isoformat(),
         },
         "features": aou_feats,

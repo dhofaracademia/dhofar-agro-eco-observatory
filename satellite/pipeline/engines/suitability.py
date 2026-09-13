@@ -92,22 +92,21 @@ def ndvi_persistence_feature(
     persistence_score_0_1: float | None = None,
     agricultural_probability: float | None = None,
 ) -> float | None:
-    """Prefer explicit persistence; else derive a thin provisional proxy.
+    """Prefer explicit persistence; else derive from AOU-scoped clear dates.
 
-    Not inventing multi-date truth: single-date → capped low persistence.
+    SCIENCE_LOCKS evaluator endorsement: n_clear < 2 → null (renorm).
+    Never inject 0.25 and call it persistence from one date.
     """
+    if n_clear_dates is not None and n_clear_dates < 2:
+        return None
     if persistence_score_0_1 is not None:
         return _clip01(persistence_score_0_1)
     if n_clear_dates is not None:
-        # Cap: ≥4 clear dates → 1.0; 1 date → 0.25 (cannot claim persistence)
         if n_clear_dates <= 0:
-            return 0.0
-        if n_clear_dates == 1:
-            return 0.25
+            return None
         return _clip01(n_clear_dates / 4.0)
-    if agricultural_probability is not None:
-        # Last-resort weak proxy — stamped provisional via status
-        return _clip01(float(agricultural_probability) / 100.0 * 0.5)
+    # Without n_clear, do not invent persistence from AgProb alone
+    _ = agricultural_probability
     return None
 
 
@@ -276,7 +275,7 @@ def _cautions(
     if ndre_available is False:
         out.append("NDRE unavailable on this AOU observation.")
     if n_clear_dates is not None and n_clear_dates <= 1:
-        out.append("Thin AOU clear-date history — persistence is a weak provisional proxy.")
+        out.append("1 clear date — temporal persistence not established (ndvi_persistence null / renorm).")
     if prior_iou is None:
         out.append("No prior IoU (new or unmatched ID) — geometry stability uses area gate only.")
     for code in evidence_gap_codes:
