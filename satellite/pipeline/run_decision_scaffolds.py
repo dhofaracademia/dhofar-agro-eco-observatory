@@ -145,12 +145,19 @@ def _latest_obs(unit: dict) -> dict | None:
 
 
 def _n_clear_dates(unit: dict) -> int:
-    """Count AOU-scoped observations (not window stubs)."""
-    n = 0
+    """Distinct AOU ledger dates (not window stubs / not first_seen alone)."""
+    if unit.get("n_clear_dates") is not None:
+        try:
+            return int(unit["n_clear_dates"])
+        except (TypeError, ValueError):
+            pass
+    dates = set()
     for o in unit.get("observations") or []:
-        if o.get("date") and o.get("series_scope") != "window_not_aou":
-            n += 1
-    return n
+        if o.get("series_scope") == "window_not_aou":
+            continue
+        if o.get("date") and o.get("ndvi") is not None:
+            dates.add(str(o["date"]))
+    return len(dates)
 
 
 def _window_stub_only(unit: dict) -> bool:
@@ -253,9 +260,9 @@ def main() -> int:
     generated_at = datetime.now(timezone.utc).isoformat()
 
     common_meta = {
-        "version": "0.4.4-evidence-level-honesty",
+        "version": "0.4.5-aou-temporal-ledger",
         "generated_at": generated_at,
-        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3 + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md",
+        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3 + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md",
         "status": "expert_v1_provisional",
         "product_stamp": "provisional_satellite_analytical_service",
         "najd_model_validation": "not_validated",

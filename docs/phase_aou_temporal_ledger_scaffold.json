@@ -1,0 +1,50 @@
+{
+  "lock_id": "SCIENCE_LOCKS_v0.4_aou_temporal_ledger",
+  "date": "2026-09-13",
+  "timezone": "Asia/Muscat",
+  "owner_pipeline_role": "Agrofostery Scientist",
+  "verdict": "go_with_fixes",
+  "ai_pipeline_role": true,
+  "human_review": "pending",
+  "mountain_seeding_hold": true,
+  "n_clear_gates_unchanged": true,
+  "resolved_n_clear_fake": {
+    "live_fail_sha": "5ad4016",
+    "resolved_sha": "85e2467",
+    "status": "historical_resolved"
+  },
+  "p0_must_fix": [
+    "append_upsert_aou_ledger",
+    "never_wipe_obs_to_latest_only",
+    "n_clear_from_ledger_not_first_last_seen",
+    "window_not_aou_not_in_ledger"
+  ],
+  "p1": [
+    "current_detection_enum",
+    "active_is_identity_not_confirmed_farm",
+    "geometry_gate_when_prior_iou_null",
+    "mark_evaluator_live_fail_resolved",
+    "future_validation_states_documented_not_auto"
+  ],
+  "current_detection_enum": [
+    "detected",
+    "weak",
+    "not_detected"
+  ],
+  "najd_model_validation_today": "not_validated",
+  "najd_model_validation_future": [
+    "not_validated",
+    "pipeline_validated",
+    "methodology_reviewed",
+    "empirically_validated"
+  ],
+  "forbidden": [
+    "wipe_ledger",
+    "window_dates_as_aou_n_clear",
+    "first_seen_last_seen_as_n_clear",
+    "relax_class_gates",
+    "active_as_confirmed_farm",
+    "area_gate_as_temporal_stability",
+    "collapse_validation_states"
+  ]
+}

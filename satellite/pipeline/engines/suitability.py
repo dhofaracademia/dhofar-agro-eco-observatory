@@ -166,6 +166,7 @@ def compute_suitability(
         phenology=phenology,
         terrain=terrain,
         score=score,
+        prior_iou=prior_iou,
     )
     cautions = _cautions(
         ndre_available=ndre_available,
@@ -234,6 +235,7 @@ def _drivers(
     phenology: float | None,
     terrain: float,
     score: float | None,
+    prior_iou: float | None = None,
 ) -> list[str]:
     bullets: list[str] = []
     if ag_norm is not None:
@@ -248,7 +250,10 @@ def _drivers(
         )
     if phenology is not None:
         bullets.append(f"Phenology / NDVI persistence fit: {phenology:.2f}.")
-    bullets.append(f"Geometry stability (AOU IoU/area gate): {terrain:.2f}.")
+    if prior_iou is None:
+        bullets.append(f"Geometry gate (area ≥ 2 ha): {terrain:.2f}.")
+    else:
+        bullets.append(f"Geometry stability (AOU IoU): {terrain:.2f}.")
     if score is not None:
         bullets.append(
             f"Weighted suitability_score={score:.1f} shown as components_only "
@@ -277,7 +282,10 @@ def _cautions(
     if n_clear_dates is not None and n_clear_dates <= 1:
         out.append("1 clear date — temporal persistence not established (ndvi_persistence null / renorm).")
     if prior_iou is None:
-        out.append("No prior IoU (new or unmatched ID) — geometry stability uses area gate only.")
+        out.append(
+            "No prior IoU (new or unmatched ID) — geometry gate (area ≥ 2 ha) only; "
+            "not temporal stability / geometry stability."
+        )
     for code in evidence_gap_codes:
         out.append(f"Evidence gap: {code}")
     return out
