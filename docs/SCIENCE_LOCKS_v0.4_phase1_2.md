@@ -1,9 +1,8 @@
 # Science locks — Spec / Roadmap v0.4 Decision Engines (Phase 1 + Phase 2)
 
-> **Disclosure:** “Agrofostery Scientist”, “AgriTech Developer”, “Programmer”, and “Chief of Staff” here are **role names for AI agents** in an internal multi-agent development pipeline (engineering red-team / blue-team style), **not** sign-off by an independent certified human forestry/ecology expert. **Independent human scientific review is still pending.** These locks constrain pipeline honesty; they are not external Authority or EA approval.
+> **Disclosure (EN):** Role names in these locks (“Agrofostery Scientist”, “AgriTech”, “Chief of Staff”, and others) are **AI pipeline roles** in a multi-agent engineering workflow. They are **not** an independent certified human expert, a licensed professional sign-off, or هيئة البيئة / ministry approval. **Human scientific review is still pending.** The ecological rules below stay binding for the software until a **named human reviewer** replaces this stamp.
 >
-> **إفصاح:** «Agrofostery Scientist» و«AgriTech» و«Programmer» و«Chief of Staff» هنا **أسماء أدوار لوكلاء ذكاء اصطناعي** ضمن خط تطوير متعدد الوكلاء، **وليست** مراجعة من خبير بشري مستقل معتمد في الحراجة/البيئة. **المراجعة البشرية المستقلة لا تزال معلّقة.** هذه الأقفال تضبط صدق خط الإنتاج؛ وليست اعتماداً من الهيئة أو جهة خارجية.
-
+> **إفصاح (AR):** أسماء الأدوار في هذه الأقفال («Agrofostery Scientist» وغيرها) هي **أدوار خط أنابيب ذكاء اصطناعي** في عمل هندسي متعدد الوكلاء. ليست خبيراً بشرياً معتمداً مستقلاً، وليست اعتماداً مهنياً مرخّصاً، وليست اعتماد هيئة البيئة أو الوزارة. **المراجعة العلمية البشرية لا تزال معلّقة.** القواعد البيئية أدناه تبقى مُلزمة للبرمجيات حتى يستبدل **مراجع بشري مسمّى** هذا الختم.
 
 **Owner:** Pipeline role: Agrofostery Scientist (AI agent) — species / ecology / honesty  
 **Audience:** Programmer + AgriTech  
@@ -231,13 +230,12 @@ Agricultural Probability v1, AOU IDs, Water/Vigor scores mapped to existing aler
 
 ---
 
-## Sign-off (AI pipeline role — not human expert credential)
+## Pipeline lock (AI role — not a certified human sign-off)
 
-Phase 1 gates above are **binding** for Programmer start.  
-Phase 2 definitions binding for structure; numeric thresholds marked “calibrate with field data.”  
-Questions → Agrofostery Scientist before relaxing Forbidden list.
+**Role:** Agrofostery Scientist (AI pipeline) — 2026-09-09 (Asia/Muscat)  
+**Not:** independent certified human expert; not هيئة البيئة / ministry approval.  
+**Human review:** pending.
 
----
 
 ## Phase 3 addendum — Agriculture AOU Suitability / Confidence (2026-09-09)
 
