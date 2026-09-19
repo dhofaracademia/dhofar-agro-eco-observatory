@@ -67,11 +67,3 @@ jobs:
         run: |
           npm ci
           npm run build
-
-# ---------------------------------------------------------------------------
-# Maintainer note: if push to `.github/workflows/` is blocked (OAuth lacks
-# `workflow` scope), copy this file via a token/app with workflow write or the
-# GitHub UI. Required skip ≠ green — suites must actually run.
-# Local merge-gate:
-#   cd satellite/pipeline && python tests/test_*.py
-# ---------------------------------------------------------------------------

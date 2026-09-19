@@ -43,11 +43,11 @@ def test_r2_numeric_min_valid_area_fraction_bound():
     assert DEFAULT_MIN_VALID_AREA_FRACTION_AOU is not None
     assert float(DEFAULT_MIN_VALID_AREA_FRACTION_AOU) == 0.20
     members = [
-        {"ndvi": 0.4, "ndmi": 0.1, "pixel_count": 100, "aou_overlap_area": 0.02},
-        {"ndvi": 0.4, "ndmi": 0.1, "pixel_count": 5, "aou_overlap_area": 0.49},
-        {"ndvi": 0.4, "ndmi": 0.1, "pixel_count": 5, "aou_overlap_area": 0.49},
+        {"ndvi": 0.4, "ndmi": 0.1, "pixel_count": 100, "clear_fraction": 1.0, "aou_overlap_area": 0.02},
+        {"ndvi": 0.4, "ndmi": 0.1, "pixel_count": 5, "clear_fraction": 0.0, "aou_overlap_area": 0.49},
+        {"ndvi": 0.4, "ndmi": 0.1, "pixel_count": 5, "clear_fraction": 0.0, "aou_overlap_area": 0.49},
     ]
-    # Default gate must fail ~2% area (case 5 fixture)
+    # Default gate must fail ~2% area (case 5 fixture); clear_fraction required (R4-1)
     status, meta = aou_assessability_with_area(
         members, min_clear_fraction=0.01, min_clear_members=1
     )
@@ -85,7 +85,7 @@ def test_r2_mint_stamps_provisional_and_never_unassessable_path():
     assert aou_id.startswith("AOU-")
     # Unassessable coverage must not mint via assessability gate (unit-level)
     weak = [
-        {"ndvi": 0.9, "ndmi": 0.2, "pixel_count": 5, "aou_overlap_area": 0.01},
+        {"ndvi": 0.9, "ndmi": 0.2, "pixel_count": 5, "clear_fraction": 0.01, "aou_overlap_area": 0.01},
     ]
     status, _ = aou_assessability_with_area(weak, min_clear_fraction=0.2, min_clear_members=1)
     assert status == "unassessable"

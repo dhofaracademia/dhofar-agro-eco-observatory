@@ -76,6 +76,9 @@ from engines.observation_integrity import (  # noqa: E402
     DEFAULT_MIN_CLEAR_PIXELS_CELL,
     atomic_promote_with_rollback,
     cell_assessability,
+    publish_release_with_pointer,
+    stamp_release_id_on_doc,
+    verify_release_ids_match,
 )
 
 
@@ -284,10 +287,15 @@ def build_grid_cells(ndvi, ndmi, valid, transform, crs, meta: dict, ndre=None, n
             n_slice = ndvi[r0:r1, c0:c1]
             m_slice = ndmi[r0:r1, c0:c1]
             v_slice = valid[r0:r1, c0:c1]
+            total_pixel_count = int(v_slice.size)
+            valid_pixel_count = int(np.sum(v_slice))
             count = int(np.sum(v_slice & np.isfinite(n_slice) & np.isfinite(m_slice)))
             if count < 5:
                 continue
             mask = v_slice & np.isfinite(n_slice) & np.isfinite(m_slice)
+            clear_fraction_cell = (
+                float(valid_pixel_count) / float(total_pixel_count) if total_pixel_count else None
+            )
             mean_ndvi = float(np.mean(n_slice[mask]))
             mean_ndmi = float(np.mean(m_slice[mask]))
             mean_ndre = None
@@ -349,6 +357,9 @@ def build_grid_cells(ndvi, ndmi, valid, transform, crs, meta: dict, ndre=None, n
                         "swir_feature": None if swir_feature is None else round(float(swir_feature), 4),
                         "swir_source": swir_source,
                         "pixel_count": count,
+                        "valid_pixel_count": valid_pixel_count,
+                        "total_pixel_count": total_pixel_count,
+                        "clear_fraction": None if clear_fraction_cell is None else round(clear_fraction_cell, 6),
                         "alert": "pending",
                         "date": meta["date"],
                         "source": SOURCE_STR,
@@ -946,7 +957,7 @@ def main() -> int:
                         "SCIENCE_LOCKS_v0.4_observation_integrity.md + "
                         "SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md + "
                         "SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md + "
-                        "SCIENCE_LOCKS_v0.4_post29_evaluator_residuals.md"
+                        "SCIENCE_LOCKS_v0.4_post29_evaluator_residuals.md + SCIENCE_LOCKS_v0.4_post30_evaluator_followup.md"
                     )
                     doc["promote_includes_decision"] = True
                     doc["single_staged_decision"] = True
@@ -965,23 +976,67 @@ def main() -> int:
             except Exception:
                 pass
 
+        # R4-4: stamp identical release_id on ALL artifacts, then equality gate
+        def _stamp(path: Path) -> None:
+            if not path.is_file():
+                return
+            try:
+                doc = json.loads(path.read_text())
+            except Exception:
+                return
+            stamp_release_id_on_doc(doc, release_id)
+            path.write_text(json.dumps(doc, indent=2 if path.suffix == ".json" else None))
+
+        for rel in promote:
+            _stamp(stage_root / rel)
+        # Feature-level stamps on registry geojson
+        reg_gj = stage_root / "aou" / "aou_registry.geojson"
+        if reg_gj.is_file():
+            try:
+                doc = json.loads(reg_gj.read_text())
+                stamp_release_id_on_doc(doc, release_id)
+                for f in doc.get("features") or []:
+                    props = f.get("properties") or {}
+                    props["release_id"] = release_id
+                    props["run_id"] = release_id
+                    f["properties"] = props
+                reg_gj.write_text(json.dumps(doc))
+            except Exception:
+                pass
+
+        id_failures = verify_release_ids_match(stage_root, release_id, promote)
+        if id_failures:
+            print(
+                f"ERROR: release_id gate failed {id_failures} — CURRENT pointer unchanged",
+                file=sys.stderr,
+            )
+            return 8
+
         fail_after = os.environ.get("MONITOR_PROMOTE_FAIL_AFTER")
-        fail_after_n = int(fail_after) if fail_after not in (None, "") else None
+        fail_before_pointer = os.environ.get("MONITOR_FAIL_BEFORE_POINTER", "").strip() in (
+            "1", "true", "yes",
+        )
+        fail_mid = int(fail_after) if fail_after not in (None, "") else None
         try:
-            atomic_promote_with_rollback(
+            publish_release_with_pointer(
                 stage_root=stage_root,
                 public_root=OUT_DATA,
+                release_id=release_id,
                 relative_paths=promote,
-                fail_after=fail_after_n,
+                fail_before_pointer=fail_before_pointer,
+                fail_mid_copy=fail_mid,
             )
         except Exception as e:
             print(
-                f"ERROR: atomic promote failed — full rollback to last-good: {e}",
+                f"ERROR: release pointer publish failed — CURRENT unchanged: {e}",
                 file=sys.stderr,
             )
             return 7
 
-        print(f"Promoted full release {release_id} → {OUT_DATA} (AOU+Decision exit 0)")
+        print(
+            f"Promoted full release {release_id} → releases/{release_id} "
+            f"(CURRENT pointer swapped; AOU+Decision exit 0)"
+        )
         print(f"Wrote {GEOJSON_PATH} ({len(latest_feats)} features, date={latest_date})")
         print(f"Wrote {TIMESERIES_PATH} ({len(timeseries)} dates)")
         return 0

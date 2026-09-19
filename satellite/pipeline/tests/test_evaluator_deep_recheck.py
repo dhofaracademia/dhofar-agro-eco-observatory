@@ -55,10 +55,10 @@ def test_area_vs_count_fraction_divergence():
     """2% area must not show 100% coverage via count alone."""
     members = [
         # one tiny clear cell
-        {"ndvi": 0.4, "ndmi": 0.1, "pixel_count": 100, "aou_overlap_area": 0.02},
+        {"ndvi": 0.4, "ndmi": 0.1, "pixel_count": 100, "clear_fraction": 1.0, "aou_overlap_area": 0.02},
         # large cloudy / unassessable members
-        {"ndvi": 0.4, "ndmi": 0.1, "pixel_count": 5, "aou_overlap_area": 0.49},
-        {"ndvi": 0.4, "ndmi": 0.1, "pixel_count": 5, "aou_overlap_area": 0.49},
+        {"ndvi": 0.4, "ndmi": 0.1, "pixel_count": 5, "clear_fraction": 0.0, "aou_overlap_area": 0.49},
+        {"ndvi": 0.4, "ndmi": 0.1, "pixel_count": 5, "clear_fraction": 0.0, "aou_overlap_area": 0.49},
     ]
     status, meta = aou_assessability_with_area(
         members, min_clear_fraction=0.01, min_clear_members=1, min_valid_area_fraction=None
@@ -81,8 +81,8 @@ def test_area_vs_count_fraction_divergence():
 
 def test_shared_aggregate_equality():
     clear = [
-        {"ndvi": 0.40, "ndmi": 0.10, "pixel_count": 100, "aou_overlap_area": 0.5, "source": "s2"},
-        {"ndvi": 0.40, "ndmi": 0.10, "pixel_count": 100, "aou_overlap_area": 0.5, "source": "s2"},
+        {"ndvi": 0.40, "ndmi": 0.10, "pixel_count": 100, "clear_fraction": 1.0, "aou_overlap_area": 0.5, "source": "s2"},
+        {"ndvi": 0.40, "ndmi": 0.10, "pixel_count": 100, "clear_fraction": 1.0, "aou_overlap_area": 0.5, "source": "s2"},
     ]
     all_m = clear + [{"ndvi": None, "ndmi": None, "pixel_count": 5, "aou_overlap_area": 0.1}]
     _, meta = aou_assessability_with_area(clear, min_clear_fraction=0.2, min_clear_members=1)

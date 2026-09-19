@@ -1,0 +1,45 @@
+{
+  "lock_id": "SCIENCE_LOCKS_v0.4_post30_evaluator_followup",
+  "date": "2026-09-20",
+  "timezone": "Asia/Muscat",
+  "owner_pipeline_role": "Agrofostery Scientist",
+  "verdict": "go_with_fixes",
+  "against_main": "059f7e70b5e7cfea491804f5db4afd894b6f439f",
+  "closed_by_pr30": "549736d17f58d4d6071e528db799e727822baf0e",
+  "ai_pipeline_role": true,
+  "human_review": "pending",
+  "mountain_seeding_hold": true,
+  "closed_do_not_reopen": [
+    "r3_1_clear_pixel_numerator_when_fraction_present",
+    "r3_2_biotic_three_state_silence_unknown",
+    "r3_3_atomic_promote_file_rollback",
+    "r3_4_single_staged_decision_under_monitor"
+  ],
+  "p0_must_fix": [
+    "valid_area_fraction_denom_full_aou_target",
+    "no_silent_full_clear_when_clear_fraction_missing",
+    "biotic_current_only_new_assessable",
+    "rejected_current_biotic_unknown",
+    "biotic_last_trusted_separate",
+    "immutable_release_tree_plus_current_pointer",
+    "release_id_on_all_monitor_aou_decision_artifacts"
+  ],
+  "p1": [
+    "tests_r4_residuals",
+    "ui_retained_biotic_coverage_banners",
+    "migrate_readers_to_pointer"
+  ],
+  "forbidden": [
+    "relitigate_pr30_r3_without_regression",
+    "invent_clear_fraction_1",
+    "member_overlap_denom_as_aou_area_claim",
+    "current_biotic_on_retained_unassessable",
+    "advance_pointer_before_full_release",
+    "split_release_ids_one_publish",
+    "lift_mountain_3b"
+  ],
+  "companions": [
+    "SCIENCE_LOCKS_v0.4_post29_evaluator_residuals.md",
+    "SCIENCE_LOCKS_v0.4_evaluator_round2.md"
+  ]
+}

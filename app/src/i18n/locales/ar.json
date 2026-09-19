@@ -257,7 +257,7 @@
     "colArea": "المساحة (هكتار تقديري)",
     "noAouYet": "لا وحدات بعد — شغّل run_ag_probability.py / run_monitor.py.",
     "selectAou": "اختر وحدة AOU",
-    "aouSeriesStub": "التاريخ متعدد التواريخ للوحدة محدود؛ قد يتضمن الرسم سلسلة سياق النافذة (موسومة). أعد تشغيل الرصد لتنمية تاريخ كل AOU عبر المعرّفات الثابتة.",
+    "aouSeriesStub": "رسوم الوحدة تستخدم رصد الوحدة فقط؛ نافذة إقليمية منفصلة.",
     "splitChartsNote": "يُرسم NDVI وNDMI على رسمين منفصلين (وليس محوراً مشتركاً).",
     "ndreUnavailable": "NDRE غير متاح في هذا المخرج — أُعيد توزين AgProb (وزن NDRE → NDVI+NDMI). مسار STAC الكامل يقرأ B05 (B06/B07 احتياطي موثّق).",
     "windowNdvi": "متوسط NDVI للنافذة",
@@ -336,7 +336,15 @@
     "unassessableBanner": "غير قابل للتقييم في هذا التاريخ — تغطية صافية غير كافية. الدرجات ليست رصداً حالياً سليماً/ممكناً.",
     "observationRoleRetained": "observation_role={{role}} (refresh_status={{status}}) — احتفاظ بآخر نتيجة جيدة؛ ليست رصد اليوم.",
     "refreshStatusRetained": "refresh_status={{status}} — تم الاحتفاظ بالدرجات المؤرخة السابقة",
-    "discoveryProvisionalBanner": "وحدة مراقبة جديدة — provisional_new حتى تاريخين صافيين (n_clear ≥ 2). ليست مزرعة معتمدة."
+    "discoveryProvisionalBanner": "وحدة مراقبة جديدة — provisional_new حتى تاريخين صافيين (n_clear ≥ 2). ليست مزرعة معتمدة.",
+    "trendInsufficient": "رصد صافٍ واحد لهذه الوحدة — غير كافٍ للاتجاه (ع/EN). نقطة واحدة؛ نافذة إقليمية منفصلة أدناه.",
+    "trendInsufficientCaption": "غير كافٍ للاتجاه (n_clear < 2) — سلسلة الوحدة فقط",
+    "unitScope": "سلسلة وحدة AOU (NDVI و NDMI)",
+    "ndviUnit": "NDVI للوحدة (AOU)",
+    "ndviRegional": "NDVI إقليمي (النافذة)",
+    "coverageUnknown": "تغطية صافية: غير معروفة",
+    "coverageUnknownHint": "نسبة التغطية غير معروفة — لا تُعرض كـ 0٪ أو 100٪",
+    "areaGeometryVsClear": "هكتار الشكل ≠ المساحة الصافية المرصودة"
   },
   "about": {
     "title": "المنهجية والصدق العلمي",

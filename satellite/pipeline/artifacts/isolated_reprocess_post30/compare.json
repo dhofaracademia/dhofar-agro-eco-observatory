@@ -1,0 +1,23 @@
+{
+  "observation_date": "2026-09-06",
+  "processed_at": "2026-09-19T20:58:09.247222+00:00",
+  "engine_version": "0.4.9-post30-followup",
+  "release_id": "iso-20260906-post30",
+  "before_public_snapshot": "before",
+  "after_isolated": "data",
+  "coverage_ok_path": {
+    "assessability": "assessable",
+    "valid_area_fraction": 0.3239999999998082,
+    "valid_area_fraction_denominator": "aou_target_area",
+    "clear_fraction_missing": false
+  },
+  "rejected_path": {
+    "assessability": "unassessable",
+    "biotic_status": "unknown",
+    "biotic_status_last_trusted": "possible",
+    "biotic_last_trusted_date": "2026-08-01",
+    "refresh_status": "unassessable_coverage"
+  },
+  "note": "Isolated only \u2014 CURRENT under artifacts/; app/public untouched. No live S2.",
+  "mountain_seeding_hold": true
+}
