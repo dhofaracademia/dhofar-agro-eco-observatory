@@ -1,0 +1,58 @@
+{
+  "lock_id": "SCIENCE_LOCKS_v0.4_post_integrity_evaluator",
+  "date": "2026-09-19",
+  "timezone": "Asia/Muscat",
+  "owner_pipeline_role": "Agrofostery Scientist",
+  "verdict": "go_with_fixes",
+  "against_main": "437d9203498cedda6eb43929735f503fe8ec3eff",
+  "ai_pipeline_role": true,
+  "human_review": "pending",
+  "mountain_seeding_hold": true,
+  "closes_integrity_deferred_c": true,
+  "acceptance_bar": [
+    "scene_clear_not_sufficient_for_aou_assessability",
+    "stress_persistence_from_aou_ledger_sequence",
+    "no_public_monitor_promote_before_aou_success",
+    "nov_1_never_late_khareef",
+    "reprocess_required_before_published_integrity_claim"
+  ],
+  "p0_must_fix": [
+    "per_cell_clear_coverage_unassessable",
+    "per_aou_min_clear_coverage_unassessable",
+    "thresholds_in_run_meta",
+    "stress_flags_from_ledger_sequence",
+    "forbid_persistence_feature_0_5_without_sequence",
+    "empty_flags_not_no_stress",
+    "stage_then_swap_after_aou_ok",
+    "keep_last_good_on_fail",
+    "khareef_calendar_year_bound",
+    "nov_1_not_late_khareef",
+    "khareef_status_only",
+    "full_reprocess_before_integrity_claim"
+  ],
+  "p1": [
+    "assessability_in_analysis_decision_ux",
+    "tests_coverage_unassessable",
+    "tests_empty_flags_persistence",
+    "tests_atomic_cross_stage",
+    "tests_nov1_stage",
+    "tests_reprocess_writes_ledger"
+  ],
+  "forbidden": [
+    "scene_gate_alone_as_aou_assessable",
+    "invent_scores_when_unassessable",
+    "persistence_feature_half_from_n_clear_only",
+    "empty_stress_as_healthy",
+    "monitor_public_before_aou_ok",
+    "partial_publish_on_fail",
+    "late_khareef_on_or_after_nov_1",
+    "integrity_claim_without_reprocess",
+    "lift_mountain_3b"
+  ],
+  "companions": [
+    "SCIENCE_LOCKS_v0.4_observation_integrity.md",
+    "SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md",
+    "SCIENCE_LOCKS_v0.4_khareef_status_tracker.md",
+    "SCIENCE_LOCKS_v0.4_evaluator_endorsement.md"
+  ]
+}

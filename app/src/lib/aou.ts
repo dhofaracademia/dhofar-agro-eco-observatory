@@ -24,6 +24,15 @@ export type AouAlertProps = {
   possible_biotic_stress?: boolean;
   data_quality_confidence?: number;
   geometry_kind?: string;
+  /** AOU/cell-scoped clear dates — never window length. */
+  n_clear_dates?: number;
+  n_dates_above_bare?: number;
+  temporal_evidence_sufficient?: boolean;
+  biotic_unknown_reason?: string | null;
+  refresh_status?: string;
+  assessability?: "assessable" | "unassessable" | string;
+  persistence_status?: string;
+  persistence_feature?: number | null;
 };
 
 export type AouFeature = {

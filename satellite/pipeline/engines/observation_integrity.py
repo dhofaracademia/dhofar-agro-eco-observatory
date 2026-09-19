@@ -127,3 +127,134 @@ def temporal_evidence_labels(n_clear: int) -> dict[str, Any]:
         "temporal_evidence_en": TEMPORAL_EVIDENCE_INSUFFICIENT_EN if insufficient else None,
         "biotic_unknown_reason": "insufficient_temporal_evidence" if insufficient else None,
     }
+
+
+# --- Post-integrity evaluator: per-cell / per-AOU clear coverage (§1) ---
+# Thresholds stamped in run_meta by callers.
+DEFAULT_MIN_CLEAR_PIXELS_CELL = 50
+DEFAULT_MIN_CLEAR_FRACTION_CELL = 0.02
+DEFAULT_MIN_CLEAR_FRACTION_AOU = 0.20
+DEFAULT_MIN_CLEAR_MEMBERS_AOU = 1
+
+
+def cell_assessability(
+    props: dict[str, Any],
+    *,
+    min_clear_pixels: int = DEFAULT_MIN_CLEAR_PIXELS_CELL,
+    min_clear_fraction: float = DEFAULT_MIN_CLEAR_FRACTION_CELL,
+) -> str:
+    """Per-cell clear-coverage gate. Scene clear alone is not sufficient.
+
+    Missing SCL / cloudlike / below threshold → unassessable (never invent NDVI/NDMI).
+    """
+    if props.get("scl_missing") is True or props.get("scl_status") == "missing":
+        return "unassessable"
+    if props.get("scl_clear") is False:
+        return "unassessable"
+    status = props.get("status") or props.get("coverage_status")
+    if status in ("unclassified", "blocked", "scl_missing", "coverage_fail"):
+        return "unassessable"
+    pc = props.get("pixel_count")
+    if pc is not None and int(pc) < int(min_clear_pixels):
+        return "unassessable"
+    frac = props.get("clear_fraction")
+    if frac is not None and float(frac) < float(min_clear_fraction):
+        return "unassessable"
+    # No valid optical reading → cannot vote
+    if props.get("ndvi") is None or props.get("ndmi") is None:
+        return "unassessable"
+    return "assessable"
+
+
+def aou_assessability(
+    members: list[dict],
+    *,
+    min_clear_fraction: float = DEFAULT_MIN_CLEAR_FRACTION_AOU,
+    min_clear_members: int = DEFAULT_MIN_CLEAR_MEMBERS_AOU,
+) -> tuple[str, dict[str, Any]]:
+    """Per-AOU clear-coverage after positive-area join.
+
+    clear-coverage = clear assessable members / in-AOU members (count basis).
+    Below threshold → unassessable for that date (do not advance observation_date).
+    """
+    meta = {
+        "member_count": len(members),
+        "clear_member_count": 0,
+        "clear_fraction": 0.0,
+        "min_clear_fraction_aou": min_clear_fraction,
+        "min_clear_members_aou": min_clear_members,
+    }
+    if not members:
+        return "unassessable", meta
+    clear = [m for m in members if cell_assessability(m) == "assessable"]
+    meta["clear_member_count"] = len(clear)
+    meta["clear_fraction"] = len(clear) / max(len(members), 1)
+    if len(clear) < int(min_clear_members) or meta["clear_fraction"] < float(min_clear_fraction):
+        return "unassessable", meta
+    return "assessable", meta
+
+
+def ledger_sequence_rows(unit_or_obs: dict[str, Any] | None) -> list[dict]:
+    """AOU ledger clear-date rows only (exclude window_not_aou). Ordered by date."""
+    if not unit_or_obs:
+        return []
+    rows = []
+    for o in unit_or_obs.get("observations") or []:
+        if o.get("series_scope") == "window_not_aou":
+            continue
+        if not o.get("date"):
+            continue
+        if o.get("ndvi") is None:
+            continue
+        rows.append(o)
+    rows.sort(key=lambda r: str(r["date"]))
+    return rows
+
+
+def ledger_persistence_feature(
+    rows: list[dict],
+    *,
+    bare_ndvi: float = 0.18,
+) -> tuple[float | None, int, int]:
+    """Persistence from ledger clear-date sequence only.
+
+    Forbidden: invent 0.5 solely because n_clear >= 2 without sequence feature.
+    n_clear < 2 → None (caller renorms / gates).
+    """
+    n_clear = len(rows)
+    if n_clear < 2:
+        return None, n_clear, 0
+    n_above = sum(1 for r in rows if float(r.get("ndvi") or -1) >= bare_ndvi)
+    frac = n_above / max(n_clear, 1)
+    if n_above < 2:
+        return max(0.0, min(1.0, frac * 0.5)), n_clear, n_above
+    return max(0.0, min(1.0, frac)), n_clear, n_above
+
+
+def ledger_stress_flags(
+    rows: list[dict],
+    *,
+    kind: str,
+    last_n: int = 3,
+    attention_thr: float = 55.0,
+) -> list[bool]:
+    """Derive recent stress flags from ledger sequence — never invent 'healthy' from []."""
+    recent = rows[-last_n:] if rows else []
+    flags: list[bool] = []
+    for r in recent:
+        if kind == "water":
+            score = r.get("water_stress_score")
+            alert = r.get("alert")
+            flags.append(
+                bool(alert == "water_attention")
+                or (score is not None and float(score) >= attention_thr)
+            )
+        else:
+            score = r.get("vigor_stress_score")
+            alert = r.get("alert")
+            flags.append(
+                bool(alert == "vigor_attention")
+                or (score is not None and float(score) >= attention_thr)
+            )
+    return flags
+

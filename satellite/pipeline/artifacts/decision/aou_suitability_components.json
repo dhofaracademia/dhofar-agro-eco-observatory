@@ -1,6 +1,6 @@
 {
   "version": "0.4.5-aou-temporal-ledger",
-  "generated_at": "2026-09-13T14:56:53.844510+00:00",
+  "generated_at": "2026-09-19T11:37:08.609884+00:00",
   "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3 + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md",
   "status": "expert_v1_provisional",
   "product_stamp": "provisional_satellite_analytical_service",
@@ -23,14 +23,14 @@
       "aou_id": "AOU-NJ-000001",
       "suitability_domain": "agriculture_aou",
       "status": "expert_v1_provisional",
-      "suitability_score": 51.7,
+      "suitability_score": 74.11,
       "suitability_summary_label": "components_only",
       "suitability_components": {
-        "moisture_proxy": 0.2751,
-        "vigor_proxy": 0.2812,
+        "moisture_proxy": 0.82,
+        "vigor_proxy": 0.82,
         "phenology_fit": null,
         "terrain_constraint": 1.0,
-        "agricultural_probability_norm": 0.6173
+        "agricultural_probability_norm": 0.5882
       },
       "weights_used": {
         "agricultural_probability": 0.4375,
@@ -61,13 +61,13 @@
       "mountain_apply": false,
       "action_auto_assign": false,
       "why_this_site": {
-        "headline": "AOU-NJ-000001: provisional agriculture_aou suitability 51.7/100 (moderate relative among components; ag_probability_norm=0.62) — expert_v1_provisional, not operational truth",
+        "headline": "AOU-NJ-000001: provisional agriculture_aou suitability 74.1/100 (higher relative among components; ag_probability_norm=0.59) — expert_v1_provisional, not operational truth",
         "drivers": [
-          "Agricultural probability (norm) available: 0.62 (weight 0.35).",
-          "Moisture proxy from inverse water_stress (NDMI-based): 0.28 — not soil moisture %.",
-          "Vigor proxy from inverse vigor_stress (NDVI-based): 0.28 — not fertilizer diagnosis.",
+          "Agricultural probability (norm) available: 0.59 (weight 0.35).",
+          "Moisture proxy from inverse water_stress (NDMI-based): 0.82 — not soil moisture %.",
+          "Vigor proxy from inverse vigor_stress (NDVI-based): 0.82 — not fertilizer diagnosis.",
           "Geometry gate (area ≥ 2 ha): 1.00.",
-          "Weighted suitability_score=51.7 shown as components_only (Suitability ≠ Confidence)."
+          "Weighted suitability_score=74.1 shown as components_only (Suitability ≠ Confidence)."
         ],
         "cautions": [
           "expert_v1_provisional — Agrofostery weight locks; not field-validated operational truth.",
@@ -86,7 +86,7 @@
           "Evidence gap: no_mpi_curve",
           "Evidence gap: window_series_stub_only"
         ],
-        "recommended_next_step": "Satellite attention: canopy-moisture (NDMI) proxy is low — review irrigation from this satellite decision. Optional additional field verification (last resort) only — not required to act.",
+        "recommended_next_step": "Satellite decision: continue monitoring. A field visit is not required to use this output; optional additional field verification is last-resort only.",
         "action_ladder_suggestion": null
       },
       "evidence_level": "satellite_only",
@@ -97,14 +97,14 @@
       "aou_id": "AOU-NJ-000002",
       "suitability_domain": "agriculture_aou",
       "status": "expert_v1_provisional",
-      "suitability_score": 58.56,
+      "suitability_score": 72.23,
       "suitability_summary_label": "components_only",
       "suitability_components": {
-        "moisture_proxy": 0.4796,
-        "vigor_proxy": 0.4642,
+        "moisture_proxy": 0.82,
+        "vigor_proxy": 0.82,
         "phenology_fit": null,
         "terrain_constraint": 1.0,
-        "agricultural_probability_norm": 0.5821
+        "agricultural_probability_norm": 0.5453
       },
       "weights_used": {
         "agricultural_probability": 0.4375,
@@ -135,13 +135,13 @@
       "mountain_apply": false,
       "action_auto_assign": false,
       "why_this_site": {
-        "headline": "AOU-NJ-000002: provisional agriculture_aou suitability 58.6/100 (moderate relative among components; ag_probability_norm=0.58) — expert_v1_provisional, not operational truth",
+        "headline": "AOU-NJ-000002: provisional agriculture_aou suitability 72.2/100 (higher relative among components; ag_probability_norm=0.55) — expert_v1_provisional, not operational truth",
         "drivers": [
-          "Agricultural probability (norm) available: 0.58 (weight 0.35).",
-          "Moisture proxy from inverse water_stress (NDMI-based): 0.48 — not soil moisture %.",
-          "Vigor proxy from inverse vigor_stress (NDVI-based): 0.46 — not fertilizer diagnosis.",
+          "Agricultural probability (norm) available: 0.55 (weight 0.35).",
+          "Moisture proxy from inverse water_stress (NDMI-based): 0.82 — not soil moisture %.",
+          "Vigor proxy from inverse vigor_stress (NDVI-based): 0.82 — not fertilizer diagnosis.",
           "Geometry gate (area ≥ 2 ha): 1.00.",
-          "Weighted suitability_score=58.6 shown as components_only (Suitability ≠ Confidence)."
+          "Weighted suitability_score=72.2 shown as components_only (Suitability ≠ Confidence)."
         ],
         "cautions": [
           "expert_v1_provisional — Agrofostery weight locks; not field-validated operational truth.",
@@ -171,14 +171,14 @@
       "aou_id": "AOU-NJ-000003",
       "suitability_domain": "agriculture_aou",
       "status": "expert_v1_provisional",
-      "suitability_score": 62.27,
+      "suitability_score": 75.63,
       "suitability_summary_label": "components_only",
       "suitability_components": {
-        "moisture_proxy": 0.4879,
-        "vigor_proxy": 0.4947,
+        "moisture_proxy": 0.82,
+        "vigor_proxy": 0.82,
         "phenology_fit": null,
         "terrain_constraint": 1.0,
-        "agricultural_probability_norm": 0.6458
+        "agricultural_probability_norm": 0.6229
       },
       "weights_used": {
         "agricultural_probability": 0.4375,
@@ -209,13 +209,13 @@
       "mountain_apply": false,
       "action_auto_assign": false,
       "why_this_site": {
-        "headline": "AOU-NJ-000003: provisional agriculture_aou suitability 62.3/100 (higher relative among components; ag_probability_norm=0.65) — expert_v1_provisional, not operational truth",
+        "headline": "AOU-NJ-000003: provisional agriculture_aou suitability 75.6/100 (higher relative among components; ag_probability_norm=0.62) — expert_v1_provisional, not operational truth",
         "drivers": [
-          "Agricultural probability (norm) available: 0.65 (weight 0.35).",
-          "Moisture proxy from inverse water_stress (NDMI-based): 0.49 — not soil moisture %.",
-          "Vigor proxy from inverse vigor_stress (NDVI-based): 0.49 — not fertilizer diagnosis.",
+          "Agricultural probability (norm) available: 0.62 (weight 0.35).",
+          "Moisture proxy from inverse water_stress (NDMI-based): 0.82 — not soil moisture %.",
+          "Vigor proxy from inverse vigor_stress (NDVI-based): 0.82 — not fertilizer diagnosis.",
           "Geometry gate (area ≥ 2 ha): 1.00.",
-          "Weighted suitability_score=62.3 shown as components_only (Suitability ≠ Confidence)."
+          "Weighted suitability_score=75.6 shown as components_only (Suitability ≠ Confidence)."
         ],
         "cautions": [
           "expert_v1_provisional — Agrofostery weight locks; not field-validated operational truth.",
@@ -245,14 +245,14 @@
       "aou_id": "AOU-NJ-000004",
       "suitability_domain": "agriculture_aou",
       "status": "expert_v1_provisional",
-      "suitability_score": 46.93,
+      "suitability_score": 69.27,
       "suitability_summary_label": "components_only",
       "suitability_components": {
-        "moisture_proxy": 0.26,
-        "vigor_proxy": 0.2609,
+        "moisture_proxy": 0.82,
+        "vigor_proxy": 0.82,
         "phenology_fit": null,
         "terrain_constraint": 1.0,
-        "agricultural_probability_norm": 0.5265
+        "agricultural_probability_norm": 0.4775
       },
       "weights_used": {
         "agricultural_probability": 0.4375,
@@ -283,13 +283,13 @@
       "mountain_apply": false,
       "action_auto_assign": false,
       "why_this_site": {
-        "headline": "AOU-NJ-000004: provisional agriculture_aou suitability 46.9/100 (moderate relative among components; ag_probability_norm=0.53) — expert_v1_provisional, not operational truth",
+        "headline": "AOU-NJ-000004: provisional agriculture_aou suitability 69.3/100 (higher relative among components; ag_probability_norm=0.48) — expert_v1_provisional, not operational truth",
         "drivers": [
-          "Agricultural probability (norm) available: 0.53 (weight 0.35).",
-          "Moisture proxy from inverse water_stress (NDMI-based): 0.26 — not soil moisture %.",
-          "Vigor proxy from inverse vigor_stress (NDVI-based): 0.26 — not fertilizer diagnosis.",
+          "Agricultural probability (norm) available: 0.48 (weight 0.35).",
+          "Moisture proxy from inverse water_stress (NDMI-based): 0.82 — not soil moisture %.",
+          "Vigor proxy from inverse vigor_stress (NDVI-based): 0.82 — not fertilizer diagnosis.",
           "Geometry gate (area ≥ 2 ha): 1.00.",
-          "Weighted suitability_score=46.9 shown as components_only (Suitability ≠ Confidence)."
+          "Weighted suitability_score=69.3 shown as components_only (Suitability ≠ Confidence)."
         ],
         "cautions": [
           "expert_v1_provisional — Agrofostery weight locks; not field-validated operational truth.",
@@ -308,7 +308,7 @@
           "Evidence gap: no_mpi_curve",
           "Evidence gap: window_series_stub_only"
         ],
-        "recommended_next_step": "Satellite attention: canopy-moisture (NDMI) proxy is low — review irrigation from this satellite decision. Optional additional field verification (last resort) only — not required to act.",
+        "recommended_next_step": "Satellite decision: continue monitoring. A field visit is not required to use this output; optional additional field verification is last-resort only.",
         "action_ladder_suggestion": null
       },
       "evidence_level": "satellite_only",
@@ -319,14 +319,14 @@
       "aou_id": "AOU-NJ-000005",
       "suitability_domain": "agriculture_aou",
       "status": "expert_v1_provisional",
-      "suitability_score": 46.02,
+      "suitability_score": 67.09,
       "suitability_summary_label": "components_only",
       "suitability_components": {
-        "moisture_proxy": 0.2887,
-        "vigor_proxy": 0.3153,
+        "moisture_proxy": 0.8872,
+        "vigor_proxy": 0.82,
         "phenology_fit": null,
         "terrain_constraint": 1.0,
-        "agricultural_probability_norm": 0.4622
+        "agricultural_probability_norm": 0.399
       },
       "weights_used": {
         "agricultural_probability": 0.4375,
@@ -357,13 +357,13 @@
       "mountain_apply": false,
       "action_auto_assign": false,
       "why_this_site": {
-        "headline": "AOU-NJ-000005: provisional agriculture_aou suitability 46.0/100 (moderate relative among components; ag_probability_norm=0.46) — expert_v1_provisional, not operational truth",
+        "headline": "AOU-NJ-000005: provisional agriculture_aou suitability 67.1/100 (higher relative among components; ag_probability_norm=0.40) — expert_v1_provisional, not operational truth",
         "drivers": [
-          "Agricultural probability (norm) available: 0.46 (weight 0.35).",
-          "Moisture proxy from inverse water_stress (NDMI-based): 0.29 — not soil moisture %.",
-          "Vigor proxy from inverse vigor_stress (NDVI-based): 0.32 — not fertilizer diagnosis.",
+          "Agricultural probability (norm) available: 0.40 (weight 0.35).",
+          "Moisture proxy from inverse water_stress (NDMI-based): 0.89 — not soil moisture %.",
+          "Vigor proxy from inverse vigor_stress (NDVI-based): 0.82 — not fertilizer diagnosis.",
           "Geometry gate (area ≥ 2 ha): 1.00.",
-          "Weighted suitability_score=46.0 shown as components_only (Suitability ≠ Confidence)."
+          "Weighted suitability_score=67.1 shown as components_only (Suitability ≠ Confidence)."
         ],
         "cautions": [
           "expert_v1_provisional — Agrofostery weight locks; not field-validated operational truth.",
@@ -382,7 +382,7 @@
           "Evidence gap: no_mpi_curve",
           "Evidence gap: window_series_stub_only"
         ],
-        "recommended_next_step": "Satellite attention: canopy-moisture (NDMI) proxy is low — review irrigation from this satellite decision. Optional additional field verification (last resort) only — not required to act.",
+        "recommended_next_step": "Satellite decision: continue monitoring. A field visit is not required to use this output; optional additional field verification is last-resort only.",
         "action_ladder_suggestion": null
       },
       "evidence_level": "satellite_only",
@@ -393,14 +393,14 @@
       "aou_id": "AOU-NJ-000006",
       "suitability_domain": "agriculture_aou",
       "status": "expert_v1_provisional",
-      "suitability_score": 49.12,
+      "suitability_score": 67.08,
       "suitability_summary_label": "components_only",
       "suitability_components": {
-        "moisture_proxy": 0.3516,
-        "vigor_proxy": 0.3514,
+        "moisture_proxy": 0.82,
+        "vigor_proxy": 0.82,
         "phenology_fit": null,
         "terrain_constraint": 1.0,
-        "agricultural_probability_norm": 0.4856
+        "agricultural_probability_norm": 0.4276
       },
       "weights_used": {
         "agricultural_probability": 0.4375,
@@ -431,13 +431,13 @@
       "mountain_apply": false,
       "action_auto_assign": false,
       "why_this_site": {
-        "headline": "AOU-NJ-000006: provisional agriculture_aou suitability 49.1/100 (moderate relative among components; ag_probability_norm=0.49) — expert_v1_provisional, not operational truth",
+        "headline": "AOU-NJ-000006: provisional agriculture_aou suitability 67.1/100 (higher relative among components; ag_probability_norm=0.43) — expert_v1_provisional, not operational truth",
         "drivers": [
-          "Agricultural probability (norm) available: 0.49 (weight 0.35).",
-          "Moisture proxy from inverse water_stress (NDMI-based): 0.35 — not soil moisture %.",
-          "Vigor proxy from inverse vigor_stress (NDVI-based): 0.35 — not fertilizer diagnosis.",
+          "Agricultural probability (norm) available: 0.43 (weight 0.35).",
+          "Moisture proxy from inverse water_stress (NDMI-based): 0.82 — not soil moisture %.",
+          "Vigor proxy from inverse vigor_stress (NDVI-based): 0.82 — not fertilizer diagnosis.",
           "Geometry gate (area ≥ 2 ha): 1.00.",
-          "Weighted suitability_score=49.1 shown as components_only (Suitability ≠ Confidence)."
+          "Weighted suitability_score=67.1 shown as components_only (Suitability ≠ Confidence)."
         ],
         "cautions": [
           "expert_v1_provisional — Agrofostery weight locks; not field-validated operational truth.",
@@ -456,7 +456,7 @@
           "Evidence gap: no_mpi_curve",
           "Evidence gap: window_series_stub_only"
         ],
-        "recommended_next_step": "Satellite attention: canopy-moisture (NDMI) proxy is low — review irrigation from this satellite decision. Optional additional field verification (last resort) only — not required to act.",
+        "recommended_next_step": "Satellite decision: continue monitoring. A field visit is not required to use this output; optional additional field verification is last-resort only.",
         "action_ladder_suggestion": null
       },
       "evidence_level": "satellite_only",
@@ -467,14 +467,14 @@
       "aou_id": "AOU-NJ-000007",
       "suitability_domain": "agriculture_aou",
       "status": "expert_v1_provisional",
-      "suitability_score": 52.8,
+      "suitability_score": 75.74,
       "suitability_summary_label": "components_only",
       "suitability_components": {
-        "moisture_proxy": 0.2599,
-        "vigor_proxy": 0.2829,
+        "moisture_proxy": 0.82,
+        "vigor_proxy": 0.82,
         "phenology_fit": null,
         "terrain_constraint": 1.0,
-        "agricultural_probability_norm": 0.648
+        "agricultural_probability_norm": 0.6256
       },
       "weights_used": {
         "agricultural_probability": 0.4375,
@@ -505,13 +505,13 @@
       "mountain_apply": false,
       "action_auto_assign": false,
       "why_this_site": {
-        "headline": "AOU-NJ-000007: provisional agriculture_aou suitability 52.8/100 (moderate relative among components; ag_probability_norm=0.65) — expert_v1_provisional, not operational truth",
+        "headline": "AOU-NJ-000007: provisional agriculture_aou suitability 75.7/100 (higher relative among components; ag_probability_norm=0.63) — expert_v1_provisional, not operational truth",
         "drivers": [
-          "Agricultural probability (norm) available: 0.65 (weight 0.35).",
-          "Moisture proxy from inverse water_stress (NDMI-based): 0.26 — not soil moisture %.",
-          "Vigor proxy from inverse vigor_stress (NDVI-based): 0.28 — not fertilizer diagnosis.",
+          "Agricultural probability (norm) available: 0.63 (weight 0.35).",
+          "Moisture proxy from inverse water_stress (NDMI-based): 0.82 — not soil moisture %.",
+          "Vigor proxy from inverse vigor_stress (NDVI-based): 0.82 — not fertilizer diagnosis.",
           "Geometry gate (area ≥ 2 ha): 1.00.",
-          "Weighted suitability_score=52.8 shown as components_only (Suitability ≠ Confidence)."
+          "Weighted suitability_score=75.7 shown as components_only (Suitability ≠ Confidence)."
         ],
         "cautions": [
           "expert_v1_provisional — Agrofostery weight locks; not field-validated operational truth.",
@@ -530,7 +530,7 @@
           "Evidence gap: no_mpi_curve",
           "Evidence gap: window_series_stub_only"
         ],
-        "recommended_next_step": "Satellite attention: canopy-moisture (NDMI) proxy is low — review irrigation from this satellite decision. Optional additional field verification (last resort) only — not required to act.",
+        "recommended_next_step": "Satellite decision: continue monitoring. A field visit is not required to use this output; optional additional field verification is last-resort only.",
         "action_ladder_suggestion": null
       },
       "evidence_level": "satellite_only",
@@ -541,14 +541,14 @@
       "aou_id": "AOU-NJ-000008",
       "suitability_domain": "agriculture_aou",
       "status": "expert_v1_provisional",
-      "suitability_score": 58.22,
+      "suitability_score": 76.1,
       "suitability_summary_label": "components_only",
       "suitability_components": {
-        "moisture_proxy": 0.4105,
-        "vigor_proxy": 0.3753,
+        "moisture_proxy": 0.82,
+        "vigor_proxy": 0.82,
         "phenology_fit": null,
         "terrain_constraint": 1.0,
-        "agricultural_probability_norm": 0.6547
+        "agricultural_probability_norm": 0.6337
       },
       "weights_used": {
         "agricultural_probability": 0.4375,
@@ -579,13 +579,13 @@
       "mountain_apply": false,
       "action_auto_assign": false,
       "why_this_site": {
-        "headline": "AOU-NJ-000008: provisional agriculture_aou suitability 58.2/100 (moderate relative among components; ag_probability_norm=0.65) — expert_v1_provisional, not operational truth",
+        "headline": "AOU-NJ-000008: provisional agriculture_aou suitability 76.1/100 (higher relative among components; ag_probability_norm=0.63) — expert_v1_provisional, not operational truth",
         "drivers": [
-          "Agricultural probability (norm) available: 0.65 (weight 0.35).",
-          "Moisture proxy from inverse water_stress (NDMI-based): 0.41 — not soil moisture %.",
-          "Vigor proxy from inverse vigor_stress (NDVI-based): 0.38 — not fertilizer diagnosis.",
+          "Agricultural probability (norm) available: 0.63 (weight 0.35).",
+          "Moisture proxy from inverse water_stress (NDMI-based): 0.82 — not soil moisture %.",
+          "Vigor proxy from inverse vigor_stress (NDVI-based): 0.82 — not fertilizer diagnosis.",
           "Geometry gate (area ≥ 2 ha): 1.00.",
-          "Weighted suitability_score=58.2 shown as components_only (Suitability ≠ Confidence)."
+          "Weighted suitability_score=76.1 shown as components_only (Suitability ≠ Confidence)."
         ],
         "cautions": [
           "expert_v1_provisional — Agrofostery weight locks; not field-validated operational truth.",
@@ -604,7 +604,7 @@
           "Evidence gap: no_mpi_curve",
           "Evidence gap: window_series_stub_only"
         ],
-        "recommended_next_step": "Satellite attention: canopy-moisture (NDMI) proxy is low — review irrigation from this satellite decision. Optional additional field verification (last resort) only — not required to act.",
+        "recommended_next_step": "Satellite decision: continue monitoring. A field visit is not required to use this output; optional additional field verification is last-resort only.",
         "action_ladder_suggestion": null
       },
       "evidence_level": "satellite_only",
@@ -615,14 +615,14 @@
       "aou_id": "AOU-NJ-000009",
       "suitability_domain": "agriculture_aou",
       "status": "expert_v1_provisional",
-      "suitability_score": 49.11,
+      "suitability_score": 67.56,
       "suitability_summary_label": "components_only",
       "suitability_components": {
-        "moisture_proxy": 0.3121,
-        "vigor_proxy": 0.3649,
+        "moisture_proxy": 0.82,
+        "vigor_proxy": 0.82,
         "phenology_fit": null,
         "terrain_constraint": 1.0,
-        "agricultural_probability_norm": 0.4946
+        "agricultural_probability_norm": 0.4385
       },
       "weights_used": {
         "agricultural_probability": 0.4375,
@@ -653,13 +653,13 @@
       "mountain_apply": false,
       "action_auto_assign": false,
       "why_this_site": {
-        "headline": "AOU-NJ-000009: provisional agriculture_aou suitability 49.1/100 (moderate relative among components; ag_probability_norm=0.49) — expert_v1_provisional, not operational truth",
+        "headline": "AOU-NJ-000009: provisional agriculture_aou suitability 67.6/100 (higher relative among components; ag_probability_norm=0.44) — expert_v1_provisional, not operational truth",
         "drivers": [
-          "Agricultural probability (norm) available: 0.49 (weight 0.35).",
-          "Moisture proxy from inverse water_stress (NDMI-based): 0.31 — not soil moisture %.",
-          "Vigor proxy from inverse vigor_stress (NDVI-based): 0.36 — not fertilizer diagnosis.",
+          "Agricultural probability (norm) available: 0.44 (weight 0.35).",
+          "Moisture proxy from inverse water_stress (NDMI-based): 0.82 — not soil moisture %.",
+          "Vigor proxy from inverse vigor_stress (NDVI-based): 0.82 — not fertilizer diagnosis.",
           "Geometry gate (area ≥ 2 ha): 1.00.",
-          "Weighted suitability_score=49.1 shown as components_only (Suitability ≠ Confidence)."
+          "Weighted suitability_score=67.6 shown as components_only (Suitability ≠ Confidence)."
         ],
         "cautions": [
           "expert_v1_provisional — Agrofostery weight locks; not field-validated operational truth.",
@@ -678,7 +678,7 @@
           "Evidence gap: no_mpi_curve",
           "Evidence gap: window_series_stub_only"
         ],
-        "recommended_next_step": "Satellite attention: canopy-moisture (NDMI) proxy is low — review irrigation from this satellite decision. Optional additional field verification (last resort) only — not required to act.",
+        "recommended_next_step": "Satellite decision: continue monitoring. A field visit is not required to use this output; optional additional field verification is last-resort only.",
         "action_ladder_suggestion": null
       },
       "evidence_level": "satellite_only",

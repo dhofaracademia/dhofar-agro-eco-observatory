@@ -113,20 +113,25 @@ def calendar_stage(asof: date) -> tuple[str, str]:
     """
     Calendar-heuristic stage label (not a phenology publication).
     Binding: never claim post_khareef before post window opens AND clear scene gate.
+    Year-bound: windows use asof.year — Nov 1 is NEVER late_khareef
+    (SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md §4).
     """
-    # Rough Dhofar Khareef calendar (documented heuristic)
+    # Rough Dhofar Khareef calendar (documented heuristic), always year-bound
     y = asof.year
+    post_start = date(y, 9, 15)
+    post_end = date(y, 10, 31)
     if asof < date(y, 6, 1):
         return "pre_khareef", "calendar_heuristic"
     if asof < date(y, 6, 21):
         return "onset", "calendar_heuristic"
     if asof < date(y, 8, 15):
         return "peak", "calendar_heuristic"
-    if asof < POST_WINDOW_START.replace(year=y) if asof.year == POST_WINDOW_START.year else date(y, 9, 15):
+    if asof < post_start:
         return "late_khareef", "calendar_heuristic"
     # On/after post window start — still may not stamp post_khareef without EO gate
-    if asof <= (POST_WINDOW_END.replace(year=y) if asof.year == POST_WINDOW_END.year else date(y, 10, 31)):
+    if asof <= post_end:
         return "late_khareef", "calendar_heuristic_post_window_pending_clear_scene"
+    # After post-window end (e.g. Nov 1+): never late_khareef
     return "insufficient", "calendar_heuristic"
 
 

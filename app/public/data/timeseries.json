@@ -24,8 +24,9 @@
       "NDVI=(B08-B04)/(B08+B04)",
       "NDMI=(B08-B11)/(B08+B11)",
       "NDRE=(B08-B05)/(B08+B05) [B06/B07 documented fallback only]",
-      "AgProb=SCIENCE_LOCKS§1 expert_v1",
-      "Stress=SCIENCE_LOCKS§3 expert_v1"
+      "AgProb=SCIENCE_LOCKS\u00a71 expert_v1",
+      "Stress=SCIENCE_LOCKS\u00a73 expert_v1",
+      "AlertUnify=map_stress_to_alert (same pass as latest_alerts)"
     ],
     "reflectance_scale": 10000.0,
     "grid_m": 500.0,
@@ -198,14 +199,17 @@
       "citation": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer; product S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909; acquisition 2026-09-06; MGRS tile 39QYA.",
       "alert_counts": {
         "bare": 1770,
-        "healthy": 65,
-        "water_attention": 26,
-        "vigor_attention": 11
+        "healthy": 67,
+        "water_attention": 20,
+        "vigor_attention": 15
       },
-      "grid_cell_count": 1872
+      "grid_cell_count": 1872,
+      "run_id": "20260919T113653Z",
+      "classifier": "map_stress_to_alert"
     }
   ],
   "phase": "0.4.1-agriculture",
-  "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md",
-  "last_updated": "2026-09-13T14:56:53.747298+00:00"
+  "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md + SCIENCE_LOCKS_v0.4_observation_integrity.md",
+  "last_updated": "2026-09-19T11:36:53.231131+00:00",
+  "run_id": "20260919T113653Z"
 }
