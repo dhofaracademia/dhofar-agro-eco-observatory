@@ -148,6 +148,11 @@ export default function AouProfilePanel({
           })}
         </p>
       )}
+      {p.discovery_status === "provisional_new" && (
+        <p className="mt-3 rounded-xl border border-violet-200 bg-violet-50 p-3 text-xs leading-relaxed text-sand-800/90">
+          {t("analysis.discoveryProvisionalBanner")}
+        </p>
+      )}
     </aside>
   );
 }

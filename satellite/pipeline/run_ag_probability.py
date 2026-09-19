@@ -7,7 +7,7 @@ Modes:
      and rewrite latest_alerts with new fields (ndre null if unavailable).
   2) Called after run_monitor.py full STAC path (same writers).
 
-Cite: docs/SCIENCE_LOCKS_v0.4_phase1_2.md + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + SCIENCE_LOCKS_v0.4_observation_integrity.md + SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md + SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md
+Cite: docs/SCIENCE_LOCKS_v0.4_phase1_2.md + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + SCIENCE_LOCKS_v0.4_observation_integrity.md + SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md + SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md + SCIENCE_LOCKS_v0.4_evaluator_round2.md
 AOU ≠ farm; DQ ≠ ecological confidence; biotic ≠ pest certainty.
 500 m grid remains fallback/debug (geometry_kind=monitoring_grid_500m).
 """
@@ -41,9 +41,14 @@ from engines.observation_integrity import (  # noqa: E402
     DEFAULT_MIN_CLEAR_FRACTION_CELL,
     DEFAULT_MIN_CLEAR_MEMBERS_AOU,
     DEFAULT_MIN_CLEAR_PIXELS_CELL,
+    DEFAULT_MIN_VALID_AREA_FRACTION_AOU,
+    DISCOVERY_ESTABLISHED,
+    DISCOVERY_PROVISIONAL,
     JOIN_RULE,
     OBSERVATION_ROLE_CURRENT,
     OBSERVATION_ROLE_RETAINED,
+    cap_ag_class_for_discovery,
+    discovery_status_for_n_clear,
     alert_counts_match,
     aou_assessability_with_area,
     assign_cells_max_overlap,
@@ -615,6 +620,144 @@ def assign_aou_ids(
         except Exception:
             month = None
 
+
+    def _discover_mint_from_features(cell_feats: list[dict], *, allow_unassigned_only: bool) -> None:
+        """Round-2 R2-3: mint/match new AOUs with provisional_new until n_clear>=2.
+
+        Never mint from unassessable coverage. Day-1 max ag_class=possible.
+        When allow_unassigned_only, only cells without an aou_id are considered.
+        """
+        nonlocal aou_features
+        pool = list(cell_feats)
+        if allow_unassigned_only:
+            pool = [
+                f
+                for f in cell_feats
+                if not f.get("properties", {}).get("aou_id")
+            ]
+        if not pool:
+            return
+        candidates = segment_probability_mask(pool)
+        if not candidates:
+            return
+        cand_geoms = [(f"__cand_{i}", c["geometry"]) for i, c in enumerate(candidates)]
+        by_cand = assign_cells_max_overlap(pool, cand_geoms, bare_ndvi=BARE_NDVI)
+        for i, cand in enumerate(candidates):
+            cand_key = f"__cand_{i}"
+            cand_members = (by_cand.get(cand_key) or {}).get("members") or []
+            for m in cand_members:
+                m["assessability"] = cell_assessability(
+                    m,
+                    min_clear_pixels=DEFAULT_MIN_CLEAR_PIXELS_CELL,
+                    min_clear_fraction=DEFAULT_MIN_CLEAR_FRACTION_CELL,
+                )
+            assess_c, assess_meta_c = aou_assessability_with_area(
+                cand_members,
+                min_clear_fraction=DEFAULT_MIN_CLEAR_FRACTION_AOU,
+                min_clear_members=DEFAULT_MIN_CLEAR_MEMBERS_AOU,
+                min_valid_area_fraction=DEFAULT_MIN_VALID_AREA_FRACTION_AOU,
+            )
+            if assess_c == "unassessable" or not cand_members:
+                continue
+            clear_c = [m for m in cand_members if m.get("assessability") == "assessable"]
+            mean_ndvi, mean_ndmi = member_clear_means(clear_c)
+            if mean_ndvi is None or mean_ndmi is None:
+                continue
+            scored = _score_unit_from_ndvi_ndmi(mean_ndvi, mean_ndmi, month, 1)
+            ag_class = scored["ag_class"] or _honest_class(scored["agricultural_probability"], 1)
+            ag_class = cap_ag_class_for_discovery(
+                ag_class, n_clear=1, discovery_status=DISCOVERY_PROVISIONAL
+            )
+            props = {
+                "agricultural_probability": scored["agricultural_probability"],
+                "ag_class": ag_class,
+                "area_ha_est": cand["area_ha_est"],
+                "n_clear_dates": 1,
+                "persistence_status": persistence_status(1),
+                "discovery_status": DISCOVERY_PROVISIONAL,
+            }
+            aou_id, rec = mint_or_match_aou(
+                cand["geometry"],
+                registry,
+                observation_date=observation_date or "1970-01-01",
+                props=props,
+            )
+            for mi in (by_cand.get(cand_key) or {}).get("member_indices") or []:
+                pool[mi]["properties"]["aou_id"] = aou_id
+            n_ledger = _aou_scoped_clear_count(
+                ledger,
+                aou_id,
+                pending_date=observation_date,
+                pending_ndvi=mean_ndvi,
+                exclude_date=observation_date,
+            )
+            disc = discovery_status_for_n_clear(n_ledger)
+            ag_class = cap_ag_class_for_discovery(
+                ag_class, n_clear=n_ledger, discovery_status=disc
+            )
+            te = temporal_evidence_labels(n_ledger)
+            rec["ndvi"] = round(float(mean_ndvi), 4)
+            rec["ndmi"] = round(float(mean_ndmi), 4)
+            rec["current_detection"] = "detected" if mean_ndvi >= BARE_NDVI else "weak"
+            rec["n_clear_dates"] = n_ledger
+            rec["refresh_status"] = "refreshed"
+            rec["active"] = True
+            rec["discovery_status"] = disc
+            rec["discovery_action"] = rec.get("discovery_action") or "mint"
+            rec["ag_class"] = ag_class
+            rec["assessability"] = "assessable"
+            rec["valid_area_fraction"] = assess_meta_c.get("valid_area_fraction")
+            rec["assessable_cell_fraction"] = assess_meta_c.get("assessable_cell_fraction")
+            for k, v in te.items():
+                rec[k] = v
+            if any(f["properties"].get("aou_id") == aou_id for f in aou_features):
+                continue
+            aou_features.append(
+                {
+                    "type": "Feature",
+                    "geometry": mapping(cand["geometry"]),
+                    "properties": {
+                        "aou_id": aou_id,
+                        "previous_ids": rec.get("previous_ids", []),
+                        "first_seen_date": rec.get("first_seen_date"),
+                        "last_seen_date": rec.get("last_seen_date"),
+                        "active": True,
+                        "current_detection": rec["current_detection"],
+                        "refresh_status": "refreshed",
+                        "observation_role": OBSERVATION_ROLE_CURRENT,
+                        "agricultural_probability": props["agricultural_probability"],
+                        "ag_class": ag_class,
+                        "area_ha_est": cand["area_ha_est"],
+                        "ndvi": rec.get("ndvi"),
+                        "ndmi": rec.get("ndmi"),
+                        "ndre": None,
+                        "ndre_available": False,
+                        "ndre_status": "unavailable",
+                        "member_count": cand["member_count"],
+                        "geometry_kind": "aou_segment",
+                        "aou_not_official_farm": True,
+                        "n_clear_dates": n_ledger,
+                        "persistence_status": props["persistence_status"],
+                        "persistence_feature": None,
+                        "persistence_estimated_from_window": False,
+                        "assessability": "assessable",
+                        "assessable_cell_fraction": assess_meta_c.get("assessable_cell_fraction"),
+                        "valid_area_fraction": assess_meta_c.get("valid_area_fraction"),
+                        "discovery_status": disc,
+                        "discovery_action": rec.get("discovery_action"),
+                        "match_iou": rec.get("match_iou"),
+                        "evidence_level": "satellite_only",
+                        "product_stamp": "provisional_satellite_analytical_service",
+                        "najd_model_validation": "not_validated",
+                        "formula_ref": FORMULA_REF_AOU,
+                        "date": observation_date,
+                        "join_rule": JOIN_RULE,
+                        **te,
+                    },
+                }
+            )
+
+
     if active:
         aou_geoms: list[tuple[str, Any]] = []
         rec_by_id: dict[str, dict] = {}
@@ -644,6 +787,7 @@ def assign_aou_ids(
                 members,
                 min_clear_fraction=DEFAULT_MIN_CLEAR_FRACTION_AOU,
                 min_clear_members=DEFAULT_MIN_CLEAR_MEMBERS_AOU,
+                min_valid_area_fraction=DEFAULT_MIN_VALID_AREA_FRACTION_AOU,
             )
             clear_members = [m for m in members if m.get("assessability") == "assessable"]
             mean_ndvi, mean_ndmi = member_clear_means(clear_members)
@@ -821,6 +965,11 @@ def assign_aou_ids(
             rec["assessable_cell_fraction"] = assess_meta.get("assessable_cell_fraction")
             rec["valid_area_fraction"] = assess_meta.get("valid_area_fraction")
             rec["observation_role"] = obs_role
+            rec["discovery_status"] = discovery_status_for_n_clear(n_clear)
+            ag_class = cap_ag_class_for_discovery(
+                ag_class, n_clear=n_clear, discovery_status=rec["discovery_status"]
+            )
+            rec["ag_class"] = ag_class
             rec["biotic_status"] = biotic_status
             rec["possible_biotic_stress"] = possible_biotic
             rec["aggregate_id"] = agg["aggregate_id"]
@@ -875,6 +1024,9 @@ def assign_aou_ids(
                         "alert": agg_alert,
                         "possible_biotic_stress": possible_biotic,
                         "biotic_status": biotic_status,
+                        "discovery_status": rec.get("discovery_status"),
+                        "discovery_action": rec.get("discovery_action"),
+                        "match_iou": rec.get("match_iou"),
                         "aggregate_id": agg["aggregate_id"],
                         "aou_date_aggregate": agg,
                         "last_good_date": last_good_date,
@@ -888,118 +1040,13 @@ def assign_aou_ids(
                     },
                 }
             )
-    else:
-        # Cold start only
-        candidates = segment_probability_mask(features)
-        # Clear then assign via positive-area max overlap against candidate polys
-        cand_geoms = []
-        for idx, cand in enumerate(candidates):
-            cand_geoms.append((f"__cand_{idx}", cand["geometry"]))
-        by_cand = assign_cells_max_overlap(features, cand_geoms, bare_ndvi=BARE_NDVI)
 
-        for idx, cand in enumerate(candidates):
-            cand_key = f"__cand_{idx}"
-            cand_members = (by_cand.get(cand_key) or {}).get("members") or []
-            for m in cand_members:
-                m["assessability"] = cell_assessability(
-                    m,
-                    min_clear_pixels=DEFAULT_MIN_CLEAR_PIXELS_CELL,
-                    min_clear_fraction=DEFAULT_MIN_CLEAR_FRACTION_CELL,
-                )
-            assess_c, _am = aou_assessability_with_area(
-                cand_members,
-                min_clear_fraction=DEFAULT_MIN_CLEAR_FRACTION_AOU,
-                min_clear_members=DEFAULT_MIN_CLEAR_MEMBERS_AOU,
-            )
-            # Unassessable cells never create AOUs
-            if assess_c == "unassessable" or not cand_members:
-                continue
-            clear_c = [m for m in cand_members if m.get("assessability") == "assessable"]
-            mean_ndvi = cand.get("ndvi_mean")
-            mean_ndmi = cand.get("ndmi_mean")
-            m_ndvi, m_ndmi = member_clear_means(clear_c)
-            if m_ndvi is not None:
-                mean_ndvi, mean_ndmi = m_ndvi, m_ndmi
-            has_new = mean_ndvi is not None and mean_ndmi is not None
-            n_clear = _aou_scoped_clear_count(
-                ledger,
-                aou_id="__cold_start__",
-                pending_date=observation_date if has_new else None,
-                pending_ndvi=mean_ndvi if has_new else None,
-            )
-            te = temporal_evidence_labels(n_clear)
-            scored = _score_unit_from_ndvi_ndmi(mean_ndvi, mean_ndmi, month, n_clear) if has_new else {
-                "agricultural_probability": cand.get("agricultural_probability"),
-                "ag_class": _honest_class(cand.get("agricultural_probability"), n_clear),
-                "persistence_status": persistence_status(n_clear),
-            }
-            props = {
-                "agricultural_probability": scored["agricultural_probability"],
-                "ag_class": scored["ag_class"] or _honest_class(scored["agricultural_probability"], n_clear),
-                "area_ha_est": cand["area_ha_est"],
-                "n_clear_dates": n_clear,
-                "persistence_status": scored.get("persistence_status") or persistence_status(n_clear),
-            }
-            aou_id, rec = mint_or_match_aou(
-                cand["geometry"],
-                registry,
-                observation_date=observation_date if has_new else (observation_date or "1970-01-01"),
-                props=props,
-            )
-            # Re-stamp cell aou_ids from candidate key → real id
-            for i in (by_cand.get(cand_key) or {}).get("member_indices") or []:
-                features[i]["properties"]["aou_id"] = aou_id
-            if has_new:
-                rec["ndvi"] = round(float(mean_ndvi), 4)
-                rec["ndmi"] = round(float(mean_ndmi), 4)
-                refresh_status = "refreshed"
-                stamp_date = observation_date
-            else:
-                refresh_status = "no_new_observation"
-                stamp_date = rec.get("last_seen_date")
-            detection = "detected" if (mean_ndvi or 0) >= BARE_NDVI else "weak"
-            rec["current_detection"] = detection
-            rec["n_clear_dates"] = n_clear
-            rec["refresh_status"] = refresh_status
-            rec["active"] = True
-            for k, v in te.items():
-                rec[k] = v
-            aou_features.append(
-                {
-                    "type": "Feature",
-                    "geometry": mapping(cand["geometry"]),
-                    "properties": {
-                        "aou_id": aou_id,
-                        "previous_ids": rec.get("previous_ids", []),
-                        "first_seen_date": rec.get("first_seen_date"),
-                        "last_seen_date": rec.get("last_seen_date"),
-                        "active": True,
-                        "current_detection": detection,
-                        "refresh_status": refresh_status,
-                        "agricultural_probability": props["agricultural_probability"],
-                        "ag_class": props["ag_class"],
-                        "area_ha_est": cand["area_ha_est"],
-                        "ndvi": rec.get("ndvi"),
-                        "ndmi": rec.get("ndmi"),
-                        "ndre": None,
-                        "ndre_available": False,
-                        "ndre_status": "unavailable",
-                        "member_count": cand["member_count"],
-                        "geometry_kind": "aou_segment",
-                        "aou_not_official_farm": True,
-                        "n_clear_dates": n_clear,
-                        "persistence_status": props["persistence_status"],
-                        "persistence_estimated_from_window": False,
-                        "evidence_level": "satellite_only",
-                        "product_stamp": "provisional_satellite_analytical_service",
-                        "najd_model_validation": "not_validated",
-                        "formula_ref": FORMULA_REF_AOU,
-                        "date": stamp_date,
-                        "join_rule": JOIN_RULE,
-                        **te,
-                    },
-                }
-            )
+        # Round-2 R2-3: discover NEW AOUs after registry non-empty
+        _discover_mint_from_features(features, allow_unassigned_only=True)
+
+    else:
+        # Cold start — same discovery policy (provisional_new, no unassessable mint)
+        _discover_mint_from_features(features, allow_unassigned_only=False)
 
     # Ensure every cell has explicit aou_id (None if unassigned)
     for f in features:
@@ -1459,7 +1506,7 @@ def main() -> int:
                 "decision/action_ladder.stubs.json",
                 "decision/run_meta.json",
             ],
-            "phase": "0.4.6-evaluator-deep-recheck",
+            "phase": "0.4.7-evaluator-round2",
             "formula_ref": FORMULA_REF_POST,
             "join_rule": join_meta.get("join_rule", JOIN_RULE),
             "join_predicate": "positive_area_overlap",
@@ -1471,12 +1518,13 @@ def main() -> int:
             "min_clear_fraction_cell": DEFAULT_MIN_CLEAR_FRACTION_CELL,
             "min_clear_fraction_aou": DEFAULT_MIN_CLEAR_FRACTION_AOU,
             "min_clear_members_aou": DEFAULT_MIN_CLEAR_MEMBERS_AOU,
-            "min_valid_area_fraction_aou": None,
+            "min_valid_area_fraction_aou": DEFAULT_MIN_VALID_AREA_FRACTION_AOU,
             "coverage_gate": {
                 "min_clear_pixels_cell": DEFAULT_MIN_CLEAR_PIXELS_CELL,
                 "min_clear_fraction_cell": DEFAULT_MIN_CLEAR_FRACTION_CELL,
                 "min_clear_fraction_aou": DEFAULT_MIN_CLEAR_FRACTION_AOU,
                 "min_clear_members_aou": DEFAULT_MIN_CLEAR_MEMBERS_AOU,
+                "min_valid_area_fraction_aou": DEFAULT_MIN_VALID_AREA_FRACTION_AOU,
                 "assessable_cell_fraction": "secondary_count",
                 "valid_area_fraction": "primary_when_overlaps",
             },

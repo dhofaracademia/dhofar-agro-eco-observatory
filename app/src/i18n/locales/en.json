@@ -319,13 +319,17 @@
         "biotic_field_verification": "Optional additional field verification — possible biotic (last resort)",
         "continue_monitoring": "Continue monitoring",
         "defer_insufficient_evidence": "Defer — insufficient evidence"
-      }
+      },
+      "discoveryProvisional": "discovery: provisional_new",
+      "demotedProvisional": "Decision demoted — provisional discovery",
+      "demotedUnassessable": "Decision demoted — unassessable/retained"
     },
     "temporalEvidenceInsufficient": "Insufficient temporal evidence",
     "bioticUnknownTemporal": "Biotic status unknown — insufficient temporal evidence (n_clear < 2). Empty stress history ≠ no biotic issue.",
     "unassessableBanner": "Unassessable this date — clear coverage insufficient. Scores are not a current healthy/possible observation.",
     "observationRoleRetained": "observation_role={{role}} (refresh_status={{status}}) — last-good retained; not observed today.",
-    "refreshStatusRetained": "refresh_status={{status}} — prior dated scores retained"
+    "refreshStatusRetained": "refresh_status={{status}} — prior dated scores retained",
+    "discoveryProvisionalBanner": "New AOU — provisional_new until a second clear date (n_clear ≥ 2). Not a validated farm parcel."
   },
   "about": {
     "title": "Method & scientific honesty",

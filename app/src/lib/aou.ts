@@ -38,6 +38,9 @@ export type AouAlertProps = {
   assessable_cell_fraction?: number | null;
   valid_area_fraction?: number | null;
   aggregate_id?: string | null;
+  discovery_status?: "provisional_new" | "established" | string;
+  discovery_action?: "mint" | "match" | string;
+  match_iou?: number | null;
   persistence_status?: string;
   persistence_feature?: number | null;
 };

@@ -135,6 +135,12 @@ def mint_or_match_aou(
         if props.get("ag_class") is not None:
             rec["ag_class"] = props["ag_class"]
         rec["match_iou"] = round(best_iou, 4)
+        rec["discovery_action"] = "match"
+        # Match keeps prior discovery_status unless caller upgrades via props
+        if props.get("discovery_status"):
+            rec["discovery_status"] = props["discovery_status"]
+        elif not rec.get("discovery_status"):
+            rec["discovery_status"] = "provisional_new"
         return rec["aou_id"], rec
 
     aou_id = next_id(registry)
@@ -152,6 +158,10 @@ def mint_or_match_aou(
         "ag_class": props.get("ag_class"),
         "region": REGION,
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§2",
+        # Round-2 R2-3: new mint is provisional until n_clear >= 2
+        "discovery_action": "mint",
+        "discovery_status": props.get("discovery_status") or "provisional_new",
+        "match_iou": None,
     }
     registry.setdefault("units", []).append(rec)
     return aou_id, rec

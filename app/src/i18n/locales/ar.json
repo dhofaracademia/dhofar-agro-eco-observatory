@@ -319,13 +319,17 @@
         "biotic_field_verification": "تحقق ميداني إضافي اختياري — إجهاد حيوي محتمل (ملاذ أخير)",
         "continue_monitoring": "متابعة الرصد",
         "defer_insufficient_evidence": "تأجيل — أدلة غير كافية"
-      }
+      },
+      "discoveryProvisional": "اكتشاف: provisional_new",
+      "demotedProvisional": "قرار مخفّض — اكتشاف مؤقت",
+      "demotedUnassessable": "قرار مخفّض — غير قابل للتقييم/مُحتفظ"
     },
     "temporalEvidenceInsufficient": "أدلة زمنية غير كافية",
     "bioticUnknownTemporal": "حالة الإجهاد الحيوي غير معروفة — أدلة زمنية غير كافية (n_clear < 2). فراغ سجل الإجهاد ≠ عدم وجود مشكلة حيوية.",
     "unassessableBanner": "غير قابل للتقييم في هذا التاريخ — تغطية صافية غير كافية. الدرجات ليست رصداً حالياً سليماً/ممكناً.",
     "observationRoleRetained": "observation_role={{role}} (refresh_status={{status}}) — احتفاظ بآخر نتيجة جيدة؛ ليست رصد اليوم.",
-    "refreshStatusRetained": "refresh_status={{status}} — تم الاحتفاظ بالدرجات المؤرخة السابقة"
+    "refreshStatusRetained": "refresh_status={{status}} — تم الاحتفاظ بالدرجات المؤرخة السابقة",
+    "discoveryProvisionalBanner": "وحدة مراقبة جديدة — provisional_new حتى تاريخين صافيين (n_clear ≥ 2). ليست مزرعة معتمدة."
   },
   "about": {
     "title": "المنهجية والصدق العلمي",

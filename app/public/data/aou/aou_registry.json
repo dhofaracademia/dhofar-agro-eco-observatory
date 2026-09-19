@@ -62,7 +62,7 @@
         "clear_overlap_area_sum": 2.1308659526346988e-05,
         "min_clear_fraction_aou": 0.2,
         "min_clear_members_aou": 1,
-        "min_valid_area_fraction_aou": null,
+        "min_valid_area_fraction_aou": 0.2,
         "clear_fraction": 1.0
       },
       "stress_flags_recent_water": [],
@@ -76,12 +76,12 @@
       "observation_role": "current_observation",
       "biotic_status": "unknown",
       "possible_biotic_stress": false,
-      "aggregate_id": "AOU-NJ-000001|2026-09-06|20260919T133443Z",
+      "aggregate_id": "AOU-NJ-000001|2026-09-06|20260919T182936Z",
       "aou_date_aggregate": {
-        "aggregate_id": "AOU-NJ-000001|2026-09-06|20260919T133443Z",
+        "aggregate_id": "AOU-NJ-000001|2026-09-06|20260919T182936Z",
         "aou_id": "AOU-NJ-000001",
         "date": "2026-09-06",
-        "run_id": "20260919T133443Z",
+        "run_id": "20260919T182936Z",
         "ndvi": 0.5868,
         "ndmi": 0.1688,
         "water_stress_score": 18.0,
@@ -122,7 +122,8 @@
       },
       "last_good_date": "2026-09-06",
       "last_good_ndvi": 0.5868,
-      "last_good_ndmi": 0.1688
+      "last_good_ndmi": 0.1688,
+      "discovery_status": "provisional_new"
     },
     {
       "aou_id": "AOU-NJ-000002",
@@ -207,7 +208,7 @@
         "clear_overlap_area_sum": 8.525767107452469e-05,
         "min_clear_fraction_aou": 0.2,
         "min_clear_members_aou": 1,
-        "min_valid_area_fraction_aou": null,
+        "min_valid_area_fraction_aou": 0.2,
         "clear_fraction": 1.0
       },
       "stress_flags_recent_water": [],
@@ -221,12 +222,12 @@
       "observation_role": "current_observation",
       "biotic_status": "unknown",
       "possible_biotic_stress": false,
-      "aggregate_id": "AOU-NJ-000002|2026-09-06|20260919T133443Z",
+      "aggregate_id": "AOU-NJ-000002|2026-09-06|20260919T182936Z",
       "aou_date_aggregate": {
-        "aggregate_id": "AOU-NJ-000002|2026-09-06|20260919T133443Z",
+        "aggregate_id": "AOU-NJ-000002|2026-09-06|20260919T182936Z",
         "aou_id": "AOU-NJ-000002",
         "date": "2026-09-06",
-        "run_id": "20260919T133443Z",
+        "run_id": "20260919T182936Z",
         "ndvi": 0.5572,
         "ndmi": 0.1489,
         "water_stress_score": 18.0,
@@ -288,7 +289,8 @@
       },
       "last_good_date": "2026-09-06",
       "last_good_ndvi": 0.5572,
-      "last_good_ndmi": 0.1489
+      "last_good_ndmi": 0.1489,
+      "discovery_status": "provisional_new"
     },
     {
       "aou_id": "AOU-NJ-000003",
@@ -357,7 +359,7 @@
         "clear_overlap_area_sum": 4.263672460205399e-05,
         "min_clear_fraction_aou": 0.2,
         "min_clear_members_aou": 1,
-        "min_valid_area_fraction_aou": null,
+        "min_valid_area_fraction_aou": 0.2,
         "clear_fraction": 1.0
       },
       "stress_flags_recent_water": [],
@@ -371,12 +373,12 @@
       "observation_role": "current_observation",
       "biotic_status": "unknown",
       "possible_biotic_stress": false,
-      "aggregate_id": "AOU-NJ-000003|2026-09-06|20260919T133443Z",
+      "aggregate_id": "AOU-NJ-000003|2026-09-06|20260919T182936Z",
       "aou_date_aggregate": {
-        "aggregate_id": "AOU-NJ-000003|2026-09-06|20260919T133443Z",
+        "aggregate_id": "AOU-NJ-000003|2026-09-06|20260919T182936Z",
         "aou_id": "AOU-NJ-000003",
         "date": "2026-09-06",
-        "run_id": "20260919T133443Z",
+        "run_id": "20260919T182936Z",
         "ndvi": 0.5997,
         "ndmi": 0.1977,
         "water_stress_score": 18.0,
@@ -424,7 +426,8 @@
       },
       "last_good_date": "2026-09-06",
       "last_good_ndvi": 0.5997,
-      "last_good_ndmi": 0.1977
+      "last_good_ndmi": 0.1977,
+      "discovery_status": "provisional_new"
     },
     {
       "aou_id": "AOU-NJ-000004",
@@ -485,7 +488,7 @@
         "clear_overlap_area_sum": 2.1298213521621623e-05,
         "min_clear_fraction_aou": 0.2,
         "min_clear_members_aou": 1,
-        "min_valid_area_fraction_aou": null,
+        "min_valid_area_fraction_aou": 0.2,
         "clear_fraction": 1.0
       },
       "stress_flags_recent_water": [],
@@ -499,12 +502,12 @@
       "observation_role": "current_observation",
       "biotic_status": "unknown",
       "possible_biotic_stress": false,
-      "aggregate_id": "AOU-NJ-000004|2026-09-06|20260919T133443Z",
+      "aggregate_id": "AOU-NJ-000004|2026-09-06|20260919T182936Z",
       "aou_date_aggregate": {
-        "aggregate_id": "AOU-NJ-000004|2026-09-06|20260919T133443Z",
+        "aggregate_id": "AOU-NJ-000004|2026-09-06|20260919T182936Z",
         "aou_id": "AOU-NJ-000004",
         "date": "2026-09-06",
-        "run_id": "20260919T133443Z",
+        "run_id": "20260919T182936Z",
         "ndvi": 0.5199,
         "ndmi": 0.1063,
         "water_stress_score": 18.0,
@@ -545,7 +548,8 @@
       },
       "last_good_date": "2026-09-06",
       "last_good_ndvi": 0.5199,
-      "last_good_ndmi": 0.1063
+      "last_good_ndmi": 0.1063,
+      "discovery_status": "provisional_new"
     },
     {
       "aou_id": "AOU-NJ-000005",
@@ -606,7 +610,7 @@
         "clear_overlap_area_sum": 2.1300775012699378e-05,
         "min_clear_fraction_aou": 0.2,
         "min_clear_members_aou": 1,
-        "min_valid_area_fraction_aou": null,
+        "min_valid_area_fraction_aou": 0.2,
         "clear_fraction": 1.0
       },
       "stress_flags_recent_water": [],
@@ -620,12 +624,12 @@
       "observation_role": "current_observation",
       "biotic_status": "unknown",
       "possible_biotic_stress": false,
-      "aggregate_id": "AOU-NJ-000005|2026-09-06|20260919T133443Z",
+      "aggregate_id": "AOU-NJ-000005|2026-09-06|20260919T182936Z",
       "aou_date_aggregate": {
-        "aggregate_id": "AOU-NJ-000005|2026-09-06|20260919T133443Z",
+        "aggregate_id": "AOU-NJ-000005|2026-09-06|20260919T182936Z",
         "aou_id": "AOU-NJ-000005",
         "date": "2026-09-06",
-        "run_id": "20260919T133443Z",
+        "run_id": "20260919T182936Z",
         "ndvi": 0.5103,
         "ndmi": 0.0184,
         "water_stress_score": 11.28,
@@ -666,7 +670,8 @@
       },
       "last_good_date": "2026-09-06",
       "last_good_ndvi": 0.5103,
-      "last_good_ndmi": 0.0184
+      "last_good_ndmi": 0.0184,
+      "discovery_status": "provisional_new"
     },
     {
       "aou_id": "AOU-NJ-000006",
@@ -735,7 +740,7 @@
         "clear_overlap_area_sum": 4.2603784718737945e-05,
         "min_clear_fraction_aou": 0.2,
         "min_clear_members_aou": 1,
-        "min_valid_area_fraction_aou": null,
+        "min_valid_area_fraction_aou": 0.2,
         "clear_fraction": 1.0
       },
       "stress_flags_recent_water": [],
@@ -749,12 +754,12 @@
       "observation_role": "current_observation",
       "biotic_status": "unknown",
       "possible_biotic_stress": false,
-      "aggregate_id": "AOU-NJ-000006|2026-09-06|20260919T133443Z",
+      "aggregate_id": "AOU-NJ-000006|2026-09-06|20260919T182936Z",
       "aou_date_aggregate": {
-        "aggregate_id": "AOU-NJ-000006|2026-09-06|20260919T133443Z",
+        "aggregate_id": "AOU-NJ-000006|2026-09-06|20260919T182936Z",
         "aou_id": "AOU-NJ-000006",
         "date": "2026-09-06",
-        "run_id": "20260919T133443Z",
+        "run_id": "20260919T182936Z",
         "ndvi": 0.4816,
         "ndmi": 0.0876,
         "water_stress_score": 18.0,
@@ -802,7 +807,8 @@
       },
       "last_good_date": "2026-09-06",
       "last_good_ndvi": 0.4816,
-      "last_good_ndmi": 0.0876
+      "last_good_ndmi": 0.0876,
+      "discovery_status": "provisional_new"
     },
     {
       "aou_id": "AOU-NJ-000007",
@@ -863,7 +869,7 @@
         "clear_overlap_area_sum": 2.130277025552235e-05,
         "min_clear_fraction_aou": 0.2,
         "min_clear_members_aou": 1,
-        "min_valid_area_fraction_aou": null,
+        "min_valid_area_fraction_aou": 0.2,
         "clear_fraction": 1.0
       },
       "stress_flags_recent_water": [],
@@ -877,12 +883,12 @@
       "observation_role": "current_observation",
       "biotic_status": "unknown",
       "possible_biotic_stress": false,
-      "aggregate_id": "AOU-NJ-000007|2026-09-06|20260919T133443Z",
+      "aggregate_id": "AOU-NJ-000007|2026-09-06|20260919T182936Z",
       "aou_date_aggregate": {
-        "aggregate_id": "AOU-NJ-000007|2026-09-06|20260919T133443Z",
+        "aggregate_id": "AOU-NJ-000007|2026-09-06|20260919T182936Z",
         "aou_id": "AOU-NJ-000007",
         "date": "2026-09-06",
-        "run_id": "20260919T133443Z",
+        "run_id": "20260919T182936Z",
         "ndvi": 0.6518,
         "ndmi": 0.141,
         "water_stress_score": 18.0,
@@ -923,7 +929,8 @@
       },
       "last_good_date": "2026-09-06",
       "last_good_ndvi": 0.6518,
-      "last_good_ndmi": 0.141
+      "last_good_ndmi": 0.141,
+      "discovery_status": "provisional_new"
     },
     {
       "aou_id": "AOU-NJ-000008",
@@ -984,7 +991,7 @@
         "clear_overlap_area_sum": 2.1314551021188743e-05,
         "min_clear_fraction_aou": 0.2,
         "min_clear_members_aou": 1,
-        "min_valid_area_fraction_aou": null,
+        "min_valid_area_fraction_aou": 0.2,
         "clear_fraction": 1.0
       },
       "stress_flags_recent_water": [],
@@ -998,12 +1005,12 @@
       "observation_role": "current_observation",
       "biotic_status": "unknown",
       "possible_biotic_stress": false,
-      "aggregate_id": "AOU-NJ-000008|2026-09-06|20260919T133443Z",
+      "aggregate_id": "AOU-NJ-000008|2026-09-06|20260919T182936Z",
       "aou_date_aggregate": {
-        "aggregate_id": "AOU-NJ-000008|2026-09-06|20260919T133443Z",
+        "aggregate_id": "AOU-NJ-000008|2026-09-06|20260919T182936Z",
         "aou_id": "AOU-NJ-000008",
         "date": "2026-09-06",
-        "run_id": "20260919T133443Z",
+        "run_id": "20260919T182936Z",
         "ndvi": 0.6392,
         "ndmi": 0.1658,
         "water_stress_score": 18.0,
@@ -1044,7 +1051,8 @@
       },
       "last_good_date": "2026-09-06",
       "last_good_ndvi": 0.6392,
-      "last_good_ndmi": 0.1658
+      "last_good_ndmi": 0.1658,
+      "discovery_status": "provisional_new"
     },
     {
       "aou_id": "AOU-NJ-000009",
@@ -1105,7 +1113,7 @@
         "clear_overlap_area_sum": 2.1316141804322676e-05,
         "min_clear_fraction_aou": 0.2,
         "min_clear_members_aou": 1,
-        "min_valid_area_fraction_aou": null,
+        "min_valid_area_fraction_aou": 0.2,
         "clear_fraction": 1.0
       },
       "stress_flags_recent_water": [],
@@ -1119,12 +1127,12 @@
       "observation_role": "current_observation",
       "biotic_status": "unknown",
       "possible_biotic_stress": false,
-      "aggregate_id": "AOU-NJ-000009|2026-09-06|20260919T133443Z",
+      "aggregate_id": "AOU-NJ-000009|2026-09-06|20260919T182936Z",
       "aou_date_aggregate": {
-        "aggregate_id": "AOU-NJ-000009|2026-09-06|20260919T133443Z",
+        "aggregate_id": "AOU-NJ-000009|2026-09-06|20260919T182936Z",
         "aou_id": "AOU-NJ-000009",
         "date": "2026-09-06",
-        "run_id": "20260919T133443Z",
+        "run_id": "20260919T182936Z",
         "ndvi": 0.5001,
         "ndmi": 0.08,
         "water_stress_score": 18.0,
@@ -1165,10 +1173,11 @@
       },
       "last_good_date": "2026-09-06",
       "last_good_ndvi": 0.5001,
-      "last_good_ndmi": 0.08
+      "last_good_ndmi": 0.08,
+      "discovery_status": "provisional_new"
     }
   ],
-  "updated_at": "2026-09-19T13:34:43.623489+00:00",
+  "updated_at": "2026-09-19T18:29:36.969873+00:00",
   "najd_model_validation": "not_validated",
   "active_means": "registry_identity_only",
   "join_rule": "max_overlap_area"

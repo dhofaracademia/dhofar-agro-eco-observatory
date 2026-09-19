@@ -61,7 +61,7 @@ def test_area_vs_count_fraction_divergence():
         {"ndvi": 0.4, "ndmi": 0.1, "pixel_count": 5, "aou_overlap_area": 0.49},
     ]
     status, meta = aou_assessability_with_area(
-        members, min_clear_fraction=0.01, min_clear_members=1
+        members, min_clear_fraction=0.01, min_clear_members=1, min_valid_area_fraction=None
     )
     # Count fraction = 1/3 ≈ 0.33; area fraction = 0.02/1.0 = 0.02
     assert abs(meta["assessable_cell_fraction"] - (1 / 3)) < 1e-6

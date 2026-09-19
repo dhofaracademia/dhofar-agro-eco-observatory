@@ -1,0 +1,121 @@
+{
+  "lock_id": "SCIENCE_LOCKS_v0.4_evaluator_round2",
+  "date": "2026-09-19",
+  "timezone": "Asia/Muscat",
+  "owner_pipeline_role": "Agrofostery Scientist",
+  "verdict": "go_with_fixes",
+  "against_main": "2397667b55bf84396e97140181d244a8a8b56747",
+  "closed_by_pr28": "147f42ba3d709ed81d0895b9fba8c57019cf799c",
+  "evaluator_must_rebase_from": "bd1d90c",
+  "ai_pipeline_role": true,
+  "human_review": "pending",
+  "mountain_seeding_hold": true,
+  "closed_do_not_reopen": [
+    "assessability_pre_gate_agprob",
+    "observation_role_current_vs_retained",
+    "shared_aou_date_aggregate",
+    "history_before_T_no_self_feed",
+    "ledger_persistence_into_agprob_suitability",
+    "valid_area_fraction_computed",
+    "biotic_three_state",
+    "atomic_promote_includes_decision"
+  ],
+  "p0_must_fix": [
+    "unassessable_mandatory_full_release_path",
+    "numeric_min_valid_area_fraction_aou_gate",
+    "new_aou_discovery_policy",
+    "provisional_new_until_n_clear_ge_2",
+    "no_likely_on_day1_new_aou",
+    "no_mint_from_unassessable",
+    "rerun_evaluator_on_post_28_sha"
+  ],
+  "p1": [
+    "discovery_status_ui",
+    "tests_discovery_policy",
+    "tests_area_threshold_gate",
+    "regression_deep_recheck_suite"
+  ],
+  "forbidden": [
+    "relitigate_closed_pr28_without_regression",
+    "unassessable_to_current_healthy_possible",
+    "count_only_coverage_forever",
+    "mint_unassessable",
+    "likely_on_n_clear_lt_2_new_aou",
+    "evaluator_fail_on_pre_28_as_current",
+    "lift_mountain_3b"
+  ],
+  "companions": [
+    "SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md",
+    "SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md",
+    "SCIENCE_LOCKS_v0.4_observation_integrity.md"
+  ],
+  "case_matrix": "docs/phase_evaluator_round2_case_matrix.md",
+  "cases": [
+    {
+      "id": 1,
+      "pri": "P0",
+      "name": "unassessable_mandatory_all_stages",
+      "expect": "no_healthy_possible_mint_from_unassessable; last_good_not_current"
+    },
+    {
+      "id": 2,
+      "pri": "P0",
+      "name": "single_aou_date_aggregate",
+      "expect": "registry=ledger=decision; no_rejected_in_mean",
+      "after_28": "expect_pass"
+    },
+    {
+      "id": 3,
+      "pri": "P0",
+      "name": "idempotent_reprocess_T",
+      "expect": "no_self_feed; history_before_T; replace_not_append",
+      "after_28": "expect_pass"
+    },
+    {
+      "id": 4,
+      "pri": "P1",
+      "name": "persistence_into_agprob_and_suitability",
+      "expect": "ledger_persistence_moves_scores",
+      "after_28": "expect_pass"
+    },
+    {
+      "id": 5,
+      "pri": "P0",
+      "name": "valid_area_fraction_numeric_gate",
+      "expect": "area_fraction_computed_and_numeric_min_gate",
+      "after_28": "compute_pass_gate_residual"
+    },
+    {
+      "id": 6,
+      "pri": "P1",
+      "name": "biotic_three_state",
+      "expect": "possible|unknown|not_flagged",
+      "after_28": "expect_pass"
+    },
+    {
+      "id": 7,
+      "pri": "P1",
+      "name": "atomic_promote_includes_decision",
+      "expect": "decision_in_promote; fail_keeps_last_good",
+      "after_28": "expect_pass"
+    },
+    {
+      "id": 8,
+      "pri": "P0",
+      "name": "new_aou_discovery_policy",
+      "expect": "provisional_until_n_clear_ge_2; no_likely_day1; no_mint_unassessable"
+    },
+    {
+      "id": 9,
+      "pri": "P2",
+      "name": "ux_honesty_paths",
+      "expect": "stamps_visible; no_last_good_as_today"
+    },
+    {
+      "id": 10,
+      "pri": "P2",
+      "name": "full_pipeline_regression_ci",
+      "expect": "cases_1_9_as_merge_gate"
+    }
+  ]
+}

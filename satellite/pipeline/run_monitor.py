@@ -69,6 +69,14 @@ MIN_CLEAR_FRACTION = float(os.environ.get("MONITOR_MIN_CLEAR_FRACTION", "0.02"))
 # STAC window: default end=now (UTC), lookback configurable; fixed only when stamped
 DEFAULT_LOOKBACK_DAYS = int(os.environ.get("MONITOR_STAC_LOOKBACK_DAYS", "90"))
 
+# Round-2 R2-1: full-path assessability gate in classify_alerts
+sys.path.insert(0, str(PIPELINE_DIR))
+from engines.observation_integrity import (  # noqa: E402
+    DEFAULT_MIN_CLEAR_FRACTION_CELL,
+    DEFAULT_MIN_CLEAR_PIXELS_CELL,
+    cell_assessability,
+)
+
 
 def stac_datetime_range() -> tuple[str, dict]:
     """Return (datetime_range, window_meta). end=now unless reproducibility_fixed."""
@@ -378,11 +386,20 @@ def classify_alerts(features: list[dict]) -> list[dict]:
             p = f["properties"]
             ndvi = p["ndvi"]
             ndmi = p["ndmi"]
-            if ndvi is None or not math.isfinite(ndvi):
+            # Round-2 R2-1: assessability BEFORE alert class (full release path)
+            assess = cell_assessability(
+                p,
+                min_clear_pixels=DEFAULT_MIN_CLEAR_PIXELS_CELL,
+                min_clear_fraction=DEFAULT_MIN_CLEAR_FRACTION_CELL,
+            )
+            p["assessability"] = assess
+            if assess == "unassessable":
+                p["alert"] = "unclear"
+            elif ndvi is None or not math.isfinite(ndvi):
                 p["alert"] = "unclear"
             elif ndvi < BARE_NDVI:
                 p["alert"] = "bare"
-            elif ndmi < ndmi_p25 and ndvi >= BARE_NDVI:
+            elif ndmi is not None and ndmi < ndmi_p25 and ndvi >= BARE_NDVI:
                 # water stress attention among vegetated
                 p["alert"] = "water_attention"
             elif ndvi < ndvi_p25:
@@ -686,7 +703,7 @@ def main() -> int:
     # Consistency: latest map counts == timeseries counts for latest_date
     ts_latest = next((t for t in timeseries if t["date"] == latest_date), None)
     if ts_latest is not None:
-        from engines.observation_integrity import alert_counts_match
+        from engines.observation_integrity import alert_counts_match  # noqa: E402
 
         if not alert_counts_match(dict(alert_counts), dict(ts_latest.get("alert_counts") or {})):
             print(
