@@ -1,0 +1,21 @@
+{
+  "release_id": "20260919T211515Z",
+  "path": "releases/20260919T211515Z",
+  "artifacts": [
+    "latest_alerts.geojson",
+    "timeseries.json",
+    "aou/aou_observations.json",
+    "aou/aou_registry.geojson",
+    "aou/aou_registry.json",
+    "meta/last_refresh.json",
+    "meta/run_meta.json",
+    "decision/aou_suitability_components.json",
+    "decision/aou_confidence.json",
+    "decision/aou_evidence_gaps.json",
+    "decision/run_meta.json",
+    "decision/action_ladder.stubs.json"
+  ],
+  "pointer_semantics": "immutable_release_dir_plus_current",
+  "atomic_claim": false,
+  "note": "Pointer swap after full tree verified; not claiming cross-FS atomic multi-file."
+}
