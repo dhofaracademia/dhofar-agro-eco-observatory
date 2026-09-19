@@ -1,7 +1,7 @@
 {
   "type": "aou_registry",
   "version": "0.4.1",
-  "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72",
+  "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72 + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md",
   "units": [
     {
       "aou_id": "AOU-NJ-000001",
@@ -44,7 +44,8 @@
       "region": "NJ",
       "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72",
       "n_clear_dates": 1,
-      "persistence_status": "single_date_insufficient"
+      "persistence_status": "single_date_insufficient",
+      "current_detection": "detected"
     },
     {
       "aou_id": "AOU-NJ-000002",
@@ -111,7 +112,8 @@
       "region": "NJ",
       "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72",
       "n_clear_dates": 1,
-      "persistence_status": "single_date_insufficient"
+      "persistence_status": "single_date_insufficient",
+      "current_detection": "detected"
     },
     {
       "aou_id": "AOU-NJ-000003",
@@ -162,7 +164,8 @@
       "region": "NJ",
       "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72",
       "n_clear_dates": 1,
-      "persistence_status": "single_date_insufficient"
+      "persistence_status": "single_date_insufficient",
+      "current_detection": "detected"
     },
     {
       "aou_id": "AOU-NJ-000004",
@@ -205,7 +208,8 @@
       "region": "NJ",
       "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72",
       "n_clear_dates": 1,
-      "persistence_status": "single_date_insufficient"
+      "persistence_status": "single_date_insufficient",
+      "current_detection": "detected"
     },
     {
       "aou_id": "AOU-NJ-000005",
@@ -248,7 +252,8 @@
       "region": "NJ",
       "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72",
       "n_clear_dates": 1,
-      "persistence_status": "single_date_insufficient"
+      "persistence_status": "single_date_insufficient",
+      "current_detection": "detected"
     },
     {
       "aou_id": "AOU-NJ-000006",
@@ -299,7 +304,8 @@
       "region": "NJ",
       "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72",
       "n_clear_dates": 1,
-      "persistence_status": "single_date_insufficient"
+      "persistence_status": "single_date_insufficient",
+      "current_detection": "detected"
     },
     {
       "aou_id": "AOU-NJ-000007",
@@ -342,7 +348,8 @@
       "region": "NJ",
       "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72",
       "n_clear_dates": 1,
-      "persistence_status": "single_date_insufficient"
+      "persistence_status": "single_date_insufficient",
+      "current_detection": "detected"
     },
     {
       "aou_id": "AOU-NJ-000008",
@@ -385,7 +392,8 @@
       "region": "NJ",
       "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72",
       "n_clear_dates": 1,
-      "persistence_status": "single_date_insufficient"
+      "persistence_status": "single_date_insufficient",
+      "current_detection": "detected"
     },
     {
       "aou_id": "AOU-NJ-000009",
@@ -428,8 +436,11 @@
       "region": "NJ",
       "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72",
       "n_clear_dates": 1,
-      "persistence_status": "single_date_insufficient"
+      "persistence_status": "single_date_insufficient",
+      "current_detection": "detected"
     }
   ],
-  "updated_at": "2026-09-13T10:08:25.242207+00:00"
+  "updated_at": "2026-09-13T14:56:53.746935+00:00",
+  "najd_model_validation": "not_validated",
+  "active_means": "registry_identity_only"
 }

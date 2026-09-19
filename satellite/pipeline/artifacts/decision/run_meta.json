@@ -1,7 +1,7 @@
 {
-  "version": "0.4.4-evidence-level-honesty",
-  "generated_at": "2026-09-13T10:09:00.625229+00:00",
-  "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3 + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md",
+  "version": "0.4.5-aou-temporal-ledger",
+  "generated_at": "2026-09-13T14:56:53.844510+00:00",
+  "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3 + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md",
   "status": "expert_v1_provisional",
   "product_stamp": "provisional_satellite_analytical_service",
   "najd_model_validation": "not_validated",

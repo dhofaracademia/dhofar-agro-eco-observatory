@@ -73,7 +73,7 @@ Lead with evidence level + stamp. Demote “field visit is not required / معا
 
 ## 3. Required fix — `n_clear` is AOU-scoped, never the window count
 
-**Live fail (2026-09-13 glance, main `5ad4016`):**
+**Live fail (2026-09-13 glance, main `5ad4016`) — Historical / RESOLVED @ `85e2467` (PR #22):**
 
 - All 9 Najd AOUs have **one** AOU-scoped observation: `2026-09-06`.
 - `timeseries.json` has **four** AOI-window dates (2026-08-17, 08-25, 08-30, 09-06). Those are *area* composites, not per-AOU clears.
@@ -213,3 +213,12 @@ Unlock to a stronger stamp is **later**. n≥20 per species×domain×horizon rem
 **Not:** independent certified human expert; not هيئة البيئة / ministry approval.  
 **Human review:** pending.
 
+---
+
+## Addendum 2026-09-13 — Temporal ledger (follow-on)
+
+**Pointer:** [`SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md`](SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md)
+
+§3 **Live fail @ `5ad4016`** is **Historical / RESOLVED** at `85e2467` (PR #22). Do not re-open it.
+
+**Open:** persist per-AOU dated observations (append/upsert). `n_clear` from that ledger only. `window_not_aou` stays context. Class/persistence gates in §3.2–3.3 **unchanged**.

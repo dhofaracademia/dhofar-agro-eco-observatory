@@ -7,7 +7,7 @@ Modes:
      and rewrite latest_alerts with new fields (ndre null if unavailable).
   2) Called after run_monitor.py full STAC path (same writers).
 
-Cite: docs/SCIENCE_LOCKS_v0.4_phase1_2.md + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md
+Cite: docs/SCIENCE_LOCKS_v0.4_phase1_2.md + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md
 AOU ≠ farm; DQ ≠ ecological confidence; biotic ≠ pest certainty.
 500 m grid remains fallback/debug (geometry_kind=monitoring_grid_500m).
 """
@@ -194,31 +194,132 @@ def enrich_features(features: list[dict], *, month: int | None) -> list[dict]:
     return out
 
 
-def _aou_scoped_clear_count(rec: dict[str, Any], observation_date: str) -> int:
-    """Distinct AOU observation dates (not window length). Offline today → 1."""
-    dates = set()
-    for key in ("first_seen_date", "last_seen_date"):
-        if rec.get(key):
-            dates.add(str(rec[key]))
-    if observation_date:
-        dates.add(str(observation_date))
-    # first_seen == last_seen == observation → one clear date
-    return max(1, len(dates)) if dates else 1
+def _load_observations_ledger(path: Path) -> dict[str, Any] | None:
+    if not path.exists():
+        return None
+    try:
+        return json.loads(path.read_text())
+    except Exception:
+        return None
+
+
+def _ledger_dates_for_aou(ledger: dict[str, Any] | None, aou_id: str) -> set[str]:
+    """Distinct AOU-scoped clear dates from the ledger (never window_not_aou)."""
+    dates: set[str] = set()
+    if not ledger:
+        return dates
+    for unit in ledger.get("units") or []:
+        if unit.get("aou_id") != aou_id:
+            continue
+        for o in unit.get("observations") or []:
+            if o.get("series_scope") == "window_not_aou":
+                continue
+            if o.get("date") and o.get("ndvi") is not None:
+                dates.add(str(o["date"]))
+    return dates
+
+
+def _aou_scoped_clear_count(
+    ledger: dict[str, Any] | None,
+    aou_id: str,
+    *,
+    pending_date: str | None = None,
+    pending_ndvi: float | None = None,
+) -> int:
+    """Distinct ledger dates where series_scope != window_not_aou.
+
+    Forbidden sources: first_seen/last_seen alone; hardcoded 1/4; window length.
+    Optional pending_* includes today's clear row about to be upserted.
+    """
+    dates = _ledger_dates_for_aou(ledger, aou_id)
+    if pending_date and pending_ndvi is not None:
+        dates.add(str(pending_date))
+    return len(dates)
+
+
+def _current_detection_for_run(
+    *,
+    intersecting: list[dict],
+    vegetated: list[dict],
+    ag_class: str | None,
+) -> str:
+    """detected | weak | not_detected — orthogonal to registry active identity."""
+    possible_plus = {"possible", "likely", "very_likely"}
+    if vegetated or (ag_class in possible_plus and intersecting):
+        return "detected"
+    if intersecting:
+        return "weak"
+    return "not_detected"
+
+
+def _sync_registry_from_ledger(
+    registry: dict[str, Any],
+    aou_features: list[dict],
+    obs_doc: dict[str, Any],
+) -> None:
+    """n_clear + first_seen/last_seen from ledger; re-gate ag_class/persistence."""
+    from engines.ag_probability import ag_class_from_probability, persistence_status
+
+    by_id = {u["aou_id"]: u for u in obs_doc.get("units") or []}
+    for rec in registry.get("units") or []:
+        aid = rec.get("aou_id")
+        unit = by_id.get(aid) or {}
+        dates = sorted(_ledger_dates_for_aou({"units": [unit]}, aid))
+        n_clear = len(dates)
+        rec["n_clear_dates"] = n_clear
+        if dates:
+            rec["first_seen_date"] = dates[0]
+            rec["last_seen_date"] = dates[-1]
+        prob = rec.get("agricultural_probability")
+        if prob is not None:
+            rec["ag_class"] = ag_class_from_probability(
+                float(prob),
+                n_clear_dates=n_clear,
+                persistence_feature=0.0 if n_clear < 2 else 0.5,
+                single_date_only=n_clear < 2,
+            )
+        rec["persistence_status"] = persistence_status(n_clear)
+
+    for feat in aou_features:
+        p = feat["properties"]
+        aid = p.get("aou_id")
+        unit = by_id.get(aid) or {}
+        dates = sorted(_ledger_dates_for_aou({"units": [unit]}, aid))
+        n_clear = len(dates)
+        p["n_clear_dates"] = n_clear
+        if dates:
+            p["first_seen_date"] = dates[0]
+            p["last_seen_date"] = dates[-1]
+        if unit.get("n_clear_dates") is not None:
+            p["n_clear_dates"] = int(unit["n_clear_dates"])
+            n_clear = int(unit["n_clear_dates"])
+        prob = p.get("agricultural_probability")
+        if prob is not None:
+            p["ag_class"] = ag_class_from_probability(
+                float(prob),
+                n_clear_dates=n_clear,
+                persistence_feature=0.0 if n_clear < 2 else 0.5,
+                single_date_only=n_clear < 2,
+            )
+        p["persistence_status"] = persistence_status(n_clear)
 
 
 def assign_aou_ids(
     features: list[dict],
     registry_json_path: Path,
     observation_date: str,
+    ledger: dict[str, Any] | None = None,
 ) -> tuple[list[dict], dict[str, Any], list[dict]]:
     """Persistent AOUs: re-score existing units honestly; segment only if registry empty.
 
-    FORBIDDEN: hardcoded n_clear_dates=4 / persistence_feature=0.5.
-    n_clear is AOU-scoped (today 1). Soft window persistence never raises class.
+    n_clear from AOU observation ledger (distinct dates, series_scope != window_not_aou).
+    FORBIDDEN: hardcoded n_clear_dates=1/4 forever; first_seen/last_seen alone; window length.
+    Soft window persistence never raises class. active = registry identity only.
     """
     from engines.ag_probability import (
         ag_class_from_probability,
         agricultural_probability,
+        persistence_status,
     )
 
     registry = load_registry(registry_json_path)
@@ -249,7 +350,7 @@ def assign_aou_ids(
         return {
             "agricultural_probability": ag["agricultural_probability"],
             "ag_class": ag["ag_class"],
-            "persistence_status": ag.get("persistence_status", "single_date_insufficient"),
+            "persistence_status": ag.get("persistence_status", persistence_status(n_clear)),
         }
 
     month = None
@@ -260,37 +361,65 @@ def assign_aou_ids(
             month = None
 
     if active:
-        # Re-score path: keep 9 (or N) identities; do not mint from inflated window gates
+        # Re-score path: keep N identities; do not mint from inflated window gates
         for rec in active:
             aou_id = rec["aou_id"]
-            n_clear = 1  # AOU-scoped; multi-date history not yet tracked per unit
-            scored = _score_unit_from_ndvi_ndmi(rec.get("ndvi"), rec.get("ndmi"), month, n_clear)
-            # Prefer recompute; fall back to class-gate on stored probability
-            mean_prob = scored["agricultural_probability"]
-            if mean_prob is None:
-                mean_prob = rec.get("agricultural_probability")
-            ag_class = scored["ag_class"] or _honest_class(mean_prob, n_clear)
-            pers_status = scored.get("persistence_status") or "single_date_insufficient"
-
             try:
                 geom = shape(rec["geometry"])
             except Exception:
                 continue
-            member_count = 0
+
+            intersecting: list[dict] = []
+            vegetated: list[dict] = []
             for i, f in enumerate(features):
                 try:
                     g = shape(f["geometry"])
-                    if geom.intersects(g) and (f["properties"].get("ndvi") or 0) >= BARE_NDVI:
-                        cell_to_aou[i] = aou_id
-                        member_count += 1
+                    if not geom.intersects(g):
+                        continue
+                    props = f["properties"]
+                    intersecting.append(props)
+                    cell_to_aou[i] = aou_id
+                    if (props.get("ndvi") or 0) >= BARE_NDVI:
+                        vegetated.append(props)
                 except Exception:
                     continue
+
+            # Append pending only when this run has polygon-covering clear NDVI
+            cover_props = vegetated or intersecting
+            pending_ndvi = None
+            if cover_props:
+                ndvi_vals = [m["ndvi"] for m in cover_props if m.get("ndvi") is not None]
+                if ndvi_vals:
+                    pending_ndvi = sum(ndvi_vals) / len(ndvi_vals)
+
+            n_clear = _aou_scoped_clear_count(
+                ledger,
+                aou_id,
+                pending_date=observation_date if pending_ndvi is not None else None,
+                pending_ndvi=pending_ndvi,
+            )
+
+            scored = _score_unit_from_ndvi_ndmi(rec.get("ndvi"), rec.get("ndmi"), month, n_clear)
+            mean_prob = scored["agricultural_probability"]
+            if mean_prob is None:
+                mean_prob = rec.get("agricultural_probability")
+            ag_class = scored["ag_class"] or _honest_class(mean_prob, n_clear)
+            pers_status = scored.get("persistence_status") or persistence_status(n_clear)
+
+            detection = _current_detection_for_run(
+                intersecting=intersecting,
+                vegetated=vegetated,
+                ag_class=ag_class,
+            )
+            member_count = len(vegetated) or len(intersecting) or rec.get("member_count")
 
             rec["agricultural_probability"] = mean_prob
             rec["ag_class"] = ag_class
             rec["n_clear_dates"] = n_clear
             rec["persistence_status"] = pers_status
-            rec["last_seen_date"] = observation_date
+            rec["current_detection"] = detection
+            # active stays registry identity — do not retire on a miss
+            rec["active"] = True if rec.get("active", True) else False
 
             aou_features.append(
                 {
@@ -300,8 +429,9 @@ def assign_aou_ids(
                         "aou_id": aou_id,
                         "previous_ids": rec.get("previous_ids", []),
                         "first_seen_date": rec.get("first_seen_date"),
-                        "last_seen_date": observation_date,
-                        "active": True,
+                        "last_seen_date": rec.get("last_seen_date"),
+                        "active": bool(rec.get("active", True)),
+                        "current_detection": detection,
                         "agricultural_probability": mean_prob,
                         "ag_class": ag_class,
                         "area_ha_est": rec.get("area_ha_est"),
@@ -310,7 +440,7 @@ def assign_aou_ids(
                         "ndre": None,
                         "ndre_available": False,
                         "ndre_status": "unavailable",
-                        "member_count": member_count or rec.get("member_count"),
+                        "member_count": member_count,
                         "geometry_kind": "aou_segment",
                         "aou_not_official_farm": True,
                         "n_clear_dates": n_clear,
@@ -319,7 +449,7 @@ def assign_aou_ids(
                         "evidence_level": "satellite_only",
                         "product_stamp": "provisional_satellite_analytical_service",
                         "najd_model_validation": "not_validated",
-                        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§1-2",
+                        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§1-2 + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md",
                         "date": observation_date,
                     },
                 }
@@ -328,13 +458,18 @@ def assign_aou_ids(
         # Cold start only: segment mask (honest cell scores; no window persistence gate)
         candidates = segment_probability_mask(features)
         for cand in candidates:
-            n_clear = 1
+            n_clear = _aou_scoped_clear_count(
+                ledger,
+                aou_id="__cold_start__",
+                pending_date=observation_date,
+                pending_ndvi=cand.get("ndvi_mean"),
+            )
             props = {
                 "agricultural_probability": cand["agricultural_probability"],
                 "ag_class": _honest_class(cand["agricultural_probability"], n_clear),
                 "area_ha_est": cand["area_ha_est"],
                 "n_clear_dates": n_clear,
-                "persistence_status": "single_date_insufficient",
+                "persistence_status": persistence_status(n_clear),
             }
             aou_id, rec = mint_or_match_aou(
                 cand["geometry"],
@@ -349,6 +484,10 @@ def assign_aou_ids(
                         cell_to_aou[i] = aou_id
                 except Exception:
                     continue
+            detection = "detected" if (cand.get("ndvi_mean") or 0) >= BARE_NDVI else "weak"
+            rec["current_detection"] = detection
+            rec["n_clear_dates"] = n_clear
+            rec["active"] = True
             aou_features.append(
                 {
                     "type": "Feature",
@@ -359,6 +498,7 @@ def assign_aou_ids(
                         "first_seen_date": rec.get("first_seen_date"),
                         "last_seen_date": rec.get("last_seen_date"),
                         "active": True,
+                        "current_detection": detection,
                         "agricultural_probability": cand["agricultural_probability"],
                         "ag_class": props["ag_class"],
                         "area_ha_est": cand["area_ha_est"],
@@ -371,12 +511,12 @@ def assign_aou_ids(
                         "geometry_kind": "aou_segment",
                         "aou_not_official_farm": True,
                         "n_clear_dates": n_clear,
-                        "persistence_status": "single_date_insufficient",
+                        "persistence_status": persistence_status(n_clear),
                         "persistence_estimated_from_window": False,
                         "evidence_level": "satellite_only",
                         "product_stamp": "provisional_satellite_analytical_service",
                         "najd_model_validation": "not_validated",
-                        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§1-2",
+                        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§1-2 + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md",
                         "date": observation_date,
                     },
                 }
@@ -391,12 +531,29 @@ def assign_aou_ids(
     return features, registry, aou_features
 
 
+
 def build_observations(
     aou_features: list[dict],
     timeseries: dict[str, Any],
     enriched_cells: list[dict],
+    existing_path: Path | None = None,
 ) -> dict[str, Any]:
-    """Per-AOU series: prefer cell aggregates at latest date; stub window series honestly."""
+    """Per-AOU ledger: load + append/upsert by (aou_id, date). Never wipe to latest-only.
+
+    observations[] = AOU-scoped clear rows only (never window_not_aou).
+    window_context_series rewritten from timeseries as context only.
+    n_clear_dates lives on the unit — not as a constant on every row.
+    """
+    existing_by_aou: dict[str, dict] = {}
+    if existing_path is not None and existing_path.exists():
+        try:
+            prev = json.loads(existing_path.read_text())
+            for u in prev.get("units") or []:
+                if u.get("aou_id"):
+                    existing_by_aou[str(u["aou_id"])] = u
+        except Exception:
+            existing_by_aou = {}
+
     by_aou_cells: dict[str, list] = defaultdict(list)
     for f in enriched_cells:
         aid = f["properties"].get("aou_id")
@@ -408,47 +565,72 @@ def build_observations(
         p = feat["properties"]
         aid = p["aou_id"]
         members = by_aou_cells.get(aid, [])
-        # Latest observation from members
-        obs = []
+
+        # Keep prior ledger rows (exclude any accidental window rows)
+        prior_rows: list[dict] = []
+        prev_unit = existing_by_aou.get(aid) or {}
+        for o in prev_unit.get("observations") or []:
+            if o.get("series_scope") == "window_not_aou":
+                continue
+            if o.get("date"):
+                prior_rows.append(dict(o))
+                # Drop misleading per-row constant if present
+                prior_rows[-1].pop("n_clear_dates", None)
+
+        by_date: dict[str, dict] = {
+            str(o["date"]): o for o in prior_rows if o.get("date")
+        }
+
+        # Upsert today's AOU-scoped aggregate when members cover the polygon
         if members:
-            ndvi = sum(m["ndvi"] for m in members if m.get("ndvi") is not None) / max(
-                1, sum(1 for m in members if m.get("ndvi") is not None)
-            )
-            ndmi = sum(m["ndmi"] for m in members if m.get("ndmi") is not None) / max(
-                1, sum(1 for m in members if m.get("ndmi") is not None)
-            )
-            w = sum(m.get("water_stress_score") or 0 for m in members) / max(1, len(members))
-            v = sum(m.get("vigor_stress_score") or 0 for m in members) / max(1, len(members))
-            dq = sum(m.get("data_quality_confidence") or 0 for m in members) / max(1, len(members))
-            biotic = any(m.get("possible_biotic_stress") for m in members)
-            alerts = [m.get("alert") for m in members]
-            alert = max(set(alerts), key=alerts.count) if alerts else "unclear"
-            obs.append(
-                {
-                    "aou_id": aid,
-                    "date": p.get("date"),
-                    "ndvi": round(ndvi, 4),
-                    "ndmi": round(ndmi, 4),
-                    "ndre": None,
-                    "ndre_available": False,
-                    "agricultural_probability": p.get("agricultural_probability"),
-                    "ag_class": p.get("ag_class"),
-                    "area_ha_est": p.get("area_ha_est"),
-                    "water_stress_score": round(w, 2),
-                    "vigor_stress_score": round(v, 2),
-                    "alert": alert,
-                    "possible_biotic_stress": biotic,
-                    "data_quality_confidence": round(dq, 1),
-                    "source": members[0].get("source"),
-                    "product_id": members[0].get("product_id"),
-                    "tile": members[0].get("tile"),
-                    "cloud_cover": members[0].get("cloud_cover"),
-                    "series_scope": "aou_members_aggregate",
-                    "n_clear_dates": 1,
-                    "persistence_status": "single_date_insufficient",
-                }
-            )
-        # Honest window-level companion points (not AOU-true history yet)
+            ndvi_vals = [m["ndvi"] for m in members if m.get("ndvi") is not None]
+            ndmi_vals = [m["ndmi"] for m in members if m.get("ndmi") is not None]
+            if ndvi_vals:
+                ndvi = sum(ndvi_vals) / len(ndvi_vals)
+                ndmi = (sum(ndmi_vals) / len(ndmi_vals)) if ndmi_vals else None
+                w = sum(m.get("water_stress_score") or 0 for m in members) / max(1, len(members))
+                v = sum(m.get("vigor_stress_score") or 0 for m in members) / max(1, len(members))
+                dq = sum(m.get("data_quality_confidence") or 0 for m in members) / max(1, len(members))
+                biotic = any(m.get("possible_biotic_stress") for m in members)
+                alerts = [m.get("alert") for m in members]
+                alert = max(set(alerts), key=alerts.count) if alerts else "unclear"
+                obs_date = p.get("date") or members[0].get("date")
+                if obs_date:
+                    by_date[str(obs_date)] = {
+                        "aou_id": aid,
+                        "date": str(obs_date),
+                        "ndvi": round(ndvi, 4),
+                        "ndmi": None if ndmi is None else round(ndmi, 4),
+                        "ndre": None,
+                        "ndre_available": False,
+                        "agricultural_probability": p.get("agricultural_probability"),
+                        "ag_class": p.get("ag_class"),
+                        "area_ha_est": p.get("area_ha_est"),
+                        "water_stress_score": round(w, 2),
+                        "vigor_stress_score": round(v, 2),
+                        "alert": alert,
+                        "possible_biotic_stress": biotic,
+                        "data_quality_confidence": round(dq, 1),
+                        "source": members[0].get("source"),
+                        "product_id": members[0].get("product_id"),
+                        "tile": members[0].get("tile"),
+                        "cloud_cover": members[0].get("cloud_cover"),
+                        "series_scope": "aou_members_aggregate",
+                        "persistence_status": p.get("persistence_status"),
+                    }
+
+        obs = sorted(by_date.values(), key=lambda o: o.get("date") or "")
+        n_clear = len(
+            {
+                str(o["date"])
+                for o in obs
+                if o.get("date")
+                and o.get("series_scope") != "window_not_aou"
+                and o.get("ndvi") is not None
+            }
+        )
+
+        # Context only — never copied into observations[] / n_clear
         window_series = []
         for d in timeseries.get("dates", []):
             window_series.append(
@@ -457,24 +639,33 @@ def build_observations(
                     "ndvi": (d.get("ndvi") or {}).get("mean"),
                     "ndmi": (d.get("ndmi") or {}).get("mean"),
                     "series_scope": "window_not_aou",
-                    "note": "Window mean — AOU-specific history not yet multi-date tracked",
+                    "note": "Window mean — AOI context only; not AOU ledger / n_clear",
                 }
             )
         units.append(
             {
                 "aou_id": aid,
+                "n_clear_dates": n_clear,
                 "observations": obs,
                 "window_context_series": window_series,
-                "honesty": "AOU multi-date history grows as monitor re-runs with registry matching",
+                "honesty": (
+                    "AOU ledger append/upserts by (aou_id, date); "
+                    "window_context_series is context only (series_scope=window_not_aou)"
+                ),
             }
         )
 
     return {
-        "version": "0.4.1",
+        "version": "0.4.5-aou-temporal-ledger",
         "generated_at": datetime.now(timezone.utc).isoformat(),
-        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md",
+        "formula_ref": (
+            "SCIENCE_LOCKS_v0.4_phase1_2.md + "
+            "SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + "
+            "SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md"
+        ),
         "units": units,
     }
+
 
 
 def main() -> int:
@@ -511,13 +702,19 @@ def main() -> int:
         except Exception:
             month = None
 
+    ledger = _load_observations_ledger(observations_path)
     print(
         f"Enriching {len(geo.get('features', []))} cells; "
-        f"cell/AOU n_clear_dates=1 (scoped); "
+        f"AOU n_clear from ledger (append/upsert); "
         f"window_dates={window_date_count} (context only); date={date}"
     )
     enriched = enrich_features(geo["features"], month=month)
-    enriched, registry, aou_feats = assign_aou_ids(enriched, registry_json, date or "1970-01-01")
+    enriched, registry, aou_feats = assign_aou_ids(
+        enriched,
+        registry_json,
+        date or "1970-01-01",
+        ledger=ledger,
+    )
 
     alert_counts: dict[str, int] = defaultdict(int)
     biotic_n = 0
@@ -554,7 +751,7 @@ def main() -> int:
                 "Alerts use Water/Vigor stress scores (expert v1) mapped to UI codes. "
                 "AOU ≠ official farm. possible_biotic_stress ≠ pest certainty. "
                 "Data-quality confidence ≠ ecological confidence. "
-                "n_clear_dates is AOU/cell-scoped — never timeseries window length. "
+                "n_clear_dates from AOU observation ledger (append/upsert) — never window length. "
                 "500m grid is fallback/debug; segmented AOUs are in aou/aou_registry.geojson. "
                 "provisional_satellite_analytical_service; najd_model_validation=not_validated."
             ),
@@ -570,27 +767,40 @@ def main() -> int:
     alerts_path.write_text(json.dumps(geo_out))
     print(f"Wrote {alerts_path} ({len(enriched)} features)")
 
+    obs = build_observations(
+        aou_feats,
+        ts,
+        enriched,
+        existing_path=observations_path,
+    )
+    _sync_registry_from_ledger(registry, aou_feats, obs)
+    registry["najd_model_validation"] = "not_validated"
+    registry["formula_ref"] = (
+        "SCIENCE_LOCKS_v0.4_phase1_2.md§2 + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md"
+    )
+    registry["active_means"] = "registry_identity_only"
+    observations_path.write_text(json.dumps(obs, indent=2))
+    print(f"Wrote {observations_path} ({len(obs['units'])} units)")
+
     save_registry(registry_json, registry)
 
     reg_fc = {
         "type": "FeatureCollection",
         "name": "aou_registry",
         "properties": {
-            "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§2",
+            "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§2 + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md",
             "aou_not_official_farm": True,
             "count": len(aou_feats),
             "product_stamp": "provisional_satellite_analytical_service",
             "najd_model_validation": "not_validated",
+            "active_means": "registry_identity_only",
+            "current_detection_enum": ["detected", "weak", "not_detected"],
             "last_updated": datetime.now(timezone.utc).isoformat(),
         },
         "features": aou_feats,
     }
     registry_geojson.write_text(json.dumps(reg_fc))
     print(f"Wrote {registry_geojson} ({len(aou_feats)} AOUs)")
-
-    obs = build_observations(aou_feats, ts, enriched)
-    observations_path.write_text(json.dumps(obs, indent=2))
-    print(f"Wrote {observations_path} ({len(obs['units'])} units)")
 
     # Update timeseries method block
     if ts_path.exists():
