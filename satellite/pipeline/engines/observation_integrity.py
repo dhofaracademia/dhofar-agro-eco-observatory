@@ -135,6 +135,26 @@ DEFAULT_MIN_CLEAR_PIXELS_CELL = 50
 DEFAULT_MIN_CLEAR_FRACTION_CELL = 0.02
 DEFAULT_MIN_CLEAR_FRACTION_AOU = 0.20
 DEFAULT_MIN_CLEAR_MEMBERS_AOU = 1
+# Round-2 R2-2: numeric area gate (conservative = count fraction floor). Not null.
+DEFAULT_MIN_VALID_AREA_FRACTION_AOU = 0.20
+
+DISCOVERY_PROVISIONAL = "provisional_new"
+DISCOVERY_ESTABLISHED = "established"
+
+
+def discovery_status_for_n_clear(n_clear: int) -> str:
+    """provisional_new until second clear date; then established."""
+    return DISCOVERY_ESTABLISHED if int(n_clear or 0) >= 2 else DISCOVERY_PROVISIONAL
+
+
+def cap_ag_class_for_discovery(ag_class: str | None, *, n_clear: int, discovery_status: str | None) -> str | None:
+    """Day-1 / provisional: max possible; never likely/very_likely."""
+    if ag_class is None:
+        return None
+    if discovery_status == DISCOVERY_PROVISIONAL or int(n_clear or 0) < 2:
+        if ag_class in ("likely", "very_likely"):
+            return "possible"
+    return ag_class
 
 
 def cell_assessability(
@@ -316,7 +336,7 @@ def aou_assessability_with_area(
     *,
     min_clear_fraction: float = DEFAULT_MIN_CLEAR_FRACTION_AOU,
     min_clear_members: int = DEFAULT_MIN_CLEAR_MEMBERS_AOU,
-    min_valid_area_fraction: float | None = None,
+    min_valid_area_fraction: float | None = DEFAULT_MIN_VALID_AREA_FRACTION_AOU,
 ) -> tuple[str, dict[str, Any]]:
     """AOU assessability with count + area fractions.
 

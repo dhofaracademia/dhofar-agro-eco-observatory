@@ -1,6 +1,6 @@
 {
   "version": "0.4.6-evaluator-deep-recheck",
-  "generated_at": "2026-09-19T13:34:43.593702+00:00",
+  "generated_at": "2026-09-19T18:29:36.941066+00:00",
   "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + SCIENCE_LOCKS_v0.4_observation_integrity.md + SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md + SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md",
   "units": [
     {
@@ -34,7 +34,7 @@
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000001|2026-09-06|20260919T133443Z",
+          "aggregate_id": "AOU-NJ-000001|2026-09-06|20260919T182936Z",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 1.0,
           "raw_measures": {
@@ -115,7 +115,7 @@
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000002|2026-09-06|20260919T133443Z",
+          "aggregate_id": "AOU-NJ-000002|2026-09-06|20260919T182936Z",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 1.0,
           "raw_measures": {
@@ -196,7 +196,7 @@
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000003|2026-09-06|20260919T133443Z",
+          "aggregate_id": "AOU-NJ-000003|2026-09-06|20260919T182936Z",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 1.0,
           "raw_measures": {
@@ -277,7 +277,7 @@
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000004|2026-09-06|20260919T133443Z",
+          "aggregate_id": "AOU-NJ-000004|2026-09-06|20260919T182936Z",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 1.0,
           "raw_measures": {
@@ -358,7 +358,7 @@
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000005|2026-09-06|20260919T133443Z",
+          "aggregate_id": "AOU-NJ-000005|2026-09-06|20260919T182936Z",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 1.0,
           "raw_measures": {
@@ -439,7 +439,7 @@
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000006|2026-09-06|20260919T133443Z",
+          "aggregate_id": "AOU-NJ-000006|2026-09-06|20260919T182936Z",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 1.0,
           "raw_measures": {
@@ -520,7 +520,7 @@
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000007|2026-09-06|20260919T133443Z",
+          "aggregate_id": "AOU-NJ-000007|2026-09-06|20260919T182936Z",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 1.0,
           "raw_measures": {
@@ -601,7 +601,7 @@
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000008|2026-09-06|20260919T133443Z",
+          "aggregate_id": "AOU-NJ-000008|2026-09-06|20260919T182936Z",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 1.0,
           "raw_measures": {
@@ -682,7 +682,7 @@
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000009|2026-09-06|20260919T133443Z",
+          "aggregate_id": "AOU-NJ-000009|2026-09-06|20260919T182936Z",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 1.0,
           "raw_measures": {

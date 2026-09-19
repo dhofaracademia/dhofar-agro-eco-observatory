@@ -270,10 +270,19 @@ def main() -> int:
         suit["n_dates_above_bare"] = latest.get("n_dates_above_bare", reg.get("n_dates_above_bare"))
         suit["valid_area_fraction"] = reg.get("valid_area_fraction") or agg.get("valid_area_fraction")
         suit["biotic_status"] = latest.get("biotic_status") or reg.get("biotic_status")
+        disc = reg.get("discovery_status") or latest.get("discovery_status") or agg.get("discovery_status")
+        suit["discovery_status"] = disc
+        suit["discovery_action"] = reg.get("discovery_action") or latest.get("discovery_action")
         if assess == "unassessable" or obs_role == "retained_last_good":
             # Demote: do not present retained/unassessable as current Decision class
             suit["decision_role"] = "retained_or_unassessable"
             suit["suitability_summary_label"] = "demoted_unassessable_or_retained"
+        elif disc == "provisional_new" or (is_new and n_clear < 2):
+            # Round-2 R2-3: provisional discovery — no action ladder as established farm
+            suit["decision_role"] = "provisional_new"
+            suit["suitability_summary_label"] = "demoted_provisional_new"
+            if suit.get("why_this_site") and isinstance(suit["why_this_site"], dict):
+                suit["why_this_site"]["action_ladder_suggestion"] = "defer_insufficient_evidence"
         suitability_units.append(suit)
 
         conf = compute_confidence(
@@ -295,7 +304,7 @@ def main() -> int:
     generated_at = datetime.now(timezone.utc).isoformat()
 
     common_meta = {
-        "version": "0.4.6-evaluator-deep-recheck",
+        "version": "0.4.7-evaluator-round2",
         "generated_at": generated_at,
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3 + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md",
         "status": "expert_v1_provisional",

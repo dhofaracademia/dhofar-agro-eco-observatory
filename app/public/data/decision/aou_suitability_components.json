@@ -1,6 +1,6 @@
 {
-  "version": "0.4.6-evaluator-deep-recheck",
-  "generated_at": "2026-09-19T13:34:43.625032+00:00",
+  "version": "0.4.7-evaluator-round2",
+  "generated_at": "2026-09-19T18:29:36.973615+00:00",
   "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3 + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md",
   "status": "expert_v1_provisional",
   "product_stamp": "provisional_satellite_analytical_service",
@@ -11,8 +11,8 @@
   "action_auto_assign": false,
   "writes_to_app_public": true,
   "input_refs": {
-    "aou_registry": "app/public/data/observatory_publish_20260919T133443Z_4gvgwj4p/aou/aou_registry.json",
-    "aou_observations": "app/public/data/observatory_publish_20260919T133443Z_4gvgwj4p/aou/aou_observations.json"
+    "aou_registry": "app/public/data/observatory_publish_20260919T182936Z_lorcrn4h/aou/aou_registry.json",
+    "aou_observations": "app/public/data/observatory_publish_20260919T182936Z_lorcrn4h/aou/aou_observations.json"
   },
   "honesty_en": "Offline decision scaffolds for Najd agriculture AOUs only. Suitability ≠ Confidence ≠ data_quality_confidence. Not ecological certainty. No mountain UI. Action ladder manual only.",
   "schema_ref": "docs/spec_0.4/suitability_components.schema.json",
@@ -24,7 +24,7 @@
       "suitability_domain": "agriculture_aou",
       "status": "expert_v1_provisional",
       "suitability_score": 74.11,
-      "suitability_summary_label": "components_only",
+      "suitability_summary_label": "demoted_provisional_new",
       "suitability_components": {
         "moisture_proxy": 0.82,
         "vigor_proxy": 0.82,
@@ -87,25 +87,28 @@
           "Evidence gap: window_series_stub_only"
         ],
         "recommended_next_step": "Satellite decision: continue monitoring. A field visit is not required to use this output; optional additional field verification is last-resort only.",
-        "action_ladder_suggestion": null
+        "action_ladder_suggestion": "defer_insufficient_evidence"
       },
       "evidence_level": "satellite_only",
       "product_stamp": "provisional_satellite_analytical_service",
       "najd_model_validation": "not_validated",
       "assessability": "assessable",
       "observation_role": "current_observation",
-      "aggregate_id": "AOU-NJ-000001|2026-09-06|20260919T133443Z",
+      "aggregate_id": "AOU-NJ-000001|2026-09-06|20260919T182936Z",
       "persistence_feature": null,
       "n_dates_above_bare": 0,
       "valid_area_fraction": 1.0,
-      "biotic_status": "unknown"
+      "biotic_status": "unknown",
+      "discovery_status": "provisional_new",
+      "discovery_action": null,
+      "decision_role": "provisional_new"
     },
     {
       "aou_id": "AOU-NJ-000002",
       "suitability_domain": "agriculture_aou",
       "status": "expert_v1_provisional",
       "suitability_score": 72.23,
-      "suitability_summary_label": "components_only",
+      "suitability_summary_label": "demoted_provisional_new",
       "suitability_components": {
         "moisture_proxy": 0.82,
         "vigor_proxy": 0.82,
@@ -168,25 +171,28 @@
           "Evidence gap: window_series_stub_only"
         ],
         "recommended_next_step": "Satellite decision: continue monitoring. A field visit is not required to use this output; optional additional field verification is last-resort only.",
-        "action_ladder_suggestion": null
+        "action_ladder_suggestion": "defer_insufficient_evidence"
       },
       "evidence_level": "satellite_only",
       "product_stamp": "provisional_satellite_analytical_service",
       "najd_model_validation": "not_validated",
       "assessability": "assessable",
       "observation_role": "current_observation",
-      "aggregate_id": "AOU-NJ-000002|2026-09-06|20260919T133443Z",
+      "aggregate_id": "AOU-NJ-000002|2026-09-06|20260919T182936Z",
       "persistence_feature": null,
       "n_dates_above_bare": 0,
       "valid_area_fraction": 1.0,
-      "biotic_status": "unknown"
+      "biotic_status": "unknown",
+      "discovery_status": "provisional_new",
+      "discovery_action": null,
+      "decision_role": "provisional_new"
     },
     {
       "aou_id": "AOU-NJ-000003",
       "suitability_domain": "agriculture_aou",
       "status": "expert_v1_provisional",
       "suitability_score": 75.63,
-      "suitability_summary_label": "components_only",
+      "suitability_summary_label": "demoted_provisional_new",
       "suitability_components": {
         "moisture_proxy": 0.82,
         "vigor_proxy": 0.82,
@@ -249,25 +255,28 @@
           "Evidence gap: window_series_stub_only"
         ],
         "recommended_next_step": "Satellite decision: continue monitoring. A field visit is not required to use this output; optional additional field verification is last-resort only.",
-        "action_ladder_suggestion": null
+        "action_ladder_suggestion": "defer_insufficient_evidence"
       },
       "evidence_level": "satellite_only",
       "product_stamp": "provisional_satellite_analytical_service",
       "najd_model_validation": "not_validated",
       "assessability": "assessable",
       "observation_role": "current_observation",
-      "aggregate_id": "AOU-NJ-000003|2026-09-06|20260919T133443Z",
+      "aggregate_id": "AOU-NJ-000003|2026-09-06|20260919T182936Z",
       "persistence_feature": null,
       "n_dates_above_bare": 0,
       "valid_area_fraction": 1.0,
-      "biotic_status": "unknown"
+      "biotic_status": "unknown",
+      "discovery_status": "provisional_new",
+      "discovery_action": null,
+      "decision_role": "provisional_new"
     },
     {
       "aou_id": "AOU-NJ-000004",
       "suitability_domain": "agriculture_aou",
       "status": "expert_v1_provisional",
       "suitability_score": 69.27,
-      "suitability_summary_label": "components_only",
+      "suitability_summary_label": "demoted_provisional_new",
       "suitability_components": {
         "moisture_proxy": 0.82,
         "vigor_proxy": 0.82,
@@ -330,25 +339,28 @@
           "Evidence gap: window_series_stub_only"
         ],
         "recommended_next_step": "Satellite decision: continue monitoring. A field visit is not required to use this output; optional additional field verification is last-resort only.",
-        "action_ladder_suggestion": null
+        "action_ladder_suggestion": "defer_insufficient_evidence"
       },
       "evidence_level": "satellite_only",
       "product_stamp": "provisional_satellite_analytical_service",
       "najd_model_validation": "not_validated",
       "assessability": "assessable",
       "observation_role": "current_observation",
-      "aggregate_id": "AOU-NJ-000004|2026-09-06|20260919T133443Z",
+      "aggregate_id": "AOU-NJ-000004|2026-09-06|20260919T182936Z",
       "persistence_feature": null,
       "n_dates_above_bare": 0,
       "valid_area_fraction": 1.0,
-      "biotic_status": "unknown"
+      "biotic_status": "unknown",
+      "discovery_status": "provisional_new",
+      "discovery_action": null,
+      "decision_role": "provisional_new"
     },
     {
       "aou_id": "AOU-NJ-000005",
       "suitability_domain": "agriculture_aou",
       "status": "expert_v1_provisional",
       "suitability_score": 67.09,
-      "suitability_summary_label": "components_only",
+      "suitability_summary_label": "demoted_provisional_new",
       "suitability_components": {
         "moisture_proxy": 0.8872,
         "vigor_proxy": 0.82,
@@ -411,25 +423,28 @@
           "Evidence gap: window_series_stub_only"
         ],
         "recommended_next_step": "Satellite decision: continue monitoring. A field visit is not required to use this output; optional additional field verification is last-resort only.",
-        "action_ladder_suggestion": null
+        "action_ladder_suggestion": "defer_insufficient_evidence"
       },
       "evidence_level": "satellite_only",
       "product_stamp": "provisional_satellite_analytical_service",
       "najd_model_validation": "not_validated",
       "assessability": "assessable",
       "observation_role": "current_observation",
-      "aggregate_id": "AOU-NJ-000005|2026-09-06|20260919T133443Z",
+      "aggregate_id": "AOU-NJ-000005|2026-09-06|20260919T182936Z",
       "persistence_feature": null,
       "n_dates_above_bare": 0,
       "valid_area_fraction": 1.0,
-      "biotic_status": "unknown"
+      "biotic_status": "unknown",
+      "discovery_status": "provisional_new",
+      "discovery_action": null,
+      "decision_role": "provisional_new"
     },
     {
       "aou_id": "AOU-NJ-000006",
       "suitability_domain": "agriculture_aou",
       "status": "expert_v1_provisional",
       "suitability_score": 67.08,
-      "suitability_summary_label": "components_only",
+      "suitability_summary_label": "demoted_provisional_new",
       "suitability_components": {
         "moisture_proxy": 0.82,
         "vigor_proxy": 0.82,
@@ -492,25 +507,28 @@
           "Evidence gap: window_series_stub_only"
         ],
         "recommended_next_step": "Satellite decision: continue monitoring. A field visit is not required to use this output; optional additional field verification is last-resort only.",
-        "action_ladder_suggestion": null
+        "action_ladder_suggestion": "defer_insufficient_evidence"
       },
       "evidence_level": "satellite_only",
       "product_stamp": "provisional_satellite_analytical_service",
       "najd_model_validation": "not_validated",
       "assessability": "assessable",
       "observation_role": "current_observation",
-      "aggregate_id": "AOU-NJ-000006|2026-09-06|20260919T133443Z",
+      "aggregate_id": "AOU-NJ-000006|2026-09-06|20260919T182936Z",
       "persistence_feature": null,
       "n_dates_above_bare": 0,
       "valid_area_fraction": 1.0,
-      "biotic_status": "unknown"
+      "biotic_status": "unknown",
+      "discovery_status": "provisional_new",
+      "discovery_action": null,
+      "decision_role": "provisional_new"
     },
     {
       "aou_id": "AOU-NJ-000007",
       "suitability_domain": "agriculture_aou",
       "status": "expert_v1_provisional",
       "suitability_score": 75.74,
-      "suitability_summary_label": "components_only",
+      "suitability_summary_label": "demoted_provisional_new",
       "suitability_components": {
         "moisture_proxy": 0.82,
         "vigor_proxy": 0.82,
@@ -573,25 +591,28 @@
           "Evidence gap: window_series_stub_only"
         ],
         "recommended_next_step": "Satellite decision: continue monitoring. A field visit is not required to use this output; optional additional field verification is last-resort only.",
-        "action_ladder_suggestion": null
+        "action_ladder_suggestion": "defer_insufficient_evidence"
       },
       "evidence_level": "satellite_only",
       "product_stamp": "provisional_satellite_analytical_service",
       "najd_model_validation": "not_validated",
       "assessability": "assessable",
       "observation_role": "current_observation",
-      "aggregate_id": "AOU-NJ-000007|2026-09-06|20260919T133443Z",
+      "aggregate_id": "AOU-NJ-000007|2026-09-06|20260919T182936Z",
       "persistence_feature": null,
       "n_dates_above_bare": 0,
       "valid_area_fraction": 1.0,
-      "biotic_status": "unknown"
+      "biotic_status": "unknown",
+      "discovery_status": "provisional_new",
+      "discovery_action": null,
+      "decision_role": "provisional_new"
     },
     {
       "aou_id": "AOU-NJ-000008",
       "suitability_domain": "agriculture_aou",
       "status": "expert_v1_provisional",
       "suitability_score": 76.1,
-      "suitability_summary_label": "components_only",
+      "suitability_summary_label": "demoted_provisional_new",
       "suitability_components": {
         "moisture_proxy": 0.82,
         "vigor_proxy": 0.82,
@@ -654,25 +675,28 @@
           "Evidence gap: window_series_stub_only"
         ],
         "recommended_next_step": "Satellite decision: continue monitoring. A field visit is not required to use this output; optional additional field verification is last-resort only.",
-        "action_ladder_suggestion": null
+        "action_ladder_suggestion": "defer_insufficient_evidence"
       },
       "evidence_level": "satellite_only",
       "product_stamp": "provisional_satellite_analytical_service",
       "najd_model_validation": "not_validated",
       "assessability": "assessable",
       "observation_role": "current_observation",
-      "aggregate_id": "AOU-NJ-000008|2026-09-06|20260919T133443Z",
+      "aggregate_id": "AOU-NJ-000008|2026-09-06|20260919T182936Z",
       "persistence_feature": null,
       "n_dates_above_bare": 0,
       "valid_area_fraction": 1.0,
-      "biotic_status": "unknown"
+      "biotic_status": "unknown",
+      "discovery_status": "provisional_new",
+      "discovery_action": null,
+      "decision_role": "provisional_new"
     },
     {
       "aou_id": "AOU-NJ-000009",
       "suitability_domain": "agriculture_aou",
       "status": "expert_v1_provisional",
       "suitability_score": 67.56,
-      "suitability_summary_label": "components_only",
+      "suitability_summary_label": "demoted_provisional_new",
       "suitability_components": {
         "moisture_proxy": 0.82,
         "vigor_proxy": 0.82,
@@ -735,18 +759,21 @@
           "Evidence gap: window_series_stub_only"
         ],
         "recommended_next_step": "Satellite decision: continue monitoring. A field visit is not required to use this output; optional additional field verification is last-resort only.",
-        "action_ladder_suggestion": null
+        "action_ladder_suggestion": "defer_insufficient_evidence"
       },
       "evidence_level": "satellite_only",
       "product_stamp": "provisional_satellite_analytical_service",
       "najd_model_validation": "not_validated",
       "assessability": "assessable",
       "observation_role": "current_observation",
-      "aggregate_id": "AOU-NJ-000009|2026-09-06|20260919T133443Z",
+      "aggregate_id": "AOU-NJ-000009|2026-09-06|20260919T182936Z",
       "persistence_feature": null,
       "n_dates_above_bare": 0,
       "valid_area_fraction": 1.0,
-      "biotic_status": "unknown"
+      "biotic_status": "unknown",
+      "discovery_status": "provisional_new",
+      "discovery_action": null,
+      "decision_role": "provisional_new"
     }
   ]
 }

@@ -7,6 +7,11 @@ export type SuitabilityUnit = {
   status?: string;
   suitability_score?: number;
   suitability_summary_label?: string;
+  decision_role?: string;
+  discovery_status?: string;
+  discovery_action?: string;
+  assessability?: string;
+  observation_role?: string;
   suitability_components?: Record<string, number>;
   why_this_site?: {
     headline?: string;
@@ -153,6 +158,22 @@ export default function DecisionChrome({
           <span className="rounded-full border border-amber-400 bg-white px-2 py-0.5">
             {t("analysis.decision.noMountain")}
           </span>
+          {suitability?.discovery_status === "provisional_new" && (
+            <span className="rounded-full border border-violet-400 bg-violet-50 px-2 py-0.5 text-violet-950">
+              {t("analysis.decision.discoveryProvisional")}
+            </span>
+          )}
+          {(suitability?.decision_role === "demoted_unassessable_or_retained" ||
+            suitability?.decision_role === "retained_or_unassessable") && (
+            <span className="rounded-full border border-slate-400 bg-slate-50 px-2 py-0.5 text-slate-900">
+              {t("analysis.decision.demotedUnassessable")}
+            </span>
+          )}
+          {suitability?.decision_role === "provisional_new" && (
+            <span className="rounded-full border border-violet-400 bg-violet-50 px-2 py-0.5 text-violet-950">
+              {t("analysis.decision.demotedProvisional")}
+            </span>
+          )}
         </div>
       </div>
 

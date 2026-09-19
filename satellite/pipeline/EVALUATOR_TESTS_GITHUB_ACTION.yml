@@ -1,0 +1,57 @@
+name: Evaluator integrity suites
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  evaluator-suites:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: satellite/pipeline
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: satellite/pipeline/requirements.txt
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          # Light deps for unit suites (shapely already in requirements)
+
+      - name: Observation integrity suite
+        run: python tests/test_observation_integrity.py
+
+      - name: Post-integrity evaluator suite
+        run: python tests/test_post_integrity_evaluator.py
+
+      - name: Evaluator deep re-check suite (cases 1–7 regression)
+        run: python tests/test_evaluator_deep_recheck.py
+
+      - name: Evaluator Round 2 residual suite (cases 1,5,8 + CI gate)
+        run: python tests/test_evaluator_round2.py
+
+# ---------------------------------------------------------------------------
+# Maintainer note: GitHub OAuth for this repo historically blocks pushes to
+# `.github/workflows/` without `workflow` scope. Copy this file to
+# `.github/workflows/evaluator-tests.yml` via a token/app with workflow write
+# (or the GitHub UI) to enable the merge-gate on PRs/main.
+# Local merge-gate (same suites):
+#   cd satellite/pipeline
+#   python tests/test_observation_integrity.py
+#   python tests/test_post_integrity_evaluator.py
+#   python tests/test_evaluator_deep_recheck.py
+#   python tests/test_evaluator_round2.py
+# ---------------------------------------------------------------------------
