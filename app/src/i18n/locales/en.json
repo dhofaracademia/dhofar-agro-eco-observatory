@@ -323,6 +323,8 @@
     },
     "temporalEvidenceInsufficient": "Insufficient temporal evidence",
     "bioticUnknownTemporal": "Biotic status unknown — insufficient temporal evidence (n_clear < 2). Empty stress history ≠ no biotic issue.",
+    "unassessableBanner": "Unassessable this date — clear coverage insufficient. Scores are not a current healthy/possible observation.",
+    "observationRoleRetained": "observation_role={{role}} (refresh_status={{status}}) — last-good retained; not observed today.",
     "refreshStatusRetained": "refresh_status={{status}} — prior dated scores retained"
   },
   "about": {

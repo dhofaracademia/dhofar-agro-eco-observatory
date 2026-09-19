@@ -258,3 +258,196 @@ def ledger_stress_flags(
             )
     return flags
 
+
+
+# --- Evaluator deep re-check (SCIENCE_LOCKS_v0.4_evaluator_deep_recheck) ---
+OBSERVATION_ROLE_CURRENT = "current_observation"
+OBSERVATION_ROLE_RETAINED = "retained_last_good"
+BIOTIC_POSSIBLE = "possible"
+BIOTIC_UNKNOWN = "unknown"
+BIOTIC_NOT_FLAGGED = "not_flagged"
+
+
+def ledger_rows_before(
+    unit_or_obs: dict[str, Any] | None,
+    before_date: str | None,
+) -> list[dict]:
+    """Ledger clear-date rows with date < before_date (strict). None before_date → all."""
+    rows = ledger_sequence_rows(unit_or_obs)
+    if not before_date:
+        return rows
+    return [r for r in rows if str(r.get("date") or "") < str(before_date)]
+
+
+def ledger_rows_excluding_date(
+    unit_or_obs: dict[str, Any] | None,
+    exclude_date: str | None,
+) -> list[dict]:
+    """Ledger rows excluding same-day T (replace without treating T as prior evidence)."""
+    rows = ledger_sequence_rows(unit_or_obs)
+    if not exclude_date:
+        return rows
+    return [r for r in rows if str(r.get("date") or "") != str(exclude_date)]
+
+
+def observation_role_for_refresh(refresh_status: str | None, *, has_new: bool) -> str:
+    """current_observation only when this run advanced a clear assessable sample."""
+    if has_new and refresh_status == "refreshed":
+        return OBSERVATION_ROLE_CURRENT
+    return OBSERVATION_ROLE_RETAINED
+
+
+def biotic_status_three_state(
+    *,
+    possible_biotic_stress: bool,
+    n_clear: int,
+    rules_evaluated: bool = True,
+) -> str:
+    """possible | unknown | not_flagged — never confirmed pest; silence ≠ healthy."""
+    if possible_biotic_stress:
+        return BIOTIC_POSSIBLE
+    if n_clear < 2 or not rules_evaluated:
+        return BIOTIC_UNKNOWN
+    return BIOTIC_NOT_FLAGGED
+
+
+def aou_assessability_with_area(
+    members: list[dict],
+    *,
+    min_clear_fraction: float = DEFAULT_MIN_CLEAR_FRACTION_AOU,
+    min_clear_members: int = DEFAULT_MIN_CLEAR_MEMBERS_AOU,
+    min_valid_area_fraction: float | None = None,
+) -> tuple[str, dict[str, Any]]:
+    """AOU assessability with count + area fractions.
+
+    assessable_cell_fraction = clear assessable count / member count (secondary).
+    valid_area_fraction = sum(overlap of assessable clear) / sum(overlap of all members).
+    Primary gate may use either; area is stamped always when overlaps present.
+    """
+    meta = {
+        "member_count": len(members),
+        "clear_member_count": 0,
+        "clear_member_fraction": 0.0,
+        "assessable_cell_fraction": 0.0,
+        "valid_area_fraction": None,
+        "member_overlap_area_sum": 0.0,
+        "clear_overlap_area_sum": 0.0,
+        "min_clear_fraction_aou": min_clear_fraction,
+        "min_clear_members_aou": min_clear_members,
+        "min_valid_area_fraction_aou": min_valid_area_fraction,
+    }
+    if not members:
+        return "unassessable", meta
+
+    clear = [m for m in members if cell_assessability(m) == "assessable"]
+    meta["clear_member_count"] = len(clear)
+    frac_count = len(clear) / max(len(members), 1)
+    meta["clear_member_fraction"] = frac_count
+    meta["assessable_cell_fraction"] = frac_count
+    # Backward-compat alias used by older callers / UI
+    meta["clear_fraction"] = frac_count
+
+    area_all = 0.0
+    area_clear = 0.0
+    for m in members:
+        ov = m.get("aou_overlap_area")
+        if ov is None:
+            continue
+        try:
+            a = float(ov)
+        except (TypeError, ValueError):
+            continue
+        if a <= 0:
+            continue
+        area_all += a
+        if cell_assessability(m) == "assessable":
+            area_clear += a
+    meta["member_overlap_area_sum"] = area_all
+    meta["clear_overlap_area_sum"] = area_clear
+    if area_all > 0:
+        meta["valid_area_fraction"] = area_clear / area_all
+    else:
+        meta["valid_area_fraction"] = None
+
+    count_fail = len(clear) < int(min_clear_members) or frac_count < float(min_clear_fraction)
+    area_fail = False
+    if min_valid_area_fraction is not None and meta["valid_area_fraction"] is not None:
+        area_fail = float(meta["valid_area_fraction"]) < float(min_valid_area_fraction)
+    # When area available and threshold set, both must pass; else count gate alone.
+    if count_fail or area_fail:
+        return "unassessable", meta
+    return "assessable", meta
+
+
+def build_aou_date_aggregate(
+    *,
+    aou_id: str,
+    date: str | None,
+    clear_members: list[dict],
+    all_members: list[dict],
+    assessability: str,
+    assess_meta: dict[str, Any],
+    run_id: str | None = None,
+    water_stress: float | None = None,
+    vigor_stress: float | None = None,
+    alert: str | None = None,
+    agricultural_probability: float | None = None,
+    ag_class: str | None = None,
+    persistence_feature: float | None = None,
+    n_clear_dates: int | None = None,
+    n_dates_above_bare: int | None = None,
+    observation_role: str | None = None,
+    biotic_status: str | None = None,
+    possible_biotic_stress: bool | None = None,
+    refresh_status: str | None = None,
+    sources: list[str] | None = None,
+) -> dict[str, Any]:
+    """Single frozen (AOU, date) aggregate consumed by registry, ledger, decision."""
+    mean_ndvi, mean_ndmi = member_clear_means(clear_members)
+    accepted = [
+        {
+            "ndvi": m.get("ndvi"),
+            "ndmi": m.get("ndmi"),
+            "pixel_count": m.get("pixel_count"),
+            "aou_overlap_area": m.get("aou_overlap_area"),
+            "product_id": m.get("product_id"),
+        }
+        for m in clear_members
+    ]
+    srcs = sources or sorted(
+        {str(m.get("source") or m.get("product_id") or "") for m in clear_members if m.get("source") or m.get("product_id")}
+    )
+    aggregate_id = f"{aou_id}|{date or 'none'}|{run_id or 'norun'}"
+    return {
+        "aggregate_id": aggregate_id,
+        "aou_id": aou_id,
+        "date": date,
+        "run_id": run_id,
+        "ndvi": None if mean_ndvi is None else round(float(mean_ndvi), 4),
+        "ndmi": None if mean_ndmi is None else round(float(mean_ndmi), 4),
+        "water_stress_score": water_stress,
+        "vigor_stress_score": vigor_stress,
+        "alert": alert,
+        "agricultural_probability": agricultural_probability,
+        "ag_class": ag_class,
+        "persistence_feature": persistence_feature,
+        "n_clear_dates": n_clear_dates,
+        "n_dates_above_bare": n_dates_above_bare,
+        "assessability": assessability,
+        "assessable_cell_fraction": assess_meta.get("assessable_cell_fraction"),
+        "valid_area_fraction": assess_meta.get("valid_area_fraction"),
+        "clear_member_fraction": assess_meta.get("clear_member_fraction"),
+        "clear_member_count": assess_meta.get("clear_member_count"),
+        "member_count": assess_meta.get("member_count", len(all_members)),
+        "observation_role": observation_role,
+        "biotic_status": biotic_status,
+        "possible_biotic_stress": possible_biotic_stress,
+        "refresh_status": refresh_status,
+        "accepted_cells": accepted,
+        "sources": [s for s in srcs if s],
+        "coverage": {
+            "assessable_cell_fraction": assess_meta.get("assessable_cell_fraction"),
+            "valid_area_fraction": assess_meta.get("valid_area_fraction"),
+            "clear_member_fraction": assess_meta.get("clear_member_fraction"),
+        },
+    }

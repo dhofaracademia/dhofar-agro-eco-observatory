@@ -1,0 +1,60 @@
+{
+  "lock_id": "SCIENCE_LOCKS_v0.4_evaluator_deep_recheck",
+  "date": "2026-09-19",
+  "timezone": "Asia/Muscat",
+  "owner_pipeline_role": "Agrofostery Scientist",
+  "verdict": "go_with_fixes",
+  "against_main": "bd1d90c1491497efc8c6e02de87052210a498de9",
+  "ai_pipeline_role": true,
+  "human_review": "pending",
+  "mountain_seeding_hold": true,
+  "acceptance_bar": [
+    "unassessable_never_healthy_or_possible",
+    "last_good_not_current_observation",
+    "one_aggregate_per_aou_date_shared",
+    "reprocess_history_before_T_no_self_feed",
+    "persistence_and_n_dates_above_bare_into_agprob_and_suitability",
+    "valid_area_fraction_primary",
+    "biotic_three_state_after_history",
+    "atomic_promote_includes_decision"
+  ],
+  "p0_must_fix": [
+    "unified_assessability_pre_gate",
+    "observation_role_retained_vs_current",
+    "shared_aou_date_aggregate",
+    "idempotent_reprocess_date_T",
+    "history_strictly_before_T_for_priors",
+    "suitability_uses_ledger_persistence_feature",
+    "valid_area_fraction_from_overlap_areas",
+    "biotic_status_possible_unknown_not_flagged",
+    "promote_decision_artifacts_with_aou"
+  ],
+  "p1": [
+    "discovery_honesty_fields",
+    "ui_demote_unassessable_and_retained",
+    "tests_unassessable_not_healthy",
+    "tests_aggregate_equality",
+    "tests_reprocess_idempotent",
+    "tests_area_vs_count_fraction",
+    "tests_biotic_three_state",
+    "tests_promote_includes_decision"
+  ],
+  "forbidden": [
+    "unassessable_to_healthy_possible_likely",
+    "last_good_as_current_obs",
+    "divergent_aou_date_aggregates",
+    "self_feed_date_T_as_prior",
+    "suitability_fake_persistence",
+    "count_only_clear_fraction_as_sole_coverage",
+    "confirmed_pest",
+    "silence_as_healthy",
+    "decision_half_release",
+    "lift_mountain_3b"
+  ],
+  "companions": [
+    "SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md",
+    "SCIENCE_LOCKS_v0.4_observation_integrity.md",
+    "SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md",
+    "SCIENCE_LOCKS_v0.4_evaluator_endorsement.md"
+  ]
+}

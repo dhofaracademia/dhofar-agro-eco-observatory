@@ -119,22 +119,33 @@ export default function AouProfilePanel({
           {t(labels.noteKey)}
         </p>
       )}
-      {p.possible_biotic_stress && (
+      {(p.possible_biotic_stress || p.biotic_status === "possible") && (
         <p className="mt-3 rounded-xl border border-amber-200 bg-amber-50 p-3 text-xs leading-relaxed text-sand-800/90">
           {t("analysis.bioticPossible")}: {t("analysis.bioticDisclaimer")}
         </p>
       )}
       {!p.possible_biotic_stress &&
-        (p.temporal_evidence_sufficient === false ||
+        p.biotic_status !== "possible" &&
+        (p.biotic_status === "unknown" ||
+          p.temporal_evidence_sufficient === false ||
           p.biotic_unknown_reason === "insufficient_temporal_evidence" ||
           (typeof p.n_clear_dates === "number" && p.n_clear_dates < 2)) && (
         <p className="mt-3 rounded-xl border border-slate-200 bg-slate-50 p-3 text-xs leading-relaxed text-sand-800/90">
           {t("analysis.temporalEvidenceInsufficient")}: {t("analysis.bioticUnknownTemporal")}
         </p>
       )}
-      {p.refresh_status && p.refresh_status !== "refreshed" && (
+      {p.assessability === "unassessable" && (
         <p className="mt-3 rounded-xl border border-slate-200 bg-slate-50 p-3 text-xs leading-relaxed text-sand-800/90">
-          {t("analysis.refreshStatusRetained", { status: String(p.refresh_status) })}
+          {t("analysis.unassessableBanner")}
+        </p>
+      )}
+      {(p.observation_role === "retained_last_good" ||
+        (p.refresh_status && p.refresh_status !== "refreshed")) && (
+        <p className="mt-3 rounded-xl border border-slate-200 bg-slate-50 p-3 text-xs leading-relaxed text-sand-800/90">
+          {t("analysis.observationRoleRetained", {
+            role: String(p.observation_role || "retained_last_good"),
+            status: String(p.refresh_status || "retained"),
+          })}
         </p>
       )}
     </aside>

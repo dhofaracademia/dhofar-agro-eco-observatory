@@ -31,6 +31,13 @@ export type AouAlertProps = {
   biotic_unknown_reason?: string | null;
   refresh_status?: string;
   assessability?: "assessable" | "unassessable" | string;
+  /** current_observation vs retained_last_good (deep re-check). */
+  observation_role?: "current_observation" | "retained_last_good" | string;
+  /** possible | unknown | not_flagged — never confirmed pest. */
+  biotic_status?: "possible" | "unknown" | "not_flagged" | string;
+  assessable_cell_fraction?: number | null;
+  valid_area_fraction?: number | null;
+  aggregate_id?: string | null;
   persistence_status?: string;
   persistence_feature?: number | null;
 };

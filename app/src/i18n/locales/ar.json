@@ -323,6 +323,8 @@
     },
     "temporalEvidenceInsufficient": "أدلة زمنية غير كافية",
     "bioticUnknownTemporal": "حالة الإجهاد الحيوي غير معروفة — أدلة زمنية غير كافية (n_clear < 2). فراغ سجل الإجهاد ≠ عدم وجود مشكلة حيوية.",
+    "unassessableBanner": "غير قابل للتقييم في هذا التاريخ — تغطية صافية غير كافية. الدرجات ليست رصداً حالياً سليماً/ممكناً.",
+    "observationRoleRetained": "observation_role={{role}} (refresh_status={{status}}) — احتفاظ بآخر نتيجة جيدة؛ ليست رصد اليوم.",
     "refreshStatusRetained": "refresh_status={{status}} — تم الاحتفاظ بالدرجات المؤرخة السابقة"
   },
   "about": {

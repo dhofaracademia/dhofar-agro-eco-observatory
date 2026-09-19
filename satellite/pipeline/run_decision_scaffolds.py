@@ -24,8 +24,21 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-AOU_DIR = ROOT / "app" / "public" / "data" / "aou"
-OUT_DIR = Path(__file__).resolve().parent / "artifacts" / "decision"
+
+
+def _paths() -> tuple[Path, Path, Path]:
+    """Resolve AOU inputs + decision out; honor MONITOR_OUT_DATA for staged release."""
+    import os
+    data = Path(os.environ["MONITOR_OUT_DATA"]) if os.environ.get("MONITOR_OUT_DATA") else ROOT / "app" / "public" / "data"
+    aou = data / "aou"
+    # Staged runs write decision into data/decision for atomic promote with AOU.
+    # Offline scaffold default still mirrors under pipeline/artifacts/decision.
+    if os.environ.get("MONITOR_OUT_DATA"):
+        out = data / "decision"
+    else:
+        out = Path(__file__).resolve().parent / "artifacts" / "decision"
+    return data, aou, out
+
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
@@ -168,10 +181,11 @@ def _window_stub_only(unit: dict) -> bool:
 
 
 def main() -> int:
-    registry_path = AOU_DIR / "aou_registry.json"
-    obs_path = AOU_DIR / "aou_observations.json"
+    data_root, aou_dir, out_dir = _paths()
+    registry_path = aou_dir / "aou_registry.json"
+    obs_path = aou_dir / "aou_observations.json"
     if not registry_path.exists() or not obs_path.exists():
-        print(f"ERROR: missing AOU inputs under {AOU_DIR}", file=sys.stderr)
+        print(f"ERROR: missing AOU inputs under {aou_dir}", file=sys.stderr)
         return 1
 
     registry = _load_json(registry_path)
@@ -218,6 +232,16 @@ def main() -> int:
         )
         evidence_units.append(gaps)
 
+        # Shared aggregate / ledger persistence — never invent None + n_clear/4
+        pers = latest.get("persistence_feature")
+        if pers is None:
+            pers = reg.get("persistence_feature")
+        agg = reg.get("aou_date_aggregate") or latest.get("aou_date_aggregate") or {}
+        if pers is None and agg.get("persistence_feature") is not None:
+            pers = agg.get("persistence_feature")
+        assess = reg.get("assessability") or latest.get("assessability") or agg.get("assessability")
+        obs_role = reg.get("observation_role") or latest.get("observation_role") or agg.get("observation_role")
+
         suit = compute_suitability(
             aou_id=aou_id,
             agricultural_probability=latest.get(
@@ -225,7 +249,7 @@ def main() -> int:
             ),
             water_stress_score=latest.get("water_stress_score"),
             vigor_stress_score=latest.get("vigor_stress_score"),
-            ndvi_persistence=None,
+            ndvi_persistence=pers,
             n_clear_dates=n_clear,
             prior_iou=prior_iou,
             area_ha=area_ha,
@@ -239,6 +263,17 @@ def main() -> int:
         suit["evidence_level"] = "satellite_only"
         suit["product_stamp"] = "provisional_satellite_analytical_service"
         suit["najd_model_validation"] = "not_validated"
+        suit["assessability"] = assess
+        suit["observation_role"] = obs_role
+        suit["aggregate_id"] = agg.get("aggregate_id") or latest.get("aggregate_id") or reg.get("aggregate_id")
+        suit["persistence_feature"] = pers
+        suit["n_dates_above_bare"] = latest.get("n_dates_above_bare", reg.get("n_dates_above_bare"))
+        suit["valid_area_fraction"] = reg.get("valid_area_fraction") or agg.get("valid_area_fraction")
+        suit["biotic_status"] = latest.get("biotic_status") or reg.get("biotic_status")
+        if assess == "unassessable" or obs_role == "retained_last_good":
+            # Demote: do not present retained/unassessable as current Decision class
+            suit["decision_role"] = "retained_or_unassessable"
+            suit["suitability_summary_label"] = "demoted_unassessable_or_retained"
         suitability_units.append(suit)
 
         conf = compute_confidence(
@@ -256,13 +291,13 @@ def main() -> int:
         conf["najd_model_validation"] = "not_validated"
         confidence_units.append(conf)
 
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    out_dir.mkdir(parents=True, exist_ok=True)
     generated_at = datetime.now(timezone.utc).isoformat()
 
     common_meta = {
-        "version": "0.4.5-aou-temporal-ledger",
+        "version": "0.4.6-evaluator-deep-recheck",
         "generated_at": generated_at,
-        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3 + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md",
+        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3 + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md",
         "status": "expert_v1_provisional",
         "product_stamp": "provisional_satellite_analytical_service",
         "najd_model_validation": "not_validated",
@@ -270,7 +305,7 @@ def main() -> int:
         "never_merge": True,
         "mountain_apply": False,
         "action_auto_assign": False,
-        "writes_to_app_public": False,
+        "writes_to_app_public": bool(__import__("os").environ.get("MONITOR_OUT_DATA")),
         "input_refs": {
             "aou_registry": str(registry_path.relative_to(ROOT)),
             "aou_observations": str(obs_path.relative_to(ROOT)),
@@ -330,13 +365,19 @@ def main() -> int:
     }
 
     for name, doc in files.items():
-        path = OUT_DIR / name
+        path = out_dir / name
         with path.open("w", encoding="utf-8") as f:
             json.dump(doc, f, ensure_ascii=False, indent=2)
             f.write("\n")
-        print(f"wrote {path.relative_to(ROOT)}")
+        try:
+            print(f"wrote {path.relative_to(ROOT)}")
+        except ValueError:
+            print(f"wrote {path}")
 
-    print(f"OK — {len(aou_ids)} AOUs → {OUT_DIR.relative_to(ROOT)}")
+    try:
+        print(f"OK — {len(aou_ids)} AOUs → {out_dir.relative_to(ROOT)}")
+    except ValueError:
+        print(f"OK — {len(aou_ids)} AOUs → {out_dir}")
     return 0
 
 
