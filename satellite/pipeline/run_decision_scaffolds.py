@@ -26,9 +26,29 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 
 
+def _safe_rel(path: Path, root: Path = ROOT) -> str:
+    """Relative path when under root; else absolute (no ValueError)."""
+    try:
+        return str(Path(path).resolve().relative_to(Path(root).resolve()))
+    except ValueError:
+        return str(Path(path).resolve())
+
+
+
 def _paths() -> tuple[Path, Path, Path]:
-    """Resolve AOU inputs + decision out; honor MONITOR_OUT_DATA for staged release."""
+    """Resolve AOU inputs + decision out; honor MONITOR_OUT_DATA / explicit dirs.
+
+    Explicit override (R3-4 staging):
+      MONITOR_DECISION_IN  — directory containing aou/ (+ optional alerts)
+      MONITOR_DECISION_OUT — decision output directory
+    Else MONITOR_OUT_DATA stages both in/out under the same tree.
+    """
     import os
+    if os.environ.get("MONITOR_DECISION_IN") or os.environ.get("MONITOR_DECISION_OUT"):
+        data = Path(os.environ.get("MONITOR_DECISION_IN") or os.environ.get("MONITOR_OUT_DATA") or (ROOT / "app" / "public" / "data"))
+        aou = data / "aou" if (data / "aou").is_dir() else data
+        out = Path(os.environ["MONITOR_DECISION_OUT"]) if os.environ.get("MONITOR_DECISION_OUT") else (data / "decision")
+        return data, aou if aou.name == "aou" else (data / "aou"), out
     data = Path(os.environ["MONITOR_OUT_DATA"]) if os.environ.get("MONITOR_OUT_DATA") else ROOT / "app" / "public" / "data"
     aou = data / "aou"
     # Staged runs write decision into data/decision for atomic promote with AOU.
@@ -304,7 +324,7 @@ def main() -> int:
     generated_at = datetime.now(timezone.utc).isoformat()
 
     common_meta = {
-        "version": "0.4.7-evaluator-round2",
+        "version": "0.4.8-post29-residuals",
         "generated_at": generated_at,
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3 + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md",
         "status": "expert_v1_provisional",
@@ -315,9 +335,13 @@ def main() -> int:
         "mountain_apply": False,
         "action_auto_assign": False,
         "writes_to_app_public": bool(__import__("os").environ.get("MONITOR_OUT_DATA")),
+        "run_id": __import__("os").environ.get("MONITOR_RELEASE_ID")
+            or __import__("os").environ.get("MONITOR_RUN_ID"),
+        "release_id": __import__("os").environ.get("MONITOR_RELEASE_ID")
+            or __import__("os").environ.get("MONITOR_RUN_ID"),
         "input_refs": {
-            "aou_registry": str(registry_path.relative_to(ROOT)),
-            "aou_observations": str(obs_path.relative_to(ROOT)),
+            "aou_registry": _safe_rel(registry_path),
+            "aou_observations": _safe_rel(obs_path),
         },
         "honesty_en": (
             "Offline decision scaffolds for Najd agriculture AOUs only. "
@@ -379,12 +403,12 @@ def main() -> int:
             json.dump(doc, f, ensure_ascii=False, indent=2)
             f.write("\n")
         try:
-            print(f"wrote {path.relative_to(ROOT)}")
+            print(f"wrote {_safe_rel(path)}")
         except ValueError:
             print(f"wrote {path}")
 
     try:
-        print(f"OK — {len(aou_ids)} AOUs → {out_dir.relative_to(ROOT)}")
+        print(f"OK — {len(aou_ids)} AOUs → {_safe_rel(out_dir)}")
     except ValueError:
         print(f"OK — {len(aou_ids)} AOUs → {out_dir}")
     return 0

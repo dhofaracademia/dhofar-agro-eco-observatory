@@ -65,6 +65,7 @@ from engines.observation_integrity import (  # noqa: E402
     observation_role_for_refresh,
     positive_area_overlap,
     temporal_evidence_labels,
+    atomic_promote_with_rollback,
 )
 from engines.biotic import biotic_three_state, infer_biotic_from_cell  # noqa: E402
 from engines.stress import (  # noqa: E402
@@ -82,14 +83,16 @@ FORMULA_REF_POST = (
     "SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + "
     "SCIENCE_LOCKS_v0.4_observation_integrity.md + "
     "SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md + "
-    "SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md"
+    "SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md + "
+    "SCIENCE_LOCKS_v0.4_post29_evaluator_residuals.md"
 )
 FORMULA_REF_AOU = (
     "SCIENCE_LOCKS_v0.4_phase1_2.md§1-2 + "
     "SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + "
     "SCIENCE_LOCKS_v0.4_observation_integrity.md + "
     "SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md + "
-    "SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md"
+    "SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md + "
+    "SCIENCE_LOCKS_v0.4_post29_evaluator_residuals.md"
 )
 
 
@@ -876,14 +879,52 @@ def assign_aou_ids(
                 out_ndvi, out_ndmi = last_good_ndvi, last_good_ndmi
                 obs_role = OBSERVATION_ROLE_RETAINED
 
-            # Biotic three-state AFTER valid history ready (clear members + n_clear)
+            # R3-2: re-infer biotic AFTER ledger history + final water/vigor scores.
+            # prior_vigor_flags = ledger dates strictly before T; include current flag.
+            # Silence / empty priors → unknown (rules_evaluated=False), never not_flagged.
             possible_biotic = False
-            if clear_members and n_clear >= 2:
-                possible_biotic = any(m.get("possible_biotic_stress") for m in clear_members)
+            rules_evaluated = False
+            if clear_members and n_clear >= 2 and len(vigor_flags) >= 1:
+                rules_evaluated = True
+                for m in clear_members:
+                    if m.get("ndvi") is None or m.get("ndmi") is None:
+                        continue
+                    cur_vigor = bool(
+                        m.get("alert") == "vigor_attention"
+                        or (
+                            m.get("vigor_stress_score") is not None
+                            and float(m["vigor_stress_score"]) >= 55.0
+                        )
+                    )
+                    flags = list(vigor_flags) + [cur_vigor]
+                    dq = m.get("data_quality_confidence")
+                    if dq is None:
+                        dq = 50.0
+                    biotic = infer_biotic_from_cell(
+                        ndvi=float(m["ndvi"]),
+                        ndmi=float(m["ndmi"]),
+                        ndvi_p25=m.get("ndvi_p25_veg", 0.25),
+                        ndmi_p25=m.get("ndmi_p25_veg", -0.05),
+                        vigor_stress=float(m.get("vigor_stress_score") or 0),
+                        water_stress=float(m.get("water_stress_score") or 0),
+                        neighbor_ndvi_median=m.get("peer_ndvi_median"),
+                        data_quality_confidence=float(dq),
+                        prior_vigor_flags=flags,
+                    )
+                    m["possible_biotic_stress"] = biotic["possible_biotic_stress"]
+                    m["biotic_disclaimer_en"] = biotic["disclaimer_en"]
+                    m["biotic_disclaimer_ar"] = biotic["disclaimer_ar"]
+                    m["biotic_rules"] = biotic.get("rules")
+                    if biotic["possible_biotic_stress"]:
+                        possible_biotic = True
+            elif clear_members:
+                # Insufficient priors or n_clear<2 — do not OR stale cell flags into not_flagged
+                for m in clear_members:
+                    m["possible_biotic_stress"] = False
             b3 = biotic_three_state(
                 possible_biotic_stress=possible_biotic,
                 n_clear=n_clear,
-                rules_evaluated=bool(clear_members) and n_clear >= 1,
+                rules_evaluated=rules_evaluated,
             )
             biotic_status = b3["biotic_status"]
 
@@ -1475,9 +1516,13 @@ def main() -> int:
     props["consistency_status"] = "ok"
     geo_out["properties"] = props
 
-    # --- Atomic publish: stage then swap ---
+    # --- Atomic publish: stage then swap (R3-3/R3-4) ---
+    import os
     import shutil
     import tempfile
+
+    # When monitor owns the partner release, skip nested decision (R3-4: one decision run).
+    skip_decision = os.environ.get("SKIP_DECISION_SCAFFOLDS", "").strip() in ("1", "true", "yes")
 
     stage = Path(tempfile.mkdtemp(prefix=f"observatory_publish_{run_id}_", dir=str(out)))
     try:
@@ -1489,11 +1534,12 @@ def main() -> int:
         (stage / "aou" / "aou_observations.json").write_text(json.dumps(obs, indent=2))
         (stage / "aou" / "aou_registry.geojson").write_text(json.dumps(reg_fc))
         save_registry(stage / "aou" / "aou_registry.json", registry)
+        release_id = run_id
         refresh = {
             "last_updated": datetime.now(timezone.utc).isoformat(),
-            "source": "run_ag_probability",
+            "source": "run_ag_probability" + ("" if skip_decision else "+run_decision_scaffolds"),
             "run_id": run_id,
-            "release_id": run_id,
+            "release_id": release_id,
             "artifacts": [
                 "latest_alerts.geojson",
                 "timeseries.json",
@@ -1506,7 +1552,7 @@ def main() -> int:
                 "decision/action_ladder.stubs.json",
                 "decision/run_meta.json",
             ],
-            "phase": "0.4.7-evaluator-round2",
+            "phase": "0.4.8-post29-residuals",
             "formula_ref": FORMULA_REF_POST,
             "join_rule": join_meta.get("join_rule", JOIN_RULE),
             "join_predicate": "positive_area_overlap",
@@ -1519,6 +1565,7 @@ def main() -> int:
             "min_clear_fraction_aou": DEFAULT_MIN_CLEAR_FRACTION_AOU,
             "min_clear_members_aou": DEFAULT_MIN_CLEAR_MEMBERS_AOU,
             "min_valid_area_fraction_aou": DEFAULT_MIN_VALID_AREA_FRACTION_AOU,
+            "valid_area_fraction_basis": "clear_pixels_in_aou",
             "coverage_gate": {
                 "min_clear_pixels_cell": DEFAULT_MIN_CLEAR_PIXELS_CELL,
                 "min_clear_fraction_cell": DEFAULT_MIN_CLEAR_FRACTION_CELL,
@@ -1526,31 +1573,43 @@ def main() -> int:
                 "min_clear_members_aou": DEFAULT_MIN_CLEAR_MEMBERS_AOU,
                 "min_valid_area_fraction_aou": DEFAULT_MIN_VALID_AREA_FRACTION_AOU,
                 "assessable_cell_fraction": "secondary_count",
-                "valid_area_fraction": "primary_when_overlaps",
+                "valid_area_fraction": "clear_pixels_in_aou",
+                "valid_area_fraction_basis": "clear_pixels_in_aou",
             },
-            "promote_includes_decision": True,
+            "promote_includes_decision": not skip_decision,
+            "single_staged_decision": True,
         }
         (stage / "meta" / "last_refresh.json").write_text(json.dumps(refresh, indent=2))
         (stage / "meta" / "run_meta.json").write_text(json.dumps(refresh, indent=2))
 
-        # Decision scaffolds against stage (same release_id)
-        import os
-        prev_out = os.environ.get("MONITOR_OUT_DATA")
-        os.environ["MONITOR_OUT_DATA"] = str(stage)
-        try:
-            from run_decision_scaffolds import main as decision_main
-            drc = decision_main()
-        except Exception as e:
-            print(f"ERROR: decision scaffolds failed: {e}", file=sys.stderr)
-            return 5
-        finally:
-            if prev_out is None:
-                os.environ.pop("MONITOR_OUT_DATA", None)
-            else:
-                os.environ["MONITOR_OUT_DATA"] = prev_out
-        if drc != 0:
-            print(f"ERROR: decision scaffolds exited {drc}", file=sys.stderr)
-            return drc if drc else 5
+        if not skip_decision:
+            # Standalone AgProb path: one decision run on this stage (unified release_id)
+            prev_out = os.environ.get("MONITOR_OUT_DATA")
+            os.environ["MONITOR_OUT_DATA"] = str(stage)
+            try:
+                from run_decision_scaffolds import main as decision_main
+                drc = decision_main()
+            except Exception as e:
+                print(f"ERROR: decision scaffolds failed: {e}", file=sys.stderr)
+                return 5
+            finally:
+                if prev_out is None:
+                    os.environ.pop("MONITOR_OUT_DATA", None)
+                else:
+                    os.environ["MONITOR_OUT_DATA"] = prev_out
+            if drc != 0:
+                print(f"ERROR: decision scaffolds exited {drc}", file=sys.stderr)
+                return drc if drc else 5
+            # Stamp decision run_meta with same release_id BEFORE promote
+            dmeta = stage / "decision" / "run_meta.json"
+            if dmeta.is_file():
+                try:
+                    doc = json.loads(dmeta.read_text())
+                    doc["release_id"] = release_id
+                    doc["run_id"] = release_id
+                    dmeta.write_text(json.dumps(doc, indent=2))
+                except Exception:
+                    pass
 
         required = [
             "latest_alerts.geojson",
@@ -1560,38 +1619,35 @@ def main() -> int:
             "aou/aou_registry.json",
             "meta/last_refresh.json",
             "meta/run_meta.json",
-            "decision/aou_suitability_components.json",
-            "decision/aou_confidence.json",
-            "decision/aou_evidence_gaps.json",
-            "decision/run_meta.json",
         ]
+        if not skip_decision:
+            required.extend(
+                [
+                    "decision/aou_suitability_components.json",
+                    "decision/aou_confidence.json",
+                    "decision/aou_evidence_gaps.json",
+                    "decision/run_meta.json",
+                ]
+            )
         missing = [r for r in required if not (stage / r).exists()]
         if missing:
             print(f"ERROR: release missing {missing} — abort promote", file=sys.stderr)
             return 6
 
-        # All-or-nothing swap
-        shutil.move(str(stage / "latest_alerts.geojson"), str(alerts_path))
-        shutil.move(str(stage / "timeseries.json"), str(ts_path))
-        aou_dir.mkdir(parents=True, exist_ok=True)
-        for name in ("aou_observations.json", "aou_registry.geojson", "aou_registry.json"):
-            shutil.move(str(stage / "aou" / name), str(aou_dir / name))
-        meta_dir = out / "meta"
-        meta_dir.mkdir(parents=True, exist_ok=True)
-        for name in ("last_refresh.json", "run_meta.json"):
-            shutil.move(str(stage / "meta" / name), str(meta_dir / name))
-        decision_dir = out / "decision"
-        decision_dir.mkdir(parents=True, exist_ok=True)
-        for name in (
-            "aou_suitability_components.json",
-            "aou_confidence.json",
-            "aou_evidence_gaps.json",
-            "action_ladder.stubs.json",
-            "run_meta.json",
-        ):
-            src = stage / "decision" / name
-            if src.exists():
-                shutil.move(str(src), str(decision_dir / name))
+        promote = list(required)
+        if not skip_decision:
+            # Include optional action ladder when present
+            if (stage / "decision" / "action_ladder.stubs.json").exists():
+                promote.append("decision/action_ladder.stubs.json")
+        try:
+            atomic_promote_with_rollback(
+                stage_root=stage,
+                public_root=out,
+                relative_paths=promote,
+            )
+        except Exception as e:
+            print(f"ERROR: atomic promote failed / rolled back: {e}", file=sys.stderr)
+            return 7
     finally:
         shutil.rmtree(stage, ignore_errors=True)
 
