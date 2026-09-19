@@ -16,9 +16,13 @@ import json
 import math
 import sys
 from collections import defaultdict
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
+import os
+import shutil
+import tempfile
+import uuid
 
 import numpy as np
 import planetary_computer as pc
@@ -59,13 +63,48 @@ SCALE = 10000.0  # Sentinel-2 L2A reflectance scale
 SOURCE_STR = "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer"
 STAC_URL = "https://planetarycomputer.microsoft.com/api/stac/v1"
 TARGET_DATES_HINT = 4  # aim for 2–4 dates spanning weeks
+# Clear-pixel / coverage gate — independent of scene cloud % (integrity pack P1)
+MIN_CLEAR_PIXELS = int(os.environ.get("MONITOR_MIN_CLEAR_PIXELS", "500"))
+MIN_CLEAR_FRACTION = float(os.environ.get("MONITOR_MIN_CLEAR_FRACTION", "0.02"))
+# STAC window: default end=now (UTC), lookback configurable; fixed only when stamped
+DEFAULT_LOOKBACK_DAYS = int(os.environ.get("MONITOR_STAC_LOOKBACK_DAYS", "90"))
+
+
+def stac_datetime_range() -> tuple[str, dict]:
+    """Return (datetime_range, window_meta). end=now unless reproducibility_fixed."""
+    mode = os.environ.get("MONITOR_WINDOW_MODE", "live").strip().lower()
+    if mode == "reproducibility_fixed":
+        start = os.environ.get("MONITOR_STAC_START", "2026-06-01")
+        end = os.environ.get("MONITOR_STAC_END", "2026-09-08")
+        meta = {
+            "window_mode": "reproducibility_fixed",
+            "stac_start": start,
+            "stac_end": end,
+            "lookback_days": None,
+        }
+        return f"{start}/{end}", meta
+    end = os.environ.get("MONITOR_STAC_END")
+    if end:
+        end_d = date.fromisoformat(end)
+    else:
+        end_d = datetime.now(timezone.utc).date()
+    lookback = int(os.environ.get("MONITOR_STAC_LOOKBACK_DAYS", str(DEFAULT_LOOKBACK_DAYS)))
+    start_d = end_d - timedelta(days=lookback)
+    meta = {
+        "window_mode": "live",
+        "stac_start": start_d.isoformat(),
+        "stac_end": end_d.isoformat(),
+        "lookback_days": lookback,
+        "run_time_utc": datetime.now(timezone.utc).isoformat(),
+    }
+    return f"{start_d.isoformat()}/{end_d.isoformat()}", meta
 
 
 def open_catalog():
     return Client.open(STAC_URL, modifier=pc.sign_inplace)
 
 
-def search_items(catalog, datetime_range: str = "2026-06-01/2026-09-08"):
+def search_items(catalog, datetime_range: str):
     search = catalog.search(
         collections=["sentinel-2-l2a"],
         bbox=AOI_BBOX,
@@ -172,14 +211,16 @@ def read_window_band(href: str, bbox_wgs84: list[float], out_shape=None, dst_crs
 
 
 def scl_valid_mask(b04, b08, b11, scl=None):
-    """SCL gates BEFORE indices (SCIENCE_LOCKS / AgriTech)."""
+    """SCL gates BEFORE indices (SCIENCE_LOCKS / AgriTech / integrity pack).
+
+    Missing SCL → all invalid (block / unclassified). Never invent clear pixels.
+    """
     valid = (b04 > 0) & (b08 > 0) & (b11 > 0) & (b04 < 10000) & (b08 < 10000) & (b11 < 10000)
-    if scl is not None:
-        # Exclude 0 nodata, 1 saturated, 3 cloud shadow, 8/9 cloud, 10 thin cirrus
-        # SCIENCE_LOCKS §1.3: SCL cloud/shadow/cirrus → nodata (no probability)
-        cloudlike = np.isin(scl, [0, 1, 3, 8, 9, 10])
-        valid = valid & (~cloudlike)
-    return valid
+    if scl is None:
+        return np.zeros_like(valid, dtype=bool)
+    # Exclude 0 nodata, 1 saturated, 3 cloud shadow, 8/9 cloud, 10 thin cirrus
+    cloudlike = np.isin(scl, [0, 1, 3, 8, 9, 10])
+    return valid & (~cloudlike)
 
 
 def compute_indices(b04, b08, b11, scl=None):
@@ -414,7 +455,10 @@ def process_item(item) -> tuple[list[dict], dict]:
             print(f"    SCL read failed: {e}")
             scl = None
 
+    scl_missing = scl is None
     ndvi, ndmi, valid = compute_indices(b04, b08, b11, scl)
+    if scl_missing:
+        print("    SCL missing → blocked (unclassified); no clear pixels invented")
 
     # NDRE after SCL gate — SCIENCE_LOCKS / AgriTech prefs
     ndre = None
@@ -439,12 +483,50 @@ def process_item(item) -> tuple[list[dict], dict]:
         print(f"    NDRE skipped: {e}")
 
     finite = np.isfinite(ndvi) & valid
+    n_clear = int(np.sum(finite))
+    n_total = int(ndvi.size)
+    clear_fraction = (n_clear / n_total) if n_total else 0.0
+    coverage_ok = (n_clear >= MIN_CLEAR_PIXELS) and (clear_fraction >= MIN_CLEAR_FRACTION)
+    if not coverage_ok or scl_missing:
+        print(
+            f"    coverage gate FAIL clear={n_clear}/{n_total} "
+            f"frac={clear_fraction:.4f} min_px={MIN_CLEAR_PIXELS} "
+            f"min_frac={MIN_CLEAR_FRACTION} scl_missing={scl_missing}"
+        )
+        stats = {
+            "date": d,
+            "product_id": product_id,
+            "tile": tile,
+            "cloud_cover": cloud,
+            "pixels_valid": n_clear,
+            "clear_fraction": round(clear_fraction, 6),
+            "coverage_ok": False,
+            "scl_missing": scl_missing,
+            "status": "insufficient_clear_data" if not scl_missing else "scl_missing_blocked",
+            "scene_capture_date": d,
+            "ndvi_mean": None,
+            "ndvi_p10": None,
+            "ndvi_p50": None,
+            "ndvi_p90": None,
+            "ndmi_mean": None,
+            "ndmi_p10": None,
+            "ndmi_p50": None,
+            "ndmi_p90": None,
+            "shape": list(b08.shape),
+            "source": SOURCE_STR,
+        }
+        return [], stats
+
     stats = {
         "date": d,
         "product_id": product_id,
         "tile": tile,
         "cloud_cover": cloud,
-        "pixels_valid": int(np.sum(finite)),
+        "pixels_valid": n_clear,
+        "clear_fraction": round(clear_fraction, 6),
+        "coverage_ok": True,
+        "scl_missing": False,
+        "scene_capture_date": d,
         "ndvi_mean": float(np.nanmean(ndvi[finite])) if np.any(finite) else None,
         "ndvi_p10": float(np.nanpercentile(ndvi[finite], 10)) if np.any(finite) else None,
         "ndvi_p50": float(np.nanpercentile(ndvi[finite], 50)) if np.any(finite) else None,
@@ -494,11 +576,17 @@ def pick_best_item_per_date(items: list):
 def main() -> int:
     CACHE_DIR.mkdir(parents=True, exist_ok=True)
     OUT_DATA.mkdir(parents=True, exist_ok=True)
+    run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ") + "-" + uuid.uuid4().hex[:8]
+    reprocess_time = datetime.now(timezone.utc).isoformat()
+    datetime_range, window_meta = stac_datetime_range()
 
     print("Opening Planetary Computer STAC…")
     catalog = open_catalog()
-    print("Searching sentinel-2-l2a…")
-    items = search_items(catalog)
+    print(
+        f"Searching sentinel-2-l2a… window={datetime_range} "
+        f"mode={window_meta.get('window_mode')} run_id={run_id}"
+    )
+    items = search_items(catalog, datetime_range)
     print(f"STAC returned {len(items)} items (cloud<{CLOUD_LT})")
 
     selected = pick_dates_and_items(items)
@@ -517,9 +605,18 @@ def main() -> int:
         try:
             feats, stats = process_item(item)
             all_features.extend(feats)
+            if not stats.get("coverage_ok", True) or stats.get("status") in (
+                "insufficient_clear_data",
+                "scl_missing_blocked",
+            ):
+                errors.append(
+                    f"{stats.get('product_id')}: {stats.get('status', 'coverage_fail')}"
+                )
+                continue
             timeseries.append(
                 {
                     "date": stats["date"],
+                    "scene_capture_date": stats.get("scene_capture_date", stats["date"]),
                     "source": SOURCE_STR,
                     "product_id": stats["product_id"],
                     "tile": stats["tile"],
@@ -527,6 +624,7 @@ def main() -> int:
                     "window_bbox": WINDOW_BBOX,
                     "aoi_bbox": AOI_BBOX,
                     "pixels_valid": stats["pixels_valid"],
+                    "clear_fraction": stats.get("clear_fraction"),
                     "ndvi": {
                         "mean": stats["ndvi_mean"],
                         "p10": stats["ndvi_p10"],
@@ -560,42 +658,16 @@ def main() -> int:
         (PIPELINE_DIR / "_partial_errors.json").write_text(json.dumps(notes, indent=2))
         return 2
 
-    # Use latest date features for latest_alerts.geojson
-    latest_date = max(f["properties"]["date"] for f in all_features)
-    latest_feats = [f for f in all_features if f["properties"]["date"] == latest_date]
-    latest_feats = classify_alerts(latest_feats)
-
-    # Also classify all for optional multi-date use in timeseries rollup
+    # Single classify pass for ALL dates → same classifier for map + timeseries
     all_classified = classify_alerts(all_features)
+    latest_date = max(f["properties"]["date"] for f in all_classified)
+    latest_feats = [f for f in all_classified if f["properties"]["date"] == latest_date]
 
     alert_counts = defaultdict(int)
     for f in latest_feats:
         alert_counts[f["properties"]["alert"]] += 1
 
-    geojson = {
-        "type": "FeatureCollection",
-        "name": "najd_latest_alerts",
-        "crs": {"type": "name", "properties": {"name": "urn:ogc:def:crs:OGC:1.3:CRS84"}},
-        "properties": {
-            "source": SOURCE_STR,
-            "date": latest_date,
-            "last_updated": datetime.now(timezone.utc).isoformat(),
-            "window_bbox": WINDOW_BBOX,
-            "aoi_bbox": AOI_BBOX,
-            "bare_ndvi_threshold": BARE_NDVI,
-            "grid_m": GRID_M,
-            "alert_counts": dict(alert_counts),
-            "note": (
-                "Alerts are relative early-intervention flags among vegetated "
-                "cells, not definitive diagnoses."
-            ),
-        },
-        "features": latest_feats,
-    }
-    GEOJSON_PATH.write_text(json.dumps(geojson))
-    print(f"Wrote {GEOJSON_PATH} ({len(latest_feats)} features, date={latest_date})")
-
-    # Enrich timeseries with alert counts per date from all_classified
+    # Enrich timeseries with alert counts from the SAME classified set
     for ts in timeseries:
         d = ts["date"]
         counts = defaultdict(int)
@@ -606,27 +678,87 @@ def main() -> int:
                 n += 1
         ts["alert_counts"] = dict(counts)
         ts["grid_cell_count"] = n
+        ts["run_id"] = run_id
+        ts["classifier"] = "classify_alerts_relative_p25"
+        ts["scene_capture_date"] = d
+        ts["reprocess_time_utc"] = reprocess_time
+
+    # Consistency: latest map counts == timeseries counts for latest_date
+    ts_latest = next((t for t in timeseries if t["date"] == latest_date), None)
+    if ts_latest is not None:
+        from engines.observation_integrity import alert_counts_match
+
+        if not alert_counts_match(dict(alert_counts), dict(ts_latest.get("alert_counts") or {})):
+            print(
+                f"ERROR: monitor alert/timeseries mismatch date={latest_date} "
+                f"map={dict(alert_counts)} ts={ts_latest.get('alert_counts')}",
+                file=sys.stderr,
+            )
+            return 3
+
+    geojson = {
+        "type": "FeatureCollection",
+        "name": "najd_latest_alerts",
+        "crs": {"type": "name", "properties": {"name": "urn:ogc:def:crs:OGC:1.3:CRS84"}},
+        "properties": {
+            "source": SOURCE_STR,
+            "date": latest_date,
+            "scene_capture_date": latest_date,
+            "reprocess_time_utc": reprocess_time,
+            "run_id": run_id,
+            "last_updated": reprocess_time,
+            "window_bbox": WINDOW_BBOX,
+            "aoi_bbox": AOI_BBOX,
+            "bare_ndvi_threshold": BARE_NDVI,
+            "grid_m": GRID_M,
+            "alert_counts": dict(alert_counts),
+            "stac_window": window_meta,
+            "min_clear_pixels": MIN_CLEAR_PIXELS,
+            "min_clear_fraction": MIN_CLEAR_FRACTION,
+            "consistency_status": "ok",
+            "note": (
+                "Alerts are relative early-intervention flags among vegetated "
+                "cells, not definitive diagnoses. scene_capture_date ≠ reprocess_time."
+            ),
+        },
+        "features": latest_feats,
+    }
 
     ts_doc = {
         "source": SOURCE_STR,
         "generated_on": datetime.now(timezone.utc).date().isoformat(),
-        "last_updated": datetime.now(timezone.utc).isoformat(),
+        "last_updated": reprocess_time,
+        "run_id": run_id,
+        "reprocess_time_utc": reprocess_time,
         "aoi_bbox": AOI_BBOX,
         "window_bbox": WINDOW_BBOX,
         "priority_tiles": sorted(PRIORITY_TILES),
+        "stac_window": window_meta,
+        "min_clear_pixels": MIN_CLEAR_PIXELS,
+        "min_clear_fraction": MIN_CLEAR_FRACTION,
         "method": {
             "indices": [
                 "NDVI=(B08-B04)/(B08+B04)",
                 "NDMI=(B08-B11)/(B08+B11)",
                 "NDRE=(B08-B05)/(B08+B05) [B06/B07 documented fallback only]",
             ],
-            "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md",
+            "formula_ref": (
+                "SCIENCE_LOCKS_v0.4_phase1_2.md + "
+                "SCIENCE_LOCKS_v0.4_observation_integrity.md"
+            ),
             "reflectance_scale": SCALE,
             "grid_m": GRID_M,
             "bare_ndvi_threshold": BARE_NDVI,
             "cloud_filter": f"eo:cloud_cover < {CLOUD_LT}",
+            "coverage_gate": {
+                "min_clear_pixels": MIN_CLEAR_PIXELS,
+                "min_clear_fraction": MIN_CLEAR_FRACTION,
+                "independent_of_cloud_pct": True,
+                "missing_scl": "block_unclassified",
+            },
             "stac": STAC_URL,
             "collection": "sentinel-2-l2a",
+            "classifier": "classify_alerts_relative_p25",
         },
         "citation": (
             "Copernicus Sentinel-2 L2A (ESA) accessed via Microsoft Planetary "
@@ -635,28 +767,43 @@ def main() -> int:
         "errors": errors,
         "dates": timeseries,
     }
-    TIMESERIES_PATH.write_text(json.dumps(ts_doc, indent=2))
+
+    # Atomic publish of monitor artifacts (AgProb publishes again after enrich)
+    stage = Path(tempfile.mkdtemp(prefix=f"monitor_publish_{run_id}_", dir=str(OUT_DATA)))
+    try:
+        (stage / "meta").mkdir(parents=True, exist_ok=True)
+        (stage / "latest_alerts.geojson").write_text(json.dumps(geojson))
+        (stage / "timeseries.json").write_text(json.dumps(ts_doc, indent=2))
+        refresh_doc = {
+            "last_updated": ts_doc["last_updated"],
+            "source": "run_monitor",
+            "run_id": run_id,
+            "artifacts": ["latest_alerts.geojson", "timeseries.json"],
+            "generated_on": ts_doc.get("generated_on"),
+            "stac_window": window_meta,
+            "scene_capture_date": latest_date,
+            "reprocess_time_utc": reprocess_time,
+            "mountain_seeding_hold": True,
+        }
+        (stage / "meta" / "last_refresh.json").write_text(json.dumps(refresh_doc, indent=2))
+        (stage / "meta" / "run_meta.json").write_text(json.dumps(refresh_doc, indent=2))
+        shutil.move(str(stage / "latest_alerts.geojson"), str(GEOJSON_PATH))
+        shutil.move(str(stage / "timeseries.json"), str(TIMESERIES_PATH))
+        meta_dir = OUT_DATA / "meta"
+        meta_dir.mkdir(parents=True, exist_ok=True)
+        shutil.move(str(stage / "meta" / "last_refresh.json"), str(meta_dir / "last_refresh.json"))
+        shutil.move(str(stage / "meta" / "run_meta.json"), str(meta_dir / "run_meta.json"))
+    finally:
+        shutil.rmtree(stage, ignore_errors=True)
+
+    print(f"Wrote {GEOJSON_PATH} ({len(latest_feats)} features, date={latest_date})")
     print(f"Wrote {TIMESERIES_PATH} ({len(timeseries)} dates)")
 
-    meta_dir = OUT_DATA / "meta"
-    meta_dir.mkdir(parents=True, exist_ok=True)
-    refresh_doc = {
-        "last_updated": ts_doc["last_updated"],
-        "source": "run_monitor",
-        "artifacts": ["latest_alerts.geojson", "timeseries.json"],
-        "generated_on": ts_doc.get("generated_on"),
-    }
-    refresh_path = meta_dir / "last_refresh.json"
-    refresh_path.write_text(json.dumps(refresh_doc, indent=2))
-    print(f"Wrote {refresh_path}")
-
-    # Summary print
     print("\n=== ALERT COUNTS (latest date {}) ===".format(latest_date))
     for k in sorted(alert_counts.keys()):
         print(f"  {k}: {alert_counts[k]}")
     print(f"  TOTAL: {sum(alert_counts.values())}")
 
-    # Persist run summary for RUN_NOTES
     summary = {
         "latest_date": latest_date,
         "alert_counts": dict(alert_counts),
@@ -665,19 +812,23 @@ def main() -> int:
         "errors": errors,
         "window_bbox": WINDOW_BBOX,
         "n_latest_features": len(latest_feats),
+        "run_id": run_id,
+        "stac_window": window_meta,
     }
     (PIPELINE_DIR / "_run_summary.json").write_text(json.dumps(summary, indent=2))
 
-    # Phase-1 engines: AgProb / AOU identity / stress / biotic (SCIENCE_LOCKS)
+    # Phase-1 engines — fail-hard (non-zero) keep last good already published only if ag fails after
     try:
         from run_ag_probability import main as ag_main
 
         print("\nRunning Phase-1 Agricultural Probability / AOU engines…")
         rc = ag_main()
         if rc != 0:
-            print(f"WARNING: run_ag_probability exited {rc}")
+            print(f"ERROR: run_ag_probability exited {rc} — publish incomplete", file=sys.stderr)
+            return rc if rc else 4
     except Exception as e:
-        print(f"WARNING: AgProb engines not run: {e}")
+        print(f"ERROR: AgProb engines failed: {e}", file=sys.stderr)
+        return 4
 
     return 0
 

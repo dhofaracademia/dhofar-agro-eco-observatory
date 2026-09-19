@@ -137,3 +137,12 @@ If post window is still empty (today is 2026-09-13; preferred window opens 15 Se
 **Pointer:** [`SCIENCE_LOCKS_v0.4_evaluator_endorsement.md`](SCIENCE_LOCKS_v0.4_evaluator_endorsement.md)
 
 Satellite-first (no FO prerequisite) **stands**. Partner chrome should lead with `evidence_level` (`satellite_only` | `enhanced_by_field_verification`) + Confidence + evidence basis + product stamp `provisional_satellite_analytical_service`. “Field optional” is a footnote, not the scientific claim. Platform methodology validation remains required; 9 single-date AOUs ≠ validated Najd model. Mountain seeding-rec Hold unchanged.
+
+---
+
+## Addendum 2026-09-19 — Observation integrity
+
+**Pointer:** [`SCIENCE_LOCKS_v0.4_observation_integrity.md`](SCIENCE_LOCKS_v0.4_observation_integrity.md)
+
+Satellite-first stands. Partner “refreshed” claims require integrity-pack P0/P1 (real new obs, matched counts, atomic publish). Mountain 3.B Hold unchanged.
+

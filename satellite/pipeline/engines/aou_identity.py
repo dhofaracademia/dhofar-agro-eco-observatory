@@ -213,8 +213,12 @@ def segment_probability_mask(
         area_ha = abs(poly.area) * m_per_deg_lat * m_per_deg_lon / 10_000.0
         if area_ha < min_area_ha:
             continue
-        # aggregate props from members that intersect
-        member_props = [m for g, m in zip(geoms, metas) if poly.intersects(g)]
+        # aggregate props from members with positive-area overlap (not boundary-only)
+        from .observation_integrity import positive_area_overlap
+
+        member_props = [
+            m for g, m in zip(geoms, metas) if positive_area_overlap(poly, g) > 0
+        ]
         probs = [m.get(prob_key) for m in member_props if m.get(prob_key) is not None]
         ndvis = [m.get("ndvi") for m in member_props if m.get("ndvi") is not None]
         ndmis = [m.get("ndmi") for m in member_props if m.get("ndmi") is not None]

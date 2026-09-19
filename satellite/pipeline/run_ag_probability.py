@@ -7,7 +7,7 @@ Modes:
      and rewrite latest_alerts with new fields (ndre null if unavailable).
   2) Called after run_monitor.py full STAC path (same writers).
 
-Cite: docs/SCIENCE_LOCKS_v0.4_phase1_2.md + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md
+Cite: docs/SCIENCE_LOCKS_v0.4_phase1_2.md + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + SCIENCE_LOCKS_v0.4_observation_integrity.md
 AOU ≠ farm; DQ ≠ ecological confidence; biotic ≠ pest certainty.
 500 m grid remains fallback/debug (geometry_kind=monitoring_grid_500m).
 """
@@ -35,6 +35,15 @@ from engines.aou_identity import (  # noqa: E402
     mint_or_match_aou,
     save_registry,
     segment_probability_mask,
+)
+from engines.observation_integrity import (  # noqa: E402
+    JOIN_RULE,
+    alert_counts_match,
+    assign_cells_max_overlap,
+    count_alerts,
+    member_clear_means,
+    positive_area_overlap,
+    temporal_evidence_labels,
 )
 from engines.biotic import infer_biotic_from_cell  # noqa: E402
 from engines.stress import (  # noqa: E402
@@ -189,6 +198,12 @@ def enrich_features(features: list[dict], *, month: int | None) -> list[dict]:
         p["possible_biotic_stress"] = biotic["possible_biotic_stress"]
         p["biotic_disclaimer_en"] = biotic["disclaimer_en"]
         p["biotic_disclaimer_ar"] = biotic["disclaimer_ar"]
+        # Empty stress/biotic history ≠ "no biotic issue"
+        te = temporal_evidence_labels(n_clear_dates)
+        for k, v in te.items():
+            p[k] = v
+        if not biotic["possible_biotic_stress"] and not te["temporal_evidence_sufficient"]:
+            p["biotic_status"] = "unknown_insufficient_temporal_evidence"
 
         out.append({"type": "Feature", "geometry": f["geometry"], "properties": p})
     return out
@@ -309,12 +324,13 @@ def assign_aou_ids(
     registry_json_path: Path,
     observation_date: str,
     ledger: dict[str, Any] | None = None,
-) -> tuple[list[dict], dict[str, Any], list[dict]]:
-    """Persistent AOUs: re-score existing units honestly; segment only if registry empty.
+) -> tuple[list[dict], dict[str, Any], list[dict], dict[str, Any]]:
+    """Persistent AOUs with integrity-pack join + refresh rules.
 
-    n_clear from AOU observation ledger (distinct dates, series_scope != window_not_aou).
-    FORBIDDEN: hardcoded n_clear_dates=1/4 forever; first_seen/last_seen alone; window length.
-    Soft window persistence never raises class. active = registry identity only.
+    - Clear stale cell→AOU; positive-area overlap only; multi-hit → max_overlap_area.
+    - Scores from **current** in-AOU cell NDVI/NDMI. No valid new clear sample →
+      do NOT advance observation_date / last_seen_date; stamp refresh_status=stale.
+    - n_clear from AOU observation ledger (append/upsert elsewhere).
     """
     from engines.ag_probability import (
         ag_class_from_probability,
@@ -324,8 +340,12 @@ def assign_aou_ids(
 
     registry = load_registry(registry_json_path)
     aou_features: list[dict] = []
-    cell_to_aou: dict[int, str] = {}
     active = [u for u in (registry.get("units") or []) if u.get("active", True) and u.get("geometry")]
+    join_meta = {
+        "join_rule": JOIN_RULE,
+        "join_predicate": "positive_area_overlap",
+        "formula_ref": "SCIENCE_LOCKS_v0.4_observation_integrity.md§1",
+    }
 
     def _honest_class(prob: float | None, n_clear: int) -> str | None:
         if prob is None:
@@ -339,7 +359,7 @@ def assign_aou_ids(
 
     def _score_unit_from_ndvi_ndmi(ndvi, ndmi, month: int | None, n_clear: int) -> dict:
         if ndvi is None or ndmi is None:
-            return {"agricultural_probability": None, "ag_class": None}
+            return {"agricultural_probability": None, "ag_class": None, "persistence_status": persistence_status(n_clear)}
         ag = agricultural_probability(
             ndvi=float(ndvi),
             ndmi=float(ndmi),
@@ -361,65 +381,73 @@ def assign_aou_ids(
             month = None
 
     if active:
-        # Re-score path: keep N identities; do not mint from inflated window gates
+        aou_geoms: list[tuple[str, Any]] = []
+        rec_by_id: dict[str, dict] = {}
         for rec in active:
-            aou_id = rec["aou_id"]
             try:
                 geom = shape(rec["geometry"])
             except Exception:
                 continue
+            aou_geoms.append((rec["aou_id"], geom))
+            rec_by_id[rec["aou_id"]] = rec
 
-            intersecting: list[dict] = []
-            vegetated: list[dict] = []
-            for i, f in enumerate(features):
-                try:
-                    g = shape(f["geometry"])
-                    if not geom.intersects(g):
-                        continue
-                    props = f["properties"]
-                    intersecting.append(props)
-                    cell_to_aou[i] = aou_id
-                    if (props.get("ndvi") or 0) >= BARE_NDVI:
-                        vegetated.append(props)
-                except Exception:
-                    continue
+        by_aou = assign_cells_max_overlap(features, aou_geoms, bare_ndvi=BARE_NDVI)
 
-            # Append pending only when this run has polygon-covering clear NDVI
-            cover_props = vegetated or intersecting
-            pending_ndvi = None
-            if cover_props:
-                ndvi_vals = [m["ndvi"] for m in cover_props if m.get("ndvi") is not None]
-                if ndvi_vals:
-                    pending_ndvi = sum(ndvi_vals) / len(ndvi_vals)
+        for aou_id, geom in aou_geoms:
+            rec = rec_by_id[aou_id]
+            bucket = by_aou.get(aou_id) or {"members": [], "vegetated": []}
+            members = bucket["members"]
+            vegetated = bucket["vegetated"]
+            mean_ndvi, mean_ndmi = member_clear_means(members)
 
+            has_new = mean_ndvi is not None and mean_ndmi is not None
+            pending_ndvi = mean_ndvi if has_new else None
             n_clear = _aou_scoped_clear_count(
                 ledger,
                 aou_id,
-                pending_date=observation_date if pending_ndvi is not None else None,
+                pending_date=observation_date if has_new else None,
                 pending_ndvi=pending_ndvi,
             )
+            te = temporal_evidence_labels(n_clear)
 
-            scored = _score_unit_from_ndvi_ndmi(rec.get("ndvi"), rec.get("ndmi"), month, n_clear)
-            mean_prob = scored["agricultural_probability"]
-            if mean_prob is None:
+            if has_new:
+                scored = _score_unit_from_ndvi_ndmi(mean_ndvi, mean_ndmi, month, n_clear)
+                mean_prob = scored["agricultural_probability"]
+                ag_class = scored["ag_class"] or _honest_class(mean_prob, n_clear)
+                pers_status = scored.get("persistence_status") or persistence_status(n_clear)
+                refresh_status = "refreshed"
+                stamp_date = observation_date
+                rec["ndvi"] = round(mean_ndvi, 4)
+                rec["ndmi"] = round(mean_ndmi, 4)
+                rec["last_seen_date"] = observation_date
+                out_ndvi, out_ndmi = rec["ndvi"], rec["ndmi"]
+            else:
+                # No valid new clear in-boundary sample — keep prior dated scores; do not advance date
+                refresh_status = "stale" if (rec.get("ndvi") is None or rec.get("ndmi") is None or not members) else "no_new_observation"
+                if not members:
+                    refresh_status = "no_new_observation"
                 mean_prob = rec.get("agricultural_probability")
-            ag_class = scored["ag_class"] or _honest_class(mean_prob, n_clear)
-            pers_status = scored.get("persistence_status") or persistence_status(n_clear)
+                ag_class = _honest_class(mean_prob, n_clear) or rec.get("ag_class")
+                pers_status = persistence_status(n_clear)
+                stamp_date = rec.get("last_seen_date")  # prior date only
+                out_ndvi, out_ndmi = rec.get("ndvi"), rec.get("ndmi")
 
             detection = _current_detection_for_run(
-                intersecting=intersecting,
+                intersecting=members,
                 vegetated=vegetated,
                 ag_class=ag_class,
             )
-            member_count = len(vegetated) or len(intersecting) or rec.get("member_count")
+            member_count = len(vegetated) or len(members) or rec.get("member_count")
 
             rec["agricultural_probability"] = mean_prob
             rec["ag_class"] = ag_class
             rec["n_clear_dates"] = n_clear
             rec["persistence_status"] = pers_status
             rec["current_detection"] = detection
-            # active stays registry identity — do not retire on a miss
+            rec["refresh_status"] = refresh_status
             rec["active"] = True if rec.get("active", True) else False
+            for k, v in te.items():
+                rec[k] = v
 
             aou_features.append(
                 {
@@ -432,11 +460,12 @@ def assign_aou_ids(
                         "last_seen_date": rec.get("last_seen_date"),
                         "active": bool(rec.get("active", True)),
                         "current_detection": detection,
+                        "refresh_status": refresh_status,
                         "agricultural_probability": mean_prob,
                         "ag_class": ag_class,
                         "area_ha_est": rec.get("area_ha_est"),
-                        "ndvi": rec.get("ndvi"),
-                        "ndmi": rec.get("ndmi"),
+                        "ndvi": out_ndvi,
+                        "ndmi": out_ndmi,
                         "ndre": None,
                         "ndre_available": False,
                         "ndre_status": "unavailable",
@@ -449,45 +478,78 @@ def assign_aou_ids(
                         "evidence_level": "satellite_only",
                         "product_stamp": "provisional_satellite_analytical_service",
                         "najd_model_validation": "not_validated",
-                        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§1-2 + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md",
-                        "date": observation_date,
+                        "formula_ref": (
+                            "SCIENCE_LOCKS_v0.4_phase1_2.md§1-2 + "
+                            "SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + "
+                            "SCIENCE_LOCKS_v0.4_observation_integrity.md"
+                        ),
+                        "date": stamp_date,
+                        "join_rule": JOIN_RULE,
+                        **te,
                     },
                 }
             )
     else:
-        # Cold start only: segment mask (honest cell scores; no window persistence gate)
+        # Cold start only
         candidates = segment_probability_mask(features)
-        for cand in candidates:
+        # Clear then assign via positive-area max overlap against candidate polys
+        cand_geoms = []
+        for idx, cand in enumerate(candidates):
+            cand_geoms.append((f"__cand_{idx}", cand["geometry"]))
+        by_cand = assign_cells_max_overlap(features, cand_geoms, bare_ndvi=BARE_NDVI)
+
+        for idx, cand in enumerate(candidates):
+            cand_key = f"__cand_{idx}"
+            mean_ndvi = cand.get("ndvi_mean")
+            mean_ndmi = cand.get("ndmi_mean")
+            # Prefer means from positive-area members
+            m_ndvi, m_ndmi = member_clear_means((by_cand.get(cand_key) or {}).get("members") or [])
+            if m_ndvi is not None:
+                mean_ndvi, mean_ndmi = m_ndvi, m_ndmi
+            has_new = mean_ndvi is not None and mean_ndmi is not None
             n_clear = _aou_scoped_clear_count(
                 ledger,
                 aou_id="__cold_start__",
-                pending_date=observation_date,
-                pending_ndvi=cand.get("ndvi_mean"),
+                pending_date=observation_date if has_new else None,
+                pending_ndvi=mean_ndvi if has_new else None,
             )
+            te = temporal_evidence_labels(n_clear)
+            scored = _score_unit_from_ndvi_ndmi(mean_ndvi, mean_ndmi, month, n_clear) if has_new else {
+                "agricultural_probability": cand.get("agricultural_probability"),
+                "ag_class": _honest_class(cand.get("agricultural_probability"), n_clear),
+                "persistence_status": persistence_status(n_clear),
+            }
             props = {
-                "agricultural_probability": cand["agricultural_probability"],
-                "ag_class": _honest_class(cand["agricultural_probability"], n_clear),
+                "agricultural_probability": scored["agricultural_probability"],
+                "ag_class": scored["ag_class"] or _honest_class(scored["agricultural_probability"], n_clear),
                 "area_ha_est": cand["area_ha_est"],
                 "n_clear_dates": n_clear,
-                "persistence_status": persistence_status(n_clear),
+                "persistence_status": scored.get("persistence_status") or persistence_status(n_clear),
             }
             aou_id, rec = mint_or_match_aou(
                 cand["geometry"],
                 registry,
-                observation_date=observation_date,
+                observation_date=observation_date if has_new else (observation_date or "1970-01-01"),
                 props=props,
             )
-            for i, f in enumerate(features):
-                try:
-                    g = shape(f["geometry"])
-                    if cand["geometry"].intersects(g):
-                        cell_to_aou[i] = aou_id
-                except Exception:
-                    continue
-            detection = "detected" if (cand.get("ndvi_mean") or 0) >= BARE_NDVI else "weak"
+            # Re-stamp cell aou_ids from candidate key → real id
+            for i in (by_cand.get(cand_key) or {}).get("member_indices") or []:
+                features[i]["properties"]["aou_id"] = aou_id
+            if has_new:
+                rec["ndvi"] = round(float(mean_ndvi), 4)
+                rec["ndmi"] = round(float(mean_ndmi), 4)
+                refresh_status = "refreshed"
+                stamp_date = observation_date
+            else:
+                refresh_status = "no_new_observation"
+                stamp_date = rec.get("last_seen_date")
+            detection = "detected" if (mean_ndvi or 0) >= BARE_NDVI else "weak"
             rec["current_detection"] = detection
             rec["n_clear_dates"] = n_clear
+            rec["refresh_status"] = refresh_status
             rec["active"] = True
+            for k, v in te.items():
+                rec[k] = v
             aou_features.append(
                 {
                     "type": "Feature",
@@ -499,11 +561,12 @@ def assign_aou_ids(
                         "last_seen_date": rec.get("last_seen_date"),
                         "active": True,
                         "current_detection": detection,
-                        "agricultural_probability": cand["agricultural_probability"],
+                        "refresh_status": refresh_status,
+                        "agricultural_probability": props["agricultural_probability"],
                         "ag_class": props["ag_class"],
                         "area_ha_est": cand["area_ha_est"],
-                        "ndvi": cand.get("ndvi_mean"),
-                        "ndmi": cand.get("ndmi_mean"),
+                        "ndvi": rec.get("ndvi"),
+                        "ndmi": rec.get("ndmi"),
                         "ndre": None,
                         "ndre_available": False,
                         "ndre_status": "unavailable",
@@ -511,24 +574,28 @@ def assign_aou_ids(
                         "geometry_kind": "aou_segment",
                         "aou_not_official_farm": True,
                         "n_clear_dates": n_clear,
-                        "persistence_status": persistence_status(n_clear),
+                        "persistence_status": props["persistence_status"],
                         "persistence_estimated_from_window": False,
                         "evidence_level": "satellite_only",
                         "product_stamp": "provisional_satellite_analytical_service",
                         "najd_model_validation": "not_validated",
-                        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§1-2 + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md",
-                        "date": observation_date,
+                        "formula_ref": (
+                            "SCIENCE_LOCKS_v0.4_phase1_2.md§1-2 + "
+                            "SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + "
+                            "SCIENCE_LOCKS_v0.4_observation_integrity.md"
+                        ),
+                        "date": stamp_date,
+                        "join_rule": JOIN_RULE,
+                        **te,
                     },
                 }
             )
 
-    for i, f in enumerate(features):
-        if i in cell_to_aou:
-            f["properties"]["aou_id"] = cell_to_aou[i]
-        else:
-            f["properties"].setdefault("aou_id", None)
+    # Ensure every cell has explicit aou_id (None if unassigned)
+    for f in features:
+        f["properties"].setdefault("aou_id", None)
 
-    return features, registry, aou_features
+    return features, registry, aou_features, join_meta
 
 
 
@@ -581,26 +648,34 @@ def build_observations(
             str(o["date"]): o for o in prior_rows if o.get("date")
         }
 
-        # Upsert today's AOU-scoped aggregate when members cover the polygon
-        if members:
+        # Upsert only when this run refreshed with valid clear member NDVI+NDMI.
+        # Stale / no_new_observation → keep prior ledger rows; do NOT stamp new date.
+        refresh_status = p.get("refresh_status") or "refreshed"
+        if members and refresh_status == "refreshed":
             ndvi_vals = [m["ndvi"] for m in members if m.get("ndvi") is not None]
             ndmi_vals = [m["ndmi"] for m in members if m.get("ndmi") is not None]
-            if ndvi_vals:
-                ndvi = sum(ndvi_vals) / len(ndvi_vals)
-                ndmi = (sum(ndmi_vals) / len(ndmi_vals)) if ndmi_vals else None
+            pairs_ok = [
+                m for m in members
+                if m.get("ndvi") is not None and m.get("ndmi") is not None
+            ]
+            if pairs_ok:
+                ndvi = sum(m["ndvi"] for m in pairs_ok) / len(pairs_ok)
+                ndmi = sum(m["ndmi"] for m in pairs_ok) / len(pairs_ok)
                 w = sum(m.get("water_stress_score") or 0 for m in members) / max(1, len(members))
                 v = sum(m.get("vigor_stress_score") or 0 for m in members) / max(1, len(members))
                 dq = sum(m.get("data_quality_confidence") or 0 for m in members) / max(1, len(members))
+                # Empty temporal history ≠ "no biotic" — only flag when rules fire;
+                # stamp insufficient temporal evidence when n_clear < 2.
                 biotic = any(m.get("possible_biotic_stress") for m in members)
                 alerts = [m.get("alert") for m in members]
                 alert = max(set(alerts), key=alerts.count) if alerts else "unclear"
                 obs_date = p.get("date") or members[0].get("date")
                 if obs_date:
-                    by_date[str(obs_date)] = {
+                    row = {
                         "aou_id": aid,
                         "date": str(obs_date),
                         "ndvi": round(ndvi, 4),
-                        "ndmi": None if ndmi is None else round(ndmi, 4),
+                        "ndmi": round(ndmi, 4),
                         "ndre": None,
                         "ndre_available": False,
                         "agricultural_probability": p.get("agricultural_probability"),
@@ -617,7 +692,13 @@ def build_observations(
                         "cloud_cover": members[0].get("cloud_cover"),
                         "series_scope": "aou_members_aggregate",
                         "persistence_status": p.get("persistence_status"),
+                        "refresh_status": refresh_status,
                     }
+                    if p.get("temporal_evidence_ar"):
+                        row["temporal_evidence_ar"] = p["temporal_evidence_ar"]
+                        row["temporal_evidence_en"] = p.get("temporal_evidence_en")
+                        row["biotic_unknown_reason"] = p.get("biotic_unknown_reason")
+                    by_date[str(obs_date)] = row
 
         obs = sorted(by_date.values(), key=lambda o: o.get("date") or "")
         n_clear = len(
@@ -661,7 +742,8 @@ def build_observations(
         "formula_ref": (
             "SCIENCE_LOCKS_v0.4_phase1_2.md + "
             "SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + "
-            "SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md"
+            "SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + "
+            "SCIENCE_LOCKS_v0.4_observation_integrity.md"
         ),
         "units": units,
     }
@@ -709,19 +791,16 @@ def main() -> int:
         f"window_dates={window_date_count} (context only); date={date}"
     )
     enriched = enrich_features(geo["features"], month=month)
-    enriched, registry, aou_feats = assign_aou_ids(
+    enriched, registry, aou_feats, join_meta = assign_aou_ids(
         enriched,
         registry_json,
         date or "1970-01-01",
         ledger=ledger,
     )
 
-    alert_counts: dict[str, int] = defaultdict(int)
-    biotic_n = 0
-    for f in enriched:
-        alert_counts[f["properties"].get("alert", "unclear")] += 1
-        if f["properties"].get("possible_biotic_stress"):
-            biotic_n += 1
+    alert_counts = count_alerts(enriched)
+    biotic_n = sum(1 for f in enriched if f["properties"].get("possible_biotic_stress"))
+    run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
 
     props = dict(geo.get("properties") or {})
     props.update(
@@ -747,6 +826,10 @@ def main() -> int:
             "najd_model_validation": "not_validated",
             "evidence_level_default": "satellite_only",
             "window_date_count_context_only": window_date_count,
+            "run_id": run_id,
+            "join_rule": join_meta.get("join_rule", JOIN_RULE),
+            "join_predicate": join_meta.get("join_predicate", "positive_area_overlap"),
+            "consistency_status": "pending",
             "note": (
                 "Alerts use Water/Vigor stress scores (expert v1) mapped to UI codes. "
                 "AOU ≠ official farm. possible_biotic_stress ≠ pest certainty. "
@@ -764,8 +847,6 @@ def main() -> int:
         "properties": props,
         "features": enriched,
     }
-    alerts_path.write_text(json.dumps(geo_out))
-    print(f"Wrote {alerts_path} ({len(enriched)} features)")
 
     obs = build_observations(
         aou_feats,
@@ -776,69 +857,150 @@ def main() -> int:
     _sync_registry_from_ledger(registry, aou_feats, obs)
     registry["najd_model_validation"] = "not_validated"
     registry["formula_ref"] = (
-        "SCIENCE_LOCKS_v0.4_phase1_2.md§2 + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md"
+        "SCIENCE_LOCKS_v0.4_phase1_2.md§2 + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + "
+        "SCIENCE_LOCKS_v0.4_observation_integrity.md"
     )
     registry["active_means"] = "registry_identity_only"
-    observations_path.write_text(json.dumps(obs, indent=2))
-    print(f"Wrote {observations_path} ({len(obs['units'])} units)")
-
-    save_registry(registry_json, registry)
+    registry["join_rule"] = join_meta.get("join_rule", JOIN_RULE)
 
     reg_fc = {
         "type": "FeatureCollection",
         "name": "aou_registry",
         "properties": {
-            "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§2 + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md",
+            "formula_ref": registry["formula_ref"],
             "aou_not_official_farm": True,
             "count": len(aou_feats),
             "product_stamp": "provisional_satellite_analytical_service",
             "najd_model_validation": "not_validated",
             "active_means": "registry_identity_only",
             "current_detection_enum": ["detected", "weak", "not_detected"],
+            "join_rule": join_meta.get("join_rule", JOIN_RULE),
+            "run_id": run_id,
             "last_updated": datetime.now(timezone.utc).isoformat(),
         },
         "features": aou_feats,
     }
-    registry_geojson.write_text(json.dumps(reg_fc))
+
+    # --- Unify timeseries alert_counts with enriched (single classifier) ---
+    ts = ts if isinstance(ts, dict) else {"dates": []}
+    ts["phase"] = "0.4.1-agriculture"
+    ts["formula_ref"] = (
+        "SCIENCE_LOCKS_v0.4_phase1_2.md + SCIENCE_LOCKS_v0.4_observation_integrity.md"
+    )
+    ts["run_id"] = run_id
+    method = ts.setdefault("method", {})
+    indices = list(method.get("indices") or [])
+    for item in [
+        "NDRE=(B08-B05)/(B08+B05) [B06/B07 documented fallback only]",
+        "AgProb=SCIENCE_LOCKS§1 expert_v1",
+        "Stress=SCIENCE_LOCKS§3 expert_v1",
+        "AlertUnify=map_stress_to_alert (same pass as latest_alerts)",
+    ]:
+        if item not in indices:
+            indices.append(item)
+    method["indices"] = indices
+    method["aou_identity"] = "AOU-NJ-###### centroid+IoU>=0.3"
+    method["join_rule"] = join_meta.get("join_rule", JOIN_RULE)
+    method["join_predicate"] = "positive_area_overlap"
+    matched_date = False
+    for entry in ts.get("dates") or []:
+        if entry.get("date") == date:
+            entry["alert_counts"] = dict(alert_counts)
+            entry["grid_cell_count"] = len(enriched)
+            entry["run_id"] = run_id
+            entry["classifier"] = "map_stress_to_alert"
+            matched_date = True
+            break
+    if date and not matched_date:
+        (ts.setdefault("dates", [])).append(
+            {
+                "date": date,
+                "alert_counts": dict(alert_counts),
+                "grid_cell_count": len(enriched),
+                "run_id": run_id,
+                "classifier": "map_stress_to_alert",
+            }
+        )
+    ts["last_updated"] = datetime.now(timezone.utc).isoformat()
+
+    ts_counts = {}
+    for entry in ts.get("dates") or []:
+        if entry.get("date") == date:
+            ts_counts = dict(entry.get("alert_counts") or {})
+            break
+    if date and not alert_counts_match(alert_counts, ts_counts):
+        print(
+            f"ERROR: alert/timeseries count mismatch for date={date} "
+            f"alerts={dict(alert_counts)} timeseries={ts_counts}",
+            file=sys.stderr,
+        )
+        props["consistency_status"] = "mismatch"
+        # Keep last good published set — do not write
+        return 3
+    props["consistency_status"] = "ok"
+    geo_out["properties"] = props
+
+    # --- Atomic publish: stage then swap ---
+    import shutil
+    import tempfile
+
+    stage = Path(tempfile.mkdtemp(prefix=f"observatory_publish_{run_id}_", dir=str(out)))
+    try:
+        (stage / "aou").mkdir(parents=True, exist_ok=True)
+        (stage / "meta").mkdir(parents=True, exist_ok=True)
+        (stage / "latest_alerts.geojson").write_text(json.dumps(geo_out))
+        (stage / "timeseries.json").write_text(json.dumps(ts, indent=2))
+        (stage / "aou" / "aou_observations.json").write_text(json.dumps(obs, indent=2))
+        (stage / "aou" / "aou_registry.geojson").write_text(json.dumps(reg_fc))
+        # registry json via save_registry into stage
+        save_registry(stage / "aou" / "aou_registry.json", registry)
+        refresh = {
+            "last_updated": datetime.now(timezone.utc).isoformat(),
+            "source": "run_ag_probability",
+            "run_id": run_id,
+            "artifacts": [
+                "latest_alerts.geojson",
+                "timeseries.json",
+                "aou/aou_registry.geojson",
+                "aou/aou_registry.json",
+                "aou/aou_observations.json",
+            ],
+            "phase": "0.4.1-agriculture",
+            "formula_ref": (
+                "SCIENCE_LOCKS_v0.4_phase1_2.md + "
+                "SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + "
+                "SCIENCE_LOCKS_v0.4_observation_integrity.md"
+            ),
+            "join_rule": join_meta.get("join_rule", JOIN_RULE),
+            "join_predicate": "positive_area_overlap",
+            "consistency_status": "ok",
+            "mountain_seeding_hold": True,
+            "observation_date": date,
+            "alert_counts": dict(alert_counts),
+        }
+        (stage / "meta" / "last_refresh.json").write_text(json.dumps(refresh, indent=2))
+        (stage / "meta" / "run_meta.json").write_text(json.dumps(refresh, indent=2))
+
+        # Swap into place
+        shutil.move(str(stage / "latest_alerts.geojson"), str(alerts_path))
+        shutil.move(str(stage / "timeseries.json"), str(ts_path))
+        aou_dir.mkdir(parents=True, exist_ok=True)
+        for name in ("aou_observations.json", "aou_registry.geojson", "aou_registry.json"):
+            shutil.move(str(stage / "aou" / name), str(aou_dir / name))
+        meta_dir = out / "meta"
+        meta_dir.mkdir(parents=True, exist_ok=True)
+        for name in ("last_refresh.json", "run_meta.json"):
+            shutil.move(str(stage / "meta" / name), str(meta_dir / name))
+    finally:
+        shutil.rmtree(stage, ignore_errors=True)
+
+    print(f"Wrote {alerts_path} ({len(enriched)} features) run_id={run_id}")
+    print(f"Wrote {observations_path} ({len(obs['units'])} units)")
     print(f"Wrote {registry_geojson} ({len(aou_feats)} AOUs)")
-
-    # Update timeseries method block
-    if ts_path.exists():
-        ts["phase"] = "0.4.1-agriculture"
-        ts["formula_ref"] = "SCIENCE_LOCKS_v0.4_phase1_2.md"
-        method = ts.setdefault("method", {})
-        indices = list(method.get("indices") or [])
-        for item in [
-            "NDRE=(B08-B05)/(B08+B05) [B06/B07 documented fallback only]",
-            "AgProb=SCIENCE_LOCKS§1 expert_v1",
-            "Stress=SCIENCE_LOCKS§3 expert_v1",
-        ]:
-            if item not in indices:
-                indices.append(item)
-        method["indices"] = indices
-        method["aou_identity"] = "AOU-NJ-###### centroid+IoU>=0.3"
-        ts["last_updated"] = datetime.now(timezone.utc).isoformat()
-        ts_path.write_text(json.dumps(ts, indent=2))
-        print(f"Updated {ts_path}")
-
-    meta_dir = out / "meta"
-    meta_dir.mkdir(parents=True, exist_ok=True)
-    refresh = {
-        "last_updated": datetime.now(timezone.utc).isoformat(),
-        "source": "run_ag_probability",
-        "artifacts": [
-            "latest_alerts.geojson",
-            "timeseries.json",
-            "aou/aou_registry.geojson",
-            "aou/aou_registry.json",
-            "aou/aou_observations.json",
-        ],
-        "phase": "0.4.1-agriculture",
-        "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md",
-    }
-    (meta_dir / "last_refresh.json").write_text(json.dumps(refresh, indent=2))
+    print(f"Updated {ts_path} (alert_counts unified for {date})")
     print("Done.")
     return 0
+
 
 
 if __name__ == "__main__":
