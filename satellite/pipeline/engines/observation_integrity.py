@@ -331,18 +331,51 @@ def biotic_status_three_state(
     return BIOTIC_NOT_FLAGGED
 
 
+def _member_clear_pixel_area_in_aou(m: dict[str, Any]) -> float:
+    """Clear-pixel area inside AOU for one member (post-#29 R3-1).
+
+    Prefer ``aou_overlap_area × clear_fraction`` (weighted approx of clear
+    footprint ∩ AOU). Full accepted-cell polygon area is **not** the numerator
+    when ``clear_fraction`` is present — a mostly cloudy cell that still passes
+    the cell gate must not overweight the AOU.
+    Without ``clear_fraction``, assessable members contribute full overlap
+    (reading treated as clear within the join footprint); unassessable → 0.
+    """
+    ov = m.get("aou_overlap_area")
+    if ov is None:
+        return 0.0
+    try:
+        a = float(ov)
+    except (TypeError, ValueError):
+        return 0.0
+    if a <= 0:
+        return 0.0
+    cf = m.get("clear_fraction")
+    if cf is not None:
+        try:
+            return a * max(0.0, min(1.0, float(cf)))
+        except (TypeError, ValueError):
+            return 0.0
+    if cell_assessability(m) == "assessable":
+        return a
+    return 0.0
+
+
 def aou_assessability_with_area(
     members: list[dict],
     *,
     min_clear_fraction: float = DEFAULT_MIN_CLEAR_FRACTION_AOU,
     min_clear_members: int = DEFAULT_MIN_CLEAR_MEMBERS_AOU,
     min_valid_area_fraction: float | None = DEFAULT_MIN_VALID_AREA_FRACTION_AOU,
+    aou_target_area: float | None = None,
 ) -> tuple[str, dict[str, Any]]:
-    """AOU assessability with count + area fractions.
+    """AOU assessability with count + clear-pixel-in-AOU area fractions.
 
     assessable_cell_fraction = clear assessable count / member count (secondary).
-    valid_area_fraction = sum(overlap of assessable clear) / sum(overlap of all members).
-    Primary gate may use either; area is stamped always when overlaps present.
+    valid_area_fraction = clear-pixel area inside AOU / denominator
+      where clear-pixel area ≈ ∑(aou_overlap_area × clear_fraction)
+      and denominator = aou_target_area if provided else ∑(member overlaps).
+    Basis stamp: valid_area_fraction_basis=clear_pixels_in_aou.
     """
     meta = {
         "member_count": len(members),
@@ -350,8 +383,11 @@ def aou_assessability_with_area(
         "clear_member_fraction": 0.0,
         "assessable_cell_fraction": 0.0,
         "valid_area_fraction": None,
+        "valid_area_fraction_basis": "clear_pixels_in_aou",
+        "valid_area_fraction_denominator": None,
         "member_overlap_area_sum": 0.0,
         "clear_overlap_area_sum": 0.0,
+        "clear_pixel_area_in_aou_sum": 0.0,
         "min_clear_fraction_aou": min_clear_fraction,
         "min_clear_members_aou": min_clear_members,
         "min_valid_area_fraction_aou": min_valid_area_fraction,
@@ -368,7 +404,8 @@ def aou_assessability_with_area(
     meta["clear_fraction"] = frac_count
 
     area_all = 0.0
-    area_clear = 0.0
+    area_clear_polygon = 0.0  # legacy full-polygon (secondary diagnostic only)
+    clear_pixel_area = 0.0
     for m in members:
         ov = m.get("aou_overlap_area")
         if ov is None:
@@ -381,11 +418,28 @@ def aou_assessability_with_area(
             continue
         area_all += a
         if cell_assessability(m) == "assessable":
-            area_clear += a
+            area_clear_polygon += a
+        clear_pixel_area += _member_clear_pixel_area_in_aou(m)
     meta["member_overlap_area_sum"] = area_all
-    meta["clear_overlap_area_sum"] = area_clear
-    if area_all > 0:
-        meta["valid_area_fraction"] = area_clear / area_all
+    meta["clear_overlap_area_sum"] = area_clear_polygon
+    meta["clear_pixel_area_in_aou_sum"] = clear_pixel_area
+
+    denom = None
+    denom_kind = None
+    if aou_target_area is not None:
+        try:
+            ta = float(aou_target_area)
+        except (TypeError, ValueError):
+            ta = 0.0
+        if ta > 0:
+            denom = ta
+            denom_kind = "aou_target_area"
+    if denom is None and area_all > 0:
+        denom = area_all
+        denom_kind = "member_overlap_sum"
+    meta["valid_area_fraction_denominator"] = denom_kind
+    if denom is not None and denom > 0:
+        meta["valid_area_fraction"] = clear_pixel_area / denom
     else:
         meta["valid_area_fraction"] = None
 
@@ -468,6 +522,83 @@ def build_aou_date_aggregate(
         "coverage": {
             "assessable_cell_fraction": assess_meta.get("assessable_cell_fraction"),
             "valid_area_fraction": assess_meta.get("valid_area_fraction"),
+            "valid_area_fraction_basis": assess_meta.get(
+                "valid_area_fraction_basis", "clear_pixels_in_aou"
+            ),
+            "valid_area_fraction_denominator": assess_meta.get("valid_area_fraction_denominator"),
             "clear_member_fraction": assess_meta.get("clear_member_fraction"),
         },
     }
+
+
+# --- Post-#29 R3-3: all-or-nothing promote with full rollback ---
+def atomic_promote_with_rollback(
+    *,
+    stage_root: "Path",
+    public_root: "Path",
+    relative_paths: list[str],
+    fail_after: int | None = None,
+) -> None:
+    """Promote staged files to public with last-good snapshot + full rollback.
+
+    1. Snapshot every existing public file in ``relative_paths``.
+    2. Move staged files into public one-by-one.
+    3. On any mid-promote error (or injected ``fail_after``): restore **all**
+       moved paths from the snapshot (or delete if no last-good). Partner never
+       sees a partial new release (e.g. latest_alerts+timeseries half-update).
+    """
+    import shutil
+    import tempfile
+    from pathlib import Path
+
+    stage_root = Path(stage_root)
+    public_root = Path(public_root)
+    snapshot = Path(
+        tempfile.mkdtemp(prefix="publish_last_good_", dir=str(public_root.parent))
+    )
+    moved: list[str] = []
+    try:
+        for rel in relative_paths:
+            dst = public_root / rel
+            if dst.is_file():
+                snap = snapshot / rel
+                snap.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(dst, snap)
+        for i, rel in enumerate(relative_paths):
+            if fail_after is not None and i >= int(fail_after):
+                raise RuntimeError(
+                    f"injected promote failure after {fail_after} moves ({rel})"
+                )
+            src = stage_root / rel
+            if not src.exists():
+                raise FileNotFoundError(f"staged release missing {rel}")
+            dst = public_root / rel
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            shutil.move(str(src), str(dst))
+            moved.append(rel)
+    except Exception:
+        for rel in moved:
+            dst = public_root / rel
+            snap = snapshot / rel
+            if snap.is_file():
+                dst.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(snap, dst)
+            elif dst.exists():
+                try:
+                    dst.unlink()
+                except OSError:
+                    pass
+        raise
+    finally:
+        shutil.rmtree(snapshot, ignore_errors=True)
+
+
+def safe_relpath(path, root) -> str:
+    """Return path relative to root, or absolute str if outside root (no throw)."""
+    from pathlib import Path
+    p = Path(path).resolve()
+    r = Path(root).resolve()
+    try:
+        return str(p.relative_to(r))
+    except ValueError:
+        return str(p)

@@ -36,7 +36,7 @@ export default function RestorationMap({ heightClass = "h-[28rem]" }: { heightCl
 
   useEffect(() => {
     let cancelled = false;
-    fetch(publicUrl("data/mountain/khareef_status_cells.geojson"))
+    fetch(publicUrl("data/khareef/khareef_status_cells.geojson"))
       .then((r) => {
         if (!r.ok) throw new Error("primary missing");
         return r.json();

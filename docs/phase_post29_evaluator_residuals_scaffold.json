@@ -1,0 +1,43 @@
+{
+  "lock_id": "SCIENCE_LOCKS_v0.4_post29_evaluator_residuals",
+  "date": "2026-09-19",
+  "timezone": "Asia/Muscat",
+  "owner_pipeline_role": "Agrofostery Scientist",
+  "verdict": "go_with_fixes",
+  "against_main": "a85868478e5fe480e6eb5688b70486f4a982a449",
+  "closed_by_pr29": "f533f08f2124fbe2748139f8f4d3caf4dfa6f7cc",
+  "ai_pipeline_role": true,
+  "human_review": "pending",
+  "mountain_seeding_hold": true,
+  "closed_do_not_reopen": [
+    "unassessable_full_release_path",
+    "numeric_min_valid_area_fraction_aou_gate",
+    "provisional_new_discovery_policy",
+    "round2_regression_2_4_6_7",
+    "round2_case9_ux"
+  ],
+  "p0_must_fix": [
+    "valid_area_fraction_clear_pixels_in_aou",
+    "biotic_reinfer_after_ledger_silence_not_not_flagged",
+    "true_all_or_nothing_promote_full_rollback",
+    "single_staged_decision_unified_release_id"
+  ],
+  "p1": [
+    "tests_r3_residuals",
+    "ci_case10_when_maintainer_allows",
+    "recalibrate_area_gate_after_clear_pixel_basis"
+  ],
+  "forbidden": [
+    "relitigate_pr29_without_regression",
+    "full_cell_polygon_as_clear_area_numerator",
+    "not_flagged_from_silence",
+    "partial_promote_mixed_release",
+    "dual_decision_split_release_id",
+    "lift_mountain_3b"
+  ],
+  "companions": [
+    "SCIENCE_LOCKS_v0.4_evaluator_round2.md",
+    "SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md",
+    "phase_evaluator_round2_case_matrix.md"
+  ]
+}

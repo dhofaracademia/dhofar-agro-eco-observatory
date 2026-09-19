@@ -89,6 +89,16 @@ FORBIDDEN_PROP_KEYS = {
 }
 
 
+
+def _safe_rel(path, root=None):
+    """Paths outside ROOT → absolute string (no ValueError)."""
+    root = root or REPO_ROOT
+    try:
+        return str(Path(path).resolve().relative_to(Path(root).resolve()))
+    except ValueError:
+        return str(Path(path).resolve())
+
+
 def utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
@@ -176,7 +186,7 @@ def dry_run() -> int:
             "Script + schema shipped; full E2E not yet run in this invocation."
         ),
         "artifacts": {
-            "schema": str(SCHEMA_PATH.relative_to(REPO_ROOT)),
+            "schema": _safe_rel(SCHEMA_PATH),
             "geojson": None,
         },
     }
@@ -716,9 +726,9 @@ def main(argv: list[str] | None = None) -> int:
         "ndmi_pre": pre_info,
         "ndmi_post": post_info,
         "artifacts": {
-            "geojson": str(GEOJSON_PATH.relative_to(REPO_ROOT)),
-            "sample": str((OUT_DIR / "pilot_terrain.sample.geojson").relative_to(REPO_ROOT)),
-            "schema": str(SCHEMA_PATH.relative_to(REPO_ROOT)),
+            "geojson": _safe_rel(GEOJSON_PATH),
+            "sample": _safe_rel(OUT_DIR / "pilot_terrain.sample.geojson"),
+            "schema": _safe_rel(SCHEMA_PATH),
         },
         "ui_wire": False,
         "forbidden_fields_enforced": sorted(FORBIDDEN_PROP_KEYS),

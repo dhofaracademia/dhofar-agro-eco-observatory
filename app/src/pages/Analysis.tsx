@@ -76,6 +76,8 @@ type AouFeature = {
     agricultural_probability?: number;
     ag_class?: string;
     area_ha_est?: number;
+    valid_area_fraction?: number | null;
+    assessable_cell_fraction?: number | null;
     ndvi?: number;
     ndmi?: number;
     ndre?: number | null;
@@ -479,9 +481,21 @@ export default function Analysis() {
                       <td className="px-3 py-2 font-mono font-semibold text-crop-700">{f.properties.aou_id}</td>
                       <td className="px-3 py-2">{f.properties.agricultural_probability ?? "—"}</td>
                       <td className="px-3 py-2">{f.properties.ag_class ?? "—"}</td>
-                      <td className="px-3 py-2">{f.properties.area_ha_est ?? "—"}</td>
+                      <td className="px-3 py-2">
+                        <div title={t("analysis.areaGeometryHint")}>
+                          {f.properties.area_ha_est ?? "—"}
+                          <span className="ms-1 text-[10px] text-sand-800/50">{t("analysis.areaHaUnit")}</span>
+                        </div>
+                        {f.properties.valid_area_fraction != null && (
+                          <div className="text-[10px] text-sand-800/60" title={t("analysis.areaCoverageHint")}>
+                            {t("analysis.coverageShort")}: {(Number(f.properties.valid_area_fraction) * 100).toFixed(0)}%
+                          </div>
+                        )}
+                      </td>
                       <td className="px-3 py-2">{f.properties.ndvi ?? "—"}</td>
-                      <td className="px-3 py-2">{f.properties.ndmi ?? "—"}</td>
+                      <td className="px-3 py-2" title={t("analysis.ndmiUnitHint")}>
+                        {f.properties.ndmi ?? "—"}
+                      </td>
                     </tr>
                   ))}
                   {!aouRegistry.length && (
@@ -532,7 +546,7 @@ export default function Analysis() {
                 points={aouNdviSeries.length ? aouNdviSeries : windowNdvi}
               />
               <SeriesChart
-                title={`${t("live.ndmiMean")} — ${selectedAou || t("analysis.windowScope")}`}
+                title={`${selectedAou ? t("analysis.ndmiUnit") : t("analysis.ndmiRegional")} — ${selectedAou || t("analysis.windowScope")}`}
                 color="#0284c7"
                 points={aouNdmiSeries.length ? aouNdmiSeries : windowNdmi}
               />

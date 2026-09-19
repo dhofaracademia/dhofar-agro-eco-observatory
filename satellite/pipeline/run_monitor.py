@@ -74,6 +74,7 @@ sys.path.insert(0, str(PIPELINE_DIR))
 from engines.observation_integrity import (  # noqa: E402
     DEFAULT_MIN_CLEAR_FRACTION_CELL,
     DEFAULT_MIN_CLEAR_PIXELS_CELL,
+    atomic_promote_with_rollback,
     cell_assessability,
 )
 
@@ -843,9 +844,12 @@ def main() -> int:
         }
         (PIPELINE_DIR / "_run_summary.json").write_text(json.dumps(summary, indent=2))
 
-        # Point AgProb at staging — not public
+        # Point AgProb at staging — not public.
+        # R3-4: monitor owns the single decision run; AgProb must not nest another.
         prev_out = os.environ.get("MONITOR_OUT_DATA")
+        prev_skip = os.environ.get("SKIP_DECISION_SCAFFOLDS")
         os.environ["MONITOR_OUT_DATA"] = str(stage_root)
+        os.environ["SKIP_DECISION_SCAFFOLDS"] = "1"
         try:
             from run_ag_probability import main as ag_main
 
@@ -860,6 +864,10 @@ def main() -> int:
                 os.environ.pop("MONITOR_OUT_DATA", None)
             else:
                 os.environ["MONITOR_OUT_DATA"] = prev_out
+            if prev_skip is None:
+                os.environ.pop("SKIP_DECISION_SCAFFOLDS", None)
+            else:
+                os.environ["SKIP_DECISION_SCAFFOLDS"] = prev_skip
 
         if rc != 0:
             print(
@@ -868,16 +876,29 @@ def main() -> int:
             )
             return rc if rc else 4
 
-        # Decision scaffolds against the same stage (full partner release)
+        # R3-4: ONE decision scaffold invocation on the same stage tree
+        prev_out = os.environ.get("MONITOR_OUT_DATA")
+        prev_rid = os.environ.get("MONITOR_RELEASE_ID")
+        os.environ["MONITOR_OUT_DATA"] = str(stage_root)
+        os.environ["MONITOR_RELEASE_ID"] = run_id
         try:
             from run_decision_scaffolds import main as decision_main
 
-            print("\nRunning Phase-3 Decision scaffolds on staging…")
+            print("\nRunning Phase-3 Decision scaffolds on staging (single pass)…")
             drc = decision_main()
         except Exception as e:
             print(f"ERROR: Decision scaffolds failed: {e}", file=sys.stderr)
             print("Keeping last-good public set; discarding stage.", file=sys.stderr)
             return 5
+        finally:
+            if prev_out is None:
+                os.environ.pop("MONITOR_OUT_DATA", None)
+            else:
+                os.environ["MONITOR_OUT_DATA"] = prev_out
+            if prev_rid is None:
+                os.environ.pop("MONITOR_RELEASE_ID", None)
+            else:
+                os.environ["MONITOR_RELEASE_ID"] = prev_rid
         if drc != 0:
             print(
                 f"ERROR: run_decision_scaffolds exited {drc} — public last-good retained; stage discarded",
@@ -885,7 +906,7 @@ def main() -> int:
             )
             return drc if drc else 5
 
-        # Full-release atomic promote (deep re-check §7): ag+obs+decision, one release_id
+        # Full-release atomic promote (R3-3): snapshot last-good + full rollback
         promote = [
             "latest_alerts.geojson",
             "timeseries.json",
@@ -910,6 +931,7 @@ def main() -> int:
             )
             return 6
 
+        # Unified release_id stamped on meta + decision BEFORE promote (R3-4)
         release_id = run_id
         for meta_name in ("last_refresh.json", "run_meta.json"):
             mp = stage_root / "meta" / meta_name
@@ -919,17 +941,20 @@ def main() -> int:
                     doc["publish_gate"] = "full_release_ok"
                     doc["source"] = "run_monitor+run_ag_probability+run_decision_scaffolds"
                     doc["release_id"] = release_id
+                    doc["run_id"] = release_id
                     doc["formula_ref"] = (
                         "SCIENCE_LOCKS_v0.4_observation_integrity.md + "
                         "SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md + "
-                        "SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md"
+                        "SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md + "
+                        "SCIENCE_LOCKS_v0.4_post29_evaluator_residuals.md"
                     )
                     doc["promote_includes_decision"] = True
+                    doc["single_staged_decision"] = True
+                    doc["valid_area_fraction_basis"] = "clear_pixels_in_aou"
                     doc["mountain_seeding_hold"] = True
                     mp.write_text(json.dumps(doc, indent=2))
                 except Exception:
                     pass
-        # Stamp decision run_meta with same release_id
         dmeta = stage_root / "decision" / "run_meta.json"
         if dmeta.is_file():
             try:
@@ -940,14 +965,21 @@ def main() -> int:
             except Exception:
                 pass
 
-        # All-or-nothing: stage to a temp public swap dir then move — on mid-swap
-        # failure we still prefer not leaving mixed versions; move file-by-file
-        # only after required set verified above.
-        for rel in promote:
-            src = stage_root / rel
-            dst = OUT_DATA / rel
-            dst.parent.mkdir(parents=True, exist_ok=True)
-            shutil.move(str(src), str(dst))
+        fail_after = os.environ.get("MONITOR_PROMOTE_FAIL_AFTER")
+        fail_after_n = int(fail_after) if fail_after not in (None, "") else None
+        try:
+            atomic_promote_with_rollback(
+                stage_root=stage_root,
+                public_root=OUT_DATA,
+                relative_paths=promote,
+                fail_after=fail_after_n,
+            )
+        except Exception as e:
+            print(
+                f"ERROR: atomic promote failed — full rollback to last-good: {e}",
+                file=sys.stderr,
+            )
+            return 7
 
         print(f"Promoted full release {release_id} → {OUT_DATA} (AOU+Decision exit 0)")
         print(f"Wrote {GEOJSON_PATH} ({len(latest_feats)} features, date={latest_date})")

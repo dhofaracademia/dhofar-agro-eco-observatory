@@ -42,6 +42,10 @@ jobs:
 
       - name: Evaluator Round 2 residual suite (cases 1,5,8 + CI gate)
         run: python tests/test_evaluator_round2.py
+#   python tests/test_post29_residuals.py
+
+      - name: Post-#29 HIGH residual suite (R3-1/2/3)
+        run: python tests/test_post29_residuals.py
 
 # ---------------------------------------------------------------------------
 # Maintainer note: GitHub OAuth for this repo historically blocks pushes to
@@ -54,4 +58,5 @@ jobs:
 #   python tests/test_post_integrity_evaluator.py
 #   python tests/test_evaluator_deep_recheck.py
 #   python tests/test_evaluator_round2.py
+#   python tests/test_post29_residuals.py
 # ---------------------------------------------------------------------------
