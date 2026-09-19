@@ -10,7 +10,7 @@
     "aou/aou_observations.json"
   ],
   "phase": "0.4.1-agriculture",
-  "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + SCIENCE_LOCKS_v0.4_observation_integrity.md",
+  "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + SCIENCE_LOCKS_v0.4_observation_integrity.md + SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md",
   "join_rule": "max_overlap_area",
   "join_predicate": "positive_area_overlap",
   "consistency_status": "ok",
@@ -21,5 +21,15 @@
     "healthy": 67,
     "water_attention": 20,
     "vigor_attention": 15
+  },
+  "min_clear_pixels_cell": 50,
+  "min_clear_fraction_cell": 0.02,
+  "min_clear_fraction_aou": 0.2,
+  "min_clear_members_aou": 1,
+  "coverage_gate": {
+    "min_clear_pixels_cell": 50,
+    "min_clear_fraction_cell": 0.02,
+    "min_clear_fraction_aou": 0.2,
+    "min_clear_members_aou": 1
   }
 }

@@ -209,7 +209,7 @@
     }
   ],
   "phase": "0.4.1-agriculture",
-  "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md + SCIENCE_LOCKS_v0.4_observation_integrity.md",
+  "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + SCIENCE_LOCKS_v0.4_observation_integrity.md + SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md",
   "last_updated": "2026-09-19T11:36:53.231131+00:00",
   "run_id": "20260919T113653Z"
 }
