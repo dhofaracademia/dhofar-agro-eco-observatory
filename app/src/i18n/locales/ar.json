@@ -323,12 +323,7 @@
     },
     "temporalEvidenceInsufficient": "أدلة زمنية غير كافية",
     "bioticUnknownTemporal": "حالة الإجهاد الحيوي غير معروفة — أدلة زمنية غير كافية (n_clear < 2). فراغ سجل الإجهاد ≠ عدم وجود مشكلة حيوية.",
-    "refreshPriorScoresRetained": "أُبقيَت الدرجات المؤرخة السابقة — لم يُحدَّث تاريخ الرصد",
-    "refreshStatus": {
-      "stale": "تحديث قديم (NDVI/NDMI فارغ أو لا عينة صافية جديدة صالحة)",
-      "no_new_observation": "لا رصد صافٍ جديد داخل الحدود في هذه الجولة",
-      "refreshed": "حُدِّث من قراءات الخلايا الحالية داخل وحدة الرصد"
-    }
+    "refreshStatusRetained": "refresh_status={{status}} — تم الاحتفاظ بالدرجات المؤرخة السابقة"
   },
   "about": {
     "title": "المنهجية والصدق العلمي",
