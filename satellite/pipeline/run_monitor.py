@@ -857,15 +857,70 @@ def main() -> int:
 
         # Point AgProb at staging — not public.
         # R3-4: monitor owns the single decision run; AgProb must not nest another.
+        # Multi-date AOU ledger: chronologically enrich EACH clear date so
+        # aou_observations appends (aou_id, date) rows; n_clear grows honestly.
+        # Final published alerts remain latest_date only.
         prev_out = os.environ.get("MONITOR_OUT_DATA")
         prev_skip = os.environ.get("SKIP_DECISION_SCAFFOLDS")
+        prev_rid = os.environ.get("MONITOR_RELEASE_ID")
         os.environ["MONITOR_OUT_DATA"] = str(stage_root)
         os.environ["SKIP_DECISION_SCAFFOLDS"] = "1"
+        os.environ["MONITOR_RELEASE_ID"] = run_id
+        rc = 0
         try:
             from run_ag_probability import main as ag_main
 
-            print("\nRunning Phase-1 Agricultural Probability / AOU engines on staging…")
-            rc = ag_main()
+            dates_sorted = sorted({f["properties"]["date"] for f in all_classified})
+            print(
+                f"\nRunning Phase-1 AgProb/AOU on staging for {len(dates_sorted)} date(s) "
+                f"(ledger append/upsert chronologically)…"
+            )
+            for d in dates_sorted:
+                date_feats = [f for f in all_classified if f["properties"]["date"] == d]
+                # Stamp release_id on every feature (optional R4 hygiene)
+                for f in date_feats:
+                    f.setdefault("properties", {})["release_id"] = run_id
+                counts = defaultdict(int)
+                for f in date_feats:
+                    counts[f["properties"].get("alert") or "unclear"] += 1
+                date_geo = {
+                    "type": "FeatureCollection",
+                    "name": "najd_latest_alerts",
+                    "crs": geojson.get("crs"),
+                    "properties": {
+                        **(geojson.get("properties") or {}),
+                        "date": d,
+                        "scene_capture_date": d,
+                        "alert_counts": dict(counts),
+                        "run_id": run_id,
+                        "release_id": run_id,
+                        "ledger_pass_date": d,
+                        "note": (
+                            "Multi-date ledger pass; published map uses latest_date only."
+                        ),
+                    },
+                    "features": date_feats,
+                }
+                (stage_root / "latest_alerts.geojson").write_text(json.dumps(date_geo))
+                print(f"  AOU ledger pass date={d} cells={len(date_feats)}")
+                rc = ag_main()
+                if rc != 0:
+                    print(
+                        f"ERROR: run_ag_probability exited {rc} on date={d}",
+                        file=sys.stderr,
+                    )
+                    break
+            # Restore latest-date alerts as the staged map product
+            for f in latest_feats:
+                f.setdefault("properties", {})["release_id"] = run_id
+            geojson["features"] = latest_feats
+            geojson.setdefault("properties", {})["release_id"] = run_id
+            geojson["properties"]["run_id"] = run_id
+            (stage_root / "latest_alerts.geojson").write_text(json.dumps(geojson))
+            # Final enrich pass on latest so registry/decision match published map
+            if rc == 0:
+                print(f"  Final AOU pass on published latest_date={latest_date}")
+                rc = ag_main()
         except Exception as e:
             print(f"ERROR: AgProb engines failed: {e}", file=sys.stderr)
             print("Keeping last-good public set; discarding stage.", file=sys.stderr)
@@ -879,6 +934,10 @@ def main() -> int:
                 os.environ.pop("SKIP_DECISION_SCAFFOLDS", None)
             else:
                 os.environ["SKIP_DECISION_SCAFFOLDS"] = prev_skip
+            if prev_rid is None:
+                os.environ.pop("MONITOR_RELEASE_ID", None)
+            else:
+                os.environ["MONITOR_RELEASE_ID"] = prev_rid
 
         if rc != 0:
             print(
