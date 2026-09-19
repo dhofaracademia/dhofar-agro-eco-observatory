@@ -1,0 +1,20 @@
+{
+  "release_id": "iso-20260906-post30",
+  "path": "releases/iso-20260906-post30",
+  "artifacts": [
+    "latest_alerts.geojson",
+    "timeseries.json",
+    "aou/aou_observations.json",
+    "aou/aou_registry.json",
+    "aou/aou_registry.geojson",
+    "meta/run_meta.json",
+    "meta/last_refresh.json",
+    "decision/run_meta.json",
+    "decision/aou_confidence.json",
+    "decision/aou_suitability_components.json",
+    "decision/aou_evidence_gaps.json"
+  ],
+  "pointer_semantics": "immutable_release_dir_plus_current",
+  "atomic_claim": false,
+  "note": "Pointer swap after full tree verified; not claiming cross-FS atomic multi-file."
+}
