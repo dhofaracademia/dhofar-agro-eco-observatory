@@ -42,3 +42,16 @@ jobs:
 
       - name: Evaluator Round 2 residual suite (cases 1,5,8 + CI gate)
         run: python tests/test_evaluator_round2.py
+
+# ---------------------------------------------------------------------------
+# Maintainer note: GitHub OAuth for this repo historically blocks pushes to
+# `.github/workflows/` without `workflow` scope. Copy this file to
+# `.github/workflows/evaluator-tests.yml` via a token/app with workflow write
+# (or the GitHub UI) to enable the merge-gate on PRs/main.
+# Local merge-gate (same suites):
+#   cd satellite/pipeline
+#   python tests/test_observation_integrity.py
+#   python tests/test_post_integrity_evaluator.py
+#   python tests/test_evaluator_deep_recheck.py
+#   python tests/test_evaluator_round2.py
+# ---------------------------------------------------------------------------
