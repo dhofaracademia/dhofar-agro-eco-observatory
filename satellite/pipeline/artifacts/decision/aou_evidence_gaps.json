@@ -1,7 +1,7 @@
 {
-  "version": "0.4.5-aou-temporal-ledger",
-  "generated_at": "2026-09-19T11:37:08.609884+00:00",
-  "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3 + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md",
+  "version": "0.4.6-evaluator-deep-recheck",
+  "generated_at": "2026-09-19T13:34:43.625032+00:00",
+  "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md§Phase3 + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md",
   "status": "expert_v1_provisional",
   "product_stamp": "provisional_satellite_analytical_service",
   "najd_model_validation": "not_validated",
@@ -9,10 +9,10 @@
   "never_merge": true,
   "mountain_apply": false,
   "action_auto_assign": false,
-  "writes_to_app_public": false,
+  "writes_to_app_public": true,
   "input_refs": {
-    "aou_registry": "app/public/data/aou/aou_registry.json",
-    "aou_observations": "app/public/data/aou/aou_observations.json"
+    "aou_registry": "app/public/data/observatory_publish_20260919T133443Z_4gvgwj4p/aou/aou_registry.json",
+    "aou_observations": "app/public/data/observatory_publish_20260919T133443Z_4gvgwj4p/aou/aou_observations.json"
   },
   "honesty_en": "Offline decision scaffolds for Najd agriculture AOUs only. Suitability ≠ Confidence ≠ data_quality_confidence. Not ecological certainty. No mountain UI. Action ladder manual only.",
   "schema_ref": "docs/spec_0.4/evidence_gap.schema.json",

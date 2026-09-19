@@ -1,7 +1,7 @@
 {
-  "version": "0.4.5-aou-temporal-ledger",
-  "generated_at": "2026-09-19T11:36:53.231037+00:00",
-  "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + SCIENCE_LOCKS_v0.4_observation_integrity.md",
+  "version": "0.4.6-evaluator-deep-recheck",
+  "generated_at": "2026-09-19T13:34:43.593702+00:00",
+  "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + SCIENCE_LOCKS_v0.4_observation_integrity.md + SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md + SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md",
   "units": [
     {
       "aou_id": "AOU-NJ-000001",
@@ -21,6 +21,7 @@
           "vigor_stress_score": 18.0,
           "alert": "healthy",
           "possible_biotic_stress": false,
+          "biotic_status": "unknown",
           "data_quality_confidence": 97.0,
           "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
           "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
@@ -28,7 +29,24 @@
           "cloud_cover": 0.867071,
           "series_scope": "aou_members_aggregate",
           "persistence_status": "single_date_insufficient",
+          "persistence_feature": null,
+          "n_dates_above_bare": 0,
           "refresh_status": "refreshed",
+          "observation_role": "current_observation",
+          "assessability": "assessable",
+          "aggregate_id": "AOU-NJ-000001|2026-09-06|20260919T133443Z",
+          "assessable_cell_fraction": 1.0,
+          "valid_area_fraction": 1.0,
+          "raw_measures": {
+            "ndvi": 0.5868,
+            "ndmi": 0.1688
+          },
+          "derived_scores": {
+            "water_stress_score": 18.0,
+            "vigor_stress_score": 18.0,
+            "agricultural_probability": 58.82,
+            "ag_class": "possible"
+          },
           "temporal_evidence_ar": "\u0623\u062f\u0644\u0629 \u0632\u0645\u0646\u064a\u0629 \u063a\u064a\u0631 \u0643\u0627\u0641\u064a\u0629",
           "temporal_evidence_en": "Insufficient temporal evidence",
           "biotic_unknown_reason": "insufficient_temporal_evidence"
@@ -84,6 +102,7 @@
           "vigor_stress_score": 18.0,
           "alert": "healthy",
           "possible_biotic_stress": false,
+          "biotic_status": "unknown",
           "data_quality_confidence": 97.0,
           "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
           "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
@@ -91,7 +110,24 @@
           "cloud_cover": 0.867071,
           "series_scope": "aou_members_aggregate",
           "persistence_status": "single_date_insufficient",
+          "persistence_feature": null,
+          "n_dates_above_bare": 0,
           "refresh_status": "refreshed",
+          "observation_role": "current_observation",
+          "assessability": "assessable",
+          "aggregate_id": "AOU-NJ-000002|2026-09-06|20260919T133443Z",
+          "assessable_cell_fraction": 1.0,
+          "valid_area_fraction": 1.0,
+          "raw_measures": {
+            "ndvi": 0.5572,
+            "ndmi": 0.1489
+          },
+          "derived_scores": {
+            "water_stress_score": 18.0,
+            "vigor_stress_score": 18.0,
+            "agricultural_probability": 54.53,
+            "ag_class": "possible"
+          },
           "temporal_evidence_ar": "\u0623\u062f\u0644\u0629 \u0632\u0645\u0646\u064a\u0629 \u063a\u064a\u0631 \u0643\u0627\u0641\u064a\u0629",
           "temporal_evidence_en": "Insufficient temporal evidence",
           "biotic_unknown_reason": "insufficient_temporal_evidence"
@@ -147,6 +183,7 @@
           "vigor_stress_score": 18.0,
           "alert": "healthy",
           "possible_biotic_stress": false,
+          "biotic_status": "unknown",
           "data_quality_confidence": 97.0,
           "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
           "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
@@ -154,7 +191,24 @@
           "cloud_cover": 0.867071,
           "series_scope": "aou_members_aggregate",
           "persistence_status": "single_date_insufficient",
+          "persistence_feature": null,
+          "n_dates_above_bare": 0,
           "refresh_status": "refreshed",
+          "observation_role": "current_observation",
+          "assessability": "assessable",
+          "aggregate_id": "AOU-NJ-000003|2026-09-06|20260919T133443Z",
+          "assessable_cell_fraction": 1.0,
+          "valid_area_fraction": 1.0,
+          "raw_measures": {
+            "ndvi": 0.5997,
+            "ndmi": 0.1977
+          },
+          "derived_scores": {
+            "water_stress_score": 18.0,
+            "vigor_stress_score": 18.0,
+            "agricultural_probability": 62.29,
+            "ag_class": "possible"
+          },
           "temporal_evidence_ar": "\u0623\u062f\u0644\u0629 \u0632\u0645\u0646\u064a\u0629 \u063a\u064a\u0631 \u0643\u0627\u0641\u064a\u0629",
           "temporal_evidence_en": "Insufficient temporal evidence",
           "biotic_unknown_reason": "insufficient_temporal_evidence"
@@ -210,6 +264,7 @@
           "vigor_stress_score": 18.0,
           "alert": "healthy",
           "possible_biotic_stress": false,
+          "biotic_status": "unknown",
           "data_quality_confidence": 97.0,
           "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
           "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
@@ -217,7 +272,24 @@
           "cloud_cover": 0.867071,
           "series_scope": "aou_members_aggregate",
           "persistence_status": "single_date_insufficient",
+          "persistence_feature": null,
+          "n_dates_above_bare": 0,
           "refresh_status": "refreshed",
+          "observation_role": "current_observation",
+          "assessability": "assessable",
+          "aggregate_id": "AOU-NJ-000004|2026-09-06|20260919T133443Z",
+          "assessable_cell_fraction": 1.0,
+          "valid_area_fraction": 1.0,
+          "raw_measures": {
+            "ndvi": 0.5199,
+            "ndmi": 0.1063
+          },
+          "derived_scores": {
+            "water_stress_score": 18.0,
+            "vigor_stress_score": 18.0,
+            "agricultural_probability": 47.75,
+            "ag_class": "possible"
+          },
           "temporal_evidence_ar": "\u0623\u062f\u0644\u0629 \u0632\u0645\u0646\u064a\u0629 \u063a\u064a\u0631 \u0643\u0627\u0641\u064a\u0629",
           "temporal_evidence_en": "Insufficient temporal evidence",
           "biotic_unknown_reason": "insufficient_temporal_evidence"
@@ -273,6 +345,7 @@
           "vigor_stress_score": 18.0,
           "alert": "healthy",
           "possible_biotic_stress": false,
+          "biotic_status": "unknown",
           "data_quality_confidence": 97.0,
           "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
           "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
@@ -280,7 +353,24 @@
           "cloud_cover": 0.867071,
           "series_scope": "aou_members_aggregate",
           "persistence_status": "single_date_insufficient",
+          "persistence_feature": null,
+          "n_dates_above_bare": 0,
           "refresh_status": "refreshed",
+          "observation_role": "current_observation",
+          "assessability": "assessable",
+          "aggregate_id": "AOU-NJ-000005|2026-09-06|20260919T133443Z",
+          "assessable_cell_fraction": 1.0,
+          "valid_area_fraction": 1.0,
+          "raw_measures": {
+            "ndvi": 0.5103,
+            "ndmi": 0.0184
+          },
+          "derived_scores": {
+            "water_stress_score": 11.28,
+            "vigor_stress_score": 18.0,
+            "agricultural_probability": 39.9,
+            "ag_class": "possible"
+          },
           "temporal_evidence_ar": "\u0623\u062f\u0644\u0629 \u0632\u0645\u0646\u064a\u0629 \u063a\u064a\u0631 \u0643\u0627\u0641\u064a\u0629",
           "temporal_evidence_en": "Insufficient temporal evidence",
           "biotic_unknown_reason": "insufficient_temporal_evidence"
@@ -336,6 +426,7 @@
           "vigor_stress_score": 18.0,
           "alert": "healthy",
           "possible_biotic_stress": false,
+          "biotic_status": "unknown",
           "data_quality_confidence": 97.0,
           "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
           "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
@@ -343,7 +434,24 @@
           "cloud_cover": 0.867071,
           "series_scope": "aou_members_aggregate",
           "persistence_status": "single_date_insufficient",
+          "persistence_feature": null,
+          "n_dates_above_bare": 0,
           "refresh_status": "refreshed",
+          "observation_role": "current_observation",
+          "assessability": "assessable",
+          "aggregate_id": "AOU-NJ-000006|2026-09-06|20260919T133443Z",
+          "assessable_cell_fraction": 1.0,
+          "valid_area_fraction": 1.0,
+          "raw_measures": {
+            "ndvi": 0.4816,
+            "ndmi": 0.0876
+          },
+          "derived_scores": {
+            "water_stress_score": 18.0,
+            "vigor_stress_score": 18.0,
+            "agricultural_probability": 42.76,
+            "ag_class": "possible"
+          },
           "temporal_evidence_ar": "\u0623\u062f\u0644\u0629 \u0632\u0645\u0646\u064a\u0629 \u063a\u064a\u0631 \u0643\u0627\u0641\u064a\u0629",
           "temporal_evidence_en": "Insufficient temporal evidence",
           "biotic_unknown_reason": "insufficient_temporal_evidence"
@@ -399,6 +507,7 @@
           "vigor_stress_score": 18.0,
           "alert": "healthy",
           "possible_biotic_stress": false,
+          "biotic_status": "unknown",
           "data_quality_confidence": 97.0,
           "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
           "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
@@ -406,7 +515,24 @@
           "cloud_cover": 0.867071,
           "series_scope": "aou_members_aggregate",
           "persistence_status": "single_date_insufficient",
+          "persistence_feature": null,
+          "n_dates_above_bare": 0,
           "refresh_status": "refreshed",
+          "observation_role": "current_observation",
+          "assessability": "assessable",
+          "aggregate_id": "AOU-NJ-000007|2026-09-06|20260919T133443Z",
+          "assessable_cell_fraction": 1.0,
+          "valid_area_fraction": 1.0,
+          "raw_measures": {
+            "ndvi": 0.6518,
+            "ndmi": 0.141
+          },
+          "derived_scores": {
+            "water_stress_score": 18.0,
+            "vigor_stress_score": 18.0,
+            "agricultural_probability": 62.56,
+            "ag_class": "possible"
+          },
           "temporal_evidence_ar": "\u0623\u062f\u0644\u0629 \u0632\u0645\u0646\u064a\u0629 \u063a\u064a\u0631 \u0643\u0627\u0641\u064a\u0629",
           "temporal_evidence_en": "Insufficient temporal evidence",
           "biotic_unknown_reason": "insufficient_temporal_evidence"
@@ -462,6 +588,7 @@
           "vigor_stress_score": 18.0,
           "alert": "healthy",
           "possible_biotic_stress": false,
+          "biotic_status": "unknown",
           "data_quality_confidence": 97.0,
           "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
           "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
@@ -469,7 +596,24 @@
           "cloud_cover": 0.867071,
           "series_scope": "aou_members_aggregate",
           "persistence_status": "single_date_insufficient",
+          "persistence_feature": null,
+          "n_dates_above_bare": 0,
           "refresh_status": "refreshed",
+          "observation_role": "current_observation",
+          "assessability": "assessable",
+          "aggregate_id": "AOU-NJ-000008|2026-09-06|20260919T133443Z",
+          "assessable_cell_fraction": 1.0,
+          "valid_area_fraction": 1.0,
+          "raw_measures": {
+            "ndvi": 0.6392,
+            "ndmi": 0.1658
+          },
+          "derived_scores": {
+            "water_stress_score": 18.0,
+            "vigor_stress_score": 18.0,
+            "agricultural_probability": 63.37,
+            "ag_class": "possible"
+          },
           "temporal_evidence_ar": "\u0623\u062f\u0644\u0629 \u0632\u0645\u0646\u064a\u0629 \u063a\u064a\u0631 \u0643\u0627\u0641\u064a\u0629",
           "temporal_evidence_en": "Insufficient temporal evidence",
           "biotic_unknown_reason": "insufficient_temporal_evidence"
@@ -525,6 +669,7 @@
           "vigor_stress_score": 18.0,
           "alert": "healthy",
           "possible_biotic_stress": false,
+          "biotic_status": "unknown",
           "data_quality_confidence": 97.0,
           "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
           "product_id": "S2A_MSIL2A_20260906T070431_R020_T39QYA_20260906T093909",
@@ -532,7 +677,24 @@
           "cloud_cover": 0.867071,
           "series_scope": "aou_members_aggregate",
           "persistence_status": "single_date_insufficient",
+          "persistence_feature": null,
+          "n_dates_above_bare": 0,
           "refresh_status": "refreshed",
+          "observation_role": "current_observation",
+          "assessability": "assessable",
+          "aggregate_id": "AOU-NJ-000009|2026-09-06|20260919T133443Z",
+          "assessable_cell_fraction": 1.0,
+          "valid_area_fraction": 1.0,
+          "raw_measures": {
+            "ndvi": 0.5001,
+            "ndmi": 0.08
+          },
+          "derived_scores": {
+            "water_stress_score": 18.0,
+            "vigor_stress_score": 18.0,
+            "agricultural_probability": 43.85,
+            "ag_class": "possible"
+          },
           "temporal_evidence_ar": "\u0623\u062f\u0644\u0629 \u0632\u0645\u0646\u064a\u0629 \u063a\u064a\u0631 \u0643\u0627\u0641\u064a\u0629",
           "temporal_evidence_en": "Insufficient temporal evidence",
           "biotic_unknown_reason": "insufficient_temporal_evidence"

@@ -92,20 +92,19 @@ def ndvi_persistence_feature(
     persistence_score_0_1: float | None = None,
     agricultural_probability: float | None = None,
 ) -> float | None:
-    """Prefer explicit persistence; else derive from AOU-scoped clear dates.
+    """Prefer explicit ledger persistence_feature; else null (renorm).
 
-    SCIENCE_LOCKS evaluator endorsement: n_clear < 2 → null (renorm).
-    Never inject 0.25 and call it persistence from one date.
+    SCIENCE_LOCKS evaluator deep re-check + endorsement:
+      n_clear < 2 → null (renorm).
+      Forbidden: invent n_clear/4 as fake persistence.
+      Forbidden: ndvi_persistence=None while claiming multi-date phenology —
+      callers must pass ledger persistence_feature or accept renorm.
     """
     if n_clear_dates is not None and n_clear_dates < 2:
         return None
     if persistence_score_0_1 is not None:
         return _clip01(persistence_score_0_1)
-    if n_clear_dates is not None:
-        if n_clear_dates <= 0:
-            return None
-        return _clip01(n_clear_dates / 4.0)
-    # Without n_clear, do not invent persistence from AgProb alone
+    # Deep re-check: do NOT invent n_clear/4. Null → renorm weights.
     _ = agricultural_probability
     return None
 

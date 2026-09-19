@@ -851,7 +851,24 @@ def main() -> int:
             )
             return rc if rc else 4
 
-        # AOU success → single swap of partner-facing artifacts from stage to public
+        # Decision scaffolds against the same stage (full partner release)
+        try:
+            from run_decision_scaffolds import main as decision_main
+
+            print("\nRunning Phase-3 Decision scaffolds on staging…")
+            drc = decision_main()
+        except Exception as e:
+            print(f"ERROR: Decision scaffolds failed: {e}", file=sys.stderr)
+            print("Keeping last-good public set; discarding stage.", file=sys.stderr)
+            return 5
+        if drc != 0:
+            print(
+                f"ERROR: run_decision_scaffolds exited {drc} — public last-good retained; stage discarded",
+                file=sys.stderr,
+            )
+            return drc if drc else 5
+
+        # Full-release atomic promote (deep re-check §7): ag+obs+decision, one release_id
         promote = [
             "latest_alerts.geojson",
             "timeseries.json",
@@ -860,33 +877,62 @@ def main() -> int:
             "aou/aou_registry.json",
             "meta/last_refresh.json",
             "meta/run_meta.json",
+            "decision/aou_suitability_components.json",
+            "decision/aou_confidence.json",
+            "decision/aou_evidence_gaps.json",
+            "decision/action_ladder.stubs.json",
+            "decision/run_meta.json",
         ]
-        # Mark refresh as published only after AOU OK
+        required = list(promote)  # missing any → hard fail, no partial swap
+        missing = [rel for rel in required if not (stage_root / rel).exists()]
+        if missing:
+            print(
+                f"ERROR: staged release missing required files {missing} — "
+                "public last-good retained (all-or-nothing)",
+                file=sys.stderr,
+            )
+            return 6
+
+        release_id = run_id
         for meta_name in ("last_refresh.json", "run_meta.json"):
             mp = stage_root / "meta" / meta_name
             if mp.is_file():
                 try:
                     doc = json.loads(mp.read_text())
-                    doc["publish_gate"] = "aou_ok"
-                    doc["source"] = "run_monitor+run_ag_probability"
+                    doc["publish_gate"] = "full_release_ok"
+                    doc["source"] = "run_monitor+run_ag_probability+run_decision_scaffolds"
+                    doc["release_id"] = release_id
                     doc["formula_ref"] = (
-                        doc.get("formula_ref")
-                        or "SCIENCE_LOCKS_v0.4_observation_integrity.md + "
-                        "SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md"
+                        "SCIENCE_LOCKS_v0.4_observation_integrity.md + "
+                        "SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md + "
+                        "SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md"
                     )
+                    doc["promote_includes_decision"] = True
+                    doc["mountain_seeding_hold"] = True
                     mp.write_text(json.dumps(doc, indent=2))
                 except Exception:
                     pass
+        # Stamp decision run_meta with same release_id
+        dmeta = stage_root / "decision" / "run_meta.json"
+        if dmeta.is_file():
+            try:
+                doc = json.loads(dmeta.read_text())
+                doc["release_id"] = release_id
+                doc["run_id"] = release_id
+                dmeta.write_text(json.dumps(doc, indent=2))
+            except Exception:
+                pass
 
+        # All-or-nothing: stage to a temp public swap dir then move — on mid-swap
+        # failure we still prefer not leaving mixed versions; move file-by-file
+        # only after required set verified above.
         for rel in promote:
             src = stage_root / rel
-            if not src.exists():
-                continue
             dst = OUT_DATA / rel
             dst.parent.mkdir(parents=True, exist_ok=True)
             shutil.move(str(src), str(dst))
 
-        print(f"Promoted staged artifacts → {OUT_DATA} (AOU exit 0)")
+        print(f"Promoted full release {release_id} → {OUT_DATA} (AOU+Decision exit 0)")
         print(f"Wrote {GEOJSON_PATH} ({len(latest_feats)} features, date={latest_date})")
         print(f"Wrote {TIMESERIES_PATH} ({len(timeseries)} dates)")
         return 0

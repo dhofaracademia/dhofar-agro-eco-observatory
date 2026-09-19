@@ -7,7 +7,7 @@ Modes:
      and rewrite latest_alerts with new fields (ndre null if unavailable).
   2) Called after run_monitor.py full STAC path (same writers).
 
-Cite: docs/SCIENCE_LOCKS_v0.4_phase1_2.md + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + SCIENCE_LOCKS_v0.4_observation_integrity.md + SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md
+Cite: docs/SCIENCE_LOCKS_v0.4_phase1_2.md + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + SCIENCE_LOCKS_v0.4_observation_integrity.md + SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md + SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md
 AOU ≠ farm; DQ ≠ ecological confidence; biotic ≠ pest certainty.
 500 m grid remains fallback/debug (geometry_kind=monitoring_grid_500m).
 """
@@ -42,19 +42,26 @@ from engines.observation_integrity import (  # noqa: E402
     DEFAULT_MIN_CLEAR_MEMBERS_AOU,
     DEFAULT_MIN_CLEAR_PIXELS_CELL,
     JOIN_RULE,
+    OBSERVATION_ROLE_CURRENT,
+    OBSERVATION_ROLE_RETAINED,
     alert_counts_match,
-    aou_assessability,
+    aou_assessability_with_area,
     assign_cells_max_overlap,
+    biotic_status_three_state,
+    build_aou_date_aggregate,
     cell_assessability,
     count_alerts,
     ledger_persistence_feature,
+    ledger_rows_before,
+    ledger_rows_excluding_date,
     ledger_sequence_rows,
     ledger_stress_flags,
     member_clear_means,
+    observation_role_for_refresh,
     positive_area_overlap,
     temporal_evidence_labels,
 )
-from engines.biotic import infer_biotic_from_cell  # noqa: E402
+from engines.biotic import biotic_three_state, infer_biotic_from_cell  # noqa: E402
 from engines.stress import (  # noqa: E402
     map_stress_to_alert,
     vigor_stress_score,
@@ -69,13 +76,15 @@ FORMULA_REF_POST = (
     "SCIENCE_LOCKS_v0.4_phase1_2.md + "
     "SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + "
     "SCIENCE_LOCKS_v0.4_observation_integrity.md + "
-    "SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md"
+    "SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md + "
+    "SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md"
 )
 FORMULA_REF_AOU = (
     "SCIENCE_LOCKS_v0.4_phase1_2.md§1-2 + "
     "SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + "
     "SCIENCE_LOCKS_v0.4_observation_integrity.md + "
-    "SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md"
+    "SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md + "
+    "SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md"
 )
 
 
@@ -209,6 +218,12 @@ def enrich_features(features: list[dict], *, month: int | None) -> list[dict]:
         p["alert"] = alert
         p["geometry_kind"] = "monitoring_grid_500m"
 
+        # Pre-gate assessability BEFORE final alert/ag_class publish (deep re-check §1)
+        p["assessability"] = cell_assessability(
+            p,
+            min_clear_pixels=DEFAULT_MIN_CLEAR_PIXELS_CELL,
+            min_clear_fraction=DEFAULT_MIN_CLEAR_FRACTION_CELL,
+        )
         biotic = infer_biotic_from_cell(
             ndvi=ndvi,
             ndmi=ndmi,
@@ -227,19 +242,21 @@ def enrich_features(features: list[dict], *, month: int | None) -> list[dict]:
         te = temporal_evidence_labels(n_clear_dates)
         for k, v in te.items():
             p[k] = v
-        if not biotic["possible_biotic_stress"] and not te["temporal_evidence_sufficient"]:
-            p["biotic_status"] = "unknown_insufficient_temporal_evidence"
-            p["biotic_unknown_reason"] = "insufficient_temporal_evidence"
-        # Per-cell clear-coverage gate (scene clear ≠ cell assessable)
-        p["assessability"] = cell_assessability(
-            p,
-            min_clear_pixels=DEFAULT_MIN_CLEAR_PIXELS_CELL,
-            min_clear_fraction=DEFAULT_MIN_CLEAR_FRACTION_CELL,
+        b3 = biotic_three_state(
+            possible_biotic_stress=bool(biotic["possible_biotic_stress"]),
+            n_clear=n_clear_dates,
+            rules_evaluated=True,
         )
+        p["biotic_status"] = b3["biotic_status"]
+        if b3["biotic_status"] == "unknown":
+            p["biotic_unknown_reason"] = "insufficient_temporal_evidence"
         if p["assessability"] == "unassessable":
-            # Do not invent stress/ag scores as observed — keep indices, stamp honesty
+            # Never map unassessable → healthy / possible|likely|very_likely
             p["alert"] = "unclear"
             p["ag_class"] = "unassessable"
+            p["observation_role"] = "unassessable"
+        else:
+            p["observation_role"] = OBSERVATION_ROLE_CURRENT
 
         out.append({"type": "Feature", "geometry": f["geometry"], "properties": p})
     return out
@@ -276,13 +293,17 @@ def _aou_scoped_clear_count(
     *,
     pending_date: str | None = None,
     pending_ndvi: float | None = None,
+    exclude_date: str | None = None,
 ) -> int:
     """Distinct ledger dates where series_scope != window_not_aou.
 
     Forbidden sources: first_seen/last_seen alone; hardcoded 1/4; window length.
-    Optional pending_* includes today's clear row about to be upserted.
+    exclude_date: drop same-day T before optionally adding pending (idempotent replace).
+    Optional pending_* includes today's clear row about to be upserted (documented).
     """
     dates = _ledger_dates_for_aou(ledger, aou_id)
+    if exclude_date:
+        dates.discard(str(exclude_date))
     if pending_date and pending_ndvi is not None:
         dates.add(str(pending_date))
     return len(dates)
@@ -305,15 +326,18 @@ def _persistence_feature_from_ledger(
     *,
     pending_ndvi: float | None = None,
     pending_date: str | None = None,
+    exclude_date: str | None = None,
 ) -> tuple[float | None, int, int, str]:
-    """Ledger-sequence persistence only — never invent 0.5 from n_clear>=2 alone."""
+    """Ledger-sequence persistence only — never invent 0.5 from n_clear>=2 alone.
+
+    Same-day replace: exclude_date drops T from prior sequence before pending upsert
+    so reprocess of T does not double-count or self-feed.
+    """
     unit = _unit_from_ledger(ledger, aou_id)
-    rows = ledger_sequence_rows(unit)
+    rows = ledger_rows_excluding_date(unit, exclude_date or pending_date)
     if pending_date and pending_ndvi is not None:
-        # Include pending clear observation in sequence for this run
-        if not any(str(r.get("date")) == str(pending_date) for r in rows):
-            rows = list(rows) + [{"date": str(pending_date), "ndvi": float(pending_ndvi)}]
-            rows.sort(key=lambda r: str(r["date"]))
+        rows = list(rows) + [{"date": str(pending_date), "ndvi": float(pending_ndvi)}]
+        rows.sort(key=lambda r: str(r["date"]))
     feat, n_clear, n_above = ledger_persistence_feature(rows, bare_ndvi=BARE_NDVI)
     from engines.ag_probability import persistence_status as _ps
     status = _ps(n_clear)
@@ -395,9 +419,15 @@ def _stress_flags_from_ledger(
     aou_id: str,
     *,
     kind: str,
+    before_date: str | None = None,
 ) -> list[bool]:
-    """Empty flags mean renorm — never 'no stress / healthy'."""
-    return ledger_stress_flags(ledger_sequence_rows(_unit_from_ledger(ledger, aou_id)), kind=kind)
+    """Prior stress flags from history strictly before T — never self-feed date T.
+
+    Empty flags mean renorm — never 'no stress / healthy'.
+    """
+    unit = _unit_from_ledger(ledger, aou_id)
+    rows = ledger_rows_before(unit, before_date) if before_date else ledger_sequence_rows(unit)
+    return ledger_stress_flags(rows, kind=kind)
 
 def _current_detection_for_run(
     *,
@@ -419,10 +449,27 @@ def _sync_registry_from_ledger(
     aou_features: list[dict],
     obs_doc: dict[str, Any],
 ) -> None:
-    """n_clear + first_seen/last_seen from ledger; re-gate ag_class/persistence."""
+    """n_clear + first_seen/last_seen from ledger; re-gate ag_class/persistence.
+
+    Deep re-check: must NOT promote unassessable → current ag class
+    (possible|likely|very_likely). Retained last-good scores keep observation_role.
+    """
     from engines.ag_probability import ag_class_from_probability, persistence_status
 
     by_id = {u["aou_id"]: u for u in obs_doc.get("units") or []}
+    forbidden_promote = {"possible", "likely", "very_likely", "healthy"}
+
+    def _gate_class(assess: str | None, proposed: str | None, prior: str | None) -> str | None:
+        if assess == "unassessable":
+            # Never invent a healthy/possible class from ledger sync
+            if proposed in forbidden_promote or proposed is None:
+                return "unassessable"
+            if prior == "unassessable" or prior is None:
+                return "unassessable"
+            # Keep prior class only as retained chrome, but stamp unassessable for current
+            return "unassessable"
+        return proposed
+
     for rec in registry.get("units") or []:
         aid = rec.get("aou_id")
         unit = by_id.get(aid) or {}
@@ -431,19 +478,28 @@ def _sync_registry_from_ledger(
         rec["n_clear_dates"] = n_clear
         if dates:
             rec["first_seen_date"] = dates[0]
-            rec["last_seen_date"] = dates[-1]
+            # last_seen_date advances only via assign_aou_ids when refreshed;
+            # sync may align from ledger max date when assessable current
+            if rec.get("assessability") != "unassessable" or rec.get("refresh_status") == "refreshed":
+                rec["last_seen_date"] = dates[-1]
         rows = ledger_sequence_rows(unit)
         pers_feat, n_seq, n_above = ledger_persistence_feature(rows, bare_ndvi=BARE_NDVI)
         rec["n_dates_above_bare"] = n_above
         rec["persistence_feature"] = pers_feat  # None when sequence insufficient
+        assess = rec.get("assessability")
         prob = rec.get("agricultural_probability")
-        if prob is not None:
-            rec["ag_class"] = ag_class_from_probability(
+        if assess == "unassessable":
+            rec["ag_class"] = "unassessable"
+            if rec.get("observation_role") != OBSERVATION_ROLE_CURRENT:
+                rec["observation_role"] = OBSERVATION_ROLE_RETAINED
+        elif prob is not None:
+            proposed = ag_class_from_probability(
                 float(prob),
                 n_clear_dates=n_clear,
                 persistence_feature=0.0 if pers_feat is None else float(pers_feat),
                 single_date_only=n_clear < 2,
             )
+            rec["ag_class"] = _gate_class(assess, proposed, rec.get("ag_class"))
         rec["persistence_status"] = persistence_status(n_clear) if n_clear < 2 else (
             persistence_status(n_clear) if pers_feat is not None else "insufficient_sequence"
         )
@@ -457,7 +513,8 @@ def _sync_registry_from_ledger(
         p["n_clear_dates"] = n_clear
         if dates:
             p["first_seen_date"] = dates[0]
-            p["last_seen_date"] = dates[-1]
+            if p.get("assessability") != "unassessable" or p.get("refresh_status") == "refreshed":
+                p["last_seen_date"] = dates[-1]
         if unit.get("n_clear_dates") is not None:
             p["n_clear_dates"] = int(unit["n_clear_dates"])
             n_clear = int(unit["n_clear_dates"])
@@ -465,14 +522,21 @@ def _sync_registry_from_ledger(
         pers_feat, n_seq, n_above = ledger_persistence_feature(rows, bare_ndvi=BARE_NDVI)
         p["n_dates_above_bare"] = n_above
         p["persistence_feature"] = pers_feat
-        prob = p.get("agricultural_probability")
-        if prob is not None:
-            p["ag_class"] = ag_class_from_probability(
-                float(prob),
-                n_clear_dates=n_clear,
-                persistence_feature=0.0 if pers_feat is None else float(pers_feat),
-                single_date_only=n_clear < 2,
-            )
+        assess = p.get("assessability")
+        if assess == "unassessable":
+            p["ag_class"] = "unassessable"
+            if p.get("observation_role") != OBSERVATION_ROLE_CURRENT:
+                p["observation_role"] = OBSERVATION_ROLE_RETAINED
+        else:
+            prob = p.get("agricultural_probability")
+            if prob is not None:
+                proposed = ag_class_from_probability(
+                    float(prob),
+                    n_clear_dates=n_clear,
+                    persistence_feature=0.0 if pers_feat is None else float(pers_feat),
+                    single_date_only=n_clear < 2,
+                )
+                p["ag_class"] = _gate_class(assess, proposed, p.get("ag_class"))
         p["persistence_status"] = persistence_status(n_clear) if (n_clear < 2 or pers_feat is not None) else "insufficient_sequence"
 
 
@@ -520,20 +584,28 @@ def assign_aou_ids(
             single_date_only=n_clear < 2,
         )
 
-    def _score_unit_from_ndvi_ndmi(ndvi, ndmi, month: int | None, n_clear: int) -> dict:
+    def _score_unit_from_ndvi_ndmi(
+        ndvi, ndmi, month: int | None, n_clear: int, n_dates_above_bare: int | None = None
+    ) -> dict:
         if ndvi is None or ndmi is None:
             return {"agricultural_probability": None, "ag_class": None, "persistence_status": persistence_status(n_clear)}
+        n_above = (
+            int(n_dates_above_bare)
+            if n_dates_above_bare is not None
+            else (1 if float(ndvi) >= BARE_NDVI else 0)
+        )
         ag = agricultural_probability(
             ndvi=float(ndvi),
             ndmi=float(ndmi),
             n_clear_dates=n_clear,
-            n_dates_above_bare=1 if float(ndvi) >= BARE_NDVI else 0,
+            n_dates_above_bare=n_above,
             month=month,
         )
         return {
             "agricultural_probability": ag["agricultural_probability"],
             "ag_class": ag["ag_class"],
             "persistence_status": ag.get("persistence_status", persistence_status(n_clear)),
+            "n_dates_above_bare": n_above,
         }
 
     month = None
@@ -561,14 +633,14 @@ def assign_aou_ids(
             bucket = by_aou.get(aou_id) or {"members": [], "vegetated": []}
             members = bucket["members"]
             vegetated = bucket["vegetated"]
-            # Per-cell assessability before AOU aggregate
+            # Per-cell assessability BEFORE aggregate / scoring / observation write
             for m in members:
                 m["assessability"] = cell_assessability(
                     m,
                     min_clear_pixels=DEFAULT_MIN_CLEAR_PIXELS_CELL,
                     min_clear_fraction=DEFAULT_MIN_CLEAR_FRACTION_CELL,
                 )
-            assess, assess_meta = aou_assessability(
+            assess, assess_meta = aou_assessability_with_area(
                 members,
                 min_clear_fraction=DEFAULT_MIN_CLEAR_FRACTION_AOU,
                 min_clear_members=DEFAULT_MIN_CLEAR_MEMBERS_AOU,
@@ -578,24 +650,31 @@ def assign_aou_ids(
 
             has_new = assess == "assessable" and mean_ndvi is not None and mean_ndmi is not None
             pending_ndvi = mean_ndvi if has_new else None
+            # Idempotent reprocess: exclude same-day T from prior, then add pending
             n_clear = _aou_scoped_clear_count(
                 ledger,
                 aou_id,
                 pending_date=observation_date if has_new else None,
                 pending_ndvi=pending_ndvi,
+                exclude_date=observation_date,
             )
             pers_feat, _ns, n_above, pers_stat = _persistence_feature_from_ledger(
                 ledger,
                 aou_id,
                 pending_ndvi=pending_ndvi,
                 pending_date=observation_date if has_new else None,
+                exclude_date=observation_date,
             )
-            water_flags = _stress_flags_from_ledger(ledger, aou_id, kind="water")
-            vigor_flags = _stress_flags_from_ledger(ledger, aou_id, kind="vigor")
-            # A: when n_clear≥2, feed ledger flags into member stress scores
-            # (enrich_features still passes [] at n_clear=1 — renorm/null OK)
-            if n_clear >= 2 and members:
-                for m in members:
+            # Prior stress flags: history strictly before T (never self-feed T)
+            water_flags = _stress_flags_from_ledger(
+                ledger, aou_id, kind="water", before_date=observation_date
+            )
+            vigor_flags = _stress_flags_from_ledger(
+                ledger, aou_id, kind="vigor", before_date=observation_date
+            )
+            # Stress recalc ONLY on clear_members (not cloudy/unassessable cells)
+            if n_clear >= 2 and clear_members:
+                for m in clear_members:
                     _rescore_stress_with_ledger_flags(
                         m,
                         water_flags=water_flags,
@@ -605,24 +684,35 @@ def assign_aou_ids(
                     )
             te = temporal_evidence_labels(n_clear)
 
+            last_good_ndvi = rec.get("ndvi")
+            last_good_ndmi = rec.get("ndmi")
+            last_good_date = rec.get("last_seen_date")
+            last_good_prob = rec.get("agricultural_probability")
+            last_good_class = rec.get("ag_class")
+
             if not members:
-                # No positive-area members this run — keep prior dated scores; do not advance
                 refresh_status = "no_new_observation"
-                mean_prob = rec.get("agricultural_probability")
-                ag_class = _honest_class(mean_prob, n_clear, pers_feat) or rec.get("ag_class")
+                mean_prob = last_good_prob
+                ag_class = last_good_class
+                if ag_class in ("possible", "likely", "very_likely") and assess == "unassessable":
+                    ag_class = "unassessable"
                 pers_status = pers_stat or persistence_status(n_clear)
-                stamp_date = rec.get("last_seen_date")
-                out_ndvi, out_ndmi = rec.get("ndvi"), rec.get("ndmi")
+                stamp_date = last_good_date
+                out_ndvi, out_ndmi = last_good_ndvi, last_good_ndmi
+                obs_role = OBSERVATION_ROLE_RETAINED
             elif assess == "unassessable":
-                # Members present but clear-coverage below gate — unassessable, no date advance
+                # Unassessable: never create/advance observation; keep last-good ≠ current
                 refresh_status = "unassessable_coverage"
-                mean_prob = rec.get("agricultural_probability")
+                mean_prob = last_good_prob
                 ag_class = "unassessable"
                 pers_status = pers_stat or persistence_status(n_clear)
-                stamp_date = rec.get("last_seen_date")
-                out_ndvi, out_ndmi = rec.get("ndvi"), rec.get("ndmi")
+                stamp_date = last_good_date
+                out_ndvi, out_ndmi = last_good_ndvi, last_good_ndmi
+                obs_role = OBSERVATION_ROLE_RETAINED
             elif has_new:
-                scored = _score_unit_from_ndvi_ndmi(mean_ndvi, mean_ndmi, month, n_clear)
+                scored = _score_unit_from_ndvi_ndmi(
+                    mean_ndvi, mean_ndmi, month, n_clear, n_dates_above_bare=n_above
+                )
                 mean_prob = scored["agricultural_probability"]
                 ag_class = scored["ag_class"] or _honest_class(mean_prob, n_clear, pers_feat)
                 pers_status = pers_stat or scored.get("persistence_status") or persistence_status(n_clear)
@@ -632,23 +722,91 @@ def assign_aou_ids(
                 rec["ndmi"] = round(mean_ndmi, 4)
                 rec["last_seen_date"] = observation_date
                 out_ndvi, out_ndmi = rec["ndvi"], rec["ndmi"]
+                obs_role = OBSERVATION_ROLE_CURRENT
             else:
-                # No valid new clear in-boundary sample — keep prior dated scores; do not advance date
-                refresh_status = "stale" if (rec.get("ndvi") is None or rec.get("ndmi") is None or not members) else "no_new_observation"
-                if not members:
-                    refresh_status = "no_new_observation"
-                mean_prob = rec.get("agricultural_probability")
-                ag_class = _honest_class(mean_prob, n_clear, pers_feat) or rec.get("ag_class")
+                refresh_status = "stale" if (last_good_ndvi is None or last_good_ndmi is None) else "no_new_observation"
+                mean_prob = last_good_prob
+                ag_class = last_good_class or _honest_class(mean_prob, n_clear, pers_feat)
                 pers_status = pers_stat or persistence_status(n_clear)
-                stamp_date = rec.get("last_seen_date")  # prior date only
-                out_ndvi, out_ndmi = rec.get("ndvi"), rec.get("ndmi")
+                stamp_date = last_good_date
+                out_ndvi, out_ndmi = last_good_ndvi, last_good_ndmi
+                obs_role = OBSERVATION_ROLE_RETAINED
+
+            # Biotic three-state AFTER valid history ready (clear members + n_clear)
+            possible_biotic = False
+            if clear_members and n_clear >= 2:
+                possible_biotic = any(m.get("possible_biotic_stress") for m in clear_members)
+            b3 = biotic_three_state(
+                possible_biotic_stress=possible_biotic,
+                n_clear=n_clear,
+                rules_evaluated=bool(clear_members) and n_clear >= 1,
+            )
+            biotic_status = b3["biotic_status"]
 
             detection = _current_detection_for_run(
                 intersecting=members,
                 vegetated=vegetated,
-                ag_class=ag_class,
+                ag_class=ag_class if assess == "assessable" else None,
             )
             member_count = len(vegetated) or len(members) or rec.get("member_count")
+
+            w_score = (
+                round(
+                    sum(m.get("water_stress_score") or 0 for m in clear_members) / max(1, len(clear_members)),
+                    2,
+                )
+                if clear_members
+                else None
+            )
+            v_score = (
+                round(
+                    sum(m.get("vigor_stress_score") or 0 for m in clear_members) / max(1, len(clear_members)),
+                    2,
+                )
+                if clear_members
+                else None
+            )
+            if clear_members:
+                alerts = [m.get("alert") for m in clear_members]
+                agg_alert = max(set(alerts), key=alerts.count) if alerts else "unclear"
+            else:
+                agg_alert = None
+
+            # Single (AOU, date) aggregate blob — registry / ledger / decision share this
+            agg = build_aou_date_aggregate(
+                aou_id=aou_id,
+                date=stamp_date if obs_role == OBSERVATION_ROLE_RETAINED else (observation_date if has_new else stamp_date),
+                clear_members=clear_members,
+                all_members=members,
+                assessability=assess,
+                assess_meta=assess_meta,
+                run_id=None,
+                water_stress=w_score,
+                vigor_stress=v_score,
+                alert=agg_alert,
+                agricultural_probability=mean_prob if has_new else last_good_prob,
+                ag_class=ag_class,
+                persistence_feature=pers_feat,
+                n_clear_dates=n_clear,
+                n_dates_above_bare=n_above,
+                observation_role=obs_role,
+                biotic_status=biotic_status,
+                possible_biotic_stress=possible_biotic,
+                refresh_status=refresh_status,
+            )
+            # For current observation, NDVI/NDMI on aggregate are from clear_members
+            if has_new:
+                agg["ndvi"] = out_ndvi
+                agg["ndmi"] = out_ndmi
+                agg["date"] = observation_date
+                agg["agricultural_probability"] = mean_prob
+            else:
+                # Retained last-good: stamp prior values; do not pretend current means
+                agg["ndvi"] = out_ndvi
+                agg["ndmi"] = out_ndmi
+                agg["date"] = stamp_date
+                agg["agricultural_probability"] = mean_prob
+                agg["last_good_date"] = last_good_date
 
             rec["agricultural_probability"] = mean_prob
             rec["ag_class"] = ag_class
@@ -660,6 +818,16 @@ def assign_aou_ids(
             rec["refresh_status"] = refresh_status
             rec["assessability"] = assess
             rec["assessability_meta"] = assess_meta
+            rec["assessable_cell_fraction"] = assess_meta.get("assessable_cell_fraction")
+            rec["valid_area_fraction"] = assess_meta.get("valid_area_fraction")
+            rec["observation_role"] = obs_role
+            rec["biotic_status"] = biotic_status
+            rec["possible_biotic_stress"] = possible_biotic
+            rec["aggregate_id"] = agg["aggregate_id"]
+            rec["aou_date_aggregate"] = agg
+            rec["last_good_date"] = last_good_date
+            rec["last_good_ndvi"] = last_good_ndvi
+            rec["last_good_ndmi"] = last_good_ndmi
             rec["stress_flags_recent_water"] = water_flags
             rec["stress_flags_recent_vigor"] = vigor_flags
             rec["active"] = True if rec.get("active", True) else False
@@ -678,6 +846,7 @@ def assign_aou_ids(
                         "active": bool(rec.get("active", True)),
                         "current_detection": detection,
                         "refresh_status": refresh_status,
+                        "observation_role": obs_role,
                         "agricultural_probability": mean_prob,
                         "ag_class": ag_class,
                         "area_ha_est": rec.get("area_ha_est"),
@@ -697,26 +866,18 @@ def assign_aou_ids(
                         "assessability": assess,
                         "clear_member_count": assess_meta.get("clear_member_count"),
                         "clear_fraction": assess_meta.get("clear_fraction"),
+                        "assessable_cell_fraction": assess_meta.get("assessable_cell_fraction"),
+                        "valid_area_fraction": assess_meta.get("valid_area_fraction"),
                         "stress_flags_recent_water": water_flags,
                         "stress_flags_recent_vigor": vigor_flags,
-                        "water_stress_score": (
-                            round(
-                                sum(m.get("water_stress_score") or 0 for m in (clear_members or members))
-                                / max(1, len(clear_members or members)),
-                                2,
-                            )
-                            if (clear_members or members)
-                            else None
-                        ),
-                        "vigor_stress_score": (
-                            round(
-                                sum(m.get("vigor_stress_score") or 0 for m in (clear_members or members))
-                                / max(1, len(clear_members or members)),
-                                2,
-                            )
-                            if (clear_members or members)
-                            else None
-                        ),
+                        "water_stress_score": w_score,
+                        "vigor_stress_score": v_score,
+                        "alert": agg_alert,
+                        "possible_biotic_stress": possible_biotic,
+                        "biotic_status": biotic_status,
+                        "aggregate_id": agg["aggregate_id"],
+                        "aou_date_aggregate": agg,
+                        "last_good_date": last_good_date,
                         "evidence_level": "satellite_only",
                         "product_stamp": "provisional_satellite_analytical_service",
                         "najd_model_validation": "not_validated",
@@ -738,10 +899,25 @@ def assign_aou_ids(
 
         for idx, cand in enumerate(candidates):
             cand_key = f"__cand_{idx}"
+            cand_members = (by_cand.get(cand_key) or {}).get("members") or []
+            for m in cand_members:
+                m["assessability"] = cell_assessability(
+                    m,
+                    min_clear_pixels=DEFAULT_MIN_CLEAR_PIXELS_CELL,
+                    min_clear_fraction=DEFAULT_MIN_CLEAR_FRACTION_CELL,
+                )
+            assess_c, _am = aou_assessability_with_area(
+                cand_members,
+                min_clear_fraction=DEFAULT_MIN_CLEAR_FRACTION_AOU,
+                min_clear_members=DEFAULT_MIN_CLEAR_MEMBERS_AOU,
+            )
+            # Unassessable cells never create AOUs
+            if assess_c == "unassessable" or not cand_members:
+                continue
+            clear_c = [m for m in cand_members if m.get("assessability") == "assessable"]
             mean_ndvi = cand.get("ndvi_mean")
             mean_ndmi = cand.get("ndmi_mean")
-            # Prefer means from positive-area members
-            m_ndvi, m_ndmi = member_clear_means((by_cand.get(cand_key) or {}).get("members") or [])
+            m_ndvi, m_ndmi = member_clear_means(clear_c)
             if m_ndvi is not None:
                 mean_ndvi, mean_ndmi = m_ndvi, m_ndmi
             has_new = mean_ndvi is not None and mean_ndmi is not None
@@ -882,51 +1058,86 @@ def build_observations(
             str(o["date"]): o for o in prior_rows if o.get("date")
         }
 
-        # Upsert only when this run refreshed with valid clear member NDVI+NDMI.
-        # Stale / no_new_observation → keep prior ledger rows; do NOT stamp new date.
+        # Upsert only when refreshed + assessable + current_observation.
+        # Unassessable / retained_last_good → never write a clear observation for T.
+        # Consume the SAME aou_date_aggregate blob (no divergent re-mean).
         refresh_status = p.get("refresh_status") or "refreshed"
-        if members and refresh_status == "refreshed":
-            ndvi_vals = [m["ndvi"] for m in members if m.get("ndvi") is not None]
-            ndmi_vals = [m["ndmi"] for m in members if m.get("ndmi") is not None]
-            pairs_ok = [
+        obs_role = p.get("observation_role")
+        assess = p.get("assessability")
+        agg = p.get("aou_date_aggregate") or {}
+        if (
+            members
+            and refresh_status == "refreshed"
+            and assess == "assessable"
+            and obs_role == OBSERVATION_ROLE_CURRENT
+        ):
+            clear_ok = [
                 m for m in members
-                if m.get("ndvi") is not None and m.get("ndmi") is not None
+                if m.get("assessability") == "assessable"
+                and m.get("ndvi") is not None
+                and m.get("ndmi") is not None
             ]
-            if pairs_ok:
-                ndvi = sum(m["ndvi"] for m in pairs_ok) / len(pairs_ok)
-                ndmi = sum(m["ndmi"] for m in pairs_ok) / len(pairs_ok)
-                w = sum(m.get("water_stress_score") or 0 for m in members) / max(1, len(members))
-                v = sum(m.get("vigor_stress_score") or 0 for m in members) / max(1, len(members))
-                dq = sum(m.get("data_quality_confidence") or 0 for m in members) / max(1, len(members))
-                # Empty temporal history ≠ "no biotic" — only flag when rules fire;
-                # stamp insufficient temporal evidence when n_clear < 2.
-                biotic = any(m.get("possible_biotic_stress") for m in members)
-                alerts = [m.get("alert") for m in members]
-                alert = max(set(alerts), key=alerts.count) if alerts else "unclear"
-                obs_date = p.get("date") or members[0].get("date")
+            # Prefer shared aggregate NDVI/NDMI; fall back to clear_members mean
+            ndvi = agg.get("ndvi")
+            ndmi = agg.get("ndmi")
+            if (ndvi is None or ndmi is None) and clear_ok:
+                ndvi, ndmi = member_clear_means(clear_ok)
+            if clear_ok and ndvi is not None and ndmi is not None:
+                w = agg.get("water_stress_score")
+                if w is None:
+                    w = sum(m.get("water_stress_score") or 0 for m in clear_ok) / max(1, len(clear_ok))
+                v = agg.get("vigor_stress_score")
+                if v is None:
+                    v = sum(m.get("vigor_stress_score") or 0 for m in clear_ok) / max(1, len(clear_ok))
+                dq = sum(m.get("data_quality_confidence") or 0 for m in clear_ok) / max(1, len(clear_ok))
+                biotic = bool(agg.get("possible_biotic_stress")) if "possible_biotic_stress" in agg else any(
+                    m.get("possible_biotic_stress") for m in clear_ok
+                )
+                alert = agg.get("alert")
+                if not alert:
+                    alerts = [m.get("alert") for m in clear_ok]
+                    alert = max(set(alerts), key=alerts.count) if alerts else "unclear"
+                obs_date = agg.get("date") or p.get("date") or clear_ok[0].get("date")
                 if obs_date:
+                    # Same-day replace: overwrite by_date[T] without treating prior T as evidence
                     row = {
                         "aou_id": aid,
                         "date": str(obs_date),
-                        "ndvi": round(ndvi, 4),
-                        "ndmi": round(ndmi, 4),
+                        "ndvi": round(float(ndvi), 4),
+                        "ndmi": round(float(ndmi), 4),
                         "ndre": None,
                         "ndre_available": False,
-                        "agricultural_probability": p.get("agricultural_probability"),
-                        "ag_class": p.get("ag_class"),
+                        "agricultural_probability": agg.get("agricultural_probability", p.get("agricultural_probability")),
+                        "ag_class": agg.get("ag_class", p.get("ag_class")),
                         "area_ha_est": p.get("area_ha_est"),
-                        "water_stress_score": round(w, 2),
-                        "vigor_stress_score": round(v, 2),
+                        "water_stress_score": round(float(w), 2) if w is not None else None,
+                        "vigor_stress_score": round(float(v), 2) if v is not None else None,
                         "alert": alert,
                         "possible_biotic_stress": biotic,
+                        "biotic_status": agg.get("biotic_status") or p.get("biotic_status"),
                         "data_quality_confidence": round(dq, 1),
-                        "source": members[0].get("source"),
-                        "product_id": members[0].get("product_id"),
-                        "tile": members[0].get("tile"),
-                        "cloud_cover": members[0].get("cloud_cover"),
+                        "source": clear_ok[0].get("source"),
+                        "product_id": clear_ok[0].get("product_id"),
+                        "tile": clear_ok[0].get("tile"),
+                        "cloud_cover": clear_ok[0].get("cloud_cover"),
                         "series_scope": "aou_members_aggregate",
                         "persistence_status": p.get("persistence_status"),
+                        "persistence_feature": agg.get("persistence_feature", p.get("persistence_feature")),
+                        "n_dates_above_bare": agg.get("n_dates_above_bare", p.get("n_dates_above_bare")),
                         "refresh_status": refresh_status,
+                        "observation_role": OBSERVATION_ROLE_CURRENT,
+                        "assessability": "assessable",
+                        "aggregate_id": agg.get("aggregate_id") or p.get("aggregate_id"),
+                        "assessable_cell_fraction": agg.get("assessable_cell_fraction"),
+                        "valid_area_fraction": agg.get("valid_area_fraction"),
+                        # raw measures vs derived scores
+                        "raw_measures": {"ndvi": round(float(ndvi), 4), "ndmi": round(float(ndmi), 4)},
+                        "derived_scores": {
+                            "water_stress_score": round(float(w), 2) if w is not None else None,
+                            "vigor_stress_score": round(float(v), 2) if v is not None else None,
+                            "agricultural_probability": agg.get("agricultural_probability", p.get("agricultural_probability")),
+                            "ag_class": agg.get("ag_class", p.get("ag_class")),
+                        },
                     }
                     if p.get("temporal_evidence_ar"):
                         row["temporal_evidence_ar"] = p["temporal_evidence_ar"]
@@ -971,14 +1182,15 @@ def build_observations(
         )
 
     return {
-        "version": "0.4.5-aou-temporal-ledger",
+        "version": "0.4.6-evaluator-deep-recheck",
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "formula_ref": (
             "SCIENCE_LOCKS_v0.4_phase1_2.md + "
             "SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + "
             "SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + "
             "SCIENCE_LOCKS_v0.4_observation_integrity.md + "
-            "SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md"
+            "SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md + "
+            "SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md"
         ),
         "units": units,
     }
@@ -1089,12 +1301,51 @@ def main() -> int:
         enriched,
         existing_path=observations_path,
     )
+    # Stamp shared aggregate_id with run_id so registry/ledger/decision match
+    for feat in aou_feats:
+        p = feat["properties"]
+        agg = p.get("aou_date_aggregate")
+        if isinstance(agg, dict):
+            agg["run_id"] = run_id
+            aid = p.get("aou_id")
+            d = agg.get("date")
+            agg["aggregate_id"] = f"{aid}|{d or 'none'}|{run_id}"
+            p["aggregate_id"] = agg["aggregate_id"]
+            p["aou_date_aggregate"] = agg
+            # Mirror aggregate NDVI into consistency check fields
+            if p.get("observation_role") == OBSERVATION_ROLE_CURRENT and agg.get("ndvi") is not None:
+                # Ensure feature NDVI matches aggregate (single blob)
+                p["ndvi"] = agg["ndvi"]
+                p["ndmi"] = agg["ndmi"]
+    for rec in registry.get("units") or []:
+        agg = rec.get("aou_date_aggregate")
+        if isinstance(agg, dict):
+            agg["run_id"] = run_id
+            agg["aggregate_id"] = f"{rec.get('aou_id')}|{agg.get('date') or 'none'}|{run_id}"
+            rec["aggregate_id"] = agg["aggregate_id"]
+            rec["aou_date_aggregate"] = agg
+    # Re-copy aggregate fields onto observation rows for date T
+    for unit in obs.get("units") or []:
+        aid = unit.get("aou_id")
+        feat_p = next((f["properties"] for f in aou_feats if f["properties"].get("aou_id") == aid), None)
+        if not feat_p:
+            continue
+        agg = feat_p.get("aou_date_aggregate") or {}
+        for row in unit.get("observations") or []:
+            if row.get("date") == agg.get("date") and feat_p.get("observation_role") == OBSERVATION_ROLE_CURRENT:
+                row["aggregate_id"] = agg.get("aggregate_id")
+                row["ndvi"] = agg.get("ndvi", row.get("ndvi"))
+                row["ndmi"] = agg.get("ndmi", row.get("ndmi"))
+                row["persistence_feature"] = agg.get("persistence_feature", row.get("persistence_feature"))
+                row["n_dates_above_bare"] = agg.get("n_dates_above_bare", row.get("n_dates_above_bare"))
+
     _sync_registry_from_ledger(registry, aou_feats, obs)
     registry["najd_model_validation"] = "not_validated"
     registry["formula_ref"] = (
         "SCIENCE_LOCKS_v0.4_phase1_2.md§2 + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + "
         "SCIENCE_LOCKS_v0.4_observation_integrity.md + "
-        "SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md"
+        "SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md + "
+        "SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md"
     )
     registry["active_means"] = "registry_identity_only"
     registry["join_rule"] = join_meta.get("join_rule", JOIN_RULE)
@@ -1185,24 +1436,30 @@ def main() -> int:
     try:
         (stage / "aou").mkdir(parents=True, exist_ok=True)
         (stage / "meta").mkdir(parents=True, exist_ok=True)
+        (stage / "decision").mkdir(parents=True, exist_ok=True)
         (stage / "latest_alerts.geojson").write_text(json.dumps(geo_out))
         (stage / "timeseries.json").write_text(json.dumps(ts, indent=2))
         (stage / "aou" / "aou_observations.json").write_text(json.dumps(obs, indent=2))
         (stage / "aou" / "aou_registry.geojson").write_text(json.dumps(reg_fc))
-        # registry json via save_registry into stage
         save_registry(stage / "aou" / "aou_registry.json", registry)
         refresh = {
             "last_updated": datetime.now(timezone.utc).isoformat(),
             "source": "run_ag_probability",
             "run_id": run_id,
+            "release_id": run_id,
             "artifacts": [
                 "latest_alerts.geojson",
                 "timeseries.json",
                 "aou/aou_registry.geojson",
                 "aou/aou_registry.json",
                 "aou/aou_observations.json",
+                "decision/aou_suitability_components.json",
+                "decision/aou_confidence.json",
+                "decision/aou_evidence_gaps.json",
+                "decision/action_ladder.stubs.json",
+                "decision/run_meta.json",
             ],
-            "phase": "0.4.1-agriculture",
+            "phase": "0.4.6-evaluator-deep-recheck",
             "formula_ref": FORMULA_REF_POST,
             "join_rule": join_meta.get("join_rule", JOIN_RULE),
             "join_predicate": "positive_area_overlap",
@@ -1210,22 +1467,62 @@ def main() -> int:
             "mountain_seeding_hold": True,
             "observation_date": date,
             "alert_counts": dict(alert_counts),
-            # lock §1 — cell/AOU clear-coverage thresholds
             "min_clear_pixels_cell": DEFAULT_MIN_CLEAR_PIXELS_CELL,
             "min_clear_fraction_cell": DEFAULT_MIN_CLEAR_FRACTION_CELL,
             "min_clear_fraction_aou": DEFAULT_MIN_CLEAR_FRACTION_AOU,
             "min_clear_members_aou": DEFAULT_MIN_CLEAR_MEMBERS_AOU,
+            "min_valid_area_fraction_aou": None,
             "coverage_gate": {
                 "min_clear_pixels_cell": DEFAULT_MIN_CLEAR_PIXELS_CELL,
                 "min_clear_fraction_cell": DEFAULT_MIN_CLEAR_FRACTION_CELL,
                 "min_clear_fraction_aou": DEFAULT_MIN_CLEAR_FRACTION_AOU,
                 "min_clear_members_aou": DEFAULT_MIN_CLEAR_MEMBERS_AOU,
+                "assessable_cell_fraction": "secondary_count",
+                "valid_area_fraction": "primary_when_overlaps",
             },
+            "promote_includes_decision": True,
         }
         (stage / "meta" / "last_refresh.json").write_text(json.dumps(refresh, indent=2))
         (stage / "meta" / "run_meta.json").write_text(json.dumps(refresh, indent=2))
 
-        # Swap into place
+        # Decision scaffolds against stage (same release_id)
+        import os
+        prev_out = os.environ.get("MONITOR_OUT_DATA")
+        os.environ["MONITOR_OUT_DATA"] = str(stage)
+        try:
+            from run_decision_scaffolds import main as decision_main
+            drc = decision_main()
+        except Exception as e:
+            print(f"ERROR: decision scaffolds failed: {e}", file=sys.stderr)
+            return 5
+        finally:
+            if prev_out is None:
+                os.environ.pop("MONITOR_OUT_DATA", None)
+            else:
+                os.environ["MONITOR_OUT_DATA"] = prev_out
+        if drc != 0:
+            print(f"ERROR: decision scaffolds exited {drc}", file=sys.stderr)
+            return drc if drc else 5
+
+        required = [
+            "latest_alerts.geojson",
+            "timeseries.json",
+            "aou/aou_observations.json",
+            "aou/aou_registry.geojson",
+            "aou/aou_registry.json",
+            "meta/last_refresh.json",
+            "meta/run_meta.json",
+            "decision/aou_suitability_components.json",
+            "decision/aou_confidence.json",
+            "decision/aou_evidence_gaps.json",
+            "decision/run_meta.json",
+        ]
+        missing = [r for r in required if not (stage / r).exists()]
+        if missing:
+            print(f"ERROR: release missing {missing} — abort promote", file=sys.stderr)
+            return 6
+
+        # All-or-nothing swap
         shutil.move(str(stage / "latest_alerts.geojson"), str(alerts_path))
         shutil.move(str(stage / "timeseries.json"), str(ts_path))
         aou_dir.mkdir(parents=True, exist_ok=True)
@@ -1235,6 +1532,18 @@ def main() -> int:
         meta_dir.mkdir(parents=True, exist_ok=True)
         for name in ("last_refresh.json", "run_meta.json"):
             shutil.move(str(stage / "meta" / name), str(meta_dir / name))
+        decision_dir = out / "decision"
+        decision_dir.mkdir(parents=True, exist_ok=True)
+        for name in (
+            "aou_suitability_components.json",
+            "aou_confidence.json",
+            "aou_evidence_gaps.json",
+            "action_ladder.stubs.json",
+            "run_meta.json",
+        ):
+            src = stage / "decision" / name
+            if src.exists():
+                shutil.move(str(src), str(decision_dir / name))
     finally:
         shutil.rmtree(stage, ignore_errors=True)
 

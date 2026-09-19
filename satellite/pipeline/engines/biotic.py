@@ -83,3 +83,32 @@ def infer_biotic_from_cell(
         persistence_ok=persistence,
         data_quality_ok=dq,
     )
+
+
+def biotic_three_state(
+    *,
+    possible_biotic_stress: bool,
+    n_clear: int,
+    rules_evaluated: bool = True,
+) -> dict[str, Any]:
+    """Explicit three-state after history ready.
+
+    possible — rules fire (still not pest certainty)
+    unknown — history insufficient or rules inconclusive (n_clear<2; empty ≠ healthy)
+    not_flagged — n_clear≥2 and rules do not fire (satellite non-flag only)
+    """
+    if possible_biotic_stress:
+        status = "possible"
+    elif n_clear < 2 or not rules_evaluated:
+        status = "unknown"
+    else:
+        status = "not_flagged"
+    return {
+        "biotic_status": status,
+        "possible_biotic_stress": bool(possible_biotic_stress),
+        "biotic_risk_label": "possible_biotic_stress" if possible_biotic_stress else None,
+        "never_confirmed_pest": True,
+        "silence_is_not_healthy": status == "unknown",
+        "disclaimer_en": DISCLAIMER_EN,
+        "disclaimer_ar": DISCLAIMER_AR,
+    }
