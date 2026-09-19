@@ -468,5 +468,26 @@
     "addFoCta": "Optional — Add field observation",
     "addFoHint": "Upgrades evidence level when a dated FO exists. Never gates Analysis, Decision, or Seed.",
     "fieldFootnote": "A field visit is not required to use this output; optional additional field verification is last-resort only."
+  },
+  "khareefStatus": {
+    "banner": "Khareef status — vegetation and moisture indicators. Not a seeding recommendation.",
+    "bannerHelp": "3.A corridor tracker Samhan→Sarfait (fog_escarpment). product_kind = onset_window_dry_mpi_provisional or insufficient. Timing deferred. Seeding-rec Hold. No experimental partner seeding toggle. Not post_khareef until post window + clear scene + Approve.",
+    "productStamp": "provisional_satellite_analytical_service",
+    "corridorTitle": "Corridor status — Samhan → Sarfait",
+    "asof": "As of",
+    "loading": "Loading Khareef status cells…",
+    "loadError": "Could not load Khareef status cells.",
+    "optional": "optional",
+    "nullProxy": "null (no clear claim)",
+    "nClear": "n_clear",
+    "evidence": "Evidence",
+    "stages": {
+      "pre_khareef": "pre_khareef",
+      "onset": "onset",
+      "peak": "peak",
+      "late_khareef": "late_khareef",
+      "post_khareef": "post_khareef",
+      "insufficient": "insufficient"
+    }
   }
 }

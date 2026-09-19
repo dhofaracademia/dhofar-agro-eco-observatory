@@ -1,0 +1,63 @@
+{
+  "lock_id": "SCIENCE_LOCKS_v0.4_khareef_status_tracker",
+  "date": "2026-09-13",
+  "timezone": "Asia/Muscat",
+  "owner_pipeline_role": "Agrofostery Scientist",
+  "verdict": "go",
+  "ai_pipeline_role": true,
+  "human_review": "pending",
+  "mountain_seeding_hold": true,
+  "lifts_3b": false,
+  "product": "khareef_status_tracker",
+  "domain": "fog_escarpment",
+  "corridor_segments": [
+    "sarfait",
+    "qamar",
+    "qara",
+    "samhan",
+    "mirbat_mughsayl"
+  ],
+  "allowed_indices": [
+    "NDVI",
+    "NDMI",
+    "NDRE_optional",
+    "true_color_cite",
+    "MPI_stamped"
+  ],
+  "khareef_stage_enum": [
+    "pre_khareef",
+    "onset",
+    "peak",
+    "late_khareef",
+    "post_khareef",
+    "insufficient"
+  ],
+  "post_khareef_stage_allowed_after": {
+    "window_start": "2026-09-15",
+    "window_end": "2026-10-31",
+    "requires": [
+      "ge1_clear_S2_L2A_SCL",
+      "product_kind_post_khareef_or_insufficient",
+      "pipeline_approve_sha"
+    ]
+  },
+  "partner_now": [
+    "corridor_status_map",
+    "ndvi_ndmi_indicators",
+    "stage_not_post_khareef",
+    "onset_or_insufficient_mpi",
+    "fog_catalog_list_only",
+    "not_seeding_recommendation"
+  ],
+  "forbidden": [
+    "plant_here_while_hold",
+    "onset_mpi_as_post_khareef",
+    "fake_live_onset",
+    "mix_najd_arid",
+    "germination_pct",
+    "authority_approved",
+    "soil_moisture_pct",
+    "experimental_seeding_toggle",
+    "interpolated_ndmi"
+  ]
+}

@@ -13,7 +13,7 @@ type SiteFeature = {
 type SiteFC = {
   type: "FeatureCollection";
   features: SiteFeature[];
-  properties?: { note?: string };
+  properties?: { note?: string; note_en?: string; note_ar?: string; khareef_stage?: string };
 };
 
 const STATUS_COLOR = "#78716c";
@@ -36,11 +36,17 @@ export default function RestorationMap({ heightClass = "h-[28rem]" }: { heightCl
 
   useEffect(() => {
     let cancelled = false;
-    fetch(publicUrl("data/mountain/recommended_sites.geojson"))
+    fetch(publicUrl("data/mountain/khareef_status_cells.geojson"))
       .then((r) => {
-        if (!r.ok) throw new Error("fetch failed");
+        if (!r.ok) throw new Error("primary missing");
         return r.json();
       })
+      .catch(() =>
+        fetch(publicUrl("data/mountain/recommended_sites.geojson")).then((r) => {
+          if (!r.ok) throw new Error("fetch failed");
+          return r.json();
+        }),
+      )
       .then((j: SiteFC) => {
         if (!cancelled) setData(j);
       })
@@ -114,7 +120,13 @@ export default function RestorationMap({ heightClass = "h-[28rem]" }: { heightCl
         </div>
       </div>
 
-      {data?.properties?.note && <p className="text-xs text-sand-800/60">{data.properties.note}</p>}
+      {(data?.properties?.note || data?.properties?.note_en) && (
+        <p className="text-xs text-sand-800/60">
+          {i18n.language?.startsWith("ar")
+            ? data?.properties?.note_ar ?? data?.properties?.note_en ?? data?.properties?.note
+            : data?.properties?.note_en ?? data?.properties?.note}
+        </p>
+      )}
     </div>
   );
 }
