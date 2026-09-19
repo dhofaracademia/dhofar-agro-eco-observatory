@@ -77,6 +77,7 @@ type AouFeature = {
     ag_class?: string;
     area_ha_est?: number;
     valid_area_fraction?: number | null;
+    clear_fraction_missing?: boolean;
     assessable_cell_fraction?: number | null;
     ndvi?: number;
     ndmi?: number;
@@ -134,7 +135,14 @@ function SeriesChart({
   points: { date: string; value: number }[];
   caption?: string;
 }) {
-  if (!points.length) return null;
+  if (!points.length) {
+    return (
+      <div className="rounded-2xl border border-sand-200 bg-white p-4 shadow-sm">
+        <h3 className="mb-2 text-sm font-semibold text-sand-900">{title}</h3>
+        <p className="text-xs text-sand-800/60">{caption ?? "—"}</p>
+      </div>
+    );
+  }
   const w = 560;
   const h = 140;
   const pad = 28;
@@ -318,31 +326,23 @@ export default function Analysis() {
     return [...ids].sort();
   }, [suitabilityUnits, confidenceUnits, aouRegistry]);
 
+  // Unit series = AOU observations only. Never swap window_context under unit title.
   const aouNdviSeries = useMemo(() => {
     if (!selectedUnit) return [];
-    const obs = selectedUnit.observations
-      .filter((o) => o.date && o.ndvi != null)
-      .map((o) => ({ date: o.date as string, value: o.ndvi as number }));
-    if (obs.length) return obs;
-    // Honest stub: window series when AOU multi-date not yet available
-    return (selectedUnit.window_context_series || [])
+    return selectedUnit.observations
       .filter((o) => o.date && o.ndvi != null)
       .map((o) => ({ date: o.date as string, value: o.ndvi as number }));
   }, [selectedUnit]);
 
   const aouNdmiSeries = useMemo(() => {
     if (!selectedUnit) return [];
-    const obs = selectedUnit.observations
-      .filter((o) => o.date && o.ndmi != null)
-      .map((o) => ({ date: o.date as string, value: o.ndmi as number }));
-    if (obs.length > 1) return obs;
-    return (selectedUnit.window_context_series || [])
+    return selectedUnit.observations
       .filter((o) => o.date && o.ndmi != null)
       .map((o) => ({ date: o.date as string, value: o.ndmi as number }));
   }, [selectedUnit]);
 
-  const aouSeriesIsWindowStub =
-    !!selectedUnit && selectedUnit.observations.length <= 1 && aouNdviSeries.length > 0;
+  const unitObsCount = selectedUnit?.observations?.length ?? 0;
+  const aouTrendInsufficient = !!selectedUnit && unitObsCount < 2;
 
   return (
     <div className="space-y-8">
@@ -486,11 +486,18 @@ export default function Analysis() {
                           {f.properties.area_ha_est ?? "—"}
                           <span className="ms-1 text-[10px] text-sand-800/50">{t("analysis.areaHaUnit")}</span>
                         </div>
-                        {f.properties.valid_area_fraction != null && (
+                        {f.properties.valid_area_fraction != null &&
+                        Number.isFinite(Number(f.properties.valid_area_fraction)) &&
+                        !f.properties.clear_fraction_missing ? (
                           <div className="text-[10px] text-sand-800/60" title={t("analysis.areaCoverageHint")}>
                             {t("analysis.coverageShort")}: {(Number(f.properties.valid_area_fraction) * 100).toFixed(0)}%
                           </div>
+                        ) : (
+                          <div className="text-[10px] text-sand-800/60" title={t("analysis.coverageUnknownHint")}>
+                            {t("analysis.coverageUnknown")}
+                          </div>
                         )}
+                        <div className="text-[10px] text-sand-800/40">{t("analysis.areaGeometryVsClear")}</div>
                       </td>
                       <td className="px-3 py-2">{f.properties.ndvi ?? "—"}</td>
                       <td className="px-3 py-2" title={t("analysis.ndmiUnitHint")}>
@@ -534,21 +541,31 @@ export default function Analysis() {
                 ))}
               </select>
             </div>
-            {aouSeriesIsWindowStub && (
+            {aouTrendInsufficient && (
               <p className="rounded-xl border border-amber-200 bg-amber-50 p-3 text-xs text-amber-950">
-                {t("analysis.aouSeriesStub")}
+                {t("analysis.trendInsufficient")}
               </p>
             )}
             <div className="grid gap-3 lg:grid-cols-2">
               <SeriesChart
-                title={`${t("live.ndviMean")} — ${selectedAou || t("analysis.windowScope")}`}
+                title={`${t("analysis.ndviUnit")} — ${selectedAou || "—"}`}
                 color="#2f6b3a"
-                points={aouNdviSeries.length ? aouNdviSeries : windowNdvi}
+                points={aouNdviSeries}
+                caption={
+                  aouTrendInsufficient
+                    ? t("analysis.trendInsufficientCaption")
+                    : t("analysis.unitScope")
+                }
               />
               <SeriesChart
-                title={`${selectedAou ? t("analysis.ndmiUnit") : t("analysis.ndmiRegional")} — ${selectedAou || t("analysis.windowScope")}`}
+                title={`${t("analysis.ndmiUnit")} — ${selectedAou || "—"}`}
                 color="#0284c7"
-                points={aouNdmiSeries.length ? aouNdmiSeries : windowNdmi}
+                points={aouNdmiSeries}
+                caption={
+                  aouTrendInsufficient
+                    ? t("analysis.trendInsufficientCaption")
+                    : t("analysis.unitScope")
+                }
               />
             </div>
             <p className="text-xs text-sand-800/60">{t("analysis.splitChartsNote")}</p>
@@ -561,8 +578,8 @@ export default function Analysis() {
             <h2 className="text-lg font-semibold text-crop-700">{t("live.timeseries")}</h2>
             <p className="text-sm text-sand-800/90">{t("live.timeseriesBlurb")}</p>
             <div className="grid gap-3 lg:grid-cols-2">
-              <SeriesChart title={t("analysis.windowNdvi")} color="#2f6b3a" points={windowNdvi} caption={t("analysis.windowScope")} />
-              <SeriesChart title={t("analysis.windowNdmi")} color="#0284c7" points={windowNdmi} caption={t("analysis.windowScope")} />
+              <SeriesChart title={t("analysis.ndviRegional")} color="#2f6b3a" points={windowNdvi} caption={t("analysis.windowScope")} />
+              <SeriesChart title={t("analysis.ndmiRegional")} color="#0284c7" points={windowNdmi} caption={t("analysis.windowScope")} />
             </div>
             {ts?.dates && (
               <div className="overflow-x-auto rounded-2xl border border-sand-200 bg-white p-4 shadow-sm">

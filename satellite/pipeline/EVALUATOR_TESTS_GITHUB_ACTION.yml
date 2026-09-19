@@ -26,10 +26,10 @@ jobs:
           cache: pip
           cache-dependency-path: satellite/pipeline/requirements.txt
 
-      - name: Install dependencies
+      - name: Install pinned dependencies
         run: |
           pip install -r requirements.txt
-          # Light deps for unit suites (shapely already in requirements)
+          # Synthetic fixtures only — no live Sentinel-2 in PR CI
 
       - name: Observation integrity suite
         run: python tests/test_observation_integrity.py
@@ -37,26 +37,41 @@ jobs:
       - name: Post-integrity evaluator suite
         run: python tests/test_post_integrity_evaluator.py
 
-      - name: Evaluator deep re-check suite (cases 1–7 regression)
+      - name: Evaluator deep re-check suite
         run: python tests/test_evaluator_deep_recheck.py
 
-      - name: Evaluator Round 2 residual suite (cases 1,5,8 + CI gate)
+      - name: Evaluator Round 2 residual suite
         run: python tests/test_evaluator_round2.py
-#   python tests/test_post29_residuals.py
 
-      - name: Post-#29 HIGH residual suite (R3-1/2/3)
+      - name: Post-#29 HIGH residual suite (R3 — do not reopen)
         run: python tests/test_post29_residuals.py
 
+      - name: Post-#30 follow-up suite (R4-1…R4-4 + R3-4)
+        run: python tests/test_post30_followup.py
+
+  app-build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+      - name: Install + build
+        run: |
+          npm ci
+          npm run build
+
 # ---------------------------------------------------------------------------
-# Maintainer note: GitHub OAuth for this repo historically blocks pushes to
-# `.github/workflows/` without `workflow` scope. Copy this file to
-# `.github/workflows/evaluator-tests.yml` via a token/app with workflow write
-# (or the GitHub UI) to enable the merge-gate on PRs/main.
-# Local merge-gate (same suites):
-#   cd satellite/pipeline
-#   python tests/test_observation_integrity.py
-#   python tests/test_post_integrity_evaluator.py
-#   python tests/test_evaluator_deep_recheck.py
-#   python tests/test_evaluator_round2.py
-#   python tests/test_post29_residuals.py
+# Maintainer note: if push to `.github/workflows/` is blocked (OAuth lacks
+# `workflow` scope), copy this file via a token/app with workflow write or the
+# GitHub UI. Required skip ≠ green — suites must actually run.
+# Local merge-gate:
+#   cd satellite/pipeline && python tests/test_*.py
 # ---------------------------------------------------------------------------

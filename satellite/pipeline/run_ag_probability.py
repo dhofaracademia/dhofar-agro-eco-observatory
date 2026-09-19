@@ -34,7 +34,7 @@ from engines.aou_identity import (  # noqa: E402
     load_registry,
     mint_or_match_aou,
     save_registry,
-    segment_probability_mask,
+    segment_probability_mask
 )
 from engines.observation_integrity import (  # noqa: E402
     DEFAULT_MIN_CLEAR_FRACTION_AOU,
@@ -66,12 +66,16 @@ from engines.observation_integrity import (  # noqa: E402
     positive_area_overlap,
     temporal_evidence_labels,
     atomic_promote_with_rollback,
+    aou_geometry_target_area,
+    publish_release_with_pointer,
+    verify_release_ids_match,
+    stamp_release_id_on_doc
 )
 from engines.biotic import biotic_three_state, infer_biotic_from_cell  # noqa: E402
 from engines.stress import (  # noqa: E402
     map_stress_to_alert,
     vigor_stress_score,
-    water_stress_score,
+    water_stress_score
 )
 
 BARE_NDVI = 0.18
@@ -301,7 +305,7 @@ def _aou_scoped_clear_count(
     *,
     pending_date: str | None = None,
     pending_ndvi: float | None = None,
-    exclude_date: str | None = None,
+    exclude_date: str | None = None
 ) -> int:
     """Distinct ledger dates where series_scope != window_not_aou.
 
@@ -334,7 +338,7 @@ def _persistence_feature_from_ledger(
     *,
     pending_ndvi: float | None = None,
     pending_date: str | None = None,
-    exclude_date: str | None = None,
+    exclude_date: str | None = None
 ) -> tuple[float | None, int, int, str]:
     """Ledger-sequence persistence only — never invent 0.5 from n_clear>=2 alone.
 
@@ -361,7 +365,7 @@ def _rescore_stress_with_ledger_flags(
     water_flags: list[bool],
     vigor_flags: list[bool],
     month: int | None,
-    n_clear_dates: int,
+    n_clear_dates: int
 ) -> None:
     """Feed ledger stress_flags into water/vigor scores when n_clear≥2.
 
@@ -427,7 +431,7 @@ def _stress_flags_from_ledger(
     aou_id: str,
     *,
     kind: str,
-    before_date: str | None = None,
+    before_date: str | None = None
 ) -> list[bool]:
     """Prior stress flags from history strictly before T — never self-feed date T.
 
@@ -441,7 +445,7 @@ def _current_detection_for_run(
     *,
     intersecting: list[dict],
     vegetated: list[dict],
-    ag_class: str | None,
+    ag_class: str | None
 ) -> str:
     """detected | weak | not_detected — orthogonal to registry active identity."""
     possible_plus = {"possible", "likely", "very_likely"}
@@ -455,7 +459,7 @@ def _current_detection_for_run(
 def _sync_registry_from_ledger(
     registry: dict[str, Any],
     aou_features: list[dict],
-    obs_doc: dict[str, Any],
+    obs_doc: dict[str, Any]
 ) -> None:
     """n_clear + first_seen/last_seen from ledger; re-gate ag_class/persistence.
 
@@ -552,7 +556,7 @@ def assign_aou_ids(
     features: list[dict],
     registry_json_path: Path,
     observation_date: str,
-    ledger: dict[str, Any] | None = None,
+    ledger: dict[str, Any] | None = None
 ) -> tuple[list[dict], dict[str, Any], list[dict], dict[str, Any]]:
     """Persistent AOUs with integrity-pack join + refresh rules.
 
@@ -654,11 +658,18 @@ def assign_aou_ids(
                     min_clear_pixels=DEFAULT_MIN_CLEAR_PIXELS_CELL,
                     min_clear_fraction=DEFAULT_MIN_CLEAR_FRACTION_CELL,
                 )
+            cand_target = aou_geometry_target_area(shape(cand["geometry"])) if cand.get("geometry") else None
+            if cand_target is None:
+                try:
+                    cand_target = float(shape(cand["geometry"]).area)
+                except Exception:
+                    cand_target = None
             assess_c, assess_meta_c = aou_assessability_with_area(
                 cand_members,
                 min_clear_fraction=DEFAULT_MIN_CLEAR_FRACTION_AOU,
                 min_clear_members=DEFAULT_MIN_CLEAR_MEMBERS_AOU,
                 min_valid_area_fraction=DEFAULT_MIN_VALID_AREA_FRACTION_AOU,
+                aou_target_area=cand_target,
             )
             if assess_c == "unassessable" or not cand_members:
                 continue
@@ -746,6 +757,8 @@ def assign_aou_ids(
                         "assessability": "assessable",
                         "assessable_cell_fraction": assess_meta_c.get("assessable_cell_fraction"),
                         "valid_area_fraction": assess_meta_c.get("valid_area_fraction"),
+                        "valid_area_fraction_basis": assess_meta_c.get("valid_area_fraction_basis"),
+                        "valid_area_fraction_denominator": assess_meta_c.get("valid_area_fraction_denominator"),
                         "discovery_status": disc,
                         "discovery_action": rec.get("discovery_action"),
                         "match_iou": rec.get("match_iou"),
@@ -786,11 +799,13 @@ def assign_aou_ids(
                     min_clear_pixels=DEFAULT_MIN_CLEAR_PIXELS_CELL,
                     min_clear_fraction=DEFAULT_MIN_CLEAR_FRACTION_CELL,
                 )
+            aou_target = aou_geometry_target_area(geom, area_ha_est=rec.get("area_ha_est"))
             assess, assess_meta = aou_assessability_with_area(
                 members,
                 min_clear_fraction=DEFAULT_MIN_CLEAR_FRACTION_AOU,
                 min_clear_members=DEFAULT_MIN_CLEAR_MEMBERS_AOU,
                 min_valid_area_fraction=DEFAULT_MIN_VALID_AREA_FRACTION_AOU,
+                aou_target_area=aou_target,
             )
             clear_members = [m for m in members if m.get("assessability") == "assessable"]
             mean_ndvi, mean_ndmi = member_clear_means(clear_members)
@@ -879,12 +894,15 @@ def assign_aou_ids(
                 out_ndvi, out_ndmi = last_good_ndvi, last_good_ndmi
                 obs_role = OBSERVATION_ROLE_RETAINED
 
-            # R3-2: re-infer biotic AFTER ledger history + final water/vigor scores.
-            # prior_vigor_flags = ledger dates strictly before T; include current flag.
-            # Silence / empty priors → unknown (rules_evaluated=False), never not_flagged.
+            # R3-2 + R4-2: re-infer biotic AFTER ledger history + final water/vigor.
+            # Current biotic ONLY when has_new AND assessability=assessable.
+            # Rejected / unassessable / retained → current unknown; last-trusted separate.
+            last_trusted_biotic = rec.get("biotic_status_last_trusted") or rec.get("biotic_status")
+            last_trusted_biotic_date = rec.get("biotic_last_trusted_date") or rec.get("last_seen_date")
             possible_biotic = False
             rules_evaluated = False
-            if clear_members and n_clear >= 2 and len(vigor_flags) >= 1:
+            biotic_status = "unknown"
+            if has_new and assess == "assessable" and clear_members and n_clear >= 2 and len(vigor_flags) >= 1:
                 rules_evaluated = True
                 for m in clear_members:
                     if m.get("ndvi") is None or m.get("ndmi") is None:
@@ -917,16 +935,22 @@ def assign_aou_ids(
                     m["biotic_rules"] = biotic.get("rules")
                     if biotic["possible_biotic_stress"]:
                         possible_biotic = True
-            elif clear_members:
-                # Insufficient priors or n_clear<2 — do not OR stale cell flags into not_flagged
-                for m in clear_members:
+                b3 = biotic_three_state(
+                    possible_biotic_stress=possible_biotic,
+                    n_clear=n_clear,
+                    rules_evaluated=rules_evaluated,
+                )
+                biotic_status = b3["biotic_status"]
+                # Accepted current → advance last-trusted biotic
+                last_trusted_biotic = biotic_status
+                last_trusted_biotic_date = observation_date
+            else:
+                # Rejected / retained / insufficient → current unknown; do not emit possible
+                possible_biotic = False
+                biotic_status = "unknown"
+                for m in clear_members or []:
                     m["possible_biotic_stress"] = False
-            b3 = biotic_three_state(
-                possible_biotic_stress=possible_biotic,
-                n_clear=n_clear,
-                rules_evaluated=rules_evaluated,
-            )
-            biotic_status = b3["biotic_status"]
+                # Do not advance last-trusted biotic date
 
             detection = _current_detection_for_run(
                 intersecting=members,
@@ -1013,6 +1037,8 @@ def assign_aou_ids(
             rec["ag_class"] = ag_class
             rec["biotic_status"] = biotic_status
             rec["possible_biotic_stress"] = possible_biotic
+            rec["biotic_status_last_trusted"] = last_trusted_biotic
+            rec["biotic_last_trusted_date"] = last_trusted_biotic_date
             rec["aggregate_id"] = agg["aggregate_id"]
             rec["aou_date_aggregate"] = agg
             rec["last_good_date"] = last_good_date
@@ -1065,6 +1091,12 @@ def assign_aou_ids(
                         "alert": agg_alert,
                         "possible_biotic_stress": possible_biotic,
                         "biotic_status": biotic_status,
+                        "biotic_status_last_trusted": last_trusted_biotic,
+                        "biotic_last_trusted_date": last_trusted_biotic_date,
+                        "valid_area_fraction_basis": assess_meta.get("valid_area_fraction_basis"),
+                        "valid_area_fraction_denominator": assess_meta.get("valid_area_fraction_denominator"),
+                        "clear_fraction_missing": assess_meta.get("clear_fraction_missing"),
+                        "aou_target_area": assess_meta.get("aou_target_area"),
                         "discovery_status": rec.get("discovery_status"),
                         "discovery_action": rec.get("discovery_action"),
                         "match_iou": rec.get("match_iou"),
@@ -1101,7 +1133,7 @@ def build_observations(
     aou_features: list[dict],
     timeseries: dict[str, Any],
     enriched_cells: list[dict],
-    existing_path: Path | None = None,
+    existing_path: Path | None = None
 ) -> dict[str, Any]:
     """Per-AOU ledger: load + append/upsert by (aou_id, date). Never wipe to latest-only.
 
@@ -1335,7 +1367,11 @@ def main() -> int:
 
     alert_counts = count_alerts(enriched)
     biotic_n = sum(1 for f in enriched if f["properties"].get("possible_biotic_stress"))
-    run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    import os as _os_rid
+    run_id = (
+        _os_rid.environ.get("MONITOR_RELEASE_ID")
+        or datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    )
 
     props = dict(geo.get("properties") or {})
     props.update(
@@ -1552,7 +1588,7 @@ def main() -> int:
                 "decision/action_ladder.stubs.json",
                 "decision/run_meta.json",
             ],
-            "phase": "0.4.8-post29-residuals",
+            "phase": "0.4.9-post30-followup",
             "formula_ref": FORMULA_REF_POST,
             "join_rule": join_meta.get("join_rule", JOIN_RULE),
             "join_predicate": "positive_area_overlap",
@@ -1566,6 +1602,7 @@ def main() -> int:
             "min_clear_members_aou": DEFAULT_MIN_CLEAR_MEMBERS_AOU,
             "min_valid_area_fraction_aou": DEFAULT_MIN_VALID_AREA_FRACTION_AOU,
             "valid_area_fraction_basis": "clear_pixels_in_aou",
+            "release_pointer_semantics": "releases/<id>+CURRENT",
             "coverage_gate": {
                 "min_clear_pixels_cell": DEFAULT_MIN_CLEAR_PIXELS_CELL,
                 "min_clear_fraction_cell": DEFAULT_MIN_CLEAR_FRACTION_CELL,
@@ -1639,14 +1676,61 @@ def main() -> int:
             # Include optional action ladder when present
             if (stage / "decision" / "action_ladder.stubs.json").exists():
                 promote.append("decision/action_ladder.stubs.json")
+        # R4-4: stamp identical release_id on ALL partner artifacts before promote
+        def _stamp_file(path: Path) -> None:
+            if not path.is_file():
+                return
+            try:
+                doc = json.loads(path.read_text())
+            except Exception:
+                return
+            stamp_release_id_on_doc(doc, release_id)
+            path.write_text(json.dumps(doc, indent=2 if path.suffix == ".json" else None))
+
+        for rel in promote:
+            _stamp_file(stage / rel)
+        # Also ensure registry geojson FeatureCollection properties
+        reg_gj = stage / "aou" / "aou_registry.geojson"
+        if reg_gj.is_file():
+            try:
+                doc = json.loads(reg_gj.read_text())
+                stamp_release_id_on_doc(doc, release_id)
+                for f in doc.get("features") or []:
+                    if isinstance(f.get("properties"), dict):
+                        f["properties"]["release_id"] = release_id
+                        f["properties"]["run_id"] = release_id
+                reg_gj.write_text(json.dumps(doc))
+            except Exception:
+                pass
+        alerts_f = stage / "latest_alerts.geojson"
+        if alerts_f.is_file():
+            try:
+                doc = json.loads(alerts_f.read_text())
+                stamp_release_id_on_doc(doc, release_id)
+                alerts_f.write_text(json.dumps(doc))
+            except Exception:
+                pass
+
+        id_failures = verify_release_ids_match(stage, release_id, promote)
+        if id_failures:
+            print(
+                f"ERROR: release_id gate failed {id_failures} — abort promote (pointer unchanged)",
+                file=sys.stderr,
+            )
+            return 8
+
         try:
-            atomic_promote_with_rollback(
+            publish_release_with_pointer(
                 stage_root=stage,
                 public_root=out,
+                release_id=release_id,
                 relative_paths=promote,
             )
         except Exception as e:
-            print(f"ERROR: atomic promote failed / rolled back: {e}", file=sys.stderr)
+            print(
+                f"ERROR: release pointer publish failed — CURRENT unchanged: {e}",
+                file=sys.stderr,
+            )
             return 7
     finally:
         shutil.rmtree(stage, ignore_errors=True)

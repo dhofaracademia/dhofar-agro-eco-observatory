@@ -332,14 +332,11 @@ def biotic_status_three_state(
 
 
 def _member_clear_pixel_area_in_aou(m: dict[str, Any]) -> float:
-    """Clear-pixel area inside AOU for one member (post-#29 R3-1).
+    """Clear-pixel area inside AOU for one member (R3-1 + R4-1).
 
-    Prefer ``aou_overlap_area × clear_fraction`` (weighted approx of clear
-    footprint ∩ AOU). Full accepted-cell polygon area is **not** the numerator
-    when ``clear_fraction`` is present — a mostly cloudy cell that still passes
-    the cell gate must not overweight the AOU.
-    Without ``clear_fraction``, assessable members contribute full overlap
-    (reading treated as clear within the join footprint); unassessable → 0.
+    Prefer ``aou_overlap_area × clear_fraction`` (clear footprint ∩ AOU estimate).
+    Missing ``clear_fraction`` must **not** invent 1.0 / full-clear — contribute 0
+    to the clear numerator (fail-honest). Unassessable → 0.
     """
     ov = m.get("aou_overlap_area")
     if ov is None:
@@ -351,14 +348,13 @@ def _member_clear_pixel_area_in_aou(m: dict[str, Any]) -> float:
     if a <= 0:
         return 0.0
     cf = m.get("clear_fraction")
-    if cf is not None:
-        try:
-            return a * max(0.0, min(1.0, float(cf)))
-        except (TypeError, ValueError):
-            return 0.0
-    if cell_assessability(m) == "assessable":
-        return a
-    return 0.0
+    if cf is None:
+        # R4-1: no silent full-clear when coverage fraction absent
+        return 0.0
+    try:
+        return a * max(0.0, min(1.0, float(cf)))
+    except (TypeError, ValueError):
+        return 0.0
 
 
 def aou_assessability_with_area(
@@ -369,13 +365,16 @@ def aou_assessability_with_area(
     min_valid_area_fraction: float | None = DEFAULT_MIN_VALID_AREA_FRACTION_AOU,
     aou_target_area: float | None = None,
 ) -> tuple[str, dict[str, Any]]:
-    """AOU assessability with count + clear-pixel-in-AOU area fractions.
+    """AOU assessability with count + clear-pixel-in-AOU area fractions (R4-1).
 
     assessable_cell_fraction = clear assessable count / member count (secondary).
     valid_area_fraction = clear-pixel area inside AOU / denominator
       where clear-pixel area ≈ ∑(aou_overlap_area × clear_fraction)
-      and denominator = aou_target_area if provided else ∑(member overlaps).
-    Basis stamp: valid_area_fraction_basis=clear_pixels_in_aou.
+      and denominator = aou_target_area (required for AOU-area honesty).
+      Member-overlap sum is diagnostic only when target area is absent.
+    Missing clear_fraction → exclude from numerator; stamp clear_fraction_missing.
+    Basis stamp: valid_area_fraction_basis=clear_pixels_in_aou
+      (or overlap_times_clear_fraction_estimate when all clear areas used that path).
     """
     meta = {
         "member_count": len(members),
@@ -388,9 +387,12 @@ def aou_assessability_with_area(
         "member_overlap_area_sum": 0.0,
         "clear_overlap_area_sum": 0.0,
         "clear_pixel_area_in_aou_sum": 0.0,
+        "clear_fraction_missing": False,
+        "coverage_incomplete": False,
         "min_clear_fraction_aou": min_clear_fraction,
         "min_clear_members_aou": min_clear_members,
         "min_valid_area_fraction_aou": min_valid_area_fraction,
+        "aou_target_area": aou_target_area,
     }
     if not members:
         return "unassessable", meta
@@ -400,12 +402,14 @@ def aou_assessability_with_area(
     frac_count = len(clear) / max(len(members), 1)
     meta["clear_member_fraction"] = frac_count
     meta["assessable_cell_fraction"] = frac_count
-    # Backward-compat alias used by older callers / UI
+    # Backward-compat alias used by older callers / UI (member clear-count fraction)
     meta["clear_fraction"] = frac_count
 
     area_all = 0.0
     area_clear_polygon = 0.0  # legacy full-polygon (secondary diagnostic only)
     clear_pixel_area = 0.0
+    any_cf_missing = False
+    any_cf_used = False
     for m in members:
         ov = m.get("aou_overlap_area")
         if ov is None:
@@ -419,10 +423,20 @@ def aou_assessability_with_area(
         area_all += a
         if cell_assessability(m) == "assessable":
             area_clear_polygon += a
+        if m.get("clear_fraction") is None:
+            any_cf_missing = True
+        else:
+            any_cf_used = True
         clear_pixel_area += _member_clear_pixel_area_in_aou(m)
     meta["member_overlap_area_sum"] = area_all
     meta["clear_overlap_area_sum"] = area_clear_polygon
     meta["clear_pixel_area_in_aou_sum"] = clear_pixel_area
+    meta["clear_fraction_missing"] = bool(any_cf_missing)
+    meta["coverage_incomplete"] = bool(any_cf_missing)
+    if any_cf_used and not any_cf_missing:
+        meta["valid_area_fraction_basis"] = "overlap_times_clear_fraction_estimate"
+    else:
+        meta["valid_area_fraction_basis"] = "clear_pixels_in_aou"
 
     denom = None
     denom_kind = None
@@ -435,19 +449,26 @@ def aou_assessability_with_area(
             denom = ta
             denom_kind = "aou_target_area"
     if denom is None and area_all > 0:
+        # Diagnostic fallback only — callers must pass aou_target_area for honesty
         denom = area_all
         denom_kind = "member_overlap_sum"
     meta["valid_area_fraction_denominator"] = denom_kind
     if denom is not None and denom > 0:
-        meta["valid_area_fraction"] = clear_pixel_area / denom
+        # Cap at 1.0 — overlaps must not report >100%
+        frac = clear_pixel_area / denom
+        meta["valid_area_fraction"] = min(1.0, float(frac))
     else:
         meta["valid_area_fraction"] = None
 
     count_fail = len(clear) < int(min_clear_members) or frac_count < float(min_clear_fraction)
     area_fail = False
-    if min_valid_area_fraction is not None and meta["valid_area_fraction"] is not None:
-        area_fail = float(meta["valid_area_fraction"]) < float(min_valid_area_fraction)
-    # When area available and threshold set, both must pass; else count gate alone.
+    if min_valid_area_fraction is not None:
+        if meta["valid_area_fraction"] is None:
+            # Missing coverage / no area → do not auto-accept
+            area_fail = True
+        else:
+            area_fail = float(meta["valid_area_fraction"]) < float(min_valid_area_fraction)
+    # When area threshold set, both count and area must pass; missing area fails.
     if count_fail or area_fail:
         return "unassessable", meta
     return "assessable", meta
@@ -577,21 +598,222 @@ def atomic_promote_with_rollback(
             shutil.move(str(src), str(dst))
             moved.append(rel)
     except Exception:
+        restore_ok = True
         for rel in moved:
             dst = public_root / rel
             snap = snapshot / rel
-            if snap.is_file():
-                dst.parent.mkdir(parents=True, exist_ok=True)
-                shutil.copy2(snap, dst)
-            elif dst.exists():
-                try:
-                    dst.unlink()
-                except OSError:
-                    pass
-        raise
-    finally:
+            try:
+                if snap.is_file():
+                    dst.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copy2(snap, dst)
+                elif dst.exists():
+                    try:
+                        dst.unlink()
+                    except OSError:
+                        restore_ok = False
+            except OSError:
+                restore_ok = False
+        if not restore_ok:
+            # Never delete backup if restore failed — keep snapshot for manual recovery
+            raise
         shutil.rmtree(snapshot, ignore_errors=True)
+        raise
+    else:
+        shutil.rmtree(snapshot, ignore_errors=True)
+    finally:
+        # Only remove snapshot on success path (handled in else) or clean unused snap
+        if not moved and snapshot.exists():
+            shutil.rmtree(snapshot, ignore_errors=True)
 
+
+
+def aou_geometry_target_area(geom: Any, *, area_ha_est: float | None = None) -> float | None:
+    """AOU target area in geometry CRS units (deg²) or projected m² — consistent with overlap.
+
+    Prefer shapely geometry ``.area`` so units match ``aou_overlap_area`` from
+    ``positive_area_overlap``. ``area_ha_est`` is a fallback when geom area is
+    unavailable (converted assuming geographic approx is unacceptable — only
+    used when geom.area is 0/None and ha is provided via projected estimate).
+    """
+    if geom is not None:
+        try:
+            a = float(geom.area)
+            if a > 0:
+                return a
+        except Exception:
+            pass
+    if area_ha_est is not None:
+        try:
+            ha = float(area_ha_est)
+        except (TypeError, ValueError):
+            return None
+        if ha > 0:
+            # Keep as ha→m² only when overlaps are also in m²; callers using
+            # geographic overlap should pass geom.area. Stamp via area_ha path
+            # is diagnostic — return None rather than mix units silently.
+            return None
+    return None
+
+
+def verify_release_ids_match(
+    root: "Path",
+    release_id: str,
+    relative_paths: list[str] | None = None,
+) -> list[str]:
+    """Pre-promote gate (R4-4): every listed artifact must carry identical release_id.
+
+    Returns list of failure messages (empty = OK).
+    """
+    from pathlib import Path
+    import json
+
+    root = Path(root)
+    rels = relative_paths or [
+        "meta/run_meta.json",
+        "meta/last_refresh.json",
+        "timeseries.json",
+        "latest_alerts.geojson",
+        "aou/aou_observations.json",
+        "aou/aou_registry.json",
+        "aou/aou_registry.geojson",
+        "decision/run_meta.json",
+        "decision/aou_confidence.json",
+        "decision/aou_suitability_components.json",
+        "decision/aou_evidence_gaps.json",
+    ]
+    failures: list[str] = []
+    for rel in rels:
+        p = root / rel
+        if not p.is_file():
+            # Optional decision files may be absent on standalone skip path
+            if rel.startswith("decision/"):
+                continue
+            failures.append(f"missing:{rel}")
+            continue
+        try:
+            doc = json.loads(p.read_text())
+        except Exception as e:
+            failures.append(f"invalid_json:{rel}:{e}")
+            continue
+        rid = doc.get("release_id")
+        if rid is None and isinstance(doc.get("properties"), dict):
+            rid = doc["properties"].get("release_id")
+        if rid is None and isinstance(doc.get("meta"), dict):
+            rid = doc["meta"].get("release_id")
+        # Registry list shape
+        if rid is None and isinstance(doc.get("units"), list) and doc.get("release_id") is None:
+            rid = doc.get("release_id")
+        if rid != release_id:
+            failures.append(f"id_mismatch:{rel}:got={rid!r}:want={release_id!r}")
+    return failures
+
+
+def publish_release_with_pointer(
+    *,
+    stage_root: "Path",
+    public_root: "Path",
+    release_id: str,
+    relative_paths: list[str],
+    fail_before_pointer: bool = False,
+    fail_mid_copy: int | None = None,
+) -> Path:
+    """Immutable release dir + single CURRENT pointer swap (R4-3).
+
+    1. Copy staged files into ``public_root/releases/<release_id>/``.
+    2. Verify required files exist under that tree.
+    3. Atomically (best-effort) swap ``CURRENT`` pointer / ``latest_release.json``
+       to the new id — **only after** the full tree is OK.
+    4. Also mirror into the legacy live tree via ``atomic_promote_with_rollback``
+       for readers not yet on the pointer (compat); pointer is source of truth
+       for "current" identity.
+
+    On any failure before pointer swap: pointer unchanged; partial release dir
+    is left for diagnostics (never pointed). Does **not** claim OS-atomic rename
+    across filesystems — documents best-effort replace.
+    """
+    import json
+    import shutil
+    import tempfile
+    from pathlib import Path
+
+    stage_root = Path(stage_root)
+    public_root = Path(public_root)
+    releases = public_root / "releases"
+    releases.mkdir(parents=True, exist_ok=True)
+    release_dir = releases / release_id
+    if release_dir.exists():
+        shutil.rmtree(release_dir)
+    release_dir.mkdir(parents=True, exist_ok=True)
+
+    copied: list[str] = []
+    try:
+        for i, rel in enumerate(relative_paths):
+            if fail_mid_copy is not None and i >= int(fail_mid_copy):
+                raise RuntimeError(f"injected mid-copy failure at {rel}")
+            src = stage_root / rel
+            if not src.exists():
+                raise FileNotFoundError(f"staged release missing {rel}")
+            dst = release_dir / rel
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(src, dst)
+            copied.append(rel)
+
+        # Verify tree complete
+        missing = [r for r in relative_paths if not (release_dir / r).is_file()]
+        if missing:
+            raise FileNotFoundError(f"release tree incomplete: {missing}")
+
+        if fail_before_pointer:
+            raise RuntimeError("injected failure before pointer swap")
+
+        # Write pointer payload then replace CURRENT via temp+rename
+        pointer_doc = {
+            "release_id": release_id,
+            "path": f"releases/{release_id}",
+            "artifacts": list(relative_paths),
+            "pointer_semantics": "immutable_release_dir_plus_current",
+            "atomic_claim": False,
+            "note": "Pointer swap after full tree verified; not claiming cross-FS atomic multi-file.",
+        }
+        latest_path = public_root / "latest_release.json"
+        tmp_latest = public_root / f".latest_release.{release_id}.tmp"
+        tmp_latest.write_text(json.dumps(pointer_doc, indent=2))
+        tmp_latest.replace(latest_path)
+
+        current_link = public_root / "CURRENT"
+        # Prefer text pointer file (portable); also try symlink when possible
+        tmp_cur = public_root / f".CURRENT.{release_id}.tmp"
+        tmp_cur.write_text(release_id + "\n")
+        tmp_cur.replace(current_link)
+        try:
+            link_path = public_root / "CURRENT_LINK"
+            if link_path.is_symlink() or link_path.exists():
+                link_path.unlink()
+            link_path.symlink_to(Path("releases") / release_id)
+        except OSError:
+            pass
+
+        # Compat mirror into live tree (legacy readers) with rollback
+        atomic_promote_with_rollback(
+            stage_root=stage_root,
+            public_root=public_root,
+            relative_paths=relative_paths,
+        )
+        return release_dir
+    except Exception:
+        # Pointer unchanged; leave partial release dir for diagnostics (do not delete
+        # if a restore/mirror already partially applied — safer to keep).
+        raise
+
+
+def stamp_release_id_on_doc(doc: dict[str, Any], release_id: str) -> dict[str, Any]:
+    """Stamp identical release_id/run_id on a JSON document (R4-4)."""
+    doc["release_id"] = release_id
+    doc["run_id"] = release_id
+    if isinstance(doc.get("properties"), dict):
+        doc["properties"]["release_id"] = release_id
+        doc["properties"]["run_id"] = release_id
+    return doc
 
 def safe_relpath(path, root) -> str:
     """Return path relative to root, or absolute str if outside root (no throw)."""

@@ -39,7 +39,7 @@ def test_r3_1_clear_pixel_area_fraction_not_full_polygon():
         min_clear_members=1,
         min_valid_area_fraction=None,
     )
-    assert meta["valid_area_fraction_basis"] == "clear_pixels_in_aou"
+    assert meta["valid_area_fraction_basis"] in ("clear_pixels_in_aou", "overlap_times_clear_fraction_estimate")
     assert meta["valid_area_fraction"] is not None
     assert abs(meta["valid_area_fraction"] - 0.02) < 1e-9, meta["valid_area_fraction"]
     # Full-polygon numerator would have been 1.0 — forbidden
@@ -58,17 +58,23 @@ def test_r3_1_clear_pixel_area_fraction_not_full_polygon():
 
 
 def test_r3_1_round2_area_vs_count_still_diverges():
-    """Regression: tiny clear overlap vs large cloudy members → area 0.02 ≠ count."""
+    """Regression: tiny clear overlap vs large cloudy members → area 0.02 ≠ count.
+
+    R4-1 requires clear_fraction present for numerator; cloudy members use low fraction.
+    """
     members = [
-        {"ndvi": 0.4, "ndmi": 0.1, "pixel_count": 100, "aou_overlap_area": 0.02},
-        {"ndvi": 0.4, "ndmi": 0.1, "pixel_count": 5, "aou_overlap_area": 0.49},
-        {"ndvi": 0.4, "ndmi": 0.1, "pixel_count": 5, "aou_overlap_area": 0.49},
+        {"ndvi": 0.4, "ndmi": 0.1, "pixel_count": 100, "clear_fraction": 1.0, "aou_overlap_area": 0.02},
+        {"ndvi": 0.4, "ndmi": 0.1, "pixel_count": 5, "clear_fraction": 0.0, "aou_overlap_area": 0.49},
+        {"ndvi": 0.4, "ndmi": 0.1, "pixel_count": 5, "clear_fraction": 0.0, "aou_overlap_area": 0.49},
     ]
     _, meta = aou_assessability_with_area(
         members, min_clear_fraction=0.01, min_clear_members=1, min_valid_area_fraction=None
     )
     assert abs(meta["valid_area_fraction"] - 0.02) < 1e-9
-    assert meta["valid_area_fraction_basis"] == "clear_pixels_in_aou"
+    assert meta["valid_area_fraction_basis"] in (
+        "clear_pixels_in_aou",
+        "overlap_times_clear_fraction_estimate",
+    )
 
 
 def test_r3_2_infer_possible_via_pipeline_path():

@@ -257,7 +257,7 @@
     "colArea": "Area (ha est.)",
     "noAouYet": "No AOUs yet — run run_ag_probability.py / run_monitor.py.",
     "selectAou": "Select AOU",
-    "aouSeriesStub": "AOU-specific multi-date history is limited; chart may include window-level context series (labeled). Re-run the monitor to grow per-AOU history via persistent IDs.",
+    "aouSeriesStub": "AOU unit charts use unit observations only; regional window is charted separately.",
     "splitChartsNote": "NDVI and NDMI are plotted on separate charts (not a shared axis).",
     "ndreUnavailable": "NDRE unavailable on this artifact — AgProb renormed (NDRE weight → NDVI+NDMI). Full STAC path reads B05 (B06/B07 documented fallback).",
     "windowNdvi": "Window NDVI mean",
@@ -336,7 +336,15 @@
     "unassessableBanner": "Unassessable this date — clear coverage insufficient. Scores are not a current healthy/possible observation.",
     "observationRoleRetained": "observation_role={{role}} (refresh_status={{status}}) — last-good retained; not observed today.",
     "refreshStatusRetained": "refresh_status={{status}} — prior dated scores retained",
-    "discoveryProvisionalBanner": "New AOU — provisional_new until a second clear date (n_clear ≥ 2). Not a validated farm parcel."
+    "discoveryProvisionalBanner": "New AOU — provisional_new until a second clear date (n_clear ≥ 2). Not a validated farm parcel.",
+    "trendInsufficient": "Single clear observation for this unit — insufficient for a trend (AR/EN). One point shown; regional window is separate below.",
+    "trendInsufficientCaption": "Insufficient for trend (n_clear < 2) — unit series only",
+    "unitScope": "AOU unit series (NDVI & NDMI)",
+    "ndviUnit": "AOU NDVI (unit)",
+    "ndviRegional": "Regional NDVI (window)",
+    "coverageUnknown": "clear cov: unknown",
+    "coverageUnknownHint": "Coverage fraction unknown — not displayed as 0% or 100%",
+    "areaGeometryVsClear": "Geometry ha ≠ clear observed area"
   },
   "about": {
     "title": "Method & scientific honesty",
