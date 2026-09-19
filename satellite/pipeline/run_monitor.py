@@ -768,12 +768,23 @@ def main() -> int:
         "dates": timeseries,
     }
 
-    # Atomic publish of monitor artifacts (AgProb publishes again after enrich)
-    stage = Path(tempfile.mkdtemp(prefix=f"monitor_publish_{run_id}_", dir=str(OUT_DATA)))
+    # Cross-stage atomic publish (SCIENCE_LOCKS post-integrity §3 / Integrity deferred C):
+    # Stage monitor outputs; run AOU/AgProb against the stage; promote public ONLY if AOU exits 0.
+    # Forbidden: promoting latest_alerts / timeseries to public before AOU success.
+    stage_root = Path(tempfile.mkdtemp(prefix=f"monitor_aou_stage_{run_id}_", dir=str(OUT_DATA)))
     try:
-        (stage / "meta").mkdir(parents=True, exist_ok=True)
-        (stage / "latest_alerts.geojson").write_text(json.dumps(geojson))
-        (stage / "timeseries.json").write_text(json.dumps(ts_doc, indent=2))
+        # Seed stage with existing public AOU ledger/registry so AgProb can append
+        import os
+        for sub in ("aou", "meta", "decision"):
+            src = OUT_DATA / sub
+            dst = stage_root / sub
+            if src.is_dir():
+                shutil.copytree(src, dst, dirs_exist_ok=True)
+            else:
+                dst.mkdir(parents=True, exist_ok=True)
+
+        (stage_root / "latest_alerts.geojson").write_text(json.dumps(geojson))
+        (stage_root / "timeseries.json").write_text(json.dumps(ts_doc, indent=2))
         refresh_doc = {
             "last_updated": ts_doc["last_updated"],
             "source": "run_monitor",
@@ -784,53 +795,103 @@ def main() -> int:
             "scene_capture_date": latest_date,
             "reprocess_time_utc": reprocess_time,
             "mountain_seeding_hold": True,
+            "publish_gate": "awaiting_aou_success",
+            "coverage_gate": {
+                "min_clear_pixels": MIN_CLEAR_PIXELS,
+                "min_clear_fraction": MIN_CLEAR_FRACTION,
+                "min_clear_pixels_cell": int(os.environ.get("MONITOR_MIN_CLEAR_PIXELS_CELL", "50")),
+                "min_clear_fraction_aou": float(os.environ.get("MONITOR_MIN_CLEAR_FRACTION_AOU", "0.20")),
+            },
         }
-        (stage / "meta" / "last_refresh.json").write_text(json.dumps(refresh_doc, indent=2))
-        (stage / "meta" / "run_meta.json").write_text(json.dumps(refresh_doc, indent=2))
-        shutil.move(str(stage / "latest_alerts.geojson"), str(GEOJSON_PATH))
-        shutil.move(str(stage / "timeseries.json"), str(TIMESERIES_PATH))
-        meta_dir = OUT_DATA / "meta"
-        meta_dir.mkdir(parents=True, exist_ok=True)
-        shutil.move(str(stage / "meta" / "last_refresh.json"), str(meta_dir / "last_refresh.json"))
-        shutil.move(str(stage / "meta" / "run_meta.json"), str(meta_dir / "run_meta.json"))
-    finally:
-        shutil.rmtree(stage, ignore_errors=True)
+        (stage_root / "meta" / "last_refresh.json").write_text(json.dumps(refresh_doc, indent=2))
+        (stage_root / "meta" / "run_meta.json").write_text(json.dumps(refresh_doc, indent=2))
 
-    print(f"Wrote {GEOJSON_PATH} ({len(latest_feats)} features, date={latest_date})")
-    print(f"Wrote {TIMESERIES_PATH} ({len(timeseries)} dates)")
+        print(f"Staged monitor artifacts under {stage_root} (public untouched until AOU OK)")
+        print("\n=== ALERT COUNTS (latest date {}) ===".format(latest_date))
+        for k in sorted(alert_counts.keys()):
+            print(f"  {k}: {alert_counts[k]}")
+        print(f"  TOTAL: {sum(alert_counts.values())}")
 
-    print("\n=== ALERT COUNTS (latest date {}) ===".format(latest_date))
-    for k in sorted(alert_counts.keys()):
-        print(f"  {k}: {alert_counts[k]}")
-    print(f"  TOTAL: {sum(alert_counts.values())}")
+        summary = {
+            "latest_date": latest_date,
+            "alert_counts": dict(alert_counts),
+            "timeseries_dates": [t["date"] for t in timeseries],
+            "sample_stats": timeseries,
+            "errors": errors,
+            "window_bbox": WINDOW_BBOX,
+            "n_latest_features": len(latest_feats),
+            "run_id": run_id,
+            "stac_window": window_meta,
+            "stage_root": str(stage_root),
+        }
+        (PIPELINE_DIR / "_run_summary.json").write_text(json.dumps(summary, indent=2))
 
-    summary = {
-        "latest_date": latest_date,
-        "alert_counts": dict(alert_counts),
-        "timeseries_dates": [t["date"] for t in timeseries],
-        "sample_stats": timeseries,
-        "errors": errors,
-        "window_bbox": WINDOW_BBOX,
-        "n_latest_features": len(latest_feats),
-        "run_id": run_id,
-        "stac_window": window_meta,
-    }
-    (PIPELINE_DIR / "_run_summary.json").write_text(json.dumps(summary, indent=2))
+        # Point AgProb at staging — not public
+        prev_out = os.environ.get("MONITOR_OUT_DATA")
+        os.environ["MONITOR_OUT_DATA"] = str(stage_root)
+        try:
+            from run_ag_probability import main as ag_main
 
-    # Phase-1 engines — fail-hard (non-zero) keep last good already published only if ag fails after
-    try:
-        from run_ag_probability import main as ag_main
+            print("\nRunning Phase-1 Agricultural Probability / AOU engines on staging…")
+            rc = ag_main()
+        except Exception as e:
+            print(f"ERROR: AgProb engines failed: {e}", file=sys.stderr)
+            print("Keeping last-good public set; discarding stage.", file=sys.stderr)
+            return 4
+        finally:
+            if prev_out is None:
+                os.environ.pop("MONITOR_OUT_DATA", None)
+            else:
+                os.environ["MONITOR_OUT_DATA"] = prev_out
 
-        print("\nRunning Phase-1 Agricultural Probability / AOU engines…")
-        rc = ag_main()
         if rc != 0:
-            print(f"ERROR: run_ag_probability exited {rc} — publish incomplete", file=sys.stderr)
+            print(
+                f"ERROR: run_ag_probability exited {rc} — public last-good retained; stage discarded",
+                file=sys.stderr,
+            )
             return rc if rc else 4
-    except Exception as e:
-        print(f"ERROR: AgProb engines failed: {e}", file=sys.stderr)
-        return 4
 
-    return 0
+        # AOU success → single swap of partner-facing artifacts from stage to public
+        promote = [
+            "latest_alerts.geojson",
+            "timeseries.json",
+            "aou/aou_observations.json",
+            "aou/aou_registry.geojson",
+            "aou/aou_registry.json",
+            "meta/last_refresh.json",
+            "meta/run_meta.json",
+        ]
+        # Mark refresh as published only after AOU OK
+        for meta_name in ("last_refresh.json", "run_meta.json"):
+            mp = stage_root / "meta" / meta_name
+            if mp.is_file():
+                try:
+                    doc = json.loads(mp.read_text())
+                    doc["publish_gate"] = "aou_ok"
+                    doc["source"] = "run_monitor+run_ag_probability"
+                    doc["formula_ref"] = (
+                        doc.get("formula_ref")
+                        or "SCIENCE_LOCKS_v0.4_observation_integrity.md + "
+                        "SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md"
+                    )
+                    mp.write_text(json.dumps(doc, indent=2))
+                except Exception:
+                    pass
+
+        for rel in promote:
+            src = stage_root / rel
+            if not src.exists():
+                continue
+            dst = OUT_DATA / rel
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            shutil.move(str(src), str(dst))
+
+        print(f"Promoted staged artifacts → {OUT_DATA} (AOU exit 0)")
+        print(f"Wrote {GEOJSON_PATH} ({len(latest_feats)} features, date={latest_date})")
+        print(f"Wrote {TIMESERIES_PATH} ({len(timeseries)} dates)")
+        return 0
+    finally:
+        shutil.rmtree(stage_root, ignore_errors=True)
 
 
 if __name__ == "__main__":

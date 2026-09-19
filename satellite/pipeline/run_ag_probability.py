@@ -7,7 +7,7 @@ Modes:
      and rewrite latest_alerts with new fields (ndre null if unavailable).
   2) Called after run_monitor.py full STAC path (same writers).
 
-Cite: docs/SCIENCE_LOCKS_v0.4_phase1_2.md + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + SCIENCE_LOCKS_v0.4_observation_integrity.md
+Cite: docs/SCIENCE_LOCKS_v0.4_phase1_2.md + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + SCIENCE_LOCKS_v0.4_observation_integrity.md + SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md
 AOU ≠ farm; DQ ≠ ecological confidence; biotic ≠ pest certainty.
 500 m grid remains fallback/debug (geometry_kind=monitoring_grid_500m).
 """
@@ -37,10 +37,19 @@ from engines.aou_identity import (  # noqa: E402
     segment_probability_mask,
 )
 from engines.observation_integrity import (  # noqa: E402
+    DEFAULT_MIN_CLEAR_FRACTION_AOU,
+    DEFAULT_MIN_CLEAR_FRACTION_CELL,
+    DEFAULT_MIN_CLEAR_MEMBERS_AOU,
+    DEFAULT_MIN_CLEAR_PIXELS_CELL,
     JOIN_RULE,
     alert_counts_match,
+    aou_assessability,
     assign_cells_max_overlap,
+    cell_assessability,
     count_alerts,
+    ledger_persistence_feature,
+    ledger_sequence_rows,
+    ledger_stress_flags,
     member_clear_means,
     positive_area_overlap,
     temporal_evidence_labels,
@@ -54,6 +63,20 @@ from engines.stress import (  # noqa: E402
 
 BARE_NDVI = 0.18
 EXPECTED_PIXELS = 2500
+
+# Published formula_ref (lock §B / post-integrity evaluator)
+FORMULA_REF_POST = (
+    "SCIENCE_LOCKS_v0.4_phase1_2.md + "
+    "SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + "
+    "SCIENCE_LOCKS_v0.4_observation_integrity.md + "
+    "SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md"
+)
+FORMULA_REF_AOU = (
+    "SCIENCE_LOCKS_v0.4_phase1_2.md§1-2 + "
+    "SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + "
+    "SCIENCE_LOCKS_v0.4_observation_integrity.md + "
+    "SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md"
+)
 
 
 def out_data_dir() -> Path:
@@ -81,6 +104,8 @@ def enrich_features(features: list[dict], *, month: int | None) -> list[dict]:
     n_clear_dates is per-cell / AOU-scoped SCL-clear count — NEVER the
     AOI timeseries window length (SCIENCE_LOCKS evaluator endorsement).
     Offline enrich has one observation date per cell → n_clear_dates=1.
+    Stress calls use stress_flags_recent=[] here (renorm/null). After AOU
+    assign, multi-date units (n_clear≥2) re-score via ledger flags.
     """
     # Neighbor NDVI medians for biotic spatial term (simple peer p25 fallback)
     veg_ndvi = [
@@ -204,6 +229,17 @@ def enrich_features(features: list[dict], *, month: int | None) -> list[dict]:
             p[k] = v
         if not biotic["possible_biotic_stress"] and not te["temporal_evidence_sufficient"]:
             p["biotic_status"] = "unknown_insufficient_temporal_evidence"
+            p["biotic_unknown_reason"] = "insufficient_temporal_evidence"
+        # Per-cell clear-coverage gate (scene clear ≠ cell assessable)
+        p["assessability"] = cell_assessability(
+            p,
+            min_clear_pixels=DEFAULT_MIN_CLEAR_PIXELS_CELL,
+            min_clear_fraction=DEFAULT_MIN_CLEAR_FRACTION_CELL,
+        )
+        if p["assessability"] == "unassessable":
+            # Do not invent stress/ag scores as observed — keep indices, stamp honesty
+            p["alert"] = "unclear"
+            p["ag_class"] = "unassessable"
 
         out.append({"type": "Feature", "geometry": f["geometry"], "properties": p})
     return out
@@ -252,6 +288,117 @@ def _aou_scoped_clear_count(
     return len(dates)
 
 
+
+
+def _unit_from_ledger(ledger: dict[str, Any] | None, aou_id: str) -> dict[str, Any] | None:
+    if not ledger:
+        return None
+    for unit in ledger.get("units") or []:
+        if unit.get("aou_id") == aou_id:
+            return unit
+    return None
+
+
+def _persistence_feature_from_ledger(
+    ledger: dict[str, Any] | None,
+    aou_id: str,
+    *,
+    pending_ndvi: float | None = None,
+    pending_date: str | None = None,
+) -> tuple[float | None, int, int, str]:
+    """Ledger-sequence persistence only — never invent 0.5 from n_clear>=2 alone."""
+    unit = _unit_from_ledger(ledger, aou_id)
+    rows = ledger_sequence_rows(unit)
+    if pending_date and pending_ndvi is not None:
+        # Include pending clear observation in sequence for this run
+        if not any(str(r.get("date")) == str(pending_date) for r in rows):
+            rows = list(rows) + [{"date": str(pending_date), "ndvi": float(pending_ndvi)}]
+            rows.sort(key=lambda r: str(r["date"]))
+    feat, n_clear, n_above = ledger_persistence_feature(rows, bare_ndvi=BARE_NDVI)
+    from engines.ag_probability import persistence_status as _ps
+    status = _ps(n_clear)
+    if n_clear >= 2 and feat is None:
+        status = "insufficient_sequence"
+    return feat, n_clear, n_above, status
+
+
+
+def _rescore_stress_with_ledger_flags(
+    props: dict,
+    *,
+    water_flags: list[bool],
+    vigor_flags: list[bool],
+    month: int | None,
+    n_clear_dates: int,
+) -> None:
+    """Feed ledger stress_flags into water/vigor scores when n_clear≥2.
+
+    While n_clear < 2, keep empty-flag renorm/null persistence path.
+    Mutates props in place (shared with Feature.properties for members).
+    """
+    ndvi = props.get("ndvi")
+    ndmi = props.get("ndmi")
+    if ndvi is None or ndmi is None:
+        return
+    # Single-date / insufficient sequence → empty flags (renorm), not invented healthy
+    use_flags = n_clear_dates >= 2
+    w_flags = list(water_flags) if use_flags else []
+    v_flags = list(vigor_flags) if use_flags else []
+    ndre = props.get("ndre")
+    ndre_available = bool(props.get("ndre_available", False) and ndre is not None)
+    water = water_stress_score(
+        ndmi=ndmi,
+        ndmi_p25_veg=props.get("ndmi_p25_veg", -0.05),
+        ndmi_p50_veg=None,
+        ndmi_hist_median=None,
+        stress_flags_recent=w_flags,
+        month=month,
+        ndvi=ndvi,
+        n_clear_dates=n_clear_dates,
+    )
+    vigor = vigor_stress_score(
+        ndvi=ndvi,
+        ndvi_p25_veg=props.get("ndvi_p25_veg", 0.25),
+        ndvi_p50_veg=None,
+        ndvi_hist_median=None,
+        ndre=ndre if ndre_available else None,
+        stress_flags_recent=v_flags,
+        month=month,
+        n_clear_dates=n_clear_dates,
+    )
+    props["water_stress_score"] = water["water_stress_score"]
+    props["vigor_stress_score"] = vigor["vigor_stress_score"]
+    props["stress_components_water"] = water["components"]
+    props["stress_components_vigor"] = vigor["components"]
+    props["stress_status"] = "expert_v1"
+    props["formula_ref_stress"] = water["formula_ref"]
+    props["stress_flags_recent_water"] = w_flags
+    props["stress_flags_recent_vigor"] = v_flags
+    if use_flags:
+        # AOU-scoped multi-date evidence for stress persistence term
+        props["n_clear_dates"] = n_clear_dates
+    dq = props.get("data_quality_confidence")
+    if dq is None:
+        dq = data_quality_confidence(props.get("cloud_cover"), props.get("pixel_count"))
+        props["data_quality_confidence"] = dq
+    props["alert"] = map_stress_to_alert(
+        ndvi=ndvi,
+        bare_floor=BARE_NDVI,
+        water=water,
+        vigor=vigor,
+        data_quality_confidence=dq,
+    )
+
+
+def _stress_flags_from_ledger(
+    ledger: dict[str, Any] | None,
+    aou_id: str,
+    *,
+    kind: str,
+) -> list[bool]:
+    """Empty flags mean renorm — never 'no stress / healthy'."""
+    return ledger_stress_flags(ledger_sequence_rows(_unit_from_ledger(ledger, aou_id)), kind=kind)
+
 def _current_detection_for_run(
     *,
     intersecting: list[dict],
@@ -285,15 +432,21 @@ def _sync_registry_from_ledger(
         if dates:
             rec["first_seen_date"] = dates[0]
             rec["last_seen_date"] = dates[-1]
+        rows = ledger_sequence_rows(unit)
+        pers_feat, n_seq, n_above = ledger_persistence_feature(rows, bare_ndvi=BARE_NDVI)
+        rec["n_dates_above_bare"] = n_above
+        rec["persistence_feature"] = pers_feat  # None when sequence insufficient
         prob = rec.get("agricultural_probability")
         if prob is not None:
             rec["ag_class"] = ag_class_from_probability(
                 float(prob),
                 n_clear_dates=n_clear,
-                persistence_feature=0.0 if n_clear < 2 else 0.5,
+                persistence_feature=0.0 if pers_feat is None else float(pers_feat),
                 single_date_only=n_clear < 2,
             )
-        rec["persistence_status"] = persistence_status(n_clear)
+        rec["persistence_status"] = persistence_status(n_clear) if n_clear < 2 else (
+            persistence_status(n_clear) if pers_feat is not None else "insufficient_sequence"
+        )
 
     for feat in aou_features:
         p = feat["properties"]
@@ -308,15 +461,19 @@ def _sync_registry_from_ledger(
         if unit.get("n_clear_dates") is not None:
             p["n_clear_dates"] = int(unit["n_clear_dates"])
             n_clear = int(unit["n_clear_dates"])
+        rows = ledger_sequence_rows(unit)
+        pers_feat, n_seq, n_above = ledger_persistence_feature(rows, bare_ndvi=BARE_NDVI)
+        p["n_dates_above_bare"] = n_above
+        p["persistence_feature"] = pers_feat
         prob = p.get("agricultural_probability")
         if prob is not None:
             p["ag_class"] = ag_class_from_probability(
                 float(prob),
                 n_clear_dates=n_clear,
-                persistence_feature=0.0 if n_clear < 2 else 0.5,
+                persistence_feature=0.0 if pers_feat is None else float(pers_feat),
                 single_date_only=n_clear < 2,
             )
-        p["persistence_status"] = persistence_status(n_clear)
+        p["persistence_status"] = persistence_status(n_clear) if (n_clear < 2 or pers_feat is not None) else "insufficient_sequence"
 
 
 def assign_aou_ids(
@@ -344,16 +501,22 @@ def assign_aou_ids(
     join_meta = {
         "join_rule": JOIN_RULE,
         "join_predicate": "positive_area_overlap",
-        "formula_ref": "SCIENCE_LOCKS_v0.4_observation_integrity.md§1",
+        "formula_ref": "SCIENCE_LOCKS_v0.4_observation_integrity.md§1 + SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md",
     }
 
-    def _honest_class(prob: float | None, n_clear: int) -> str | None:
+    def _honest_class(
+        prob: float | None,
+        n_clear: int,
+        persistence_feature: float | None = None,
+    ) -> str | None:
         if prob is None:
             return None
+        # Forbidden: invent 0.5 solely from n_clear>=2 without ledger sequence
+        pers = 0.0 if persistence_feature is None else float(persistence_feature)
         return ag_class_from_probability(
             float(prob),
             n_clear_dates=n_clear,
-            persistence_feature=0.0 if n_clear < 2 else 0.5,
+            persistence_feature=pers,
             single_date_only=n_clear < 2,
         )
 
@@ -398,9 +561,22 @@ def assign_aou_ids(
             bucket = by_aou.get(aou_id) or {"members": [], "vegetated": []}
             members = bucket["members"]
             vegetated = bucket["vegetated"]
-            mean_ndvi, mean_ndmi = member_clear_means(members)
+            # Per-cell assessability before AOU aggregate
+            for m in members:
+                m["assessability"] = cell_assessability(
+                    m,
+                    min_clear_pixels=DEFAULT_MIN_CLEAR_PIXELS_CELL,
+                    min_clear_fraction=DEFAULT_MIN_CLEAR_FRACTION_CELL,
+                )
+            assess, assess_meta = aou_assessability(
+                members,
+                min_clear_fraction=DEFAULT_MIN_CLEAR_FRACTION_AOU,
+                min_clear_members=DEFAULT_MIN_CLEAR_MEMBERS_AOU,
+            )
+            clear_members = [m for m in members if m.get("assessability") == "assessable"]
+            mean_ndvi, mean_ndmi = member_clear_means(clear_members)
 
-            has_new = mean_ndvi is not None and mean_ndmi is not None
+            has_new = assess == "assessable" and mean_ndvi is not None and mean_ndmi is not None
             pending_ndvi = mean_ndvi if has_new else None
             n_clear = _aou_scoped_clear_count(
                 ledger,
@@ -408,13 +584,48 @@ def assign_aou_ids(
                 pending_date=observation_date if has_new else None,
                 pending_ndvi=pending_ndvi,
             )
+            pers_feat, _ns, n_above, pers_stat = _persistence_feature_from_ledger(
+                ledger,
+                aou_id,
+                pending_ndvi=pending_ndvi,
+                pending_date=observation_date if has_new else None,
+            )
+            water_flags = _stress_flags_from_ledger(ledger, aou_id, kind="water")
+            vigor_flags = _stress_flags_from_ledger(ledger, aou_id, kind="vigor")
+            # A: when n_clear≥2, feed ledger flags into member stress scores
+            # (enrich_features still passes [] at n_clear=1 — renorm/null OK)
+            if n_clear >= 2 and members:
+                for m in members:
+                    _rescore_stress_with_ledger_flags(
+                        m,
+                        water_flags=water_flags,
+                        vigor_flags=vigor_flags,
+                        month=month,
+                        n_clear_dates=n_clear,
+                    )
             te = temporal_evidence_labels(n_clear)
 
-            if has_new:
+            if not members:
+                # No positive-area members this run — keep prior dated scores; do not advance
+                refresh_status = "no_new_observation"
+                mean_prob = rec.get("agricultural_probability")
+                ag_class = _honest_class(mean_prob, n_clear, pers_feat) or rec.get("ag_class")
+                pers_status = pers_stat or persistence_status(n_clear)
+                stamp_date = rec.get("last_seen_date")
+                out_ndvi, out_ndmi = rec.get("ndvi"), rec.get("ndmi")
+            elif assess == "unassessable":
+                # Members present but clear-coverage below gate — unassessable, no date advance
+                refresh_status = "unassessable_coverage"
+                mean_prob = rec.get("agricultural_probability")
+                ag_class = "unassessable"
+                pers_status = pers_stat or persistence_status(n_clear)
+                stamp_date = rec.get("last_seen_date")
+                out_ndvi, out_ndmi = rec.get("ndvi"), rec.get("ndmi")
+            elif has_new:
                 scored = _score_unit_from_ndvi_ndmi(mean_ndvi, mean_ndmi, month, n_clear)
                 mean_prob = scored["agricultural_probability"]
-                ag_class = scored["ag_class"] or _honest_class(mean_prob, n_clear)
-                pers_status = scored.get("persistence_status") or persistence_status(n_clear)
+                ag_class = scored["ag_class"] or _honest_class(mean_prob, n_clear, pers_feat)
+                pers_status = pers_stat or scored.get("persistence_status") or persistence_status(n_clear)
                 refresh_status = "refreshed"
                 stamp_date = observation_date
                 rec["ndvi"] = round(mean_ndvi, 4)
@@ -427,8 +638,8 @@ def assign_aou_ids(
                 if not members:
                     refresh_status = "no_new_observation"
                 mean_prob = rec.get("agricultural_probability")
-                ag_class = _honest_class(mean_prob, n_clear) or rec.get("ag_class")
-                pers_status = persistence_status(n_clear)
+                ag_class = _honest_class(mean_prob, n_clear, pers_feat) or rec.get("ag_class")
+                pers_status = pers_stat or persistence_status(n_clear)
                 stamp_date = rec.get("last_seen_date")  # prior date only
                 out_ndvi, out_ndmi = rec.get("ndvi"), rec.get("ndmi")
 
@@ -442,9 +653,15 @@ def assign_aou_ids(
             rec["agricultural_probability"] = mean_prob
             rec["ag_class"] = ag_class
             rec["n_clear_dates"] = n_clear
+            rec["n_dates_above_bare"] = n_above
+            rec["persistence_feature"] = pers_feat
             rec["persistence_status"] = pers_status
             rec["current_detection"] = detection
             rec["refresh_status"] = refresh_status
+            rec["assessability"] = assess
+            rec["assessability_meta"] = assess_meta
+            rec["stress_flags_recent_water"] = water_flags
+            rec["stress_flags_recent_vigor"] = vigor_flags
             rec["active"] = True if rec.get("active", True) else False
             for k, v in te.items():
                 rec[k] = v
@@ -473,16 +690,37 @@ def assign_aou_ids(
                         "geometry_kind": "aou_segment",
                         "aou_not_official_farm": True,
                         "n_clear_dates": n_clear,
+                        "n_dates_above_bare": n_above,
+                        "persistence_feature": pers_feat,
                         "persistence_status": pers_status,
                         "persistence_estimated_from_window": False,
+                        "assessability": assess,
+                        "clear_member_count": assess_meta.get("clear_member_count"),
+                        "clear_fraction": assess_meta.get("clear_fraction"),
+                        "stress_flags_recent_water": water_flags,
+                        "stress_flags_recent_vigor": vigor_flags,
+                        "water_stress_score": (
+                            round(
+                                sum(m.get("water_stress_score") or 0 for m in (clear_members or members))
+                                / max(1, len(clear_members or members)),
+                                2,
+                            )
+                            if (clear_members or members)
+                            else None
+                        ),
+                        "vigor_stress_score": (
+                            round(
+                                sum(m.get("vigor_stress_score") or 0 for m in (clear_members or members))
+                                / max(1, len(clear_members or members)),
+                                2,
+                            )
+                            if (clear_members or members)
+                            else None
+                        ),
                         "evidence_level": "satellite_only",
                         "product_stamp": "provisional_satellite_analytical_service",
                         "najd_model_validation": "not_validated",
-                        "formula_ref": (
-                            "SCIENCE_LOCKS_v0.4_phase1_2.md§1-2 + "
-                            "SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + "
-                            "SCIENCE_LOCKS_v0.4_observation_integrity.md"
-                        ),
+                        "formula_ref": FORMULA_REF_AOU,
                         "date": stamp_date,
                         "join_rule": JOIN_RULE,
                         **te,
@@ -579,11 +817,7 @@ def assign_aou_ids(
                         "evidence_level": "satellite_only",
                         "product_stamp": "provisional_satellite_analytical_service",
                         "najd_model_validation": "not_validated",
-                        "formula_ref": (
-                            "SCIENCE_LOCKS_v0.4_phase1_2.md§1-2 + "
-                            "SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + "
-                            "SCIENCE_LOCKS_v0.4_observation_integrity.md"
-                        ),
+                        "formula_ref": FORMULA_REF_AOU,
                         "date": stamp_date,
                         "join_rule": JOIN_RULE,
                         **te,
@@ -743,7 +977,8 @@ def build_observations(
             "SCIENCE_LOCKS_v0.4_phase1_2.md + "
             "SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + "
             "SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + "
-            "SCIENCE_LOCKS_v0.4_observation_integrity.md"
+            "SCIENCE_LOCKS_v0.4_observation_integrity.md + "
+            "SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md"
         ),
         "units": units,
     }
@@ -817,7 +1052,7 @@ def main() -> int:
                 "biotic_risk",
                 "aou_identity",
             ],
-            "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md",
+            "formula_ref": FORMULA_REF_POST,
             "ndre_note": "NDRE unavailable on offline enrich of existing grid; full STAC path reads B05/B06/B07",
             "geometry_kinds": ["monitoring_grid_500m", "aou_segment"],
             "aou_count": len(aou_feats),
@@ -858,7 +1093,8 @@ def main() -> int:
     registry["najd_model_validation"] = "not_validated"
     registry["formula_ref"] = (
         "SCIENCE_LOCKS_v0.4_phase1_2.md§2 + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + "
-        "SCIENCE_LOCKS_v0.4_observation_integrity.md"
+        "SCIENCE_LOCKS_v0.4_observation_integrity.md + "
+        "SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md"
     )
     registry["active_means"] = "registry_identity_only"
     registry["join_rule"] = join_meta.get("join_rule", JOIN_RULE)
@@ -884,9 +1120,7 @@ def main() -> int:
     # --- Unify timeseries alert_counts with enriched (single classifier) ---
     ts = ts if isinstance(ts, dict) else {"dates": []}
     ts["phase"] = "0.4.1-agriculture"
-    ts["formula_ref"] = (
-        "SCIENCE_LOCKS_v0.4_phase1_2.md + SCIENCE_LOCKS_v0.4_observation_integrity.md"
-    )
+    ts["formula_ref"] = FORMULA_REF_POST
     ts["run_id"] = run_id
     method = ts.setdefault("method", {})
     indices = list(method.get("indices") or [])
@@ -969,17 +1203,24 @@ def main() -> int:
                 "aou/aou_observations.json",
             ],
             "phase": "0.4.1-agriculture",
-            "formula_ref": (
-                "SCIENCE_LOCKS_v0.4_phase1_2.md + "
-                "SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + "
-                "SCIENCE_LOCKS_v0.4_observation_integrity.md"
-            ),
+            "formula_ref": FORMULA_REF_POST,
             "join_rule": join_meta.get("join_rule", JOIN_RULE),
             "join_predicate": "positive_area_overlap",
             "consistency_status": "ok",
             "mountain_seeding_hold": True,
             "observation_date": date,
             "alert_counts": dict(alert_counts),
+            # lock §1 — cell/AOU clear-coverage thresholds
+            "min_clear_pixels_cell": DEFAULT_MIN_CLEAR_PIXELS_CELL,
+            "min_clear_fraction_cell": DEFAULT_MIN_CLEAR_FRACTION_CELL,
+            "min_clear_fraction_aou": DEFAULT_MIN_CLEAR_FRACTION_AOU,
+            "min_clear_members_aou": DEFAULT_MIN_CLEAR_MEMBERS_AOU,
+            "coverage_gate": {
+                "min_clear_pixels_cell": DEFAULT_MIN_CLEAR_PIXELS_CELL,
+                "min_clear_fraction_cell": DEFAULT_MIN_CLEAR_FRACTION_CELL,
+                "min_clear_fraction_aou": DEFAULT_MIN_CLEAR_FRACTION_AOU,
+                "min_clear_members_aou": DEFAULT_MIN_CLEAR_MEMBERS_AOU,
+            },
         }
         (stage / "meta" / "last_refresh.json").write_text(json.dumps(refresh, indent=2))
         (stage / "meta" / "run_meta.json").write_text(json.dumps(refresh, indent=2))

@@ -1,7 +1,7 @@
 {
   "type": "aou_registry",
   "version": "0.4.1",
-  "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72 + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md",
+  "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72 + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + SCIENCE_LOCKS_v0.4_observation_integrity.md",
   "units": [
     {
       "aou_id": "AOU-NJ-000001",
@@ -39,13 +39,36 @@
         ]
       },
       "area_ha_est": 25.106,
-      "agricultural_probability": 61.73,
+      "agricultural_probability": 58.82,
       "ag_class": "possible",
       "region": "NJ",
       "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72",
       "n_clear_dates": 1,
       "persistence_status": "single_date_insufficient",
-      "current_detection": "detected"
+      "current_detection": "detected",
+      "ndvi": 0.5868,
+      "ndmi": 0.1688,
+      "n_dates_above_bare": 0,
+      "persistence_feature": null,
+      "refresh_status": "refreshed",
+      "assessability": "assessable",
+      "assessability_meta": {
+        "member_count": 1,
+        "clear_member_count": 1,
+        "clear_fraction": 1.0,
+        "min_clear_fraction_aou": 0.2,
+        "min_clear_members_aou": 1
+      },
+      "stress_flags_recent_water": [
+        true
+      ],
+      "stress_flags_recent_vigor": [
+        true
+      ],
+      "temporal_evidence_sufficient": false,
+      "temporal_evidence_ar": "\u0623\u062f\u0644\u0629 \u0632\u0645\u0646\u064a\u0629 \u063a\u064a\u0631 \u0643\u0627\u0641\u064a\u0629",
+      "temporal_evidence_en": "Insufficient temporal evidence",
+      "biotic_unknown_reason": "insufficient_temporal_evidence"
     },
     {
       "aou_id": "AOU-NJ-000002",
@@ -107,13 +130,36 @@
         ]
       },
       "area_ha_est": 100.416,
-      "agricultural_probability": 58.21,
+      "agricultural_probability": 54.53,
       "ag_class": "possible",
       "region": "NJ",
       "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72",
       "n_clear_dates": 1,
       "persistence_status": "single_date_insufficient",
-      "current_detection": "detected"
+      "current_detection": "detected",
+      "ndvi": 0.5572,
+      "ndmi": 0.1489,
+      "n_dates_above_bare": 0,
+      "persistence_feature": null,
+      "refresh_status": "refreshed",
+      "assessability": "assessable",
+      "assessability_meta": {
+        "member_count": 4,
+        "clear_member_count": 4,
+        "clear_fraction": 1.0,
+        "min_clear_fraction_aou": 0.2,
+        "min_clear_members_aou": 1
+      },
+      "stress_flags_recent_water": [
+        false
+      ],
+      "stress_flags_recent_vigor": [
+        false
+      ],
+      "temporal_evidence_sufficient": false,
+      "temporal_evidence_ar": "\u0623\u062f\u0644\u0629 \u0632\u0645\u0646\u064a\u0629 \u063a\u064a\u0631 \u0643\u0627\u0641\u064a\u0629",
+      "temporal_evidence_en": "Insufficient temporal evidence",
+      "biotic_unknown_reason": "insufficient_temporal_evidence"
     },
     {
       "aou_id": "AOU-NJ-000003",
@@ -159,13 +205,36 @@
         ]
       },
       "area_ha_est": 50.208,
-      "agricultural_probability": 64.58,
+      "agricultural_probability": 62.29,
       "ag_class": "possible",
       "region": "NJ",
       "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72",
       "n_clear_dates": 1,
       "persistence_status": "single_date_insufficient",
-      "current_detection": "detected"
+      "current_detection": "detected",
+      "ndvi": 0.5997,
+      "ndmi": 0.1977,
+      "n_dates_above_bare": 0,
+      "persistence_feature": null,
+      "refresh_status": "refreshed",
+      "assessability": "assessable",
+      "assessability_meta": {
+        "member_count": 2,
+        "clear_member_count": 2,
+        "clear_fraction": 1.0,
+        "min_clear_fraction_aou": 0.2,
+        "min_clear_members_aou": 1
+      },
+      "stress_flags_recent_water": [
+        false
+      ],
+      "stress_flags_recent_vigor": [
+        false
+      ],
+      "temporal_evidence_sufficient": false,
+      "temporal_evidence_ar": "\u0623\u062f\u0644\u0629 \u0632\u0645\u0646\u064a\u0629 \u063a\u064a\u0631 \u0643\u0627\u0641\u064a\u0629",
+      "temporal_evidence_en": "Insufficient temporal evidence",
+      "biotic_unknown_reason": "insufficient_temporal_evidence"
     },
     {
       "aou_id": "AOU-NJ-000004",
@@ -203,13 +272,36 @@
         ]
       },
       "area_ha_est": 25.098,
-      "agricultural_probability": 52.65,
+      "agricultural_probability": 47.75,
       "ag_class": "possible",
       "region": "NJ",
       "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72",
       "n_clear_dates": 1,
       "persistence_status": "single_date_insufficient",
-      "current_detection": "detected"
+      "current_detection": "detected",
+      "ndvi": 0.5199,
+      "ndmi": 0.1063,
+      "n_dates_above_bare": 0,
+      "persistence_feature": null,
+      "refresh_status": "refreshed",
+      "assessability": "assessable",
+      "assessability_meta": {
+        "member_count": 1,
+        "clear_member_count": 1,
+        "clear_fraction": 1.0,
+        "min_clear_fraction_aou": 0.2,
+        "min_clear_members_aou": 1
+      },
+      "stress_flags_recent_water": [
+        true
+      ],
+      "stress_flags_recent_vigor": [
+        true
+      ],
+      "temporal_evidence_sufficient": false,
+      "temporal_evidence_ar": "\u0623\u062f\u0644\u0629 \u0632\u0645\u0646\u064a\u0629 \u063a\u064a\u0631 \u0643\u0627\u0641\u064a\u0629",
+      "temporal_evidence_en": "Insufficient temporal evidence",
+      "biotic_unknown_reason": "insufficient_temporal_evidence"
     },
     {
       "aou_id": "AOU-NJ-000005",
@@ -247,13 +339,36 @@
         ]
       },
       "area_ha_est": 25.1,
-      "agricultural_probability": 46.22,
+      "agricultural_probability": 39.9,
       "ag_class": "possible",
       "region": "NJ",
       "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72",
       "n_clear_dates": 1,
       "persistence_status": "single_date_insufficient",
-      "current_detection": "detected"
+      "current_detection": "detected",
+      "ndvi": 0.5103,
+      "ndmi": 0.0184,
+      "n_dates_above_bare": 0,
+      "persistence_feature": null,
+      "refresh_status": "refreshed",
+      "assessability": "assessable",
+      "assessability_meta": {
+        "member_count": 1,
+        "clear_member_count": 1,
+        "clear_fraction": 1.0,
+        "min_clear_fraction_aou": 0.2,
+        "min_clear_members_aou": 1
+      },
+      "stress_flags_recent_water": [
+        true
+      ],
+      "stress_flags_recent_vigor": [
+        true
+      ],
+      "temporal_evidence_sufficient": false,
+      "temporal_evidence_ar": "\u0623\u062f\u0644\u0629 \u0632\u0645\u0646\u064a\u0629 \u063a\u064a\u0631 \u0643\u0627\u0641\u064a\u0629",
+      "temporal_evidence_en": "Insufficient temporal evidence",
+      "biotic_unknown_reason": "insufficient_temporal_evidence"
     },
     {
       "aou_id": "AOU-NJ-000006",
@@ -299,13 +414,36 @@
         ]
       },
       "area_ha_est": 50.201,
-      "agricultural_probability": 48.56,
+      "agricultural_probability": 42.76,
       "ag_class": "possible",
       "region": "NJ",
       "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72",
       "n_clear_dates": 1,
       "persistence_status": "single_date_insufficient",
-      "current_detection": "detected"
+      "current_detection": "detected",
+      "ndvi": 0.4816,
+      "ndmi": 0.0876,
+      "n_dates_above_bare": 0,
+      "persistence_feature": null,
+      "refresh_status": "refreshed",
+      "assessability": "assessable",
+      "assessability_meta": {
+        "member_count": 2,
+        "clear_member_count": 2,
+        "clear_fraction": 1.0,
+        "min_clear_fraction_aou": 0.2,
+        "min_clear_members_aou": 1
+      },
+      "stress_flags_recent_water": [
+        true
+      ],
+      "stress_flags_recent_vigor": [
+        true
+      ],
+      "temporal_evidence_sufficient": false,
+      "temporal_evidence_ar": "\u0623\u062f\u0644\u0629 \u0632\u0645\u0646\u064a\u0629 \u063a\u064a\u0631 \u0643\u0627\u0641\u064a\u0629",
+      "temporal_evidence_en": "Insufficient temporal evidence",
+      "biotic_unknown_reason": "insufficient_temporal_evidence"
     },
     {
       "aou_id": "AOU-NJ-000007",
@@ -343,13 +481,36 @@
         ]
       },
       "area_ha_est": 25.099,
-      "agricultural_probability": 64.8,
+      "agricultural_probability": 62.56,
       "ag_class": "possible",
       "region": "NJ",
       "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72",
       "n_clear_dates": 1,
       "persistence_status": "single_date_insufficient",
-      "current_detection": "detected"
+      "current_detection": "detected",
+      "ndvi": 0.6518,
+      "ndmi": 0.141,
+      "n_dates_above_bare": 0,
+      "persistence_feature": null,
+      "refresh_status": "refreshed",
+      "assessability": "assessable",
+      "assessability_meta": {
+        "member_count": 1,
+        "clear_member_count": 1,
+        "clear_fraction": 1.0,
+        "min_clear_fraction_aou": 0.2,
+        "min_clear_members_aou": 1
+      },
+      "stress_flags_recent_water": [
+        true
+      ],
+      "stress_flags_recent_vigor": [
+        true
+      ],
+      "temporal_evidence_sufficient": false,
+      "temporal_evidence_ar": "\u0623\u062f\u0644\u0629 \u0632\u0645\u0646\u064a\u0629 \u063a\u064a\u0631 \u0643\u0627\u0641\u064a\u0629",
+      "temporal_evidence_en": "Insufficient temporal evidence",
+      "biotic_unknown_reason": "insufficient_temporal_evidence"
     },
     {
       "aou_id": "AOU-NJ-000008",
@@ -387,13 +548,36 @@
         ]
       },
       "area_ha_est": 25.104,
-      "agricultural_probability": 65.47,
+      "agricultural_probability": 63.37,
       "ag_class": "possible",
       "region": "NJ",
       "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72",
       "n_clear_dates": 1,
       "persistence_status": "single_date_insufficient",
-      "current_detection": "detected"
+      "current_detection": "detected",
+      "ndvi": 0.6392,
+      "ndmi": 0.1658,
+      "n_dates_above_bare": 0,
+      "persistence_feature": null,
+      "refresh_status": "refreshed",
+      "assessability": "assessable",
+      "assessability_meta": {
+        "member_count": 1,
+        "clear_member_count": 1,
+        "clear_fraction": 1.0,
+        "min_clear_fraction_aou": 0.2,
+        "min_clear_members_aou": 1
+      },
+      "stress_flags_recent_water": [
+        true
+      ],
+      "stress_flags_recent_vigor": [
+        true
+      ],
+      "temporal_evidence_sufficient": false,
+      "temporal_evidence_ar": "\u0623\u062f\u0644\u0629 \u0632\u0645\u0646\u064a\u0629 \u063a\u064a\u0631 \u0643\u0627\u0641\u064a\u0629",
+      "temporal_evidence_en": "Insufficient temporal evidence",
+      "biotic_unknown_reason": "insufficient_temporal_evidence"
     },
     {
       "aou_id": "AOU-NJ-000009",
@@ -431,16 +615,40 @@
         ]
       },
       "area_ha_est": 25.102,
-      "agricultural_probability": 49.46,
+      "agricultural_probability": 43.85,
       "ag_class": "possible",
       "region": "NJ",
       "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a72",
       "n_clear_dates": 1,
       "persistence_status": "single_date_insufficient",
-      "current_detection": "detected"
+      "current_detection": "detected",
+      "ndvi": 0.5001,
+      "ndmi": 0.08,
+      "n_dates_above_bare": 0,
+      "persistence_feature": null,
+      "refresh_status": "refreshed",
+      "assessability": "assessable",
+      "assessability_meta": {
+        "member_count": 1,
+        "clear_member_count": 1,
+        "clear_fraction": 1.0,
+        "min_clear_fraction_aou": 0.2,
+        "min_clear_members_aou": 1
+      },
+      "stress_flags_recent_water": [
+        true
+      ],
+      "stress_flags_recent_vigor": [
+        true
+      ],
+      "temporal_evidence_sufficient": false,
+      "temporal_evidence_ar": "\u0623\u062f\u0644\u0629 \u0632\u0645\u0646\u064a\u0629 \u063a\u064a\u0631 \u0643\u0627\u0641\u064a\u0629",
+      "temporal_evidence_en": "Insufficient temporal evidence",
+      "biotic_unknown_reason": "insufficient_temporal_evidence"
     }
   ],
-  "updated_at": "2026-09-13T14:56:53.746935+00:00",
+  "updated_at": "2026-09-19T11:36:53.265074+00:00",
   "najd_model_validation": "not_validated",
-  "active_means": "registry_identity_only"
+  "active_means": "registry_identity_only",
+  "join_rule": "max_overlap_area"
 }
