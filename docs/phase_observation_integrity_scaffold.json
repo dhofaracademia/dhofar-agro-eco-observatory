@@ -1,0 +1,57 @@
+{
+  "lock_id": "SCIENCE_LOCKS_v0.4_observation_integrity",
+  "date": "2026-09-19",
+  "timezone": "Asia/Muscat",
+  "owner_pipeline_role": "Agrofostery Scientist",
+  "verdict": "go_with_fixes",
+  "against_main": "d3a1b6e",
+  "ai_pipeline_role": true,
+  "human_review": "pending",
+  "mountain_seeding_hold": true,
+  "acceptance_bar": [
+    "new_observation_changes_result",
+    "missing_observation_shown_as_data_loss",
+    "rerun_must_not_stamp_old_scores_with_new_dates"
+  ],
+  "p0_must_fix": [
+    "positive_area_overlap_join",
+    "clear_stale_cell_aou_ids",
+    "declared_multi_aou_rule",
+    "no_advance_date_without_new_clear_obs",
+    "stale_stamp_when_no_refresh",
+    "ledger_append_upsert_align_pr24",
+    "n_clear_from_ledger",
+    "empty_stress_not_no_biotic",
+    "alert_timeseries_counts_match_same_run"
+  ],
+  "p1": [
+    "stac_end_equals_run_time_default",
+    "independent_clear_pixel_coverage_gate",
+    "missing_scl_block_or_unclassified",
+    "atomic_publish_single_run_id",
+    "engine_fail_nonzero_keep_last_good"
+  ],
+  "p2": [
+    "chart_scope_aou_vs_regional_labels",
+    "geometry_ha_vs_cell_ha_vs_clear_coverage_pct"
+  ],
+  "join_rule_enum": [
+    "max_overlap_area",
+    "area_weighted"
+  ],
+  "forbidden": [
+    "boundary_only_intersects",
+    "fake_date_advance",
+    "old_scores_new_date",
+    "window_as_aou_n_clear",
+    "empty_history_as_no_biotic",
+    "divergent_alert_timeseries_counts",
+    "partial_publish_on_fail",
+    "lift_mountain_3b"
+  ],
+  "merged_bases": {
+    "pr24": "68b97fbc9096e2405f06462222b2817ad892447e",
+    "pr25": "d3a1b6e49fa950736c6ecd71f49ad3eae2b810ff"
+  },
+  "hold_merge_for_science_glance": true
+}

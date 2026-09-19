@@ -222,3 +222,12 @@ Unlock to a stronger stamp is **later**. n≥20 per species×domain×horizon rem
 §3 **Live fail @ `5ad4016`** is **Historical / RESOLVED** at `85e2467` (PR #22). Do not re-open it.
 
 **Open:** persist per-AOU dated observations (append/upsert). `n_clear` from that ledger only. `window_not_aou` stays context. Class/persistence gates in §3.2–3.3 **unchanged**.
+
+---
+
+## Addendum 2026-09-19 — Observation integrity pack
+
+**Pointer:** [`SCIENCE_LOCKS_v0.4_observation_integrity.md`](SCIENCE_LOCKS_v0.4_observation_integrity.md)
+
+Evaluator reliability / integrity pack (2026-09-19). **Go-with-fixes:** positive-area cell→AOU join; no date advance without new clear obs; alert≡timeseries counts per run_id; atomic publish. Aligns temporal ledger (merged #24). Mountain 3.B Hold unchanged.
+

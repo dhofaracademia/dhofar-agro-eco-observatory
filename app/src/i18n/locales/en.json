@@ -271,7 +271,7 @@
     "dqNotEco": "Data-quality confidence ≠ ecological / suitability confidence",
     "bioticTitle": "Biotic stress risk",
     "bioticPossible": "possible_biotic_stress",
-    "bioticNone": "No biotic risk flag",
+    "bioticNone": "No biotic risk flag (not the same as 'no biotic issue')",
     "bioticDisclaimer": "Possible biotic stress — satellite cannot confirm pest or disease. Optional additional field verification (last resort) only.",
     "noActionLadder": "Action ladder suggestion stays null — operator picks manually; no auto-assign from Suitability.",
     "formulaRef": "Formulas: docs/SCIENCE_LOCKS_v0.4_phase1_2.md (Phase 1 agriculture).",
@@ -320,7 +320,10 @@
         "continue_monitoring": "Continue monitoring",
         "defer_insufficient_evidence": "Defer — insufficient evidence"
       }
-    }
+    },
+    "temporalEvidenceInsufficient": "Insufficient temporal evidence",
+    "bioticUnknownTemporal": "Biotic status unknown — insufficient temporal evidence (n_clear < 2). Empty stress history ≠ no biotic issue.",
+    "refreshStatusRetained": "refresh_status={{status}} — prior dated scores retained"
   },
   "about": {
     "title": "Method & scientific honesty",
