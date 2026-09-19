@@ -134,7 +134,10 @@ export default function AouProfilePanel({
       )}
       {p.refresh_status && p.refresh_status !== "refreshed" && (
         <p className="mt-3 rounded-xl border border-slate-200 bg-slate-50 p-3 text-xs leading-relaxed text-sand-800/90">
-          refresh_status={String(p.refresh_status)} — prior dated scores retained
+          {t(`analysis.refreshStatus.${String(p.refresh_status)}`, {
+            defaultValue: t("analysis.refreshStatus.stale"),
+          })}{" "}
+          — {t("analysis.refreshPriorScoresRetained")}
         </p>
       )}
     </aside>

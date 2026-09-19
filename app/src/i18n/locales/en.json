@@ -322,7 +322,13 @@
       }
     },
     "temporalEvidenceInsufficient": "Insufficient temporal evidence",
-    "bioticUnknownTemporal": "Biotic status unknown — insufficient temporal evidence (n_clear < 2). Empty stress history ≠ no biotic issue."
+    "bioticUnknownTemporal": "Biotic status unknown — insufficient temporal evidence (n_clear < 2). Empty stress history ≠ no biotic issue.",
+    "refreshPriorScoresRetained": "Prior dated scores retained — observation date not advanced",
+    "refreshStatus": {
+      "stale": "Refresh stale (empty NDVI/NDMI or no valid new clear sample)",
+      "no_new_observation": "No new clear in-boundary observation this run",
+      "refreshed": "Refreshed from current in-AOU cell readings"
+    }
   },
   "about": {
     "title": "Method & scientific honesty",

@@ -899,7 +899,7 @@ def main() -> int:
         if item not in indices:
             indices.append(item)
     method["indices"] = indices
-    method["aou_identity"] = "AOU-NJ-###### centroid+IoU>=0.3"
+    method["aou_identity"] = "AOU-NJ-###### positive_area_overlap + max_overlap_area (SCIENCE_LOCKS_v0.4_observation_integrity)"
     method["join_rule"] = join_meta.get("join_rule", JOIN_RULE)
     method["join_predicate"] = "positive_area_overlap"
     matched_date = False
