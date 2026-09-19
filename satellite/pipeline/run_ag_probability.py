@@ -114,6 +114,54 @@ def data_quality_confidence(cloud_cover: float | None, pixel_count: int | None) 
     return round(max(5.0, min(97.0, score)), 1)
 
 
+CLEAR_FRACTION_BASIS_PROVIDED = "provided"
+CLEAR_FRACTION_BASIS_VALID_TOTAL = "valid_pixel_count_over_total_pixel_count"
+CLEAR_FRACTION_BASIS_PIXEL_EXPECTED = "pixel_count_over_expected_grid"
+CLEAR_FRACTION_BASIS_MISSING = "missing"
+
+
+def ensure_cell_clear_fraction(props: dict) -> dict:
+    """Carry or reconstruct cell clear_fraction for R4-1 (offline enrich).
+
+    Prefer existing clear_fraction. Else valid/total if both present.
+    Else pixel_count / EXPECTED_PIXELS with honest basis stamp.
+    Never invent silent 1.0 without a basis stamp.
+    """
+    if props.get("clear_fraction") is not None:
+        try:
+            props["clear_fraction"] = round(max(0.0, min(1.0, float(props["clear_fraction"]))), 6)
+        except (TypeError, ValueError):
+            props["clear_fraction"] = None
+        else:
+            if not props.get("clear_fraction_basis"):
+                props["clear_fraction_basis"] = CLEAR_FRACTION_BASIS_PROVIDED
+            return props
+    vpc = props.get("valid_pixel_count")
+    tpc = props.get("total_pixel_count")
+    try:
+        if vpc is not None and tpc is not None and float(tpc) > 0:
+            props["clear_fraction"] = round(min(1.0, max(0.0, float(vpc) / float(tpc))), 6)
+            props["clear_fraction_basis"] = CLEAR_FRACTION_BASIS_VALID_TOTAL
+            return props
+    except (TypeError, ValueError):
+        pass
+    pc = props.get("pixel_count")
+    try:
+        if pc is not None and EXPECTED_PIXELS > 0:
+            props["clear_fraction"] = round(
+                min(1.0, max(0.0, float(pc) / float(EXPECTED_PIXELS))), 6
+            )
+            props["clear_fraction_basis"] = CLEAR_FRACTION_BASIS_PIXEL_EXPECTED
+            props.setdefault("total_pixel_count", int(EXPECTED_PIXELS))
+            props.setdefault("valid_pixel_count", int(pc))
+            return props
+    except (TypeError, ValueError):
+        pass
+    props["clear_fraction"] = None
+    props["clear_fraction_basis"] = CLEAR_FRACTION_BASIS_MISSING
+    return props
+
+
 def cell_key(props: dict) -> str:
     # Stable debug key only — NOT AOU identity (SCIENCE_LOCKS §2.2)
     return f"grid:{props.get('date')}:{round(props.get('ndvi', 0), 4)}:{round(props.get('ndmi', 0), 4)}:{props.get('pixel_count')}"
@@ -124,9 +172,12 @@ def enrich_features(features: list[dict], *, month: int | None) -> list[dict]:
 
     n_clear_dates is per-cell / AOU-scoped SCL-clear count — NEVER the
     AOI timeseries window length (SCIENCE_LOCKS evaluator endorsement).
-    Offline enrich has one observation date per cell → n_clear_dates=1.
+    Offline enrich starts at n_clear_dates=1 per cell; AOU n_clear comes
+    from the temporal ledger (multi-date when ledger has multiple dates).
     Stress calls use stress_flags_recent=[] here (renorm/null). After AOU
     assign, multi-date units (n_clear≥2) re-score via ledger flags.
+    R4-1: reconstruct clear_fraction from pixel_count/valid/total when
+    SCL fraction absent so AOU valid_area_fraction is not a universal 0.
     """
     # Neighbor NDVI medians for biotic spatial term (simple peer p25 fallback)
     veg_ndvi = [
@@ -229,6 +280,9 @@ def enrich_features(features: list[dict], *, month: int | None) -> list[dict]:
         )
         p["alert"] = alert
         p["geometry_kind"] = "monitoring_grid_500m"
+
+        # R4-1: carry/reconstruct clear_fraction before cell/AOU area gates
+        ensure_cell_clear_fraction(p)
 
         # Pre-gate assessability BEFORE final alert/ag_class publish (deep re-check §1)
         p["assessability"] = cell_assessability(
@@ -1707,6 +1761,10 @@ def main() -> int:
             try:
                 doc = json.loads(alerts_f.read_text())
                 stamp_release_id_on_doc(doc, release_id)
+                for f in doc.get("features") or []:
+                    if isinstance(f.get("properties"), dict):
+                        f["properties"]["release_id"] = release_id
+                        f["properties"]["run_id"] = release_id
                 alerts_f.write_text(json.dumps(doc))
             except Exception:
                 pass

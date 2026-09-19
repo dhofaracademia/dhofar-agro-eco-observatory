@@ -402,14 +402,17 @@ def aou_assessability_with_area(
     frac_count = len(clear) / max(len(members), 1)
     meta["clear_member_fraction"] = frac_count
     meta["assessable_cell_fraction"] = frac_count
-    # Backward-compat alias used by older callers / UI (member clear-count fraction)
-    meta["clear_fraction"] = frac_count
+    # Do NOT set clear_fraction=count_frac yet — R4-1: never publish
+    # clear_fraction=1.0 together with clear_fraction_missing=True.
+    meta["clear_fraction"] = None
 
     area_all = 0.0
     area_clear_polygon = 0.0  # legacy full-polygon (secondary diagnostic only)
     clear_pixel_area = 0.0
     any_cf_missing = False
     any_cf_used = False
+    cf_weight_sum = 0.0
+    cf_area_sum = 0.0
     for m in members:
         ov = m.get("aou_overlap_area")
         if ov is None:
@@ -427,12 +430,26 @@ def aou_assessability_with_area(
             any_cf_missing = True
         else:
             any_cf_used = True
+            try:
+                cfv = max(0.0, min(1.0, float(m["clear_fraction"])))
+                cf_weight_sum += a * cfv
+                cf_area_sum += a
+            except (TypeError, ValueError):
+                any_cf_missing = True
         clear_pixel_area += _member_clear_pixel_area_in_aou(m)
     meta["member_overlap_area_sum"] = area_all
     meta["clear_overlap_area_sum"] = area_clear_polygon
     meta["clear_pixel_area_in_aou_sum"] = clear_pixel_area
     meta["clear_fraction_missing"] = bool(any_cf_missing)
     meta["coverage_incomplete"] = bool(any_cf_missing)
+    if any_cf_missing:
+        # Honest: missing cell clear_fraction → no invented 1.0 alias
+        meta["clear_fraction"] = None
+    elif cf_area_sum > 0:
+        meta["clear_fraction"] = round(cf_weight_sum / cf_area_sum, 6)
+    else:
+        # All clear_fractions present but no overlap areas — count alias only
+        meta["clear_fraction"] = frac_count
     if any_cf_used and not any_cf_missing:
         meta["valid_area_fraction_basis"] = "overlap_times_clear_fraction_estimate"
     else:

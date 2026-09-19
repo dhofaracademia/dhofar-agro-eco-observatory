@@ -1,8 +1,8 @@
 {
-  "last_updated": "2026-09-19T21:24:44.553119+00:00",
+  "last_updated": "2026-09-19T21:15:22.764113+00:00",
   "source": "run_ag_probability+run_decision_scaffolds",
-  "run_id": "20260919T212317Z",
-  "release_id": "20260919T212317Z",
+  "run_id": "20260919T211515Z",
+  "release_id": "20260919T211515Z",
   "artifacts": [
     "latest_alerts.geojson",
     "timeseries.json",

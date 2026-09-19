@@ -1,8 +1,8 @@
 {
-  "last_updated": "2026-09-19T18:29:36.970163+00:00",
-  "source": "run_ag_probability",
-  "run_id": "20260919T182936Z",
-  "release_id": "20260919T182936Z",
+  "last_updated": "2026-09-19T21:24:44.553119+00:00",
+  "source": "run_ag_probability+run_decision_scaffolds",
+  "run_id": "20260919T212317Z",
+  "release_id": "20260919T212317Z",
   "artifacts": [
     "latest_alerts.geojson",
     "timeseries.json",
@@ -15,8 +15,8 @@
     "decision/action_ladder.stubs.json",
     "decision/run_meta.json"
   ],
-  "phase": "0.4.7-evaluator-round2",
-  "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + SCIENCE_LOCKS_v0.4_observation_integrity.md + SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md + SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md",
+  "phase": "0.4.9-post30-followup",
+  "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + SCIENCE_LOCKS_v0.4_observation_integrity.md + SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md + SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md + SCIENCE_LOCKS_v0.4_post29_evaluator_residuals.md",
   "join_rule": "max_overlap_area",
   "join_predicate": "positive_area_overlap",
   "consistency_status": "ok",
@@ -33,6 +33,8 @@
   "min_clear_fraction_aou": 0.2,
   "min_clear_members_aou": 1,
   "min_valid_area_fraction_aou": 0.2,
+  "valid_area_fraction_basis": "clear_pixels_in_aou",
+  "release_pointer_semantics": "releases/<id>+CURRENT",
   "coverage_gate": {
     "min_clear_pixels_cell": 50,
     "min_clear_fraction_cell": 0.02,
@@ -40,7 +42,9 @@
     "min_clear_members_aou": 1,
     "min_valid_area_fraction_aou": 0.2,
     "assessable_cell_fraction": "secondary_count",
-    "valid_area_fraction": "primary_when_overlaps"
+    "valid_area_fraction": "clear_pixels_in_aou",
+    "valid_area_fraction_basis": "clear_pixels_in_aou"
   },
-  "promote_includes_decision": true
+  "promote_includes_decision": true,
+  "single_staged_decision": true
 }

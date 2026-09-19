@@ -1,6 +1,6 @@
 {
   "version": "0.4.8-post29-residuals",
-  "generated_at": "2026-09-19T21:24:44.555029+00:00",
+  "generated_at": "2026-09-19T21:15:22.765429+00:00",
   "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3 + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md",
   "status": "expert_v1_provisional",
   "product_stamp": "provisional_satellite_analytical_service",
@@ -10,11 +10,11 @@
   "mountain_apply": false,
   "action_auto_assign": false,
   "writes_to_app_public": true,
-  "run_id": "20260919T212317Z",
-  "release_id": "20260919T212317Z",
+  "run_id": "20260919T211515Z",
+  "release_id": "20260919T211515Z",
   "input_refs": {
-    "aou_registry": "satellite/pipeline/artifacts/isolated_reprocess_pr33_r41/data/observatory_publish_20260919T212317Z_xzg6l380/aou/aou_registry.json",
-    "aou_observations": "satellite/pipeline/artifacts/isolated_reprocess_pr33_r41/data/observatory_publish_20260919T212317Z_xzg6l380/aou/aou_observations.json"
+    "aou_registry": "satellite/pipeline/artifacts/isolated_reprocess_post31_full/data/observatory_publish_20260919T211515Z_9hanedcw/aou/aou_registry.json",
+    "aou_observations": "satellite/pipeline/artifacts/isolated_reprocess_post31_full/data/observatory_publish_20260919T211515Z_9hanedcw/aou/aou_observations.json"
   },
   "honesty_en": "Offline decision scaffolds for Najd agriculture AOUs only. Suitability \u2260 Confidence \u2260 data_quality_confidence. Not ecological certainty. No mountain UI. Action ladder manual only.",
   "schema_ref": "docs/spec_0.4/evidence_gap.schema.json",
@@ -42,10 +42,10 @@
         {
           "id": "gap_history",
           "code": "thin_aou_history",
-          "present": true,
-          "severity_en": "OK \u2014 thin_aou_history input available.",
-          "severity_ar": "\u062d\u0633\u0646\u0627\u064b \u2014 \u0627\u0644\u0645\u062f\u062e\u0644 thin_aou_history \u0645\u062a\u0648\u0641\u0631.",
-          "severity": "info"
+          "present": false,
+          "severity_en": "AOU multi-date history is thin (\u22641 clear AOU observation).",
+          "severity_ar": "\u062a\u0627\u0631\u064a\u062e \u0627\u0644\u0648\u062d\u062f\u0629 \u0645\u062a\u0639\u062f\u062f \u0627\u0644\u062a\u0648\u0627\u0631\u064a\u062e \u0636\u0639\u064a\u0641 (\u22641 \u0645\u0644\u0627\u062d\u0638\u0629 \u0635\u0627\u0641\u064a\u0629).",
+          "severity": "caution"
         },
         {
           "id": "gap_seasons",
@@ -82,10 +82,10 @@
         {
           "id": "gap_window_stub",
           "code": "window_series_stub_only",
-          "present": true,
-          "severity_en": "OK \u2014 window_series_stub_only input available.",
-          "severity_ar": "\u062d\u0633\u0646\u0627\u064b \u2014 \u0627\u0644\u0645\u062f\u062e\u0644 window_series_stub_only \u0645\u062a\u0648\u0641\u0631.",
-          "severity": "info"
+          "present": false,
+          "severity_en": "Temporal context still includes window-level stub series (not AOU-specific multi-date).",
+          "severity_ar": "\u0627\u0644\u0633\u064a\u0627\u0642 \u0627\u0644\u0632\u0645\u0646\u064a \u0645\u0627 \u0632\u0627\u0644 \u064a\u062a\u0636\u0645\u0646 \u0633\u0644\u0633\u0644\u0629 \u0646\u0627\u0641\u0630\u0629 \u062a\u0642\u0631\u064a\u0628\u064a\u0629 (\u0648\u0644\u064a\u0633\u062a \u0645\u062a\u0639\u062f\u062f\u0629 \u0627\u0644\u062a\u0648\u0627\u0631\u064a\u062e \u0644\u0644\u0648\u062d\u062f\u0629).",
+          "severity": "caution"
         },
         {
           "id": "gap_dq",
@@ -115,12 +115,14 @@
       "missing_input_codes": [
         "no_ndre",
         "no_field_visit",
+        "thin_aou_history",
         "no_historical_seasons",
         "no_prior_iou",
         "no_post_khareef_clear",
-        "no_mpi_curve"
+        "no_mpi_curve",
+        "window_series_stub_only"
       ],
-      "gap_count": 6,
+      "gap_count": 8,
       "honesty_note_en": "Evidence Gap lists missing inputs honestly. Does not invent campaign numbers, pest certainty, soil moisture %, or live Khareef. MPI onset narrative (if any) is onset-T0 provisional only \u2014 not post-khareef labeling for AOUs.",
       "honesty_note_ar": "\u0641\u062c\u0648\u0629 \u0627\u0644\u0623\u062f\u0644\u0629 \u062a\u0633\u0631\u062f \u0627\u0644\u0645\u062f\u062e\u0644\u0627\u062a \u0627\u0644\u0646\u0627\u0642\u0635\u0629 \u0628\u0635\u062f\u0642. \u0644\u0627 \u062a\u062e\u062a\u0644\u0642 \u0623\u0631\u0642\u0627\u0645 \u062d\u0645\u0644\u0627\u062a \u0623\u0648 \u064a\u0642\u064a\u0646 \u0622\u0641\u0627\u062a \u0623\u0648 \u0631\u0637\u0648\u0628\u0629 \u062a\u0631\u0628\u0629 % \u0623\u0648 \u062e\u0631\u064a\u0641\u0627\u064b \u062d\u064a\u0627\u064b. \u0633\u0631\u062f \u0628\u062f\u0627\u064a\u0629 MPI (\u0625\u0646 \u0648\u064f\u062c\u062f) \u0645\u0624\u0642\u062a \u0639\u0646\u062f T0 \u0641\u0642\u0637 \u2014 \u0648\u0644\u064a\u0633 \u0648\u0633\u0645 \u0645\u0627 \u0628\u0639\u062f \u0627\u0644\u062e\u0631\u064a\u0641 \u0644\u0648\u062d\u062f\u0627\u062a \u0627\u0644\u0632\u0631\u0627\u0639\u0629.",
       "forbidden_claims": [
@@ -160,10 +162,10 @@
         {
           "id": "gap_history",
           "code": "thin_aou_history",
-          "present": true,
-          "severity_en": "OK \u2014 thin_aou_history input available.",
-          "severity_ar": "\u062d\u0633\u0646\u0627\u064b \u2014 \u0627\u0644\u0645\u062f\u062e\u0644 thin_aou_history \u0645\u062a\u0648\u0641\u0631.",
-          "severity": "info"
+          "present": false,
+          "severity_en": "AOU multi-date history is thin (\u22641 clear AOU observation).",
+          "severity_ar": "\u062a\u0627\u0631\u064a\u062e \u0627\u0644\u0648\u062d\u062f\u0629 \u0645\u062a\u0639\u062f\u062f \u0627\u0644\u062a\u0648\u0627\u0631\u064a\u062e \u0636\u0639\u064a\u0641 (\u22641 \u0645\u0644\u0627\u062d\u0638\u0629 \u0635\u0627\u0641\u064a\u0629).",
+          "severity": "caution"
         },
         {
           "id": "gap_seasons",
@@ -200,10 +202,10 @@
         {
           "id": "gap_window_stub",
           "code": "window_series_stub_only",
-          "present": true,
-          "severity_en": "OK \u2014 window_series_stub_only input available.",
-          "severity_ar": "\u062d\u0633\u0646\u0627\u064b \u2014 \u0627\u0644\u0645\u062f\u062e\u0644 window_series_stub_only \u0645\u062a\u0648\u0641\u0631.",
-          "severity": "info"
+          "present": false,
+          "severity_en": "Temporal context still includes window-level stub series (not AOU-specific multi-date).",
+          "severity_ar": "\u0627\u0644\u0633\u064a\u0627\u0642 \u0627\u0644\u0632\u0645\u0646\u064a \u0645\u0627 \u0632\u0627\u0644 \u064a\u062a\u0636\u0645\u0646 \u0633\u0644\u0633\u0644\u0629 \u0646\u0627\u0641\u0630\u0629 \u062a\u0642\u0631\u064a\u0628\u064a\u0629 (\u0648\u0644\u064a\u0633\u062a \u0645\u062a\u0639\u062f\u062f\u0629 \u0627\u0644\u062a\u0648\u0627\u0631\u064a\u062e \u0644\u0644\u0648\u062d\u062f\u0629).",
+          "severity": "caution"
         },
         {
           "id": "gap_dq",
@@ -233,12 +235,14 @@
       "missing_input_codes": [
         "no_ndre",
         "no_field_visit",
+        "thin_aou_history",
         "no_historical_seasons",
         "no_prior_iou",
         "no_post_khareef_clear",
-        "no_mpi_curve"
+        "no_mpi_curve",
+        "window_series_stub_only"
       ],
-      "gap_count": 6,
+      "gap_count": 8,
       "honesty_note_en": "Evidence Gap lists missing inputs honestly. Does not invent campaign numbers, pest certainty, soil moisture %, or live Khareef. MPI onset narrative (if any) is onset-T0 provisional only \u2014 not post-khareef labeling for AOUs.",
       "honesty_note_ar": "\u0641\u062c\u0648\u0629 \u0627\u0644\u0623\u062f\u0644\u0629 \u062a\u0633\u0631\u062f \u0627\u0644\u0645\u062f\u062e\u0644\u0627\u062a \u0627\u0644\u0646\u0627\u0642\u0635\u0629 \u0628\u0635\u062f\u0642. \u0644\u0627 \u062a\u062e\u062a\u0644\u0642 \u0623\u0631\u0642\u0627\u0645 \u062d\u0645\u0644\u0627\u062a \u0623\u0648 \u064a\u0642\u064a\u0646 \u0622\u0641\u0627\u062a \u0623\u0648 \u0631\u0637\u0648\u0628\u0629 \u062a\u0631\u0628\u0629 % \u0623\u0648 \u062e\u0631\u064a\u0641\u0627\u064b \u062d\u064a\u0627\u064b. \u0633\u0631\u062f \u0628\u062f\u0627\u064a\u0629 MPI (\u0625\u0646 \u0648\u064f\u062c\u062f) \u0645\u0624\u0642\u062a \u0639\u0646\u062f T0 \u0641\u0642\u0637 \u2014 \u0648\u0644\u064a\u0633 \u0648\u0633\u0645 \u0645\u0627 \u0628\u0639\u062f \u0627\u0644\u062e\u0631\u064a\u0641 \u0644\u0648\u062d\u062f\u0627\u062a \u0627\u0644\u0632\u0631\u0627\u0639\u0629.",
       "forbidden_claims": [
@@ -278,10 +282,10 @@
         {
           "id": "gap_history",
           "code": "thin_aou_history",
-          "present": true,
-          "severity_en": "OK \u2014 thin_aou_history input available.",
-          "severity_ar": "\u062d\u0633\u0646\u0627\u064b \u2014 \u0627\u0644\u0645\u062f\u062e\u0644 thin_aou_history \u0645\u062a\u0648\u0641\u0631.",
-          "severity": "info"
+          "present": false,
+          "severity_en": "AOU multi-date history is thin (\u22641 clear AOU observation).",
+          "severity_ar": "\u062a\u0627\u0631\u064a\u062e \u0627\u0644\u0648\u062d\u062f\u0629 \u0645\u062a\u0639\u062f\u062f \u0627\u0644\u062a\u0648\u0627\u0631\u064a\u062e \u0636\u0639\u064a\u0641 (\u22641 \u0645\u0644\u0627\u062d\u0638\u0629 \u0635\u0627\u0641\u064a\u0629).",
+          "severity": "caution"
         },
         {
           "id": "gap_seasons",
@@ -318,10 +322,10 @@
         {
           "id": "gap_window_stub",
           "code": "window_series_stub_only",
-          "present": true,
-          "severity_en": "OK \u2014 window_series_stub_only input available.",
-          "severity_ar": "\u062d\u0633\u0646\u0627\u064b \u2014 \u0627\u0644\u0645\u062f\u062e\u0644 window_series_stub_only \u0645\u062a\u0648\u0641\u0631.",
-          "severity": "info"
+          "present": false,
+          "severity_en": "Temporal context still includes window-level stub series (not AOU-specific multi-date).",
+          "severity_ar": "\u0627\u0644\u0633\u064a\u0627\u0642 \u0627\u0644\u0632\u0645\u0646\u064a \u0645\u0627 \u0632\u0627\u0644 \u064a\u062a\u0636\u0645\u0646 \u0633\u0644\u0633\u0644\u0629 \u0646\u0627\u0641\u0630\u0629 \u062a\u0642\u0631\u064a\u0628\u064a\u0629 (\u0648\u0644\u064a\u0633\u062a \u0645\u062a\u0639\u062f\u062f\u0629 \u0627\u0644\u062a\u0648\u0627\u0631\u064a\u062e \u0644\u0644\u0648\u062d\u062f\u0629).",
+          "severity": "caution"
         },
         {
           "id": "gap_dq",
@@ -351,12 +355,14 @@
       "missing_input_codes": [
         "no_ndre",
         "no_field_visit",
+        "thin_aou_history",
         "no_historical_seasons",
         "no_prior_iou",
         "no_post_khareef_clear",
-        "no_mpi_curve"
+        "no_mpi_curve",
+        "window_series_stub_only"
       ],
-      "gap_count": 6,
+      "gap_count": 8,
       "honesty_note_en": "Evidence Gap lists missing inputs honestly. Does not invent campaign numbers, pest certainty, soil moisture %, or live Khareef. MPI onset narrative (if any) is onset-T0 provisional only \u2014 not post-khareef labeling for AOUs.",
       "honesty_note_ar": "\u0641\u062c\u0648\u0629 \u0627\u0644\u0623\u062f\u0644\u0629 \u062a\u0633\u0631\u062f \u0627\u0644\u0645\u062f\u062e\u0644\u0627\u062a \u0627\u0644\u0646\u0627\u0642\u0635\u0629 \u0628\u0635\u062f\u0642. \u0644\u0627 \u062a\u062e\u062a\u0644\u0642 \u0623\u0631\u0642\u0627\u0645 \u062d\u0645\u0644\u0627\u062a \u0623\u0648 \u064a\u0642\u064a\u0646 \u0622\u0641\u0627\u062a \u0623\u0648 \u0631\u0637\u0648\u0628\u0629 \u062a\u0631\u0628\u0629 % \u0623\u0648 \u062e\u0631\u064a\u0641\u0627\u064b \u062d\u064a\u0627\u064b. \u0633\u0631\u062f \u0628\u062f\u0627\u064a\u0629 MPI (\u0625\u0646 \u0648\u064f\u062c\u062f) \u0645\u0624\u0642\u062a \u0639\u0646\u062f T0 \u0641\u0642\u0637 \u2014 \u0648\u0644\u064a\u0633 \u0648\u0633\u0645 \u0645\u0627 \u0628\u0639\u062f \u0627\u0644\u062e\u0631\u064a\u0641 \u0644\u0648\u062d\u062f\u0627\u062a \u0627\u0644\u0632\u0631\u0627\u0639\u0629.",
       "forbidden_claims": [
@@ -396,10 +402,10 @@
         {
           "id": "gap_history",
           "code": "thin_aou_history",
-          "present": true,
-          "severity_en": "OK \u2014 thin_aou_history input available.",
-          "severity_ar": "\u062d\u0633\u0646\u0627\u064b \u2014 \u0627\u0644\u0645\u062f\u062e\u0644 thin_aou_history \u0645\u062a\u0648\u0641\u0631.",
-          "severity": "info"
+          "present": false,
+          "severity_en": "AOU multi-date history is thin (\u22641 clear AOU observation).",
+          "severity_ar": "\u062a\u0627\u0631\u064a\u062e \u0627\u0644\u0648\u062d\u062f\u0629 \u0645\u062a\u0639\u062f\u062f \u0627\u0644\u062a\u0648\u0627\u0631\u064a\u062e \u0636\u0639\u064a\u0641 (\u22641 \u0645\u0644\u0627\u062d\u0638\u0629 \u0635\u0627\u0641\u064a\u0629).",
+          "severity": "caution"
         },
         {
           "id": "gap_seasons",
@@ -436,10 +442,10 @@
         {
           "id": "gap_window_stub",
           "code": "window_series_stub_only",
-          "present": true,
-          "severity_en": "OK \u2014 window_series_stub_only input available.",
-          "severity_ar": "\u062d\u0633\u0646\u0627\u064b \u2014 \u0627\u0644\u0645\u062f\u062e\u0644 window_series_stub_only \u0645\u062a\u0648\u0641\u0631.",
-          "severity": "info"
+          "present": false,
+          "severity_en": "Temporal context still includes window-level stub series (not AOU-specific multi-date).",
+          "severity_ar": "\u0627\u0644\u0633\u064a\u0627\u0642 \u0627\u0644\u0632\u0645\u0646\u064a \u0645\u0627 \u0632\u0627\u0644 \u064a\u062a\u0636\u0645\u0646 \u0633\u0644\u0633\u0644\u0629 \u0646\u0627\u0641\u0630\u0629 \u062a\u0642\u0631\u064a\u0628\u064a\u0629 (\u0648\u0644\u064a\u0633\u062a \u0645\u062a\u0639\u062f\u062f\u0629 \u0627\u0644\u062a\u0648\u0627\u0631\u064a\u062e \u0644\u0644\u0648\u062d\u062f\u0629).",
+          "severity": "caution"
         },
         {
           "id": "gap_dq",
@@ -469,12 +475,14 @@
       "missing_input_codes": [
         "no_ndre",
         "no_field_visit",
+        "thin_aou_history",
         "no_historical_seasons",
         "no_prior_iou",
         "no_post_khareef_clear",
-        "no_mpi_curve"
+        "no_mpi_curve",
+        "window_series_stub_only"
       ],
-      "gap_count": 6,
+      "gap_count": 8,
       "honesty_note_en": "Evidence Gap lists missing inputs honestly. Does not invent campaign numbers, pest certainty, soil moisture %, or live Khareef. MPI onset narrative (if any) is onset-T0 provisional only \u2014 not post-khareef labeling for AOUs.",
       "honesty_note_ar": "\u0641\u062c\u0648\u0629 \u0627\u0644\u0623\u062f\u0644\u0629 \u062a\u0633\u0631\u062f \u0627\u0644\u0645\u062f\u062e\u0644\u0627\u062a \u0627\u0644\u0646\u0627\u0642\u0635\u0629 \u0628\u0635\u062f\u0642. \u0644\u0627 \u062a\u062e\u062a\u0644\u0642 \u0623\u0631\u0642\u0627\u0645 \u062d\u0645\u0644\u0627\u062a \u0623\u0648 \u064a\u0642\u064a\u0646 \u0622\u0641\u0627\u062a \u0623\u0648 \u0631\u0637\u0648\u0628\u0629 \u062a\u0631\u0628\u0629 % \u0623\u0648 \u062e\u0631\u064a\u0641\u0627\u064b \u062d\u064a\u0627\u064b. \u0633\u0631\u062f \u0628\u062f\u0627\u064a\u0629 MPI (\u0625\u0646 \u0648\u064f\u062c\u062f) \u0645\u0624\u0642\u062a \u0639\u0646\u062f T0 \u0641\u0642\u0637 \u2014 \u0648\u0644\u064a\u0633 \u0648\u0633\u0645 \u0645\u0627 \u0628\u0639\u062f \u0627\u0644\u062e\u0631\u064a\u0641 \u0644\u0648\u062d\u062f\u0627\u062a \u0627\u0644\u0632\u0631\u0627\u0639\u0629.",
       "forbidden_claims": [
@@ -514,10 +522,10 @@
         {
           "id": "gap_history",
           "code": "thin_aou_history",
-          "present": true,
-          "severity_en": "OK \u2014 thin_aou_history input available.",
-          "severity_ar": "\u062d\u0633\u0646\u0627\u064b \u2014 \u0627\u0644\u0645\u062f\u062e\u0644 thin_aou_history \u0645\u062a\u0648\u0641\u0631.",
-          "severity": "info"
+          "present": false,
+          "severity_en": "AOU multi-date history is thin (\u22641 clear AOU observation).",
+          "severity_ar": "\u062a\u0627\u0631\u064a\u062e \u0627\u0644\u0648\u062d\u062f\u0629 \u0645\u062a\u0639\u062f\u062f \u0627\u0644\u062a\u0648\u0627\u0631\u064a\u062e \u0636\u0639\u064a\u0641 (\u22641 \u0645\u0644\u0627\u062d\u0638\u0629 \u0635\u0627\u0641\u064a\u0629).",
+          "severity": "caution"
         },
         {
           "id": "gap_seasons",
@@ -554,10 +562,10 @@
         {
           "id": "gap_window_stub",
           "code": "window_series_stub_only",
-          "present": true,
-          "severity_en": "OK \u2014 window_series_stub_only input available.",
-          "severity_ar": "\u062d\u0633\u0646\u0627\u064b \u2014 \u0627\u0644\u0645\u062f\u062e\u0644 window_series_stub_only \u0645\u062a\u0648\u0641\u0631.",
-          "severity": "info"
+          "present": false,
+          "severity_en": "Temporal context still includes window-level stub series (not AOU-specific multi-date).",
+          "severity_ar": "\u0627\u0644\u0633\u064a\u0627\u0642 \u0627\u0644\u0632\u0645\u0646\u064a \u0645\u0627 \u0632\u0627\u0644 \u064a\u062a\u0636\u0645\u0646 \u0633\u0644\u0633\u0644\u0629 \u0646\u0627\u0641\u0630\u0629 \u062a\u0642\u0631\u064a\u0628\u064a\u0629 (\u0648\u0644\u064a\u0633\u062a \u0645\u062a\u0639\u062f\u062f\u0629 \u0627\u0644\u062a\u0648\u0627\u0631\u064a\u062e \u0644\u0644\u0648\u062d\u062f\u0629).",
+          "severity": "caution"
         },
         {
           "id": "gap_dq",
@@ -587,12 +595,14 @@
       "missing_input_codes": [
         "no_ndre",
         "no_field_visit",
+        "thin_aou_history",
         "no_historical_seasons",
         "no_prior_iou",
         "no_post_khareef_clear",
-        "no_mpi_curve"
+        "no_mpi_curve",
+        "window_series_stub_only"
       ],
-      "gap_count": 6,
+      "gap_count": 8,
       "honesty_note_en": "Evidence Gap lists missing inputs honestly. Does not invent campaign numbers, pest certainty, soil moisture %, or live Khareef. MPI onset narrative (if any) is onset-T0 provisional only \u2014 not post-khareef labeling for AOUs.",
       "honesty_note_ar": "\u0641\u062c\u0648\u0629 \u0627\u0644\u0623\u062f\u0644\u0629 \u062a\u0633\u0631\u062f \u0627\u0644\u0645\u062f\u062e\u0644\u0627\u062a \u0627\u0644\u0646\u0627\u0642\u0635\u0629 \u0628\u0635\u062f\u0642. \u0644\u0627 \u062a\u062e\u062a\u0644\u0642 \u0623\u0631\u0642\u0627\u0645 \u062d\u0645\u0644\u0627\u062a \u0623\u0648 \u064a\u0642\u064a\u0646 \u0622\u0641\u0627\u062a \u0623\u0648 \u0631\u0637\u0648\u0628\u0629 \u062a\u0631\u0628\u0629 % \u0623\u0648 \u062e\u0631\u064a\u0641\u0627\u064b \u062d\u064a\u0627\u064b. \u0633\u0631\u062f \u0628\u062f\u0627\u064a\u0629 MPI (\u0625\u0646 \u0648\u064f\u062c\u062f) \u0645\u0624\u0642\u062a \u0639\u0646\u062f T0 \u0641\u0642\u0637 \u2014 \u0648\u0644\u064a\u0633 \u0648\u0633\u0645 \u0645\u0627 \u0628\u0639\u062f \u0627\u0644\u062e\u0631\u064a\u0641 \u0644\u0648\u062d\u062f\u0627\u062a \u0627\u0644\u0632\u0631\u0627\u0639\u0629.",
       "forbidden_claims": [
@@ -632,10 +642,10 @@
         {
           "id": "gap_history",
           "code": "thin_aou_history",
-          "present": true,
-          "severity_en": "OK \u2014 thin_aou_history input available.",
-          "severity_ar": "\u062d\u0633\u0646\u0627\u064b \u2014 \u0627\u0644\u0645\u062f\u062e\u0644 thin_aou_history \u0645\u062a\u0648\u0641\u0631.",
-          "severity": "info"
+          "present": false,
+          "severity_en": "AOU multi-date history is thin (\u22641 clear AOU observation).",
+          "severity_ar": "\u062a\u0627\u0631\u064a\u062e \u0627\u0644\u0648\u062d\u062f\u0629 \u0645\u062a\u0639\u062f\u062f \u0627\u0644\u062a\u0648\u0627\u0631\u064a\u062e \u0636\u0639\u064a\u0641 (\u22641 \u0645\u0644\u0627\u062d\u0638\u0629 \u0635\u0627\u0641\u064a\u0629).",
+          "severity": "caution"
         },
         {
           "id": "gap_seasons",
@@ -672,10 +682,10 @@
         {
           "id": "gap_window_stub",
           "code": "window_series_stub_only",
-          "present": true,
-          "severity_en": "OK \u2014 window_series_stub_only input available.",
-          "severity_ar": "\u062d\u0633\u0646\u0627\u064b \u2014 \u0627\u0644\u0645\u062f\u062e\u0644 window_series_stub_only \u0645\u062a\u0648\u0641\u0631.",
-          "severity": "info"
+          "present": false,
+          "severity_en": "Temporal context still includes window-level stub series (not AOU-specific multi-date).",
+          "severity_ar": "\u0627\u0644\u0633\u064a\u0627\u0642 \u0627\u0644\u0632\u0645\u0646\u064a \u0645\u0627 \u0632\u0627\u0644 \u064a\u062a\u0636\u0645\u0646 \u0633\u0644\u0633\u0644\u0629 \u0646\u0627\u0641\u0630\u0629 \u062a\u0642\u0631\u064a\u0628\u064a\u0629 (\u0648\u0644\u064a\u0633\u062a \u0645\u062a\u0639\u062f\u062f\u0629 \u0627\u0644\u062a\u0648\u0627\u0631\u064a\u062e \u0644\u0644\u0648\u062d\u062f\u0629).",
+          "severity": "caution"
         },
         {
           "id": "gap_dq",
@@ -705,12 +715,14 @@
       "missing_input_codes": [
         "no_ndre",
         "no_field_visit",
+        "thin_aou_history",
         "no_historical_seasons",
         "no_prior_iou",
         "no_post_khareef_clear",
-        "no_mpi_curve"
+        "no_mpi_curve",
+        "window_series_stub_only"
       ],
-      "gap_count": 6,
+      "gap_count": 8,
       "honesty_note_en": "Evidence Gap lists missing inputs honestly. Does not invent campaign numbers, pest certainty, soil moisture %, or live Khareef. MPI onset narrative (if any) is onset-T0 provisional only \u2014 not post-khareef labeling for AOUs.",
       "honesty_note_ar": "\u0641\u062c\u0648\u0629 \u0627\u0644\u0623\u062f\u0644\u0629 \u062a\u0633\u0631\u062f \u0627\u0644\u0645\u062f\u062e\u0644\u0627\u062a \u0627\u0644\u0646\u0627\u0642\u0635\u0629 \u0628\u0635\u062f\u0642. \u0644\u0627 \u062a\u062e\u062a\u0644\u0642 \u0623\u0631\u0642\u0627\u0645 \u062d\u0645\u0644\u0627\u062a \u0623\u0648 \u064a\u0642\u064a\u0646 \u0622\u0641\u0627\u062a \u0623\u0648 \u0631\u0637\u0648\u0628\u0629 \u062a\u0631\u0628\u0629 % \u0623\u0648 \u062e\u0631\u064a\u0641\u0627\u064b \u062d\u064a\u0627\u064b. \u0633\u0631\u062f \u0628\u062f\u0627\u064a\u0629 MPI (\u0625\u0646 \u0648\u064f\u062c\u062f) \u0645\u0624\u0642\u062a \u0639\u0646\u062f T0 \u0641\u0642\u0637 \u2014 \u0648\u0644\u064a\u0633 \u0648\u0633\u0645 \u0645\u0627 \u0628\u0639\u062f \u0627\u0644\u062e\u0631\u064a\u0641 \u0644\u0648\u062d\u062f\u0627\u062a \u0627\u0644\u0632\u0631\u0627\u0639\u0629.",
       "forbidden_claims": [
@@ -750,10 +762,10 @@
         {
           "id": "gap_history",
           "code": "thin_aou_history",
-          "present": true,
-          "severity_en": "OK \u2014 thin_aou_history input available.",
-          "severity_ar": "\u062d\u0633\u0646\u0627\u064b \u2014 \u0627\u0644\u0645\u062f\u062e\u0644 thin_aou_history \u0645\u062a\u0648\u0641\u0631.",
-          "severity": "info"
+          "present": false,
+          "severity_en": "AOU multi-date history is thin (\u22641 clear AOU observation).",
+          "severity_ar": "\u062a\u0627\u0631\u064a\u062e \u0627\u0644\u0648\u062d\u062f\u0629 \u0645\u062a\u0639\u062f\u062f \u0627\u0644\u062a\u0648\u0627\u0631\u064a\u062e \u0636\u0639\u064a\u0641 (\u22641 \u0645\u0644\u0627\u062d\u0638\u0629 \u0635\u0627\u0641\u064a\u0629).",
+          "severity": "caution"
         },
         {
           "id": "gap_seasons",
@@ -790,10 +802,10 @@
         {
           "id": "gap_window_stub",
           "code": "window_series_stub_only",
-          "present": true,
-          "severity_en": "OK \u2014 window_series_stub_only input available.",
-          "severity_ar": "\u062d\u0633\u0646\u0627\u064b \u2014 \u0627\u0644\u0645\u062f\u062e\u0644 window_series_stub_only \u0645\u062a\u0648\u0641\u0631.",
-          "severity": "info"
+          "present": false,
+          "severity_en": "Temporal context still includes window-level stub series (not AOU-specific multi-date).",
+          "severity_ar": "\u0627\u0644\u0633\u064a\u0627\u0642 \u0627\u0644\u0632\u0645\u0646\u064a \u0645\u0627 \u0632\u0627\u0644 \u064a\u062a\u0636\u0645\u0646 \u0633\u0644\u0633\u0644\u0629 \u0646\u0627\u0641\u0630\u0629 \u062a\u0642\u0631\u064a\u0628\u064a\u0629 (\u0648\u0644\u064a\u0633\u062a \u0645\u062a\u0639\u062f\u062f\u0629 \u0627\u0644\u062a\u0648\u0627\u0631\u064a\u062e \u0644\u0644\u0648\u062d\u062f\u0629).",
+          "severity": "caution"
         },
         {
           "id": "gap_dq",
@@ -823,12 +835,14 @@
       "missing_input_codes": [
         "no_ndre",
         "no_field_visit",
+        "thin_aou_history",
         "no_historical_seasons",
         "no_prior_iou",
         "no_post_khareef_clear",
-        "no_mpi_curve"
+        "no_mpi_curve",
+        "window_series_stub_only"
       ],
-      "gap_count": 6,
+      "gap_count": 8,
       "honesty_note_en": "Evidence Gap lists missing inputs honestly. Does not invent campaign numbers, pest certainty, soil moisture %, or live Khareef. MPI onset narrative (if any) is onset-T0 provisional only \u2014 not post-khareef labeling for AOUs.",
       "honesty_note_ar": "\u0641\u062c\u0648\u0629 \u0627\u0644\u0623\u062f\u0644\u0629 \u062a\u0633\u0631\u062f \u0627\u0644\u0645\u062f\u062e\u0644\u0627\u062a \u0627\u0644\u0646\u0627\u0642\u0635\u0629 \u0628\u0635\u062f\u0642. \u0644\u0627 \u062a\u062e\u062a\u0644\u0642 \u0623\u0631\u0642\u0627\u0645 \u062d\u0645\u0644\u0627\u062a \u0623\u0648 \u064a\u0642\u064a\u0646 \u0622\u0641\u0627\u062a \u0623\u0648 \u0631\u0637\u0648\u0628\u0629 \u062a\u0631\u0628\u0629 % \u0623\u0648 \u062e\u0631\u064a\u0641\u0627\u064b \u062d\u064a\u0627\u064b. \u0633\u0631\u062f \u0628\u062f\u0627\u064a\u0629 MPI (\u0625\u0646 \u0648\u064f\u062c\u062f) \u0645\u0624\u0642\u062a \u0639\u0646\u062f T0 \u0641\u0642\u0637 \u2014 \u0648\u0644\u064a\u0633 \u0648\u0633\u0645 \u0645\u0627 \u0628\u0639\u062f \u0627\u0644\u062e\u0631\u064a\u0641 \u0644\u0648\u062d\u062f\u0627\u062a \u0627\u0644\u0632\u0631\u0627\u0639\u0629.",
       "forbidden_claims": [
@@ -868,10 +882,10 @@
         {
           "id": "gap_history",
           "code": "thin_aou_history",
-          "present": true,
-          "severity_en": "OK \u2014 thin_aou_history input available.",
-          "severity_ar": "\u062d\u0633\u0646\u0627\u064b \u2014 \u0627\u0644\u0645\u062f\u062e\u0644 thin_aou_history \u0645\u062a\u0648\u0641\u0631.",
-          "severity": "info"
+          "present": false,
+          "severity_en": "AOU multi-date history is thin (\u22641 clear AOU observation).",
+          "severity_ar": "\u062a\u0627\u0631\u064a\u062e \u0627\u0644\u0648\u062d\u062f\u0629 \u0645\u062a\u0639\u062f\u062f \u0627\u0644\u062a\u0648\u0627\u0631\u064a\u062e \u0636\u0639\u064a\u0641 (\u22641 \u0645\u0644\u0627\u062d\u0638\u0629 \u0635\u0627\u0641\u064a\u0629).",
+          "severity": "caution"
         },
         {
           "id": "gap_seasons",
@@ -908,10 +922,10 @@
         {
           "id": "gap_window_stub",
           "code": "window_series_stub_only",
-          "present": true,
-          "severity_en": "OK \u2014 window_series_stub_only input available.",
-          "severity_ar": "\u062d\u0633\u0646\u0627\u064b \u2014 \u0627\u0644\u0645\u062f\u062e\u0644 window_series_stub_only \u0645\u062a\u0648\u0641\u0631.",
-          "severity": "info"
+          "present": false,
+          "severity_en": "Temporal context still includes window-level stub series (not AOU-specific multi-date).",
+          "severity_ar": "\u0627\u0644\u0633\u064a\u0627\u0642 \u0627\u0644\u0632\u0645\u0646\u064a \u0645\u0627 \u0632\u0627\u0644 \u064a\u062a\u0636\u0645\u0646 \u0633\u0644\u0633\u0644\u0629 \u0646\u0627\u0641\u0630\u0629 \u062a\u0642\u0631\u064a\u0628\u064a\u0629 (\u0648\u0644\u064a\u0633\u062a \u0645\u062a\u0639\u062f\u062f\u0629 \u0627\u0644\u062a\u0648\u0627\u0631\u064a\u062e \u0644\u0644\u0648\u062d\u062f\u0629).",
+          "severity": "caution"
         },
         {
           "id": "gap_dq",
@@ -941,12 +955,14 @@
       "missing_input_codes": [
         "no_ndre",
         "no_field_visit",
+        "thin_aou_history",
         "no_historical_seasons",
         "no_prior_iou",
         "no_post_khareef_clear",
-        "no_mpi_curve"
+        "no_mpi_curve",
+        "window_series_stub_only"
       ],
-      "gap_count": 6,
+      "gap_count": 8,
       "honesty_note_en": "Evidence Gap lists missing inputs honestly. Does not invent campaign numbers, pest certainty, soil moisture %, or live Khareef. MPI onset narrative (if any) is onset-T0 provisional only \u2014 not post-khareef labeling for AOUs.",
       "honesty_note_ar": "\u0641\u062c\u0648\u0629 \u0627\u0644\u0623\u062f\u0644\u0629 \u062a\u0633\u0631\u062f \u0627\u0644\u0645\u062f\u062e\u0644\u0627\u062a \u0627\u0644\u0646\u0627\u0642\u0635\u0629 \u0628\u0635\u062f\u0642. \u0644\u0627 \u062a\u062e\u062a\u0644\u0642 \u0623\u0631\u0642\u0627\u0645 \u062d\u0645\u0644\u0627\u062a \u0623\u0648 \u064a\u0642\u064a\u0646 \u0622\u0641\u0627\u062a \u0623\u0648 \u0631\u0637\u0648\u0628\u0629 \u062a\u0631\u0628\u0629 % \u0623\u0648 \u062e\u0631\u064a\u0641\u0627\u064b \u062d\u064a\u0627\u064b. \u0633\u0631\u062f \u0628\u062f\u0627\u064a\u0629 MPI (\u0625\u0646 \u0648\u064f\u062c\u062f) \u0645\u0624\u0642\u062a \u0639\u0646\u062f T0 \u0641\u0642\u0637 \u2014 \u0648\u0644\u064a\u0633 \u0648\u0633\u0645 \u0645\u0627 \u0628\u0639\u062f \u0627\u0644\u062e\u0631\u064a\u0641 \u0644\u0648\u062d\u062f\u0627\u062a \u0627\u0644\u0632\u0631\u0627\u0639\u0629.",
       "forbidden_claims": [
@@ -986,10 +1002,10 @@
         {
           "id": "gap_history",
           "code": "thin_aou_history",
-          "present": true,
-          "severity_en": "OK \u2014 thin_aou_history input available.",
-          "severity_ar": "\u062d\u0633\u0646\u0627\u064b \u2014 \u0627\u0644\u0645\u062f\u062e\u0644 thin_aou_history \u0645\u062a\u0648\u0641\u0631.",
-          "severity": "info"
+          "present": false,
+          "severity_en": "AOU multi-date history is thin (\u22641 clear AOU observation).",
+          "severity_ar": "\u062a\u0627\u0631\u064a\u062e \u0627\u0644\u0648\u062d\u062f\u0629 \u0645\u062a\u0639\u062f\u062f \u0627\u0644\u062a\u0648\u0627\u0631\u064a\u062e \u0636\u0639\u064a\u0641 (\u22641 \u0645\u0644\u0627\u062d\u0638\u0629 \u0635\u0627\u0641\u064a\u0629).",
+          "severity": "caution"
         },
         {
           "id": "gap_seasons",
@@ -1026,10 +1042,10 @@
         {
           "id": "gap_window_stub",
           "code": "window_series_stub_only",
-          "present": true,
-          "severity_en": "OK \u2014 window_series_stub_only input available.",
-          "severity_ar": "\u062d\u0633\u0646\u0627\u064b \u2014 \u0627\u0644\u0645\u062f\u062e\u0644 window_series_stub_only \u0645\u062a\u0648\u0641\u0631.",
-          "severity": "info"
+          "present": false,
+          "severity_en": "Temporal context still includes window-level stub series (not AOU-specific multi-date).",
+          "severity_ar": "\u0627\u0644\u0633\u064a\u0627\u0642 \u0627\u0644\u0632\u0645\u0646\u064a \u0645\u0627 \u0632\u0627\u0644 \u064a\u062a\u0636\u0645\u0646 \u0633\u0644\u0633\u0644\u0629 \u0646\u0627\u0641\u0630\u0629 \u062a\u0642\u0631\u064a\u0628\u064a\u0629 (\u0648\u0644\u064a\u0633\u062a \u0645\u062a\u0639\u062f\u062f\u0629 \u0627\u0644\u062a\u0648\u0627\u0631\u064a\u062e \u0644\u0644\u0648\u062d\u062f\u0629).",
+          "severity": "caution"
         },
         {
           "id": "gap_dq",
@@ -1059,12 +1075,14 @@
       "missing_input_codes": [
         "no_ndre",
         "no_field_visit",
+        "thin_aou_history",
         "no_historical_seasons",
         "no_prior_iou",
         "no_post_khareef_clear",
-        "no_mpi_curve"
+        "no_mpi_curve",
+        "window_series_stub_only"
       ],
-      "gap_count": 6,
+      "gap_count": 8,
       "honesty_note_en": "Evidence Gap lists missing inputs honestly. Does not invent campaign numbers, pest certainty, soil moisture %, or live Khareef. MPI onset narrative (if any) is onset-T0 provisional only \u2014 not post-khareef labeling for AOUs.",
       "honesty_note_ar": "\u0641\u062c\u0648\u0629 \u0627\u0644\u0623\u062f\u0644\u0629 \u062a\u0633\u0631\u062f \u0627\u0644\u0645\u062f\u062e\u0644\u0627\u062a \u0627\u0644\u0646\u0627\u0642\u0635\u0629 \u0628\u0635\u062f\u0642. \u0644\u0627 \u062a\u062e\u062a\u0644\u0642 \u0623\u0631\u0642\u0627\u0645 \u062d\u0645\u0644\u0627\u062a \u0623\u0648 \u064a\u0642\u064a\u0646 \u0622\u0641\u0627\u062a \u0623\u0648 \u0631\u0637\u0648\u0628\u0629 \u062a\u0631\u0628\u0629 % \u0623\u0648 \u062e\u0631\u064a\u0641\u0627\u064b \u062d\u064a\u0627\u064b. \u0633\u0631\u062f \u0628\u062f\u0627\u064a\u0629 MPI (\u0625\u0646 \u0648\u064f\u062c\u062f) \u0645\u0624\u0642\u062a \u0639\u0646\u062f T0 \u0641\u0642\u0637 \u2014 \u0648\u0644\u064a\u0633 \u0648\u0633\u0645 \u0645\u0627 \u0628\u0639\u062f \u0627\u0644\u062e\u0631\u064a\u0641 \u0644\u0648\u062d\u062f\u0627\u062a \u0627\u0644\u0632\u0631\u0627\u0639\u0629.",
       "forbidden_claims": [

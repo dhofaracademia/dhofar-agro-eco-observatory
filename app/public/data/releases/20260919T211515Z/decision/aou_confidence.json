@@ -1,6 +1,6 @@
 {
   "version": "0.4.8-post29-residuals",
-  "generated_at": "2026-09-19T21:24:44.555029+00:00",
+  "generated_at": "2026-09-19T21:15:22.765429+00:00",
   "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3 + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md",
   "status": "expert_v1_provisional",
   "product_stamp": "provisional_satellite_analytical_service",
@@ -10,11 +10,11 @@
   "mountain_apply": false,
   "action_auto_assign": false,
   "writes_to_app_public": true,
-  "run_id": "20260919T212317Z",
-  "release_id": "20260919T212317Z",
+  "run_id": "20260919T211515Z",
+  "release_id": "20260919T211515Z",
   "input_refs": {
-    "aou_registry": "satellite/pipeline/artifacts/isolated_reprocess_pr33_r41/data/observatory_publish_20260919T212317Z_xzg6l380/aou/aou_registry.json",
-    "aou_observations": "satellite/pipeline/artifacts/isolated_reprocess_pr33_r41/data/observatory_publish_20260919T212317Z_xzg6l380/aou/aou_observations.json"
+    "aou_registry": "satellite/pipeline/artifacts/isolated_reprocess_post31_full/data/observatory_publish_20260919T211515Z_9hanedcw/aou/aou_registry.json",
+    "aou_observations": "satellite/pipeline/artifacts/isolated_reprocess_post31_full/data/observatory_publish_20260919T211515Z_9hanedcw/aou/aou_observations.json"
   },
   "honesty_en": "Offline decision scaffolds for Najd agriculture AOUs only. Suitability \u2260 Confidence \u2260 data_quality_confidence. Not ecological certainty. No mountain UI. Action ladder manual only.",
   "schema_ref": "docs/spec_0.4/confidence.schema.json",
@@ -25,14 +25,14 @@
       "aou_id": "AOU-NJ-000001",
       "confidence_domain": "data_evidence",
       "status": "expert_v1_provisional",
-      "thin_temporal": false,
+      "thin_temporal": true,
       "data_quality_confidence": 97.0,
-      "temporal_coverage_confidence": 37.5,
+      "temporal_coverage_confidence": 12.5,
       "spatial_clarity_confidence": 0.0,
-      "overall_confidence": 48.18,
+      "overall_confidence": 41.93,
       "components": {
         "data_quality_norm": 0.97,
-        "n_clear_dates_norm": 0.375,
+        "n_clear_dates_norm": 0.125,
         "historical_depth": 0.0,
         "prior_iou": 0.0
       },
@@ -48,7 +48,7 @@
         "historical_depth": 0.2,
         "prior_iou": 0.15
       },
-      "n_clear_dates": 3,
+      "n_clear_dates": 1,
       "prior_seasons_count": 0,
       "is_new_id": true,
       "cite_slots": {
@@ -69,14 +69,14 @@
       "aou_id": "AOU-NJ-000002",
       "confidence_domain": "data_evidence",
       "status": "expert_v1_provisional",
-      "thin_temporal": false,
+      "thin_temporal": true,
       "data_quality_confidence": 97.0,
-      "temporal_coverage_confidence": 37.5,
+      "temporal_coverage_confidence": 12.5,
       "spatial_clarity_confidence": 0.0,
-      "overall_confidence": 48.18,
+      "overall_confidence": 41.93,
       "components": {
         "data_quality_norm": 0.97,
-        "n_clear_dates_norm": 0.375,
+        "n_clear_dates_norm": 0.125,
         "historical_depth": 0.0,
         "prior_iou": 0.0
       },
@@ -92,7 +92,7 @@
         "historical_depth": 0.2,
         "prior_iou": 0.15
       },
-      "n_clear_dates": 3,
+      "n_clear_dates": 1,
       "prior_seasons_count": 0,
       "is_new_id": true,
       "cite_slots": {
@@ -113,14 +113,14 @@
       "aou_id": "AOU-NJ-000003",
       "confidence_domain": "data_evidence",
       "status": "expert_v1_provisional",
-      "thin_temporal": false,
+      "thin_temporal": true,
       "data_quality_confidence": 97.0,
-      "temporal_coverage_confidence": 37.5,
+      "temporal_coverage_confidence": 12.5,
       "spatial_clarity_confidence": 0.0,
-      "overall_confidence": 48.18,
+      "overall_confidence": 41.93,
       "components": {
         "data_quality_norm": 0.97,
-        "n_clear_dates_norm": 0.375,
+        "n_clear_dates_norm": 0.125,
         "historical_depth": 0.0,
         "prior_iou": 0.0
       },
@@ -136,7 +136,7 @@
         "historical_depth": 0.2,
         "prior_iou": 0.15
       },
-      "n_clear_dates": 3,
+      "n_clear_dates": 1,
       "prior_seasons_count": 0,
       "is_new_id": true,
       "cite_slots": {
@@ -157,14 +157,14 @@
       "aou_id": "AOU-NJ-000004",
       "confidence_domain": "data_evidence",
       "status": "expert_v1_provisional",
-      "thin_temporal": false,
+      "thin_temporal": true,
       "data_quality_confidence": 97.0,
-      "temporal_coverage_confidence": 50.0,
+      "temporal_coverage_confidence": 12.5,
       "spatial_clarity_confidence": 0.0,
-      "overall_confidence": 51.3,
+      "overall_confidence": 41.93,
       "components": {
         "data_quality_norm": 0.97,
-        "n_clear_dates_norm": 0.5,
+        "n_clear_dates_norm": 0.125,
         "historical_depth": 0.0,
         "prior_iou": 0.0
       },
@@ -180,7 +180,7 @@
         "historical_depth": 0.2,
         "prior_iou": 0.15
       },
-      "n_clear_dates": 4,
+      "n_clear_dates": 1,
       "prior_seasons_count": 0,
       "is_new_id": true,
       "cite_slots": {
@@ -201,14 +201,14 @@
       "aou_id": "AOU-NJ-000005",
       "confidence_domain": "data_evidence",
       "status": "expert_v1_provisional",
-      "thin_temporal": false,
+      "thin_temporal": true,
       "data_quality_confidence": 97.0,
-      "temporal_coverage_confidence": 50.0,
+      "temporal_coverage_confidence": 12.5,
       "spatial_clarity_confidence": 0.0,
-      "overall_confidence": 51.3,
+      "overall_confidence": 41.93,
       "components": {
         "data_quality_norm": 0.97,
-        "n_clear_dates_norm": 0.5,
+        "n_clear_dates_norm": 0.125,
         "historical_depth": 0.0,
         "prior_iou": 0.0
       },
@@ -224,7 +224,7 @@
         "historical_depth": 0.2,
         "prior_iou": 0.15
       },
-      "n_clear_dates": 4,
+      "n_clear_dates": 1,
       "prior_seasons_count": 0,
       "is_new_id": true,
       "cite_slots": {
@@ -245,14 +245,14 @@
       "aou_id": "AOU-NJ-000006",
       "confidence_domain": "data_evidence",
       "status": "expert_v1_provisional",
-      "thin_temporal": false,
+      "thin_temporal": true,
       "data_quality_confidence": 97.0,
-      "temporal_coverage_confidence": 50.0,
+      "temporal_coverage_confidence": 12.5,
       "spatial_clarity_confidence": 0.0,
-      "overall_confidence": 51.3,
+      "overall_confidence": 41.93,
       "components": {
         "data_quality_norm": 0.97,
-        "n_clear_dates_norm": 0.5,
+        "n_clear_dates_norm": 0.125,
         "historical_depth": 0.0,
         "prior_iou": 0.0
       },
@@ -268,7 +268,7 @@
         "historical_depth": 0.2,
         "prior_iou": 0.15
       },
-      "n_clear_dates": 4,
+      "n_clear_dates": 1,
       "prior_seasons_count": 0,
       "is_new_id": true,
       "cite_slots": {
@@ -289,14 +289,14 @@
       "aou_id": "AOU-NJ-000007",
       "confidence_domain": "data_evidence",
       "status": "expert_v1_provisional",
-      "thin_temporal": false,
+      "thin_temporal": true,
       "data_quality_confidence": 97.0,
-      "temporal_coverage_confidence": 50.0,
+      "temporal_coverage_confidence": 12.5,
       "spatial_clarity_confidence": 0.0,
-      "overall_confidence": 51.3,
+      "overall_confidence": 41.93,
       "components": {
         "data_quality_norm": 0.97,
-        "n_clear_dates_norm": 0.5,
+        "n_clear_dates_norm": 0.125,
         "historical_depth": 0.0,
         "prior_iou": 0.0
       },
@@ -312,7 +312,7 @@
         "historical_depth": 0.2,
         "prior_iou": 0.15
       },
-      "n_clear_dates": 4,
+      "n_clear_dates": 1,
       "prior_seasons_count": 0,
       "is_new_id": true,
       "cite_slots": {
@@ -333,14 +333,14 @@
       "aou_id": "AOU-NJ-000008",
       "confidence_domain": "data_evidence",
       "status": "expert_v1_provisional",
-      "thin_temporal": false,
+      "thin_temporal": true,
       "data_quality_confidence": 97.0,
-      "temporal_coverage_confidence": 37.5,
+      "temporal_coverage_confidence": 12.5,
       "spatial_clarity_confidence": 0.0,
-      "overall_confidence": 48.18,
+      "overall_confidence": 41.93,
       "components": {
         "data_quality_norm": 0.97,
-        "n_clear_dates_norm": 0.375,
+        "n_clear_dates_norm": 0.125,
         "historical_depth": 0.0,
         "prior_iou": 0.0
       },
@@ -356,7 +356,7 @@
         "historical_depth": 0.2,
         "prior_iou": 0.15
       },
-      "n_clear_dates": 3,
+      "n_clear_dates": 1,
       "prior_seasons_count": 0,
       "is_new_id": true,
       "cite_slots": {
@@ -377,14 +377,14 @@
       "aou_id": "AOU-NJ-000009",
       "confidence_domain": "data_evidence",
       "status": "expert_v1_provisional",
-      "thin_temporal": false,
+      "thin_temporal": true,
       "data_quality_confidence": 97.0,
-      "temporal_coverage_confidence": 37.5,
+      "temporal_coverage_confidence": 12.5,
       "spatial_clarity_confidence": 0.0,
-      "overall_confidence": 48.18,
+      "overall_confidence": 41.93,
       "components": {
         "data_quality_norm": 0.97,
-        "n_clear_dates_norm": 0.375,
+        "n_clear_dates_norm": 0.125,
         "historical_depth": 0.0,
         "prior_iou": 0.0
       },
@@ -400,7 +400,7 @@
         "historical_depth": 0.2,
         "prior_iou": 0.15
       },
-      "n_clear_dates": 3,
+      "n_clear_dates": 1,
       "prior_seasons_count": 0,
       "is_new_id": true,
       "cite_slots": {
