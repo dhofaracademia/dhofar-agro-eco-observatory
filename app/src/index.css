@@ -28,3 +28,9 @@ body {
   z-index: 0;
   border-radius: 1rem;
 }
+.hub-pin { background: none; border: none; }
+.hub-pin-dot {
+  display: block; width: 14px; height: 14px; border-radius: 999px;
+  background: #2f6b3a; border: 2px solid #fbf7f0;
+  box-shadow: 0 1px 4px rgba(44, 33, 24, 0.45);
+}
