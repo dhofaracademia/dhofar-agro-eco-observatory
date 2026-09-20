@@ -3,8 +3,7 @@ import L from "leaflet";
 import hubsData from "../data/hubs.json";
 import { useTranslation } from "react-i18next";
 
-const icon = L.icon({
-  const icon = L.divIcon({
+const icon = L.divIcon({
   className: "hub-pin",
   html: '<span class="hub-pin-dot"></span>',
   iconSize: [14, 14],
