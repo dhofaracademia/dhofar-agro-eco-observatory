@@ -1,3 +1,6 @@
+import { fetchReleaseData } from "../lib/releaseData";
+import ReadingStatus from "../components/ReadingStatus";
+import ReadingExplanation from "../components/ReadingExplanation";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import AlertMap from "../components/AlertMap";
@@ -189,18 +192,18 @@ export default function Analysis() {
   useEffect(() => {
     let cancelled = false;
     Promise.all([
-      fetch(publicUrl("data/timeseries.json")).then((r) => {
+      fetchReleaseData("data/timeseries.json").then((r) => {
         if (!r.ok) throw new Error("ts");
         return r.json();
       }),
-      fetch(publicUrl("data/latest_alerts.geojson")).then((r) => {
+      fetchReleaseData("data/latest_alerts.geojson").then((r) => {
         if (!r.ok) throw new Error("alerts");
         return r.json();
       }),
-      fetch(publicUrl("data/aou/aou_registry.geojson"))
+      fetchReleaseData("data/aou/aou_registry.geojson")
         .then((r) => (r.ok ? r.json() : null))
         .catch(() => null),
-      fetch(publicUrl("data/aou/aou_observations.json"))
+      fetchReleaseData("data/aou/aou_observations.json")
         .then((r) => (r.ok ? r.json() : null))
         .catch(() => null),
     ])
@@ -228,15 +231,15 @@ export default function Analysis() {
     let cancelled = false;
     setDecisionLoading(true);
     Promise.all([
-      fetch(publicUrl("data/decision/aou_suitability_components.json")).then((r) => {
+      fetchReleaseData("data/decision/aou_suitability_components.json").then((r) => {
         if (!r.ok) throw new Error("suitability");
         return r.json();
       }),
-      fetch(publicUrl("data/decision/aou_confidence.json")).then((r) => {
+      fetchReleaseData("data/decision/aou_confidence.json").then((r) => {
         if (!r.ok) throw new Error("confidence");
         return r.json();
       }),
-      fetch(publicUrl("data/decision/aou_evidence_gaps.json")).then((r) => {
+      fetchReleaseData("data/decision/aou_evidence_gaps.json").then((r) => {
         if (!r.ok) throw new Error("gaps");
         return r.json();
       }),
@@ -351,6 +354,17 @@ export default function Analysis() {
         <p className="mt-2 max-w-3xl text-sm leading-relaxed text-sand-800/90">{t("analysis.blurb")}</p>
       </div>
 
+      <ReadingStatus />
+      <p className="rounded-xl bg-white p-4 text-sm leading-relaxed">{t("simple.analysisHelp")}</p>
+      {aouRegistry.length > 0 && (
+        <section className="rounded-2xl border border-sand-200 bg-white p-4">
+          <label htmlFor="simple-aou" className="block text-sm font-semibold">{t("simple.chooseArea")}</label>
+          <select id="simple-aou" value={selectedAou} onChange={(e) => setSelectedAou(e.target.value)} className="mt-2 max-w-full rounded-lg border border-sand-300 bg-white px-3 py-3 text-sm">
+            {aouRegistry.map((f) => <option key={f.properties.aou_id} value={f.properties.aou_id}>{f.properties.aou_id}</option>)}
+          </select>
+          {selectedFeat && <ReadingExplanation reading={selectedFeat.properties} />}
+        </section>
+      )}
       <div className="flex flex-wrap gap-2" role="tablist" aria-label={t("analysis.levelsLabel")}>
         {LEVELS.map((key) => (
           <button

@@ -34,3 +34,13 @@ body {
   background: #2f6b3a; border: 2px solid #fbf7f0;
   box-shadow: 0 1px 4px rgba(44, 33, 24, 0.45);
 }
+
+/* Visible keyboard focus and comfortable touch targets for both locales. */
+:where(a, button, summary, select, input):focus-visible {
+  outline: 3px solid var(--color-crop-600);
+  outline-offset: 3px;
+}
+summary { min-height: 2.75rem; align-content: center; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+}

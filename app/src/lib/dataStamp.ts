@@ -1,3 +1,4 @@
+import { fetchReleaseData } from "./releaseData";
 /** Shared AOU / farm-monitor offline stamp helpers (Map + Analysis + Imagery). */
 import { publicUrl } from "./publicUrl";
 
@@ -107,7 +108,7 @@ export function formatStampLabel(iso: string | null | undefined, locale: string)
 
 async function fetchJson(path: string): Promise<StampDoc | null> {
   try {
-    const res = await fetch(publicUrl(path));
+    const res = await fetchReleaseData(path);
     if (!res.ok) return null;
     return (await res.json()) as StampDoc;
   } catch {

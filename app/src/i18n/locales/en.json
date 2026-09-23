@@ -5,7 +5,7 @@
     "home": "Overview",
     "map": "Sites",
     "gallery": "Imagery",
-    "analysis": "Monitoring",
+    "analysis": "Readings & explanations",
     "about": "About"
   },
   "mode": {
@@ -150,7 +150,7 @@
     "sensor": "Sensor / tile",
     "date": "Date",
     "staticNote": "Archived browse previews (offline gallery assets).",
-    "refresh": "Refresh scene list from STAC",
+    "refresh": "Find newer satellite images",
     "refreshing": "Refreshing…",
     "refreshIdle": "Idle",
     "refreshOk": "Updated",
@@ -168,7 +168,7 @@
     "farmDataTitle": "Farm monitor artifacts",
     "farmDataBlurb": "latest_alerts.geojson + timeseries.json are produced by satellite/pipeline/run_monitor.py (PC STAC + rasterio) into app/public/data/. Client Refresh browses latest STAC scenes; full raster recompute is via the pipeline / GitHub Action.",
     "farmDataMissing": "Farm GeoJSON not loaded — run the monitor pipeline or wait for the Action.",
-    "refreshHelper": "Updates the STAC scene list only — does not update AOU alerts or MPI.",
+    "refreshHelper": "This button searches for recent satellite images. It does not recalculate agricultural readings.",
     "previewFail": "Preview unavailable",
     "tabLive": "Live STAC",
     "tabArchive": "Archive",
@@ -512,6 +512,126 @@
       "late_khareef": "late_khareef",
       "post_khareef": "post_khareef",
       "insufficient": "insufficient"
+    }
+  },
+  "simple": {
+    "guide": "Start here",
+    "guideTitle": "Understand your land, one step at a time",
+    "guideIntro": "Choose an area, check when it was observed, then read what the satellite suggests. You do not need to know the technical terms.",
+    "noExpertise": "A simple guide for everyone",
+    "startMap": "Explore the monitoring map",
+    "startTitle": "What would you like to do?",
+    "startIntro": "Start with the map to explore observations, or learn how to read the results.",
+    "mapHelp": "Select a coloured cell to see its observation and a plain-language explanation. An empty area may be outside the monitored window.",
+    "analysisHelp": "Choose a monitoring area to explore its history. Start with the explanation, then open the detailed numbers if you need them.",
+    "galleryHelp": "This button searches for recent satellite images. It does not recalculate agricultural readings.",
+    "chooseArea": "Choose a monitoring area",
+    "unavailable": "Not available",
+    "readingStatus": "How recent are these readings?",
+    "observed": "Satellite observation date",
+    "processed": "Readings processed · Oman time",
+    "checked": "Last satellite search · Oman time",
+    "checking": "Checking…",
+    "checkPublished": "Check for published updates",
+    "loadRelease": "Load the new readings",
+    "newRelease": "New readings are available. Load them to update the map and charts together.",
+    "statusError": "We could not check the update status. Existing readings remain displayed; try again.",
+    "howUpdates": "How do updates work?",
+    "updateExplanation": "The processing job searches for satellite scenes and accepts usable observations after cloud and coverage checks. Checking every day does not guarantee a new clear observation every day. This button checks published results only; it does not start satellite processing.",
+    "dailyConfirmed": "A daily scheduled check has been recorded. Its last outcome is shown above.",
+    "scheduleUnconfirmed": "No daily scheduled run has been confirmed in the published status yet.",
+    "adminRun": "Administrator: open the processing controls ↗",
+    "adminHint": "Opens GitHub Actions. An authorised repository maintainer can choose “Run workflow”; this link does not start a job.",
+    "age": "The observation is {{count}} days old. Processing it again does not make the satellite image newer.",
+    "whatItMeans": "What does this reading mean?",
+    "nextStep": "Suggested next step:",
+    "shortHistory": "There are too few observations to establish a reliable trend. Compare with a later usable observation.",
+    "explainNumbers": "Explain the numbers",
+    "colours": "Understand the map labels",
+    "commonQuestions": "Your questions, explained",
+    "technicalDetails": "Technical details and coverage",
+    "skip": "Skip to main content",
+    "navigation": "Main navigation",
+    "loading": "Loading the page…",
+    "statusLabel": "Status",
+    "learn": "Learn how to read the results",
+    "illustrative": "Seasonal guide only — the highlighted stage is not a live measurement.",
+    "statuses": {
+      "updated": "New readings were processed and published successfully.",
+      "no_new_scenes": "The last check found no change in the candidate scenes. Displaying the last accepted readings.",
+      "no_scenes": "The last search found no matching scenes. Displaying the last accepted readings.",
+      "no_new_clear_observation": "No newer usable observation was accepted. Displaying the last accepted readings.",
+      "failed": "The last processing attempt failed. The previous accepted readings have been retained.",
+      "unconfigured": "Automatic update status is not available yet. See the observation date above."
+    },
+    "steps": {
+      "choose": {
+        "title": "1. Find an area",
+        "body": "Open the agricultural map and select a coloured cell. The current monitoring window covers only part of Dhofar."
+      },
+      "read": {
+        "title": "2. Read the observation",
+        "body": "Check the image date and evidence quality before interpreting a colour or a number."
+      },
+      "act": {
+        "title": "3. Follow up",
+        "body": "Compare later observations. A satellite flag is a reason to investigate, not an automatic irrigation or pesticide instruction."
+      }
+    },
+    "labels": {
+      "healthy": "Vegetation: no flag in this observation",
+      "bare": "Little visible vegetation",
+      "water_attention": "Possible moisture stress",
+      "vigor_attention": "Possible change in vegetation vigour",
+      "unclear": "Insufficient usable evidence"
+    },
+    "readings": {
+      "healthy": "The observation did not trigger the model’s stress rules. This does not confirm that plants are free of disease or that irrigation is sufficient.",
+      "bare": "Little green vegetation was detected. This may be normal for a fallow field or the current season; it is not proof of crop failure.",
+      "water_attention": "The satellite shows a moisture-related signal that deserves attention. It is not a direct measurement of soil moisture or irrigation need.",
+      "vigor_attention": "A vegetation signal deserves attention. Season, harvest, water stress and other factors may explain it.",
+      "unclear": "A current conclusion is not supported by enough usable data. Clouds, incomplete coverage or retained older readings may be involved."
+    },
+    "actions": {
+      "healthy": "Continue monitoring and compare with the next usable observation.",
+      "bare": "Consider the planting or harvest season before interpreting this as a problem.",
+      "water_attention": "Compare with earlier readings and, if possible, check local irrigation conditions before changing watering.",
+      "vigor_attention": "Compare the dates and neighbouring areas. Optional local observations can help explain the change.",
+      "unclear": "Keep the last trusted observation in view and wait for a usable update."
+    },
+    "terms": {
+      "aou": {
+        "title": "What is a monitoring area (AOU)?",
+        "body": "An area grouped from satellite observations for repeated monitoring. It is not an official farm boundary, land title or ownership record."
+      },
+      "ndvi": {
+        "title": "NDVI: how much green vegetation is visible?",
+        "body": "An index derived from reflected light. A higher value often indicates more green vegetation, but comparisons depend on season and land cover. It is not a yield estimate."
+      },
+      "ndmi": {
+        "title": "NDMI: what does the moisture signal mean?",
+        "body": "An index sensitive to moisture in vegetation. It is not a soil-moisture percentage, a groundwater measurement or a direct instruction to irrigate."
+      },
+      "confidence": {
+        "title": "Does high confidence mean the conclusion is certain?",
+        "body": "No. Data quality concerns the observations; model confidence concerns the evidence behind an estimate. Neither is a guarantee of crop health or ecological suitability."
+      },
+      "missing": {
+        "title": "Why is my area missing or a value blank?",
+        "body": "The monitoring window does not cover all of Dhofar. Clouds and limited usable observations can also prevent an assessment. A blank value means unavailable, not zero or healthy."
+      },
+      "updates": {
+        "title": "Does refreshing images update the readings?",
+        "body": "No. The image button searches the scene catalogue. Agricultural readings update only after the processing job accepts new evidence and publishes a complete release."
+      },
+      "pests": {
+        "title": "Can the satellite identify a pest or disease?",
+        "body": "The platform can flag possible stress, but cannot confirm a pest or disease. Optional field observations can help investigate; do not choose a pesticide from the satellite flag alone."
+      },
+      "mountains": {
+        "title": "Are mountain restoration results the same as farm results?",
+        "body": "No. Mountain and khareef restoration use a separate evidence path. A seasonal guide is not a live forecast, and seed-broadcast timing remains deferred when evidence is insufficient."
+      }
     }
   }
 }

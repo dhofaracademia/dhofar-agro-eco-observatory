@@ -1,3 +1,4 @@
+import ReadingExplanation from "./ReadingExplanation";
 import { useTranslation } from "react-i18next";
 import {
   aouIdFromFeature,
@@ -52,7 +53,9 @@ export default function AouProfilePanel({
         )}
       </div>
 
-      <dl className="grid gap-3 text-sm sm:grid-cols-2">
+      <ReadingExplanation reading={p} />
+      <details><summary className="cursor-pointer text-sm font-semibold text-crop-700">{t("simple.technicalDetails")}</summary>
+      <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-2">
         <div>
           <dt className="text-xs font-semibold uppercase tracking-wide text-sand-800/50">{t("aou.area")}</dt>
           <dd>{area.toFixed(2)} ha <span className="text-xs text-sand-800/50">({t("aou.estimated")})</span></dd>
@@ -113,6 +116,7 @@ export default function AouProfilePanel({
           <dd>{p.date ?? "—"}</dd>
         </div>
       </dl>
+      </details>
 
       {labels.noteKey && (
         <p className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-3 text-xs leading-relaxed text-sand-800/90">

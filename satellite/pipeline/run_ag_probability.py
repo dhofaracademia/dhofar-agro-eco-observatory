@@ -1778,12 +1778,17 @@ def main() -> int:
             return 8
 
         try:
-            publish_release_with_pointer(
-                stage_root=stage,
-                public_root=out,
-                release_id=release_id,
-                relative_paths=promote,
-            )
+            if skip_decision:
+                # Monitor owns publication. Chronological passes update its private
+                # stage only; never overwrite an immutable release for each date.
+                atomic_promote_with_rollback(
+                    stage_root=stage, public_root=out, relative_paths=promote,
+                )
+            else:
+                publish_release_with_pointer(
+                    stage_root=stage, public_root=out,
+                    release_id=release_id, relative_paths=promote,
+                )
         except Exception as e:
             print(
                 f"ERROR: release pointer publish failed — CURRENT unchanged: {e}",

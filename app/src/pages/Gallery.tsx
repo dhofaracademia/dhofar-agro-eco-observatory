@@ -1,3 +1,4 @@
+import { fetchReleaseData } from "../lib/releaseData";
 import { useMemo, useState, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import scenes from "../data/scenes.json";
@@ -99,7 +100,7 @@ function FarmArtifactsMeta({
 
   useEffect(() => {
     let cancelled = false;
-    fetch(publicUrl("data/timeseries.json"))
+    fetchReleaseData("data/timeseries.json")
       .then((r) => {
         if (!r.ok) throw new Error("missing");
         return r.json();
@@ -283,7 +284,7 @@ export default function Gallery() {
               {formatClientStamp(updatedAt)}
             </div>
             <div className="text-xs">
-              Status: <span className="font-medium">{statusLabel}</span>
+              {t("simple.statusLabel")}: <span className="font-medium">{statusLabel}</span>
               {error ? <span className="text-red-700"> — {error}</span> : null}
             </div>
           </div>

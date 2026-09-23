@@ -1,4 +1,4 @@
-import { Link, NavLink, useParams } from "react-router-dom";
+import { Link, NavLink, useParams, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import type { ReactNode } from "react";
 
@@ -10,12 +10,14 @@ const linkClass = ({ isActive }: { isActive: boolean }) =>
 export default function Layout({ children }: { children: ReactNode }) {
   const { t, i18n } = useTranslation();
   const { locale = "en" } = useParams();
+  const location = useLocation();
   const other = locale === "ar" ? "en" : "ar";
   const base = `/${locale}`;
   const isAr = i18n.language === "ar";
 
   return (
     <div className="min-h-screen flex flex-col">
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:block focus:bg-white focus:p-4">{t("simple.skip")}</a>
       <header className="sticky top-0 z-20 border-b border-sand-200/80 bg-sand-50/90 backdrop-blur">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3">
           <Link to={base} className="min-w-0">
@@ -33,10 +35,11 @@ export default function Layout({ children }: { children: ReactNode }) {
               </span>
             </div>
           </Link>
-          <nav className="flex flex-wrap items-center gap-1">
+          <nav aria-label={t("simple.navigation")} className="flex flex-wrap items-center gap-1">
             <NavLink to={base} end className={linkClass}>
               {t("nav.home")}
             </NavLink>
+            <NavLink to={`${base}/guide`} className={linkClass}>{t("simple.guide")}</NavLink>
             <NavLink to={`${base}/gallery`} className={linkClass}>
               {t("nav.gallery")}
             </NavLink>
@@ -50,15 +53,15 @@ export default function Layout({ children }: { children: ReactNode }) {
               {t("nav.about")}
             </NavLink>
             <Link
-              to={`/${other}`}
+              to={{ pathname: location.pathname.replace(/^\/(ar|en)(?=\/|$)/, `/${other}`), search: location.search, hash: location.hash }}
               className="ms-2 rounded-full border border-sand-300 px-3 py-1.5 text-sm font-semibold text-sand-800 hover:bg-sand-100"
             >
-              {other === "ar" ? "ع" : "EN"}
+              {other === "ar" ? "العربية" : "English"}
             </Link>
           </nav>
         </div>
       </header>
-      <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8">{children}</main>
+      <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-6xl flex-1 px-4 py-8">{children}</main>
       <footer className="border-t border-sand-200 py-5 text-center text-xs text-sand-800/60">
         <div>
           {t("appName")}
