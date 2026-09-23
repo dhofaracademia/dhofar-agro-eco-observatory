@@ -6,15 +6,26 @@
     {
       "source": "/data/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=120, must-revalidate" },
-        { "key": "Access-Control-Allow-Origin", "value": "*" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=120, must-revalidate"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
       ]
     }
   ],
   "rewrites": [
     {
-      "source": "/((?!data/|previews/|leaflet/|assets/|robots.txt|sitemap.xml|favicon.svg|favicon.ico).*)",
+      "source": "/((?!api/|data/|previews/|leaflet/|assets/|robots.txt|sitemap.xml|favicon.svg|favicon.ico).*)",
       "destination": "/index.html"
     }
-  ]
+  ],
+  "functions": {
+    "api/satellite-scenes.js": {
+      "maxDuration": 30
+    }
+  }
 }

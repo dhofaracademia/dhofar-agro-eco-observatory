@@ -17,6 +17,7 @@ export default function Home() {
         <p className="mt-2 leading-relaxed">{t("simple.startIntro")}</p>
         <div className="mt-5 flex flex-wrap gap-3">
           <Link to={`${base}/map`} className="rounded-full bg-white px-5 py-3 font-semibold text-crop-700">{t("simple.startMap")}</Link>
+          <Link to={`${base}/gallery`} className="rounded-full border border-white px-5 py-3 font-semibold">{t("gallery.refresh")}</Link>
           <Link to={`${base}/guide`} className="rounded-full border border-white px-5 py-3 font-semibold">{t("simple.learn")}</Link>
         </div>
       </section>
