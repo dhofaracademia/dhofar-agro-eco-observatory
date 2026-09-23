@@ -216,16 +216,17 @@ export default function Gallery() {
     setStatus("refreshing");
     setError(null);
     try {
-      const items = await fetchLatestSentinel2Scenes(6);
-      const now = new Date().toISOString();
+      const result = await fetchLatestSentinel2Scenes();
+      const items = result.scenes;
+      const now = result.checkedAt;
       setLive(items);
       setUpdatedAt(now);
       setStatus("updated");
       setTab("live");
-      localStorage.setItem(LS_KEY, JSON.stringify({ updatedAt: now, scenes: items }));
-    } catch (e) {
+      try { localStorage.setItem(LS_KEY, JSON.stringify({ updatedAt: now, scenes: items })); } catch { /* Optional cache must not make a successful search fail. */ }
+    } catch {
       setStatus("failed");
-      setError(e instanceof Error ? e.message : String(e));
+      setError("source_unavailable");
     }
   }, []);
 
@@ -252,6 +253,31 @@ export default function Gallery() {
           </span>
         </div>
 
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="text-sm text-sand-800/80">
+            <div>
+              <span className="font-semibold">{t("gallery.lastUpdated")}: </span>
+              {formatClientStamp(updatedAt)}
+            </div>
+            <div className="text-xs" role="status" aria-live="polite">
+              {t("simple.statusLabel")}: <span className="font-medium">{statusLabel}</span>
+              {error ? <span className="text-red-700"> — {t("gallery.refreshErrorHelpful")}</span> : null}
+            </div>
+          </div>
+          <div className="flex max-w-sm flex-col items-stretch gap-1 sm:items-end">
+            <button
+              type="button"
+              onClick={() => void onRefresh()}
+              disabled={status === "refreshing"}
+              className="rounded-full bg-crop-600 px-5 py-2 text-sm font-semibold text-white hover:bg-crop-700 disabled:opacity-60"
+            >
+              {status === "refreshing" ? t("gallery.refreshing") : t("gallery.refresh")}
+            </button>
+            <p className="text-[11px] leading-snug text-sand-800/70">{t("gallery.refreshHelper")}</p>
+          </div>
+        </div>
+
+        {status === "updated" && <p className="rounded-xl bg-crop-600/10 p-3 text-sm" role="status">{live.length ? t("gallery.foundScenes", { count: live.length, date: live[0]?.date || "—" }) : t("gallery.noScenesFound")}</p>}
         <aside className="rounded-xl border border-amber-200 bg-amber-50/80 p-3 text-xs text-sand-900/90 space-y-1">
           <div className="font-semibold text-earth-600">{t("honesty.title")}</div>
           <ul className="list-disc space-y-1 ps-4">
@@ -275,30 +301,6 @@ export default function Gallery() {
             {aouStampText}
           </div>
           <p className="text-[11px] text-sand-800/70">{t("map.aouNotByStac")}</p>
-        </div>
-
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="text-sm text-sand-800/80">
-            <div>
-              <span className="font-semibold">{t("gallery.lastUpdated")}: </span>
-              {formatClientStamp(updatedAt)}
-            </div>
-            <div className="text-xs">
-              {t("simple.statusLabel")}: <span className="font-medium">{statusLabel}</span>
-              {error ? <span className="text-red-700"> — {error}</span> : null}
-            </div>
-          </div>
-          <div className="flex max-w-sm flex-col items-stretch gap-1 sm:items-end">
-            <button
-              type="button"
-              onClick={() => void onRefresh()}
-              disabled={status === "refreshing"}
-              className="rounded-full bg-crop-600 px-5 py-2 text-sm font-semibold text-white hover:bg-crop-700 disabled:opacity-60"
-            >
-              {status === "refreshing" ? t("gallery.refreshing") : t("gallery.refresh")}
-            </button>
-            <p className="text-[11px] leading-snug text-sand-800/70">{t("gallery.refreshHelper")}</p>
-          </div>
         </div>
 
         <div className="flex flex-wrap gap-2" role="tablist" aria-label="Gallery tabs">
