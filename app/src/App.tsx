@@ -1,16 +1,18 @@
 import { Navigate, Route, Routes, useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
-import MapPage from "./pages/MapPage";
-import Gallery from "./pages/Gallery";
-import Analysis from "./pages/Analysis";
-import About from "./pages/About";
+const MapPage = lazy(() => import("./pages/MapPage"));
+const Gallery = lazy(() => import("./pages/Gallery"));
+const Analysis = lazy(() => import("./pages/Analysis"));
+const About = lazy(() => import("./pages/About"));
+
+const Guide = lazy(() => import("./pages/Guide"));
 
 function LocaleRoutes() {
   const { locale } = useParams();
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
 
   useEffect(() => {
     const lng = locale === "ar" ? "ar" : "en";
@@ -25,14 +27,17 @@ function LocaleRoutes() {
 
   return (
     <Layout>
+      <Suspense fallback={<p role="status" className="py-12 text-center">{t("simple.loading")}</p>}>
       <Routes>
         <Route index element={<Home />} />
         <Route path="map" element={<MapPage />} />
         <Route path="gallery" element={<Gallery />} />
         <Route path="analysis" element={<Analysis />} />
+        <Route path="guide" element={<Guide />} />
         <Route path="about" element={<About />} />
         <Route path="*" element={<Navigate to={`/${locale}`} replace />} />
       </Routes>
+      </Suspense>
     </Layout>
   );
 }

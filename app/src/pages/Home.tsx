@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { publicUrl } from "../lib/publicUrl";
+import ReadingStatus from "../components/ReadingStatus";
 import KhareefCalendar from "../components/KhareefCalendar";
 
 export default function Home() {
@@ -10,6 +11,16 @@ export default function Home() {
 
   return (
     <div className="space-y-10">
+      <section className="rounded-2xl bg-crop-700 p-5 text-white sm:p-8">
+        <p className="text-sm">{t("simple.noExpertise")}</p>
+        <h2 className="mt-2 text-2xl font-bold">{t("simple.startTitle")}</h2>
+        <p className="mt-2 leading-relaxed">{t("simple.startIntro")}</p>
+        <div className="mt-5 flex flex-wrap gap-3">
+          <Link to={`${base}/map`} className="rounded-full bg-white px-5 py-3 font-semibold text-crop-700">{t("simple.startMap")}</Link>
+          <Link to={`${base}/guide`} className="rounded-full border border-white px-5 py-3 font-semibold">{t("simple.learn")}</Link>
+        </div>
+      </section>
+      <ReadingStatus />
       <section className="grid gap-8 lg:grid-cols-2 lg:items-center">
         <div className="space-y-4">
           <span className="inline-block rounded-full bg-sand-100 px-3 py-1 text-xs font-semibold text-earth-600">
@@ -71,7 +82,7 @@ export default function Home() {
         </div>
       </section>
 
-      <KhareefCalendar active="peak" />
+      <KhareefCalendar />
 
       <section className="grid gap-4 md:grid-cols-2">
         <div className="rounded-2xl border border-sand-200 bg-white p-5 shadow-sm">

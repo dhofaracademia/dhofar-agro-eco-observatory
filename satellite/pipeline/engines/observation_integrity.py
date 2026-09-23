@@ -726,101 +726,68 @@ def verify_release_ids_match(
 
 
 def publish_release_with_pointer(
-    *,
-    stage_root: "Path",
-    public_root: "Path",
-    release_id: str,
-    relative_paths: list[str],
-    fail_before_pointer: bool = False,
+    *, stage_root: "Path", public_root: "Path", release_id: str,
+    relative_paths: list[str], fail_before_pointer: bool = False,
     fail_mid_copy: int | None = None,
-) -> Path:
-    """Immutable release dir + single CURRENT pointer swap (R4-3).
+) -> "Path":
+    """Publish a new immutable tree, then transactionally mirror files + pointers.
 
-    1. Copy staged files into ``public_root/releases/<release_id>/``.
-    2. Verify required files exist under that tree.
-    3. Atomically (best-effort) swap ``CURRENT`` pointer / ``latest_release.json``
-       to the new id — **only after** the full tree is OK.
-    4. Also mirror into the legacy live tree via ``atomic_promote_with_rollback``
-       for readers not yet on the pointer (compat); pointer is source of truth
-       for "current" identity.
-
-    On any failure before pointer swap: pointer unchanged; partial release dir
-    is left for diagnostics (never pointed). Does **not** claim OS-atomic rename
-    across filesystems — documents best-effort replace.
+    Frontends pin latest_release.json once per session. Existing release IDs
+    are never replaced. Legacy files and pointers share rollback on failure.
     """
     import json
+    import re
     import shutil
     import tempfile
     from pathlib import Path
 
-    stage_root = Path(stage_root)
-    public_root = Path(public_root)
+    if not re.fullmatch(r"[A-Za-z0-9_-]+", release_id):
+        raise ValueError("Invalid release id")
+    stage_root, public_root = Path(stage_root), Path(public_root)
     releases = public_root / "releases"
     releases.mkdir(parents=True, exist_ok=True)
     release_dir = releases / release_id
     if release_dir.exists():
-        shutil.rmtree(release_dir)
-    release_dir.mkdir(parents=True, exist_ok=True)
-
-    copied: list[str] = []
+        raise FileExistsError(f"Immutable release already exists: {release_id}")
+    rels = list(dict.fromkeys(relative_paths))
+    for rel in rels:
+        if Path(rel).is_absolute() or ".." in Path(rel).parts:
+            raise ValueError(f"Invalid release path: {rel}")
+    pending = Path(tempfile.mkdtemp(prefix=".pending-", dir=releases))
     try:
-        for i, rel in enumerate(relative_paths):
-            if fail_mid_copy is not None and i >= int(fail_mid_copy):
+        for i, rel in enumerate(rels):
+            if fail_mid_copy is not None and i >= fail_mid_copy:
                 raise RuntimeError(f"injected mid-copy failure at {rel}")
-            src = stage_root / rel
-            if not src.exists():
+            src, dst = stage_root / rel, pending / rel
+            if not src.is_file():
                 raise FileNotFoundError(f"staged release missing {rel}")
-            dst = release_dir / rel
             dst.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(src, dst)
-            copied.append(rel)
-
-        # Verify tree complete
-        missing = [r for r in relative_paths if not (release_dir / r).is_file()]
-        if missing:
-            raise FileNotFoundError(f"release tree incomplete: {missing}")
-
         if fail_before_pointer:
             raise RuntimeError("injected failure before pointer swap")
-
-        # Write pointer payload then replace CURRENT via temp+rename
+        pending.rename(release_dir)
         pointer_doc = {
-            "release_id": release_id,
-            "path": f"releases/{release_id}",
-            "artifacts": list(relative_paths),
-            "pointer_semantics": "immutable_release_dir_plus_current",
+            "release_id": release_id, "path": f"releases/{release_id}",
+            "artifacts": rels, "pointer_semantics": "immutable_release_dir_plus_current",
             "atomic_claim": False,
-            "note": "Pointer swap after full tree verified; not claiming cross-FS atomic multi-file.",
         }
-        latest_path = public_root / "latest_release.json"
-        tmp_latest = public_root / f".latest_release.{release_id}.tmp"
-        tmp_latest.write_text(json.dumps(pointer_doc, indent=2))
-        tmp_latest.replace(latest_path)
-
-        current_link = public_root / "CURRENT"
-        # Prefer text pointer file (portable); also try symlink when possible
-        tmp_cur = public_root / f".CURRENT.{release_id}.tmp"
-        tmp_cur.write_text(release_id + "\n")
-        tmp_cur.replace(current_link)
+        (stage_root / "latest_release.json").write_text(json.dumps(pointer_doc, indent=2))
+        (stage_root / "CURRENT").write_text(release_id + "\n")
+        atomic_promote_with_rollback(
+            stage_root=stage_root, public_root=public_root,
+            relative_paths=rels + ["CURRENT", "latest_release.json"],
+        )
+        # Compatibility only; the web app uses latest_release.json, never this link.
+        link = public_root / "CURRENT_LINK"
         try:
-            link_path = public_root / "CURRENT_LINK"
-            if link_path.is_symlink() or link_path.exists():
-                link_path.unlink()
-            link_path.symlink_to(Path("releases") / release_id)
+            if link.is_symlink() or link.exists():
+                link.unlink()
+            link.symlink_to(Path("releases") / release_id)
         except OSError:
             pass
-
-        # Compat mirror into live tree (legacy readers) with rollback
-        atomic_promote_with_rollback(
-            stage_root=stage_root,
-            public_root=public_root,
-            relative_paths=relative_paths,
-        )
         return release_dir
-    except Exception:
-        # Pointer unchanged; leave partial release dir for diagnostics (do not delete
-        # if a restore/mirror already partially applied — safer to keep).
-        raise
+    finally:
+        shutil.rmtree(pending, ignore_errors=True)
 
 
 def stamp_release_id_on_doc(doc: dict[str, Any], release_id: str) -> dict[str, Any]:

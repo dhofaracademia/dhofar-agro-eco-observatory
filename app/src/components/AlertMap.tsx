@@ -1,3 +1,4 @@
+import { fetchReleaseData } from "../lib/releaseData";
 import { useEffect, useMemo, useState } from "react";
 import { MapContainer, TileLayer, GeoJSON, Rectangle, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
@@ -76,7 +77,7 @@ export default function AlertMap({
 
   useEffect(() => {
     let cancelled = false;
-    fetch(publicUrl("data/latest_alerts.geojson"))
+    fetchReleaseData("data/latest_alerts.geojson")
       .then((r) => {
         if (!r.ok) throw new Error("fetch failed");
         return r.json();

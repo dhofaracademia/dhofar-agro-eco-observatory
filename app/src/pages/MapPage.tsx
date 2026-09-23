@@ -1,3 +1,5 @@
+import ReadingStatus from "../components/ReadingStatus";
+import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import AlertMap from "../components/AlertMap";
@@ -33,6 +35,7 @@ function HubCoverageBadge({ hub }: { hub: Hub }) {
 
 export default function MapPage() {
   const { t, i18n } = useTranslation();
+  const { locale = "en" } = useParams();
   const { hubs, bbox } = hubsData;
   const analysisWindow = "analysis_window" in hubsData ? hubsData.analysis_window : null;
   const [mode, setMode] = useState<ObservatoryMode>("agricultural");
@@ -44,8 +47,9 @@ export default function MapPage() {
         <p className="mt-2 max-w-3xl text-sm leading-relaxed text-sand-800/90">{t("map.blurb")}</p>
       </div>
 
+      <p className="rounded-xl border border-sand-200 bg-white p-4 text-sm leading-relaxed">{t("simple.mapHelp")} <Link className="font-semibold text-crop-700 underline" to={`/${locale}/guide`}>{t("simple.learn")}</Link></p>
       <ObservatoryModeToggle mode={mode} onChange={setMode} />
-      <KhareefCalendar active="weakening" />
+      <KhareefCalendar />
 
       {mode === "agricultural" ? (
         <section className="space-y-2">
@@ -61,6 +65,7 @@ export default function MapPage() {
           <p className="text-xs text-sand-800/60">{t("provisional.aou")}</p>
           <p className="text-xs text-amber-950/90">{t("map.aouNotByStac")}</p>
           <NajdSeasonalChip />
+          <ReadingStatus />
           <AlertMap />
         </section>
       ) : (
@@ -83,7 +88,8 @@ export default function MapPage() {
       )}
 
       {mode === "agricultural" && (
-        <div className="grid gap-4 md:grid-cols-2">
+        <details className="rounded-2xl border border-sand-200 p-4"><summary className="cursor-pointer font-semibold">{t("simple.technicalDetails")}</summary>
+        <div className="mt-4 grid gap-4 md:grid-cols-2">
           <div className="rounded-2xl border border-sand-200 bg-white p-4 text-sm shadow-sm">
             <h2 className="mb-2 font-semibold text-crop-700">{t("map.bbox")}</h2>
             <code className="text-xs">
@@ -131,6 +137,7 @@ export default function MapPage() {
             </ul>
           </div>
         </div>
+        </details>
       )}
     </div>
   );

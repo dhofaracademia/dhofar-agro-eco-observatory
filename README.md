@@ -49,19 +49,17 @@ Writes:
 - app/public/data/timeseries.json
 - app/public/data/meta/last_refresh.json
 
-### Scheduled monitor Action
+### Automatic readings refresh
 
-Template: satellite/pipeline/GITHUB_ACTION_TEMPLATE.md
+The workflow `.github/workflows/monitor.yml` checks daily at 05:17 UTC (09:17 Oman)
+and supports a maintainer-triggered **Run workflow**. It becomes active after it is
+merged into the default branch with GitHub Actions and contents-write enabled.
+A daily check does not guarantee a daily usable observation.
 
-If monitor.yml is installed under the repo Actions workflows folder on the default branch, use Actions then Farm STAC / AOU monitor (manual run + weekly cron).
-
-Enable steps when missing or restricted:
-
-1. Copy YAML from the template into the Actions workflows folder as monitor.yml
-2. Allow Actions plus contents write for the job
-3. Run a manual dispatch once and confirm app/public/data artifacts update
-
-Until enabled on main, do **not** assume the scheduled monitor is live — use run_monitor.py locally.
+The refresh job keeps the last-good data on failures, skips unchanged candidate
+scenes and publishes complete releases. Public check status is kept separately
+from satellite observation time. The visitor's update button only checks already
+published results. See [activation and verification](docs/AUTOMATIC_REFRESH_AND_GUIDE.md).
 
 ### Honesty locks (unchanged)
 
