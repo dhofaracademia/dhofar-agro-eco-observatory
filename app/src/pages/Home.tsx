@@ -5,54 +5,28 @@ import ReadingStatus from "../components/ReadingStatus";
 import KhareefCalendar from "../components/KhareefCalendar";
 
 export default function Home() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { locale = "en" } = useParams();
   const base = `/${locale}`;
+  const archiveNote = i18n.language?.startsWith("ar")
+    ? "صورة أرشيفية، وليست القراءة الحية."
+    : "Archive image, not the live reading.";
 
   return (
     <div className="space-y-10">
       <section className="rounded-2xl bg-crop-700 p-5 text-white sm:p-8">
         <p className="text-sm">{t("simple.noExpertise")}</p>
-        <h2 className="mt-2 text-2xl font-bold">{t("simple.startTitle")}</h2>
-        <p className="mt-2 leading-relaxed">{t("simple.startIntro")}</p>
+        <h1 className="mt-2 text-2xl font-bold sm:text-3xl">{t("simple.startTitle")}</h1>
+        <p className="mt-2 max-w-2xl leading-relaxed">{t("simple.startIntro")}</p>
         <div className="mt-5 flex flex-wrap gap-3">
-          <Link to={`${base}/analysis`} className="rounded-full bg-white px-5 py-3 font-semibold text-crop-700">{t("explore.start")}</Link>
-          <Link to={`${base}/gallery`} className="rounded-full border border-white px-5 py-3 font-semibold">{t("gallery.refresh")}</Link>
+          <Link to={`${base}/map`} className="rounded-full bg-white px-5 py-3 font-semibold text-crop-700">{t("simple.startMap")}</Link>
+          <Link to={`${base}/analysis`} className="rounded-full border border-white px-5 py-3 font-semibold">{t("explore.start")}</Link>
           <Link to={`${base}/guide`} className="rounded-full border border-white px-5 py-3 font-semibold">{t("simple.learn")}</Link>
         </div>
       </section>
       <ReadingStatus />
-      <section className="grid gap-8 lg:grid-cols-2 lg:items-center">
-        <div className="space-y-4">
-          <span className="inline-block rounded-full bg-sand-100 px-3 py-1 text-xs font-semibold text-earth-600">
-            {t("home.badge")}
-          </span>
-          <h1 className="text-3xl font-bold tracking-tight text-sand-900 sm:text-4xl">
-            {t("home.title")}
-          </h1>
-          <p className="text-base leading-relaxed text-sand-800/90">{t("home.intro")}</p>
-          <p className="text-sm text-sand-800/60">{t("home.previewNote")}</p>
-          <div className="flex flex-wrap gap-3 pt-2">
-            <Link
-              to={`${base}/map`}
-              className="rounded-full bg-crop-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-crop-700"
-            >
-              {t("home.ctaMap")}
-            </Link>
-            <Link
-              to={`${base}/gallery`}
-              className="rounded-full border border-sand-300 bg-white px-5 py-2.5 text-sm font-semibold text-sand-800 hover:bg-sand-100"
-            >
-              {t("home.ctaGallery")}
-            </Link>
-            <Link
-              to={`${base}/analysis`}
-              className="rounded-full border border-sand-300 bg-white px-5 py-2.5 text-sm font-semibold text-sand-800 hover:bg-sand-100"
-            >
-              {t("home.ctaAnalysis")}
-            </Link>
-          </div>
-        </div>
+      <section className="space-y-3">
+        <p className="text-sm text-sand-800/70">{t("home.previewNote")}</p>
         <div className="grid gap-3 sm:grid-cols-2">
           <figure className="overflow-hidden rounded-2xl border border-sand-200 bg-white shadow-sm sm:col-span-2">
             <img
@@ -61,7 +35,7 @@ export default function Home() {
               className="h-48 w-full object-cover sm:h-56"
             />
             <figcaption className="px-3 py-2 text-xs text-sand-800/70">
-              Thumrait · true-color · 2026-03-13
+              Thumrait · true-color · 2026-03-13 · {archiveNote}
             </figcaption>
           </figure>
           <figure className="overflow-hidden rounded-2xl border border-sand-200 bg-white shadow-sm">
@@ -70,7 +44,7 @@ export default function Home() {
               alt="Thumrait NDVI"
               className="h-36 w-full object-cover"
             />
-            <figcaption className="px-3 py-2 text-xs text-sand-800/70">NDVI</figcaption>
+            <figcaption className="px-3 py-2 text-xs text-sand-800/70">NDVI · 2026-03-13 · {archiveNote}</figcaption>
           </figure>
           <figure className="overflow-hidden rounded-2xl border border-sand-200 bg-white shadow-sm">
             <img
@@ -78,7 +52,9 @@ export default function Home() {
               alt="Thumrait late summer"
               className="h-36 w-full object-cover"
             />
-            <figcaption className="px-3 py-2 text-xs text-sand-800/70">Late summer</figcaption>
+            <figcaption className="px-3 py-2 text-xs text-sand-800/70">
+              Thumrait · 2026-09-04 · {archiveNote}
+            </figcaption>
           </figure>
         </div>
       </section>
