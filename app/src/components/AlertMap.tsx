@@ -1,6 +1,6 @@
 import { fetchReleaseData } from "../lib/releaseData";
 import { useEffect, useMemo, useState } from "react";
-import { MapContainer, TileLayer, GeoJSON, Rectangle, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, GeoJSON, Rectangle, Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
 import { useTranslation } from "react-i18next";
 import hubsData from "../data/hubs.json";
@@ -8,7 +8,6 @@ import SourceCitation from "./SourceCitation";
 import type { SourceInfo } from "./SourceCitation";
 import AouProfilePanel from "./AouProfilePanel";
 import { aouIdFromFeature, type AouFeature, type AlertKind } from "../lib/aou";
-import { publicUrl } from "../lib/publicUrl";
 import NajdSeasonalChip from "./NajdSeasonalChip";
 
 type AlertProps = {
@@ -16,12 +15,31 @@ type AlertProps = {
   ndvi: number;
   ndmi: number;
   date: string;
-  source: string;
-  product_id: string;
-  tile: string;
+  source?: string;
+  product_id?: string;
+  tile?: string;
   cloud_cover?: number;
   pixel_count?: number;
+  temporal_evidence_sufficient?: boolean;
 };
+
+function displayAlert(props?: Pick<AlertProps, "alert" | "temporal_evidence_sufficient">): AlertKind {
+  const raw = props?.alert ?? "unclear";
+  if (props?.temporal_evidence_sufficient === false && raw !== "bare" && raw !== "unclear") {
+    return "unclear";
+  }
+  return raw;
+}
+
+function FitAouLayer({ features, active }: { features: AlertFeature[]; active: boolean }) {
+  const map = useMap();
+  useEffect(() => {
+    if (!active || features.length === 0) return;
+    const bounds = L.geoJSON(features as never).getBounds();
+    if (bounds.isValid()) map.fitBounds(bounds, { padding: [32, 32], maxZoom: 12 });
+  }, [features, active, map]);
+  return null;
+}
 
 type AlertFeature = AouFeature & {
   properties: AlertProps;
@@ -66,6 +84,7 @@ export default function AlertMap({
   const [data, setData] = useState<AlertFC | null>(null);
   const [error, setError] = useState(false);
   const [hideBare, setHideBare] = useState(true);
+  const [showDebugGrid, setShowDebugGrid] = useState(false);
   const [selected, setSelected] = useState<AlertFeature | null>(null);
   const { hubs, bbox } = hubsData;
   const analysisWindow =
@@ -77,7 +96,11 @@ export default function AlertMap({
 
   useEffect(() => {
     let cancelled = false;
-    fetchReleaseData("data/latest_alerts.geojson")
+    setData(null);
+    setError(false);
+    setSelected(null);
+    const path = showDebugGrid ? "data/latest_alerts.geojson" : "data/aou/aou_registry.geojson";
+    fetchReleaseData(path)
       .then((r) => {
         if (!r.ok) throw new Error("fetch failed");
         return r.json();
@@ -91,14 +114,16 @@ export default function AlertMap({
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [showDebugGrid]);
 
   const filtered = useMemo(() => {
     if (!data) return null;
-    if (!hideBare) return data;
     return {
       ...data,
-      features: data.features.filter((f) => f.properties?.alert !== "bare"),
+      features: data.features.filter((f) => {
+        const kind = displayAlert(f.properties);
+        return !(hideBare && kind === "bare");
+      }),
     };
   }, [data, hideBare]);
 
@@ -126,13 +151,13 @@ export default function AlertMap({
     : null;
 
   const style = (feature?: AlertFeature) => {
-    const alert = feature?.properties?.alert ?? "bare";
+    const alert = displayAlert(feature?.properties);
     const isBare = alert === "bare";
     const id = feature ? aouIdFromFeature(feature) : "";
     const isSelected = selected && feature && aouIdFromFeature(selected) === id;
     return {
       color: isSelected ? "#111827" : (COLORS[alert] ?? "#999"),
-      weight: isSelected ? 2 : isBare ? 0 : 0.5,
+      weight: isSelected ? 2 : isBare ? 0 : showDebugGrid ? 0.5 : 2,
       fillColor: COLORS[alert] ?? "#999",
       fillOpacity: isBare ? 0.15 : isSelected ? 0.75 : 0.55,
     };
@@ -140,17 +165,26 @@ export default function AlertMap({
 
   const onEach = (feature: AlertFeature, layer: L.Layer) => {
     const p = feature.properties;
-    const kind = p.alert || "unclear";
+    const kind = displayAlert(p);
+    const downgraded = kind === "unclear" && p.alert && p.alert !== "unclear" && p.alert !== "bare";
     const label = t(`live.${kind}`, { defaultValue: kind });
     const tip = t(`live.tip_${kind}`, { defaultValue: "" });
     const tipHtml = tip ? `<div style="margin-top:6px;max-width:240px">${tip}</div>` : "";
+    const downgradedHtml = downgraded
+      ? `<div style="margin-top:6px;max-width:240px">${t("map.downgradedUnclear", {
+          defaultValue: i18n.language?.startsWith("ar")
+            ? "المشاهدات لا تكفي لإظهار تنبيه الانتباه هذا."
+            : "Not enough observations to show this attention flag.",
+        })}</div>`
+      : "";
     const aouId = aouIdFromFeature(feature);
+    const when = [p.date, p.tile].filter(Boolean).join(" · ");
     layer.bindPopup(
-      `<strong>${aouId}</strong><br/><strong>${label}</strong>${tipHtml}<br/>NDVI ${p.ndvi} · NDMI ${p.ndmi}` +
-        `<br/>${p.date} · ${p.tile}` +
+      `<strong>\( {aouId}</strong><br/><strong> \){label}</strong>\( {tipHtml} \){downgradedHtml}<br/>NDVI ${p.ndvi ?? "—"} · NDMI ${p.ndmi ?? "—"}` +
+        (when ? `<br/>${when}` : "") +
         `<br/><small>${t("aou.notOfficialFarm")}</small>` +
         `<br/><small>Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer</small>` +
-        `<br/><small>${p.product_id}</small>`,
+        (p.product_id ? `<br/><small>${p.product_id}</small>` : ""),
     );
     layer.on({
       click: () => setSelected(feature),
@@ -170,12 +204,13 @@ export default function AlertMap({
         )}
         {filtered && (
           <GeoJSON
-            key={`${hideBare}-${filtered.features.length}-${i18n.language}-${selected ? aouIdFromFeature(selected) : "none"}`}
+            key={`\( {showDebugGrid}- \){hideBare}-\( {filtered.features.length}- \){i18n.language}-${selected ? aouIdFromFeature(selected) : "none"}`}
             data={filtered as never}
             style={style as never}
             onEachFeature={onEach as never}
           />
         )}
+        {filtered && <FitAouLayer features={filtered.features} active={!showDebugGrid} />}
         {hubs.map((h) => {
           const inWindow = Boolean(h.covered_by_current_window);
           const inAoi = Boolean(h.within_satellite_aoi);
@@ -214,6 +249,14 @@ export default function AlertMap({
           <input type="checkbox" checked={hideBare} onChange={(e) => setHideBare(e.target.checked)} />
           {t("map.hideBare")}
         </label>
+        <label className="flex items-center gap-2 text-sm text-sand-800">
+          <input type="checkbox" checked={showDebugGrid} onChange={(e) => setShowDebugGrid(e.target.checked)} />
+          {t("map.showDebugGrid", {
+            defaultValue: i18n.language?.startsWith("ar")
+              ? "أظهر شبكة التصحيح 500 م"
+              : "Show 500 m debug grid",
+          })}
+        </label>
         <div className="flex flex-wrap gap-3 text-xs">
           {(["bare", "healthy", "water_attention", "vigor_attention", "unclear"] as const).map((k) => (
             <span key={k} className="inline-flex items-center gap-1.5">
@@ -223,7 +266,15 @@ export default function AlertMap({
           ))}
         </div>
       </div>
-      {/* Persistent seasonal context under bare legend; chip also gates on Sep–Oct Muscat */}
+      {showDebugGrid && (
+        <p className="text-xs leading-relaxed text-amber-950">
+          {t("map.debugGridNote", {
+            defaultValue: i18n.language?.startsWith("ar")
+              ? "طبقة تصحيح فقط، والملف كبير. الخلايا التي لا تملك مشاهدات كافية تُعرض كدليل غير كافٍ، لا كحالة سليمة أو إجهاد رطوبة."
+              : "Debug layer only, and a large download. Cells without enough observations are shown as unclear, not as healthy or moisture stress.",
+          })}
+        </p>
+      )}
       <NajdSeasonalChip always />
 
       {error && <p className="text-sm text-red-700">{t("live.error")}</p>}
