@@ -1012,6 +1012,8 @@ def main() -> int:
             if mp.is_file():
                 try:
                     doc = json.loads(mp.read_text())
+                    from engines.data_quality import POLICY as quality_policy
+                    doc["data_quality_policy"] = quality_policy["version"]
                     doc["publish_gate"] = "full_release_ok"
                     doc["source"] = "run_monitor+run_ag_probability+run_decision_scaffolds"
                     doc["release_id"] = release_id

@@ -1,3 +1,4 @@
+import { publicUrl } from "../lib/publicUrl";
 import { useTranslation } from "react-i18next";
 
 export default function About() {
@@ -12,6 +13,21 @@ export default function About() {
         <h1 className="text-2xl font-bold text-sand-900">{t("about.title")}</h1>
         <p className="mt-2 max-w-3xl text-sm leading-relaxed text-sand-800/90">{t("about.blurb")}</p>
       </div>
+
+      <section className="space-y-3 rounded-2xl border border-amber-200 bg-amber-50 p-5">
+        <h2 className="text-lg font-semibold text-earth-600">{t("validation.title")}</h2>
+        <p className="font-semibold">{t("validation.status")}</p>
+        <p className="text-sm leading-relaxed">{t("validation.body")}</p>
+        <p className="text-sm leading-relaxed">{t("validation.coverage")}</p>
+        <details><summary className="cursor-pointer font-semibold">{t("validation.form")}</summary>
+          <p className="mt-3 text-sm leading-relaxed">{t("validation.pilot")}</p>
+          <p className="mt-3 text-sm leading-relaxed">{t("validation.instructions")}</p>
+          <div className="mt-4 flex flex-wrap gap-4 text-sm">
+            <a className="underline" download href={publicUrl("validation/pilot-20260924/cases.geojson")}>{t("validation.cases")}</a>
+            <a className="underline" download href={publicUrl("validation/pilot-20260924/reviews.csv")}>{t("validation.form")}</a>
+          </div>
+        </details>
+      </section>
 
       <div className="grid gap-4 md:grid-cols-2">
         <section className="rounded-2xl border border-sand-200 bg-white p-5 shadow-sm">

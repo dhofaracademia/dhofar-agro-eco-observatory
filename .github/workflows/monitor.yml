@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/monitor.yml'
       - 'satellite/pipeline/**'
+      - 'app/src/data/qualityPolicy.json'
   workflow_dispatch:
     inputs:
       force:

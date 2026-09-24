@@ -106,12 +106,7 @@ def out_data_dir() -> Path:
     return Path(os.environ.get("MONITOR_OUT_DATA", str(REPO_ROOT / "app" / "public" / "data")))
 
 
-def data_quality_confidence(cloud_cover: float | None, pixel_count: int | None) -> float:
-    cloud = float(cloud_cover) if cloud_cover is not None else 0.0
-    cloud_score = max(0.0, 100.0 - cloud * 4.0)
-    valid_fraction = min(1.0, (pixel_count or EXPECTED_PIXELS * 0.5) / EXPECTED_PIXELS)
-    score = 0.4 * cloud_score + 0.6 * (valid_fraction * 100.0)
-    return round(max(5.0, min(97.0, score)), 1)
+from engines.data_quality import data_quality_confidence, POLICY as DATA_QUALITY_POLICY
 
 
 CLEAR_FRACTION_BASIS_PROVIDED = "provided"
@@ -243,6 +238,7 @@ def enrich_features(features: list[dict], *, month: int | None) -> list[dict]:
 
         dq = data_quality_confidence(p.get("cloud_cover"), p.get("pixel_count"))
         p["data_quality_confidence"] = dq
+        p["data_quality_policy"] = DATA_QUALITY_POLICY["version"]
 
         water = water_stress_score(
             ndmi=ndmi,
@@ -971,7 +967,7 @@ def assign_aou_ids(
                     flags = list(vigor_flags) + [cur_vigor]
                     dq = m.get("data_quality_confidence")
                     if dq is None:
-                        dq = 50.0
+                        dq = 0.0
                     biotic = infer_biotic_from_cell(
                         ndvi=float(m["ndvi"]),
                         ndmi=float(m["ndmi"]),

@@ -1,0 +1,51 @@
+{
+  "release_id": "20260924T044623Z-1acc51f5",
+  "registry_sha256": "dbc0c8f91445655e87bd531427984ac3c91c49832fef7f9508cb893c0d072e84",
+  "predictions": {
+    "548e297c616e4221": {
+      "class": "unlikely",
+      "aou_id": "AOU-NJ-000001",
+      "observation_date": "2026-09-19"
+    },
+    "949c2e6098fd1d57": {
+      "class": "unlikely",
+      "aou_id": "AOU-NJ-000002",
+      "observation_date": "2026-09-19"
+    },
+    "26a845f82b47abb7": {
+      "class": "unlikely",
+      "aou_id": "AOU-NJ-000003",
+      "observation_date": "2026-09-19"
+    },
+    "bc0c55b929a3c57f": {
+      "class": "unlikely",
+      "aou_id": "AOU-NJ-000004",
+      "observation_date": "2026-09-19"
+    },
+    "89dd4140449b5957": {
+      "class": "possible",
+      "aou_id": "AOU-NJ-000005",
+      "observation_date": "2026-09-19"
+    },
+    "05263d859bdfbb43": {
+      "class": "possible",
+      "aou_id": "AOU-NJ-000006",
+      "observation_date": "2026-09-19"
+    },
+    "a3382cd8522860f1": {
+      "class": "unlikely",
+      "aou_id": "AOU-NJ-000007",
+      "observation_date": "2026-09-19"
+    },
+    "d6ab3dd11e54f57d": {
+      "class": "unlikely",
+      "aou_id": "AOU-NJ-000008",
+      "observation_date": "2026-09-19"
+    },
+    "a398fe23492e8aad": {
+      "class": "possible",
+      "aou_id": "AOU-NJ-000009",
+      "observation_date": "2026-09-19"
+    }
+  }
+}
