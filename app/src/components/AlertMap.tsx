@@ -23,6 +23,7 @@ type AlertProps = {
   temporal_evidence_sufficient?: boolean;
 };
 
+/** Attention colors require enough observations. A bare cell stays bare. */
 function displayAlert(props?: Pick<AlertProps, "alert" | "temporal_evidence_sufficient">): AlertKind {
   const raw = props?.alert ?? "unclear";
   if (props?.temporal_evidence_sufficient === false && raw !== "bare" && raw !== "unclear") {
@@ -167,24 +168,38 @@ export default function AlertMap({
     const p = feature.properties;
     const kind = displayAlert(p);
     const downgraded = kind === "unclear" && p.alert && p.alert !== "unclear" && p.alert !== "bare";
-    const label = t(`live.${kind}`, { defaultValue: kind });
-    const tip = t(`live.tip_${kind}`, { defaultValue: "" });
-    const tipHtml = tip ? `<div style="margin-top:6px;max-width:240px">${tip}</div>` : "";
+    const label = t("live." + kind, { defaultValue: kind });
+    const tip = t("live.tip_" + kind, { defaultValue: "" });
+    const tipHtml = tip ? '<div style="margin-top:6px;max-width:240px">' + tip + "</div>" : "";
     const downgradedHtml = downgraded
-      ? `<div style="margin-top:6px;max-width:240px">${t("map.downgradedUnclear", {
+      ? '<div style="margin-top:6px;max-width:240px">' +
+        t("map.downgradedUnclear", {
           defaultValue: i18n.language?.startsWith("ar")
             ? "المشاهدات لا تكفي لإظهار تنبيه الانتباه هذا."
             : "Not enough observations to show this attention flag.",
-        })}</div>`
+        }) +
+        "</div>"
       : "";
     const aouId = aouIdFromFeature(feature);
     const when = [p.date, p.tile].filter(Boolean).join(" · ");
     layer.bindPopup(
-      `<strong>\( {aouId}</strong><br/><strong> \){label}</strong>\( {tipHtml} \){downgradedHtml}<br/>NDVI ${p.ndvi ?? "—"} · NDMI ${p.ndmi ?? "—"}` +
-        (when ? `<br/>${when}` : "") +
-        `<br/><small>${t("aou.notOfficialFarm")}</small>` +
-        `<br/><small>Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer</small>` +
-        (p.product_id ? `<br/><small>${p.product_id}</small>` : ""),
+      "<strong>" +
+        aouId +
+        "</strong><br/><strong>" +
+        label +
+        "</strong>" +
+        tipHtml +
+        downgradedHtml +
+        "<br/>NDVI " +
+        (p.ndvi ?? "—") +
+        " · NDMI " +
+        (p.ndmi ?? "—") +
+        (when ? "<br/>" + when : "") +
+        "<br/><small>" +
+        t("aou.notOfficialFarm") +
+        "</small>" +
+        "<br/><small>Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer</small>" +
+        (p.product_id ? "<br/><small>" + p.product_id + "</small>" : ""),
     );
     layer.on({
       click: () => setSelected(feature),
@@ -192,7 +207,7 @@ export default function AlertMap({
   };
 
   const mapBlock = (
-    <div className={`${heightClass} w-full overflow-hidden rounded-2xl border border-sand-200 shadow-sm`}>
+    <div className={heightClass + " w-full overflow-hidden rounded-2xl border border-sand-200 shadow-sm"}>
       <MapContainer center={bbox.center as [number, number]} zoom={9} scrollWheelZoom={false}>
         <TileLayer attribution="&copy; OpenStreetMap" url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <Rectangle bounds={bounds} pathOptions={{ color: "#2f6b3a", weight: 2, fillOpacity: 0.04 }} />
@@ -204,7 +219,7 @@ export default function AlertMap({
         )}
         {filtered && (
           <GeoJSON
-            key={`\( {showDebugGrid}- \){hideBare}-\( {filtered.features.length}- \){i18n.language}-${selected ? aouIdFromFeature(selected) : "none"}`}
+            key={[String(showDebugGrid), String(hideBare), String(filtered.features.length), i18n.language, selected ? aouIdFromFeature(selected) : "none"].join("-")}
             data={filtered as never}
             style={style as never}
             onEachFeature={onEach as never}
@@ -261,7 +276,7 @@ export default function AlertMap({
           {(["bare", "healthy", "water_attention", "vigor_attention", "unclear"] as const).map((k) => (
             <span key={k} className="inline-flex items-center gap-1.5">
               <span className="h-3 w-3 rounded-sm" style={{ background: COLORS[k] }} />
-              {t(`live.${k}`)}
+              {t("live." + k)}
             </span>
           ))}
         </div>
