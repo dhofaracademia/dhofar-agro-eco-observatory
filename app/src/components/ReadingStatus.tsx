@@ -3,9 +3,9 @@ import { useTranslation } from 'react-i18next';
 import { fetchReleaseData, getRelease } from '../lib/releaseData';
 import { publicUrl } from '../lib/publicUrl';
 
-type Status = { status?: string; last_checked_at?: string; schedule?: string };
+type Status = { status?: string; last_checked_at?: string; last_attempt_at?: string; schedule?: string };
 type Stamp = { observation_date?: string; scene_capture_date?: string; last_updated?: string };
-const states = new Set(['updated', 'no_new_scenes', 'no_scenes', 'no_new_clear_observation', 'failed']);
+const states = new Set(['updated', 'no_new_scenes', 'no_scenes', 'no_new_clear_observation', 'failed', 'checking']);
 
 export default function ReadingStatus() {
   const { t, i18n } = useTranslation();
@@ -59,6 +59,8 @@ export default function ReadingStatus() {
   };
   const obs = stamp.observation_date || stamp.scene_capture_date;
   const age = obs ? Math.floor((Date.now() - new Date(`${obs.slice(0, 10)}T00:00:00Z`).getTime()) / 86400000) : null;
+  const lastAttempt = status.last_attempt_at || status.last_checked_at;
+  const overdue = lastAttempt && Date.now() - Date.parse(lastAttempt) > 48 * 3600000;
   return (
     <section className="rounded-2xl border border-sand-200 bg-white p-4 sm:p-5" aria-label={t('simple.readingStatus')}>
       <div className="flex flex-wrap items-center justify-between gap-3">
@@ -68,7 +70,7 @@ export default function ReadingStatus() {
         </button>
       </div>
       <dl className="mt-4 grid gap-4 text-sm sm:grid-cols-3">
-        {[[t('simple.observed'), date(obs)], [t('simple.processed'), date(stamp.last_updated, true)], [t('simple.checked'), date(status.last_checked_at, true)]].map(([label, value]) => (
+        {[[t('simple.observed'), date(obs)], [t('simple.processed'), date(stamp.last_updated, true)], [t('simple.checked'), date(status.last_attempt_at || status.last_checked_at, true)]].map(([label, value]) => (
           <div key={label}><dt className="text-sand-800/70">{label}</dt><dd className="mt-1 font-semibold">{value}</dd></div>
         ))}
       </dl>
@@ -77,6 +79,7 @@ export default function ReadingStatus() {
       </p>
       {newRelease && <button type="button" onClick={() => window.location.reload()} className="mt-2 rounded-full bg-crop-600 px-4 py-2 text-sm text-white">{t('simple.loadRelease')}</button>}
       {age != null && age > 0 && <p className="mt-2 text-sm text-sand-800">{t('simple.age', { count: age })}</p>}
+      {overdue && <p role="status" className="mt-3 rounded-lg bg-amber-50 p-3 text-sm">{t("simple.staleCheck")}</p>}
       <details className="mt-3 text-sm">
         <summary className="cursor-pointer font-medium text-crop-700">{t('simple.howUpdates')}</summary>
         <p className="mt-2 leading-relaxed">{t('simple.updateExplanation')}</p>

@@ -48,6 +48,7 @@ export default function MapPage() {
       </div>
 
       <p className="rounded-xl border border-sand-200 bg-white p-4 text-sm leading-relaxed">{t("simple.mapHelp")} <Link className="font-semibold text-crop-700 underline" to={`/${locale}/guide`}>{t("simple.learn")}</Link></p>
+      <Link to={`/${locale}/analysis`} className="inline-block rounded-full bg-crop-700 px-5 py-3 font-semibold text-white">{t("explore.start")}</Link>
       <ObservatoryModeToggle mode={mode} onChange={setMode} />
       <KhareefCalendar />
 

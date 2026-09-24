@@ -1,5 +1,10 @@
 name: Satellite readings refresh
 on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/monitor.yml'
+      - 'satellite/pipeline/**'
   workflow_dispatch:
     inputs:
       force:
@@ -33,20 +38,42 @@ jobs:
         id: refresh
         continue-on-error: true
         env:
-          FORCE_REFRESH: ${{ inputs.force }}
+          FORCE_REFRESH: ${{ inputs.force || github.event_name == 'push' }}
           MONITOR_RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           args=()
           if [ "$FORCE_REFRESH" = 'true' ]; then args+=(--force); fi
           python satellite/pipeline/refresh_monitor.py "${args[@]}"
+      - name: Record failed attempt without replacing readings
+        if: always() && (failure() || steps.refresh.outcome == 'failure')
+        env:
+          MONITOR_RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          python - <<'PYCODE'
+          import json, os
+          from pathlib import Path
+          from datetime import datetime, timezone
+          path = Path('app/public/data/meta/monitor_status.json')
+          old = json.loads(path.read_text()) if path.exists() else {}
+          old.update(status='failed', error='workflow_failed',
+                     last_attempt_at=datetime.now(timezone.utc).isoformat(),
+                     trigger=os.environ.get('GITHUB_EVENT_NAME'),
+                     run_url=os.environ.get('MONITOR_RUN_URL'))
+          path.parent.mkdir(parents=True, exist_ok=True)
+          path.write_text(json.dumps(old, indent=2) + '\n')
+          PYCODE
       - name: Save complete release or check status
+        if: always() && !cancelled()
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          # The processor also writes a tracked diagnostic outside the published data.
+          git restore satellite/pipeline/_run_summary.json
           git add app/public/data
           if ! git diff --cached --quiet; then
             git commit -m 'data: satellite refresh and check status'
-            git push
+            git pull --rebase origin main
+            git push origin HEAD:main
           fi
       - name: Surface failed refresh (last-good retained)
         if: steps.refresh.outcome == 'failure'

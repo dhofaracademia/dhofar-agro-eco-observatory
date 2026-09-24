@@ -69,6 +69,14 @@ class RefreshTests(unittest.TestCase):
         self.assertEqual(refresh(self.out, discover=lambda: ['new'], run=bad), 1)
         self.assertFalse((self.out / 'releases/new').exists())
 
+    def test_successful_empty_check_clears_previous_error_and_records_attempt(self):
+        p = self.out / 'meta/monitor_status.json'
+        p.write_text(json.dumps({'status': 'failed', 'error': 'previous_failure'}))
+        self.assertEqual(refresh(self.out, discover=lambda: []), 0)
+        self.assertEqual(self.status()['status'], 'no_scenes')
+        self.assertNotIn('error', self.status())
+        self.assertIn('last_attempt_at', self.status())
+
     def test_existing_release_is_never_replaced(self):
         stage = Path(self.temp.name) / 'stage'
         stage.mkdir()

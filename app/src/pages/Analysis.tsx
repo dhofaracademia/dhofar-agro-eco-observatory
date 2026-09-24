@@ -1,6 +1,8 @@
 import { fetchReleaseData } from "../lib/releaseData";
 import ReadingStatus from "../components/ReadingStatus";
-import ReadingExplanation from "../components/ReadingExplanation";
+import SiteExplorer from "../components/SiteExplorer";
+import type { AouFeature as ExplorerFeature } from "../lib/aou";
+import type { Observation } from "../lib/siteInsights";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import AlertMap from "../components/AlertMap";
@@ -72,27 +74,11 @@ type AlertsMeta = {
   features?: { properties: AlertProps; geometry?: unknown }[];
 };
 
-type AouFeature = {
-  type: "Feature";
-  properties: {
-    aou_id: string;
-    agricultural_probability?: number;
-    ag_class?: string;
-    area_ha_est?: number;
-    valid_area_fraction?: number | null;
-    clear_fraction_missing?: boolean;
-    assessable_cell_fraction?: number | null;
-    ndvi?: number;
-    ndmi?: number;
-    ndre?: number | null;
-    ndre_available?: boolean;
-    date?: string;
-  };
-};
+type AouFeature = ExplorerFeature & { properties: ExplorerFeature["properties"] & { aou_id: string; area_ha_est?: number; clear_fraction_missing?: boolean } };
 
 type AouObsUnit = {
   aou_id: string;
-  observations: {
+  observations: (Observation & {
     date?: string;
     ndvi?: number | null;
     ndmi?: number | null;
@@ -105,7 +91,7 @@ type AouObsUnit = {
     data_quality_confidence?: number;
     alert?: string;
     series_scope?: string;
-  }[];
+  })[];
   window_context_series?: {
     date?: string;
     ndvi?: number | null;
@@ -183,6 +169,8 @@ export default function Analysis() {
   const [aouObs, setAouObs] = useState<AouObsUnit[]>([]);
   const [selectedAou, setSelectedAou] = useState<string>("");
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [advanced, setAdvanced] = useState(false);
   const [suitabilityUnits, setSuitabilityUnits] = useState<SuitabilityUnit[]>([]);
   const [confidenceUnits, setConfidenceUnits] = useState<ConfidenceUnit[]>([]);
   const [evidenceUnits, setEvidenceUnits] = useState<EvidenceGapUnit[]>([]);
@@ -201,11 +189,9 @@ export default function Analysis() {
         return r.json();
       }),
       fetchReleaseData("data/aou/aou_registry.geojson")
-        .then((r) => (r.ok ? r.json() : null))
-        .catch(() => null),
+        .then((r) => { if (!r.ok) throw new Error("missing area data"); return r.json(); }),
       fetchReleaseData("data/aou/aou_observations.json")
-        .then((r) => (r.ok ? r.json() : null))
-        .catch(() => null),
+        .then((r) => { if (!r.ok) throw new Error("missing area data"); return r.json(); }),
     ])
       .then(([timeseries, geo, registry, observations]) => {
         if (cancelled) return;
@@ -214,13 +200,11 @@ export default function Analysis() {
         const feats = (registry?.features || []) as AouFeature[];
         setAouRegistry(feats);
         setAouObs((observations?.units || []) as AouObsUnit[]);
-        if (feats.length && !selectedAou) {
-          setSelectedAou(feats[0].properties.aou_id);
-        }
+
       })
       .catch(() => {
         if (!cancelled) setError(true);
-      });
+      }).finally(() => { if (!cancelled) setLoading(false); });
     return () => {
       cancelled = true;
     };
@@ -355,16 +339,12 @@ export default function Analysis() {
       </div>
 
       <ReadingStatus />
-      <p className="rounded-xl bg-white p-4 text-sm leading-relaxed">{t("simple.analysisHelp")}</p>
-      {aouRegistry.length > 0 && (
-        <section className="rounded-2xl border border-sand-200 bg-white p-4">
-          <label htmlFor="simple-aou" className="block text-sm font-semibold">{t("simple.chooseArea")}</label>
-          <select id="simple-aou" value={selectedAou} onChange={(e) => setSelectedAou(e.target.value)} className="mt-2 max-w-full rounded-lg border border-sand-300 bg-white px-3 py-3 text-sm">
-            {aouRegistry.map((f) => <option key={f.properties.aou_id} value={f.properties.aou_id}>{f.properties.aou_id}</option>)}
-          </select>
-          {selectedFeat && <ReadingExplanation reading={selectedFeat.properties} />}
-        </section>
-      )}
+      {loading && <p role="status">{t("live.loading")}</p>}
+      {error && <p role="alert" className="rounded-xl bg-amber-50 p-4">{t("explore.loadError")} <button type="button" onClick={() => window.location.reload()} className="underline">{t("explore.retry")}</button></p>}
+      {!loading && !error && <SiteExplorer features={aouRegistry} units={aouObs} selectedId={selectedAou} onSelect={setSelectedAou} />}
+      <details onToggle={e => setAdvanced(e.currentTarget.open)} className="rounded-2xl border border-sand-200 p-4">
+        <summary className="cursor-pointer font-semibold text-crop-700">{t("explore.advanced")}</summary>
+        {advanced && <div className="mt-5 space-y-8">
       <div className="flex flex-wrap gap-2" role="tablist" aria-label={t("analysis.levelsLabel")}>
         {LEVELS.map((key) => (
           <button
@@ -682,6 +662,8 @@ export default function Analysis() {
           </section>
         </>
       )}
+        </div>}
+      </details>
     </div>
   );
 }

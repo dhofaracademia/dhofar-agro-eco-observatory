@@ -28,6 +28,7 @@ import numpy as np
 import planetary_computer as pc
 import rasterio
 from pystac_client import Client
+from pystac_client.stac_api_io import StacApiIO
 from pyproj import Transformer
 from rasterio.enums import Resampling
 from rasterio.windows import from_bounds
@@ -113,7 +114,7 @@ def stac_datetime_range() -> tuple[str, dict]:
 
 
 def open_catalog():
-    return Client.open(STAC_URL, modifier=pc.sign_inplace)
+    return Client.open(STAC_URL, modifier=pc.sign_inplace, stac_io=StacApiIO(timeout=30, max_retries=2))
 
 
 def search_items(catalog, datetime_range: str):
@@ -123,6 +124,7 @@ def search_items(catalog, datetime_range: str):
         datetime=datetime_range,
         query={"eo:cloud_cover": {"lt": CLOUD_LT}},
         max_items=200,
+        sortby=[{"field": "datetime", "direction": "desc"}],
     )
     return list(search.items())
 
@@ -183,7 +185,8 @@ def signed_href(item, asset_key: str) -> str:
 
 def read_window_band(href: str, bbox_wgs84: list[float], out_shape=None, dst_crs=None):
     """Windowed COG read for bbox; optionally resample to out_shape/dst_crs."""
-    with rasterio.Env(GDAL_DISABLE_READDIR_ON_OPEN="EMPTY_DIR", CPL_VSIL_CURL_ALLOWED_PROTOCOLS="https"):
+    with rasterio.Env(GDAL_HTTP_TIMEOUT=60, GDAL_HTTP_CONNECTTIMEOUT=15, GDAL_HTTP_MAX_RETRY=2,
+            GDAL_DISABLE_READDIR_ON_OPEN="EMPTY_DIR", CPL_VSIL_CURL_ALLOWED_PROTOCOLS="https"):
         with rasterio.open(href) as src:
             transformer = Transformer.from_crs("EPSG:4326", src.crs, always_xy=True)
             left, bottom = transformer.transform(bbox_wgs84[0], bbox_wgs84[1])
@@ -464,7 +467,8 @@ def process_item(item) -> tuple[list[dict], dict]:
             )
             # SCL should use nearest; re-read with nearest if we used bilinear
             with rasterio.Env(
-                GDAL_DISABLE_READDIR_ON_OPEN="EMPTY_DIR",
+                GDAL_HTTP_TIMEOUT=60, GDAL_HTTP_CONNECTTIMEOUT=15, GDAL_HTTP_MAX_RETRY=2,
+            GDAL_DISABLE_READDIR_ON_OPEN="EMPTY_DIR",
                 CPL_VSIL_CURL_ALLOWED_PROTOCOLS="https",
             ):
                 with rasterio.open(href_scl) as src:
