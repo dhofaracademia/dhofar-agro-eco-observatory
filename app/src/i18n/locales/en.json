@@ -637,7 +637,8 @@
         "body": "No. Mountain and khareef restoration use a separate evidence path. A seasonal guide is not a live forecast, and seed-broadcast timing remains deferred when evidence is insufficient."
       }
     },
-    "staleCheck": "No update attempt has been recorded in the last 48 hours. Readings may be delayed; check the observation date."
+    "staleCheck": "No update attempt has been recorded in the last 48 hours. Readings may be delayed; check the observation date.",
+    "qualityUnavailable": "Insufficient or unavailable"
   },
   "explore": {
     "title": "Check a place you care about",
@@ -680,5 +681,15 @@
     "loadError": "Area data could not be loaded. Coverage cannot be confirmed right now.",
     "retry": "Try again",
     "period": "From {{from}} to {{to}}"
+  },
+  "validation": {
+    "title": "Has result accuracy been independently tested?",
+    "status": "Independent review is not yet complete",
+    "body": "Passing software tests verifies aspects of system behaviour, not agricultural diagnostic accuracy. Image-quality scores are not probabilities of correct results. Independent reference evidence is needed before claiming local accuracy.",
+    "pilot": "The initial packet contains 9 units from one frozen release. It asks for agricultural land-use judgments supported by dated independent evidence; it does not test irrigation, pest or seeding advice, or represent all of Dhofar.",
+    "cases": "Download review-area boundaries",
+    "form": "Download the review form",
+    "instructions": "An independent reviewer assesses sites before consulting model predictions and records their evidence, date and judgment, or uncertainty. Another sensor or an independent record may be used; a field visit is optional. Evidence must be inspected before it counts as independent validation.",
+    "coverage": "Insufficient valid pixels cannot yield positive confidence. The current minimum is 50 pixels in a nominal 2,500-pixel cell, and quality cannot exceed local coverage percentage. This is an engineering precaution, not a field-calibrated accuracy threshold."
   }
 }

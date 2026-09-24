@@ -50,3 +50,14 @@ test('data failure is an error, never a false uncovered location', async ({ page
   await expect(page.getByRole('alert')).toContainText('Area data could not be loaded');
   await expect(page.getByRole('button', { name: 'Check coverage', exact: true })).toHaveCount(0);
 });
+
+test('independent validation is explicitly pending and the review packet is downloadable', async ({ page }) => {
+  await page.goto('/en/about');
+  await expect(page.getByText('Independent review is not yet complete', { exact: true })).toBeVisible();
+  await page.locator('summary').filter({ hasText: 'Download the review form' }).click();
+  const link = page.getByRole('link', {name:'Download the review form',exact:true});
+  const href = await link.getAttribute('href');
+  const response = await page.request.get(href!);
+  expect(response.ok()).toBe(true);
+  expect(await response.text()).toContain('independent_of_model');
+});

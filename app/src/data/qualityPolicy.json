@@ -1,0 +1,10 @@
+{
+  "version": "coverage_capped_v2",
+  "expected_pixels": 2500,
+  "min_valid_pixels": 50,
+  "min_valid_fraction": 0.02,
+  "cloud_penalty": 4,
+  "scene_weight": 0.4,
+  "pixel_weight": 0.6,
+  "max_score": 97
+}

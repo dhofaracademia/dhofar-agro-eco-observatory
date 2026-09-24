@@ -108,7 +108,7 @@ export default function AouProfilePanel({
         <div>
           <dt className="text-xs font-semibold uppercase tracking-wide text-sand-800/50">{t("aou.confidence")}</dt>
           <dd>
-            {conf}% <span className="text-xs text-sand-800/50">({t("aou.confidenceDataQuality")})</span>
+            {conf > 0 ? `${conf}%` : t("simple.qualityUnavailable")} <span className="text-xs text-sand-800/50">({t("aou.confidenceDataQuality")})</span>
           </dd>
         </div>
         <div>

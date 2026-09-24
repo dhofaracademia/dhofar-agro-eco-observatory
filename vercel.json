@@ -19,7 +19,7 @@
   ],
   "rewrites": [
     {
-      "source": "/((?!api/|data/|previews/|leaflet/|assets/|robots.txt|sitemap.xml|favicon.svg|favicon.ico).*)",
+      "source": "/((?!api/|validation/|data/|previews/|leaflet/|assets/|robots.txt|sitemap.xml|favicon.svg|favicon.ico).*)",
       "destination": "/index.html"
     }
   ],
