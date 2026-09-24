@@ -24,5 +24,15 @@ jobs:
           cache: npm
           cache-dependency-path: app/package-lock.json
       - run: node --test tests/satellite-scenes.test.cjs
+      - run: node --experimental-strip-types --test tests/site-insights.test.mjs
       - run: npm ci && npm run build
         working-directory: app
+      - run: npx playwright install --with-deps chromium
+        working-directory: app
+      - run: npx playwright test
+        working-directory: app
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: browser-test-results
+          path: app/test-results

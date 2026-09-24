@@ -32,10 +32,11 @@ def refresh(out: Path, *, force: bool = False, discover=None, run=None) -> int:
     from engines.observation_integrity import publish_release_with_pointer, verify_release_ids_match
     checked = datetime.now(timezone.utc).isoformat()
     previous = read_json(out / 'meta/monitor_status.json')
-    status = {**previous, 'last_checked_at': checked, 'status': 'checking',
+    status = {**previous, 'last_checked_at': checked, 'last_attempt_at': checked, 'status': 'checking',
               'trigger': os.environ.get('GITHUB_EVENT_NAME', 'manual'),
               'schedule': 'daily' if os.environ.get('GITHUB_EVENT_NAME') == 'schedule' else previous.get('schedule'),
               'run_url': os.environ.get('MONITOR_RUN_URL')}
+    status.pop('error', None)
     try:
         if discover is None:
             import run_monitor as monitor
@@ -60,7 +61,7 @@ def refresh(out: Path, *, force: bool = False, discover=None, run=None) -> int:
             shutil.copytree(out, stage, ignore=shutil.ignore_patterns('releases', 'CURRENT_LINK'))
             if run is None:
                 def run(path):
-                    subprocess.run([sys.executable, str(PIPELINE / 'run_monitor.py')],
+                    subprocess.run([sys.executable, "-u", str(PIPELINE / 'run_monitor.py')],
                                    env={**os.environ, 'MONITOR_OUT_DATA': str(path)},
                                    check=True, timeout=5400)
             run(stage)

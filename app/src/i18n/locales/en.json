@@ -48,7 +48,7 @@
     "confidenceDataQuality": "data-quality from cloud cover & valid pixels — not ecological or restoration confidence",
     "date": "Acquisition date",
     "health": {
-      "stable": "Stable vigor",
+      "stable": "No recorded attention flag",
       "watch": "Watch — vegetation change",
       "possibleBiotic": "Possible biotic stress",
       "bare": "Bare / little canopy",
@@ -98,7 +98,7 @@
   "home": {
     "badge": "Dhofar · Oman · Open Data First",
     "title": "One map. Two observatories.",
-    "intro": "Dhofar Agro & Eco Observatory turns open Earth-observation into interpretable satellite decisions for Dhofar: Agricultural Observation Units (AOUs) across the Najd irrigated plain, and restoration status for the fog mountains. Partners may act on Analysis / Decision / Seed with zero field visits. Gallery STAC refresh updates scene listings only; AOU/MPI layers stay provisional until a full monitor run.",
+    "intro": "Experimental monitoring of vegetation changes and stress indicators in selected areas of Dhofar. It helps identify what deserves follow-up, with clear observation dates and limits on interpretation.",
     "whyTitle": "Why Sentinel-2?",
     "whyBody": "Irrigated blocks in Najd are large enough for 10 m pixels. Optical VNIR + SWIR supports vegetation and canopy-moisture indices. Inland Najd is hyper-arid, so clear scenes are common most months. Mountain Khareef seasons need cloud-aware composites and moisture persistence — not a single post-rain image.",
     "seasonTitle": "Wheat & Khareef seasons",
@@ -110,14 +110,14 @@
     "ctaMap": "Open observatory map",
     "ctaGallery": "Browse scenes",
     "ctaAnalysis": "Open satellite decision",
-    "previewNote": "Imagery can refresh the Sentinel-2 scene list from Planetary Computer STAC. AOU alerts, mountain MPI, and restoration scores remain offline / provisional stubs — not recomputed by that button."
+    "previewNote": "Dated examples from the image archive. Open the gallery for recent images or the location checker for readings."
   },
   "map": {
     "title": "Dhofar observatory map",
     "blurb": "Switch between Agricultural Observatory (Najd AOUs) and Restoration Observatory (mountain & foothill sites). Shared basemap; separated scientific rules.",
     "bbox": "Najd farm-corridor bbox",
     "hubs": "Agricultural hubs",
-    "liveTitle": "Agricultural Observation Units",
+    "liveTitle": "Published readings map",
     "liveBlurb": "500 m cells from the latest clear Sentinel-2 scene, labelled as AOUs. Water and vigor flags are relative to vegetated peers — not lab diagnoses or official farms.",
     "hideBare": "Hide bare desert cells",
     "legendBare": "Bare / unplanted",
@@ -125,7 +125,7 @@
     "legendWater": "Needs water check",
     "legendVigor": "Low vigor — check nutrition/management",
     "aouOfflineBadge": "AOU layer: last offline run {{date}}",
-    "aouNotByStac": "Gallery STAC refresh does not update the AOU alert layer.",
+    "aouNotByStac": "Refreshing gallery images does not recalculate these readings. Observation dates and processing status are shown below.",
     "najdOffSeasonChip": "Sep–Oct: bare often = off-season (expected)",
     "najdOffSeasonHelper": "In Asia/Muscat September–October, Najd wheat is typically off-season. Many bare AOU cells reflect expected fallow / unplanted ground — not necessarily a monitor failure.",
     "hubOutsideWindow": "Outside analysis window",
@@ -181,8 +181,8 @@
     "noScenesFound": "Search complete: no matching images in the last 60 days with cloud cover below 30%. Archived images are available below."
   },
   "analysis": {
-    "title": "Agricultural analysis",
-    "blurb": "Four-level satellite decision support for Najd Agricultural Observation Units: overview, spatial, temporal, and provisional decision scores. Thresholds follow SCIENCE_LOCKS expert v1. A field visit is not required to use this page.",
+    "title": "Your location and its changes",
+    "blurb": "Choose a monitoring area to understand its reading and data freshness. Specialist indicators and layers are available below.",
     "indicesTitle": "Key indices",
     "ndviName": "NDVI — vegetation index",
     "ndviFormula": "(B08 − B04) / (B08 + B04)",
@@ -258,7 +258,7 @@
     "colAgProb": "Ag. probability",
     "colAgClass": "Ag. class",
     "colArea": "Area (ha est.)",
-    "noAouYet": "No AOUs yet — run run_ag_probability.py / run_monitor.py.",
+    "noAouYet": "No monitoring areas are published in this release.",
     "selectAou": "Select AOU",
     "aouSeriesStub": "AOU unit charts use unit observations only; regional window is charted separately.",
     "splitChartsNote": "NDVI and NDMI are plotted on separate charts (not a shared axis).",
@@ -292,7 +292,7 @@
     "decision": {
       "title": "Decision support — Najd AOUs",
       "honestyTitle": "expert_v1_provisional — offline snapshot, not operational truth",
-      "honestyBody": "Lead with evidence level + provisional stamp. Suitability ≠ Confidence. n_clear_dates is AOU-scoped (today = 1) — not the window date count. Partners may act with zero FO/SE. Missing field evidence is an honesty chip only. Mountain seeding recommendations stay on Hold.",
+      "honestyBody": "Results are experimental. Read the observation date and clear-day count for each unit. Suitability and evidence quality are different concepts; mountain seeding recommendations remain on hold.",
       "whyThisSite": "Why this site",
       "evidenceGaps": "Evidence gaps",
       "suitabilityComponents": "Suitability components",
@@ -340,8 +340,8 @@
     "observationRoleRetained": "observation_role={{role}} (refresh_status={{status}}) — last-good retained; not observed today.",
     "refreshStatusRetained": "refresh_status={{status}} — prior dated scores retained",
     "discoveryProvisionalBanner": "New AOU — provisional_new until a second clear date (n_clear ≥ 2). Not a validated farm parcel.",
-    "trendInsufficient": "Single clear observation for this unit — insufficient for a trend (AR/EN). One point shown; regional window is separate below.",
-    "trendInsufficientCaption": "Insufficient for trend (n_clear < 2) — unit series only",
+    "trendInsufficient": "Fewer than two valid readings are available to describe this unit’s change.",
+    "trendInsufficientCaption": "Insufficient temporal evidence for comparison",
     "unitScope": "AOU unit series (NDVI & NDMI)",
     "ndviUnit": "AOU NDVI (unit)",
     "ndviRegional": "Regional NDVI (window)",
@@ -374,7 +374,7 @@
       "AOU ≠ Official Farm until authorized government data is linked."
     ],
     "limitTitle": "MVP limits",
-    "limitBody": "This MVP can refresh the Imagery STAC scene list from Planetary Computer. AOU alert GeoJSON and mountain MPI remain offline or illustrative stubs. It does not recompute live post-khareef MPI or print Environment Authority approval. A field visit is not required to use Najd Analysis / Decision / Seed.",
+    "limitBody": "Current coverage is limited and experimental. Images can be refreshed on this site; calculating agricultural readings is a separate process. Mountain analysis is experimental and does not provide approved seeding recommendations.",
     "dataSourcesTitle": "Data sources",
     "dataSourcesBody": "Sentinel-2 L2A via Microsoft Planetary Computer STAC; static browse previews; sample mountain GeoJSON. Contains modified Copernicus Sentinel data (ESA).",
     "howToReadTitle": "How to read this demo",
@@ -394,8 +394,8 @@
     "tile": "MGRS tile",
     "cloud": "Cloud cover",
     "citation": "Citation",
-    "liveTitle": "Farm monitor (offline artifacts)",
-    "liveBlurb": "NDVI and NDMI summaries from the latest offline farm-monitor run (Sentinel-2 L2A). Not recomputed by Gallery STAC refresh — re-run satellite/pipeline/run_monitor.py or the scheduled Action when enabled.",
+    "liveTitle": "Published agricultural readings",
+    "liveBlurb": "Results from the last completed satellite processing run. Refreshing gallery images is separate from calculating these readings; check the update status and observation date.",
     "alertCounts": "Zone counts (latest)",
     "timeseries": "Week-to-week change",
     "timeseriesBlurb": "Mean NDVI / NDMI and attention counts for clear scenes in the monitor window.",
@@ -406,13 +406,13 @@
     "error": "Could not load live monitor data.",
     "note": "Alerts are relative early-intervention flags among vegetated cells, not definitive diagnoses.",
     "bare": "Bare / unplanted",
-    "healthy": "Stable vigor",
+    "healthy": "No attention flag in this observation",
     "water_attention": "Needs water check",
     "vigor_attention": "Low vigor — management check",
     "cells": "cells",
     "unclear": "Unclear — needs review",
     "tip_bare": "Little or no green canopy in this cell for the acquisition date.",
-    "tip_healthy": "Vegetation indices look stable versus nearby vegetated cells.",
+    "tip_healthy": "This reading did not trigger the attention thresholds. It is not proof of health or a stable trend.",
     "tip_water_attention": "Canopy moisture (NDMI) is low versus nearby vegetated areas — verify irrigation soon.",
     "tip_vigor_attention": "Greening (NDVI) is weak versus peers. Management / possible nutrient attention — satellite decision; not fertilizer diagnosis; biotic risk is a separate flag.",
     "tip_unclear": "Signal is ambiguous for this cell — review satellite imagery. Field visit is not required."
@@ -421,7 +421,7 @@
   "provisional": {
     "badge": "Provisional / sample",
     "sites": "Sample restoration sites are status markers (onset / insufficient MPI) — not field-validated and not seeding recommendations. Seeding-rec Hold until post-khareef MPI + scientist SHA.",
-    "aou": "AOU cells shown here are from offline / one-shot discovery — not yet on a scheduled open-data pull.",
+    "aou": "Experimental monitoring units within a limited footprint. Results come from the last completed run; units are not official farm boundaries.",
     "mpi": "MPI class is provisional; live MPI is not computed in this MVP."
   },
   "appNameShort": "Dhofar Observatory",
@@ -524,16 +524,16 @@
     "noExpertise": "A simple guide for everyone",
     "startMap": "Explore the monitoring map",
     "startTitle": "What would you like to do?",
-    "startIntro": "Start with the map to explore observations, or learn how to read the results.",
+    "startIntro": "Choose an area or check your coordinates, then see when it was observed and what the reading can tell you.",
     "mapHelp": "Select a coloured cell to see its observation and a plain-language explanation. An empty area may be outside the monitored window.",
-    "analysisHelp": "Choose a monitoring area to explore its history. Start with the explanation, then open the detailed numbers if you need them.",
+    "analysisHelp": "Choose a location and read its summary. Specialist details are available when needed.",
     "galleryHelp": "This button searches for recent satellite images. It does not recalculate agricultural readings.",
     "chooseArea": "Choose a monitoring area",
     "unavailable": "Not available",
     "readingStatus": "How recent are these readings?",
     "observed": "Satellite observation date",
     "processed": "Readings processed · Oman time",
-    "checked": "Last satellite search · Oman time",
+    "checked": "Last readings update attempt · Oman time",
     "checking": "Checking…",
     "checkPublished": "Check for published updates",
     "loadRelease": "Load the new readings",
@@ -542,7 +542,7 @@
     "howUpdates": "How do updates work?",
     "updateExplanation": "The processing job searches for satellite scenes and accepts usable observations after cloud and coverage checks. Checking every day does not guarantee a new clear observation every day. This button checks published results only; it does not start satellite processing.",
     "dailyConfirmed": "A daily scheduled check has been recorded. Its last outcome is shown above.",
-    "scheduleUnconfirmed": "No daily scheduled run has been confirmed in the published status yet.",
+    "scheduleUnconfirmed": "Checks are scheduled daily at 09:17 Oman time. A scheduled run is not yet recorded in the published status; availability depends on successful processing and usable imagery.",
     "adminRun": "Administrator: open the processing controls ↗",
     "adminHint": "Opens GitHub Actions. An authorised repository maintainer can choose “Run workflow”; this link does not start a job.",
     "age": "The observation is {{count}} days old. Processing it again does not make the satellite image newer.",
@@ -565,12 +565,13 @@
       "no_scenes": "The last search found no matching scenes. Displaying the last accepted readings.",
       "no_new_clear_observation": "No newer usable observation was accepted. Displaying the last accepted readings.",
       "failed": "The last processing attempt failed. The previous accepted readings have been retained.",
-      "unconfigured": "Automatic update status is not available yet. See the observation date above."
+      "unconfigured": "No update-attempt log has been published yet. Check the observation date before using the result.",
+      "checking": "Readings are being checked and processed; the last successful results remain visible."
     },
     "steps": {
       "choose": {
         "title": "1. Find an area",
-        "body": "Open the agricultural map and select a coloured cell. The current monitoring window covers only part of Dhofar."
+        "body": "Open the location checker. Search a known place, enter coordinates or select a monitoring area from the list."
       },
       "read": {
         "title": "2. Read the observation",
@@ -582,14 +583,14 @@
       }
     },
     "labels": {
-      "healthy": "Vegetation: no flag in this observation",
+      "healthy": "No attention flag in this observation",
       "bare": "Little visible vegetation",
       "water_attention": "Possible moisture stress",
       "vigor_attention": "Possible change in vegetation vigour",
       "unclear": "Insufficient usable evidence"
     },
     "readings": {
-      "healthy": "The observation did not trigger the model’s stress rules. This does not confirm that plants are free of disease or that irrigation is sufficient.",
+      "healthy": "No attention flag was triggered by the analysis rules for this observation. This does not prove the absence of problems or stability over time.",
       "bare": "Little green vegetation was detected. This may be normal for a fallow field or the current season; it is not proof of crop failure.",
       "water_attention": "The satellite shows a moisture-related signal that deserves attention. It is not a direct measurement of soil moisture or irrigation need.",
       "vigor_attention": "A vegetation signal deserves attention. Season, harvest, water stress and other factors may explain it.",
@@ -635,6 +636,49 @@
         "title": "Are mountain restoration results the same as farm results?",
         "body": "No. Mountain and khareef restoration use a separate evidence path. A seasonal guide is not a live forecast, and seed-broadcast timing remains deferred when evidence is insufficient."
       }
-    }
+    },
+    "staleCheck": "No update attempt has been recorded in the last 48 hours. Readings may be delayed; check the observation date."
+  },
+  "explore": {
+    "title": "Check a place you care about",
+    "start": "Check a location or monitoring area",
+    "intro": "There are currently {{count}} agricultural monitoring areas in a limited pilot footprint. Choose an area or check your coordinates; coverage does not extend across all of Dhofar.",
+    "searchLabel": "Known place name or location coordinates",
+    "placeholder": "Hanfit, or 18.0000, 53.9000",
+    "coordinatesHelp": "Enter latitude first, then longitude in decimal degrees. Place names locate their centres; they do not imply coverage of the entire locality.",
+    "search": "Check coverage",
+    "choose": "Or choose an available monitoring area",
+    "select": "Select an area to see its reading",
+    "unit": "Monitoring area {{number}}",
+    "covered": "This point falls within an available monitoring unit. The reading describes that unit, not a field measurement at the point or a property boundary.",
+    "outside": "No published agricultural monitoring unit covers this point. This does not mean the land is non-agricultural. We will not substitute readings from a nearby area.",
+    "invalid": "Location not recognised. Choose a suggested place or enter latitude, longitude. Example: 18.0000, 53.9000.",
+    "save": "Save to follow",
+    "unsave": "Remove saved area",
+    "saved": "My saved areas:",
+    "savedNotice": "Saved areas updated on this browser only. No automatic notifications are sent; return to see the latest published readings.",
+    "saveError": "This browser could not save your selection. You can continue using the map and readings.",
+    "missingSaved": "Unavailable in this release",
+    "remove": "Remove",
+    "mapHelp": "Green outlines show available monitoring units, not vegetation health. Click a shape or choose it from the list. The blue marker is your searched point.",
+    "selectHint": "Choose a monitoring area to see its observation date and explanation. We do not assume the first area is your location.",
+    "changeTitle": "What changed?",
+    "comparison_quality": "There is no current reading with sufficient quality for comparison. A retained reading may appear above with its original date; it is not a new observation.",
+    "comparison_history": "Fewer than two valid observations are available for this area. More observations are needed to describe a change.",
+    "comparison_method": "The available readings use different aggregation methods or source tiles. Comparison is deferred until two compatible readings exist for this unit.",
+    "indicator": "Indicator",
+    "before": "Previous",
+    "after": "Latest",
+    "difference": "Difference",
+    "descriptiveOnly": "This is a descriptive difference between compatible observations, not a diagnosis or an established seasonal trend. Harvest, season and coverage changes can affect values. Differences are index units, not percentages or irrigation requirements.",
+    "evidence": "What evidence and limitations apply?",
+    "clearArea": "Clear observed area",
+    "observations": "Clear observation days",
+    "identifier": "Monitoring area identifier",
+    "limits": "Image quality is not diagnostic accuracy. The model is experimental and its local accuracy is not yet validated. A monitoring unit is not an official farm, and a satellite reading alone cannot establish the cause of stress.",
+    "advanced": "For specialists: charts, layers and analysis details",
+    "loadError": "Area data could not be loaded. Coverage cannot be confirmed right now.",
+    "retry": "Try again",
+    "period": "From {{from}} to {{to}}"
   }
 }
