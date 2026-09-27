@@ -1,6 +1,6 @@
 {
-  "release_id": "20260925T101332Z-615a2a66",
-  "path": "releases/20260925T101332Z-615a2a66",
+  "release_id": "20260927T103458Z-70bcf891",
+  "path": "releases/20260927T103458Z-70bcf891",
   "artifacts": [
     "latest_alerts.geojson",
     "timeseries.json",
