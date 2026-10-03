@@ -13,6 +13,36 @@ persistence feature 0.0 when n_clear < 2 (never 0.5 from one date).
 from __future__ import annotations
 
 from typing import Any
+import math
+
+EVIDENCE_VERSION = "activity_evidence_v2"
+
+
+def measured_swir_for_members(members: list[dict]) -> tuple[float | None, dict]:
+    """Match the existing equal-member NDVI/NDMI aggregation, without mixing proxies.
+
+    Only accepted members with explicit band provenance count. Partial band
+    coverage stays a disclosed proxy; a single measured member cannot represent
+    all of an AOU. This is a band-derived feature, not independent validation.
+    """
+    values = []
+    sources = set()
+    for member in members:
+        value = member.get("swir_feature")
+        source = member.get("swir_source")
+        if (source in {"b11", "b11_b12"} and not isinstance(value, bool)
+                and isinstance(value, (int, float)) and math.isfinite(value)
+                and 0 <= value <= 1):
+            values.append(float(value))
+            sources.add(source)
+    complete = bool(members) and len(values) == len(members)
+    return (sum(values) / len(values) if complete else None), {
+        "aggregation": "equal_clear_member_mean",
+        "clear_members": len(members),
+        "measured_members": len(values),
+        "complete": complete,
+        "band_sources": sorted(sources),
+    }
 
 AG_WEIGHTS = {
     "ndvi_peak": 0.22,
@@ -215,6 +245,10 @@ def agricultural_probability(
             "note": "Dynamic World veto (water/built) — assist only, no optical support",
         }
 
+    # Invalid optional input is missing evidence, never an explicit measurement.
+    if (isinstance(swir_feature, bool) or not isinstance(swir_feature, (int, float))
+            or not math.isfinite(swir_feature) or not 0 <= swir_feature <= 1):
+        swir_feature = None
     weights = redistribute_ndre_weight(ndre_available and ndre is not None)
     pers_raw = feature_persistence(n_dates_above_bare, n_clear_dates)
     # n_clear < 2: omit persistence and renorm remaining weights (skip, not 0*0.18 drag).
@@ -253,7 +287,39 @@ def agricultural_probability(
         single_date_only=single_date_only,
     )
 
+    proxy_swir = swir_feature is None
+    floor = feats["ndvi_peak"] == 0 and feats["ndmi"] == 0
+    sources = {
+        "ndvi_peak": "current_ndvi_transform",
+        "ndmi": "current_ndmi_transform",
+        "swir": "derived_ndvi_ndmi" if proxy_swir else "band_derived_swir",
+        "phenology": "derived_ndvi_month",
+        "persistence": "missing" if pers_feat is None else "derived_clear_date_counts",
+        "texture": "default_not_measured" if local_variance is None else "measured_local_variance",
+    }
+    if "ndre" in weights:
+        sources["ndre"] = "measured_ndre_transform"
+    evidence = {
+        "version": EVIDENCE_VERSION,
+        "score_semantics": "vegetation_activity_heuristic_not_land_use_probability",
+        "calibrated_probability": False,
+        "land_use_status": "not_established_by_score",
+        "inputs": {"ndvi": ndvi, "ndmi": ndmi, "month": month,
+                   "n_clear_dates": n_clear_dates, "n_dates_above_bare": n_dates_above_bare},
+        "weights": weights,
+        "features": {k: (None if k == "persistence" and pers_feat is None else round(v, 6)) for k, v in feats.items()},
+        "sources": sources,
+        "contributions_points": {k: round(w * feats.get(k, 0.0) * 100, 6) for k, w in weights.items()},
+        "boost_points": boost,
+        "score": round(prob, 2),
+        "vegetation_features_at_floor": floor,
+        "correlated_floor_collapse": proxy_swir and floor,
+        "correlated_ndvi_ndmi_weight": round(sum(weights.get(k, 0) for k in
+            (["ndvi_peak", "ndmi", "phenology", "swir"] if proxy_swir else ["ndvi_peak", "ndmi", "phenology"])), 6),
+    }
+
     return {
+        "ag_evidence": evidence,
         "agricultural_probability": round(prob, 2),
         "ag_class": ag_class,
         "weights": weights,

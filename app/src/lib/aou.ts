@@ -1,5 +1,17 @@
 export type AlertKind = "bare" | "healthy" | "water_attention" | "vigor_attention" | "unclear";
 
+export type AgEvidence = {
+  version: string;
+  calibrated_probability: boolean;
+  score: number;
+  correlated_floor_collapse: boolean;
+  vegetation_features_at_floor: boolean;
+  weights: Record<string, number>;
+  sources: Record<string, string>;
+  contributions_points: Record<string, number>;
+  swir_coverage?: { clear_members: number; measured_members: number; complete: boolean };
+};
+
 export type AouAlertProps = {
   alert: AlertKind;
   ndvi: number;
@@ -18,6 +30,7 @@ export type AouAlertProps = {
   ndre_available?: boolean;
   ndre_status?: string;
   agricultural_probability?: number;
+  ag_evidence?: AgEvidence | null;
   ag_class?: string;
   water_stress_score?: number;
   vigor_stress_score?: number;

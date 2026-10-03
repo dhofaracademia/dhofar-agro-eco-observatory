@@ -251,6 +251,7 @@ def main() -> int:
                 "ndre": None,
                 "ndre_available": False,
                 "agricultural_probability": ag.get("agricultural_probability"),
+                "ag_evidence": ag.get("ag_evidence"),
                 "ag_class": ag.get("ag_class"),
                 "alert": "healthy" if sample["ndvi"] >= BARE_NDVI else "bare",
                 "clear_fraction": sample["clear_fraction"],

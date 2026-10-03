@@ -29,7 +29,7 @@ PIPELINE_DIR = Path(__file__).resolve().parent
 REPO_ROOT = PIPELINE_DIR.parents[1]
 sys.path.insert(0, str(PIPELINE_DIR))
 
-from engines.ag_probability import agricultural_probability  # noqa: E402
+from engines.ag_probability import agricultural_probability, measured_swir_for_members  # noqa: E402
 from engines.aou_identity import (  # noqa: E402
     load_registry,
     mint_or_match_aou,
@@ -210,7 +210,8 @@ def enrich_features(features: list[dict], *, month: int | None) -> list[dict]:
         persistence_estimated = False  # window must never raise class alone
         persistence_gate = False  # requires AOU/cell n_clear >= 2
 
-        swir_feature = p.get("swir_feature")
+        # A numeric proxy is not a band measurement without explicit provenance.
+        swir_feature, swir_coverage = measured_swir_for_members([p])
         ag = agricultural_probability(
             ndvi=ndvi,
             ndmi=ndmi,
@@ -222,11 +223,11 @@ def enrich_features(features: list[dict], *, month: int | None) -> list[dict]:
             local_variance=None,
             swir_feature=swir_feature if swir_feature is not None else None,
         )
-        if swir_feature is not None:
-            p["swir_source"] = p.get("swir_source", "b11_b12")
-        elif "swir_source" not in p:
+        if swir_feature is None:
             p["swir_source"] = "proxy_ndvi_ndmi"
+        ag["ag_evidence"]["swir_coverage"] = swir_coverage
         p["agricultural_probability"] = ag["agricultural_probability"]
+        p["ag_evidence"] = ag["ag_evidence"]
         p["ag_class"] = ag["ag_class"]
         p["ag_probability_status"] = "expert_v1"
         p["n_clear_dates"] = n_clear_dates
@@ -647,7 +648,8 @@ def assign_aou_ids(
         )
 
     def _score_unit_from_ndvi_ndmi(
-        ndvi, ndmi, month: int | None, n_clear: int, n_dates_above_bare: int | None = None
+        ndvi, ndmi, month: int | None, n_clear: int, n_dates_above_bare: int | None = None,
+        clear_members: list[dict] | None = None,
     ) -> dict:
         if ndvi is None or ndmi is None:
             return {"agricultural_probability": None, "ag_class": None, "persistence_status": persistence_status(n_clear)}
@@ -656,14 +658,18 @@ def assign_aou_ids(
             if n_dates_above_bare is not None
             else (1 if float(ndvi) >= BARE_NDVI else 0)
         )
+        swir, swir_coverage = measured_swir_for_members(clear_members or [])
         ag = agricultural_probability(
             ndvi=float(ndvi),
             ndmi=float(ndmi),
             n_clear_dates=n_clear,
             n_dates_above_bare=n_above,
             month=month,
+            swir_feature=swir,
         )
+        ag["ag_evidence"]["swir_coverage"] = swir_coverage
         return {
+            "ag_evidence": ag["ag_evidence"],
             "agricultural_probability": ag["agricultural_probability"],
             "ag_class": ag["ag_class"],
             "persistence_status": ag.get("persistence_status", persistence_status(n_clear)),
@@ -727,7 +733,7 @@ def assign_aou_ids(
             mean_ndvi, mean_ndmi = member_clear_means(clear_c)
             if mean_ndvi is None or mean_ndmi is None:
                 continue
-            scored = _score_unit_from_ndvi_ndmi(mean_ndvi, mean_ndmi, month, 1)
+            scored = _score_unit_from_ndvi_ndmi(mean_ndvi, mean_ndmi, month, 1, clear_members=clear_c)
             ag_class = scored["ag_class"] or _honest_class(scored["agricultural_probability"], 1)
             ag_class = cap_ag_class_for_discovery(
                 ag_class, n_clear=1, discovery_status=DISCOVERY_PROVISIONAL
@@ -769,6 +775,7 @@ def assign_aou_ids(
             rec["discovery_status"] = disc
             rec["discovery_action"] = rec.get("discovery_action") or "mint"
             rec["ag_class"] = ag_class
+            rec["ag_evidence"] = scored.get("ag_evidence")
             rec["assessability"] = "assessable"
             rec["valid_area_fraction"] = assess_meta_c.get("valid_area_fraction")
             rec["assessable_cell_fraction"] = assess_meta_c.get("assessable_cell_fraction")
@@ -790,6 +797,7 @@ def assign_aou_ids(
                         "refresh_status": "refreshed",
                         "observation_role": OBSERVATION_ROLE_CURRENT,
                         "agricultural_probability": props["agricultural_probability"],
+                        "ag_evidence": scored.get("ag_evidence"),
                         "ag_class": ag_class,
                         "area_ha_est": cand["area_ha_est"],
                         "ndvi": rec.get("ndvi"),
@@ -923,8 +931,10 @@ def assign_aou_ids(
                 obs_role = OBSERVATION_ROLE_RETAINED
             elif has_new:
                 scored = _score_unit_from_ndvi_ndmi(
-                    mean_ndvi, mean_ndmi, month, n_clear, n_dates_above_bare=n_above
+                    mean_ndvi, mean_ndmi, month, n_clear, n_dates_above_bare=n_above,
+                    clear_members=clear_members,
                 )
+                rec["ag_evidence"] = scored.get("ag_evidence")
                 mean_prob = scored["agricultural_probability"]
                 ag_class = scored["ag_class"] or _honest_class(mean_prob, n_clear, pers_feat)
                 pers_status = pers_stat or scored.get("persistence_status") or persistence_status(n_clear)
@@ -1054,6 +1064,8 @@ def assign_aou_ids(
                 refresh_status=refresh_status,
             )
             # For current observation, NDVI/NDMI on aggregate are from clear_members
+            # Retained metadata stays tied to the retained observation and score.
+            agg["ag_evidence"] = rec.get("ag_evidence")
             if has_new:
                 agg["ndvi"] = out_ndvi
                 agg["ndmi"] = out_ndmi
@@ -1114,6 +1126,7 @@ def assign_aou_ids(
                         "refresh_status": refresh_status,
                         "observation_role": obs_role,
                         "agricultural_probability": mean_prob,
+                        "ag_evidence": rec.get("ag_evidence"),
                         "ag_class": ag_class,
                         "area_ha_est": rec.get("area_ha_est"),
                         "ndvi": out_ndvi,
@@ -1278,6 +1291,7 @@ def build_observations(
                         "ndre": None,
                         "ndre_available": False,
                         "agricultural_probability": agg.get("agricultural_probability", p.get("agricultural_probability")),
+                        "ag_evidence": agg.get("ag_evidence", p.get("ag_evidence")),
                         "ag_class": agg.get("ag_class", p.get("ag_class")),
                         "area_ha_est": p.get("area_ha_est"),
                         "water_stress_score": round(float(w), 2) if w is not None else None,

@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import type { AouAlertProps } from '../lib/aou';
+import AgEvidenceCard from './AgEvidenceCard';
 
 export default function ReadingExplanation({ reading }: { reading: Partial<AouAlertProps> }) {
   const { t } = useTranslation();
@@ -12,6 +13,7 @@ export default function ReadingExplanation({ reading }: { reading: Partial<AouAl
       <p className="mt-2 text-sm leading-relaxed">{t(`simple.readings.${state}`)}</p>
       <p className="mt-2 text-sm leading-relaxed"><strong>{t('simple.nextStep')} </strong>{t(`simple.actions.${state}`)}</p>
       {(reading.n_clear_dates ?? 0) < 2 && <p className="mt-2 text-sm text-amber-950">{t('simple.shortHistory')}</p>}
+      <AgEvidenceCard reading={reading} />
       <details className="mt-3 text-sm">
         <summary className="cursor-pointer font-medium">{t('simple.explainNumbers')}</summary>
         <dl className="mt-3 space-y-3">
