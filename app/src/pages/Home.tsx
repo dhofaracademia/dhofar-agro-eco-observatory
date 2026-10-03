@@ -31,29 +31,29 @@ export default function Home() {
           <figure className="overflow-hidden rounded-2xl border border-sand-200 bg-white shadow-sm sm:col-span-2">
             <img
               src={publicUrl("previews/39QZV_20260313_truecolor_wheatseason_Thumrait.png")}
-              alt="Thumrait true-color"
+              alt={t('home.naturalImage')}
               className="h-48 w-full object-cover sm:h-56"
             />
             <figcaption className="px-3 py-2 text-xs text-sand-800/70">
-              Thumrait · true-color · 2026-03-13 · {archiveNote}
+              {t('home.naturalImage')} · 2026-03-13 · {archiveNote}
             </figcaption>
           </figure>
           <figure className="overflow-hidden rounded-2xl border border-sand-200 bg-white shadow-sm">
             <img
               src={publicUrl("previews/39QZV_20260313_NDVI_Thumrait.png")}
-              alt="Thumrait NDVI"
+              alt={t('home.greennessImage')}
               className="h-36 w-full object-cover"
             />
-            <figcaption className="px-3 py-2 text-xs text-sand-800/70">NDVI · 2026-03-13 · {archiveNote}</figcaption>
+            <figcaption className="px-3 py-2 text-xs text-sand-800/70">{t('home.greennessImage')} · 2026-03-13 · {archiveNote}</figcaption>
           </figure>
           <figure className="overflow-hidden rounded-2xl border border-sand-200 bg-white shadow-sm">
             <img
               src={publicUrl("previews/39QZV_20260904_truecolor_Thumrait.png")}
-              alt="Thumrait late summer"
+              alt={t('home.lateSummerImage')}
               className="h-36 w-full object-cover"
             />
             <figcaption className="px-3 py-2 text-xs text-sand-800/70">
-              Thumrait · 2026-09-04 · {archiveNote}
+              {t('home.lateSummerImage')} · 2026-09-04 · {archiveNote}
             </figcaption>
           </figure>
         </div>

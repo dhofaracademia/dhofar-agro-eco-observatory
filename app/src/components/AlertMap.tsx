@@ -170,37 +170,29 @@ export default function AlertMap({
     const downgraded = kind === "unclear" && p.alert && p.alert !== "unclear" && p.alert !== "bare";
     const label = t("live." + kind, { defaultValue: kind });
     const tip = t("live.tip_" + kind, { defaultValue: "" });
-    const tipHtml = tip ? '<div style="margin-top:6px;max-width:240px">' + tip + "</div>" : "";
-    const downgradedHtml = downgraded
-      ? '<div style="margin-top:6px;max-width:240px">' +
-        t("map.downgradedUnclear", {
-          defaultValue: i18n.language?.startsWith("ar")
-            ? "المشاهدات لا تكفي لإظهار تنبيه الانتباه هذا."
-            : "Not enough observations to show this attention flag.",
-        }) +
-        "</div>"
-      : "";
     const aouId = aouIdFromFeature(feature);
-    const when = [p.date, p.tile].filter(Boolean).join(" · ");
-    layer.bindPopup(
-      "<strong>" +
-        aouId +
-        "</strong><br/><strong>" +
-        label +
-        "</strong>" +
-        tipHtml +
-        downgradedHtml +
-        "<br/>NDVI " +
-        (p.ndvi ?? "—") +
-        " · NDMI " +
-        (p.ndmi ?? "—") +
-        (when ? "<br/>" + when : "") +
-        "<br/><small>" +
-        t("aou.notOfficialFarm") +
-        "</small>" +
-        "<br/><small>Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer</small>" +
-        (p.product_id ? "<br/><small>" + p.product_id + "</small>" : ""),
-    );
+    const popup = document.createElement("div");
+    const addText = (tag: string, text: string, parent: HTMLElement = popup) => {
+      const node = document.createElement(tag);
+      node.textContent = text;
+      parent.appendChild(node);
+      return node;
+    };
+    addText("strong", t("explore.unit", { number: Number(aouId.split("-").at(-1)) || "—" }));
+    addText("div", label).className = "font-semibold";
+    if (tip) addText("p", tip);
+    if (downgraded) addText("p", t("map.downgradedUnclear"));
+    if (p.date) addText("p", `${t("simple.observed")}: ${p.date}`);
+    addText("p", t("aou.notOfficialFarm"));
+    const details = document.createElement("details");
+    popup.appendChild(details);
+    addText("summary", t("simple.technicalDetails"), details).className = "cursor-pointer font-semibold";
+    addText("div", `${t("explore.identifier")}: ${aouId}`, details);
+    addText("div", `NDVI: ${p.ndvi ?? "—"} · NDMI: ${p.ndmi ?? "—"}`, details);
+    addText("small", "Copernicus Sentinel-2 L2A (ESA) / Microsoft Planetary Computer", details);
+    if (p.tile) addText("div", p.tile, details);
+    if (p.product_id) addText("div", p.product_id, details).className = "break-all";
+    layer.bindPopup(popup);
     layer.on({
       click: () => setSelected(feature),
     });

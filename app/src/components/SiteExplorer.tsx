@@ -78,7 +78,7 @@ export default function SiteExplorer({ features, units, selectedId, onSelect }: 
         <div className="min-w-0 flex-1 basis-64"><label htmlFor={`${uid}-unit`} className="block text-sm font-semibold">{t('explore.choose')}</label>
           <select id={`${uid}-unit`} value={selectedId} onChange={e => choose(e.target.value)} className="mt-2 w-full rounded-xl border border-sand-300 p-3">
             <option value="">{t('explore.select')}</option>
-            {features.map(f => <option key={f.properties.aou_id} value={f.properties.aou_id || ""}>{label(f.properties.aou_id!)} · {f.properties.aou_id}</option>)}
+            {features.map(f => <option key={f.properties.aou_id} value={f.properties.aou_id || ""}>{label(f.properties.aou_id!)}</option>)}
           </select>
         </div>
         {feature && <button type="button" aria-pressed={saved.includes(selectedId)} onClick={toggleSave} className="rounded-full border border-crop-700 px-5 py-3 text-sm font-semibold text-crop-700">{t(saved.includes(selectedId) ? 'explore.unsave' : 'explore.save')}</button>}
@@ -105,7 +105,7 @@ export default function SiteExplorer({ features, units, selectedId, onSelect }: 
           {reason ? <p className="mt-2 text-sm leading-relaxed">{t(`explore.comparison_${reason}`)}</p> : change.latest && change.previous && <>
             <p className="mt-2 text-sm">{t('explore.period', { from: formatDate(change.previous.date), to: formatDate(change.latest.date) })}</p>
             <div className="mt-3 overflow-x-auto"><table className="w-full text-start text-sm"><caption className="sr-only">{t('explore.changeTitle')}</caption><thead><tr>{['indicator', 'before', 'after', 'difference'].map(k => <th key={k} className="p-2 text-start">{t(`explore.${k}`)}</th>)}</tr></thead>
-              <tbody>{(['ndvi', 'ndmi'] as const).map(key => <tr key={key} className="border-t border-sand-100"><th className="p-2 text-start font-medium">{t(`simple.terms.${key}.title`)}</th><td className="p-2">{change.previous![key]!.toFixed(3)}</td><td className="p-2">{change.latest![key]!.toFixed(3)}</td><td className="p-2" dir="ltr">{number(change[key]!)}</td></tr>)}</tbody></table></div>
+              <tbody>{(['ndvi', 'ndmi'] as const).map(key => <tr key={key} className="border-t border-sand-100"><th className="p-2 text-start font-medium">{t(`simple.indicators.${key}`)}</th><td className="p-2">{change.previous![key]!.toFixed(3)}</td><td className="p-2">{change.latest![key]!.toFixed(3)}</td><td className="p-2" dir="ltr">{number(change[key]!)}</td></tr>)}</tbody></table></div>
             <p className="mt-3 text-sm leading-relaxed">{t('explore.descriptiveOnly')}</p>
           </>}
         </div>
