@@ -5,6 +5,7 @@ import scenes from "../data/scenes.json";
 import { publicUrl } from "../lib/publicUrl";
 import {
   fetchLatestSentinel2Scenes,
+  sanitizeScenes,
   type RefreshStatus,
   type StacScene,
 } from "../lib/stacRefresh";
@@ -159,10 +160,11 @@ export default function Gallery() {
   useEffect(() => {
     try {
       const raw = localStorage.getItem(LS_KEY);
-      if (!raw) return;
+      if (!raw || raw.length > 65536) return;
       const parsed = JSON.parse(raw) as StoredRefresh;
-      if (parsed?.scenes?.length) {
-        setLive(parsed.scenes);
+      const safeScenes = sanitizeScenes(parsed?.scenes);
+      if (safeScenes.length && typeof parsed.updatedAt === 'string' && Number.isFinite(Date.parse(parsed.updatedAt))) {
+        setLive(safeScenes);
         setUpdatedAt(parsed.updatedAt);
         setStatus("updated");
       }
