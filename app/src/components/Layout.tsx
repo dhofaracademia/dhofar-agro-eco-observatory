@@ -60,7 +60,6 @@ export default function Layout({ children }: { children: ReactNode }) {
         <Link to={base} className="mb-3 inline-flex rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-crop-700"><BrandLogo footer /></Link>
         <div>
           {t("appName")}
-          <span className="text-sand-800/40"> · {t("navAlias")}</span>
         </div>
         <div className="mt-1">{t("footer")}</div>
         <div className="mx-auto mt-2 max-w-3xl px-4">{t("gallery.howRefresh")}</div>
