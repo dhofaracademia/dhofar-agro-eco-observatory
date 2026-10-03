@@ -1,0 +1,10 @@
+{
+  "preview": [
+    "planetarycomputer.microsoft.com",
+    "sentinel2l2a01.blob.core.windows.net",
+    "sentinel2l2a02.blob.core.windows.net"
+  ],
+  "catalogue": [
+    "planetarycomputer.microsoft.com"
+  ]
+}
