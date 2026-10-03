@@ -210,7 +210,8 @@ def enrich_features(features: list[dict], *, month: int | None) -> list[dict]:
         persistence_estimated = False  # window must never raise class alone
         persistence_gate = False  # requires AOU/cell n_clear >= 2
 
-        swir_feature = p.get("swir_feature")
+        # A numeric proxy is not a band measurement without explicit provenance.
+        swir_feature, swir_coverage = measured_swir_for_members([p])
         ag = agricultural_probability(
             ndvi=ndvi,
             ndmi=ndmi,
@@ -222,10 +223,9 @@ def enrich_features(features: list[dict], *, month: int | None) -> list[dict]:
             local_variance=None,
             swir_feature=swir_feature if swir_feature is not None else None,
         )
-        if swir_feature is not None:
-            p["swir_source"] = p.get("swir_source", "b11_b12")
-        elif "swir_source" not in p:
+        if swir_feature is None:
             p["swir_source"] = "proxy_ndvi_ndmi"
+        ag["ag_evidence"]["swir_coverage"] = swir_coverage
         p["agricultural_probability"] = ag["agricultural_probability"]
         p["ag_evidence"] = ag["ag_evidence"]
         p["ag_class"] = ag["ag_class"]

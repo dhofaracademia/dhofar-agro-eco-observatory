@@ -8,7 +8,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from engines.ag_probability import agricultural_probability, measured_swir_for_members
-from run_ag_probability import assign_aou_ids, build_observations
+from run_ag_probability import assign_aou_ids, build_observations, enrich_features
 from test_observation_integrity import _cell
 from shapely.geometry import box, mapping
 
@@ -49,6 +49,17 @@ class ActivityEvidenceTests(unittest.TestCase):
         value, meta = measured_swir_for_members([good, {'swir_feature': 0, 'swir_source': 'b11_b12'}])
         self.assertEqual(value, .2)
         self.assertTrue(meta['complete'])
+
+    def test_grid_enrichment_never_promotes_an_unverified_number_to_measurement(self):
+        for source in [None, 'proxy_ndvi_ndmi', 'b11']:
+            cell = _cell(0,0,1,1,ndvi=.1651,ndmi=-.0554,date='2026-09-26')
+            cell['properties']['swir_feature'] = .6
+            if source is not None:
+                cell['properties']['swir_source'] = source
+            props = enrich_features([cell], month=9)[0]['properties']
+            expected = 'band_derived_swir' if source == 'b11' else 'derived_ndvi_ndmi'
+            self.assertEqual(props['ag_evidence']['sources']['swir'], expected)
+            self.assertEqual(props['swir_source'], 'b11' if source == 'b11' else 'proxy_ndvi_ndmi')
 
     def test_provenance_survives_unit_registry_and_ledger_and_retained_reading(self):
         with tempfile.TemporaryDirectory() as td:
