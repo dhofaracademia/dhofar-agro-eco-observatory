@@ -80,8 +80,8 @@ export default function AouProfilePanel({
           <div>
             <dt className="text-xs font-semibold uppercase tracking-wide text-sand-800/50">{t("analysis.colAgProb")}</dt>
             <dd>
-              {p.agricultural_probability}{" "}
-              <span className="text-xs text-sand-800/50">({p.ag_class ?? "—"})</span>
+              {p.agricultural_probability} / 100{" "}
+              <span className="text-xs text-sand-800/50">({t(`agEvidence.classes.${p.ag_class}`, { defaultValue: '—' })})</span>
             </dd>
           </div>
         )}

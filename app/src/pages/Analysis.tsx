@@ -474,7 +474,7 @@ export default function Analysis() {
                     >
                       <td className="px-3 py-2 font-mono font-semibold text-crop-700">{f.properties.aou_id}</td>
                       <td className="px-3 py-2">{f.properties.agricultural_probability ?? "—"}</td>
-                      <td className="px-3 py-2">{f.properties.ag_class ?? "—"}</td>
+                      <td className="px-3 py-2">{t(`agEvidence.classes.${f.properties.ag_class}`, { defaultValue: '—' })}</td>
                       <td className="px-3 py-2">
                         <div title={t("analysis.areaGeometryHint")}>
                           {f.properties.area_ha_est ?? "—"}

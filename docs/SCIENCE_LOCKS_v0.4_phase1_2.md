@@ -29,19 +29,25 @@ Companion: `docs/ROADMAP_v0.4_decision_engines.md`, Product Spec 1.0.1.
 
 ## Phase 1 — Agricultural Probability Engine
 
+**Implementation clarification (September 2026):** the legacy field name denotes
+an uncalibrated vegetation-activity score, not a land-use probability. Current
+NDVI, a month prior, derived SWIR fallback and default texture are not independent
+measured features. See [actual computation and provenance](ACTIVITY_SCORE_EVIDENCE.md).
+The weights and safety gates below remain unchanged.
+
 ### 1.1 Output
 
 Per pixel (10–20 m) or per segment after thresholding:
 
 | Field | Type | Meaning |
 |-------|------|---------|
-| `agricultural_probability` | 0–100 | Likelihood cell is irrigated/cultivated activity |
+| `agricultural_probability` | 0–100 | Legacy key: uncalibrated vegetation-activity heuristic, not land-use probability |
 | `ag_class` | enum | `unlikely` 0–30 · `possible` 30–60 · `likely` 60–80 · `very_likely` 80–100 |
 | `data_quality_confidence` | 0–100 | From clear pixels / cloud / coverage only |
 
 ### 1.2 Feature set (weights — v1 expert defaults)
 
-All features min–max or z-scored within AOI seasonal window before weighting. Weights sum to 1.0 for the **core optical block**; assists are **gates/boosts**, not equal voters.
+The current implementation uses clipped fixed-range feature transforms; it does not compute seasonal-window z-scores. Weights sum to 1.0 for the **core optical block**; assists are **gates/boosts**, not equal voters. The table describes intended feature roles; actual measured, derived and default inputs are disclosed in `ag_evidence`.
 
 **Core optical / temporal (required in Phase 1):**
 

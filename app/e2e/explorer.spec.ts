@@ -61,3 +61,38 @@ test('independent validation is explicitly pending and the review packet is down
   expect(response.ok()).toBe(true);
   expect(await response.text()).toContain('independent_of_model');
 });
+
+for (const lang of ['ar', 'en']) {
+  test(`${lang}: correlated activity score is explained and never treated as land-use probability`, async ({ page }) => {
+    let retained = false;
+    await page.route('**/aou_registry.geojson', route => {
+      const fixture = structuredClone(data);
+      Object.assign(fixture.features[0].properties, {
+        agricultural_probability: 12.5, ag_class: 'unlikely', alert: 'water_attention',
+        assessability: 'assessable', observation_role: retained ? 'retained_last_good' : 'current_observation',
+        ag_evidence: {
+          version: 'activity_evidence_v2', calibrated_probability: false, score: 12.5,
+          correlated_floor_collapse: true, vegetation_features_at_floor: true,
+          weights: { persistence: .18, texture: .1 },
+          sources: { persistence: 'derived_clear_date_counts', texture: 'default_not_measured' },
+          contributions_points: { persistence: 9, texture: 3.5 },
+          swir_coverage: { clear_members: 2, measured_members: 0, complete: false },
+        },
+      });
+      return route.fulfill({ json: fixture });
+    });
+    await page.goto(`/${lang}/analysis`);
+    const label = lang === 'ar' ? 'أو اختر منطقة رصد متاحة' : 'Or choose an available monitoring area';
+    await page.getByLabel(label).selectOption(id);
+    await expect(page.getByTestId('correlated-floor-warning')).toBeVisible();
+    await expect(page.getByText('12.5 / 100', { exact: true })).toBeVisible();
+    await page.getByText(lang === 'ar' ? 'كيف حُسبت الدرجة؟' : 'How was this score calculated?', { exact: true }).click();
+    await expect(page.getByRole('cell', { name: lang === 'ar' ? 'قيمة افتراضية؛ غير مقاس' : 'Default, not measured', exact: true })).toBeVisible();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBe(true);
+    retained = true;
+    await page.reload();
+    await page.getByLabel(label).selectOption(id);
+    await expect(page.getByTestId('correlated-floor-warning')).toHaveCount(0);
+    await expect(page.getByText(lang === 'ar' ? 'لا توجد درجة حالية قابلة للتفسير' : 'No interpretable current score', { exact: true })).toBeVisible();
+  });
+}

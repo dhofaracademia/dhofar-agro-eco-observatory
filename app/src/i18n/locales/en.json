@@ -255,8 +255,8 @@
     "latestDate": "Latest observation",
     "aouListTitle": "Agricultural Observation Units",
     "colAou": "AOU ID",
-    "colAgProb": "Ag. probability",
-    "colAgClass": "Ag. class",
+    "colAgProb": "Vegetation activity score",
+    "colAgClass": "Score band",
     "colArea": "Area (ha est.)",
     "noAouYet": "No monitoring areas are published in this release.",
     "selectAou": "Select AOU",
@@ -691,5 +691,50 @@
     "form": "Download the review form",
     "instructions": "An independent reviewer assesses sites before consulting model predictions and records their evidence, date and judgment, or uncertainty. Another sensor or an independent record may be used; a field visit is optional. Evidence must be inspected before it counts as independent validation.",
     "coverage": "Insufficient valid pixels cannot yield positive confidence. The current minimum is 50 pixels in a nominal 2,500-pixel cell, and quality cannot exceed local coverage percentage. This is an engineering precaution, not a field-calibrated accuracy threshold."
+  },
+  "agEvidence": {
+    "title": "Vegetation activity score",
+    "meaning": "A heuristic score out of 100, not a calibrated probability or a measure of crop health.",
+    "landUse": "A low score does not establish non-agricultural land: the site may be harvested, fallow or sparsely vegetated.",
+    "unavailable": "No interpretable current score",
+    "floor": "Interpretation warning: components derived from NDVI and NDMI reached zero together. They are not four independent findings of absent agriculture; history and a default value may still contribute.",
+    "stressNote": "Moisture or vigor attention is a spectral signal to follow up, not a confirmed diagnosis of crop water shortage. A low activity score alone does not hide this signal.",
+    "legacy": "Component provenance is unavailable for this reading or does not match its current score; measured or independent evidence is not assumed.",
+    "details": "How was this score calculated?",
+    "correlated": "Some components reuse the same measurements and move together. Component count is not a count of independent evidence.",
+    "component": "Component",
+    "source": "Source",
+    "points": "Points",
+    "unknown": "Undocumented",
+    "swirCoverage": "Cells with documented SWIR measurements: {{measured}} of {{total}} accepted cells. If any are missing, the unit uses the derived proxy.",
+    "defaultNote": "The texture default is not a measurement of field shape. Even measured SWIR is not independent validation of agricultural land use.",
+    "components": {
+      "ndvi_peak": "Current greenness",
+      "ndmi": "Moisture index",
+      "swir": "SWIR response",
+      "phenology": "Month / greenness prior",
+      "persistence": "Greenness frequency",
+      "texture": "Spatial texture",
+      "ndre": "Red edge"
+    },
+    "sources": {
+      "current_ndvi_transform": "Current NDVI transform, not a seasonal peak",
+      "current_ndmi_transform": "Current NDMI transform",
+      "derived_ndvi_ndmi": "Proxy derived from NDVI / NDMI",
+      "band_derived_swir": "Derived from measured spectral bands",
+      "derived_ndvi_month": "Derived from NDVI / month",
+      "derived_clear_date_counts": "Derived from clear-date counts",
+      "default_not_measured": "Default, not measured",
+      "measured_local_variance": "Measured spatial variance",
+      "measured_ndre_transform": "Measured NDRE transform",
+      "missing": "Unavailable; omitted"
+    },
+    "classes": {
+      "unlikely": "Low score",
+      "possible": "Moderate score",
+      "likely": "High score",
+      "very_likely": "Very high score",
+      "unassessable": "Not assessable"
+    }
   }
 }
