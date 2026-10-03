@@ -39,7 +39,7 @@ export default function AouProfilePanel({
           <div className="text-xs font-semibold uppercase tracking-wide text-sand-800/50">
             {t("aou.profileTitle")}
           </div>
-          <h3 className="font-mono text-lg font-bold text-crop-700">{id}</h3>
+          <h3 className="text-lg font-bold text-crop-700">{t('explore.unit', { number: Number(id.split('-').at(-1)) || '—' })}</h3>
           <p className="mt-1 text-xs text-sand-800/60">{t("aou.notOfficialFarm")}</p>
         </div>
         {onClose && (
@@ -56,6 +56,7 @@ export default function AouProfilePanel({
       <ReadingExplanation reading={p} />
       <details><summary className="cursor-pointer text-sm font-semibold text-crop-700">{t("simple.technicalDetails")}</summary>
       <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-2">
+        <div><dt>{t('explore.identifier')}</dt><dd className="break-all font-mono">{id}</dd></div>
         <div>
           <dt className="text-xs font-semibold uppercase tracking-wide text-sand-800/50">{t("aou.area")}</dt>
           <dd>{area.toFixed(2)} ha <span className="text-xs text-sand-800/50">({t("aou.estimated")})</span></dd>

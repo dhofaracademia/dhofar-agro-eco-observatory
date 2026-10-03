@@ -1,6 +1,6 @@
 {
   "appName": "Dhofar Agro & Eco Observatory",
-  "subtitle": "Agricultural observation units and restoration intelligence for Dhofar, Oman",
+  "subtitle": "Following agriculture and vegetation in Dhofar, Oman",
   "nav": {
     "home": "Overview",
     "map": "Sites",
@@ -35,9 +35,9 @@
   },
   "aou": {
     "profileTitle": "Dynamic Profile",
-    "selectHint": "Click an Agricultural Observation Unit (AOU) cell on the map to open its dynamic profile.",
+    "selectHint": "Select an area on the map to see its reading and what it means.",
     "notOfficialFarm": "Not an official farm name or cadastral boundary.",
-    "disclaimer": "Polygons are Agricultural Observation Units (AOUs) derived from satellite cells — not official farms. Future link: AOU → Official Farm → Official Parcel.",
+    "disclaimer": "These areas group satellite readings for monitoring; they are not official farm or property boundaries.",
     "close": "Close",
     "area": "Estimated agricultural area",
     "estimated": "estimated",
@@ -100,34 +100,37 @@
     "title": "One map. Two observatories.",
     "intro": "Experimental monitoring of vegetation changes and stress indicators in selected areas of Dhofar. It helps identify what deserves follow-up, with clear observation dates and limits on interpretation.",
     "whyTitle": "Why Sentinel-2?",
-    "whyBody": "Irrigated blocks in Najd are large enough for 10 m pixels. Optical VNIR + SWIR supports vegetation and canopy-moisture indices. Inland Najd is hyper-arid, so clear scenes are common most months. Mountain Khareef seasons need cloud-aware composites and moisture persistence — not a single post-rain image.",
+    "whyBody": "Satellite images help track vegetation changes across large agricultural areas in Najd. Mountain sites need observations over time because clouds and moisture change during Khareef; one image is not enough for an assessment.",
     "seasonTitle": "Wheat & Khareef seasons",
     "seasonBody": "Najd wheat: typical sowing early–mid November; harvest from early April. Mountain restoration follows a dynamic Khareef calendar (Pre → Onset → Peak → Weakening → End → Post) — seeding windows are site- and moisture-dependent, not a fixed date.",
     "agroTitle": "Agricultural Observatory",
-    "agroBody": "Detect and monitor cultivated activity as AOUs (e.g. AOU-NJ-000184). Day-one operation does not require official farm names. Alerts map bare · healthy · water_attention · vigor_attention into health and water labels. Biotic risk uses possible_biotic_stress only — never pest certainty.",
+    "agroBody": "Follow changes in vegetation and moisture signals in the available monitoring areas. Readings help identify what deserves attention; they do not confirm a disease or pest, or represent official farm boundaries.",
     "restoTitle": "Restoration Observatory",
-    "restoBody": "Site suitability with a separate confidence score, Moisture Persistence Index class, regeneration ladder (Protect → ANR → Enrichment → Active Planting → Avoid), and fog-escarpment species such as Terminalia dhofarica. Arid Najd species are not auto-mixed onto fog slopes.",
+    "restoBody": "Explore places that may suit vegetation restoration and the evidence available for each. Appropriate steps range from protecting natural regrowth to planting local species, depending on the site and moisture.",
     "ctaMap": "Open observatory map",
     "ctaGallery": "Browse scenes",
     "ctaAnalysis": "Open satellite decision",
-    "previewNote": "Dated examples from the image archive. Open the gallery for recent images or the location checker for readings."
+    "previewNote": "Dated examples from the image archive. Open the gallery for recent images or the location checker for readings.",
+    "naturalImage": "Thumrait in natural colours",
+    "greennessImage": "Vegetation greenness in Thumrait",
+    "lateSummerImage": "Thumrait in late summer"
   },
   "map": {
     "title": "Dhofar observatory map",
-    "blurb": "Switch between Agricultural Observatory (Najd AOUs) and Restoration Observatory (mountain & foothill sites). Shared basemap; separated scientific rules.",
+    "blurb": "Explore readings for agricultural areas in Najd or restoration sites in the mountains and foothills. Each type of site uses an appropriate assessment method.",
     "bbox": "Najd farm-corridor bbox",
     "hubs": "Agricultural hubs",
     "liveTitle": "Published readings map",
-    "liveBlurb": "500 m cells from the latest clear Sentinel-2 scene, labelled as AOUs. Water and vigor flags are relative to vegetated peers — not lab diagnoses or official farms.",
+    "liveBlurb": "Polygons show the available satellite monitoring areas. Moisture and growth signals compare nearby vegetated areas; they are not lab diagnoses or official farm boundaries.",
     "hideBare": "Hide bare desert cells",
     "legendBare": "Bare / unplanted",
     "legendHealthy": "Stable vigor",
     "legendWater": "Needs water check",
     "legendVigor": "Low vigor — check nutrition/management",
-    "aouOfflineBadge": "AOU layer: last offline run {{date}}",
+    "aouOfflineBadge": "Monitoring areas last processed: {{date}}",
     "aouNotByStac": "Refreshing gallery images does not recalculate these readings. Observation dates and processing status are shown below.",
     "najdOffSeasonChip": "Sep–Oct: bare often = off-season (expected)",
-    "najdOffSeasonHelper": "In Asia/Muscat September–October, Najd wheat is typically off-season. Many bare AOU cells reflect expected fallow / unplanted ground — not necessarily a monitor failure.",
+    "najdOffSeasonHelper": "Lower greenness in September and October may reflect the end of a growing season or fallow ground. A low reading alone does not prove that land is non-agricultural.",
     "hubOutsideWindow": "Outside analysis window",
     "hubOutsideAoi": "Outside satellite AOI — limited / no coverage",
     "hubMazyunahNote": "Al-Mazyunah sits west of the current monitor AOI (lon ≈ 52.62°). Hub is shown for orientation; it is not covered by the farm-corridor WINDOW processed by run_monitor.py.",
@@ -137,14 +140,14 @@
   },
   "gallery": {
     "title": "Imagery",
-    "blurb": "Browse archived true-color and NDVI previews, or refresh current Sentinel-2 scenes from Microsoft Planetary Computer STAC.",
+    "blurb": "Browse archive images in natural colours or by vegetation greenness, and search for more recent satellite images. Refreshing the image list does not recalculate agricultural readings.",
     "allTiles": "All tiles",
     "allSeasons": "All seasons",
     "allTypes": "All types",
     "wheat": "Wheat season",
     "offseason": "Late summer / off-season",
     "truecolor": "True-color",
-    "ndvi": "NDVI",
+    "ndvi": "Vegetation greenness",
     "empty": "No scenes match these filters.",
     "close": "Close",
     "sensor": "Sensor / tile",
@@ -164,7 +167,7 @@
     "sourceBadgePc": "Planetary Computer",
     "sourceBadgeS2": "Sentinel-2 L2A",
     "sourceBadgeStac": "STAC",
-    "howRefresh": "Refresh queries the Microsoft Planetary Computer STAC API (sentinel-2-l2a) over the observatory AOI. Contains modified Copernicus Sentinel data. No API token required for STAC search; optional VITE_PC_SAS_TOKEN may be set later for signed assets.",
+    "howRefresh": "Satellite imagery from Copernicus, accessed through Microsoft Planetary Computer. Searching for newer images updates the image list; readings are published after processing is complete.",
     "farmDataTitle": "Farm monitor artifacts",
     "farmDataBlurb": "latest_alerts.geojson + timeseries.json are produced by satellite/pipeline/run_monitor.py (PC STAC + rasterio) into app/public/data/. Client Refresh browses latest STAC scenes; full raster recompute is via the pipeline / GitHub Action.",
     "farmDataMissing": "Farm GeoJSON not loaded — run the monitor pipeline or wait for the Action.",
@@ -413,15 +416,15 @@
     "unclear": "Unclear — needs review",
     "tip_bare": "Little or no green canopy in this cell for the acquisition date.",
     "tip_healthy": "This reading did not trigger the attention thresholds. It is not proof of health or a stable trend.",
-    "tip_water_attention": "Canopy moisture (NDMI) is low versus nearby vegetated areas — verify irrigation soon.",
-    "tip_vigor_attention": "Greening (NDVI) is weak versus peers. Management / possible nutrient attention — satellite decision; not fertilizer diagnosis; biotic risk is a separate flag.",
+    "tip_water_attention": "The vegetation moisture signal is lower than in nearby vegetated areas. It deserves attention, but is not a soil-moisture measurement or an irrigation amount recommendation.",
+    "tip_vigor_attention": "Greenness is lower than in nearby vegetated areas. Season, site conditions or possible stress may explain this; it does not confirm a nutrient deficiency or pest.",
     "tip_unclear": "Signal is ambiguous for this cell — review satellite imagery. Field visit is not required."
   },
   "appNameAr": "مرصد ظفار الزراعي البيئي",
   "provisional": {
     "badge": "Provisional / sample",
     "sites": "Sample restoration sites are status markers (onset / insufficient MPI) — not field-validated and not seeding recommendations. Seeding-rec Hold until post-khareef MPI + scientist SHA.",
-    "aou": "Experimental monitoring units within a limited footprint. Results come from the last completed run; units are not official farm boundaries.",
+    "aou": "Monitoring areas are not official farm boundaries or evidence of ownership.",
     "mpi": "MPI class is provisional; live MPI is not computed in this MVP."
   },
   "appNameShort": "Dhofar Observatory",
@@ -605,16 +608,16 @@
     },
     "terms": {
       "aou": {
-        "title": "What is a monitoring area (AOU)?",
-        "body": "An area grouped from satellite observations for repeated monitoring. It is not an official farm boundary, land title or ownership record."
+        "title": "What is a monitoring area?",
+        "body": "An area grouped from satellite observations for repeated monitoring. It is not an official farm boundary, land title or ownership record. Technical abbreviation: AOU."
       },
       "ndvi": {
-        "title": "NDVI: how much green vegetation is visible?",
-        "body": "An index derived from reflected light. A higher value often indicates more green vegetation, but comparisons depend on season and land cover. It is not a yield estimate."
+        "title": "How do we read vegetation greenness?",
+        "body": "An index derived from reflected light. A higher value often indicates more green vegetation, but comparisons depend on season and land cover. It is not a yield estimate. Technical abbreviation: NDVI."
       },
       "ndmi": {
-        "title": "NDMI: what does the moisture signal mean?",
-        "body": "An index sensitive to moisture in vegetation. It is not a soil-moisture percentage, a groundwater measurement or a direct instruction to irrigate."
+        "title": "What does the moisture signal mean?",
+        "body": "An index sensitive to moisture in vegetation. It is not a soil-moisture percentage, a groundwater measurement or a direct instruction to irrigate. Technical abbreviation: NDMI."
       },
       "confidence": {
         "title": "Does high confidence mean the conclusion is certain?",
@@ -638,7 +641,11 @@
       }
     },
     "staleCheck": "No update attempt has been recorded in the last 48 hours. Readings may be delayed; check the observation date.",
-    "qualityUnavailable": "Insufficient or unavailable"
+    "qualityUnavailable": "Insufficient or unavailable",
+    "indicators": {
+      "ndvi": "Vegetation greenness",
+      "ndmi": "Vegetation moisture signal"
+    }
   },
   "explore": {
     "title": "Check a place you care about",
@@ -697,7 +704,7 @@
     "meaning": "A heuristic score out of 100, not a calibrated probability or a measure of crop health.",
     "landUse": "A low score does not establish non-agricultural land: the site may be harvested, fallow or sparsely vegetated.",
     "unavailable": "No interpretable current score",
-    "floor": "Interpretation warning: components derived from NDVI and NDMI reached zero together. They are not four independent findings of absent agriculture; history and a default value may still contribute.",
+    "floor": "Several components derived from the greenness and moisture indices reached zero together. They are not independent evidence that agriculture is absent; history and a default value may still contribute.",
     "stressNote": "Moisture or vigor attention is a spectral signal to follow up, not a confirmed diagnosis of crop water shortage. A low activity score alone does not hide this signal.",
     "legacy": "Component provenance is unavailable for this reading or does not match its current score; measured or independent evidence is not assumed.",
     "details": "How was this score calculated?",
