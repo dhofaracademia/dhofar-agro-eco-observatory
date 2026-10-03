@@ -1,8 +1,8 @@
 {
-  "last_updated": "2026-10-03T15:12:53.111591+00:00",
+  "last_updated": "2026-10-03T16:10:30.000074+00:00",
   "source": "run_monitor+run_ag_probability+run_decision_scaffolds",
-  "run_id": "20261003T151210Z-c940410c",
-  "release_id": "20261003T151210Z-c940410c",
+  "run_id": "20261003T160946Z-41ce9f0f",
+  "release_id": "20261003T160946Z-41ce9f0f",
   "artifacts": [
     "latest_alerts.geojson",
     "timeseries.json",
