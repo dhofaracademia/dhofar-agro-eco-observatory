@@ -32,7 +32,7 @@ jobs:
           python-version: '3.11'
           cache: pip
           cache-dependency-path: satellite/pipeline/requirements.txt
-      - run: python -m pip install --upgrade pip
+      - run: python -m pip install --upgrade pip "setuptools>=83"
       - run: pip install -r satellite/pipeline/requirements.txt
       - name: Run regression tests before processing
         run: python satellite/pipeline/tests/run_all.py

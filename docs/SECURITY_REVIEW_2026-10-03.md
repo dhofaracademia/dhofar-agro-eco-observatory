@@ -18,7 +18,9 @@ credential attack, account takeover simulation, or assertion of complete securit
 - npm audit reported zero known vulnerabilities. The local Python audit initially
   flagged the environment's pip installer, not an internet-facing Python service.
   After upgrading pip, the installed pipeline/audit environment reported no known
-  vulnerabilities. Pattern scanning tracked text found no private keys, GitHub
+  vulnerabilities. GitHub’s Python 3.11 runner also exposed an outdated setuptools
+  (79.0.1; advisory fix 83.0.0), so all Python jobs upgrade setuptools before
+  installing dependencies. Pattern scanning tracked text found no private keys, GitHub
   token patterns, or AWS access-key IDs; this is not a full historical secret audit.
 
 ## Applied controls
