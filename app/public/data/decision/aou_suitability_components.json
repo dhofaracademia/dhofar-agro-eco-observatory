@@ -1,6 +1,6 @@
 {
   "version": "0.4.8-post29-residuals",
-  "generated_at": "2026-10-10T11:12:56.514107+00:00",
+  "generated_at": "2026-10-15T09:58:23.212894+00:00",
   "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3 + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md",
   "status": "expert_v1_provisional",
   "product_stamp": "provisional_satellite_analytical_service",
@@ -10,11 +10,11 @@
   "mountain_apply": false,
   "action_auto_assign": false,
   "writes_to_app_public": true,
-  "run_id": "20261010T111223Z-ee11acd4",
-  "release_id": "20261010T111223Z-ee11acd4",
+  "run_id": "20261015T095749Z-f9fb14ef",
+  "release_id": "20261015T095749Z-f9fb14ef",
   "input_refs": {
-    "aou_registry": "/tmp/dhofar-refresh-eca47t_2/data/monitor_aou_stage_20261010T111223Z-ee11acd4_1_u00gsk/aou/aou_registry.json",
-    "aou_observations": "/tmp/dhofar-refresh-eca47t_2/data/monitor_aou_stage_20261010T111223Z-ee11acd4_1_u00gsk/aou/aou_observations.json"
+    "aou_registry": "/tmp/dhofar-refresh-rdixs2o9/data/monitor_aou_stage_20261015T095749Z-f9fb14ef_5_x8xaze/aou/aou_registry.json",
+    "aou_observations": "/tmp/dhofar-refresh-rdixs2o9/data/monitor_aou_stage_20261015T095749Z-f9fb14ef_5_x8xaze/aou/aou_observations.json"
   },
   "honesty_en": "Offline decision scaffolds for Najd agriculture AOUs only. Suitability \u2260 Confidence \u2260 data_quality_confidence. Not ecological certainty. No mountain UI. Action ladder manual only.",
   "schema_ref": "docs/spec_0.4/suitability_components.schema.json",
@@ -25,14 +25,14 @@
       "aou_id": "AOU-NJ-000001",
       "suitability_domain": "agriculture_aou",
       "status": "expert_v1_provisional",
-      "suitability_score": 51.83,
+      "suitability_score": 54.79,
       "suitability_summary_label": "components_only",
       "suitability_components": {
-        "moisture_proxy": 0.3904,
-        "vigor_proxy": 0.6707,
-        "phenology_fit": 0.6364,
+        "moisture_proxy": 0.4277,
+        "vigor_proxy": 0.6788,
+        "phenology_fit": 0.6667,
         "terrain_constraint": 1.0,
-        "agricultural_probability_norm": 0.2808
+        "agricultural_probability_norm": 0.3276
       },
       "weights_used": {
         "agricultural_probability": 0.35,
@@ -50,9 +50,9 @@
       },
       "cite_slots": {
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3",
-        "observation_date": "2026-10-09",
-        "product_id": "S2B_MSIL2A_20261009T064759_R020_T39QYA_20261009T104659",
-        "tile": "39QYA",
+        "observation_date": "2026-10-14",
+        "product_id": "S2C_MSIL2A_20261014T064831_R020_T39QYV_20261014T110712",
+        "tile": "39QYV",
         "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer"
       },
       "honesty_note_en": "Provisional agriculture_aou suitability (expert_v1). Suitability \u2260 Confidence \u2260 data_quality_confidence \u2014 never merge. Moisture/vigor terms are NDMI/NDVI stress proxies, not plot soil moisture %. Not applied to mountain cells. No action auto-assign.",
@@ -63,14 +63,14 @@
       "mountain_apply": false,
       "action_auto_assign": false,
       "why_this_site": {
-        "headline": "AOU-NJ-000001: provisional agriculture_aou suitability 51.8/100 (moderate relative among components; ag_probability_norm=0.28) \u2014 expert_v1_provisional, not operational truth",
+        "headline": "AOU-NJ-000001: provisional agriculture_aou suitability 54.8/100 (moderate relative among components; ag_probability_norm=0.33) \u2014 expert_v1_provisional, not operational truth",
         "drivers": [
-          "Agricultural probability (norm) available: 0.28 (weight 0.35).",
-          "Moisture proxy from inverse water_stress (NDMI-based): 0.39 \u2014 not soil moisture %.",
-          "Vigor proxy from inverse vigor_stress (NDVI-based): 0.67 \u2014 not fertilizer diagnosis.",
-          "Phenology / NDVI persistence fit: 0.64.",
+          "Agricultural probability (norm) available: 0.33 (weight 0.35).",
+          "Moisture proxy from inverse water_stress (NDMI-based): 0.43 \u2014 not soil moisture %.",
+          "Vigor proxy from inverse vigor_stress (NDVI-based): 0.68 \u2014 not fertilizer diagnosis.",
+          "Phenology / NDVI persistence fit: 0.67.",
           "Geometry gate (area \u2265 2 ha): 1.00.",
-          "Weighted suitability_score=51.8 shown as components_only (Suitability \u2260 Confidence)."
+          "Weighted suitability_score=54.8 shown as components_only (Suitability \u2260 Confidence)."
         ],
         "cautions": [
           "expert_v1_provisional \u2014 Agrofostery weight locks; not field-validated operational truth.",
@@ -94,9 +94,9 @@
       "najd_model_validation": "not_validated",
       "assessability": "assessable",
       "observation_role": "current_observation",
-      "aggregate_id": "AOU-NJ-000001|2026-10-09|20261010T111223Z-ee11acd4",
-      "persistence_feature": 0.6363636363636364,
-      "n_dates_above_bare": 7,
+      "aggregate_id": "AOU-NJ-000001|2026-10-14|20261015T095749Z-f9fb14ef",
+      "persistence_feature": 0.6666666666666666,
+      "n_dates_above_bare": 8,
       "valid_area_fraction": 0.9999999012547719,
       "biotic_status": "not_flagged",
       "discovery_status": "established",
@@ -107,7 +107,7 @@
       "suitability_domain": "agriculture_aou",
       "status": "expert_v1_provisional",
       "suitability_score": 64.78,
-      "suitability_summary_label": "components_only",
+      "suitability_summary_label": "demoted_unassessable_or_retained",
       "suitability_components": {
         "moisture_proxy": 0.7265,
         "vigor_proxy": 0.7595,
@@ -173,22 +173,23 @@
       "evidence_level": "satellite_only",
       "product_stamp": "provisional_satellite_analytical_service",
       "najd_model_validation": "not_validated",
-      "assessability": "assessable",
-      "observation_role": "current_observation",
-      "aggregate_id": "AOU-NJ-000002|2026-10-09|20261010T111223Z-ee11acd4",
+      "assessability": "unassessable",
+      "observation_role": "retained_last_good",
+      "aggregate_id": "AOU-NJ-000002|2026-10-09|20261015T095749Z-f9fb14ef",
       "persistence_feature": 0.9,
       "n_dates_above_bare": 9,
-      "valid_area_fraction": 0.9999999624376247,
+      "valid_area_fraction": null,
       "biotic_status": "not_flagged",
       "discovery_status": "established",
-      "discovery_action": null
+      "discovery_action": null,
+      "decision_role": "retained_or_unassessable"
     },
     {
       "aou_id": "AOU-NJ-000003",
       "suitability_domain": "agriculture_aou",
       "status": "expert_v1_provisional",
       "suitability_score": 67.93,
-      "suitability_summary_label": "components_only",
+      "suitability_summary_label": "demoted_unassessable_or_retained",
       "suitability_components": {
         "moisture_proxy": 0.7087,
         "vigor_proxy": 0.7104,
@@ -254,28 +255,29 @@
       "evidence_level": "satellite_only",
       "product_stamp": "provisional_satellite_analytical_service",
       "najd_model_validation": "not_validated",
-      "assessability": "assessable",
-      "observation_role": "current_observation",
-      "aggregate_id": "AOU-NJ-000003|2026-10-09|20261010T111223Z-ee11acd4",
+      "assessability": "unassessable",
+      "observation_role": "retained_last_good",
+      "aggregate_id": "AOU-NJ-000003|2026-10-09|20261015T095749Z-f9fb14ef",
       "persistence_feature": 1.0,
       "n_dates_above_bare": 10,
-      "valid_area_fraction": 0.9999999498409037,
+      "valid_area_fraction": null,
       "biotic_status": "not_flagged",
       "discovery_status": "established",
-      "discovery_action": null
+      "discovery_action": null,
+      "decision_role": "retained_or_unassessable"
     },
     {
       "aou_id": "AOU-NJ-000004",
       "suitability_domain": "agriculture_aou",
       "status": "expert_v1_provisional",
-      "suitability_score": 35.58,
+      "suitability_score": 36.67,
       "suitability_summary_label": "components_only",
       "suitability_components": {
-        "moisture_proxy": 0.351,
-        "vigor_proxy": 0.3503,
-        "phenology_fit": 0.4286,
+        "moisture_proxy": 0.34,
+        "vigor_proxy": 0.3485,
+        "phenology_fit": 0.4667,
         "terrain_constraint": 1.0,
-        "agricultural_probability_norm": 0.1355
+        "agricultural_probability_norm": 0.1506
       },
       "weights_used": {
         "agricultural_probability": 0.35,
@@ -293,9 +295,9 @@
       },
       "cite_slots": {
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3",
-        "observation_date": "2026-10-09",
-        "product_id": "S2B_MSIL2A_20261009T064759_R020_T39QYA_20261009T104659",
-        "tile": "39QYA",
+        "observation_date": "2026-10-14",
+        "product_id": "S2C_MSIL2A_20261014T064831_R020_T39QYV_20261014T110712",
+        "tile": "39QYV",
         "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer"
       },
       "honesty_note_en": "Provisional agriculture_aou suitability (expert_v1). Suitability \u2260 Confidence \u2260 data_quality_confidence \u2014 never merge. Moisture/vigor terms are NDMI/NDVI stress proxies, not plot soil moisture %. Not applied to mountain cells. No action auto-assign.",
@@ -306,14 +308,14 @@
       "mountain_apply": false,
       "action_auto_assign": false,
       "why_this_site": {
-        "headline": "AOU-NJ-000004: provisional agriculture_aou suitability 35.6/100 (lower relative among components; ag_probability_norm=0.14) \u2014 expert_v1_provisional, not operational truth",
+        "headline": "AOU-NJ-000004: provisional agriculture_aou suitability 36.7/100 (lower relative among components; ag_probability_norm=0.15) \u2014 expert_v1_provisional, not operational truth",
         "drivers": [
-          "Agricultural probability (norm) available: 0.14 (weight 0.35).",
-          "Moisture proxy from inverse water_stress (NDMI-based): 0.35 \u2014 not soil moisture %.",
+          "Agricultural probability (norm) available: 0.15 (weight 0.35).",
+          "Moisture proxy from inverse water_stress (NDMI-based): 0.34 \u2014 not soil moisture %.",
           "Vigor proxy from inverse vigor_stress (NDVI-based): 0.35 \u2014 not fertilizer diagnosis.",
-          "Phenology / NDVI persistence fit: 0.43.",
+          "Phenology / NDVI persistence fit: 0.47.",
           "Geometry gate (area \u2265 2 ha): 1.00.",
-          "Weighted suitability_score=35.6 shown as components_only (Suitability \u2260 Confidence)."
+          "Weighted suitability_score=36.7 shown as components_only (Suitability \u2260 Confidence)."
         ],
         "cautions": [
           "expert_v1_provisional \u2014 Agrofostery weight locks; not field-validated operational truth.",
@@ -337,9 +339,9 @@
       "najd_model_validation": "not_validated",
       "assessability": "assessable",
       "observation_role": "current_observation",
-      "aggregate_id": "AOU-NJ-000004|2026-10-09|20261010T111223Z-ee11acd4",
-      "persistence_feature": 0.42857142857142855,
-      "n_dates_above_bare": 6,
+      "aggregate_id": "AOU-NJ-000004|2026-10-14|20261015T095749Z-f9fb14ef",
+      "persistence_feature": 0.4666666666666667,
+      "n_dates_above_bare": 7,
       "valid_area_fraction": 0.9999999891083816,
       "biotic_status": "not_flagged",
       "discovery_status": "established",
@@ -349,14 +351,14 @@
       "aou_id": "AOU-NJ-000005",
       "suitability_domain": "agriculture_aou",
       "status": "expert_v1_provisional",
-      "suitability_score": 50.9,
+      "suitability_score": 51.81,
       "suitability_summary_label": "components_only",
       "suitability_components": {
-        "moisture_proxy": 0.1391,
-        "vigor_proxy": 0.6419,
-        "phenology_fit": 0.9286,
+        "moisture_proxy": 0.2119,
+        "vigor_proxy": 0.6202,
+        "phenology_fit": 0.9333,
         "terrain_constraint": 1.0,
-        "agricultural_probability_norm": 0.2115
+        "agricultural_probability_norm": 0.2161
       },
       "weights_used": {
         "agricultural_probability": 0.35,
@@ -374,9 +376,9 @@
       },
       "cite_slots": {
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3",
-        "observation_date": "2026-10-09",
-        "product_id": "S2B_MSIL2A_20261009T064759_R020_T39QYA_20261009T104659",
-        "tile": "39QYA",
+        "observation_date": "2026-10-14",
+        "product_id": "S2C_MSIL2A_20261014T064831_R020_T39QYV_20261014T110712",
+        "tile": "39QYV",
         "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer"
       },
       "honesty_note_en": "Provisional agriculture_aou suitability (expert_v1). Suitability \u2260 Confidence \u2260 data_quality_confidence \u2014 never merge. Moisture/vigor terms are NDMI/NDVI stress proxies, not plot soil moisture %. Not applied to mountain cells. No action auto-assign.",
@@ -387,14 +389,14 @@
       "mountain_apply": false,
       "action_auto_assign": false,
       "why_this_site": {
-        "headline": "AOU-NJ-000005: provisional agriculture_aou suitability 50.9/100 (moderate relative among components; ag_probability_norm=0.21) \u2014 expert_v1_provisional, not operational truth",
+        "headline": "AOU-NJ-000005: provisional agriculture_aou suitability 51.8/100 (moderate relative among components; ag_probability_norm=0.22) \u2014 expert_v1_provisional, not operational truth",
         "drivers": [
-          "Agricultural probability (norm) available: 0.21 (weight 0.35).",
-          "Moisture proxy from inverse water_stress (NDMI-based): 0.14 \u2014 not soil moisture %.",
-          "Vigor proxy from inverse vigor_stress (NDVI-based): 0.64 \u2014 not fertilizer diagnosis.",
+          "Agricultural probability (norm) available: 0.22 (weight 0.35).",
+          "Moisture proxy from inverse water_stress (NDMI-based): 0.21 \u2014 not soil moisture %.",
+          "Vigor proxy from inverse vigor_stress (NDVI-based): 0.62 \u2014 not fertilizer diagnosis.",
           "Phenology / NDVI persistence fit: 0.93.",
           "Geometry gate (area \u2265 2 ha): 1.00.",
-          "Weighted suitability_score=50.9 shown as components_only (Suitability \u2260 Confidence)."
+          "Weighted suitability_score=51.8 shown as components_only (Suitability \u2260 Confidence)."
         ],
         "cautions": [
           "expert_v1_provisional \u2014 Agrofostery weight locks; not field-validated operational truth.",
@@ -418,9 +420,9 @@
       "najd_model_validation": "not_validated",
       "assessability": "assessable",
       "observation_role": "current_observation",
-      "aggregate_id": "AOU-NJ-000005|2026-10-09|20261010T111223Z-ee11acd4",
-      "persistence_feature": 0.9285714285714286,
-      "n_dates_above_bare": 13,
+      "aggregate_id": "AOU-NJ-000005|2026-10-14|20261015T095749Z-f9fb14ef",
+      "persistence_feature": 0.9333333333333333,
+      "n_dates_above_bare": 14,
       "valid_area_fraction": 0.9999998957977093,
       "biotic_status": "not_flagged",
       "discovery_status": "established",
@@ -430,14 +432,14 @@
       "aou_id": "AOU-NJ-000006",
       "suitability_domain": "agriculture_aou",
       "status": "expert_v1_provisional",
-      "suitability_score": 50.41,
+      "suitability_score": 57.43,
       "suitability_summary_label": "components_only",
       "suitability_components": {
-        "moisture_proxy": 0.3163,
-        "vigor_proxy": 0.5951,
-        "phenology_fit": 0.8571,
+        "moisture_proxy": 0.4613,
+        "vigor_proxy": 0.713,
+        "phenology_fit": 0.8667,
         "terrain_constraint": 1.0,
-        "agricultural_probability_norm": 0.1893
+        "agricultural_probability_norm": 0.2548
       },
       "weights_used": {
         "agricultural_probability": 0.35,
@@ -455,9 +457,9 @@
       },
       "cite_slots": {
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3",
-        "observation_date": "2026-10-09",
-        "product_id": "S2B_MSIL2A_20261009T064759_R020_T39QYA_20261009T104659",
-        "tile": "39QYA",
+        "observation_date": "2026-10-14",
+        "product_id": "S2C_MSIL2A_20261014T064831_R020_T39QYV_20261014T110712",
+        "tile": "39QYV",
         "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer"
       },
       "honesty_note_en": "Provisional agriculture_aou suitability (expert_v1). Suitability \u2260 Confidence \u2260 data_quality_confidence \u2014 never merge. Moisture/vigor terms are NDMI/NDVI stress proxies, not plot soil moisture %. Not applied to mountain cells. No action auto-assign.",
@@ -468,14 +470,14 @@
       "mountain_apply": false,
       "action_auto_assign": false,
       "why_this_site": {
-        "headline": "AOU-NJ-000006: provisional agriculture_aou suitability 50.4/100 (moderate relative among components; ag_probability_norm=0.19) \u2014 expert_v1_provisional, not operational truth",
+        "headline": "AOU-NJ-000006: provisional agriculture_aou suitability 57.4/100 (moderate relative among components; ag_probability_norm=0.25) \u2014 expert_v1_provisional, not operational truth",
         "drivers": [
-          "Agricultural probability (norm) available: 0.19 (weight 0.35).",
-          "Moisture proxy from inverse water_stress (NDMI-based): 0.32 \u2014 not soil moisture %.",
-          "Vigor proxy from inverse vigor_stress (NDVI-based): 0.60 \u2014 not fertilizer diagnosis.",
-          "Phenology / NDVI persistence fit: 0.86.",
+          "Agricultural probability (norm) available: 0.25 (weight 0.35).",
+          "Moisture proxy from inverse water_stress (NDMI-based): 0.46 \u2014 not soil moisture %.",
+          "Vigor proxy from inverse vigor_stress (NDVI-based): 0.71 \u2014 not fertilizer diagnosis.",
+          "Phenology / NDVI persistence fit: 0.87.",
           "Geometry gate (area \u2265 2 ha): 1.00.",
-          "Weighted suitability_score=50.4 shown as components_only (Suitability \u2260 Confidence)."
+          "Weighted suitability_score=57.4 shown as components_only (Suitability \u2260 Confidence)."
         ],
         "cautions": [
           "expert_v1_provisional \u2014 Agrofostery weight locks; not field-validated operational truth.",
@@ -491,7 +493,7 @@
           "Evidence gap: no_post_khareef_clear",
           "Evidence gap: no_mpi_curve"
         ],
-        "recommended_next_step": "Satellite attention: canopy-moisture (NDMI) proxy is low \u2014 review irrigation from this satellite decision. Optional additional field verification (last resort) only \u2014 not required to act.",
+        "recommended_next_step": "Satellite decision: continue monitoring. A field visit is not required to use this output; optional additional field verification is last-resort only.",
         "action_ladder_suggestion": null
       },
       "evidence_level": "satellite_only",
@@ -499,9 +501,9 @@
       "najd_model_validation": "not_validated",
       "assessability": "assessable",
       "observation_role": "current_observation",
-      "aggregate_id": "AOU-NJ-000006|2026-10-09|20261010T111223Z-ee11acd4",
-      "persistence_feature": 0.8571428571428571,
-      "n_dates_above_bare": 12,
+      "aggregate_id": "AOU-NJ-000006|2026-10-14|20261015T095749Z-f9fb14ef",
+      "persistence_feature": 0.8666666666666667,
+      "n_dates_above_bare": 13,
       "valid_area_fraction": 0.9999999481955474,
       "biotic_status": "not_flagged",
       "discovery_status": "established",
@@ -511,14 +513,14 @@
       "aou_id": "AOU-NJ-000007",
       "suitability_domain": "agriculture_aou",
       "status": "expert_v1_provisional",
-      "suitability_score": 41.95,
+      "suitability_score": 43.79,
       "suitability_summary_label": "components_only",
       "suitability_components": {
-        "moisture_proxy": 0.3445,
-        "vigor_proxy": 0.3644,
-        "phenology_fit": 0.6429,
+        "moisture_proxy": 0.3578,
+        "vigor_proxy": 0.3703,
+        "phenology_fit": 0.6667,
         "terrain_constraint": 1.0,
-        "agricultural_probability_norm": 0.1896
+        "agricultural_probability_norm": 0.2195
       },
       "weights_used": {
         "agricultural_probability": 0.35,
@@ -536,9 +538,9 @@
       },
       "cite_slots": {
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3",
-        "observation_date": "2026-10-09",
-        "product_id": "S2B_MSIL2A_20261009T064759_R020_T39QYA_20261009T104659",
-        "tile": "39QYA",
+        "observation_date": "2026-10-14",
+        "product_id": "S2C_MSIL2A_20261014T064831_R020_T39QYV_20261014T110712",
+        "tile": "39QYV",
         "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer"
       },
       "honesty_note_en": "Provisional agriculture_aou suitability (expert_v1). Suitability \u2260 Confidence \u2260 data_quality_confidence \u2014 never merge. Moisture/vigor terms are NDMI/NDVI stress proxies, not plot soil moisture %. Not applied to mountain cells. No action auto-assign.",
@@ -549,14 +551,14 @@
       "mountain_apply": false,
       "action_auto_assign": false,
       "why_this_site": {
-        "headline": "AOU-NJ-000007: provisional agriculture_aou suitability 42.0/100 (moderate relative among components; ag_probability_norm=0.19) \u2014 expert_v1_provisional, not operational truth",
+        "headline": "AOU-NJ-000007: provisional agriculture_aou suitability 43.8/100 (moderate relative among components; ag_probability_norm=0.22) \u2014 expert_v1_provisional, not operational truth",
         "drivers": [
-          "Agricultural probability (norm) available: 0.19 (weight 0.35).",
-          "Moisture proxy from inverse water_stress (NDMI-based): 0.34 \u2014 not soil moisture %.",
-          "Vigor proxy from inverse vigor_stress (NDVI-based): 0.36 \u2014 not fertilizer diagnosis.",
-          "Phenology / NDVI persistence fit: 0.64.",
+          "Agricultural probability (norm) available: 0.22 (weight 0.35).",
+          "Moisture proxy from inverse water_stress (NDMI-based): 0.36 \u2014 not soil moisture %.",
+          "Vigor proxy from inverse vigor_stress (NDVI-based): 0.37 \u2014 not fertilizer diagnosis.",
+          "Phenology / NDVI persistence fit: 0.67.",
           "Geometry gate (area \u2265 2 ha): 1.00.",
-          "Weighted suitability_score=42.0 shown as components_only (Suitability \u2260 Confidence)."
+          "Weighted suitability_score=43.8 shown as components_only (Suitability \u2260 Confidence)."
         ],
         "cautions": [
           "expert_v1_provisional \u2014 Agrofostery weight locks; not field-validated operational truth.",
@@ -580,9 +582,9 @@
       "najd_model_validation": "not_validated",
       "assessability": "assessable",
       "observation_role": "current_observation",
-      "aggregate_id": "AOU-NJ-000007|2026-10-09|20261010T111223Z-ee11acd4",
-      "persistence_feature": 0.6428571428571429,
-      "n_dates_above_bare": 9,
+      "aggregate_id": "AOU-NJ-000007|2026-10-14|20261015T095749Z-f9fb14ef",
+      "persistence_feature": 0.6666666666666666,
+      "n_dates_above_bare": 10,
       "valid_area_fraction": 0.9999999892424526,
       "biotic_status": "not_flagged",
       "discovery_status": "established",
@@ -593,7 +595,7 @@
       "suitability_domain": "agriculture_aou",
       "status": "expert_v1_provisional",
       "suitability_score": 63.79,
-      "suitability_summary_label": "components_only",
+      "suitability_summary_label": "demoted_unassessable_or_retained",
       "suitability_components": {
         "moisture_proxy": 0.4592,
         "vigor_proxy": 0.6763,
@@ -659,22 +661,23 @@
       "evidence_level": "satellite_only",
       "product_stamp": "provisional_satellite_analytical_service",
       "najd_model_validation": "not_validated",
-      "assessability": "assessable",
-      "observation_role": "current_observation",
-      "aggregate_id": "AOU-NJ-000008|2026-10-09|20261010T111223Z-ee11acd4",
+      "assessability": "unassessable",
+      "observation_role": "retained_last_good",
+      "aggregate_id": "AOU-NJ-000008|2026-10-09|20261015T095749Z-f9fb14ef",
       "persistence_feature": 1.0,
       "n_dates_above_bare": 10,
-      "valid_area_fraction": 0.9999998994031696,
+      "valid_area_fraction": null,
       "biotic_status": "not_flagged",
       "discovery_status": "established",
-      "discovery_action": null
+      "discovery_action": null,
+      "decision_role": "retained_or_unassessable"
     },
     {
       "aou_id": "AOU-NJ-000009",
       "suitability_domain": "agriculture_aou",
       "status": "expert_v1_provisional",
       "suitability_score": 58.65,
-      "suitability_summary_label": "components_only",
+      "suitability_summary_label": "demoted_unassessable_or_retained",
       "suitability_components": {
         "moisture_proxy": 0.4616,
         "vigor_proxy": 0.6705,
@@ -740,15 +743,16 @@
       "evidence_level": "satellite_only",
       "product_stamp": "provisional_satellite_analytical_service",
       "najd_model_validation": "not_validated",
-      "assessability": "assessable",
-      "observation_role": "current_observation",
-      "aggregate_id": "AOU-NJ-000009|2026-10-09|20261010T111223Z-ee11acd4",
+      "assessability": "unassessable",
+      "observation_role": "retained_last_good",
+      "aggregate_id": "AOU-NJ-000009|2026-10-09|20261015T095749Z-f9fb14ef",
       "persistence_feature": 1.0,
       "n_dates_above_bare": 10,
-      "valid_area_fraction": 0.9999998976228828,
+      "valid_area_fraction": null,
       "biotic_status": "not_flagged",
       "discovery_status": "established",
-      "discovery_action": null
+      "discovery_action": null,
+      "decision_role": "retained_or_unassessable"
     }
   ]
 }
