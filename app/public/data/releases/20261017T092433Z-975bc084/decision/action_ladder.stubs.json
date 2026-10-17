@@ -1,0 +1,98 @@
+{
+  "schema_ref": "docs/spec_0.4/action_ladder.schema.json",
+  "science_lock": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3",
+  "status": "enum_and_manual_only",
+  "provisional": true,
+  "manual_only": true,
+  "auto_assign_from_suitability": false,
+  "action_ladder_suggestion": null,
+  "domain": "agriculture_aou_decision",
+  "mountain_apply": false,
+  "forbidden": [
+    "numeric_suitability_to_action_auto_assignment",
+    "campaign_hectares_as_official",
+    "pest_certainty",
+    "soil_moisture_percent",
+    "merge_suitability_and_confidence",
+    "apply_agriculture_aou_weights_to_mountain"
+  ],
+  "ladder_enum": [
+    "field_irrigation_inspection",
+    "field_vigor_inspection",
+    "biotic_field_verification",
+    "continue_monitoring",
+    "defer_insufficient_evidence"
+  ],
+  "labels": {
+    "field_irrigation_inspection": {
+      "en": "Field irrigation inspection",
+      "ar": "\u0645\u0639\u0627\u064a\u0646\u0629 \u0631\u064a \u0645\u064a\u062f\u0627\u0646\u064a\u0629",
+      "order": 1
+    },
+    "field_vigor_inspection": {
+      "en": "Field vigor inspection",
+      "ar": "\u0645\u0639\u0627\u064a\u0646\u0629 \u062d\u064a\u0648\u064a\u0629 \u0645\u064a\u062f\u0627\u0646\u064a\u0629",
+      "order": 2
+    },
+    "biotic_field_verification": {
+      "en": "Biotic field verification",
+      "ar": "\u062a\u062d\u0642\u0642 \u0645\u064a\u062f\u0627\u0646\u064a \u0644\u0625\u062c\u0647\u0627\u062f \u062d\u064a\u0648\u064a \u0645\u062d\u062a\u0645\u0644",
+      "order": 3
+    },
+    "continue_monitoring": {
+      "en": "Continue monitoring",
+      "ar": "\u0645\u062a\u0627\u0628\u0639\u0629 \u0627\u0644\u0631\u0635\u062f",
+      "order": 4
+    },
+    "defer_insufficient_evidence": {
+      "en": "Defer \u2014 insufficient evidence",
+      "ar": "\u062a\u0623\u062c\u064a\u0644 \u2014 \u0623\u062f\u0644\u0629 \u063a\u064a\u0631 \u0643\u0627\u0641\u064a\u0629",
+      "order": 5
+    }
+  },
+  "rule_stubs": [
+    {
+      "id": "stub_irrigation",
+      "ladder": "field_irrigation_inspection",
+      "rule_stub_en": "When moisture_proxy is low (high water_stress), experts may manually choose irrigation inspection. Auto-assign FORBIDDEN.",
+      "rule_stub_ar": "\u0639\u0646\u062f \u0627\u0646\u062e\u0641\u0627\u0636 moisture_proxy \u064a\u0645\u0643\u0646 \u0644\u0644\u062e\u0628\u064a\u0631 \u0627\u062e\u062a\u064a\u0627\u0631 \u0645\u0639\u0627\u064a\u0646\u0629 \u0627\u0644\u0631\u064a \u064a\u062f\u0648\u064a\u0627\u064b. \u0627\u0644\u062a\u0639\u064a\u064a\u0646 \u0627\u0644\u062a\u0644\u0642\u0627\u0626\u064a \u0645\u0645\u0646\u0648\u0639.",
+      "requires_field_validation": true,
+      "auto_assign_from_suitability": false
+    },
+    {
+      "id": "stub_vigor",
+      "ladder": "field_vigor_inspection",
+      "rule_stub_en": "When vigor_proxy is low, manual vigor inspection \u2014 not fertilizer diagnosis.",
+      "rule_stub_ar": "\u0639\u0646\u062f \u0627\u0646\u062e\u0641\u0627\u0636 vigor_proxy \u0645\u0639\u0627\u064a\u0646\u0629 \u062d\u064a\u0648\u064a\u0629 \u064a\u062f\u0648\u064a\u0629 \u2014 \u0648\u0644\u064a\u0633\u062a \u062a\u0634\u062e\u064a\u0635 \u0633\u0645\u0627\u062f.",
+      "requires_field_validation": true,
+      "auto_assign_from_suitability": false
+    },
+    {
+      "id": "stub_biotic",
+      "ladder": "biotic_field_verification",
+      "rule_stub_en": "possible_biotic_stress flag only \u2014 never pest name; field verification recommended.",
+      "rule_stub_ar": "\u0639\u0644\u0645 possible_biotic_stress \u0641\u0642\u0637 \u2014 \u0628\u0644\u0627 \u0627\u0633\u0645 \u0622\u0641\u0629\u061b \u064a\u064f\u0648\u0635\u0649 \u0628\u0627\u0644\u062a\u062d\u0642\u0642 \u0627\u0644\u0645\u064a\u062f\u0627\u0646\u064a.",
+      "requires_field_validation": true,
+      "auto_assign_from_suitability": false
+    },
+    {
+      "id": "stub_monitor",
+      "ladder": "continue_monitoring",
+      "rule_stub_en": "Default when scores are mid-range or history is thin \u2014 continue Phase-1 monitor.",
+      "rule_stub_ar": "\u0627\u0644\u0627\u0641\u062a\u0631\u0627\u0636\u064a \u0639\u0646\u062f \u062f\u0631\u062c\u0627\u062a \u0645\u062a\u0648\u0633\u0637\u0629 \u0623\u0648 \u062a\u0627\u0631\u064a\u062e \u0636\u0639\u064a\u0641 \u2014 \u0645\u062a\u0627\u0628\u0639\u0629 \u0631\u0635\u062f \u0627\u0644\u0645\u0631\u062d\u0644\u0629 1.",
+      "requires_field_validation": true,
+      "auto_assign_from_suitability": false
+    },
+    {
+      "id": "stub_defer",
+      "ladder": "defer_insufficient_evidence",
+      "rule_stub_en": "When Evidence Gap is large (no field visit, thin history, missing scores) \u2014 defer.",
+      "rule_stub_ar": "\u0639\u0646\u062f \u0641\u062c\u0648\u0629 \u0623\u062f\u0644\u0629 \u0643\u0628\u064a\u0631\u0629 \u2014 \u062a\u0623\u062c\u064a\u0644.",
+      "requires_field_validation": true,
+      "auto_assign_from_suitability": false
+    }
+  ],
+  "note_en": "Display enum / manual recommended next step only. Pipeline leaves action_ladder_suggestion null.",
+  "release_id": "20261017T092433Z-975bc084",
+  "run_id": "20261017T092433Z-975bc084"
+}
