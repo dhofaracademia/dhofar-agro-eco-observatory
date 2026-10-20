@@ -1,0 +1,256 @@
+{
+  "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+  "generated_on": "2026-10-20",
+  "last_updated": "2026-10-20T10:07:27.029953+00:00",
+  "run_id": "20261020T100647Z-7a80c75b",
+  "reprocess_time_utc": "2026-10-20T10:06:47.867276+00:00",
+  "aoi_bbox": [
+    53.4,
+    17.5,
+    54.3,
+    18.5
+  ],
+  "window_bbox": [
+    53.7,
+    17.9,
+    53.98,
+    18.15
+  ],
+  "priority_tiles": [
+    "39QYA",
+    "39QYV",
+    "39QZA",
+    "39QZV"
+  ],
+  "stac_window": {
+    "window_mode": "live",
+    "stac_start": "2026-07-22",
+    "stac_end": "2026-10-20",
+    "lookback_days": 90,
+    "run_time_utc": "2026-10-20T10:06:47.867297+00:00"
+  },
+  "min_clear_pixels": 500,
+  "min_clear_fraction": 0.02,
+  "method": {
+    "indices": [
+      "NDVI=(B08-B04)/(B08+B04)",
+      "NDMI=(B08-B11)/(B08+B11)",
+      "NDRE=(B08-B05)/(B08+B05) [B06/B07 documented fallback only]",
+      "AgProb=SCIENCE_LOCKS\u00a71 expert_v1",
+      "Stress=SCIENCE_LOCKS\u00a73 expert_v1",
+      "AlertUnify=map_stress_to_alert (same pass as latest_alerts)"
+    ],
+    "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md + SCIENCE_LOCKS_v0.4_observation_integrity.md",
+    "reflectance_scale": 10000.0,
+    "grid_m": 500.0,
+    "bare_ndvi_threshold": 0.18,
+    "cloud_filter": "eo:cloud_cover < 10.0",
+    "coverage_gate": {
+      "min_clear_pixels": 500,
+      "min_clear_fraction": 0.02,
+      "independent_of_cloud_pct": true,
+      "missing_scl": "block_unclassified"
+    },
+    "stac": "https://planetarycomputer.microsoft.com/api/stac/v1",
+    "collection": "sentinel-2-l2a",
+    "classifier": "classify_alerts_relative_p25",
+    "aou_identity": "AOU-NJ-######; join_rule=max_overlap_area; join_predicate=positive_area_overlap",
+    "join_rule": "max_overlap_area",
+    "join_predicate": "positive_area_overlap"
+  },
+  "citation": "Copernicus Sentinel-2 L2A (ESA) accessed via Microsoft Planetary Computer STAC API and signed COG assets.",
+  "errors": [],
+  "dates": [
+    {
+      "date": "2026-09-29",
+      "scene_capture_date": "2026-09-29",
+      "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+      "product_id": "S2B_MSIL2A_20260929T064629_R020_T39QYA_20260929T105217",
+      "tile": "39QYA",
+      "cloud_cover": 0.0,
+      "window_bbox": [
+        53.7,
+        17.9,
+        53.98,
+        18.15
+      ],
+      "aoi_bbox": [
+        53.4,
+        17.5,
+        54.3,
+        18.5
+      ],
+      "pixels_valid": 4534266,
+      "clear_fraction": 0.551068,
+      "ndvi": {
+        "mean": 0.08780897408723831,
+        "p10": 0.06449561566114426,
+        "p50": 0.07367528229951859,
+        "p90": 0.08313402533531189
+      },
+      "ndmi": {
+        "mean": -0.08397439122200012,
+        "p10": -0.10455311089754105,
+        "p50": -0.092495396733284,
+        "p90": -0.07229012250900269
+      },
+      "grid_cell_count_raw": 1872,
+      "citation": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer; product S2B_MSIL2A_20260929T064629_R020_T39QYA_20260929T105217; acquisition 2026-09-29; MGRS tile 39QYA.",
+      "alert_counts": {
+        "bare": 1734,
+        "healthy": 69,
+        "water_attention": 14,
+        "vigor_attention": 7,
+        "unclear": 48
+      },
+      "grid_cell_count": 1872,
+      "run_id": "20261020T100647Z-7a80c75b",
+      "classifier": "map_stress_to_alert",
+      "reprocess_time_utc": "2026-10-20T10:06:47.867276+00:00"
+    },
+    {
+      "date": "2026-10-06",
+      "scene_capture_date": "2026-10-06",
+      "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+      "product_id": "S2A_MSIL2A_20261006T065321_R020_T39QYA_20261006T114806",
+      "tile": "39QYA",
+      "cloud_cover": 0.0,
+      "window_bbox": [
+        53.7,
+        17.9,
+        53.98,
+        18.15
+      ],
+      "aoi_bbox": [
+        53.4,
+        17.5,
+        54.3,
+        18.5
+      ],
+      "pixels_valid": 4534266,
+      "clear_fraction": 0.551068,
+      "ndvi": {
+        "mean": 0.07004697620868683,
+        "p10": 0.04936649650335312,
+        "p50": 0.05694236978888512,
+        "p90": 0.06627365201711655
+      },
+      "ndmi": {
+        "mean": -0.1099843755364418,
+        "p10": -0.1300441026687622,
+        "p50": -0.11836857348680496,
+        "p90": -0.09884375333786011
+      },
+      "grid_cell_count_raw": 1872,
+      "citation": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer; product S2A_MSIL2A_20261006T065321_R020_T39QYA_20261006T114806; acquisition 2026-10-06; MGRS tile 39QYA.",
+      "alert_counts": {
+        "bare": 1751,
+        "healthy": 52,
+        "vigor_attention": 6,
+        "water_attention": 15,
+        "unclear": 48
+      },
+      "grid_cell_count": 1872,
+      "run_id": "20261020T100647Z-7a80c75b",
+      "classifier": "map_stress_to_alert",
+      "reprocess_time_utc": "2026-10-20T10:06:47.867276+00:00"
+    },
+    {
+      "date": "2026-10-14",
+      "scene_capture_date": "2026-10-14",
+      "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+      "product_id": "S2C_MSIL2A_20261014T064831_R020_T39QZA_20261014T110712",
+      "tile": "39QZA",
+      "cloud_cover": 4.916925,
+      "window_bbox": [
+        53.7,
+        17.9,
+        53.98,
+        18.15
+      ],
+      "aoi_bbox": [
+        53.4,
+        17.5,
+        54.3,
+        18.5
+      ],
+      "pixels_valid": 2936076,
+      "clear_fraction": 0.356834,
+      "ndvi": {
+        "mean": 0.08069498836994171,
+        "p10": 0.06324786692857742,
+        "p50": 0.0705457255244255,
+        "p90": 0.08181736618280411
+      },
+      "ndmi": {
+        "mean": -0.09826908260583878,
+        "p10": -0.1284259855747223,
+        "p50": -0.10136625170707703,
+        "p90": -0.0823117345571518
+      },
+      "grid_cell_count_raw": 1248,
+      "citation": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer; product S2C_MSIL2A_20261014T064831_R020_T39QZA_20261014T110712; acquisition 2026-10-14; MGRS tile 39QZA.",
+      "alert_counts": {
+        "unclear": 70,
+        "bare": 1143,
+        "healthy": 24,
+        "water_attention": 8,
+        "vigor_attention": 3
+      },
+      "grid_cell_count": 1248,
+      "run_id": "20261020T100647Z-7a80c75b",
+      "classifier": "map_stress_to_alert",
+      "reprocess_time_utc": "2026-10-20T10:06:47.867276+00:00"
+    },
+    {
+      "date": "2026-10-19",
+      "scene_capture_date": "2026-10-19",
+      "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+      "product_id": "S2B_MSIL2A_20261019T064909_R020_T39QYA_20261019T103544",
+      "tile": "39QYA",
+      "cloud_cover": 0.0,
+      "window_bbox": [
+        53.7,
+        17.9,
+        53.98,
+        18.15
+      ],
+      "aoi_bbox": [
+        53.4,
+        17.5,
+        54.3,
+        18.5
+      ],
+      "pixels_valid": 4534266,
+      "clear_fraction": 0.551068,
+      "ndvi": {
+        "mean": 0.0850810706615448,
+        "p10": 0.061561547219753265,
+        "p50": 0.06997819244861603,
+        "p90": 0.0794297605752945
+      },
+      "ndmi": {
+        "mean": -0.08840993046760559,
+        "p10": -0.11001948267221451,
+        "p50": -0.09774435311555862,
+        "p90": -0.0775592103600502
+      },
+      "grid_cell_count_raw": 1872,
+      "citation": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer; product S2B_MSIL2A_20261019T064909_R020_T39QYA_20261019T103544; acquisition 2026-10-19; MGRS tile 39QYA.",
+      "alert_counts": {
+        "bare": 1738,
+        "healthy": 62,
+        "vigor_attention": 10,
+        "water_attention": 14,
+        "unclear": 48
+      },
+      "grid_cell_count": 1872,
+      "run_id": "20261020T100647Z-7a80c75b",
+      "classifier": "map_stress_to_alert",
+      "reprocess_time_utc": "2026-10-20T10:06:47.867276+00:00"
+    }
+  ],
+  "phase": "0.4.1-agriculture",
+  "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + SCIENCE_LOCKS_v0.4_observation_integrity.md + SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md + SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md + SCIENCE_LOCKS_v0.4_post29_evaluator_residuals.md",
+  "release_id": "20261020T100647Z-7a80c75b"
+}

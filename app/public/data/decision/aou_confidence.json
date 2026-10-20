@@ -1,6 +1,6 @@
 {
   "version": "0.4.8-post29-residuals",
-  "generated_at": "2026-10-17T09:25:05.541947+00:00",
+  "generated_at": "2026-10-20T10:07:27.474279+00:00",
   "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3 + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md",
   "status": "expert_v1_provisional",
   "product_stamp": "provisional_satellite_analytical_service",
@@ -10,11 +10,11 @@
   "mountain_apply": false,
   "action_auto_assign": false,
   "writes_to_app_public": true,
-  "run_id": "20261017T092433Z-975bc084",
-  "release_id": "20261017T092433Z-975bc084",
+  "run_id": "20261020T100647Z-7a80c75b",
+  "release_id": "20261020T100647Z-7a80c75b",
   "input_refs": {
-    "aou_registry": "/tmp/dhofar-refresh-whgjy2uy/data/monitor_aou_stage_20261017T092433Z-975bc084_ixzd9_qh/aou/aou_registry.json",
-    "aou_observations": "/tmp/dhofar-refresh-whgjy2uy/data/monitor_aou_stage_20261017T092433Z-975bc084_ixzd9_qh/aou/aou_observations.json"
+    "aou_registry": "/tmp/dhofar-refresh-2wmzhx3v/data/monitor_aou_stage_20261020T100647Z-7a80c75b_869sv7la/aou/aou_registry.json",
+    "aou_observations": "/tmp/dhofar-refresh-2wmzhx3v/data/monitor_aou_stage_20261020T100647Z-7a80c75b_869sv7la/aou/aou_observations.json"
   },
   "honesty_en": "Offline decision scaffolds for Najd agriculture AOUs only. Suitability \u2260 Confidence \u2260 data_quality_confidence. Not ecological certainty. No mountain UI. Action ladder manual only.",
   "schema_ref": "docs/spec_0.4/confidence.schema.json",
@@ -48,13 +48,13 @@
         "historical_depth": 0.2,
         "prior_iou": 0.15
       },
-      "n_clear_dates": 13,
+      "n_clear_dates": 14,
       "prior_seasons_count": 0,
       "is_new_id": true,
       "cite_slots": {
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3",
-        "observation_date": "2026-10-16",
-        "product_id": "S2A_MSIL2A_20261016T070431_R020_T39QYA_20261016T094106"
+        "observation_date": "2026-10-19",
+        "product_id": "S2B_MSIL2A_20261019T064909_R020_T39QYA_20261019T103544"
       },
       "honesty_note_en": "Provisional data_evidence confidence (expert_v1). Not ecological certainty. Suitability \u2260 Confidence \u2260 data_quality_confidence alone \u2014 never merge. Not applied to mountain cells.",
       "honesty_note_ar": "\u062b\u0642\u0629 \u0623\u062f\u0644\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0645\u0624\u0642\u062a\u0629 (\u062e\u0628\u064a\u0631 v1). \u0644\u064a\u0633\u062a \u064a\u0642\u064a\u0646\u0627\u064b \u0628\u064a\u0626\u064a\u0627\u064b. \u0627\u0644\u0645\u0644\u0627\u0621\u0645\u0629 \u2260 \u0627\u0644\u062b\u0642\u0629 \u2260 \u062b\u0642\u0629 \u062c\u0648\u062f\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0648\u062d\u062f\u0647\u0627 \u2014 \u0644\u0627 \u062a\u064f\u062f\u0645\u064e\u062c. \u0644\u0627 \u062a\u064f\u0637\u0628\u0651\u064e\u0642 \u0639\u0644\u0649 \u062e\u0644\u0627\u064a\u0627 \u0627\u0644\u062c\u0628\u0627\u0644.",
@@ -92,13 +92,13 @@
         "historical_depth": 0.2,
         "prior_iou": 0.15
       },
-      "n_clear_dates": 11,
+      "n_clear_dates": 12,
       "prior_seasons_count": 0,
       "is_new_id": true,
       "cite_slots": {
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3",
-        "observation_date": "2026-10-16",
-        "product_id": "S2A_MSIL2A_20261016T070431_R020_T39QYA_20261016T094106"
+        "observation_date": "2026-10-19",
+        "product_id": "S2B_MSIL2A_20261019T064909_R020_T39QYA_20261019T103544"
       },
       "honesty_note_en": "Provisional data_evidence confidence (expert_v1). Not ecological certainty. Suitability \u2260 Confidence \u2260 data_quality_confidence alone \u2014 never merge. Not applied to mountain cells.",
       "honesty_note_ar": "\u062b\u0642\u0629 \u0623\u062f\u0644\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0645\u0624\u0642\u062a\u0629 (\u062e\u0628\u064a\u0631 v1). \u0644\u064a\u0633\u062a \u064a\u0642\u064a\u0646\u0627\u064b \u0628\u064a\u0626\u064a\u0627\u064b. \u0627\u0644\u0645\u0644\u0627\u0621\u0645\u0629 \u2260 \u0627\u0644\u062b\u0642\u0629 \u2260 \u062b\u0642\u0629 \u062c\u0648\u062f\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0648\u062d\u062f\u0647\u0627 \u2014 \u0644\u0627 \u062a\u064f\u062f\u0645\u064e\u062c. \u0644\u0627 \u062a\u064f\u0637\u0628\u0651\u064e\u0642 \u0639\u0644\u0649 \u062e\u0644\u0627\u064a\u0627 \u0627\u0644\u062c\u0628\u0627\u0644.",
@@ -136,13 +136,13 @@
         "historical_depth": 0.2,
         "prior_iou": 0.15
       },
-      "n_clear_dates": 11,
+      "n_clear_dates": 12,
       "prior_seasons_count": 0,
       "is_new_id": true,
       "cite_slots": {
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3",
-        "observation_date": "2026-10-16",
-        "product_id": "S2A_MSIL2A_20261016T070431_R020_T39QYA_20261016T094106"
+        "observation_date": "2026-10-19",
+        "product_id": "S2B_MSIL2A_20261019T064909_R020_T39QYA_20261019T103544"
       },
       "honesty_note_en": "Provisional data_evidence confidence (expert_v1). Not ecological certainty. Suitability \u2260 Confidence \u2260 data_quality_confidence alone \u2014 never merge. Not applied to mountain cells.",
       "honesty_note_ar": "\u062b\u0642\u0629 \u0623\u062f\u0644\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0645\u0624\u0642\u062a\u0629 (\u062e\u0628\u064a\u0631 v1). \u0644\u064a\u0633\u062a \u064a\u0642\u064a\u0646\u0627\u064b \u0628\u064a\u0626\u064a\u0627\u064b. \u0627\u0644\u0645\u0644\u0627\u0621\u0645\u0629 \u2260 \u0627\u0644\u062b\u0642\u0629 \u2260 \u062b\u0642\u0629 \u062c\u0648\u062f\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0648\u062d\u062f\u0647\u0627 \u2014 \u0644\u0627 \u062a\u064f\u062f\u0645\u064e\u062c. \u0644\u0627 \u062a\u064f\u0637\u0628\u0651\u064e\u0642 \u0639\u0644\u0649 \u062e\u0644\u0627\u064a\u0627 \u0627\u0644\u062c\u0628\u0627\u0644.",
@@ -180,13 +180,13 @@
         "historical_depth": 0.2,
         "prior_iou": 0.15
       },
-      "n_clear_dates": 16,
+      "n_clear_dates": 17,
       "prior_seasons_count": 0,
       "is_new_id": true,
       "cite_slots": {
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3",
-        "observation_date": "2026-10-16",
-        "product_id": "S2A_MSIL2A_20261016T070431_R020_T39QYA_20261016T094106"
+        "observation_date": "2026-10-19",
+        "product_id": "S2B_MSIL2A_20261019T064909_R020_T39QYA_20261019T103544"
       },
       "honesty_note_en": "Provisional data_evidence confidence (expert_v1). Not ecological certainty. Suitability \u2260 Confidence \u2260 data_quality_confidence alone \u2014 never merge. Not applied to mountain cells.",
       "honesty_note_ar": "\u062b\u0642\u0629 \u0623\u062f\u0644\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0645\u0624\u0642\u062a\u0629 (\u062e\u0628\u064a\u0631 v1). \u0644\u064a\u0633\u062a \u064a\u0642\u064a\u0646\u0627\u064b \u0628\u064a\u0626\u064a\u0627\u064b. \u0627\u0644\u0645\u0644\u0627\u0621\u0645\u0629 \u2260 \u0627\u0644\u062b\u0642\u0629 \u2260 \u062b\u0642\u0629 \u062c\u0648\u062f\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0648\u062d\u062f\u0647\u0627 \u2014 \u0644\u0627 \u062a\u064f\u062f\u0645\u064e\u062c. \u0644\u0627 \u062a\u064f\u0637\u0628\u0651\u064e\u0642 \u0639\u0644\u0649 \u062e\u0644\u0627\u064a\u0627 \u0627\u0644\u062c\u0628\u0627\u0644.",
@@ -224,13 +224,13 @@
         "historical_depth": 0.2,
         "prior_iou": 0.15
       },
-      "n_clear_dates": 16,
+      "n_clear_dates": 17,
       "prior_seasons_count": 0,
       "is_new_id": true,
       "cite_slots": {
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3",
-        "observation_date": "2026-10-16",
-        "product_id": "S2A_MSIL2A_20261016T070431_R020_T39QYA_20261016T094106"
+        "observation_date": "2026-10-19",
+        "product_id": "S2B_MSIL2A_20261019T064909_R020_T39QYA_20261019T103544"
       },
       "honesty_note_en": "Provisional data_evidence confidence (expert_v1). Not ecological certainty. Suitability \u2260 Confidence \u2260 data_quality_confidence alone \u2014 never merge. Not applied to mountain cells.",
       "honesty_note_ar": "\u062b\u0642\u0629 \u0623\u062f\u0644\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0645\u0624\u0642\u062a\u0629 (\u062e\u0628\u064a\u0631 v1). \u0644\u064a\u0633\u062a \u064a\u0642\u064a\u0646\u0627\u064b \u0628\u064a\u0626\u064a\u0627\u064b. \u0627\u0644\u0645\u0644\u0627\u0621\u0645\u0629 \u2260 \u0627\u0644\u062b\u0642\u0629 \u2260 \u062b\u0642\u0629 \u062c\u0648\u062f\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0648\u062d\u062f\u0647\u0627 \u2014 \u0644\u0627 \u062a\u064f\u062f\u0645\u064e\u062c. \u0644\u0627 \u062a\u064f\u0637\u0628\u0651\u064e\u0642 \u0639\u0644\u0649 \u062e\u0644\u0627\u064a\u0627 \u0627\u0644\u062c\u0628\u0627\u0644.",
@@ -268,13 +268,13 @@
         "historical_depth": 0.2,
         "prior_iou": 0.15
       },
-      "n_clear_dates": 16,
+      "n_clear_dates": 17,
       "prior_seasons_count": 0,
       "is_new_id": true,
       "cite_slots": {
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3",
-        "observation_date": "2026-10-16",
-        "product_id": "S2A_MSIL2A_20261016T070431_R020_T39QYA_20261016T094106"
+        "observation_date": "2026-10-19",
+        "product_id": "S2B_MSIL2A_20261019T064909_R020_T39QYA_20261019T103544"
       },
       "honesty_note_en": "Provisional data_evidence confidence (expert_v1). Not ecological certainty. Suitability \u2260 Confidence \u2260 data_quality_confidence alone \u2014 never merge. Not applied to mountain cells.",
       "honesty_note_ar": "\u062b\u0642\u0629 \u0623\u062f\u0644\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0645\u0624\u0642\u062a\u0629 (\u062e\u0628\u064a\u0631 v1). \u0644\u064a\u0633\u062a \u064a\u0642\u064a\u0646\u0627\u064b \u0628\u064a\u0626\u064a\u0627\u064b. \u0627\u0644\u0645\u0644\u0627\u0621\u0645\u0629 \u2260 \u0627\u0644\u062b\u0642\u0629 \u2260 \u062b\u0642\u0629 \u062c\u0648\u062f\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0648\u062d\u062f\u0647\u0627 \u2014 \u0644\u0627 \u062a\u064f\u062f\u0645\u064e\u062c. \u0644\u0627 \u062a\u064f\u0637\u0628\u0651\u064e\u0642 \u0639\u0644\u0649 \u062e\u0644\u0627\u064a\u0627 \u0627\u0644\u062c\u0628\u0627\u0644.",
@@ -312,13 +312,13 @@
         "historical_depth": 0.2,
         "prior_iou": 0.15
       },
-      "n_clear_dates": 16,
+      "n_clear_dates": 17,
       "prior_seasons_count": 0,
       "is_new_id": true,
       "cite_slots": {
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3",
-        "observation_date": "2026-10-16",
-        "product_id": "S2A_MSIL2A_20261016T070431_R020_T39QYA_20261016T094106"
+        "observation_date": "2026-10-19",
+        "product_id": "S2B_MSIL2A_20261019T064909_R020_T39QYA_20261019T103544"
       },
       "honesty_note_en": "Provisional data_evidence confidence (expert_v1). Not ecological certainty. Suitability \u2260 Confidence \u2260 data_quality_confidence alone \u2014 never merge. Not applied to mountain cells.",
       "honesty_note_ar": "\u062b\u0642\u0629 \u0623\u062f\u0644\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0645\u0624\u0642\u062a\u0629 (\u062e\u0628\u064a\u0631 v1). \u0644\u064a\u0633\u062a \u064a\u0642\u064a\u0646\u0627\u064b \u0628\u064a\u0626\u064a\u0627\u064b. \u0627\u0644\u0645\u0644\u0627\u0621\u0645\u0629 \u2260 \u0627\u0644\u062b\u0642\u0629 \u2260 \u062b\u0642\u0629 \u062c\u0648\u062f\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0648\u062d\u062f\u0647\u0627 \u2014 \u0644\u0627 \u062a\u064f\u062f\u0645\u064e\u062c. \u0644\u0627 \u062a\u064f\u0637\u0628\u0651\u064e\u0642 \u0639\u0644\u0649 \u062e\u0644\u0627\u064a\u0627 \u0627\u0644\u062c\u0628\u0627\u0644.",
@@ -356,13 +356,13 @@
         "historical_depth": 0.2,
         "prior_iou": 0.15
       },
-      "n_clear_dates": 11,
+      "n_clear_dates": 12,
       "prior_seasons_count": 0,
       "is_new_id": true,
       "cite_slots": {
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3",
-        "observation_date": "2026-10-16",
-        "product_id": "S2A_MSIL2A_20261016T070431_R020_T39QYA_20261016T094106"
+        "observation_date": "2026-10-19",
+        "product_id": "S2B_MSIL2A_20261019T064909_R020_T39QYA_20261019T103544"
       },
       "honesty_note_en": "Provisional data_evidence confidence (expert_v1). Not ecological certainty. Suitability \u2260 Confidence \u2260 data_quality_confidence alone \u2014 never merge. Not applied to mountain cells.",
       "honesty_note_ar": "\u062b\u0642\u0629 \u0623\u062f\u0644\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0645\u0624\u0642\u062a\u0629 (\u062e\u0628\u064a\u0631 v1). \u0644\u064a\u0633\u062a \u064a\u0642\u064a\u0646\u0627\u064b \u0628\u064a\u0626\u064a\u0627\u064b. \u0627\u0644\u0645\u0644\u0627\u0621\u0645\u0629 \u2260 \u0627\u0644\u062b\u0642\u0629 \u2260 \u062b\u0642\u0629 \u062c\u0648\u062f\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0648\u062d\u062f\u0647\u0627 \u2014 \u0644\u0627 \u062a\u064f\u062f\u0645\u064e\u062c. \u0644\u0627 \u062a\u064f\u0637\u0628\u0651\u064e\u0642 \u0639\u0644\u0649 \u062e\u0644\u0627\u064a\u0627 \u0627\u0644\u062c\u0628\u0627\u0644.",
@@ -400,13 +400,13 @@
         "historical_depth": 0.2,
         "prior_iou": 0.15
       },
-      "n_clear_dates": 11,
+      "n_clear_dates": 12,
       "prior_seasons_count": 0,
       "is_new_id": true,
       "cite_slots": {
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3",
-        "observation_date": "2026-10-16",
-        "product_id": "S2A_MSIL2A_20261016T070431_R020_T39QYA_20261016T094106"
+        "observation_date": "2026-10-19",
+        "product_id": "S2B_MSIL2A_20261019T064909_R020_T39QYA_20261019T103544"
       },
       "honesty_note_en": "Provisional data_evidence confidence (expert_v1). Not ecological certainty. Suitability \u2260 Confidence \u2260 data_quality_confidence alone \u2014 never merge. Not applied to mountain cells.",
       "honesty_note_ar": "\u062b\u0642\u0629 \u0623\u062f\u0644\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0645\u0624\u0642\u062a\u0629 (\u062e\u0628\u064a\u0631 v1). \u0644\u064a\u0633\u062a \u064a\u0642\u064a\u0646\u0627\u064b \u0628\u064a\u0626\u064a\u0627\u064b. \u0627\u0644\u0645\u0644\u0627\u0621\u0645\u0629 \u2260 \u0627\u0644\u062b\u0642\u0629 \u2260 \u062b\u0642\u0629 \u062c\u0648\u062f\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0648\u062d\u062f\u0647\u0627 \u2014 \u0644\u0627 \u062a\u064f\u062f\u0645\u064e\u062c. \u0644\u0627 \u062a\u064f\u0637\u0628\u0651\u064e\u0642 \u0639\u0644\u0649 \u062e\u0644\u0627\u064a\u0627 \u0627\u0644\u062c\u0628\u0627\u0644.",
