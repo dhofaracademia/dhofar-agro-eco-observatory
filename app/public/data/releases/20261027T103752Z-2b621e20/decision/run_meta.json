@@ -1,0 +1,34 @@
+{
+  "version": "0.4.8-post29-residuals",
+  "generated_at": "2026-10-27T10:38:30.954239+00:00",
+  "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3 + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md",
+  "status": "expert_v1_provisional",
+  "product_stamp": "provisional_satellite_analytical_service",
+  "najd_model_validation": "not_validated",
+  "evidence_level_default": "satellite_only",
+  "never_merge": true,
+  "mountain_apply": false,
+  "action_auto_assign": false,
+  "writes_to_app_public": true,
+  "run_id": "20261027T103752Z-2b621e20",
+  "release_id": "20261027T103752Z-2b621e20",
+  "input_refs": {
+    "aou_registry": "/tmp/dhofar-refresh-bzcyck_6/data/monitor_aou_stage_20261027T103752Z-2b621e20_lakkj19n/aou/aou_registry.json",
+    "aou_observations": "/tmp/dhofar-refresh-bzcyck_6/data/monitor_aou_stage_20261027T103752Z-2b621e20_lakkj19n/aou/aou_observations.json"
+  },
+  "honesty_en": "Offline decision scaffolds for Najd agriculture AOUs only. Suitability \u2260 Confidence \u2260 data_quality_confidence. Not ecological certainty. No mountain UI. Action ladder manual only.",
+  "artifact_files": [
+    "aou_suitability_components.json",
+    "aou_confidence.json",
+    "aou_evidence_gaps.json",
+    "action_ladder.stubs.json"
+  ],
+  "aou_count": 9,
+  "engines": [
+    "engines/suitability.py",
+    "engines/confidence.py",
+    "engines/evidence_gap.py"
+  ],
+  "ui_gate": "Analysis Decision UI chrome deferred \u2014 artifacts-first PR",
+  "mpi_note_en": "If MPI is referenced: onset-T0 provisional only \u2014 do not label as post-khareef for agriculture AOUs."
+}

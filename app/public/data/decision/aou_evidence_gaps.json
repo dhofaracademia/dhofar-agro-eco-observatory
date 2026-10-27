@@ -1,6 +1,6 @@
 {
   "version": "0.4.8-post29-residuals",
-  "generated_at": "2026-10-25T09:50:57.504332+00:00",
+  "generated_at": "2026-10-27T10:38:30.954239+00:00",
   "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3 + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md",
   "status": "expert_v1_provisional",
   "product_stamp": "provisional_satellite_analytical_service",
@@ -10,11 +10,11 @@
   "mountain_apply": false,
   "action_auto_assign": false,
   "writes_to_app_public": true,
-  "run_id": "20261025T095023Z-89c4a169",
-  "release_id": "20261025T095023Z-89c4a169",
+  "run_id": "20261027T103752Z-2b621e20",
+  "release_id": "20261027T103752Z-2b621e20",
   "input_refs": {
-    "aou_registry": "/tmp/dhofar-refresh-st4vxe2v/data/monitor_aou_stage_20261025T095023Z-89c4a169_c104eih5/aou/aou_registry.json",
-    "aou_observations": "/tmp/dhofar-refresh-st4vxe2v/data/monitor_aou_stage_20261025T095023Z-89c4a169_c104eih5/aou/aou_observations.json"
+    "aou_registry": "/tmp/dhofar-refresh-bzcyck_6/data/monitor_aou_stage_20261027T103752Z-2b621e20_lakkj19n/aou/aou_registry.json",
+    "aou_observations": "/tmp/dhofar-refresh-bzcyck_6/data/monitor_aou_stage_20261027T103752Z-2b621e20_lakkj19n/aou/aou_observations.json"
   },
   "honesty_en": "Offline decision scaffolds for Najd agriculture AOUs only. Suitability \u2260 Confidence \u2260 data_quality_confidence. Not ecological certainty. No mountain UI. Action ladder manual only.",
   "schema_ref": "docs/spec_0.4/evidence_gap.schema.json",
@@ -134,7 +134,7 @@
       ],
       "cite_slots": {
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3",
-        "observation_date": "2026-10-24"
+        "observation_date": "2026-10-26"
       }
     },
     {
@@ -252,7 +252,7 @@
       ],
       "cite_slots": {
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3",
-        "observation_date": "2026-10-24"
+        "observation_date": "2026-10-26"
       }
     },
     {
@@ -370,7 +370,7 @@
       ],
       "cite_slots": {
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3",
-        "observation_date": "2026-10-24"
+        "observation_date": "2026-10-26"
       }
     },
     {
@@ -488,7 +488,7 @@
       ],
       "cite_slots": {
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3",
-        "observation_date": "2026-10-24"
+        "observation_date": "2026-10-26"
       }
     },
     {
@@ -606,7 +606,7 @@
       ],
       "cite_slots": {
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3",
-        "observation_date": "2026-10-24"
+        "observation_date": "2026-10-26"
       }
     },
     {
@@ -724,7 +724,7 @@
       ],
       "cite_slots": {
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3",
-        "observation_date": "2026-10-24"
+        "observation_date": "2026-10-26"
       }
     },
     {
@@ -842,7 +842,7 @@
       ],
       "cite_slots": {
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3",
-        "observation_date": "2026-10-24"
+        "observation_date": "2026-10-26"
       }
     },
     {
@@ -960,7 +960,7 @@
       ],
       "cite_slots": {
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3",
-        "observation_date": "2026-10-24"
+        "observation_date": "2026-10-26"
       }
     },
     {
@@ -1078,7 +1078,7 @@
       ],
       "cite_slots": {
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3",
-        "observation_date": "2026-10-24"
+        "observation_date": "2026-10-26"
       }
     }
   ]
