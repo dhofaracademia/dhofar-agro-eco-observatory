@@ -1,6 +1,6 @@
 {
   "version": "0.4.8-post29-residuals",
-  "generated_at": "2026-10-27T10:38:30.954239+00:00",
+  "generated_at": "2026-10-30T11:26:01.814857+00:00",
   "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3 + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md",
   "status": "expert_v1_provisional",
   "product_stamp": "provisional_satellite_analytical_service",
@@ -10,11 +10,11 @@
   "mountain_apply": false,
   "action_auto_assign": false,
   "writes_to_app_public": true,
-  "run_id": "20261027T103752Z-2b621e20",
-  "release_id": "20261027T103752Z-2b621e20",
+  "run_id": "20261030T112528Z-b803a1c8",
+  "release_id": "20261030T112528Z-b803a1c8",
   "input_refs": {
-    "aou_registry": "/tmp/dhofar-refresh-bzcyck_6/data/monitor_aou_stage_20261027T103752Z-2b621e20_lakkj19n/aou/aou_registry.json",
-    "aou_observations": "/tmp/dhofar-refresh-bzcyck_6/data/monitor_aou_stage_20261027T103752Z-2b621e20_lakkj19n/aou/aou_observations.json"
+    "aou_registry": "/tmp/dhofar-refresh-t_pbu165/data/monitor_aou_stage_20261030T112528Z-b803a1c8_vxkpwjam/aou/aou_registry.json",
+    "aou_observations": "/tmp/dhofar-refresh-t_pbu165/data/monitor_aou_stage_20261030T112528Z-b803a1c8_vxkpwjam/aou/aou_observations.json"
   },
   "honesty_en": "Offline decision scaffolds for Najd agriculture AOUs only. Suitability \u2260 Confidence \u2260 data_quality_confidence. Not ecological certainty. No mountain UI. Action ladder manual only.",
   "schema_ref": "docs/spec_0.4/confidence.schema.json",
@@ -26,12 +26,12 @@
       "confidence_domain": "data_evidence",
       "status": "expert_v1_provisional",
       "thin_temporal": false,
-      "data_quality_confidence": 87.5,
+      "data_quality_confidence": 97.0,
       "temporal_coverage_confidence": 100.0,
       "spatial_clarity_confidence": 0.0,
-      "overall_confidence": 60.0,
+      "overall_confidence": 63.8,
       "components": {
-        "data_quality_norm": 0.875,
+        "data_quality_norm": 0.97,
         "n_clear_dates_norm": 1.0,
         "historical_depth": 0.0,
         "prior_iou": 0.0
@@ -48,13 +48,13 @@
         "historical_depth": 0.2,
         "prior_iou": 0.15
       },
-      "n_clear_dates": 16,
+      "n_clear_dates": 17,
       "prior_seasons_count": 0,
       "is_new_id": true,
       "cite_slots": {
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3",
-        "observation_date": "2026-10-26",
-        "product_id": "S2A_MSIL2A_20261026T065311_R020_T39QYA_20261026T113903"
+        "observation_date": "2026-10-29",
+        "product_id": "S2B_MSIL2A_20261029T065009_R020_T39QYA_20261029T123350"
       },
       "honesty_note_en": "Provisional data_evidence confidence (expert_v1). Not ecological certainty. Suitability \u2260 Confidence \u2260 data_quality_confidence alone \u2014 never merge. Not applied to mountain cells.",
       "honesty_note_ar": "\u062b\u0642\u0629 \u0623\u062f\u0644\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0645\u0624\u0642\u062a\u0629 (\u062e\u0628\u064a\u0631 v1). \u0644\u064a\u0633\u062a \u064a\u0642\u064a\u0646\u0627\u064b \u0628\u064a\u0626\u064a\u0627\u064b. \u0627\u0644\u0645\u0644\u0627\u0621\u0645\u0629 \u2260 \u0627\u0644\u062b\u0642\u0629 \u2260 \u062b\u0642\u0629 \u062c\u0648\u062f\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0648\u062d\u062f\u0647\u0627 \u2014 \u0644\u0627 \u062a\u064f\u062f\u0645\u064e\u062c. \u0644\u0627 \u062a\u064f\u0637\u0628\u0651\u064e\u0642 \u0639\u0644\u0649 \u062e\u0644\u0627\u064a\u0627 \u0627\u0644\u062c\u0628\u0627\u0644.",
@@ -70,12 +70,12 @@
       "confidence_domain": "data_evidence",
       "status": "expert_v1_provisional",
       "thin_temporal": false,
-      "data_quality_confidence": 87.5,
+      "data_quality_confidence": 97.0,
       "temporal_coverage_confidence": 100.0,
       "spatial_clarity_confidence": 0.0,
-      "overall_confidence": 60.0,
+      "overall_confidence": 63.8,
       "components": {
-        "data_quality_norm": 0.875,
+        "data_quality_norm": 0.97,
         "n_clear_dates_norm": 1.0,
         "historical_depth": 0.0,
         "prior_iou": 0.0
@@ -92,13 +92,13 @@
         "historical_depth": 0.2,
         "prior_iou": 0.15
       },
-      "n_clear_dates": 14,
+      "n_clear_dates": 15,
       "prior_seasons_count": 0,
       "is_new_id": true,
       "cite_slots": {
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3",
-        "observation_date": "2026-10-26",
-        "product_id": "S2A_MSIL2A_20261026T065311_R020_T39QYA_20261026T113903"
+        "observation_date": "2026-10-29",
+        "product_id": "S2B_MSIL2A_20261029T065009_R020_T39QYA_20261029T123350"
       },
       "honesty_note_en": "Provisional data_evidence confidence (expert_v1). Not ecological certainty. Suitability \u2260 Confidence \u2260 data_quality_confidence alone \u2014 never merge. Not applied to mountain cells.",
       "honesty_note_ar": "\u062b\u0642\u0629 \u0623\u062f\u0644\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0645\u0624\u0642\u062a\u0629 (\u062e\u0628\u064a\u0631 v1). \u0644\u064a\u0633\u062a \u064a\u0642\u064a\u0646\u0627\u064b \u0628\u064a\u0626\u064a\u0627\u064b. \u0627\u0644\u0645\u0644\u0627\u0621\u0645\u0629 \u2260 \u0627\u0644\u062b\u0642\u0629 \u2260 \u062b\u0642\u0629 \u062c\u0648\u062f\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0648\u062d\u062f\u0647\u0627 \u2014 \u0644\u0627 \u062a\u064f\u062f\u0645\u064e\u062c. \u0644\u0627 \u062a\u064f\u0637\u0628\u0651\u064e\u0642 \u0639\u0644\u0649 \u062e\u0644\u0627\u064a\u0627 \u0627\u0644\u062c\u0628\u0627\u0644.",
@@ -114,12 +114,12 @@
       "confidence_domain": "data_evidence",
       "status": "expert_v1_provisional",
       "thin_temporal": false,
-      "data_quality_confidence": 87.5,
+      "data_quality_confidence": 97.0,
       "temporal_coverage_confidence": 100.0,
       "spatial_clarity_confidence": 0.0,
-      "overall_confidence": 60.0,
+      "overall_confidence": 63.8,
       "components": {
-        "data_quality_norm": 0.875,
+        "data_quality_norm": 0.97,
         "n_clear_dates_norm": 1.0,
         "historical_depth": 0.0,
         "prior_iou": 0.0
@@ -136,13 +136,13 @@
         "historical_depth": 0.2,
         "prior_iou": 0.15
       },
-      "n_clear_dates": 14,
+      "n_clear_dates": 15,
       "prior_seasons_count": 0,
       "is_new_id": true,
       "cite_slots": {
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3",
-        "observation_date": "2026-10-26",
-        "product_id": "S2A_MSIL2A_20261026T065311_R020_T39QYA_20261026T113903"
+        "observation_date": "2026-10-29",
+        "product_id": "S2B_MSIL2A_20261029T065009_R020_T39QYA_20261029T123350"
       },
       "honesty_note_en": "Provisional data_evidence confidence (expert_v1). Not ecological certainty. Suitability \u2260 Confidence \u2260 data_quality_confidence alone \u2014 never merge. Not applied to mountain cells.",
       "honesty_note_ar": "\u062b\u0642\u0629 \u0623\u062f\u0644\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0645\u0624\u0642\u062a\u0629 (\u062e\u0628\u064a\u0631 v1). \u0644\u064a\u0633\u062a \u064a\u0642\u064a\u0646\u0627\u064b \u0628\u064a\u0626\u064a\u0627\u064b. \u0627\u0644\u0645\u0644\u0627\u0621\u0645\u0629 \u2260 \u0627\u0644\u062b\u0642\u0629 \u2260 \u062b\u0642\u0629 \u062c\u0648\u062f\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0648\u062d\u062f\u0647\u0627 \u2014 \u0644\u0627 \u062a\u064f\u062f\u0645\u064e\u062c. \u0644\u0627 \u062a\u064f\u0637\u0628\u0651\u064e\u0642 \u0639\u0644\u0649 \u062e\u0644\u0627\u064a\u0627 \u0627\u0644\u062c\u0628\u0627\u0644.",
@@ -158,12 +158,12 @@
       "confidence_domain": "data_evidence",
       "status": "expert_v1_provisional",
       "thin_temporal": false,
-      "data_quality_confidence": 87.5,
+      "data_quality_confidence": 97.0,
       "temporal_coverage_confidence": 100.0,
       "spatial_clarity_confidence": 0.0,
-      "overall_confidence": 60.0,
+      "overall_confidence": 63.8,
       "components": {
-        "data_quality_norm": 0.875,
+        "data_quality_norm": 0.97,
         "n_clear_dates_norm": 1.0,
         "historical_depth": 0.0,
         "prior_iou": 0.0
@@ -180,13 +180,13 @@
         "historical_depth": 0.2,
         "prior_iou": 0.15
       },
-      "n_clear_dates": 19,
+      "n_clear_dates": 20,
       "prior_seasons_count": 0,
       "is_new_id": true,
       "cite_slots": {
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3",
-        "observation_date": "2026-10-26",
-        "product_id": "S2A_MSIL2A_20261026T065311_R020_T39QYA_20261026T113903"
+        "observation_date": "2026-10-29",
+        "product_id": "S2B_MSIL2A_20261029T065009_R020_T39QYA_20261029T123350"
       },
       "honesty_note_en": "Provisional data_evidence confidence (expert_v1). Not ecological certainty. Suitability \u2260 Confidence \u2260 data_quality_confidence alone \u2014 never merge. Not applied to mountain cells.",
       "honesty_note_ar": "\u062b\u0642\u0629 \u0623\u062f\u0644\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0645\u0624\u0642\u062a\u0629 (\u062e\u0628\u064a\u0631 v1). \u0644\u064a\u0633\u062a \u064a\u0642\u064a\u0646\u0627\u064b \u0628\u064a\u0626\u064a\u0627\u064b. \u0627\u0644\u0645\u0644\u0627\u0621\u0645\u0629 \u2260 \u0627\u0644\u062b\u0642\u0629 \u2260 \u062b\u0642\u0629 \u062c\u0648\u062f\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0648\u062d\u062f\u0647\u0627 \u2014 \u0644\u0627 \u062a\u064f\u062f\u0645\u064e\u062c. \u0644\u0627 \u062a\u064f\u0637\u0628\u0651\u064e\u0642 \u0639\u0644\u0649 \u062e\u0644\u0627\u064a\u0627 \u0627\u0644\u062c\u0628\u0627\u0644.",
@@ -202,12 +202,12 @@
       "confidence_domain": "data_evidence",
       "status": "expert_v1_provisional",
       "thin_temporal": false,
-      "data_quality_confidence": 87.5,
+      "data_quality_confidence": 97.0,
       "temporal_coverage_confidence": 100.0,
       "spatial_clarity_confidence": 0.0,
-      "overall_confidence": 60.0,
+      "overall_confidence": 63.8,
       "components": {
-        "data_quality_norm": 0.875,
+        "data_quality_norm": 0.97,
         "n_clear_dates_norm": 1.0,
         "historical_depth": 0.0,
         "prior_iou": 0.0
@@ -224,13 +224,13 @@
         "historical_depth": 0.2,
         "prior_iou": 0.15
       },
-      "n_clear_dates": 19,
+      "n_clear_dates": 20,
       "prior_seasons_count": 0,
       "is_new_id": true,
       "cite_slots": {
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3",
-        "observation_date": "2026-10-26",
-        "product_id": "S2A_MSIL2A_20261026T065311_R020_T39QYA_20261026T113903"
+        "observation_date": "2026-10-29",
+        "product_id": "S2B_MSIL2A_20261029T065009_R020_T39QYA_20261029T123350"
       },
       "honesty_note_en": "Provisional data_evidence confidence (expert_v1). Not ecological certainty. Suitability \u2260 Confidence \u2260 data_quality_confidence alone \u2014 never merge. Not applied to mountain cells.",
       "honesty_note_ar": "\u062b\u0642\u0629 \u0623\u062f\u0644\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0645\u0624\u0642\u062a\u0629 (\u062e\u0628\u064a\u0631 v1). \u0644\u064a\u0633\u062a \u064a\u0642\u064a\u0646\u0627\u064b \u0628\u064a\u0626\u064a\u0627\u064b. \u0627\u0644\u0645\u0644\u0627\u0621\u0645\u0629 \u2260 \u0627\u0644\u062b\u0642\u0629 \u2260 \u062b\u0642\u0629 \u062c\u0648\u062f\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0648\u062d\u062f\u0647\u0627 \u2014 \u0644\u0627 \u062a\u064f\u062f\u0645\u064e\u062c. \u0644\u0627 \u062a\u064f\u0637\u0628\u0651\u064e\u0642 \u0639\u0644\u0649 \u062e\u0644\u0627\u064a\u0627 \u0627\u0644\u062c\u0628\u0627\u0644.",
@@ -246,12 +246,12 @@
       "confidence_domain": "data_evidence",
       "status": "expert_v1_provisional",
       "thin_temporal": false,
-      "data_quality_confidence": 87.5,
+      "data_quality_confidence": 97.0,
       "temporal_coverage_confidence": 100.0,
       "spatial_clarity_confidence": 0.0,
-      "overall_confidence": 60.0,
+      "overall_confidence": 63.8,
       "components": {
-        "data_quality_norm": 0.875,
+        "data_quality_norm": 0.97,
         "n_clear_dates_norm": 1.0,
         "historical_depth": 0.0,
         "prior_iou": 0.0
@@ -268,13 +268,13 @@
         "historical_depth": 0.2,
         "prior_iou": 0.15
       },
-      "n_clear_dates": 19,
+      "n_clear_dates": 20,
       "prior_seasons_count": 0,
       "is_new_id": true,
       "cite_slots": {
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3",
-        "observation_date": "2026-10-26",
-        "product_id": "S2A_MSIL2A_20261026T065311_R020_T39QYA_20261026T113903"
+        "observation_date": "2026-10-29",
+        "product_id": "S2B_MSIL2A_20261029T065009_R020_T39QYA_20261029T123350"
       },
       "honesty_note_en": "Provisional data_evidence confidence (expert_v1). Not ecological certainty. Suitability \u2260 Confidence \u2260 data_quality_confidence alone \u2014 never merge. Not applied to mountain cells.",
       "honesty_note_ar": "\u062b\u0642\u0629 \u0623\u062f\u0644\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0645\u0624\u0642\u062a\u0629 (\u062e\u0628\u064a\u0631 v1). \u0644\u064a\u0633\u062a \u064a\u0642\u064a\u0646\u0627\u064b \u0628\u064a\u0626\u064a\u0627\u064b. \u0627\u0644\u0645\u0644\u0627\u0621\u0645\u0629 \u2260 \u0627\u0644\u062b\u0642\u0629 \u2260 \u062b\u0642\u0629 \u062c\u0648\u062f\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0648\u062d\u062f\u0647\u0627 \u2014 \u0644\u0627 \u062a\u064f\u062f\u0645\u064e\u062c. \u0644\u0627 \u062a\u064f\u0637\u0628\u0651\u064e\u0642 \u0639\u0644\u0649 \u062e\u0644\u0627\u064a\u0627 \u0627\u0644\u062c\u0628\u0627\u0644.",
@@ -290,12 +290,12 @@
       "confidence_domain": "data_evidence",
       "status": "expert_v1_provisional",
       "thin_temporal": false,
-      "data_quality_confidence": 87.5,
+      "data_quality_confidence": 97.0,
       "temporal_coverage_confidence": 100.0,
       "spatial_clarity_confidence": 0.0,
-      "overall_confidence": 60.0,
+      "overall_confidence": 63.8,
       "components": {
-        "data_quality_norm": 0.875,
+        "data_quality_norm": 0.97,
         "n_clear_dates_norm": 1.0,
         "historical_depth": 0.0,
         "prior_iou": 0.0
@@ -312,13 +312,13 @@
         "historical_depth": 0.2,
         "prior_iou": 0.15
       },
-      "n_clear_dates": 19,
+      "n_clear_dates": 20,
       "prior_seasons_count": 0,
       "is_new_id": true,
       "cite_slots": {
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3",
-        "observation_date": "2026-10-26",
-        "product_id": "S2A_MSIL2A_20261026T065311_R020_T39QYA_20261026T113903"
+        "observation_date": "2026-10-29",
+        "product_id": "S2B_MSIL2A_20261029T065009_R020_T39QYA_20261029T123350"
       },
       "honesty_note_en": "Provisional data_evidence confidence (expert_v1). Not ecological certainty. Suitability \u2260 Confidence \u2260 data_quality_confidence alone \u2014 never merge. Not applied to mountain cells.",
       "honesty_note_ar": "\u062b\u0642\u0629 \u0623\u062f\u0644\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0645\u0624\u0642\u062a\u0629 (\u062e\u0628\u064a\u0631 v1). \u0644\u064a\u0633\u062a \u064a\u0642\u064a\u0646\u0627\u064b \u0628\u064a\u0626\u064a\u0627\u064b. \u0627\u0644\u0645\u0644\u0627\u0621\u0645\u0629 \u2260 \u0627\u0644\u062b\u0642\u0629 \u2260 \u062b\u0642\u0629 \u062c\u0648\u062f\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0648\u062d\u062f\u0647\u0627 \u2014 \u0644\u0627 \u062a\u064f\u062f\u0645\u064e\u062c. \u0644\u0627 \u062a\u064f\u0637\u0628\u0651\u064e\u0642 \u0639\u0644\u0649 \u062e\u0644\u0627\u064a\u0627 \u0627\u0644\u062c\u0628\u0627\u0644.",
@@ -334,12 +334,12 @@
       "confidence_domain": "data_evidence",
       "status": "expert_v1_provisional",
       "thin_temporal": false,
-      "data_quality_confidence": 87.5,
+      "data_quality_confidence": 97.0,
       "temporal_coverage_confidence": 100.0,
       "spatial_clarity_confidence": 0.0,
-      "overall_confidence": 60.0,
+      "overall_confidence": 63.8,
       "components": {
-        "data_quality_norm": 0.875,
+        "data_quality_norm": 0.97,
         "n_clear_dates_norm": 1.0,
         "historical_depth": 0.0,
         "prior_iou": 0.0
@@ -356,13 +356,13 @@
         "historical_depth": 0.2,
         "prior_iou": 0.15
       },
-      "n_clear_dates": 14,
+      "n_clear_dates": 15,
       "prior_seasons_count": 0,
       "is_new_id": true,
       "cite_slots": {
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3",
-        "observation_date": "2026-10-26",
-        "product_id": "S2A_MSIL2A_20261026T065311_R020_T39QYA_20261026T113903"
+        "observation_date": "2026-10-29",
+        "product_id": "S2B_MSIL2A_20261029T065009_R020_T39QYA_20261029T123350"
       },
       "honesty_note_en": "Provisional data_evidence confidence (expert_v1). Not ecological certainty. Suitability \u2260 Confidence \u2260 data_quality_confidence alone \u2014 never merge. Not applied to mountain cells.",
       "honesty_note_ar": "\u062b\u0642\u0629 \u0623\u062f\u0644\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0645\u0624\u0642\u062a\u0629 (\u062e\u0628\u064a\u0631 v1). \u0644\u064a\u0633\u062a \u064a\u0642\u064a\u0646\u0627\u064b \u0628\u064a\u0626\u064a\u0627\u064b. \u0627\u0644\u0645\u0644\u0627\u0621\u0645\u0629 \u2260 \u0627\u0644\u062b\u0642\u0629 \u2260 \u062b\u0642\u0629 \u062c\u0648\u062f\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0648\u062d\u062f\u0647\u0627 \u2014 \u0644\u0627 \u062a\u064f\u062f\u0645\u064e\u062c. \u0644\u0627 \u062a\u064f\u0637\u0628\u0651\u064e\u0642 \u0639\u0644\u0649 \u062e\u0644\u0627\u064a\u0627 \u0627\u0644\u062c\u0628\u0627\u0644.",
@@ -378,12 +378,12 @@
       "confidence_domain": "data_evidence",
       "status": "expert_v1_provisional",
       "thin_temporal": false,
-      "data_quality_confidence": 87.5,
+      "data_quality_confidence": 97.0,
       "temporal_coverage_confidence": 100.0,
       "spatial_clarity_confidence": 0.0,
-      "overall_confidence": 60.0,
+      "overall_confidence": 63.8,
       "components": {
-        "data_quality_norm": 0.875,
+        "data_quality_norm": 0.97,
         "n_clear_dates_norm": 1.0,
         "historical_depth": 0.0,
         "prior_iou": 0.0
@@ -400,13 +400,13 @@
         "historical_depth": 0.2,
         "prior_iou": 0.15
       },
-      "n_clear_dates": 14,
+      "n_clear_dates": 15,
       "prior_seasons_count": 0,
       "is_new_id": true,
       "cite_slots": {
         "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3",
-        "observation_date": "2026-10-26",
-        "product_id": "S2A_MSIL2A_20261026T065311_R020_T39QYA_20261026T113903"
+        "observation_date": "2026-10-29",
+        "product_id": "S2B_MSIL2A_20261029T065009_R020_T39QYA_20261029T123350"
       },
       "honesty_note_en": "Provisional data_evidence confidence (expert_v1). Not ecological certainty. Suitability \u2260 Confidence \u2260 data_quality_confidence alone \u2014 never merge. Not applied to mountain cells.",
       "honesty_note_ar": "\u062b\u0642\u0629 \u0623\u062f\u0644\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0645\u0624\u0642\u062a\u0629 (\u062e\u0628\u064a\u0631 v1). \u0644\u064a\u0633\u062a \u064a\u0642\u064a\u0646\u0627\u064b \u0628\u064a\u0626\u064a\u0627\u064b. \u0627\u0644\u0645\u0644\u0627\u0621\u0645\u0629 \u2260 \u0627\u0644\u062b\u0642\u0629 \u2260 \u062b\u0642\u0629 \u062c\u0648\u062f\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0648\u062d\u062f\u0647\u0627 \u2014 \u0644\u0627 \u062a\u064f\u062f\u0645\u064e\u062c. \u0644\u0627 \u062a\u064f\u0637\u0628\u0651\u064e\u0642 \u0639\u0644\u0649 \u062e\u0644\u0627\u064a\u0627 \u0627\u0644\u062c\u0628\u0627\u0644.",

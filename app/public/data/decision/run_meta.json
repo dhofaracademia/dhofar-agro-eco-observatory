@@ -1,6 +1,6 @@
 {
   "version": "0.4.8-post29-residuals",
-  "generated_at": "2026-10-27T10:38:30.954239+00:00",
+  "generated_at": "2026-10-30T11:26:01.814857+00:00",
   "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md\u00a7Phase3 + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md",
   "status": "expert_v1_provisional",
   "product_stamp": "provisional_satellite_analytical_service",
@@ -10,11 +10,11 @@
   "mountain_apply": false,
   "action_auto_assign": false,
   "writes_to_app_public": true,
-  "run_id": "20261027T103752Z-2b621e20",
-  "release_id": "20261027T103752Z-2b621e20",
+  "run_id": "20261030T112528Z-b803a1c8",
+  "release_id": "20261030T112528Z-b803a1c8",
   "input_refs": {
-    "aou_registry": "/tmp/dhofar-refresh-bzcyck_6/data/monitor_aou_stage_20261027T103752Z-2b621e20_lakkj19n/aou/aou_registry.json",
-    "aou_observations": "/tmp/dhofar-refresh-bzcyck_6/data/monitor_aou_stage_20261027T103752Z-2b621e20_lakkj19n/aou/aou_observations.json"
+    "aou_registry": "/tmp/dhofar-refresh-t_pbu165/data/monitor_aou_stage_20261030T112528Z-b803a1c8_vxkpwjam/aou/aou_registry.json",
+    "aou_observations": "/tmp/dhofar-refresh-t_pbu165/data/monitor_aou_stage_20261030T112528Z-b803a1c8_vxkpwjam/aou/aou_observations.json"
   },
   "honesty_en": "Offline decision scaffolds for Najd agriculture AOUs only. Suitability \u2260 Confidence \u2260 data_quality_confidence. Not ecological certainty. No mountain UI. Action ladder manual only.",
   "artifact_files": [
