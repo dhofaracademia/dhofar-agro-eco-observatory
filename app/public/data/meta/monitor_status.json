@@ -1,10 +1,10 @@
 {
-  "last_checked_at": "2026-11-11T12:44:40.547653+00:00",
-  "last_attempt_at": "2026-11-11T12:44:40.547653+00:00",
+  "last_checked_at": "2026-11-12T13:47:57.972988+00:00",
+  "last_attempt_at": "2026-11-12T13:47:57.972988+00:00",
   "status": "no_new_scenes",
   "trigger": "schedule",
   "schedule": "daily",
-  "run_url": "https://github.com/dhofaracademia/dhofar-agro-eco-observatory/actions/runs/43022928771",
+  "run_url": "https://github.com/dhofaracademia/dhofar-agro-eco-observatory/actions/runs/43230683019",
   "candidate_count": 4,
   "last_success_at": "2026-11-09T13:56:18.018276+00:00",
   "observation_date": "2026-11-08",
