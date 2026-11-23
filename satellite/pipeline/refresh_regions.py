@@ -116,6 +116,12 @@ def mosaic_day(items, affine, inside):
     return ndvi, ndmi, sources
 
 
+def compact_geometry(geometry):
+    def rounded(value):
+        return [rounded(v) for v in value] if isinstance(value, (list, tuple)) else round(value, 6)
+    return {**geometry, "coordinates":rounded(geometry["coordinates"])}
+
+
 def summarize(region, latest, previous=None):
     polygon, affine, inside = grid_for(region['geometry'])
     ndvi, ndmi = latest['ndvi'], latest['ndmi']
@@ -141,7 +147,7 @@ def summarize(region, latest, previous=None):
                 common = good & np.isfinite(previous['ndvi'][sl]) & np.isfinite(previous['ndmi'][sl])
                 if int(common.sum()) >= MIN_SAMPLES and common.sum()/n >= MIN_FRACTION:
                     delta = round(float(np.mean(ndvi[sl][common]-previous['ndvi'][sl][common])), 4)
-            features.append({'type':'Feature', 'geometry':mapping(transform_geometry(INVERSE, cell.segmentize(240))), 'properties':{
+            features.append({'type':'Feature', 'geometry':compact_geometry(mapping(transform_geometry(INVERSE, cell.segmentize(240)))), 'properties':{
                 'id':f"{region['properties']['id']}:{row}:{col}", 'region_id':region['properties']['id'],
                 'clear_fraction':round(count/n, 4) if n else 0, 'valid_samples':count, 'total_samples':n,
                 'ndvi':round(float(ndvi[sl][good].mean()),4) if assessable else None,

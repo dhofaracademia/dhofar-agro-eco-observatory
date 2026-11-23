@@ -27,7 +27,8 @@ for (const locale of ['ar','en']) {
     await expect(section.getByText('2026-11-13',{exact:true})).toBeVisible();
     await select.selectOption('najd');
     await expect(section.locator('.leaflet-interactive')).toHaveCount(2);
-    await section.locator('.leaflet-interactive').last().click({force:true});
+    await expect(section.locator('.leaflet-interactive').last()).not.toHaveAttribute('d', 'M0 0');
+    await section.locator('.leaflet-interactive').last().click();
     await expect(section.locator('.leaflet-popup-content')).toContainText('0.1');
     await expect(section.getByText(locale==='ar'?'كم²':'km²',{exact:true})).toHaveCount(0);
     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1)).toBeTruthy();
@@ -49,3 +50,21 @@ test('failed refresh retains dated published readings',async({page})=>{
   await expect(section.getByText('2026-11-20',{exact:true})).toBeVisible();
   await expect(section.getByText(/last automatic update failed/)).toBeVisible();
 });
+for (const locale of ['ar', 'en']) {
+  test(`published regional dataset renders ${locale}`, async ({page}, testInfo) => {
+    const errors: string[]=[];
+    page.on('pageerror',e=>errors.push(e.message));
+    await page.goto(`/${locale}/map`);
+    const section=page.getByRole('region',{name:locale==='ar'?'الرصد الإقليمي':'Regional monitoring',exact:true});
+    await expect(section.getByRole('button')).toBeEnabled();
+    await expect(section.getByRole('alert')).toHaveCount(0);
+    for (const id of ['salalah-plain','najd','qara']) {
+      await section.getByRole('combobox').first().selectOption(id);
+      await expect.poll(()=>section.locator('.leaflet-interactive').count()).toBeGreaterThan(500);
+      await expect(section.locator('.leaflet-interactive').last()).not.toHaveAttribute('d','M0 0');
+    }
+    await section.screenshot({path:testInfo.outputPath(`regional-${locale}.png`)});
+    expect(errors).toEqual([]);
+    expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1)).toBeTruthy();
+  });
+}

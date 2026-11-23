@@ -32,3 +32,5 @@ References:
 - https://rasterio.readthedocs.io/en/stable/topics/virtual-warping.html
 - https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a
 - https://allenai.github.io/rslearn/data_sources/planetary_computer_Sentinel2/
+
+Initial processed release: acquisition 2026-11-18, comparison 2026-11-13. Study footprints: Salalah 453.56 km²; Qara 1367.61 km²; Najd 3577.49 km². In total 6144 clipped cells. This is 5398.66 km² of operational study extent, not the area of all Dhofar or all named geographic regions. Browser CI also renders the actual published dataset and retains bilingual mobile/desktop screenshots.

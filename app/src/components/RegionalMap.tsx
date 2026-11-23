@@ -12,7 +12,7 @@ type Observations = { generated_at: string; boundary_sha256: string; regions: Ob
 
 function FitRegion({ feature }: { feature: Boundary }) {
   const map = useMap();
-  useEffect(() => { map.fitBounds(L.geoJSON(feature).getBounds(), { padding: [20, 20] }); }, [feature, map]);
+  useEffect(() => { map.fitBounds(L.geoJSON(feature).getBounds(), { padding: [20, 20], animate: false }); }, [feature, map]);
   return null;
 }
 function color(value: number | null | undefined, change: boolean) {
