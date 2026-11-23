@@ -1,3 +1,4 @@
+import RegionalMap from "../components/RegionalMap";
 import ReadingStatus from "../components/ReadingStatus";
 import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
@@ -49,6 +50,8 @@ export default function MapPage() {
 
       <p className="rounded-xl border border-sand-200 bg-white p-4 text-sm leading-relaxed">{t("simple.mapHelp")} <Link className="font-semibold text-crop-700 underline" to={`/${locale}/guide`}>{t("simple.learn")}</Link></p>
       <Link to={`/${locale}/analysis`} className="inline-block rounded-full bg-crop-700 px-5 py-3 font-semibold text-white">{t("explore.start")}</Link>
+      <RegionalMap />
+      <h2 className="text-lg font-bold">{i18n.language.startsWith("ar") ? "عينات الرصد السابقة والتفاصيل المتخصصة" : "Historical monitoring samples and specialist details"}</h2>
       <ObservatoryModeToggle mode={mode} onChange={setMode} />
       <KhareefCalendar />
 
