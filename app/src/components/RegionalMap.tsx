@@ -56,7 +56,7 @@ export default function RegionalMap() {
           setObservations(data);
         }
         const status = await fetch(publicUrl("data/regions/status.json"), options);
-        if (status.ok && status.headers.get("content-type")?.includes("json")) setFailed((await status.json()).status === "failed");
+        if (status.ok) setFailed((await status.json()).status === "failed");
       } catch (e) {
         if (!controller.signal.aborted) { setError(true); setObservations(null); }
       } finally { if (!controller.signal.aborted) setLoading(false); }

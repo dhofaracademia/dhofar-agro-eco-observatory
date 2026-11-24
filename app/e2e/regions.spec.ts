@@ -44,7 +44,7 @@ test('mismatched boundaries suppress readings',async({page})=>{
 });
 test('failed refresh retains dated published readings',async({page})=>{
   await page.route('**/data/regions/observations.json',r=>r.fulfill({json:fixture}));
-  await page.route('**/data/regions/status.json',r=>r.fulfill({json:{status:'failed'}}));
+  await page.route('**/data/regions/status.json',r=>r.fulfill({contentType:'text/plain; charset=utf-8',body:JSON.stringify({status:'failed'})}));
   await page.goto('/en/map');
   const section=page.getByRole('region',{name:'Regional monitoring',exact:true});
   await expect(section.getByText('2026-11-20',{exact:true})).toBeVisible();
