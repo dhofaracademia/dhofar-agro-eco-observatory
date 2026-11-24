@@ -56,7 +56,7 @@ for (const locale of ['ar', 'en']) {
     page.on('pageerror',e=>errors.push(e.message));
     await page.goto(`/${locale}/map`);
     const section=page.getByRole('region',{name:locale==='ar'?'الرصد الإقليمي':'Regional monitoring',exact:true});
-    await expect(section.getByRole('button')).toBeEnabled();
+    await expect(section.getByRole('button', {name: locale === 'ar' ? 'تحقق من التحديثات' : 'Check for updates', exact: true})).toBeEnabled();
     await expect(section.getByRole('alert')).toHaveCount(0);
     for (const id of ['salalah-plain','najd','qara']) {
       await section.getByRole('combobox').first().selectOption(id);
