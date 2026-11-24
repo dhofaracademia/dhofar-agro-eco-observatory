@@ -1,0 +1,163 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              53.94,
+              16.99
+            ],
+            [
+              54.03,
+              16.99
+            ],
+            [
+              54.15,
+              17.02
+            ],
+            [
+              54.28,
+              17.02
+            ],
+            [
+              54.34,
+              17.05
+            ],
+            [
+              54.3,
+              17.12
+            ],
+            [
+              54.12,
+              17.13
+            ],
+            [
+              53.98,
+              17.09
+            ],
+            [
+              53.94,
+              16.99
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "salalah-plain",
+        "name_ar": "نطاق رصد سهل صلالة",
+        "name_en": "Salalah plain study area",
+        "boundary_kind": "operational_study_area",
+        "boundary_source": "Observatory-defined analysis footprint v1; not an official or complete named-region boundary",
+        "boundary_version": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              53.76,
+              17.15
+            ],
+            [
+              53.98,
+              17.12
+            ],
+            [
+              54.12,
+              17.15
+            ],
+            [
+              54.3,
+              17.15
+            ],
+            [
+              54.4,
+              17.22
+            ],
+            [
+              54.3,
+              17.36
+            ],
+            [
+              54.1,
+              17.39
+            ],
+            [
+              53.88,
+              17.32
+            ],
+            [
+              53.76,
+              17.15
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "qara",
+        "name_ar": "نطاق رصد جبال القرا",
+        "name_en": "Jabal Qara study area",
+        "boundary_kind": "operational_study_area",
+        "boundary_source": "Observatory-defined analysis footprint v1; not an official or complete named-region boundary",
+        "boundary_version": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              53.55,
+              17.75
+            ],
+            [
+              53.75,
+              17.68
+            ],
+            [
+              54.06,
+              17.72
+            ],
+            [
+              54.2,
+              17.91
+            ],
+            [
+              54.13,
+              18.2
+            ],
+            [
+              53.78,
+              18.28
+            ],
+            [
+              53.55,
+              18.08
+            ],
+            [
+              53.55,
+              17.75
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "najd",
+        "name_ar": "نطاق رصد النجد",
+        "name_en": "Najd study area",
+        "boundary_kind": "operational_study_area",
+        "boundary_source": "Observatory-defined analysis footprint v1; not an official or complete named-region boundary",
+        "boundary_version": 1
+      }
+    }
+  ]
+}
