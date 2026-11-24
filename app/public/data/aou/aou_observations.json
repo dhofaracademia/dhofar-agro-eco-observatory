@@ -1,11 +1,11 @@
 {
   "version": "0.4.6-evaluator-deep-recheck",
-  "generated_at": "2026-11-19T14:28:28.647752+00:00",
+  "generated_at": "2026-11-24T00:21:06.733370+00:00",
   "formula_ref": "SCIENCE_LOCKS_v0.4_phase1_2.md + SCIENCE_LOCKS_v0.4_evaluator_endorsement.md + SCIENCE_LOCKS_v0.4_aou_temporal_ledger.md + SCIENCE_LOCKS_v0.4_observation_integrity.md + SCIENCE_LOCKS_v0.4_post_integrity_evaluator.md + SCIENCE_LOCKS_v0.4_evaluator_deep_recheck.md",
   "units": [
     {
       "aou_id": "AOU-NJ-000001",
-      "n_clear_dates": 22,
+      "n_clear_dates": 23,
       "observations": [
         {
           "aou_id": "AOU-NJ-000001",
@@ -1401,7 +1401,7 @@
           "ndmi": 0.0059,
           "ndre": null,
           "ndre_available": false,
-          "agricultural_probability": 24.62,
+          "agricultural_probability": 25.03,
           "ag_evidence": {
             "version": "activity_evidence_v2",
             "score_semantics": "vegetation_activity_heuristic_not_land_use_probability",
@@ -1411,8 +1411,8 @@
               "ndvi": 0.24875,
               "ndmi": 0.005900000000000001,
               "month": 11,
-              "n_clear_dates": 20,
-              "n_dates_above_bare": 15
+              "n_clear_dates": 22,
+              "n_dates_above_bare": 17
             },
             "weights": {
               "ndvi_peak": 0.27,
@@ -1424,7 +1424,7 @@
             },
             "features": {
               "ndvi_peak": 0.120614,
-              "persistence": 0.75,
+              "persistence": 0.772727,
               "ndmi": 0.13975,
               "swir": 0.0,
               "phenology": 0.120614,
@@ -1440,14 +1440,14 @@
             },
             "contributions_points": {
               "ndvi_peak": 3.256579,
-              "persistence": 13.5,
+              "persistence": 13.909091,
               "ndmi": 2.795,
               "swir": 0.0,
               "phenology": 1.567982,
               "texture": 3.5
             },
             "boost_points": 0.0,
-            "score": 24.62,
+            "score": 25.03,
             "vegetation_features_at_floor": false,
             "correlated_floor_collapse": false,
             "correlated_ndvi_ndmi_weight": 0.6,
@@ -1475,12 +1475,12 @@
           "cloud_cover": 1.7e-05,
           "series_scope": "aou_members_aggregate",
           "persistence_status": "multi_date",
-          "persistence_feature": 0.75,
-          "n_dates_above_bare": 15,
+          "persistence_feature": 0.7727272727272727,
+          "n_dates_above_bare": 17,
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000001|2026-11-03|20261116T134126Z-9c846e8c",
+          "aggregate_id": "AOU-NJ-000001|2026-11-03|20261124T002022Z-6425cfa6",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 0.9999999012547719,
           "raw_measures": {
@@ -1490,7 +1490,7 @@
           "derived_scores": {
             "water_stress_score": 38.57,
             "vigor_stress_score": 24.31,
-            "agricultural_probability": 24.62,
+            "agricultural_probability": 25.03,
             "ag_class": "unlikely"
           }
         },
@@ -1601,7 +1601,7 @@
           "ndmi": -0.0669,
           "ndre": null,
           "ndre_available": false,
-          "agricultural_probability": 17.0,
+          "agricultural_probability": 17.41,
           "ag_evidence": {
             "version": "activity_evidence_v2",
             "score_semantics": "vegetation_activity_heuristic_not_land_use_probability",
@@ -1611,8 +1611,8 @@
               "ndvi": 0.16755,
               "ndmi": -0.0669,
               "month": 11,
-              "n_clear_dates": 20,
-              "n_dates_above_bare": 15
+              "n_clear_dates": 22,
+              "n_dates_above_bare": 17
             },
             "weights": {
               "ndvi_peak": 0.27,
@@ -1624,7 +1624,7 @@
             },
             "features": {
               "ndvi_peak": 0.0,
-              "persistence": 0.75,
+              "persistence": 0.772727,
               "ndmi": 0.0,
               "swir": 0.0,
               "phenology": 0.0,
@@ -1640,14 +1640,14 @@
             },
             "contributions_points": {
               "ndvi_peak": 0.0,
-              "persistence": 13.5,
+              "persistence": 13.909091,
               "ndmi": 0.0,
               "swir": 0.0,
               "phenology": 0.0,
               "texture": 3.5
             },
             "boost_points": 0.0,
-            "score": 17.0,
+            "score": 17.41,
             "vegetation_features_at_floor": true,
             "correlated_floor_collapse": false,
             "correlated_ndvi_ndmi_weight": 0.6,
@@ -1675,12 +1675,12 @@
           "cloud_cover": 0.065263,
           "series_scope": "aou_members_aggregate",
           "persistence_status": "multi_date",
-          "persistence_feature": 0.75,
-          "n_dates_above_bare": 15,
+          "persistence_feature": 0.7727272727272727,
+          "n_dates_above_bare": 17,
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000001|2026-11-08|20261116T134126Z-9c846e8c",
+          "aggregate_id": "AOU-NJ-000001|2026-11-08|20261124T002022Z-6425cfa6",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 0.9999999012547719,
           "raw_measures": {
@@ -1690,7 +1690,7 @@
           "derived_scores": {
             "water_stress_score": 57.5,
             "vigor_stress_score": 42.43,
-            "agricultural_probability": 17.0,
+            "agricultural_probability": 17.41,
             "ag_class": "unlikely"
           }
         },
@@ -1701,7 +1701,7 @@
           "ndmi": -0.0496,
           "ndre": null,
           "ndre_available": false,
-          "agricultural_probability": 19.51,
+          "agricultural_probability": 19.7,
           "ag_evidence": {
             "version": "activity_evidence_v2",
             "score_semantics": "vegetation_activity_heuristic_not_land_use_probability",
@@ -1711,8 +1711,8 @@
               "ndvi": 0.21245,
               "ndmi": -0.04965,
               "month": 11,
-              "n_clear_dates": 21,
-              "n_dates_above_bare": 16
+              "n_clear_dates": 22,
+              "n_dates_above_bare": 17
             },
             "weights": {
               "ndvi_peak": 0.27,
@@ -1724,7 +1724,7 @@
             },
             "features": {
               "ndvi_peak": 0.05693,
-              "persistence": 0.761905,
+              "persistence": 0.772727,
               "ndmi": 0.000875,
               "swir": 0.0,
               "phenology": 0.05693,
@@ -1740,14 +1740,14 @@
             },
             "contributions_points": {
               "ndvi_peak": 1.537105,
-              "persistence": 13.714286,
+              "persistence": 13.909091,
               "ndmi": 0.0175,
               "swir": 0.0,
               "phenology": 0.740088,
               "texture": 3.5
             },
             "boost_points": 0.0,
-            "score": 19.51,
+            "score": 19.7,
             "vegetation_features_at_floor": false,
             "correlated_floor_collapse": false,
             "correlated_ndvi_ndmi_weight": 0.6,
@@ -1765,7 +1765,7 @@
           "area_ha_est": 25.106,
           "water_stress_score": 57.76,
           "vigor_stress_score": 35.61,
-          "alert": "bare",
+          "alert": "healthy",
           "possible_biotic_stress": false,
           "biotic_status": "not_flagged",
           "data_quality_confidence": 97.0,
@@ -1775,12 +1775,12 @@
           "cloud_cover": 0.0,
           "series_scope": "aou_members_aggregate",
           "persistence_status": "multi_date",
-          "persistence_feature": 0.7619047619047619,
-          "n_dates_above_bare": 16,
+          "persistence_feature": 0.7727272727272727,
+          "n_dates_above_bare": 17,
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000001|2026-11-15|20261116T134126Z-9c846e8c",
+          "aggregate_id": "AOU-NJ-000001|2026-11-15|20261124T002022Z-6425cfa6",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 0.9999999012547719,
           "raw_measures": {
@@ -1790,7 +1790,7 @@
           "derived_scores": {
             "water_stress_score": 57.76,
             "vigor_stress_score": 35.61,
-            "agricultural_probability": 19.51,
+            "agricultural_probability": 19.7,
             "ag_class": "unlikely"
           }
         },
@@ -1893,34 +1893,134 @@
             "agricultural_probability": 21.9,
             "ag_class": "unlikely"
           }
+        },
+        {
+          "aou_id": "AOU-NJ-000001",
+          "date": "2026-11-23",
+          "ndvi": 0.2493,
+          "ndmi": -0.0113,
+          "ndre": null,
+          "ndre_available": false,
+          "agricultural_probability": 24.55,
+          "ag_evidence": {
+            "version": "activity_evidence_v2",
+            "score_semantics": "vegetation_activity_heuristic_not_land_use_probability",
+            "calibrated_probability": false,
+            "land_use_status": "not_established_by_score",
+            "inputs": {
+              "ndvi": 0.2493,
+              "ndmi": -0.011349999999999999,
+              "month": 11,
+              "n_clear_dates": 23,
+              "n_dates_above_bare": 18
+            },
+            "weights": {
+              "ndvi_peak": 0.27,
+              "persistence": 0.18,
+              "ndmi": 0.2,
+              "swir": 0.12,
+              "phenology": 0.13,
+              "texture": 0.1
+            },
+            "features": {
+              "ndvi_peak": 0.121579,
+              "persistence": 0.782609,
+              "ndmi": 0.096625,
+              "swir": 0.0141,
+              "phenology": 0.121579,
+              "texture": 0.35
+            },
+            "sources": {
+              "ndvi_peak": "current_ndvi_transform",
+              "ndmi": "current_ndmi_transform",
+              "swir": "band_derived_swir",
+              "phenology": "derived_ndvi_month",
+              "persistence": "derived_clear_date_counts",
+              "texture": "default_not_measured"
+            },
+            "contributions_points": {
+              "ndvi_peak": 3.282632,
+              "persistence": 14.086957,
+              "ndmi": 1.9325,
+              "swir": 0.1692,
+              "phenology": 1.580526,
+              "texture": 3.5
+            },
+            "boost_points": 0.0,
+            "score": 24.55,
+            "vegetation_features_at_floor": false,
+            "correlated_floor_collapse": false,
+            "correlated_ndvi_ndmi_weight": 0.6,
+            "swir_coverage": {
+              "aggregation": "equal_clear_member_mean",
+              "clear_members": 2,
+              "measured_members": 2,
+              "complete": true,
+              "band_sources": [
+                "b11_b12"
+              ]
+            }
+          },
+          "ag_class": "unlikely",
+          "area_ha_est": 25.106,
+          "water_stress_score": 61.61,
+          "vigor_stress_score": 33.37,
+          "alert": "healthy",
+          "possible_biotic_stress": false,
+          "biotic_status": "not_flagged",
+          "data_quality_confidence": 97.0,
+          "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+          "product_id": "S2C_MSIL2A_20261123T065201_R020_T39QYA_20261123T101710",
+          "tile": "39QYA",
+          "cloud_cover": 7e-06,
+          "series_scope": "aou_members_aggregate",
+          "persistence_status": "multi_date",
+          "persistence_feature": 0.782608695652174,
+          "n_dates_above_bare": 18,
+          "refresh_status": "refreshed",
+          "observation_role": "current_observation",
+          "assessability": "assessable",
+          "aggregate_id": "AOU-NJ-000001|2026-11-23|20261124T002022Z-6425cfa6",
+          "assessable_cell_fraction": 1.0,
+          "valid_area_fraction": 0.9999999012547719,
+          "raw_measures": {
+            "ndvi": 0.2493,
+            "ndmi": -0.0113
+          },
+          "derived_scores": {
+            "water_stress_score": 61.61,
+            "vigor_stress_score": 33.37,
+            "agricultural_probability": 24.55,
+            "ag_class": "unlikely"
+          }
         }
       ],
       "window_context_series": [
         {
-          "date": "2026-10-29",
-          "ndvi": 0.08396445959806442,
-          "ndmi": -0.0900060161948204,
+          "date": "2026-11-03",
+          "ndvi": 0.08906669914722443,
+          "ndmi": -0.08568017929792404,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
-          "date": "2026-11-05",
-          "ndvi": 0.08427970856428146,
-          "ndmi": -0.09210144728422165,
+          "date": "2026-11-08",
+          "ndvi": 0.07768069207668304,
+          "ndmi": -0.10072748363018036,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
-          "date": "2026-11-13",
-          "ndvi": 0.06928834319114685,
-          "ndmi": -0.1116238385438919,
+          "date": "2026-11-15",
+          "ndvi": 0.0812753364443779,
+          "ndmi": -0.09738822281360626,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
-          "date": "2026-11-18",
-          "ndvi": 0.08763076364994049,
-          "ndmi": -0.08791542798280716,
+          "date": "2026-11-23",
+          "ndvi": 0.08827666193246841,
+          "ndmi": -0.08680260181427002,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         }
@@ -1929,7 +2029,7 @@
     },
     {
       "aou_id": "AOU-NJ-000002",
-      "n_clear_dates": 20,
+      "n_clear_dates": 21,
       "observations": [
         {
           "aou_id": "AOU-NJ-000002",
@@ -3184,7 +3284,7 @@
           "ndmi": -0.0114,
           "ndre": null,
           "ndre_available": false,
-          "agricultural_probability": 26.22,
+          "agricultural_probability": 26.32,
           "ag_evidence": {
             "version": "activity_evidence_v2",
             "score_semantics": "vegetation_activity_heuristic_not_land_use_probability",
@@ -3194,8 +3294,8 @@
               "ndvi": 0.23401249999999996,
               "ndmi": -0.0114375,
               "month": 11,
-              "n_clear_dates": 18,
-              "n_dates_above_bare": 17
+              "n_clear_dates": 20,
+              "n_dates_above_bare": 19
             },
             "weights": {
               "ndvi_peak": 0.27,
@@ -3207,7 +3307,7 @@
             },
             "features": {
               "ndvi_peak": 0.094759,
-              "persistence": 0.944444,
+              "persistence": 0.95,
               "ndmi": 0.096406,
               "swir": 0.0,
               "phenology": 0.094759,
@@ -3223,14 +3323,14 @@
             },
             "contributions_points": {
               "ndvi_peak": 2.558487,
-              "persistence": 17.0,
+              "persistence": 17.1,
               "ndmi": 1.928125,
               "swir": 0.0,
               "phenology": 1.231864,
               "texture": 3.5
             },
             "boost_points": 0.0,
-            "score": 26.22,
+            "score": 26.32,
             "vegetation_features_at_floor": false,
             "correlated_floor_collapse": false,
             "correlated_ndvi_ndmi_weight": 0.6,
@@ -3258,12 +3358,12 @@
           "cloud_cover": 1.7e-05,
           "series_scope": "aou_members_aggregate",
           "persistence_status": "multi_date",
-          "persistence_feature": 0.9444444444444444,
-          "n_dates_above_bare": 17,
+          "persistence_feature": 0.95,
+          "n_dates_above_bare": 19,
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000002|2026-11-03|20261116T134126Z-9c846e8c",
+          "aggregate_id": "AOU-NJ-000002|2026-11-03|20261124T002022Z-6425cfa6",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 0.9999999624376247,
           "raw_measures": {
@@ -3273,7 +3373,7 @@
           "derived_scores": {
             "water_stress_score": 40.35,
             "vigor_stress_score": 33.28,
-            "agricultural_probability": 26.22,
+            "agricultural_probability": 26.32,
             "ag_class": "unlikely"
           }
         },
@@ -3384,7 +3484,7 @@
           "ndmi": 0.0141,
           "ndre": null,
           "ndre_available": false,
-          "agricultural_probability": 29.1,
+          "agricultural_probability": 29.2,
           "ag_evidence": {
             "version": "activity_evidence_v2",
             "score_semantics": "vegetation_activity_heuristic_not_land_use_probability",
@@ -3394,8 +3494,8 @@
               "ndvi": 0.2568125,
               "ndmi": 0.014124999999999997,
               "month": 11,
-              "n_clear_dates": 18,
-              "n_dates_above_bare": 17
+              "n_clear_dates": 20,
+              "n_dates_above_bare": 19
             },
             "weights": {
               "ndvi_peak": 0.27,
@@ -3407,7 +3507,7 @@
             },
             "features": {
               "ndvi_peak": 0.134759,
-              "persistence": 0.944444,
+              "persistence": 0.95,
               "ndmi": 0.160313,
               "swir": 0.0,
               "phenology": 0.134759,
@@ -3423,14 +3523,14 @@
             },
             "contributions_points": {
               "ndvi_peak": 3.638487,
-              "persistence": 17.0,
+              "persistence": 17.1,
               "ndmi": 3.20625,
               "swir": 0.0,
               "phenology": 1.751864,
               "texture": 3.5
             },
             "boost_points": 0.0,
-            "score": 29.1,
+            "score": 29.2,
             "vegetation_features_at_floor": false,
             "correlated_floor_collapse": false,
             "correlated_ndvi_ndmi_weight": 0.6,
@@ -3458,12 +3558,12 @@
           "cloud_cover": 0.065263,
           "series_scope": "aou_members_aggregate",
           "persistence_status": "multi_date",
-          "persistence_feature": 0.9444444444444444,
-          "n_dates_above_bare": 17,
+          "persistence_feature": 0.95,
+          "n_dates_above_bare": 19,
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000002|2026-11-08|20261116T134126Z-9c846e8c",
+          "aggregate_id": "AOU-NJ-000002|2026-11-08|20261124T002022Z-6425cfa6",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 0.9999999624376247,
           "raw_measures": {
@@ -3473,7 +3573,7 @@
           "derived_scores": {
             "water_stress_score": 35.28,
             "vigor_stress_score": 30.04,
-            "agricultural_probability": 29.1,
+            "agricultural_probability": 29.2,
             "ag_class": "unlikely"
           }
         },
@@ -3484,7 +3584,7 @@
           "ndmi": 0.0158,
           "ndre": null,
           "ndre_available": false,
-          "agricultural_probability": 30.54,
+          "agricultural_probability": 30.58,
           "ag_evidence": {
             "version": "activity_evidence_v2",
             "score_semantics": "vegetation_activity_heuristic_not_land_use_probability",
@@ -3494,8 +3594,8 @@
               "ndvi": 0.2753625,
               "ndmi": 0.0158125,
               "month": 11,
-              "n_clear_dates": 19,
-              "n_dates_above_bare": 18
+              "n_clear_dates": 20,
+              "n_dates_above_bare": 19
             },
             "weights": {
               "ndvi_peak": 0.27,
@@ -3507,7 +3607,7 @@
             },
             "features": {
               "ndvi_peak": 0.167303,
-              "persistence": 0.947368,
+              "persistence": 0.95,
               "ndmi": 0.164531,
               "swir": 0.0,
               "phenology": 0.167303,
@@ -3523,14 +3623,14 @@
             },
             "contributions_points": {
               "ndvi_peak": 4.517171,
-              "persistence": 17.052632,
+              "persistence": 17.1,
               "ndmi": 3.290625,
               "swir": 0.0,
               "phenology": 2.174934,
               "texture": 3.5
             },
             "boost_points": 0.0,
-            "score": 30.54,
+            "score": 30.58,
             "vegetation_features_at_floor": false,
             "correlated_floor_collapse": false,
             "correlated_ndvi_ndmi_weight": 0.6,
@@ -3558,12 +3658,12 @@
           "cloud_cover": 0.0,
           "series_scope": "aou_members_aggregate",
           "persistence_status": "multi_date",
-          "persistence_feature": 0.9473684210526315,
-          "n_dates_above_bare": 18,
+          "persistence_feature": 0.95,
+          "n_dates_above_bare": 19,
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000002|2026-11-15|20261116T134126Z-9c846e8c",
+          "aggregate_id": "AOU-NJ-000002|2026-11-15|20261124T002022Z-6425cfa6",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 0.9999999624376247,
           "raw_measures": {
@@ -3573,7 +3673,7 @@
           "derived_scores": {
             "water_stress_score": 27.17,
             "vigor_stress_score": 23.46,
-            "agricultural_probability": 30.54,
+            "agricultural_probability": 30.58,
             "ag_class": "possible"
           }
         },
@@ -3676,34 +3776,134 @@
             "agricultural_probability": 29.43,
             "ag_class": "unlikely"
           }
+        },
+        {
+          "aou_id": "AOU-NJ-000002",
+          "date": "2026-11-23",
+          "ndvi": 0.2608,
+          "ndmi": 0.0043,
+          "ndre": null,
+          "ndre_available": false,
+          "agricultural_probability": 29.03,
+          "ag_evidence": {
+            "version": "activity_evidence_v2",
+            "score_semantics": "vegetation_activity_heuristic_not_land_use_probability",
+            "calibrated_probability": false,
+            "land_use_status": "not_established_by_score",
+            "inputs": {
+              "ndvi": 0.2607875,
+              "ndmi": 0.004337500000000002,
+              "month": 11,
+              "n_clear_dates": 21,
+              "n_dates_above_bare": 20
+            },
+            "weights": {
+              "ndvi_peak": 0.27,
+              "persistence": 0.18,
+              "ndmi": 0.2,
+              "swir": 0.12,
+              "phenology": 0.13,
+              "texture": 0.1
+            },
+            "features": {
+              "ndvi_peak": 0.141732,
+              "persistence": 0.952381,
+              "ndmi": 0.135844,
+              "swir": 0.0,
+              "phenology": 0.141732,
+              "texture": 0.35
+            },
+            "sources": {
+              "ndvi_peak": "current_ndvi_transform",
+              "ndmi": "current_ndmi_transform",
+              "swir": "band_derived_swir",
+              "phenology": "derived_ndvi_month",
+              "persistence": "derived_clear_date_counts",
+              "texture": "default_not_measured"
+            },
+            "contributions_points": {
+              "ndvi_peak": 3.826776,
+              "persistence": 17.142857,
+              "ndmi": 2.716875,
+              "swir": 0.0,
+              "phenology": 1.842522,
+              "texture": 3.5
+            },
+            "boost_points": 0.0,
+            "score": 29.03,
+            "vegetation_features_at_floor": false,
+            "correlated_floor_collapse": false,
+            "correlated_ndvi_ndmi_weight": 0.6,
+            "swir_coverage": {
+              "aggregation": "equal_clear_member_mean",
+              "clear_members": 8,
+              "measured_members": 8,
+              "complete": true,
+              "band_sources": [
+                "b11_b12"
+              ]
+            }
+          },
+          "ag_class": "unlikely",
+          "area_ha_est": 100.416,
+          "water_stress_score": 33.03,
+          "vigor_stress_score": 25.39,
+          "alert": "healthy",
+          "possible_biotic_stress": false,
+          "biotic_status": "not_flagged",
+          "data_quality_confidence": 97.0,
+          "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+          "product_id": "S2C_MSIL2A_20261123T065201_R020_T39QYA_20261123T101710",
+          "tile": "39QYA",
+          "cloud_cover": 7e-06,
+          "series_scope": "aou_members_aggregate",
+          "persistence_status": "multi_date",
+          "persistence_feature": 0.9523809523809523,
+          "n_dates_above_bare": 20,
+          "refresh_status": "refreshed",
+          "observation_role": "current_observation",
+          "assessability": "assessable",
+          "aggregate_id": "AOU-NJ-000002|2026-11-23|20261124T002022Z-6425cfa6",
+          "assessable_cell_fraction": 1.0,
+          "valid_area_fraction": 0.9999999624376247,
+          "raw_measures": {
+            "ndvi": 0.2608,
+            "ndmi": 0.0043
+          },
+          "derived_scores": {
+            "water_stress_score": 33.03,
+            "vigor_stress_score": 25.39,
+            "agricultural_probability": 29.03,
+            "ag_class": "unlikely"
+          }
         }
       ],
       "window_context_series": [
         {
-          "date": "2026-10-29",
-          "ndvi": 0.08396445959806442,
-          "ndmi": -0.0900060161948204,
+          "date": "2026-11-03",
+          "ndvi": 0.08906669914722443,
+          "ndmi": -0.08568017929792404,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
-          "date": "2026-11-05",
-          "ndvi": 0.08427970856428146,
-          "ndmi": -0.09210144728422165,
+          "date": "2026-11-08",
+          "ndvi": 0.07768069207668304,
+          "ndmi": -0.10072748363018036,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
-          "date": "2026-11-13",
-          "ndvi": 0.06928834319114685,
-          "ndmi": -0.1116238385438919,
+          "date": "2026-11-15",
+          "ndvi": 0.0812753364443779,
+          "ndmi": -0.09738822281360626,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
-          "date": "2026-11-18",
-          "ndvi": 0.08763076364994049,
-          "ndmi": -0.08791542798280716,
+          "date": "2026-11-23",
+          "ndvi": 0.08827666193246841,
+          "ndmi": -0.08680260181427002,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         }
@@ -3712,7 +3912,7 @@
     },
     {
       "aou_id": "AOU-NJ-000003",
-      "n_clear_dates": 20,
+      "n_clear_dates": 21,
       "observations": [
         {
           "aou_id": "AOU-NJ-000003",
@@ -4977,8 +5177,8 @@
               "ndvi": 0.19588,
               "ndmi": -0.0522,
               "month": 11,
-              "n_clear_dates": 18,
-              "n_dates_above_bare": 18
+              "n_clear_dates": 20,
+              "n_dates_above_bare": 20
             },
             "weights": {
               "ndvi_peak": 0.27,
@@ -5031,7 +5231,7 @@
           "area_ha_est": 50.208,
           "water_stress_score": 52.72,
           "vigor_stress_score": 36.79,
-          "alert": "bare",
+          "alert": "healthy",
           "possible_biotic_stress": false,
           "biotic_status": "not_flagged",
           "data_quality_confidence": 97.0,
@@ -5042,11 +5242,11 @@
           "series_scope": "aou_members_aggregate",
           "persistence_status": "multi_date",
           "persistence_feature": 1.0,
-          "n_dates_above_bare": 18,
+          "n_dates_above_bare": 20,
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000003|2026-11-03|20261116T134126Z-9c846e8c",
+          "aggregate_id": "AOU-NJ-000003|2026-11-03|20261124T002022Z-6425cfa6",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 0.9999999498409037,
           "raw_measures": {
@@ -5177,8 +5377,8 @@
               "ndvi": 0.21056,
               "ndmi": -0.046079999999999996,
               "month": 11,
-              "n_clear_dates": 18,
-              "n_dates_above_bare": 18
+              "n_clear_dates": 20,
+              "n_dates_above_bare": 20
             },
             "weights": {
               "ndvi_peak": 0.27,
@@ -5231,7 +5431,7 @@
           "area_ha_est": 50.208,
           "water_stress_score": 47.67,
           "vigor_stress_score": 36.49,
-          "alert": "bare",
+          "alert": "healthy",
           "possible_biotic_stress": false,
           "biotic_status": "not_flagged",
           "data_quality_confidence": 97.0,
@@ -5242,11 +5442,11 @@
           "series_scope": "aou_members_aggregate",
           "persistence_status": "multi_date",
           "persistence_feature": 1.0,
-          "n_dates_above_bare": 18,
+          "n_dates_above_bare": 20,
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000003|2026-11-08|20261116T134126Z-9c846e8c",
+          "aggregate_id": "AOU-NJ-000003|2026-11-08|20261124T002022Z-6425cfa6",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 0.9999999498409037,
           "raw_measures": {
@@ -5277,8 +5477,8 @@
               "ndvi": 0.26886,
               "ndmi": -0.0033799999999999998,
               "month": 11,
-              "n_clear_dates": 19,
-              "n_dates_above_bare": 19
+              "n_clear_dates": 20,
+              "n_dates_above_bare": 20
             },
             "weights": {
               "ndvi_peak": 0.27,
@@ -5342,11 +5542,11 @@
           "series_scope": "aou_members_aggregate",
           "persistence_status": "multi_date",
           "persistence_feature": 1.0,
-          "n_dates_above_bare": 19,
+          "n_dates_above_bare": 20,
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000003|2026-11-15|20261116T134126Z-9c846e8c",
+          "aggregate_id": "AOU-NJ-000003|2026-11-15|20261124T002022Z-6425cfa6",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 0.9999999498409037,
           "raw_measures": {
@@ -5459,34 +5659,134 @@
             "agricultural_probability": 33.79,
             "ag_class": "possible"
           }
+        },
+        {
+          "aou_id": "AOU-NJ-000003",
+          "date": "2026-11-23",
+          "ndvi": 0.3223,
+          "ndmi": 0.0546,
+          "ndre": null,
+          "ndre_available": false,
+          "agricultural_probability": 37.22,
+          "ag_evidence": {
+            "version": "activity_evidence_v2",
+            "score_semantics": "vegetation_activity_heuristic_not_land_use_probability",
+            "calibrated_probability": false,
+            "land_use_status": "not_established_by_score",
+            "inputs": {
+              "ndvi": 0.32230000000000003,
+              "ndmi": 0.05464,
+              "month": 11,
+              "n_clear_dates": 21,
+              "n_dates_above_bare": 21
+            },
+            "weights": {
+              "ndvi_peak": 0.27,
+              "persistence": 0.18,
+              "ndmi": 0.2,
+              "swir": 0.12,
+              "phenology": 0.13,
+              "texture": 0.1
+            },
+            "features": {
+              "ndvi_peak": 0.249649,
+              "persistence": 1.0,
+              "ndmi": 0.2616,
+              "swir": 0.04198,
+              "phenology": 0.249649,
+              "texture": 0.35
+            },
+            "sources": {
+              "ndvi_peak": "current_ndvi_transform",
+              "ndmi": "current_ndmi_transform",
+              "swir": "band_derived_swir",
+              "phenology": "derived_ndvi_month",
+              "persistence": "derived_clear_date_counts",
+              "texture": "default_not_measured"
+            },
+            "contributions_points": {
+              "ndvi_peak": 6.740526,
+              "persistence": 18.0,
+              "ndmi": 5.232,
+              "swir": 0.50376,
+              "phenology": 3.245439,
+              "texture": 3.5
+            },
+            "boost_points": 0.0,
+            "score": 37.22,
+            "vegetation_features_at_floor": false,
+            "correlated_floor_collapse": false,
+            "correlated_ndvi_ndmi_weight": 0.6,
+            "swir_coverage": {
+              "aggregation": "equal_clear_member_mean",
+              "clear_members": 5,
+              "measured_members": 5,
+              "complete": true,
+              "band_sources": [
+                "b11_b12"
+              ]
+            }
+          },
+          "ag_class": "possible",
+          "area_ha_est": 50.208,
+          "water_stress_score": 33.26,
+          "vigor_stress_score": 30.95,
+          "alert": "healthy",
+          "possible_biotic_stress": false,
+          "biotic_status": "not_flagged",
+          "data_quality_confidence": 97.0,
+          "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+          "product_id": "S2C_MSIL2A_20261123T065201_R020_T39QYA_20261123T101710",
+          "tile": "39QYA",
+          "cloud_cover": 7e-06,
+          "series_scope": "aou_members_aggregate",
+          "persistence_status": "multi_date",
+          "persistence_feature": 1.0,
+          "n_dates_above_bare": 21,
+          "refresh_status": "refreshed",
+          "observation_role": "current_observation",
+          "assessability": "assessable",
+          "aggregate_id": "AOU-NJ-000003|2026-11-23|20261124T002022Z-6425cfa6",
+          "assessable_cell_fraction": 1.0,
+          "valid_area_fraction": 0.9999999498409037,
+          "raw_measures": {
+            "ndvi": 0.3223,
+            "ndmi": 0.0546
+          },
+          "derived_scores": {
+            "water_stress_score": 33.26,
+            "vigor_stress_score": 30.95,
+            "agricultural_probability": 37.22,
+            "ag_class": "possible"
+          }
         }
       ],
       "window_context_series": [
         {
-          "date": "2026-10-29",
-          "ndvi": 0.08396445959806442,
-          "ndmi": -0.0900060161948204,
+          "date": "2026-11-03",
+          "ndvi": 0.08906669914722443,
+          "ndmi": -0.08568017929792404,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
-          "date": "2026-11-05",
-          "ndvi": 0.08427970856428146,
-          "ndmi": -0.09210144728422165,
+          "date": "2026-11-08",
+          "ndvi": 0.07768069207668304,
+          "ndmi": -0.10072748363018036,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
-          "date": "2026-11-13",
-          "ndvi": 0.06928834319114685,
-          "ndmi": -0.1116238385438919,
+          "date": "2026-11-15",
+          "ndvi": 0.0812753364443779,
+          "ndmi": -0.09738822281360626,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
-          "date": "2026-11-18",
-          "ndvi": 0.08763076364994049,
-          "ndmi": -0.08791542798280716,
+          "date": "2026-11-23",
+          "ndvi": 0.08827666193246841,
+          "ndmi": -0.08680260181427002,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         }
@@ -5495,7 +5795,7 @@
     },
     {
       "aou_id": "AOU-NJ-000004",
-      "n_clear_dates": 26,
+      "n_clear_dates": 27,
       "observations": [
         {
           "aou_id": "AOU-NJ-000004",
@@ -7132,7 +7432,7 @@
           "ndmi": -0.0836,
           "ndre": null,
           "ndre_available": false,
-          "agricultural_probability": 11.75,
+          "agricultural_probability": 11.12,
           "ag_evidence": {
             "version": "activity_evidence_v2",
             "score_semantics": "vegetation_activity_heuristic_not_land_use_probability",
@@ -7142,7 +7442,7 @@
               "ndvi": 0.122875,
               "ndmi": -0.08360000000000001,
               "month": 11,
-              "n_clear_dates": 24,
+              "n_clear_dates": 26,
               "n_dates_above_bare": 11
             },
             "weights": {
@@ -7155,7 +7455,7 @@
             },
             "features": {
               "ndvi_peak": 0.0,
-              "persistence": 0.458333,
+              "persistence": 0.423077,
               "ndmi": 0.0,
               "swir": 0.0,
               "phenology": 0.0,
@@ -7171,14 +7471,14 @@
             },
             "contributions_points": {
               "ndvi_peak": 0.0,
-              "persistence": 8.25,
+              "persistence": 7.615385,
               "ndmi": 0.0,
               "swir": 0.0,
               "phenology": 0.0,
               "texture": 3.5
             },
             "boost_points": 0.0,
-            "score": 11.75,
+            "score": 11.12,
             "vegetation_features_at_floor": true,
             "correlated_floor_collapse": false,
             "correlated_ndvi_ndmi_weight": 0.6,
@@ -7206,12 +7506,12 @@
           "cloud_cover": 1.7e-05,
           "series_scope": "aou_members_aggregate",
           "persistence_status": "multi_date",
-          "persistence_feature": 0.4583333333333333,
+          "persistence_feature": 0.4230769230769231,
           "n_dates_above_bare": 11,
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000004|2026-11-03|20261116T134126Z-9c846e8c",
+          "aggregate_id": "AOU-NJ-000004|2026-11-03|20261124T002022Z-6425cfa6",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 0.9999999891083816,
           "raw_measures": {
@@ -7221,7 +7521,7 @@
           "derived_scores": {
             "water_stress_score": 89.5,
             "vigor_stress_score": 79.43,
-            "agricultural_probability": 11.75,
+            "agricultural_probability": 11.12,
             "ag_class": "unlikely"
           }
         },
@@ -7332,7 +7632,7 @@
           "ndmi": -0.0843,
           "ndre": null,
           "ndre_available": false,
-          "agricultural_probability": 11.75,
+          "agricultural_probability": 11.12,
           "ag_evidence": {
             "version": "activity_evidence_v2",
             "score_semantics": "vegetation_activity_heuristic_not_land_use_probability",
@@ -7342,7 +7642,7 @@
               "ndvi": 0.11954999999999999,
               "ndmi": -0.084325,
               "month": 11,
-              "n_clear_dates": 24,
+              "n_clear_dates": 26,
               "n_dates_above_bare": 11
             },
             "weights": {
@@ -7355,7 +7655,7 @@
             },
             "features": {
               "ndvi_peak": 0.0,
-              "persistence": 0.458333,
+              "persistence": 0.423077,
               "ndmi": 0.0,
               "swir": 0.0,
               "phenology": 0.0,
@@ -7371,14 +7671,14 @@
             },
             "contributions_points": {
               "ndvi_peak": 0.0,
-              "persistence": 8.25,
+              "persistence": 7.615385,
               "ndmi": 0.0,
               "swir": 0.0,
               "phenology": 0.0,
               "texture": 3.5
             },
             "boost_points": 0.0,
-            "score": 11.75,
+            "score": 11.12,
             "vegetation_features_at_floor": true,
             "correlated_floor_collapse": false,
             "correlated_ndvi_ndmi_weight": 0.6,
@@ -7406,12 +7706,12 @@
           "cloud_cover": 0.065263,
           "series_scope": "aou_members_aggregate",
           "persistence_status": "multi_date",
-          "persistence_feature": 0.4583333333333333,
+          "persistence_feature": 0.4230769230769231,
           "n_dates_above_bare": 11,
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000004|2026-11-08|20261116T134126Z-9c846e8c",
+          "aggregate_id": "AOU-NJ-000004|2026-11-08|20261124T002022Z-6425cfa6",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 0.9999999891083816,
           "raw_measures": {
@@ -7421,7 +7721,7 @@
           "derived_scores": {
             "water_stress_score": 84.72,
             "vigor_stress_score": 79.23,
-            "agricultural_probability": 11.75,
+            "agricultural_probability": 11.12,
             "ag_class": "unlikely"
           }
         },
@@ -7532,7 +7832,7 @@
           "ndmi": -0.0744,
           "ndre": null,
           "ndre_available": false,
-          "agricultural_probability": 11.42,
+          "agricultural_probability": 11.12,
           "ag_evidence": {
             "version": "activity_evidence_v2",
             "score_semantics": "vegetation_activity_heuristic_not_land_use_probability",
@@ -7542,7 +7842,7 @@
               "ndvi": 0.143725,
               "ndmi": -0.07440000000000001,
               "month": 11,
-              "n_clear_dates": 25,
+              "n_clear_dates": 26,
               "n_dates_above_bare": 11
             },
             "weights": {
@@ -7555,7 +7855,7 @@
             },
             "features": {
               "ndvi_peak": 0.0,
-              "persistence": 0.44,
+              "persistence": 0.423077,
               "ndmi": 0.0,
               "swir": 0.0,
               "phenology": 0.0,
@@ -7571,14 +7871,14 @@
             },
             "contributions_points": {
               "ndvi_peak": 0.0,
-              "persistence": 7.92,
+              "persistence": 7.615385,
               "ndmi": 0.0,
               "swir": 0.0,
               "phenology": 0.0,
               "texture": 3.5
             },
             "boost_points": 0.0,
-            "score": 11.42,
+            "score": 11.12,
             "vegetation_features_at_floor": true,
             "correlated_floor_collapse": false,
             "correlated_ndvi_ndmi_weight": 0.6,
@@ -7596,7 +7896,7 @@
           "area_ha_est": 25.098,
           "water_stress_score": 80.29,
           "vigor_stress_score": 74.68,
-          "alert": "bare",
+          "alert": "water_attention",
           "possible_biotic_stress": false,
           "biotic_status": "not_flagged",
           "data_quality_confidence": 97.0,
@@ -7606,12 +7906,12 @@
           "cloud_cover": 0.0,
           "series_scope": "aou_members_aggregate",
           "persistence_status": "multi_date",
-          "persistence_feature": 0.44,
+          "persistence_feature": 0.4230769230769231,
           "n_dates_above_bare": 11,
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000004|2026-11-15|20261116T134126Z-9c846e8c",
+          "aggregate_id": "AOU-NJ-000004|2026-11-15|20261124T002022Z-6425cfa6",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 0.9999999891083816,
           "raw_measures": {
@@ -7621,7 +7921,7 @@
           "derived_scores": {
             "water_stress_score": 80.29,
             "vigor_stress_score": 74.68,
-            "agricultural_probability": 11.42,
+            "agricultural_probability": 11.12,
             "ag_class": "unlikely"
           }
         },
@@ -7724,34 +8024,134 @@
             "agricultural_probability": 11.12,
             "ag_class": "unlikely"
           }
+        },
+        {
+          "aou_id": "AOU-NJ-000004",
+          "date": "2026-11-23",
+          "ndvi": 0.1675,
+          "ndmi": -0.0452,
+          "ndre": null,
+          "ndre_available": false,
+          "agricultural_probability": 11.07,
+          "ag_evidence": {
+            "version": "activity_evidence_v2",
+            "score_semantics": "vegetation_activity_heuristic_not_land_use_probability",
+            "calibrated_probability": false,
+            "land_use_status": "not_established_by_score",
+            "inputs": {
+              "ndvi": 0.16747499999999998,
+              "ndmi": -0.0452,
+              "month": 11,
+              "n_clear_dates": 27,
+              "n_dates_above_bare": 11
+            },
+            "weights": {
+              "ndvi_peak": 0.27,
+              "persistence": 0.18,
+              "ndmi": 0.2,
+              "swir": 0.12,
+              "phenology": 0.13,
+              "texture": 0.1
+            },
+            "features": {
+              "ndvi_peak": 0.0,
+              "persistence": 0.407407,
+              "ndmi": 0.012,
+              "swir": 0.0,
+              "phenology": 0.0,
+              "texture": 0.35
+            },
+            "sources": {
+              "ndvi_peak": "current_ndvi_transform",
+              "ndmi": "current_ndmi_transform",
+              "swir": "band_derived_swir",
+              "phenology": "derived_ndvi_month",
+              "persistence": "derived_clear_date_counts",
+              "texture": "default_not_measured"
+            },
+            "contributions_points": {
+              "ndvi_peak": 0.0,
+              "persistence": 7.333333,
+              "ndmi": 0.24,
+              "swir": 0.0,
+              "phenology": 0.0,
+              "texture": 3.5
+            },
+            "boost_points": 0.0,
+            "score": 11.07,
+            "vegetation_features_at_floor": false,
+            "correlated_floor_collapse": false,
+            "correlated_ndvi_ndmi_weight": 0.6,
+            "swir_coverage": {
+              "aggregation": "equal_clear_member_mean",
+              "clear_members": 4,
+              "measured_members": 4,
+              "complete": true,
+              "band_sources": [
+                "b11_b12"
+              ]
+            }
+          },
+          "ag_class": "unlikely",
+          "area_ha_est": 25.098,
+          "water_stress_score": 70.16,
+          "vigor_stress_score": 63.88,
+          "alert": "healthy",
+          "possible_biotic_stress": false,
+          "biotic_status": "not_flagged",
+          "data_quality_confidence": 97.0,
+          "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+          "product_id": "S2C_MSIL2A_20261123T065201_R020_T39QYA_20261123T101710",
+          "tile": "39QYA",
+          "cloud_cover": 7e-06,
+          "series_scope": "aou_members_aggregate",
+          "persistence_status": "multi_date",
+          "persistence_feature": 0.4074074074074074,
+          "n_dates_above_bare": 11,
+          "refresh_status": "refreshed",
+          "observation_role": "current_observation",
+          "assessability": "assessable",
+          "aggregate_id": "AOU-NJ-000004|2026-11-23|20261124T002022Z-6425cfa6",
+          "assessable_cell_fraction": 1.0,
+          "valid_area_fraction": 0.9999999891083816,
+          "raw_measures": {
+            "ndvi": 0.1675,
+            "ndmi": -0.0452
+          },
+          "derived_scores": {
+            "water_stress_score": 70.16,
+            "vigor_stress_score": 63.88,
+            "agricultural_probability": 11.07,
+            "ag_class": "unlikely"
+          }
         }
       ],
       "window_context_series": [
         {
-          "date": "2026-10-29",
-          "ndvi": 0.08396445959806442,
-          "ndmi": -0.0900060161948204,
+          "date": "2026-11-03",
+          "ndvi": 0.08906669914722443,
+          "ndmi": -0.08568017929792404,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
-          "date": "2026-11-05",
-          "ndvi": 0.08427970856428146,
-          "ndmi": -0.09210144728422165,
+          "date": "2026-11-08",
+          "ndvi": 0.07768069207668304,
+          "ndmi": -0.10072748363018036,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
-          "date": "2026-11-13",
-          "ndvi": 0.06928834319114685,
-          "ndmi": -0.1116238385438919,
+          "date": "2026-11-15",
+          "ndvi": 0.0812753364443779,
+          "ndmi": -0.09738822281360626,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
-          "date": "2026-11-18",
-          "ndvi": 0.08763076364994049,
-          "ndmi": -0.08791542798280716,
+          "date": "2026-11-23",
+          "ndvi": 0.08827666193246841,
+          "ndmi": -0.08680260181427002,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         }
@@ -7760,7 +8160,7 @@
     },
     {
       "aou_id": "AOU-NJ-000005",
-      "n_clear_dates": 26,
+      "n_clear_dates": 27,
       "observations": [
         {
           "aou_id": "AOU-NJ-000005",
@@ -9397,7 +9797,7 @@
           "ndmi": 0.0805,
           "ndre": null,
           "ndre_available": false,
-          "agricultural_probability": 39.57,
+          "agricultural_probability": 39.63,
           "ag_evidence": {
             "version": "activity_evidence_v2",
             "score_semantics": "vegetation_activity_heuristic_not_land_use_probability",
@@ -9407,8 +9807,8 @@
               "ndvi": 0.3446,
               "ndmi": 0.08055,
               "month": 11,
-              "n_clear_dates": 24,
-              "n_dates_above_bare": 23
+              "n_clear_dates": 26,
+              "n_dates_above_bare": 25
             },
             "weights": {
               "ndvi_peak": 0.27,
@@ -9420,7 +9820,7 @@
             },
             "features": {
               "ndvi_peak": 0.288772,
-              "persistence": 0.958333,
+              "persistence": 0.961538,
               "ndmi": 0.326375,
               "swir": 0.06215,
               "phenology": 0.288772,
@@ -9436,14 +9836,14 @@
             },
             "contributions_points": {
               "ndvi_peak": 7.796842,
-              "persistence": 17.25,
+              "persistence": 17.307692,
               "ndmi": 6.5275,
               "swir": 0.7458,
               "phenology": 3.754035,
               "texture": 3.5
             },
             "boost_points": 0.0,
-            "score": 39.57,
+            "score": 39.63,
             "vegetation_features_at_floor": false,
             "correlated_floor_collapse": false,
             "correlated_ndvi_ndmi_weight": 0.6,
@@ -9461,7 +9861,7 @@
           "area_ha_est": 25.1,
           "water_stress_score": 56.27,
           "vigor_stress_score": 30.57,
-          "alert": "water_attention",
+          "alert": "healthy",
           "possible_biotic_stress": false,
           "biotic_status": "not_flagged",
           "data_quality_confidence": 97.0,
@@ -9471,12 +9871,12 @@
           "cloud_cover": 1.7e-05,
           "series_scope": "aou_members_aggregate",
           "persistence_status": "multi_date",
-          "persistence_feature": 0.9583333333333334,
-          "n_dates_above_bare": 23,
+          "persistence_feature": 0.9615384615384616,
+          "n_dates_above_bare": 25,
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000005|2026-11-03|20261116T134126Z-9c846e8c",
+          "aggregate_id": "AOU-NJ-000005|2026-11-03|20261124T002022Z-6425cfa6",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 0.9999998957977093,
           "raw_measures": {
@@ -9486,7 +9886,7 @@
           "derived_scores": {
             "water_stress_score": 56.27,
             "vigor_stress_score": 30.57,
-            "agricultural_probability": 39.57,
+            "agricultural_probability": 39.63,
             "ag_class": "possible"
           }
         },
@@ -9597,7 +9997,7 @@
           "ndmi": 0.0862,
           "ndre": null,
           "ndre_available": false,
-          "agricultural_probability": 39.89,
+          "agricultural_probability": 39.95,
           "ag_evidence": {
             "version": "activity_evidence_v2",
             "score_semantics": "vegetation_activity_heuristic_not_land_use_probability",
@@ -9607,8 +10007,8 @@
               "ndvi": 0.3427,
               "ndmi": 0.0862,
               "month": 11,
-              "n_clear_dates": 24,
-              "n_dates_above_bare": 23
+              "n_clear_dates": 26,
+              "n_dates_above_bare": 25
             },
             "weights": {
               "ndvi_peak": 0.27,
@@ -9620,7 +10020,7 @@
             },
             "features": {
               "ndvi_peak": 0.285439,
-              "persistence": 0.958333,
+              "persistence": 0.961538,
               "ndmi": 0.3405,
               "swir": 0.07615,
               "phenology": 0.285439,
@@ -9636,14 +10036,14 @@
             },
             "contributions_points": {
               "ndvi_peak": 7.706842,
-              "persistence": 17.25,
+              "persistence": 17.307692,
               "ndmi": 6.81,
               "swir": 0.9138,
               "phenology": 3.710702,
               "texture": 3.5
             },
             "boost_points": 0.0,
-            "score": 39.89,
+            "score": 39.95,
             "vegetation_features_at_floor": false,
             "correlated_floor_collapse": false,
             "correlated_ndvi_ndmi_weight": 0.6,
@@ -9661,7 +10061,7 @@
           "area_ha_est": 25.1,
           "water_stress_score": 54.25,
           "vigor_stress_score": 30.3,
-          "alert": "water_attention",
+          "alert": "healthy",
           "possible_biotic_stress": false,
           "biotic_status": "not_flagged",
           "data_quality_confidence": 97.0,
@@ -9671,12 +10071,12 @@
           "cloud_cover": 0.065263,
           "series_scope": "aou_members_aggregate",
           "persistence_status": "multi_date",
-          "persistence_feature": 0.9583333333333334,
-          "n_dates_above_bare": 23,
+          "persistence_feature": 0.9615384615384616,
+          "n_dates_above_bare": 25,
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000005|2026-11-08|20261116T134126Z-9c846e8c",
+          "aggregate_id": "AOU-NJ-000005|2026-11-08|20261124T002022Z-6425cfa6",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 0.9999998957977093,
           "raw_measures": {
@@ -9686,7 +10086,7 @@
           "derived_scores": {
             "water_stress_score": 54.25,
             "vigor_stress_score": 30.3,
-            "agricultural_probability": 39.89,
+            "agricultural_probability": 39.95,
             "ag_class": "possible"
           }
         },
@@ -9797,7 +10197,7 @@
           "ndmi": 0.0797,
           "ndre": null,
           "ndre_available": false,
-          "agricultural_probability": 39.4,
+          "agricultural_probability": 39.43,
           "ag_evidence": {
             "version": "activity_evidence_v2",
             "score_semantics": "vegetation_activity_heuristic_not_land_use_probability",
@@ -9807,8 +10207,8 @@
               "ndvi": 0.3435,
               "ndmi": 0.07974999999999999,
               "month": 11,
-              "n_clear_dates": 25,
-              "n_dates_above_bare": 24
+              "n_clear_dates": 26,
+              "n_dates_above_bare": 25
             },
             "weights": {
               "ndvi_peak": 0.27,
@@ -9820,7 +10220,7 @@
             },
             "features": {
               "ndvi_peak": 0.286842,
-              "persistence": 0.96,
+              "persistence": 0.961538,
               "ndmi": 0.324375,
               "swir": 0.0548,
               "phenology": 0.286842,
@@ -9836,14 +10236,14 @@
             },
             "contributions_points": {
               "ndvi_peak": 7.744737,
-              "persistence": 17.28,
+              "persistence": 17.307692,
               "ndmi": 6.4875,
               "swir": 0.6576,
               "phenology": 3.728947,
               "texture": 3.5
             },
             "boost_points": 0.0,
-            "score": 39.4,
+            "score": 39.43,
             "vegetation_features_at_floor": false,
             "correlated_floor_collapse": false,
             "correlated_ndvi_ndmi_weight": 0.6,
@@ -9859,7 +10259,7 @@
           },
           "ag_class": "possible",
           "area_ha_est": 25.1,
-          "water_stress_score": 47.8,
+          "water_stress_score": 36.13,
           "vigor_stress_score": 30.79,
           "alert": "healthy",
           "possible_biotic_stress": false,
@@ -9871,12 +10271,12 @@
           "cloud_cover": 0.0,
           "series_scope": "aou_members_aggregate",
           "persistence_status": "multi_date",
-          "persistence_feature": 0.96,
-          "n_dates_above_bare": 24,
+          "persistence_feature": 0.9615384615384616,
+          "n_dates_above_bare": 25,
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000005|2026-11-15|20261116T134126Z-9c846e8c",
+          "aggregate_id": "AOU-NJ-000005|2026-11-15|20261124T002022Z-6425cfa6",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 0.9999998957977093,
           "raw_measures": {
@@ -9884,9 +10284,9 @@
             "ndmi": 0.0797
           },
           "derived_scores": {
-            "water_stress_score": 47.8,
+            "water_stress_score": 36.13,
             "vigor_stress_score": 30.79,
-            "agricultural_probability": 39.4,
+            "agricultural_probability": 39.43,
             "ag_class": "possible"
           }
         },
@@ -9989,34 +10389,134 @@
             "agricultural_probability": 33.25,
             "ag_class": "possible"
           }
+        },
+        {
+          "aou_id": "AOU-NJ-000005",
+          "date": "2026-11-23",
+          "ndvi": 0.2626,
+          "ndmi": 0.014,
+          "ndre": null,
+          "ndre_available": false,
+          "agricultural_probability": 29.83,
+          "ag_evidence": {
+            "version": "activity_evidence_v2",
+            "score_semantics": "vegetation_activity_heuristic_not_land_use_probability",
+            "calibrated_probability": false,
+            "land_use_status": "not_established_by_score",
+            "inputs": {
+              "ndvi": 0.2626,
+              "ndmi": 0.014,
+              "month": 11,
+              "n_clear_dates": 27,
+              "n_dates_above_bare": 26
+            },
+            "weights": {
+              "ndvi_peak": 0.27,
+              "persistence": 0.18,
+              "ndmi": 0.2,
+              "swir": 0.12,
+              "phenology": 0.13,
+              "texture": 0.1
+            },
+            "features": {
+              "ndvi_peak": 0.144912,
+              "persistence": 0.962963,
+              "ndmi": 0.16,
+              "swir": 0.0,
+              "phenology": 0.144912,
+              "texture": 0.35
+            },
+            "sources": {
+              "ndvi_peak": "current_ndvi_transform",
+              "ndmi": "current_ndmi_transform",
+              "swir": "band_derived_swir",
+              "phenology": "derived_ndvi_month",
+              "persistence": "derived_clear_date_counts",
+              "texture": "default_not_measured"
+            },
+            "contributions_points": {
+              "ndvi_peak": 3.912632,
+              "persistence": 17.333333,
+              "ndmi": 3.2,
+              "swir": 0.0,
+              "phenology": 1.88386,
+              "texture": 3.5
+            },
+            "boost_points": 0.0,
+            "score": 29.83,
+            "vegetation_features_at_floor": false,
+            "correlated_floor_collapse": false,
+            "correlated_ndvi_ndmi_weight": 0.6,
+            "swir_coverage": {
+              "aggregation": "equal_clear_member_mean",
+              "clear_members": 2,
+              "measured_members": 2,
+              "complete": true,
+              "band_sources": [
+                "b11_b12"
+              ]
+            }
+          },
+          "ag_class": "unlikely",
+          "area_ha_est": 25.1,
+          "water_stress_score": 21.77,
+          "vigor_stress_score": 29.3,
+          "alert": "healthy",
+          "possible_biotic_stress": false,
+          "biotic_status": "not_flagged",
+          "data_quality_confidence": 97.0,
+          "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+          "product_id": "S2C_MSIL2A_20261123T065201_R020_T39QYA_20261123T101710",
+          "tile": "39QYA",
+          "cloud_cover": 7e-06,
+          "series_scope": "aou_members_aggregate",
+          "persistence_status": "multi_date",
+          "persistence_feature": 0.9629629629629629,
+          "n_dates_above_bare": 26,
+          "refresh_status": "refreshed",
+          "observation_role": "current_observation",
+          "assessability": "assessable",
+          "aggregate_id": "AOU-NJ-000005|2026-11-23|20261124T002022Z-6425cfa6",
+          "assessable_cell_fraction": 1.0,
+          "valid_area_fraction": 0.9999998957977093,
+          "raw_measures": {
+            "ndvi": 0.2626,
+            "ndmi": 0.014
+          },
+          "derived_scores": {
+            "water_stress_score": 21.77,
+            "vigor_stress_score": 29.3,
+            "agricultural_probability": 29.83,
+            "ag_class": "unlikely"
+          }
         }
       ],
       "window_context_series": [
         {
-          "date": "2026-10-29",
-          "ndvi": 0.08396445959806442,
-          "ndmi": -0.0900060161948204,
+          "date": "2026-11-03",
+          "ndvi": 0.08906669914722443,
+          "ndmi": -0.08568017929792404,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
-          "date": "2026-11-05",
-          "ndvi": 0.08427970856428146,
-          "ndmi": -0.09210144728422165,
+          "date": "2026-11-08",
+          "ndvi": 0.07768069207668304,
+          "ndmi": -0.10072748363018036,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
-          "date": "2026-11-13",
-          "ndvi": 0.06928834319114685,
-          "ndmi": -0.1116238385438919,
+          "date": "2026-11-15",
+          "ndvi": 0.0812753364443779,
+          "ndmi": -0.09738822281360626,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
-          "date": "2026-11-18",
-          "ndvi": 0.08763076364994049,
-          "ndmi": -0.08791542798280716,
+          "date": "2026-11-23",
+          "ndvi": 0.08827666193246841,
+          "ndmi": -0.08680260181427002,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         }
@@ -10025,7 +10525,7 @@
     },
     {
       "aou_id": "AOU-NJ-000006",
-      "n_clear_dates": 26,
+      "n_clear_dates": 27,
       "observations": [
         {
           "aou_id": "AOU-NJ-000006",
@@ -11662,7 +12162,7 @@
           "ndmi": 0.0376,
           "ndre": null,
           "ndre_available": false,
-          "agricultural_probability": 30.8,
+          "agricultural_probability": 30.91,
           "ag_evidence": {
             "version": "activity_evidence_v2",
             "score_semantics": "vegetation_activity_heuristic_not_land_use_probability",
@@ -11672,8 +12172,8 @@
               "ndvi": 0.267825,
               "ndmi": 0.03762499999999999,
               "month": 11,
-              "n_clear_dates": 24,
-              "n_dates_above_bare": 22
+              "n_clear_dates": 26,
+              "n_dates_above_bare": 24
             },
             "weights": {
               "ndvi_peak": 0.27,
@@ -11685,7 +12185,7 @@
             },
             "features": {
               "ndvi_peak": 0.154079,
-              "persistence": 0.916667,
+              "persistence": 0.923077,
               "ndmi": 0.219062,
               "swir": 0.020975,
               "phenology": 0.154079,
@@ -11701,14 +12201,14 @@
             },
             "contributions_points": {
               "ndvi_peak": 4.160132,
-              "persistence": 16.5,
+              "persistence": 16.615385,
               "ndmi": 4.38125,
               "swir": 0.2517,
               "phenology": 2.003026,
               "texture": 3.5
             },
             "boost_points": 0.0,
-            "score": 30.8,
+            "score": 30.91,
             "vegetation_features_at_floor": false,
             "correlated_floor_collapse": false,
             "correlated_ndvi_ndmi_weight": 0.6,
@@ -11736,12 +12236,12 @@
           "cloud_cover": 1.7e-05,
           "series_scope": "aou_members_aggregate",
           "persistence_status": "multi_date",
-          "persistence_feature": 0.9166666666666666,
-          "n_dates_above_bare": 22,
+          "persistence_feature": 0.9230769230769231,
+          "n_dates_above_bare": 24,
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000006|2026-11-03|20261116T134126Z-9c846e8c",
+          "aggregate_id": "AOU-NJ-000006|2026-11-03|20261124T002022Z-6425cfa6",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 0.9999999481955474,
           "raw_measures": {
@@ -11751,7 +12251,7 @@
           "derived_scores": {
             "water_stress_score": 31.3,
             "vigor_stress_score": 30.09,
-            "agricultural_probability": 30.8,
+            "agricultural_probability": 30.91,
             "ag_class": "possible"
           }
         },
@@ -11862,7 +12362,7 @@
           "ndmi": 0.0302,
           "ndre": null,
           "ndre_available": false,
-          "agricultural_probability": 30.29,
+          "agricultural_probability": 30.41,
           "ag_evidence": {
             "version": "activity_evidence_v2",
             "score_semantics": "vegetation_activity_heuristic_not_land_use_probability",
@@ -11872,8 +12372,8 @@
               "ndvi": 0.26492499999999997,
               "ndmi": 0.030224999999999995,
               "month": 11,
-              "n_clear_dates": 24,
-              "n_dates_above_bare": 22
+              "n_clear_dates": 26,
+              "n_dates_above_bare": 24
             },
             "weights": {
               "ndvi_peak": 0.27,
@@ -11885,7 +12385,7 @@
             },
             "features": {
               "ndvi_peak": 0.148991,
-              "persistence": 0.916667,
+              "persistence": 0.923077,
               "ndmi": 0.200563,
               "swir": 0.026775,
               "phenology": 0.148991,
@@ -11901,14 +12401,14 @@
             },
             "contributions_points": {
               "ndvi_peak": 4.022763,
-              "persistence": 16.5,
+              "persistence": 16.615385,
               "ndmi": 4.01125,
               "swir": 0.3213,
               "phenology": 1.936886,
               "texture": 3.5
             },
             "boost_points": 0.0,
-            "score": 30.29,
+            "score": 30.41,
             "vegetation_features_at_floor": false,
             "correlated_floor_collapse": false,
             "correlated_ndvi_ndmi_weight": 0.6,
@@ -11936,12 +12436,12 @@
           "cloud_cover": 0.065263,
           "series_scope": "aou_members_aggregate",
           "persistence_status": "multi_date",
-          "persistence_feature": 0.9166666666666666,
-          "n_dates_above_bare": 22,
+          "persistence_feature": 0.9230769230769231,
+          "n_dates_above_bare": 24,
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000006|2026-11-08|20261116T134126Z-9c846e8c",
+          "aggregate_id": "AOU-NJ-000006|2026-11-08|20261124T002022Z-6425cfa6",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 0.9999999481955474,
           "raw_measures": {
@@ -11951,7 +12451,7 @@
           "derived_scores": {
             "water_stress_score": 31.24,
             "vigor_stress_score": 29.41,
-            "agricultural_probability": 30.29,
+            "agricultural_probability": 30.41,
             "ag_class": "possible"
           }
         },
@@ -12062,7 +12562,7 @@
           "ndmi": 0.0138,
           "ndre": null,
           "ndre_available": false,
-          "agricultural_probability": 28.72,
+          "agricultural_probability": 28.77,
           "ag_evidence": {
             "version": "activity_evidence_v2",
             "score_semantics": "vegetation_activity_heuristic_not_land_use_probability",
@@ -12072,8 +12572,8 @@
               "ndvi": 0.25345,
               "ndmi": 0.013750000000000002,
               "month": 11,
-              "n_clear_dates": 25,
-              "n_dates_above_bare": 23
+              "n_clear_dates": 26,
+              "n_dates_above_bare": 24
             },
             "weights": {
               "ndvi_peak": 0.27,
@@ -12085,7 +12585,7 @@
             },
             "features": {
               "ndvi_peak": 0.12886,
-              "persistence": 0.92,
+              "persistence": 0.923077,
               "ndmi": 0.159375,
               "swir": 0.026125,
               "phenology": 0.12886,
@@ -12101,14 +12601,14 @@
             },
             "contributions_points": {
               "ndvi_peak": 3.479211,
-              "persistence": 16.56,
+              "persistence": 16.615385,
               "ndmi": 3.1875,
               "swir": 0.3135,
               "phenology": 1.675175,
               "texture": 3.5
             },
             "boost_points": 0.0,
-            "score": 28.72,
+            "score": 28.77,
             "vegetation_features_at_floor": false,
             "correlated_floor_collapse": false,
             "correlated_ndvi_ndmi_weight": 0.6,
@@ -12136,12 +12636,12 @@
           "cloud_cover": 0.0,
           "series_scope": "aou_members_aggregate",
           "persistence_status": "multi_date",
-          "persistence_feature": 0.92,
-          "n_dates_above_bare": 23,
+          "persistence_feature": 0.9230769230769231,
+          "n_dates_above_bare": 24,
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000006|2026-11-15|20261116T134126Z-9c846e8c",
+          "aggregate_id": "AOU-NJ-000006|2026-11-15|20261124T002022Z-6425cfa6",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 0.9999999481955474,
           "raw_measures": {
@@ -12151,7 +12651,7 @@
           "derived_scores": {
             "water_stress_score": 35.66,
             "vigor_stress_score": 35.06,
-            "agricultural_probability": 28.72,
+            "agricultural_probability": 28.77,
             "ag_class": "unlikely"
           }
         },
@@ -12254,34 +12754,134 @@
             "agricultural_probability": 27.17,
             "ag_class": "unlikely"
           }
+        },
+        {
+          "aou_id": "AOU-NJ-000006",
+          "date": "2026-11-23",
+          "ndvi": 0.1948,
+          "ndmi": -0.0486,
+          "ndre": null,
+          "ndre_available": false,
+          "agricultural_probability": 21.28,
+          "ag_evidence": {
+            "version": "activity_evidence_v2",
+            "score_semantics": "vegetation_activity_heuristic_not_land_use_probability",
+            "calibrated_probability": false,
+            "land_use_status": "not_established_by_score",
+            "inputs": {
+              "ndvi": 0.19477499999999998,
+              "ndmi": -0.04855,
+              "month": 11,
+              "n_clear_dates": 27,
+              "n_dates_above_bare": 25
+            },
+            "weights": {
+              "ndvi_peak": 0.27,
+              "persistence": 0.18,
+              "ndmi": 0.2,
+              "swir": 0.12,
+              "phenology": 0.13,
+              "texture": 0.1
+            },
+            "features": {
+              "ndvi_peak": 0.025921,
+              "persistence": 0.925926,
+              "ndmi": 0.003625,
+              "swir": 0.0,
+              "phenology": 0.025921,
+              "texture": 0.35
+            },
+            "sources": {
+              "ndvi_peak": "current_ndvi_transform",
+              "ndmi": "current_ndmi_transform",
+              "swir": "band_derived_swir",
+              "phenology": "derived_ndvi_month",
+              "persistence": "derived_clear_date_counts",
+              "texture": "default_not_measured"
+            },
+            "contributions_points": {
+              "ndvi_peak": 0.699868,
+              "persistence": 16.666667,
+              "ndmi": 0.0725,
+              "swir": 0.0,
+              "phenology": 0.336974,
+              "texture": 3.5
+            },
+            "boost_points": 0.0,
+            "score": 21.28,
+            "vegetation_features_at_floor": false,
+            "correlated_floor_collapse": false,
+            "correlated_ndvi_ndmi_weight": 0.6,
+            "swir_coverage": {
+              "aggregation": "equal_clear_member_mean",
+              "clear_members": 4,
+              "measured_members": 4,
+              "complete": true,
+              "band_sources": [
+                "b11_b12"
+              ]
+            }
+          },
+          "ag_class": "unlikely",
+          "area_ha_est": 50.201,
+          "water_stress_score": 53.54,
+          "vigor_stress_score": 31.23,
+          "alert": "healthy",
+          "possible_biotic_stress": false,
+          "biotic_status": "not_flagged",
+          "data_quality_confidence": 97.0,
+          "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+          "product_id": "S2C_MSIL2A_20261123T065201_R020_T39QYA_20261123T101710",
+          "tile": "39QYA",
+          "cloud_cover": 7e-06,
+          "series_scope": "aou_members_aggregate",
+          "persistence_status": "multi_date",
+          "persistence_feature": 0.9259259259259259,
+          "n_dates_above_bare": 25,
+          "refresh_status": "refreshed",
+          "observation_role": "current_observation",
+          "assessability": "assessable",
+          "aggregate_id": "AOU-NJ-000006|2026-11-23|20261124T002022Z-6425cfa6",
+          "assessable_cell_fraction": 1.0,
+          "valid_area_fraction": 0.9999999481955474,
+          "raw_measures": {
+            "ndvi": 0.1948,
+            "ndmi": -0.0486
+          },
+          "derived_scores": {
+            "water_stress_score": 53.54,
+            "vigor_stress_score": 31.23,
+            "agricultural_probability": 21.28,
+            "ag_class": "unlikely"
+          }
         }
       ],
       "window_context_series": [
         {
-          "date": "2026-10-29",
-          "ndvi": 0.08396445959806442,
-          "ndmi": -0.0900060161948204,
+          "date": "2026-11-03",
+          "ndvi": 0.08906669914722443,
+          "ndmi": -0.08568017929792404,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
-          "date": "2026-11-05",
-          "ndvi": 0.08427970856428146,
-          "ndmi": -0.09210144728422165,
+          "date": "2026-11-08",
+          "ndvi": 0.07768069207668304,
+          "ndmi": -0.10072748363018036,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
-          "date": "2026-11-13",
-          "ndvi": 0.06928834319114685,
-          "ndmi": -0.1116238385438919,
+          "date": "2026-11-15",
+          "ndvi": 0.0812753364443779,
+          "ndmi": -0.09738822281360626,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
-          "date": "2026-11-18",
-          "ndvi": 0.08763076364994049,
-          "ndmi": -0.08791542798280716,
+          "date": "2026-11-23",
+          "ndvi": 0.08827666193246841,
+          "ndmi": -0.08680260181427002,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         }
@@ -12290,7 +12890,7 @@
     },
     {
       "aou_id": "AOU-NJ-000007",
-      "n_clear_dates": 26,
+      "n_clear_dates": 27,
       "observations": [
         {
           "aou_id": "AOU-NJ-000007",
@@ -13927,7 +14527,7 @@
           "ndmi": -0.0376,
           "ndre": null,
           "ndre_available": false,
-          "agricultural_probability": 16.4,
+          "agricultural_probability": 15.48,
           "ag_evidence": {
             "version": "activity_evidence_v2",
             "score_semantics": "vegetation_activity_heuristic_not_land_use_probability",
@@ -13937,7 +14537,7 @@
               "ndvi": 0.18402500000000002,
               "ndmi": -0.037625,
               "month": 11,
-              "n_clear_dates": 24,
+              "n_clear_dates": 26,
               "n_dates_above_bare": 16
             },
             "weights": {
@@ -13950,7 +14550,7 @@
             },
             "features": {
               "ndvi_peak": 0.007061,
-              "persistence": 0.666667,
+              "persistence": 0.615385,
               "ndmi": 0.030938,
               "swir": 0.0,
               "phenology": 0.007061,
@@ -13966,14 +14566,14 @@
             },
             "contributions_points": {
               "ndvi_peak": 0.190658,
-              "persistence": 12.0,
+              "persistence": 11.076923,
               "ndmi": 0.61875,
               "swir": 0.0,
               "phenology": 0.091798,
               "texture": 3.5
             },
             "boost_points": 0.0,
-            "score": 16.4,
+            "score": 15.48,
             "vegetation_features_at_floor": false,
             "correlated_floor_collapse": false,
             "correlated_ndvi_ndmi_weight": 0.6,
@@ -14001,12 +14601,12 @@
           "cloud_cover": 1.7e-05,
           "series_scope": "aou_members_aggregate",
           "persistence_status": "multi_date",
-          "persistence_feature": 0.6666666666666666,
+          "persistence_feature": 0.6153846153846154,
           "n_dates_above_bare": 16,
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000007|2026-11-03|20261116T134126Z-9c846e8c",
+          "aggregate_id": "AOU-NJ-000007|2026-11-03|20261124T002022Z-6425cfa6",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 0.9999999892424526,
           "raw_measures": {
@@ -14016,7 +14616,7 @@
           "derived_scores": {
             "water_stress_score": 74.35,
             "vigor_stress_score": 68.79,
-            "agricultural_probability": 16.4,
+            "agricultural_probability": 15.48,
             "ag_class": "unlikely"
           }
         },
@@ -14127,7 +14727,7 @@
           "ndmi": -0.0815,
           "ndre": null,
           "ndre_available": false,
-          "agricultural_probability": 15.5,
+          "agricultural_probability": 14.58,
           "ag_evidence": {
             "version": "activity_evidence_v2",
             "score_semantics": "vegetation_activity_heuristic_not_land_use_probability",
@@ -14137,7 +14737,7 @@
               "ndvi": 0.135675,
               "ndmi": -0.08147499999999999,
               "month": 11,
-              "n_clear_dates": 24,
+              "n_clear_dates": 26,
               "n_dates_above_bare": 16
             },
             "weights": {
@@ -14150,7 +14750,7 @@
             },
             "features": {
               "ndvi_peak": 0.0,
-              "persistence": 0.666667,
+              "persistence": 0.615385,
               "ndmi": 0.0,
               "swir": 0.0,
               "phenology": 0.0,
@@ -14166,14 +14766,14 @@
             },
             "contributions_points": {
               "ndvi_peak": 0.0,
-              "persistence": 12.0,
+              "persistence": 11.076923,
               "ndmi": 0.0,
               "swir": 0.0,
               "phenology": 0.0,
               "texture": 3.5
             },
             "boost_points": 0.0,
-            "score": 15.5,
+            "score": 14.58,
             "vegetation_features_at_floor": true,
             "correlated_floor_collapse": false,
             "correlated_ndvi_ndmi_weight": 0.6,
@@ -14191,7 +14791,7 @@
           "area_ha_est": 25.099,
           "water_stress_score": 85.08,
           "vigor_stress_score": 76.68,
-          "alert": "bare",
+          "alert": "water_attention",
           "possible_biotic_stress": false,
           "biotic_status": "not_flagged",
           "data_quality_confidence": 97.0,
@@ -14201,12 +14801,12 @@
           "cloud_cover": 0.065263,
           "series_scope": "aou_members_aggregate",
           "persistence_status": "multi_date",
-          "persistence_feature": 0.6666666666666666,
+          "persistence_feature": 0.6153846153846154,
           "n_dates_above_bare": 16,
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000007|2026-11-08|20261116T134126Z-9c846e8c",
+          "aggregate_id": "AOU-NJ-000007|2026-11-08|20261124T002022Z-6425cfa6",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 0.9999999892424526,
           "raw_measures": {
@@ -14216,7 +14816,7 @@
           "derived_scores": {
             "water_stress_score": 85.08,
             "vigor_stress_score": 76.68,
-            "agricultural_probability": 15.5,
+            "agricultural_probability": 14.58,
             "ag_class": "unlikely"
           }
         },
@@ -14327,7 +14927,7 @@
           "ndmi": -0.076,
           "ndre": null,
           "ndre_available": false,
-          "agricultural_probability": 15.02,
+          "agricultural_probability": 14.58,
           "ag_evidence": {
             "version": "activity_evidence_v2",
             "score_semantics": "vegetation_activity_heuristic_not_land_use_probability",
@@ -14337,7 +14937,7 @@
               "ndvi": 0.15635,
               "ndmi": -0.07595,
               "month": 11,
-              "n_clear_dates": 25,
+              "n_clear_dates": 26,
               "n_dates_above_bare": 16
             },
             "weights": {
@@ -14350,7 +14950,7 @@
             },
             "features": {
               "ndvi_peak": 0.0,
-              "persistence": 0.64,
+              "persistence": 0.615385,
               "ndmi": 0.0,
               "swir": 0.0,
               "phenology": 0.0,
@@ -14366,14 +14966,14 @@
             },
             "contributions_points": {
               "ndvi_peak": 0.0,
-              "persistence": 11.52,
+              "persistence": 11.076923,
               "ndmi": 0.0,
               "swir": 0.0,
               "phenology": 0.0,
               "texture": 3.5
             },
             "boost_points": 0.0,
-            "score": 15.02,
+            "score": 14.58,
             "vegetation_features_at_floor": true,
             "correlated_floor_collapse": false,
             "correlated_ndvi_ndmi_weight": 0.6,
@@ -14391,7 +14991,7 @@
           "area_ha_est": 25.099,
           "water_stress_score": 82.22,
           "vigor_stress_score": 69.01,
-          "alert": "bare",
+          "alert": "water_attention",
           "possible_biotic_stress": false,
           "biotic_status": "not_flagged",
           "data_quality_confidence": 97.0,
@@ -14401,12 +15001,12 @@
           "cloud_cover": 0.0,
           "series_scope": "aou_members_aggregate",
           "persistence_status": "multi_date",
-          "persistence_feature": 0.64,
+          "persistence_feature": 0.6153846153846154,
           "n_dates_above_bare": 16,
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000007|2026-11-15|20261116T134126Z-9c846e8c",
+          "aggregate_id": "AOU-NJ-000007|2026-11-15|20261124T002022Z-6425cfa6",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 0.9999999892424526,
           "raw_measures": {
@@ -14416,7 +15016,7 @@
           "derived_scores": {
             "water_stress_score": 82.22,
             "vigor_stress_score": 69.01,
-            "agricultural_probability": 15.02,
+            "agricultural_probability": 14.58,
             "ag_class": "unlikely"
           }
         },
@@ -14519,34 +15119,134 @@
             "agricultural_probability": 14.58,
             "ag_class": "unlikely"
           }
+        },
+        {
+          "aou_id": "AOU-NJ-000007",
+          "date": "2026-11-23",
+          "ndvi": 0.1845,
+          "ndmi": -0.0459,
+          "ndre": null,
+          "ndre_available": false,
+          "agricultural_probability": 15.36,
+          "ag_evidence": {
+            "version": "activity_evidence_v2",
+            "score_semantics": "vegetation_activity_heuristic_not_land_use_probability",
+            "calibrated_probability": false,
+            "land_use_status": "not_established_by_score",
+            "inputs": {
+              "ndvi": 0.18455,
+              "ndmi": -0.04585,
+              "month": 11,
+              "n_clear_dates": 27,
+              "n_dates_above_bare": 17
+            },
+            "weights": {
+              "ndvi_peak": 0.27,
+              "persistence": 0.18,
+              "ndmi": 0.2,
+              "swir": 0.12,
+              "phenology": 0.13,
+              "texture": 0.1
+            },
+            "features": {
+              "ndvi_peak": 0.007982,
+              "persistence": 0.62963,
+              "ndmi": 0.010375,
+              "swir": 0.0,
+              "phenology": 0.007982,
+              "texture": 0.35
+            },
+            "sources": {
+              "ndvi_peak": "current_ndvi_transform",
+              "ndmi": "current_ndmi_transform",
+              "swir": "band_derived_swir",
+              "phenology": "derived_ndvi_month",
+              "persistence": "derived_clear_date_counts",
+              "texture": "default_not_measured"
+            },
+            "contributions_points": {
+              "ndvi_peak": 0.215526,
+              "persistence": 11.333333,
+              "ndmi": 0.2075,
+              "swir": 0.0,
+              "phenology": 0.103772,
+              "texture": 3.5
+            },
+            "boost_points": 0.0,
+            "score": 15.36,
+            "vegetation_features_at_floor": false,
+            "correlated_floor_collapse": false,
+            "correlated_ndvi_ndmi_weight": 0.6,
+            "swir_coverage": {
+              "aggregation": "equal_clear_member_mean",
+              "clear_members": 4,
+              "measured_members": 4,
+              "complete": true,
+              "band_sources": [
+                "b11_b12"
+              ]
+            }
+          },
+          "ag_class": "unlikely",
+          "area_ha_est": 25.099,
+          "water_stress_score": 75.27,
+          "vigor_stress_score": 62.93,
+          "alert": "bare",
+          "possible_biotic_stress": false,
+          "biotic_status": "not_flagged",
+          "data_quality_confidence": 97.0,
+          "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+          "product_id": "S2C_MSIL2A_20261123T065201_R020_T39QYA_20261123T101710",
+          "tile": "39QYA",
+          "cloud_cover": 7e-06,
+          "series_scope": "aou_members_aggregate",
+          "persistence_status": "multi_date",
+          "persistence_feature": 0.6296296296296297,
+          "n_dates_above_bare": 17,
+          "refresh_status": "refreshed",
+          "observation_role": "current_observation",
+          "assessability": "assessable",
+          "aggregate_id": "AOU-NJ-000007|2026-11-23|20261124T002022Z-6425cfa6",
+          "assessable_cell_fraction": 1.0,
+          "valid_area_fraction": 0.9999999892424526,
+          "raw_measures": {
+            "ndvi": 0.1845,
+            "ndmi": -0.0459
+          },
+          "derived_scores": {
+            "water_stress_score": 75.27,
+            "vigor_stress_score": 62.93,
+            "agricultural_probability": 15.36,
+            "ag_class": "unlikely"
+          }
         }
       ],
       "window_context_series": [
         {
-          "date": "2026-10-29",
-          "ndvi": 0.08396445959806442,
-          "ndmi": -0.0900060161948204,
+          "date": "2026-11-03",
+          "ndvi": 0.08906669914722443,
+          "ndmi": -0.08568017929792404,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
-          "date": "2026-11-05",
-          "ndvi": 0.08427970856428146,
-          "ndmi": -0.09210144728422165,
+          "date": "2026-11-08",
+          "ndvi": 0.07768069207668304,
+          "ndmi": -0.10072748363018036,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
-          "date": "2026-11-13",
-          "ndvi": 0.06928834319114685,
-          "ndmi": -0.1116238385438919,
+          "date": "2026-11-15",
+          "ndvi": 0.0812753364443779,
+          "ndmi": -0.09738822281360626,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
-          "date": "2026-11-18",
-          "ndvi": 0.08763076364994049,
-          "ndmi": -0.08791542798280716,
+          "date": "2026-11-23",
+          "ndvi": 0.08827666193246841,
+          "ndmi": -0.08680260181427002,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         }
@@ -14555,7 +15255,7 @@
     },
     {
       "aou_id": "AOU-NJ-000008",
-      "n_clear_dates": 20,
+      "n_clear_dates": 21,
       "observations": [
         {
           "aou_id": "AOU-NJ-000008",
@@ -15810,7 +16510,7 @@
           "ndmi": -0.0158,
           "ndre": null,
           "ndre_available": false,
-          "agricultural_probability": 25.37,
+          "agricultural_probability": 25.57,
           "ag_evidence": {
             "version": "activity_evidence_v2",
             "score_semantics": "vegetation_activity_heuristic_not_land_use_probability",
@@ -15820,8 +16520,8 @@
               "ndvi": 0.23925000000000002,
               "ndmi": -0.0158,
               "month": 11,
-              "n_clear_dates": 18,
-              "n_dates_above_bare": 16
+              "n_clear_dates": 20,
+              "n_dates_above_bare": 18
             },
             "weights": {
               "ndvi_peak": 0.27,
@@ -15833,7 +16533,7 @@
             },
             "features": {
               "ndvi_peak": 0.103947,
-              "persistence": 0.888889,
+              "persistence": 0.9,
               "ndmi": 0.0855,
               "swir": 0.0,
               "phenology": 0.103947,
@@ -15849,14 +16549,14 @@
             },
             "contributions_points": {
               "ndvi_peak": 2.806579,
-              "persistence": 16.0,
+              "persistence": 16.2,
               "ndmi": 1.71,
               "swir": 0.0,
               "phenology": 1.351316,
               "texture": 3.5
             },
             "boost_points": 0.0,
-            "score": 25.37,
+            "score": 25.57,
             "vegetation_features_at_floor": false,
             "correlated_floor_collapse": false,
             "correlated_ndvi_ndmi_weight": 0.6,
@@ -15874,7 +16574,7 @@
           "area_ha_est": 25.104,
           "water_stress_score": 63.51,
           "vigor_stress_score": 33.93,
-          "alert": "bare",
+          "alert": "healthy",
           "possible_biotic_stress": false,
           "biotic_status": "not_flagged",
           "data_quality_confidence": 97.0,
@@ -15884,12 +16584,12 @@
           "cloud_cover": 1.7e-05,
           "series_scope": "aou_members_aggregate",
           "persistence_status": "multi_date",
-          "persistence_feature": 0.8888888888888888,
-          "n_dates_above_bare": 16,
+          "persistence_feature": 0.9,
+          "n_dates_above_bare": 18,
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000008|2026-11-03|20261116T134126Z-9c846e8c",
+          "aggregate_id": "AOU-NJ-000008|2026-11-03|20261124T002022Z-6425cfa6",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 0.9999998994031696,
           "raw_measures": {
@@ -15899,7 +16599,7 @@
           "derived_scores": {
             "water_stress_score": 63.51,
             "vigor_stress_score": 33.93,
-            "agricultural_probability": 25.37,
+            "agricultural_probability": 25.57,
             "ag_class": "unlikely"
           }
         },
@@ -16010,7 +16710,7 @@
           "ndmi": 0.0338,
           "ndre": null,
           "ndre_available": false,
-          "agricultural_probability": 32.68,
+          "agricultural_probability": 32.88,
           "ag_evidence": {
             "version": "activity_evidence_v2",
             "score_semantics": "vegetation_activity_heuristic_not_land_use_probability",
@@ -16020,8 +16720,8 @@
               "ndvi": 0.2993,
               "ndmi": 0.0338,
               "month": 11,
-              "n_clear_dates": 18,
-              "n_dates_above_bare": 16
+              "n_clear_dates": 20,
+              "n_dates_above_bare": 18
             },
             "weights": {
               "ndvi_peak": 0.27,
@@ -16033,7 +16733,7 @@
             },
             "features": {
               "ndvi_peak": 0.209298,
-              "persistence": 0.888889,
+              "persistence": 0.9,
               "ndmi": 0.2095,
               "swir": 0.0516,
               "phenology": 0.209298,
@@ -16049,14 +16749,14 @@
             },
             "contributions_points": {
               "ndvi_peak": 5.651053,
-              "persistence": 16.0,
+              "persistence": 16.2,
               "ndmi": 4.19,
               "swir": 0.6192,
               "phenology": 2.720877,
               "texture": 3.5
             },
             "boost_points": 0.0,
-            "score": 32.68,
+            "score": 32.88,
             "vegetation_features_at_floor": false,
             "correlated_floor_collapse": false,
             "correlated_ndvi_ndmi_weight": 0.6,
@@ -16074,7 +16774,7 @@
           "area_ha_est": 25.104,
           "water_stress_score": 58.72,
           "vigor_stress_score": 32.8,
-          "alert": "bare",
+          "alert": "healthy",
           "possible_biotic_stress": false,
           "biotic_status": "not_flagged",
           "data_quality_confidence": 97.0,
@@ -16084,12 +16784,12 @@
           "cloud_cover": 0.065263,
           "series_scope": "aou_members_aggregate",
           "persistence_status": "multi_date",
-          "persistence_feature": 0.8888888888888888,
-          "n_dates_above_bare": 16,
+          "persistence_feature": 0.9,
+          "n_dates_above_bare": 18,
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000008|2026-11-08|20261116T134126Z-9c846e8c",
+          "aggregate_id": "AOU-NJ-000008|2026-11-08|20261124T002022Z-6425cfa6",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 0.9999998994031696,
           "raw_measures": {
@@ -16099,7 +16799,7 @@
           "derived_scores": {
             "water_stress_score": 58.72,
             "vigor_stress_score": 32.8,
-            "agricultural_probability": 32.68,
+            "agricultural_probability": 32.88,
             "ag_class": "possible"
           }
         },
@@ -16110,7 +16810,7 @@
           "ndmi": 0.072,
           "ndre": null,
           "ndre_available": false,
-          "agricultural_probability": 37.98,
+          "agricultural_probability": 38.08,
           "ag_evidence": {
             "version": "activity_evidence_v2",
             "score_semantics": "vegetation_activity_heuristic_not_land_use_probability",
@@ -16120,8 +16820,8 @@
               "ndvi": 0.3403,
               "ndmi": 0.07195,
               "month": 11,
-              "n_clear_dates": 19,
-              "n_dates_above_bare": 17
+              "n_clear_dates": 20,
+              "n_dates_above_bare": 18
             },
             "weights": {
               "ndvi_peak": 0.27,
@@ -16133,7 +16833,7 @@
             },
             "features": {
               "ndvi_peak": 0.281228,
-              "persistence": 0.894737,
+              "persistence": 0.9,
               "ndmi": 0.304875,
               "swir": 0.0858,
               "phenology": 0.281228,
@@ -16149,14 +16849,14 @@
             },
             "contributions_points": {
               "ndvi_peak": 7.593158,
-              "persistence": 16.105263,
+              "persistence": 16.2,
               "ndmi": 6.0975,
               "swir": 1.0296,
               "phenology": 3.655965,
               "texture": 3.5
             },
             "boost_points": 0.0,
-            "score": 37.98,
+            "score": 38.08,
             "vegetation_features_at_floor": false,
             "correlated_floor_collapse": false,
             "correlated_ndvi_ndmi_weight": 0.6,
@@ -16174,7 +16874,7 @@
           "area_ha_est": 25.104,
           "water_stress_score": 55.24,
           "vigor_stress_score": 33.25,
-          "alert": "bare",
+          "alert": "healthy",
           "possible_biotic_stress": false,
           "biotic_status": "not_flagged",
           "data_quality_confidence": 97.0,
@@ -16184,12 +16884,12 @@
           "cloud_cover": 0.0,
           "series_scope": "aou_members_aggregate",
           "persistence_status": "multi_date",
-          "persistence_feature": 0.8947368421052632,
-          "n_dates_above_bare": 17,
+          "persistence_feature": 0.9,
+          "n_dates_above_bare": 18,
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000008|2026-11-15|20261116T134126Z-9c846e8c",
+          "aggregate_id": "AOU-NJ-000008|2026-11-15|20261124T002022Z-6425cfa6",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 0.9999998994031696,
           "raw_measures": {
@@ -16199,7 +16899,7 @@
           "derived_scores": {
             "water_stress_score": 55.24,
             "vigor_stress_score": 33.25,
-            "agricultural_probability": 37.98,
+            "agricultural_probability": 38.08,
             "ag_class": "possible"
           }
         },
@@ -16302,34 +17002,134 @@
             "agricultural_probability": 40.76,
             "ag_class": "possible"
           }
+        },
+        {
+          "aou_id": "AOU-NJ-000008",
+          "date": "2026-11-23",
+          "ndvi": 0.3622,
+          "ndmi": 0.1139,
+          "ndre": null,
+          "ndre_available": false,
+          "agricultural_probability": 42.21,
+          "ag_evidence": {
+            "version": "activity_evidence_v2",
+            "score_semantics": "vegetation_activity_heuristic_not_land_use_probability",
+            "calibrated_probability": false,
+            "land_use_status": "not_established_by_score",
+            "inputs": {
+              "ndvi": 0.36219999999999997,
+              "ndmi": 0.11385,
+              "month": 11,
+              "n_clear_dates": 21,
+              "n_dates_above_bare": 19
+            },
+            "weights": {
+              "ndvi_peak": 0.27,
+              "persistence": 0.18,
+              "ndmi": 0.2,
+              "swir": 0.12,
+              "phenology": 0.13,
+              "texture": 0.1
+            },
+            "features": {
+              "ndvi_peak": 0.319649,
+              "persistence": 0.904762,
+              "ndmi": 0.409625,
+              "swir": 0.1201,
+              "phenology": 0.319649,
+              "texture": 0.35
+            },
+            "sources": {
+              "ndvi_peak": "current_ndvi_transform",
+              "ndmi": "current_ndmi_transform",
+              "swir": "band_derived_swir",
+              "phenology": "derived_ndvi_month",
+              "persistence": "derived_clear_date_counts",
+              "texture": "default_not_measured"
+            },
+            "contributions_points": {
+              "ndvi_peak": 8.630526,
+              "persistence": 16.285714,
+              "ndmi": 8.1925,
+              "swir": 1.4412,
+              "phenology": 4.155439,
+              "texture": 3.5
+            },
+            "boost_points": 0.0,
+            "score": 42.21,
+            "vegetation_features_at_floor": false,
+            "correlated_floor_collapse": false,
+            "correlated_ndvi_ndmi_weight": 0.6,
+            "swir_coverage": {
+              "aggregation": "equal_clear_member_mean",
+              "clear_members": 2,
+              "measured_members": 2,
+              "complete": true,
+              "band_sources": [
+                "b11_b12"
+              ]
+            }
+          },
+          "ag_class": "possible",
+          "area_ha_est": 25.104,
+          "water_stress_score": 54.06,
+          "vigor_stress_score": 31.45,
+          "alert": "healthy",
+          "possible_biotic_stress": false,
+          "biotic_status": "not_flagged",
+          "data_quality_confidence": 97.0,
+          "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+          "product_id": "S2C_MSIL2A_20261123T065201_R020_T39QYA_20261123T101710",
+          "tile": "39QYA",
+          "cloud_cover": 7e-06,
+          "series_scope": "aou_members_aggregate",
+          "persistence_status": "multi_date",
+          "persistence_feature": 0.9047619047619048,
+          "n_dates_above_bare": 19,
+          "refresh_status": "refreshed",
+          "observation_role": "current_observation",
+          "assessability": "assessable",
+          "aggregate_id": "AOU-NJ-000008|2026-11-23|20261124T002022Z-6425cfa6",
+          "assessable_cell_fraction": 1.0,
+          "valid_area_fraction": 0.9999998994031696,
+          "raw_measures": {
+            "ndvi": 0.3622,
+            "ndmi": 0.1139
+          },
+          "derived_scores": {
+            "water_stress_score": 54.06,
+            "vigor_stress_score": 31.45,
+            "agricultural_probability": 42.21,
+            "ag_class": "possible"
+          }
         }
       ],
       "window_context_series": [
         {
-          "date": "2026-10-29",
-          "ndvi": 0.08396445959806442,
-          "ndmi": -0.0900060161948204,
+          "date": "2026-11-03",
+          "ndvi": 0.08906669914722443,
+          "ndmi": -0.08568017929792404,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
-          "date": "2026-11-05",
-          "ndvi": 0.08427970856428146,
-          "ndmi": -0.09210144728422165,
+          "date": "2026-11-08",
+          "ndvi": 0.07768069207668304,
+          "ndmi": -0.10072748363018036,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
-          "date": "2026-11-13",
-          "ndvi": 0.06928834319114685,
-          "ndmi": -0.1116238385438919,
+          "date": "2026-11-15",
+          "ndvi": 0.0812753364443779,
+          "ndmi": -0.09738822281360626,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
-          "date": "2026-11-18",
-          "ndvi": 0.08763076364994049,
-          "ndmi": -0.08791542798280716,
+          "date": "2026-11-23",
+          "ndvi": 0.08827666193246841,
+          "ndmi": -0.08680260181427002,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         }
@@ -16338,7 +17138,7 @@
     },
     {
       "aou_id": "AOU-NJ-000009",
-      "n_clear_dates": 20,
+      "n_clear_dates": 21,
       "observations": [
         {
           "aou_id": "AOU-NJ-000009",
@@ -17603,8 +18403,8 @@
               "ndvi": 0.2891,
               "ndmi": 0.0183,
               "month": 11,
-              "n_clear_dates": 18,
-              "n_dates_above_bare": 18
+              "n_clear_dates": 20,
+              "n_dates_above_bare": 20
             },
             "weights": {
               "ndvi_peak": 0.27,
@@ -17668,11 +18468,11 @@
           "series_scope": "aou_members_aggregate",
           "persistence_status": "multi_date",
           "persistence_feature": 1.0,
-          "n_dates_above_bare": 18,
+          "n_dates_above_bare": 20,
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000009|2026-11-03|20261116T134126Z-9c846e8c",
+          "aggregate_id": "AOU-NJ-000009|2026-11-03|20261124T002022Z-6425cfa6",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 0.9999998976228828,
           "raw_measures": {
@@ -17803,8 +18603,8 @@
               "ndvi": 0.31179999999999997,
               "ndmi": 0.045899999999999996,
               "month": 11,
-              "n_clear_dates": 18,
-              "n_dates_above_bare": 18
+              "n_clear_dates": 20,
+              "n_dates_above_bare": 20
             },
             "weights": {
               "ndvi_peak": 0.27,
@@ -17868,11 +18668,11 @@
           "series_scope": "aou_members_aggregate",
           "persistence_status": "multi_date",
           "persistence_feature": 1.0,
-          "n_dates_above_bare": 18,
+          "n_dates_above_bare": 20,
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000009|2026-11-08|20261116T134126Z-9c846e8c",
+          "aggregate_id": "AOU-NJ-000009|2026-11-08|20261124T002022Z-6425cfa6",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 0.9999998976228828,
           "raw_measures": {
@@ -17903,8 +18703,8 @@
               "ndvi": 0.35155000000000003,
               "ndmi": 0.075,
               "month": 11,
-              "n_clear_dates": 19,
-              "n_dates_above_bare": 19
+              "n_clear_dates": 20,
+              "n_dates_above_bare": 20
             },
             "weights": {
               "ndvi_peak": 0.27,
@@ -17968,11 +18768,11 @@
           "series_scope": "aou_members_aggregate",
           "persistence_status": "multi_date",
           "persistence_feature": 1.0,
-          "n_dates_above_bare": 19,
+          "n_dates_above_bare": 20,
           "refresh_status": "refreshed",
           "observation_role": "current_observation",
           "assessability": "assessable",
-          "aggregate_id": "AOU-NJ-000009|2026-11-15|20261116T134126Z-9c846e8c",
+          "aggregate_id": "AOU-NJ-000009|2026-11-15|20261124T002022Z-6425cfa6",
           "assessable_cell_fraction": 1.0,
           "valid_area_fraction": 0.9999998976228828,
           "raw_measures": {
@@ -18085,34 +18885,134 @@
             "agricultural_probability": 42.17,
             "ag_class": "possible"
           }
+        },
+        {
+          "aou_id": "AOU-NJ-000009",
+          "date": "2026-11-23",
+          "ndvi": 0.3805,
+          "ndmi": 0.1174,
+          "ndre": null,
+          "ndre_available": false,
+          "agricultural_probability": 44.36,
+          "ag_evidence": {
+            "version": "activity_evidence_v2",
+            "score_semantics": "vegetation_activity_heuristic_not_land_use_probability",
+            "calibrated_probability": false,
+            "land_use_status": "not_established_by_score",
+            "inputs": {
+              "ndvi": 0.38045,
+              "ndmi": 0.11735000000000001,
+              "month": 11,
+              "n_clear_dates": 21,
+              "n_dates_above_bare": 21
+            },
+            "weights": {
+              "ndvi_peak": 0.27,
+              "persistence": 0.18,
+              "ndmi": 0.2,
+              "swir": 0.12,
+              "phenology": 0.13,
+              "texture": 0.1
+            },
+            "features": {
+              "ndvi_peak": 0.351667,
+              "persistence": 1.0,
+              "ndmi": 0.418375,
+              "swir": 0.0351,
+              "phenology": 0.351667,
+              "texture": 0.35
+            },
+            "sources": {
+              "ndvi_peak": "current_ndvi_transform",
+              "ndmi": "current_ndmi_transform",
+              "swir": "band_derived_swir",
+              "phenology": "derived_ndvi_month",
+              "persistence": "derived_clear_date_counts",
+              "texture": "default_not_measured"
+            },
+            "contributions_points": {
+              "ndvi_peak": 9.495,
+              "persistence": 18.0,
+              "ndmi": 8.3675,
+              "swir": 0.4212,
+              "phenology": 4.571667,
+              "texture": 3.5
+            },
+            "boost_points": 0.0,
+            "score": 44.36,
+            "vegetation_features_at_floor": false,
+            "correlated_floor_collapse": false,
+            "correlated_ndvi_ndmi_weight": 0.6,
+            "swir_coverage": {
+              "aggregation": "equal_clear_member_mean",
+              "clear_members": 2,
+              "measured_members": 2,
+              "complete": true,
+              "band_sources": [
+                "b11_b12"
+              ]
+            }
+          },
+          "ag_class": "possible",
+          "area_ha_est": 25.102,
+          "water_stress_score": 17.0,
+          "vigor_stress_score": 17.0,
+          "alert": "healthy",
+          "possible_biotic_stress": false,
+          "biotic_status": "not_flagged",
+          "data_quality_confidence": 97.0,
+          "source": "Copernicus Sentinel-2 L2A (ESA) via Microsoft Planetary Computer",
+          "product_id": "S2C_MSIL2A_20261123T065201_R020_T39QYA_20261123T101710",
+          "tile": "39QYA",
+          "cloud_cover": 7e-06,
+          "series_scope": "aou_members_aggregate",
+          "persistence_status": "multi_date",
+          "persistence_feature": 1.0,
+          "n_dates_above_bare": 21,
+          "refresh_status": "refreshed",
+          "observation_role": "current_observation",
+          "assessability": "assessable",
+          "aggregate_id": "AOU-NJ-000009|2026-11-23|20261124T002022Z-6425cfa6",
+          "assessable_cell_fraction": 1.0,
+          "valid_area_fraction": 0.9999998976228828,
+          "raw_measures": {
+            "ndvi": 0.3805,
+            "ndmi": 0.1174
+          },
+          "derived_scores": {
+            "water_stress_score": 17.0,
+            "vigor_stress_score": 17.0,
+            "agricultural_probability": 44.36,
+            "ag_class": "possible"
+          }
         }
       ],
       "window_context_series": [
         {
-          "date": "2026-10-29",
-          "ndvi": 0.08396445959806442,
-          "ndmi": -0.0900060161948204,
+          "date": "2026-11-03",
+          "ndvi": 0.08906669914722443,
+          "ndmi": -0.08568017929792404,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
-          "date": "2026-11-05",
-          "ndvi": 0.08427970856428146,
-          "ndmi": -0.09210144728422165,
+          "date": "2026-11-08",
+          "ndvi": 0.07768069207668304,
+          "ndmi": -0.10072748363018036,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
-          "date": "2026-11-13",
-          "ndvi": 0.06928834319114685,
-          "ndmi": -0.1116238385438919,
+          "date": "2026-11-15",
+          "ndvi": 0.0812753364443779,
+          "ndmi": -0.09738822281360626,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         },
         {
-          "date": "2026-11-18",
-          "ndvi": 0.08763076364994049,
-          "ndmi": -0.08791542798280716,
+          "date": "2026-11-23",
+          "ndvi": 0.08827666193246841,
+          "ndmi": -0.08680260181427002,
           "series_scope": "window_not_aou",
           "note": "Window mean \u2014 AOI context only; not AOU ledger / n_clear"
         }
@@ -18120,6 +19020,6 @@
       "honesty": "AOU ledger append/upserts by (aou_id, date); window_context_series is context only (series_scope=window_not_aou)"
     }
   ],
-  "release_id": "20261119T142738Z-d63e9a73",
-  "run_id": "20261119T142738Z-d63e9a73"
+  "release_id": "20261124T002022Z-6425cfa6",
+  "run_id": "20261124T002022Z-6425cfa6"
 }
