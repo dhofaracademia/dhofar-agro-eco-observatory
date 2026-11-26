@@ -1,8 +1,8 @@
 {
-  "last_updated": "2026-11-24T00:21:06.822058+00:00",
+  "last_updated": "2026-11-26T15:21:06.733185+00:00",
   "source": "run_monitor+run_ag_probability+run_decision_scaffolds",
-  "run_id": "20261124T002022Z-6425cfa6",
-  "release_id": "20261124T002022Z-6425cfa6",
+  "run_id": "20261126T152035Z-c558b11c",
+  "release_id": "20261126T152035Z-c558b11c",
   "artifacts": [
     "latest_alerts.geojson",
     "timeseries.json",
@@ -21,13 +21,13 @@
   "join_predicate": "positive_area_overlap",
   "consistency_status": "ok",
   "mountain_seeding_hold": true,
-  "observation_date": "2026-11-23",
+  "observation_date": "2026-11-25",
   "alert_counts": {
     "bare": 1722,
-    "healthy": 73,
-    "vigor_attention": 11,
-    "water_attention": 18,
-    "unclear": 48
+    "healthy": 66,
+    "vigor_attention": 10,
+    "water_attention": 17,
+    "unclear": 57
   },
   "min_clear_pixels_cell": 50,
   "min_clear_fraction_cell": 0.02,
